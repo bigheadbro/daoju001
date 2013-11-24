@@ -1,0 +1,9 @@
+package com.banzhuan.entity;
+import java.io.Serializable;
+
+public class ${entity.entityName} implements Serializable {
+   #foreach( $field in $entity.columns )
+	  // ${field.remark}
+	  private ${field.fieldType} ${field.fieldName};
+   #end
+}

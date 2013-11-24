@@ -1,0 +1,30 @@
+   #foreach( $field in $entity.columns )
+	  <!--${field.remark}-->
+	  <id property="${field.fieldName}" column="${field.columnName}"/>
+   #end
+   
+   -------------------------------------------------
+   #foreach( $field in $entity.columns )
+	  ,${field.columnName}
+   #end
+   values
+   (
+   
+   #foreach( $field in $entity.columns )
+	  ,#{${field.fieldName}}
+   #end
+   
+   )
+   
+   
+   ---------------------------------------------
+   
+   #foreach( $field in $entity.columns )
+	  ,${field.columnName}=#{${field.fieldName}}
+   #end
+   
+   
+   -------------------------------------------------
+    #foreach( $field in $entity.columns )
+	  ${field.fieldName};
+   #end

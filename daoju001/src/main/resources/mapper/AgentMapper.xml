@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="agent">
+	<resultMap type="AgentEntity" id="AgentEntityMap">
+		 <!---->
+		 <id property="id" column="id"/>
+		 	  <!---->
+		 <id property="gmtCreated" column="gmt_created"/>
+		 	  <!---->
+		 <id property="gmtModified" column="gmt_modified"/>
+		 	  <!---->
+		 <id property="name" column="name"/>
+		 	  <!---->
+		 <id property="password" column="password"/>
+	</resultMap>
+	
+	<!-- 根据ID获取代理商信息 -->
+	<select id="queryUserEntityById" parameterType="int"
+		resultMap="AgentEntityMap">
+	<![CDATA[
+		SELECT * from t_user t WHERE t.id = #{id}
+	]]>
+	</select>
+</mapper>

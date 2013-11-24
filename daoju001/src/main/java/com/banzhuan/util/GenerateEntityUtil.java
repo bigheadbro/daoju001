@@ -1,6 +1,5 @@
 package com.banzhuan.util;
 
-import java.io.Console;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.PrintWriter;
@@ -30,7 +29,7 @@ public class GenerateEntityUtil {
 		try {
 			connection = java.sql.DriverManager
 					.getConnection(
-							"jdbc:mysql://localhost:3307/banzhuanwang?useUnicode=true&amp;characterEncoding=utf-8",
+							"jdbc:mysql://localhost:3307/daoju001?useUnicode=true&amp;characterEncoding=utf-8",
 							"root", "123");
 		} catch (SQLException e) {
 			e.printStackTrace();

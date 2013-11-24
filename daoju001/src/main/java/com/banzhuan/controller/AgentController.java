@@ -17,7 +17,6 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
 import com.banzhuan.common.Result;
-import com.banzhuan.entity.AgentEntity;
 import com.banzhuan.form.LoginForm;
 import com.banzhuan.service.AgentService;
 import com.qq.connect.QQConnectException;
@@ -50,8 +49,7 @@ public class AgentController {
 		{
 			return mv;
 		}
-		AgentEntity agent = (AgentEntity)result.get("agent");
-		System.out.println(agent.getName());
+
 		return mv;
 	}
 	

@@ -12,4 +12,3 @@ CREATE TABLE `t_comment` (
   `gmt_create` TimeStamp COMMENT '记录创建时间',
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='评论表';
-afadsf

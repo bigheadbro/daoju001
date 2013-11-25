@@ -1,0 +1,103 @@
+body,h1,h2,h3,h4,h5,h6,hr,p,blockquote,dl,dt,dd,ul,ol,li,pre,form,fieldset,legend,button,input,textarea,th,td {
+	margin:0;
+	padding:0;
+	font-family: "微软雅黑";
+	font-size:12px/1.5;
+}
+img{border:none;}
+html{overflow-y:scroll;}  
+table{border-collapse: collapse;border-spacing: 0;}
+em{font-style:normal}
+ul, li, ol {
+list-style: none;
+}
+ul{display:block;}
+a{text-decoration: none;color: inherit;}
+/* Clear Fix */ 
+.clearfix:after { content:"."; display:block; height:0; clear:both; visibility:hidden; } 
+.clearfix { display:inline-block; } 
+/* Hide from IE Mac */ 
+.clearfix {display:block;} 
+/* End hide from IE Mac */ 
+/* end of clearfix */
+
+/*footer-container*/
+.footer-container{background:#eeeeee;width:100%;height:100px}
+.footer-content{margin:0 auto;padding-top: 25px;}
+.footer-content p{text-align:center;font-size:12px;padding:5px}
+.footer-content p.top{color:#333333;}
+.footer-content p.top span{padding:0 10px 0 10px;}
+.footer-content p.bottom{color:#666666;}
+
+/*main head*/
+.main-head-container{background:#00b4ff;width:100%;}
+.main-head-content{margin:0 auto;width:960px;color:white;}
+.main-head-container .main-head-content .logo{float:left;}
+.main-head-container .main-head-content .logo h2{font-family:"幼圆";font-size:48px;padding:10px}
+.main-head-container .main-head-content .nav{float:left;}
+.main-head-container .main-head-content .nav ul li{display:inline-block;padding:25px 15px 25px 15px ;font-size: 21px;font-family:"幼圆";font-weight: bold;}
+.main-head-container .main-head-content .nav ul li.current {background:#006e9c}
+.main-head-container .main-head-content .login{float:right;}
+.main-head-container .main-head-content .login ul li{display:inline-block;margin:13px;margin-top:20px;font-size: 12px;font-family:"幼圆";font-weight: bold;}
+#asking a{display:block;padding-left: 10px;padding-top: 5px;width:58px;height:33px;font-size:18px;background: url(../img/asking.png) no-repeat 0 0;}
+.main-head-container .main-head-content .login ul li.current {background:#006e9c}
+
+/*main banner*/
+.main-banner-container{background:#a6cad9;width:100%;height:280px;opacity:0.8;}
+
+.main-bk-wrapper{background: url(../img/bk.jpg) repeat 0 0;width:100%;}
+.main-content-container{margin:0 auto;width:960px;margin-top:30px}
+
+.main-list-container{float:left;}
+.main-list-header{color:#00b4ff;font-weight:700;font-size:18px;}
+.main-list-header ul.hot-question{display:block;background: url(../img/hot-question.png) no-repeat 0 0;padding-left:40px;height:34px;}
+.main-list-header ul.new-agent{display:block;background: url(../img/new-agent.png) no-repeat 0 0;padding-left:40px;height:34px;}
+.main-list-header ul li{float:left;padding-top:2px;border-top:1px solid #00b4ff;border-bottom:3px solid #00b4ff;}
+.main-list-header ul li a{color:#939393;font-size:11px;}
+
+/*hot question*/
+.hot-question-listitem{margin:10px 0 10px 0}
+.hot-question-listitem .logo{float:left;}
+.hot-question-listitem .content{float:left;width:537px;margin-left:20px;background: url(../img/question-sep.png) repeat-x 0 0;}
+.hot-question-listitem.first .content{background:none}
+.hot-question-listitem .content ul{margin-top:13px}
+.hot-question-listitem .content li.name{font-size:14px;font-weight: 600;color:#606060;margin-top:10px}
+.hot-question-listitem .content li.name p{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.hot-question-listitem .content li.title{font-size:18px;color:#00b4ff;margin-top:3px}
+.hot-question-listitem .content li.title p{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.hot-question-listitem .content li.text{font-size:12px;line-height: 20px;text-overflow:ellipsis;color:#989898;margin-top:10px}
+.hot-question-listitem .content li.text p{overflow:hidden;text-overflow:ellipsis;height: 75px;}
+
+/*new agent*/
+.new-agent-listitem{margin:20px 0 10px 0}
+.new-agent-listitem .logo{float:left;}
+.new-agent-listitem .content{float:left;width:207px;margin-left:20px;background: url(../img/question-sep.png) repeat-x 0 0;}
+.new-agent-listitem.first .content{background:none}
+.new-agent-listitem .content ul{margin-top:13px}
+.new-agent-listitem .content li.name{font-size:18px;font-weight: 600;color:#004a6d;text-overflow:ellipsis;white-space:nowrap;margin-top:10px}
+.new-agent-listitem .content li.title{font-size:12px;color:#939393;text-overflow:ellipsis;margin-top:3px}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.ml30{margin-left:30px}
+.width422{width:422px;}
+.width630{width:630px;}
+.width300{width:300px;}
+.width122{width:122px;}

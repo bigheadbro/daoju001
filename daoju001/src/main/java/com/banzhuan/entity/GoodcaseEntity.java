@@ -9,6 +9,32 @@ public class GoodcaseEntity implements Serializable {
 	private static final long serialVersionUID = 6818089788212285523L;
 	//
 	private int id;
+	// 案例名称
+	private String name;
+	// 行业
+	private String industry;
+	// 工件名称
+	private int workName;
+	// 工件材质
+	private int workMaterial;
+	// 工件硬度
+	private int workSolidity;
+	// 加工方式
+	private int workType;
+	// 代理商id
+	private int agentId;
+	// 代理商名字
+	private String agentName;
+	// 代理商logo
+	private String agentLogo;
+	// 下载链接
+	private String link;
+	// 下载次数
+	private String count;
+	// 记录创建时间
+	private String gmtCreate;
+	// 记录修改时间(最近时间)
+	private String gmtModified;
 
 	/**
 	 * @return the id
@@ -227,30 +253,5 @@ public class GoodcaseEntity implements Serializable {
 		return serialVersionUID;
 	}
 
-	// 案例名称
-	private String name;
-	// 行业
-	private String industry;
-	// 工件名称
-	private int workName;
-	// 工件材质
-	private int workMaterial;
-	// 工件硬度
-	private int workSolidity;
-	// 加工方式
-	private int workType;
-	// 代理商id
-	private int agentId;
-	// 代理商名字
-	private String agentName;
-	// 代理商logo
-	private String agentLogo;
-	// 下载链接
-	private String link;
-	// 下载次数
-	private String count;
-	// 记录创建时间
-	private String gmtCreate;
-	// 记录修改时间(最近时间)
-	private String gmtModified;
+	
 }

@@ -10,6 +10,25 @@ public class CommentEntity implements Serializable {
 	//
 	private int id;
 
+	// 0=PA的评论，1=CA的评论
+	private int type;
+	// 评论内容
+	private String content;
+	// 买家id
+	private int buyerId;
+	// 卖家id，如果type是1，应该为null
+	private int agentId;
+	// 上一条评论id
+	private int parent;
+	// 回答id
+	private int answerId;
+	// 用户名称
+	private String userName;
+	// 用户头像
+	private String userAvatar;
+	// 记录创建时间
+	private String gmtCreate;
+	
 	/**
 	 * @return the id
 	 */
@@ -167,22 +186,5 @@ public class CommentEntity implements Serializable {
 		return serialVersionUID;
 	}
 
-	// 0=PA的评论，1=CA的评论
-	private int type;
-	// 评论内容
-	private String content;
-	// 买家id
-	private int buyerId;
-	// 卖家id，如果type是1，应该为null
-	private int agentId;
-	// 上一条评论id
-	private int parent;
-	// 回答id
-	private int answerId;
-	// 用户名称
-	private String userName;
-	// 用户头像
-	private String userAvatar;
-	// 记录创建时间
-	private String gmtCreate;
+	
 }

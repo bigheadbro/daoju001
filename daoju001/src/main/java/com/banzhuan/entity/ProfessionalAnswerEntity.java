@@ -9,6 +9,28 @@ public class ProfessionalAnswerEntity implements Serializable {
 	private static final long serialVersionUID = -6679115751261653584L;
 	//
 	private int id;
+	// 回答名称
+	private String title;
+	// 回答内容
+	private String content;
+	// 报价
+	private int price;
+	// 0=已发布，1=草稿
+	private int state;
+	// 买家id
+	private int buyerId;
+	// 问题id
+	private int questionId;
+	// 代理商id
+	private int agentId;
+	// 代理商名字
+	private String agentName;
+	// 代理商logo
+	private String agentLogo;
+	// 记录创建时间
+	private String gmtCreate;
+	// 记录修改时间
+	private String gmtModify;
 
 	/**
 	 * @return the id
@@ -197,26 +219,5 @@ public class ProfessionalAnswerEntity implements Serializable {
 		return serialVersionUID;
 	}
 
-	// 回答名称
-	private String title;
-	// 回答内容
-	private String content;
-	// 报价
-	private int price;
-	// 0=已发布，1=草稿
-	private int state;
-	// 买家id
-	private int buyerId;
-	// 问题id
-	private int questionId;
-	// 代理商id
-	private int agentId;
-	// 代理商名字
-	private String agentName;
-	// 代理商logo
-	private String agentLogo;
-	// 记录创建时间
-	private String gmtCreate;
-	// 记录修改时间
-	private String gmtModify;
+	
 }

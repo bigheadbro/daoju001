@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="sample">
+  <resultMap type="SampleEntity" id="SampleResultMap">
+	  <!---->
+		<id property="id" column="id" />
+		<!--样本名称 -->
+		<id property="name" column="name" />
+		<!--代理商id -->
+		<id property="agentId" column="agent_id" />
+		<!--代理商名字 -->
+		<id property="agentName" column="agent_name" />
+		<!--代理商logo -->
+		<id property="agentLogo" column="agent_logo" />
+		<!--下载链接 -->
+		<id property="link" column="link" />
+		<!--下载次数 -->
+		<id property="count" column="count" />
+		<!--记录创建时间 -->
+		<id property="gmtCreate" column="gmt_create" />
+		<!--记录修改时间(最近时间) -->
+		<id property="gmtModified" column="gmt_modified" />
+	</resultMap>
+</mapper>

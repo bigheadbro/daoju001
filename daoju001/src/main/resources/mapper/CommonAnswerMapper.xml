@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="commonanswer">
+  <resultMap type="CommonAnswerEntity" id="CommonAnswerResultMap">
+	  <!---->
+		<id property="id" column="id" />
+		<!--回答内容 -->
+		<id property="content" column="content" />
+		<!--问题id -->
+		<id property="questionId" column="question_id" />
+		<!--买家id -->
+		<id property="buyerId" column="buyer_id" />
+		<!--回答问题的买家名称 -->
+		<id property="buyerName" column="buyer_name" />
+		<!--回答问题的买家头像 -->
+		<id property="buyerAvatar" column="buyer_avatar" />
+		<!--记录创建时间 -->
+		<id property="gmtCreate" column="gmt_create" />
+		<!--记录修改时间 -->
+		<id property="gmtModify" column="gmt_modify" />
+	</resultMap>
+</mapper>

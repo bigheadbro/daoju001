@@ -29,7 +29,7 @@ public class GenerateMyBatisMapperUtil {
 			connection = java.sql.DriverManager
 					.getConnection(
 							"jdbc:mysql://localhost:3307/daoju001?useUnicode=true&amp;characterEncoding=utf-8",
-							"root", "123");
+							"root", "123123");
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -141,7 +141,7 @@ public class GenerateMyBatisMapperUtil {
 				// 把数据填入上下文
 				root.put("entity", entity);
 				// 输出
-			    //Writer sw = new PrintWriter(new FileOutputStream(new File("src/main/java/com/banzhuan/entity/"+entity.getEntityName()+".java")));
+			    //Writer sw = new PrintWriter(new FileOutputStream(new File("src/main/resources/mapper/banzhuan/entity/"+entity.getEntityName()+".java")));
 				Writer sw = new StringWriter();
 				template.merge(root, sw);
 			    sw.flush();

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="message">
+  <resultMap type="MessageEntity" id="MsgResultMap">
+	  <!---->
+		<id property="id" column="id" />
+		<!--消息名称 -->
+		<id property="title" column="title" />
+		<!--消息内容 -->
+		<id property="content" column="content" />
+		<!--发送人id -->
+		<id property="senderId" column="sender_id" />
+		<!--接收人id -->
+		<id property="receiverId" column="receiver_id" />
+		<!--记录创建时间 -->
+		<id property="gmtCreate" column="gmt_create" />
+	</resultMap>
+</mapper>

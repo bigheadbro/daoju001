@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="professionalanswer">
+  <resultMap type="ProfessionalAnswerEntity" id="ProfessionalAnswerResultMap">
+	  <!---->
+		<id property="id" column="id" />
+		<!--回答名称 -->
+		<id property="title" column="title" />
+		<!--回答内容 -->
+		<id property="content" column="content" />
+		<!--报价 -->
+		<id property="price" column="price" />
+		<!--0=已发布，1=草稿 -->
+		<id property="state" column="state" />
+		<!--买家id -->
+		<id property="buyerId" column="buyer_id" />
+		<!--问题id -->
+		<id property="questionId" column="question_id" />
+		<!--代理商id -->
+		<id property="agentId" column="agent_id" />
+		<!--代理商名字 -->
+		<id property="agentName" column="agent_name" />
+		<!--代理商logo -->
+		<id property="agentLogo" column="agent_logo" />
+		<!--记录创建时间 -->
+		<id property="gmtCreate" column="gmt_create" />
+		<!--记录修改时间 -->
+		<id property="gmtModify" column="gmt_modify" />
+	</resultMap>
+</mapper>

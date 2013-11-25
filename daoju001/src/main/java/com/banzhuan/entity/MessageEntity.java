@@ -9,6 +9,16 @@ public class MessageEntity implements Serializable {
 	private static final long serialVersionUID = -4185983627795862098L;
 	//
 	private int id;
+	// 消息名称
+	private String title;
+	// 消息内容
+	private String content;
+	// 发送人id
+	private int senderId;
+	// 接收人id
+	private int receiverId;
+	// 记录创建时间
+	private String gmtCreate;
 
 	/**
 	 * @return the id
@@ -106,15 +116,4 @@ public class MessageEntity implements Serializable {
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
-
-	// 消息名称
-	private String title;
-	// 消息内容
-	private String content;
-	// 发送人id
-	private int senderId;
-	// 接收人id
-	private int receiverId;
-	// 记录创建时间
-	private String gmtCreate;
 }

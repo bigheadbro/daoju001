@@ -9,6 +9,22 @@ public class QuestionEntity implements Serializable {
 	private static final long serialVersionUID = 9159033297247345294L;
 	//
 	private int id;
+	// 问题名称
+	private String title;
+	// 问题内容
+	private String content;
+	// 买家id
+	private int buyerId;
+	// 专业回答数量
+	private int cntPA;
+	// 普通回答数量
+	private int cntCA;
+	// 0=已发布，1=草稿
+	private int state;
+	// 记录创建时间
+	private String gmtCreate;
+	// 记录修改时间
+	private String gmtModify;
 
 	/**
 	 * @return the id
@@ -152,20 +168,5 @@ public class QuestionEntity implements Serializable {
 		return serialVersionUID;
 	}
 
-	// 问题名称
-	private String title;
-	// 问题内容
-	private String content;
-	// 买家id
-	private int buyerId;
-	// 专业回答数量
-	private int cntPA;
-	// 普通回答数量
-	private int cntCA;
-	// 0=已发布，1=草稿
-	private int state;
-	// 记录创建时间
-	private String gmtCreate;
-	// 记录修改时间
-	private String gmtModify;
+	
 }

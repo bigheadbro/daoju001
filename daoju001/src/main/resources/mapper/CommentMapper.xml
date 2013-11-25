@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="comment">
+  <resultMap type="CommentEntity" id="CommentResultMap">
+	  <!---->
+		<id property="id" column="id" />
+		<!--0=PA的评论，1=CA的评论 -->
+		<id property="type" column="type" />
+		<!--评论内容 -->
+		<id property="content" column="content" />
+		<!--买家id -->
+		<id property="buyerId" column="buyer_id" />
+		<!--卖家id，如果type是1，应该为null -->
+		<id property="agentId" column="agent_id" />
+		<!--上一条评论id -->
+		<id property="parent" column="parent" />
+		<!--回答id -->
+		<id property="answerId" column="answer_id" />
+		<!--用户名称 -->
+		<id property="userName" column="user_name" />
+		<!--用户头像 -->
+		<id property="userAvatar" column="user_avatar" />
+		<!--记录创建时间 -->
+		<id property="gmtCreate" column="gmt_create" />
+	</resultMap>
+</mapper>

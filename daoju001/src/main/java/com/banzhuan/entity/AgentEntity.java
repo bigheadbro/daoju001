@@ -9,6 +9,57 @@ public class AgentEntity implements Serializable {
 	private static final long serialVersionUID = -1111949594820636928L;
 	//
 	private int id;
+	// QQ connect 昵称
+	private String nick;
+	// QQ connect 唯一ID
+	private String qqConnectId;
+	// 登录密码
+	private String password;
+	// 公司名称
+	private String companyName;
+	// 代理品牌名称
+	private String brandName;
+	// 品牌logo
+	private String logo;
+	// 公司地址
+	private String address;
+	// 公司电话
+	private String phone;
+	// 公司传真
+	private String fax;
+	// 公司介绍
+	private String description;
+	// 证书链接
+	private String verifiedLink;
+	// 联系人名称
+	private String contactName;
+	// 联系人手机
+	private String contactPhone;
+	// 联系人QQ
+	private String contactQq;
+	// 联系人邮箱
+	private String contactEmail;
+	// 注册时间
+	private String regTime;
+	// 记录创建时间
+	private String gmtCreate;
+	// 记录修改时间(最近登录时间)
+	private String gmtModified;
+
+	/**
+	 * @return the id
+	 */
+	public int getId() {
+		return id;
+	}
+
+	/**
+	 * @param id
+	 *            the id to set
+	 */
+	public void setId(int id) {
+		this.id = id;
+	}
 	/**
 	 * @return the nick
 	 */
@@ -268,55 +319,5 @@ public class AgentEntity implements Serializable {
 		return serialVersionUID;
 	}
 
-	// QQ connect 昵称
-	private String nick;
-	// QQ connect 唯一ID
-	private String qqConnectId;
-	// 登录密码
-	private String password;
-	// 公司名称
-	private String companyName;
-	// 代理品牌名称
-	private String brandName;
-	// 品牌logo
-	private String logo;
-	// 公司地址
-	private String address;
-	// 公司电话
-	private String phone;
-	// 公司传真
-	private String fax;
-	// 公司介绍
-	private String description;
-	// 证书链接
-	private String verifiedLink;
-	// 联系人名称
-	private String contactName;
-	// 联系人手机
-	private String contactPhone;
-	// 联系人QQ
-	private String contactQq;
-	// 联系人邮箱
-	private String contactEmail;
-	// 注册时间
-	private String regTime;
-	// 记录创建时间
-	private String gmtCreate;
-	// 记录修改时间(最近登录时间)
-	private String gmtModified;
-
-	/**
-	 * @return the id
-	 */
-	public int getId() {
-		return id;
-	}
-
-	/**
-	 * @param id
-	 *            the id to set
-	 */
-	public void setId(int id) {
-		this.id = id;
-	}
+	
 }

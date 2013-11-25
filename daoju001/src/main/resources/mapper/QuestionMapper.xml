@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="question">
+  <resultMap type="QuestionEntity" id="QuestionResultMap">
+	  <!---->
+	  <id property="id" column="id"/>
+	  	  <!--问题名称-->
+	  <id property="title" column="title"/>
+	  	  <!--问题内容-->
+	  <id property="content" column="content"/>
+	  	  <!--买家id-->
+	  <id property="buyerId" column="buyer_id"/>
+	  	  <!--专业回答数量-->
+	  <id property="cntPA" column="cnt_PA"/>
+	  	  <!--普通回答数量-->
+	  <id property="cntCA" column="cnt_CA"/>
+	  	  <!--0=已发布，1=草稿-->
+	  <id property="state" column="state"/>
+	  	  <!--记录创建时间-->
+	  <id property="gmtCreate" column="gmt_create"/>
+	  	  <!--记录修改时间-->
+	  <id property="gmtModify" column="gmt_modify"/>
+  </resultMap>
+</mapper>

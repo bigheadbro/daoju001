@@ -9,6 +9,22 @@ public class SampleEntity implements Serializable {
 	private static final long serialVersionUID = -5985534750336298212L;
 	//
 	private int id;
+	// 样本名称
+	private String name;
+	// 代理商id
+	private int agentId;
+	// 代理商名字
+	private String agentName;
+	// 代理商logo
+	private String agentLogo;
+	// 下载链接
+	private String link;
+	// 下载次数
+	private String count;
+	// 记录创建时间
+	private String gmtCreate;
+	// 记录修改时间(最近时间)
+	private String gmtModified;
 
 	/**
 	 * @return the id
@@ -152,20 +168,5 @@ public class SampleEntity implements Serializable {
 		return serialVersionUID;
 	}
 
-	// 样本名称
-	private String name;
-	// 代理商id
-	private int agentId;
-	// 代理商名字
-	private String agentName;
-	// 代理商logo
-	private String agentLogo;
-	// 下载链接
-	private String link;
-	// 下载次数
-	private String count;
-	// 记录创建时间
-	private String gmtCreate;
-	// 记录修改时间(最近时间)
-	private String gmtModified;
+	
 }

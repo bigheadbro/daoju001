@@ -9,7 +9,21 @@ public class CommonAnswerEntity implements Serializable {
 	private static final long serialVersionUID = -6626386017134491401L;
 	//
 	private int id;
-
+	// 回答内容
+	private String content;
+	// 问题id
+	private int questionId;
+	// 买家id
+	private int buyerId;
+	// 回答问题的买家名称
+	private String buyerName;
+	// 回答问题的买家头像
+	private String buyerAvatar;
+	// 记录创建时间
+	private String gmtCreate;
+	// 记录修改时间
+	private String gmtModify;
+		
 	/**
 	 * @return the id
 	 */
@@ -137,18 +151,5 @@ public class CommonAnswerEntity implements Serializable {
 		return serialVersionUID;
 	}
 
-	// 回答内容
-	private String content;
-	// 问题id
-	private int questionId;
-	// 买家id
-	private int buyerId;
-	// 回答问题的买家名称
-	private String buyerName;
-	// 回答问题的买家头像
-	private String buyerAvatar;
-	// 记录创建时间
-	private String gmtCreate;
-	// 记录修改时间
-	private String gmtModify;
+	
 }

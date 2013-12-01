@@ -45,7 +45,7 @@ a{text-decoration: none;color: inherit;}
 /*main banner*/
 .main-banner-container{background:#a6cad9;width:100%;height:280px;opacity:0.8;}
 
-.main-bk-wrapper{background: url(../img/bk.jpg) repeat 0 0;width:100%;}
+.main-bk-wrapper{background: url(../img/bk.jpg) repeat 0 0;width:100%;padding-bottom: 30px;}
 .main-content-container{margin:0 auto;width:960px;margin-top:30px;padding:10px;border-radius: 4px;background-color: #f7f7f7;}
 
 .main-list-container{float:left;}
@@ -57,12 +57,14 @@ a{text-decoration: none;color: inherit;}
 /*hot question*/
 .hot-question-listitem{margin:10px 0 10px 0;}
 .seperation{background: url(../img/question-sep.png) repeat-x 0 0;margin-top:15px;margin-bottom: 15px;height: 2px;}
+.seperation10{background: url(../img/question-sep.png) repeat-x 0 0;margin-top:10px;margin-bottom: 10px;height: 2px;}
 .hot-question-listitem .logo{float:left;}
+.hot-question-listitem .logo img{width:66px;height:66px;}
 .hot-question-listitem .content{float:left;width:537px;margin-left:20px;/* background: url(../img/question-sep.png) repeat-x 0 0; */}
 .hot-question-listitem.first .content{background:none}
-.hot-question-listitem .content li.name{font-size:14px;font-weight: 600;color:#606060;margin-top:10px}
+.hot-question-listitem .content li.name{font-size:16px;font-weight: 600;color:#606060;margin-top:5px}
 .hot-question-listitem .content li.name p{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
-.hot-question-listitem .content li.title{font-size:18px;color:#00b4ff;margin-top:3px}
+.hot-question-listitem .content li.title{font-size:18px;color:#00b4ff;margin-top:5px}
 .hot-question-listitem .content li.title p{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
 .hot-question-listitem .content li.text{font-size:12px;line-height: 20px;text-overflow:ellipsis;color:#666666;margin-top:10px}
 .hot-question-listitem .content li.text img{float:left;}
@@ -102,18 +104,30 @@ a{text-decoration: none;color: inherit;}
 .goodcase-listitem  .property{font-size:12px;color:#939393;text-overflow:ellipsis;margin-top:3px}
 .goodcase-listitem  .property span{display: block;float: left;margin: 0 5px 5px 0;background-color:#dddddd;border-radius: 6px;padding: 3px;line-height: 24px;}
 
-
-
-
-
-
-
-
-
-
-
-
-
+/*买家--我的搬刀*/
+.mainpage-container{margin:0 auto;width:960px;padding-top:30px;}
+.mainpage-container .main-left{float:left;width:200px;height:720px;margin-right:20px;border-radius:10px;background-color:#f6f6f6;}
+.mainpage-container .main-right{float:left;width:700px;height:680px;border-radius:10px;background-color:#f6f6f6;padding:20px}
+.mainpage-container .main-left .main-left-content{width:100%;text-align:center}
+.mainpage-container .main-left .person-info{margin:30px auto;}
+.mainpage-container .main-left .person-info h5{font-size:18px;padding:15px;color:#606060;}
+.mainpage-container .main-left .function{margin:30px auto;}
+.mainpage-container .main-left .function ul li{padding:15px;color:#9b9b9b;font-size:14px}
+.mainpage-container .main-left .function ul li.current{color:white;background-color:#4799b1}
+.mainpage-container .main-right h2{font-size:14px;color:#656565;padding:8.5px;}
+.mainpage-container .main-right .rigth-content{background-color:white;margin-top:10px;padding:10px;height: 615px;}
+.mainpage-container .main-right .rigth-content .listitem{font-size:14px}
+.mainpage-container .main-right .rigth-content .notread{font-weight:700;}
+.mainpage-container .main-right .rigth-content .msg-list .listitem a{color:#0099cb}
+.mainpage-container .main-right .rigth-content .listitem span{float:right;color:#666666}
+.mainpage-container .main-right .right-tab  li{float:left;padding: 8px 50px;font-size:14px;}
+.mainpage-container .main-right .right-tab  li.current{color:white;background-color:#0099cb;}
+.mainpage-container .main-right .rigth-content .listitem .user-info li{float:left;font-size:14px;}
+.mainpage-container .main-right .rigth-content .listitem .user-info li.key{color:#464646;padding:10px 100px 10px 0;width:60px;}
+.mainpage-container .main-right .rigth-content .listitem .user-info li.value{color:#464646;padding:10px 15px 10px 0}
+.mainpage-container .main-right .rigth-content .listitem .user-info li.operation{color:#ccc;padding:10px 0 10px 0;font-size:12px;line-height: 21px;}
+.mainpage-container .main-right .rigth-content .listitem .save{background-color:#63a200;color:white;font-size:16px;padding: 10px 35px;line-height: 35px;}
+.mainpage-container .main-right .rigth-content .listitem .user-info input[type="text"]{width:200px}
 
 
 
@@ -125,3 +139,4 @@ a{text-decoration: none;color: inherit;}
 .width300{width:300px;}
 .width162{width:162px;}
 .width180{width:180px}
+.width60{width:60px;}

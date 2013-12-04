@@ -21,4 +21,9 @@ public class AgentDAOImpl extends SqlSessionDaoSupport implements AgentDAO {
 		return this.getSqlSession().selectOne("queryAgentEntityById", id);
 	}
 
+	@Override
+	public int insertAgentEntity(AgentEntity agent) {
+		this.getSqlSession().selectOne("insertAgentEntity", agent);
+		return agent.getId();
+	}
 }

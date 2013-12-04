@@ -49,4 +49,53 @@
 		SELECT * from t_agent t WHERE t.id = #{id}
 	]]>
 	</select>
+	
+	<!-- 新代理商信息 -->
+	<insert id="insertAgentEntity" parameterType="AgentEntity">
+		<selectKey resultType="int" order="AFTER" keyProperty="id">
+			SELECT LAST_INSERT_ID() AS id
+		</selectKey>
+		insert into t_agent
+		(
+      nick
+   	  ,qq_connect_id
+   	  ,password
+   	  ,company_name
+   	  ,brand_name
+   	  ,logo
+   	  ,address
+   	  ,phone
+   	  ,fax
+   	  ,description
+   	  ,verified_link
+   	  ,contact_name
+   	  ,contact_phone
+   	  ,contact_qq
+   	  ,contact_email
+   	  ,reg_time
+   	  ,gmt_create
+   	  ,gmt_modified)
+      values
+   (
+   	  #{nick}
+   	  ,#{qqConnectId}
+   	  ,#{password}
+   	  ,#{companyName}
+   	  ,#{brandName}
+   	  ,#{logo}
+   	  ,#{address}
+   	  ,#{phone}
+   	  ,#{fax}
+   	  ,#{description}
+   	  ,#{verifiedLink}
+   	  ,#{contactName}
+   	  ,#{contactPhone}
+   	  ,#{contactQq}
+   	  ,#{contactEmail}
+   	  ,now()
+   	  ,now()
+   	  ,now()
+      
+   )
+	</insert>
 </mapper>

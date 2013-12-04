@@ -13,5 +13,14 @@ public interface AgentDAO {
 	 * @return
 	 */
 	AgentEntity queryUserEntityById(int id);
+	
+	/**
+	 * 插入代理商信息
+	 * @param companyUser
+	 * @return
+	 */
+	public int insertAgentEntity(AgentEntity agent);
+	
+	
 
 }

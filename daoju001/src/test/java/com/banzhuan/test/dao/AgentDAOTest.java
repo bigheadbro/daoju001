@@ -52,7 +52,7 @@ public class AgentDAOTest extends BaseTest {
 	 @Test
 	 public void queryCompanyUserEntityById()
 	 {
-		 AgentEntity agent = agentDAO.queryUserEntityById(3);
+		 AgentEntity agent = agentDAO.queryUserEntityById(id);
 		 System.out.print("start:");
 		 Assert.assertNotNull(agent);
 		 System.out.print(agent.getNick());

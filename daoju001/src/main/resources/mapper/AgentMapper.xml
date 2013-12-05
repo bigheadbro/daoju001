@@ -98,4 +98,9 @@
       
    )
 	</insert>
+	
+	<!-- 根据企业用户ID称更新密码 -->
+	<update id="updateAgentPwdById" parameterType="AgentEntity">
+		update t_agent set password = #{password}, gmt_modified=now() where id=#{id}
+	</update>
 </mapper>

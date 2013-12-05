@@ -21,6 +21,12 @@ public interface AgentDAO {
 	 */
 	public int insertAgentEntity(AgentEntity agent);
 	
-	
+
+	/**
+	 * 更新代理商密码
+	 * @param agent
+	 * @return
+	 */
+	public int updateAgentPwdById(AgentEntity agent);
 
 }

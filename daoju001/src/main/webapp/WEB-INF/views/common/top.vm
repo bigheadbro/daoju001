@@ -1,0 +1,23 @@
+<div class="main-head-container">
+  <div class="main-head-content clearfix">
+	  <div class="logo">
+		  <h2>搬刀网</h2>
+		</div>
+		<div class="nav">
+		  <ul>
+			  <li><a href="#">首页</a></li>
+			  <li><a href="#">所有问题</a></li>
+			  <li><a href="#">代理商</a></li>
+			  <li><a href="#">成功案例</a></li>
+			  <li><a href="#">刀具样本</a></li>
+			</ul>
+		</div>
+	  <div class="login">
+		  <ul>
+			  <li id="asking" ><a href="#">提问</a></li>
+			  <li><a href="#">注册</a></li>
+			  <li><a href="#">登录</a></li>
+			</ul>
+		</div>
+	</div>
+</div>

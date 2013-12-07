@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>  
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="buyer">
-  <resultMap type="BuyerEntity" id="BuyerResultMap">
+	<resultMap type="BuyerEntity" id="BuyerResultMap">
 	  <!---->
 		<id property="id" column="id" />
 		<!--QQ connect 昵称 -->
@@ -21,4 +21,43 @@
 		<!--记录修改时间(最近登录时间) -->
 		<id property="gmtModified" column="gmt_modified" />
 	</resultMap>
+
+	<select id="queryBuyerEntityById" parameterType="int" resultMap="BuyerResultMap">
+	<![CDATA[
+		SELECT * from t_buyer t WHERE t.id = #{id}
+	]]>
+	</select>
+
+	<insert id="insertBuyerEntity" parameterType="BuyerEntity">
+		<selectKey resultType="int" order="AFTER" keyProperty="id">
+			SELECT LAST_INSERT_ID() AS id
+		</selectKey>
+		insert into t_buyer
+		(
+		nick
+		,qq_connect_id
+		,username
+		,password
+		,email
+		,reg_time
+		,gmt_create
+		,gmt_modified)
+		values
+		(
+		#{nick}
+		,#{qqConnectId}
+		,#{username}
+		,#{password}
+		,#{email}
+		,#{regTime}
+		,#{gmtCreate}
+		,#{gmtModified}
+
+		)
+	</insert>
+
+	<update id="updateBuyerPwdById" parameterType="BuyerEntity">
+		update t_buyer set password = #{password}, gmt_modified=now() where id=#{id}
+	</update>
+
 </mapper>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>  
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="comment">
-  <resultMap type="CommentEntity" id="CommentResultMap">
+	<resultMap type="CommentEntity" id="CommentResultMap">
 	  <!---->
 		<id property="id" column="id" />
 		<!--0=PA的评论，1=CA的评论 -->
@@ -23,4 +23,48 @@
 		<!--记录创建时间 -->
 		<id property="gmtCreate" column="gmt_create" />
 	</resultMap>
+
+	<select id="queryCommentEntityById" parameterType="int"
+		resultMap="CommentResultMap">
+	<![CDATA[
+		SELECT * from t_comment t WHERE t.id = #{id}
+	]]>
+	</select>
+
+	<insert id="insertCommentEntity" parameterType="CommentEntity">
+		<selectKey resultType="int" order="AFTER" keyProperty="id">
+			SELECT LAST_INSERT_ID() AS id
+		</selectKey>
+		insert into t_comment
+		(
+		type
+		,content
+		,buyer_id
+		,agent_id
+		,parent
+		,answer_id
+		,user_name
+		,user_avatar
+		,gmt_create)
+		values
+		(
+		#{type}
+		,#{content}
+		,#{buyerId}
+		,#{agentId}
+		,#{parent}
+		,#{answerId}
+		,#{userName}
+		,#{userAvatar}
+		,#{gmtCreate}
+
+		)
+
+	</insert>
+
+	<update id="updateCommentById" parameterType="CommentEntity">
+		update t_comment
+		set content = #{content}, gmt_modified=now() where id=#{id}
+	</update>
+
 </mapper>

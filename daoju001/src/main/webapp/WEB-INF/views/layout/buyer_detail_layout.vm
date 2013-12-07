@@ -1,0 +1,31 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+  #parse("/common/buyer_header.vm")
+  <body>
+  	#parse("/common/top.vm")
+		<div class="main-bk-wrapper">
+  	  <div class="mainpage-container clearfix">
+  		  <div class="main-left clearfix">
+  			  <div class="main-left-content">
+  					<div class="person-info">
+  						<img src="../img/avatar.png" />
+  						<h5>桂超群</h5>
+  					</div>
+  					<div class="function">
+  						<ul>
+  							<li><a href="#">我的搬刀</a></li>
+  							<li><a href="#"><a href="#">我的消息</a></li>
+  							<li><a href="#">我的问题</a></li>
+  							<li class="current"><a href="#">账户设置</a></li>
+  						</ul>
+  					</div>
+  			  </div>
+  			</div>
+  		  <div class="main-right">
+				  $screen_content
+  			</div>
+  		</div>
+    </div>
+    #parse("/common/footer.vm")
+  </body>
+</html>

@@ -1,0 +1,53 @@
+<ul class="right-tab clearfix">
+  <li class="current">账号</li>
+  <li><a href="#">密码</a></li>
+</ul>
+<div class="rigth-content">
+  <div>
+	  <div class="listitem clearfix">
+		  <ul class="user-info clearfix">
+			  <li class="key">
+				  账户名
+				</li>
+			  <li class="value">
+				  Bigheadbro
+				</li>
+			  <li class="operation">
+				  <a href="#">修改</a>
+				</li>
+			</ul>
+		</div>
+		<div class="seperation10">&nbsp;</div>
+	  <div class="listitem clearfix">
+		  <ul class="user-info clearfix">
+			  <li class="key">
+				  邮箱
+				</li>
+			  <li class="value">
+				  guichaoqun@gmail.com
+				</li>
+			  <li class="operation">
+				  <a href="#">修改</a>
+				</li>
+			</ul>
+		</div>
+		<div class="seperation10">&nbsp;</div>
+	  <div class="listitem clearfix">
+		  <ul class="user-info clearfix">
+			  <li class="key">
+				  头像
+				</li>
+			  <li class="value">
+				  <a href="#">
+					  <img src="../img/avatar.png" />
+					</a>
+				</li>
+			</ul>
+		</div>
+		<div class="seperation10">&nbsp;</div>
+	  <div class="listitem clearfix">
+		  <a class="save" href="#">保 存</a>
+		</div>
+	</div>
+</div>
+			

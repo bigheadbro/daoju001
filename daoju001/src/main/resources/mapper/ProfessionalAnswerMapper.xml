@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>  
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="professionalanswer">
-  <resultMap type="ProfessionalAnswerEntity" id="ProfessionalAnswerResultMap">
+	<resultMap type="ProfessionalAnswerEntity" id="ProfessionalAnswerResultMap">
 	  <!---->
 		<id property="id" column="id" />
 		<!--回答名称 -->
@@ -27,4 +27,51 @@
 		<!--记录修改时间 -->
 		<id property="gmtModify" column="gmt_modify" />
 	</resultMap>
+
+	<select id="queryProfessionalAnswerEntityById" parameterType="int"
+		resultMap="ProfessionalAnswerResultMap">
+	<![CDATA[
+		SELECT * from t_professional_answer t WHERE t.id = #{id}
+	]]>
+	</select>
+
+	<insert id="insertProfessionalAnswerEntity" parameterType="ProfessionalAnswerEntity">
+		<selectKey resultType="int" order="AFTER" keyProperty="id">
+			SELECT LAST_INSERT_ID() AS id
+		</selectKey>
+		insert into t_professional_answer
+		(
+		title
+		,content
+		,price
+		,state
+		,buyer_id
+		,question_id
+		,agent_id
+		,agent_name
+		,agent_logo
+		,gmt_create
+		,gmt_modify)
+		values
+		(
+		#{title}
+		,#{content}
+		,#{price}
+		,#{state}
+		,#{buyerId}
+		,#{questionId}
+		,#{agentId}
+		,#{agentName}
+		,#{agentLogo}
+		,#{gmtCreate}
+		,#{gmtModify}
+
+		)
+	</insert>
+
+	<update id="updateById" parameterType="ProfessionalAnswerEntity">
+		update
+		t_professional_answer set password = #{password}, gmt_modified=now()
+		where id=#{id}
+	</update>
 </mapper>

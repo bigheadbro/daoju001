@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>  
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="message">
-  <resultMap type="MessageEntity" id="MsgResultMap">
+	<resultMap type="MessageEntity" id="MsgResultMap">
 	  <!---->
 		<id property="id" column="id" />
 		<!--消息名称 -->
@@ -15,4 +15,35 @@
 		<!--记录创建时间 -->
 		<id property="gmtCreate" column="gmt_create" />
 	</resultMap>
+
+	<select id="queryMessageEntityById" parameterType="int"
+		resultMap="MsgResultMap">
+	<![CDATA[
+		SELECT * from t_message t WHERE t.id = #{id}
+	]]>
+	</select>
+
+	<insert id="insertMessageEntity" parameterType="MessageEntity">
+		<selectKey resultType="int" order="AFTER" keyProperty="id">
+			SELECT LAST_INSERT_ID() AS id
+		</selectKey>
+		insert into t_message
+		(
+		title
+		,content
+		,sender_id
+		,receiver_id
+		,gmt_create)
+		values
+		(
+		#{title}
+		,#{content}
+		,#{senderId}
+		,#{receiverId}
+		,#{gmtCreate}
+
+		)
+
+	</insert>
+
 </mapper>

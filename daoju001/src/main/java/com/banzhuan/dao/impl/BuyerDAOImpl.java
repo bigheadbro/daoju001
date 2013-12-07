@@ -1,26 +1,28 @@
 package com.banzhuan.dao.impl;
 
+import org.mybatis.spring.support.SqlSessionDaoSupport;
+import org.springframework.stereotype.Repository;
+
 import com.banzhuan.dao.BuyerDAO;
 import com.banzhuan.entity.BuyerEntity;
 
-public class BuyerDAOImpl implements BuyerDAO {
+@Repository("buyerDAO")
+public class BuyerDAOImpl extends SqlSessionDaoSupport implements BuyerDAO {
 
 	@Override
 	public BuyerEntity queryBuyerEntityById(int id) {
-		// TODO Auto-generated method stub
-		return null;
+		return this.getSqlSession().selectOne("queryBuyerEntityById", id);
 	}
 
 	@Override
 	public int insertBuyerEntity(BuyerEntity buyer) {
-		// TODO Auto-generated method stub
-		return 0;
+		this.getSqlSession().insert("insertBuyerEntity", buyer);
+		return buyer.getId();
 	}
 
 	@Override
 	public int updateBuyerPwdById(BuyerEntity buyer) {
-		// TODO Auto-generated method stub
-		return 0;
+		return this.getSqlSession().update("updateBuyerPwdById", buyer);
 	}
 
 }

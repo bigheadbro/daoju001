@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>  
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="sample">
-  <resultMap type="SampleEntity" id="SampleResultMap">
+	<resultMap type="SampleEntity" id="SampleResultMap">
 	  <!---->
 		<id property="id" column="id" />
 		<!--样本名称 -->
@@ -21,4 +21,43 @@
 		<!--记录修改时间(最近时间) -->
 		<id property="gmtModified" column="gmt_modified" />
 	</resultMap>
+
+	<select id="querySampleEntityById" parameterType="int"
+		resultMap="SampleResultMap">
+	<![CDATA[
+		SELECT * from t_sample t WHERE t.id = #{id}
+	]]>
+	</select>
+
+	<insert id="insertSampleEntity" parameterType="SampleEntity">
+		<selectKey resultType="int" order="AFTER" keyProperty="id">
+			SELECT LAST_INSERT_ID() AS id
+		</selectKey>
+		insert into t_sample
+		(
+		name
+		,agent_id
+		,agent_name
+		,agent_logo
+		,link
+		,count
+		,gmt_create
+		,gmt_modified)
+		values
+		(
+		#{name}
+		,#{agentId}
+		,#{agentName}
+		,#{agentLogo}
+		,#{link}
+		,#{count}
+		,#{gmtCreate}
+		,#{gmtModified}
+		)
+	</insert>
+
+	<update id="updateNameById" parameterType="SampleEntity">
+		update t_sample set
+		name = #{name}, gmt_modified=now() where id=#{id}
+	</update>
 </mapper>

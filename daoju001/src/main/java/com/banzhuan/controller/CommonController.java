@@ -5,7 +5,12 @@ import java.io.IOException;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
+
+import com.banzhuan.common.Result;
+import com.banzhuan.form.BuyerRegForm;
 
 @Controller
 @RequestMapping("/")
@@ -15,12 +20,10 @@ public class CommonController {
 	 * @return
 	 */
 	@RequestMapping(value="/*")
-	public void otherEnter(final HttpServletResponse response)
+	public ModelAndView otherEnter(final HttpServletResponse response,@ModelAttribute("form")BuyerRegForm form)
 	{
-		try {
-			response.sendRedirect("index.html");
-		} catch (IOException e) {
-		}
+		ModelAndView mv = new ModelAndView("index/index");
+		return mv;
 	}
 
 }

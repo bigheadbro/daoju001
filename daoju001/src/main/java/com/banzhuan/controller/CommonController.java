@@ -19,11 +19,19 @@ public class CommonController {
 	 * 其他未识别的URL都统一到
 	 * @return
 	 */
-	@RequestMapping(value="/*")
+	@RequestMapping(value="/index")
 	public ModelAndView otherEnter(final HttpServletResponse response,@ModelAttribute("form")BuyerRegForm form)
 	{
 		ModelAndView mv = new ModelAndView("index/index");
 		return mv;
 	}
 
+	@RequestMapping(value="/index/reg")
+	public ModelAndView reg(final HttpServletResponse response)
+	{
+		ModelAndView mv = new ModelAndView("index/reg");
+		return mv;
+	}
+
+	
 }

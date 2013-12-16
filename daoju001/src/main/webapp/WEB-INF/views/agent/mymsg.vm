@@ -1,0 +1,14 @@
+#set($layout = "/layout/agent_detail_layout.vm")
+<h2>全部消息</h2>
+<div class="rigth-content">
+  <div class="buyer-list">
+	  <div class="listitem notread clearfix">
+		  <a href="#">无锡汉尼达</a>回答了您的问题<a href="#">需要制造如此形状的倚天剑。不知道可以吗?</a>
+			<span>2013-12-01</span>
+		</div>
+	  <div class="listitem clearfix">
+		  <a href="#">上海时达</a>回答了您的问题<a href="#">需要制造如此形状的倚天剑。不知道可以吗?</a>
+			<span>2013-12-01</span>
+		</div>
+	</div>
+</div>

@@ -1,7 +1,8 @@
 #set($layout = "/layout/buyer_detail_layout.vm")
 <ul class="right-tab clearfix">
-  <li>账号</li>
+  <li><a href="accnt">账号</a></li>
   <li class="current"><a href="#">密码</a></li>
+	 <li><a href="profile">个人资料</a></li>
 </ul>
 <div class="rigth-content">
   <div>

@@ -1,0 +1,48 @@
+#set($layout = "/layout/agent_detail_layout.vm")
+<ul class="right-tab clearfix">
+  <li class="current">上传案例</li>
+  <li><a href="goodcase">案例管理</a></li>
+</ul>
+<div class="rigth-content">
+	<div class="listitem clearfix">
+		<ul class="user-info clearfix">
+			<li class="key">
+				案例名称
+			</li>
+			<li class="value">
+				<input type="text" />
+			</li>
+		</ul>
+	</div>
+	<div class="listitem clearfix">
+		<ul class="user-info clearfix">
+			<li class="key">
+				案例类型
+			</li>
+			<li class="value">
+				<div class="question-param clearfix">
+					<a class="sel fl" href="">工件名称</a>
+					<a class="sel fl" href="">所属行业</a>
+					<a class="sel fl" href="">工件材质</a>
+					<a class="sel fl" href="">工件硬度</a>
+				</div>
+			</li>
+		</ul>
+	</div>
+	<div class="listitem clearfix">
+		<ul class="user-info clearfix">
+			<li class="key">
+				案例文件
+			</li>
+			<li class="value">
+				<div class="upload-gc">
+					<a class="" href="">点击上传</a>
+					<p>仅支持DOC、PDF格式，文件小于5M</p>
+				</div>
+			</li>
+		</ul>
+	</div>
+	<div class="listitem mt20 pt20 btg clearfix">
+		  <a class="save" href="#">上传案例</a>
+		</div>
+</div>

@@ -37,7 +37,7 @@ public class AgentController {
 	@RequestMapping(value = "/*")
 	public ModelAndView common()
 	{
-		return new ModelAndView(new RedirectView("login")); 
+		return new ModelAndView(new RedirectView("agent/mainpage")); 
 	}
 	
 	
@@ -67,5 +67,65 @@ public class AgentController {
 			logger.error("qqLoginException:"+e.getMessage());
 		}
 			
+	}
+	
+	@RequestMapping(value="/changepwd")
+	public ModelAndView changepwd(HttpServletRequest request, HttpServletResponse response) {
+		ModelAndView mv = new ModelAndView("agent/changepwd");
+		return mv;
+	}
+
+	@RequestMapping(value="/accnt")
+	public ModelAndView accnt(HttpServletRequest request, HttpServletResponse response) {
+		ModelAndView mv = new ModelAndView("agent/accnt");
+		return mv;
+	}
+	
+	@RequestMapping(value="/profile")
+	public ModelAndView profile(HttpServletRequest request, HttpServletResponse response) {
+		ModelAndView mv = new ModelAndView("agent/profile");
+		return mv;
+	}
+	
+	@RequestMapping(value="/main")
+	public ModelAndView main(HttpServletRequest request, HttpServletResponse response) {
+		ModelAndView mv = new ModelAndView("agent/mainpage");
+		return mv;
+	}
+	
+	@RequestMapping(value="/mymsg")
+	public ModelAndView mymsg(HttpServletRequest request, HttpServletResponse response) {
+		ModelAndView mv = new ModelAndView("agent/mymsg");
+		return mv;
+	}
+	
+	@RequestMapping(value="/newquestion")
+	public ModelAndView newquestion(HttpServletRequest request, HttpServletResponse response) {
+		ModelAndView mv = new ModelAndView("agent/newquestion");
+		return mv;
+	}
+	
+	@RequestMapping(value="/oldquestion")
+	public ModelAndView oldquestion(HttpServletRequest request, HttpServletResponse response) {
+		ModelAndView mv = new ModelAndView("agent/oldquestion");
+		return mv;
+	}
+	
+	@RequestMapping(value="/draft")
+	public ModelAndView draft(HttpServletRequest request, HttpServletResponse response) {
+		ModelAndView mv = new ModelAndView("agent/draft");
+		return mv;
+	}
+	
+	@RequestMapping(value="/goodcase")
+	public ModelAndView goodcase(HttpServletRequest request, HttpServletResponse response) {
+		ModelAndView mv = new ModelAndView("agent/goodcase");
+		return mv;
+	}
+	
+	@RequestMapping(value="/uploadgc")
+	public ModelAndView uploadgc(HttpServletRequest request, HttpServletResponse response) {
+		ModelAndView mv = new ModelAndView("agent/uploadgc");
+		return mv;
 	}
 }

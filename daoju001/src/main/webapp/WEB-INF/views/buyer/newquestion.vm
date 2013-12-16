@@ -1,0 +1,31 @@
+#set($layout = "/layout/buyer_detail_layout.vm")
+<ul class="right-tab clearfix">
+  <li class="current">新建问题</li>
+  <li><a href="oldquestion">我提的问题</a></li>
+  <li><a href="draft">草稿箱</a></li>
+</ul>
+<div class="rigth-content">
+  <div class="add-question-header">
+	  <input type="text" placeholder="请输入标题"/>
+		<div class="question-param clearfix">
+			<a class="sel fl" href="">工件名称</a>
+			<a class="sel fl" href="">所属行业</a>
+			<a class="sel fl" href="">工件材质</a>
+			<a class="sel fl" href="">工件硬度</a>
+		</div>
+	</div>
+  <div class="add-question-container">
+		<h5 class="clearfix">
+			<a class="addimg" href="#"></a>
+			问题详情
+		</h5>
+		<div class="add-question-wrap">
+			<div class="add-question-editor" contenteditable="true" placeholder="请输入问题详情">
+			</div>
+		</div>
+	</div>
+	<div class="question-op clearfix">
+	  <a class="publish" href="#">发  布</a>
+	  <a class="savedraft" href="#">保存草稿</a>
+	</div>
+</div>

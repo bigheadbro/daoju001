@@ -1,0 +1,50 @@
+﻿#set($layout = "/layout/agent_detail_layout.vm")
+<ul class="right-tab clearfix">
+  <li class="current"><a href="#">最新问题</a></li>
+  <li><a href="oldquestion">已回答的问题</a></li>
+  <li><a href="draft">草稿箱</a></li>
+</ul>
+<div class="rigth-content">
+	<div class="buyer-list">
+		<div class="listitem">
+			<p>刀具是机械制造中用于切削加工的工具，又称切削工具?<span>2013-08-08</span></p>
+			<div class="operation clearfix">
+				<a href="#">3个问题</a><span>|</span>
+				<a href="#">查看详情</a><span>|</span>
+			</div>
+		</div>
+		<div class="listitem">
+			<p>刀具是机械制造中用于切削加工的工具，又称切削工具?<span>2013-08-08</span></p>
+			<div class="operation clearfix">
+				<a href="#">3个问题</a><span>|</span>
+				<a href="#">查看详情</a><span>|</span>
+			</div>
+		</div>
+		<div class="listitem">
+			<p>刀具是机械制造中用于切削加工的工具，又称切削工具?<span>2013-08-08</span></p>
+			<div class="operation clearfix">
+				<a href="#">3个问题</a><span>|</span>
+				<a href="#">查看详情</a><span>|</span>
+			</div>
+		</div>
+		<div class="listitem">
+			<p>刀具是机械制造中用于切削加工的工具，又称切削工具?<span>2013-08-08</span></p>
+			<div class="operation clearfix">
+				<a href="#">3个问题</a><span>|</span>
+				<a href="#">查看详情</a><span>|</span>
+				<a href="#">编辑</a><span>|</span>
+				<a href="#">删除</a>
+			</div>
+		</div>
+		<div class="listitem">
+			<p>刀具是机械制造中用于切削加工的工具，又称切削工具?<span>2013-08-08</span></p>
+			<div class="operation clearfix">
+				<a href="#">3个问题</a><span>|</span>
+				<a href="#">查看详情</a><span>|</span>
+				<a href="#">编辑</a><span>|</span>
+				<a href="#">删除</a>
+			</div>
+		</div>
+	</div>
+</div>
+		

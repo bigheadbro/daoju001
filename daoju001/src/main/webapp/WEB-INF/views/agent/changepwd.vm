@@ -1,0 +1,43 @@
+#set($layout = "/layout/agent_detail_layout.vm")
+<ul class="right-tab clearfix">
+  <li><a href="accnt">账号</a></li>
+  <li class="current"><a href="#">密码</a></li>
+	<li><a href="profile">个人资料</a></li>
+</ul>
+<div class="rigth-content">
+  <div>
+	  <div class="listitem bbg clearfix">
+		  <ul class="user-info clearfix">
+			  <li class="width60 key">
+				  旧密码
+				</li>
+			  <li class="value">
+				  <input type="text" />
+				</li>
+			</ul>
+		</div>
+	  <div class="listitem clearfix">
+		  <ul class="user-info clearfix">
+			  <li class="key">
+				  新密码
+				</li>
+			  <li class="value">
+				  <input type="text" />
+				</li>
+			</ul>
+		</div>
+	  <div class="listitem  bbg clearfix">
+		  <ul class="user-info clearfix">
+			  <li class="key">
+				  确认密码
+				</li>
+			  <li class="value">
+				  <input type="text" />
+				</li>
+			</ul>
+		</div>
+	  <div class="listitem mt20 clearfix">
+		  <a class="save" href="#">保 存</a>
+		</div>
+	</div>
+</div>

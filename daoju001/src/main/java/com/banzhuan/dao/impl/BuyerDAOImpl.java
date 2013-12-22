@@ -13,6 +13,11 @@ public class BuyerDAOImpl extends SqlSessionDaoSupport implements BuyerDAO {
 	public BuyerEntity queryBuyerEntityById(int id) {
 		return this.getSqlSession().selectOne("queryBuyerEntityById", id);
 	}
+	
+	@Override
+	public BuyerEntity queryBuyerEntityByMail(String mail) {
+		return this.getSqlSession().selectOne("queryBuyerEntityByMail", mail);
+	}
 
 	@Override
 	public int insertBuyerEntity(BuyerEntity buyer) {

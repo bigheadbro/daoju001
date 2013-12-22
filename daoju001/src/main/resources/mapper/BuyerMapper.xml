@@ -27,6 +27,12 @@
 		SELECT * from t_buyer t WHERE t.id = #{id}
 	]]>
 	</select>
+	
+	<select id="queryBuyerEntityByMail" parameterType="String" resultMap="BuyerResultMap">
+	<![CDATA[
+		SELECT * from t_buyer t WHERE t.email = #{mail}
+	]]>
+	</select>
 
 	<insert id="insertBuyerEntity" parameterType="BuyerEntity">
 		<selectKey resultType="int" order="AFTER" keyProperty="id">

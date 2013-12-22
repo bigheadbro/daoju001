@@ -1,0 +1,47 @@
+<div id="pagemask"></div>
+<div class="log-win">
+    <div class="log-layer">
+        <h3>
+            <a class="closealert" href="#">×</a>注册
+        </h3>
+        <div class="log-con clearfix">
+            <div class="left">
+                <h2>
+                                                          登录刀师傅<a href="reg">注册</a>
+                </h2>
+                <form id="form_log" method="post" action="login">
+                    <!-- 隐藏字段，用于标示是表单提交 -->
+                    <input type="hidden" name="do_submit" value="true"/>
+                    <div class="log_seg">
+                        <input type="text" name="mail" placeholder="请输入邮箱"/>
+					</div>
+                    <div class="log_seg">
+                        <input name="password" type="password" placeholder="请输入密码"/>
+                    </div>
+                    <div class="log_seg">
+                        <label for="rememberme">
+    					  <input id="rememberme" name="rememberme" type="checkbox">
+    						记住我
+    					</label>
+    					<a class="forgetpwd" href="#">忘记密码&nbsp;?</a>
+                    </div>
+                    <a class="submit_log" href="#">登&nbsp;&nbsp;录</a>
+                <script>
+                    $(function() {
+                      $(".submit_log").click(function () {
+                        $("#form_log").submit();
+                      });
+                    });
+                </script>
+				</form>
+            </div>
+			<div class="right">
+				<h2>或者使用</h2>
+				<a href="">QQ账号登录</a>
+				<p>
+					一键登录<br/>快速注册<br/>
+				</p>
+			</div>
+        </div>
+    </div>
+</div>

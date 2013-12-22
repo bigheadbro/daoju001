@@ -1,23 +1,55 @@
+<script type="text/javascript" src="../js/showlogin.js"></script>
+<script type="text/javascript" src="../js/top-nav.js"></script>
 <div class="main-head-container">
-  <div class="main-head-content clearfix">
-	  <div class="logo">
-		  <h2>搬刀网</h2>
+    <div class="main-head-content clearfix">
+        <div class="logo">
+            <h2>搬刀网</h2>
+        </div>
+        <div class="nav">
+            <ul>
+                <li>
+                    <a href="/index">首页</a>
+                </li>
+                <li>
+                    <a href="#">所有问题</a>
+                </li>
+                <li>
+                    <a href="#">代理商</a>
+                </li>
+                <li>
+                    <a href="#">成功案例</a>
+                </li>
+                <li>
+                    <a href="#">刀具样本</a>
+                </li>
+            </ul>
+        </div>
+		<div class="ask">
+			<a href="#">提问</a>
 		</div>
-		<div class="nav">
-		  <ul>
-			  <li><a href="/banzhuan/index/index">首页</a></li>
-			  <li><a href="#">所有问题</a></li>
-			  <li><a href="#">代理商</a></li>
-			  <li><a href="#">成功案例</a></li>
-			  <li><a href="#">刀具样本</a></li>
+        <div class="login">
+            #if(!$!session.getAttribute("account"))  
+			<ul class="no-auth">
+                <li>
+                    <a href="/reg">注册</a>
+                </li>
+                <li>
+                    <a id="login" href="#">登录</a>
+                </li>
 			</ul>
-		</div>
-	  <div class="login">
-		  <ul>
-			  <li id="asking" ><a href="#">提问</a></li>
-			  <li><a href="/banzhuan/index/reg">注册</a></li>
-			  <li><a href="#">登录</a></li>
-			</ul>
-		</div>
-	</div>
+                　                      #else
+                <a class="top-user" href="/buyer/main">
+					<span class="name">${account.userName}</span>
+					<img src="img/avatar.png" />
+				</a>
+				<ul class="top-dropdown">
+					<li><a href="/buyer/main">我的刀师傅</a></li>
+					<li><a href="/buyer/mymsg">消息</a></li>
+					<li><a href="/buyer/accnt">设置</a></li>
+					<li><a href="/buyer/quit">退出</a></li>
+				</ul>
+            #end		
+        </div>
+    </div>
 </div>
+#parse("/common/login.vm")

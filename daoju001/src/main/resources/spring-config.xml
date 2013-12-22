@@ -40,6 +40,11 @@
              <property name= "contentType">
                        <value>text/html;charset=utf-8</value>  
              </property>
+             <property name="toolboxConfigLocation">  
+                       <value>/WEB-INF/toolbox.xml</value>  
+             </property>
+             <property name="viewClass" value="com.banzhuan.velocity.tools.VelocityToolbox20View"/>
+             
 
              <property name="layoutUrl" value="layout/layout.vm" /> 
              <property name="allowSessionOverride" value="true"/><!-- 解决@sessionAttributes 错误问题 -->

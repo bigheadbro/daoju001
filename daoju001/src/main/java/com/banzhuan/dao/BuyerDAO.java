@@ -10,6 +10,12 @@ public interface BuyerDAO {
 	BuyerEntity queryBuyerEntityById(int id);
 	
 	/**
+	 * @param name
+	 * @return
+	 */
+	BuyerEntity queryBuyerEntityByMail(String mail);
+	
+	/**
 	 * 插入买家信息
 	 * @param companyUser
 	 * @return
@@ -23,5 +29,7 @@ public interface BuyerDAO {
 	 * @return
 	 */
 	public int updateBuyerPwdById(BuyerEntity buyer);
+	
+	
 
 }

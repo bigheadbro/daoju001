@@ -17,10 +17,26 @@
   					</div>
   					<div class="function">
   						<ul>
+						  #if($!stringUtil.isContains($request.getServletPath(),"/main"))
   							<li class="current"><a href="main">我的搬刀</a></li>
-  							<li><a href="mymsg">我的消息</a></li>
-  							<li><a href="newquestion">我的问题</a></li>
-  							<li><a href="accnt">账户设置</a></li>
+						  #else
+							<li><a href="main">我的搬刀</a></li>
+						  #end
+						  #if($!stringUtil.isContains($request.getServletPath(),"/mymsg"))
+  							<li class="current"><a href="mymsg">我的消息</a></li>
+						  #else
+							<li><a href="mymsg">我的消息</a></li>
+						  #end
+					      #if($!stringUtil.isContains($request.getServletPath(),"/newquestion"))
+  							<li class="current"><a href="newquestion">我的问题</a></li>
+						  #else
+							<li><a href="newquestion">我的问题</a></li>
+						  #end
+						  #if($!stringUtil.isContains($request.getServletPath(),"/accnt"))
+  							<li class="current"><a href="accnt">账户设置</a></li>
+						  #else
+							<li><a href="accnt">账户设置</a></li>
+						  #end
   						</ul>
   					</div>
   			  </div>

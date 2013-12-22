@@ -1,20 +1,13 @@
 #set($layout = "/layout/index_layout.vm")
-<div class="main-bk-wrapper">
+<div class="main-bk-wrapper pt0">
 	<div class="main-banner-container">
 	</div>
 	<div class="main-content-container clearfix">
 		<!-- 问题 -->
 		<div class="main-list-container width630">
 			<div class="main-list-header">
-				<ul class="hot-question">
-					<li>
-						<span>热门问题</span>
-					</li>
-					<li class="width462">&nbsp;</li>
-					<li>
-						<a class="seemore" href="#">点击查看更多问题</a>
-					</li>
-				</ul>
+                                                 热门问题
+             <a href="#">点击查看更多问题</a>
 			</div>
 			<div class="main-list-content">
 				<div class="hot-question-listitem first clearfix">
@@ -138,16 +131,9 @@
 		</div>
 		<!-- 代理商 -->
 		<div class="main-list-container width300 ml30">
-			<div class="main-list-header">
-				<ul class="new-agent">
-					<li>
-						<span>最新代理商</span>
-					</li>
-					<li class="width162">&nbsp;</li>
-					<li>
-						<a class="seemore" href="#">查看更多</a>
-					</li>
-				</ul>
+			<div class="main-list-header  ff7e00">
+                                                          最新代理商
+				<a class="seemore" href="#">查看更多</a>
 			</div>
 			<div class="main-list-content">
 				<div class="new-agent-listitem clearfix">
@@ -226,16 +212,9 @@
 		</div>
 	    <!-- 成功案例 -->
 		<div class="main-list-container width300 ml30">
-			<div class="main-list-header">
-				<ul class="goodcase">
-					<li>
-						<span>成功案例</span>
-					</li>
-					<li class="width180">&nbsp;</li>
-					<li>
-						<a class="seemore" href="#">查看更多</a>
-					</li>
-				</ul>
+			<div class="main-list-header ff002a">
+				成功案例
+			  <a class="seemore" href="#">查看更多</a>
 			</div>
 			<div class="goodcase-listitem clearfix">
 			  <div class="clearfix">
@@ -314,42 +293,4 @@
 	    <div class="seperation">&nbsp;</div>
 		</div>
 	</div>
-</div>
-<div class="reg-win">
-    <div class="reg-layer">
-        <h3>
-            <a class="closealert" href="#">×</a>注册
-        </h3>
-        <div class="reg-con clearfix">
-            <div class="left">
-                <h2>
-                    <a class="fr" href="#">登录</a>快速注册
-                </h2>
-                <form id="reg_form" method="post" action="">
-                    <!-- 隐藏字段，用于标示是表单提交 -->
-                    <input type="hidden" name="do_submit" value="true"/>
-                    #springBind("form.name")
-                    <div class="reg_seg">
-                        <input type="text" value="$!{status.value}" name="$!{status.expression}" placeholder="请输入用户名"/>
-                    </div>
-                    #springBind("form.email")
-                    <div class="reg_seg">
-                        <input name="$!{status.expression}" type="text" placeholder="请输入邮箱"/>
-                    </div>
-                    #springBind("form.pwd")
-                    <div class="reg_seg">
-                        <input id="password" name="$!{status.expression}" type="password" placeholder="请输入密码"/>
-                    </div>
-                </form>
-                <a class="submit_reg" href="">注册</a>
-                <script>
-                    $(function() {
-                      $("#submit_reg").click(function () {
-                        $("#reg_form").submit();//提交
-                      });
-                    });
-                </script>
-            </div>
-        </div>
-    </div>
 </div>

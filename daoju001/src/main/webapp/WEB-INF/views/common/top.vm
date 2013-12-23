@@ -8,7 +8,7 @@
         <div class="nav">
             <ul>
                 <li>
-                    <a href="/index">首页</a>
+                    <a href="/common/index">首页</a>
                 </li>
                 <li>
                     <a href="#">所有问题</a>
@@ -25,13 +25,13 @@
             </ul>
         </div>
 		<div class="ask">
-			<a href="#">提问</a>
+			<a href="/buyer/newquestion">提问</a>
 		</div>
         <div class="login">
             #if(!$!session.getAttribute("account"))  
 			<ul class="no-auth">
                 <li>
-                    <a href="/reg">注册</a>
+                    <a href="/common/reg">注册</a>
                 </li>
                 <li>
                     <a id="login" href="#">登录</a>
@@ -40,12 +40,12 @@
                 　                      #else
                 <a class="top-user" href="/buyer/main">
 					<span class="name">${account.userName}</span>
-					<img src="img/avatar.png" />
+					<img src="../img/avatar.png" />
 				</a>
 				<ul class="top-dropdown">
 					<li><a href="/buyer/main">我的刀师傅</a></li>
 					<li><a href="/buyer/mymsg">消息</a></li>
-					<li><a href="/buyer/accnt">设置</a></li>
+					<li><a href="/buyer/profile">设置</a></li>
 					<li><a href="/buyer/quit">退出</a></li>
 				</ul>
             #end		

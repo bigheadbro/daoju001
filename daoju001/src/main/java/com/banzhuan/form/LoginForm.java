@@ -10,6 +10,19 @@ public class LoginForm implements Serializable{
 	private String mail;
 	private String password;
 	private Boolean rememberme;
+	private int Id;
+	/**
+	 * @return the id
+	 */
+	public int getId() {
+		return Id;
+	}
+	/**
+	 * @param id the id to set
+	 */
+	public void setId(int id) {
+		Id = id;
+	}
 	public String getMail() {
 		return mail;
 	}

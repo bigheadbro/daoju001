@@ -17,14 +17,18 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
 import com.banzhuan.common.Result;
+import com.banzhuan.entity.BuyerEntity;
+import com.banzhuan.form.BuyerProfileForm;
+import com.banzhuan.form.BuyerRegForm;
 import com.banzhuan.form.LoginForm;
 import com.banzhuan.service.BuyerService;
 import com.qq.connect.QQConnectException;
 import com.qq.connect.oauth.Oauth;
+import com.banzhuan.common.Account;
 
 @Controller
 @RequestMapping("/buyer")
-public class BuyerController {
+public class BuyerController extends BaseController{
 	private Logger logger = LoggerFactory.getLogger(BuyerController.class);
 	@Autowired
 	@Qualifier("buyerService")
@@ -42,20 +46,45 @@ public class BuyerController {
 	
 	
 	@RequestMapping(value="/changepwd")
-	public ModelAndView changepwd(HttpServletRequest request, HttpServletResponse response) {
-		ModelAndView mv = new ModelAndView("buyer/changepwd");
-		return mv;
+	public ModelAndView changepwd(HttpServletRequest request, HttpServletResponse response, @ModelAttribute("account")Account account, 
+			@ModelAttribute("form")BuyerRegForm form, BindingResult result) 
+	{
+		ModelAndView view = new ModelAndView("buyer/changepwd");
+		// 非表单提交，直接显示页面
+		if(!isDoSubmit(request))
+			return view;
+		
+		
+		return view;
 	}
 
-	@RequestMapping(value="/accnt")
-	public ModelAndView accnt(HttpServletRequest request, HttpServletResponse response) {
-		ModelAndView mv = new ModelAndView("buyer/accnt");
-		return mv;
-	}
+//	@RequestMapping(value="/accnt")
+//	public ModelAndView accnt(HttpServletRequest request, HttpServletResponse response, @ModelAttribute("account")Account account, 
+//			@ModelAttribute("form")BuyerRegForm form, BindingResult result) 
+//	{
+//		ModelAndView view = new ModelAndView("buyer/accnt");
+//		account = (Account)request.getSession().getAttribute("account");
+//	    form.setUserid(account.getUserId());
+//		// 非表单提交，直接显示页面
+//		if(!isDoSubmit(request))
+//		{
+//			form.setName(account.getUserName());
+//		    form.setEmail(account.getMail());
+//		    form.setLogo(account.getLogo());
+//			return view;
+//		}
+//		Result re = buyerService.updateBuyerAccnt(form, result);
+//		return view;
+//	}
 	
 	@RequestMapping(value="/profile")
-	public ModelAndView profile(HttpServletRequest request, HttpServletResponse response) {
+	public ModelAndView profile(HttpServletRequest request, HttpServletResponse response, @ModelAttribute("account")Account account, 
+			@ModelAttribute("form")BuyerProfileForm form, BindingResult result)
+	{
 		ModelAndView mv = new ModelAndView("buyer/profile");
+		account = (Account)request.getSession().getAttribute("account");
+		BuyerEntity buyer = buyerService.getBuyerEntity(account.getUserId());
+		buyerService.setBuyerProfileFormWithBuyerEntity(form, buyer);
 		return mv;
 	}
 	

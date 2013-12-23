@@ -19,6 +19,15 @@ public class BuyerEntity implements Serializable {
 	private String password;
 	// 电子邮箱
 	private String email;
+	// logo
+	private String logo;
+
+	private String companyName;
+	private String companyAddress;
+	private String companyPhone;
+	private String contactName;
+	private String contactPhone;
+	private String contactQq;
 	// 注册时间
 	private String regTime;
 	// 记录创建时间
@@ -116,6 +125,104 @@ public class BuyerEntity implements Serializable {
 		this.email = email;
 	}
 
+	/**
+	 * @return the logo
+	 */
+	public String getLogo() {
+		return logo;
+	}
+
+	/**
+	 * @param logo the logo to set
+	 */
+	public void setLogo(String logo) {
+		this.logo = logo;
+	}
+
+	/**
+	 * @return the companyName
+	 */
+	public String getCompanyName() {
+		return companyName;
+	}
+
+	/**
+	 * @param companyName the companyName to set
+	 */
+	public void setCompanyName(String companyName) {
+		this.companyName = companyName;
+	}
+
+	/**
+	 * @return the companyAddress
+	 */
+	public String getCompanyAddress() {
+		return companyAddress;
+	}
+
+	/**
+	 * @param companyAddress the companyAddress to set
+	 */
+	public void setCompanyAddress(String companyAddress) {
+		this.companyAddress = companyAddress;
+	}
+
+	/**
+	 * @return the companyPhone
+	 */
+	public String getCompanyPhone() {
+		return companyPhone;
+	}
+
+	/**
+	 * @param companyPhone the companyPhone to set
+	 */
+	public void setCompanyPhone(String companyPhone) {
+		this.companyPhone = companyPhone;
+	}
+
+	/**
+	 * @return the contactName
+	 */
+	public String getContactName() {
+		return contactName;
+	}
+
+	/**
+	 * @param contactName the contactName to set
+	 */
+	public void setContactName(String contactName) {
+		this.contactName = contactName;
+	}
+
+	/**
+	 * @return the contactPhone
+	 */
+	public String getContactPhone() {
+		return contactPhone;
+	}
+
+	/**
+	 * @param contactPhone the contactPhone to set
+	 */
+	public void setContactPhone(String contactPhone) {
+		this.contactPhone = contactPhone;
+	}
+
+	/**
+	 * @return the contactQq
+	 */
+	public String getContactQq() {
+		return contactQq;
+	}
+
+	/**
+	 * @param contactQq the contactQq to set
+	 */
+	public void setContactQq(String contactQq) {
+		this.contactQq = contactQq;
+	}
+	
 	/**
 	 * @return the regTime
 	 */

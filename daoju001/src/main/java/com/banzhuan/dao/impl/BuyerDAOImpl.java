@@ -30,4 +30,9 @@ public class BuyerDAOImpl extends SqlSessionDaoSupport implements BuyerDAO {
 		return this.getSqlSession().update("updateBuyerPwdById", buyer);
 	}
 
+	@Override
+	public int updateBuyerEntityById(BuyerEntity buyer) {
+		return this.getSqlSession().update("updateBuyerById", buyer);
+	}
+
 }

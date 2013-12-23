@@ -7,7 +7,9 @@ import org.springframework.validation.Errors;
 
 import com.banzhuan.dao.BuyerDAO;
 import com.banzhuan.entity.BuyerEntity;
+import com.banzhuan.common.Account;
 import com.banzhuan.common.Result;
+import com.banzhuan.form.BuyerProfileForm;
 import com.banzhuan.form.BuyerRegForm;
 import com.banzhuan.form.LoginForm;
 import com.banzhuan.entity.BuyerEntity;
@@ -84,5 +86,66 @@ public class BuyerService {
 		}
 		result.add("buyer", buyer);
 		return result;
+	}
+	
+	public Result updateBuyerAccnt(BuyerRegForm form, Errors errors)
+	{
+		Result result = new Result();
+		BuyerEntity buyer = new BuyerEntity();
+		if(form.getName() != null)
+		{
+			buyer.setUsername(form.getName());
+		}
+		if(form.getLogo() != null)
+		{
+			buyer.setLogo(form.getLogo());
+		}
+		if(form.getUserid() != 0)
+		{
+			buyer.setId(form.getUserid());
+		}
+		buyerDAO.updateBuyerEntityById(buyer);
+		return result;
+	}
+	
+	public BuyerEntity getBuyerEntity(int userId)
+	{
+		return buyerDAO.queryBuyerEntityById(userId);
+	}
+	
+	public void setBuyerProfileFormWithBuyerEntity(BuyerProfileForm form, BuyerEntity entity)
+	{
+		if(entity.getUsername() != "")
+		{
+			form.setUserName(entity.getUsername());
+		}
+		if(entity.getCompanyName() != "")
+		{
+			form.setCompanyName(entity.getCompanyName());
+		}
+		else
+		{
+			
+		}
+		if(entity.getCompanyAddress() != "")
+		{
+			form.setAddress(entity.getCompanyAddress());
+		}
+		if(entity.getCompanyPhone() != "")
+		{
+			form.setCompanyPhone(entity.getCompanyPhone());
+		}
+		if(entity.getContactName() != "")
+		{
+			form.setContactName(entity.getContactName());
+		}
+		if(entity.getContactPhone() != "")
+		{
+			form.setContactPhone(entity.getContactPhone());
+		}
+		if(entity.getContactQq() != "")
+		{
+			form.setContactQQ(entity.getContactQq());
+		}
 	}
 }

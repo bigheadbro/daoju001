@@ -14,8 +14,22 @@
 		<id property="password" column="password" />
 		<!--电子邮箱 -->
 		<id property="email" column="email" />
+		<!--电子邮箱 -->
+		<id property="logo" column="logo" />
 		<!--注册时间 -->
 		<id property="regTime" column="reg_time" />
+		<!---->
+		<id property="companyName" column="company_name"/>
+			  <!---->
+		<id property="companyAddress" column="company_address"/>
+			  <!---->
+		<id property="companyPhone" column="company_phone"/>
+			  <!---->
+		<id property="contactName" column="contact_name"/>
+			  <!---->
+		<id property="contactPhone" column="contact_phone"/>
+			  <!---->
+		<id property="contactQq" column="contact_qq"/>
 		<!--记录创建时间 -->
 		<id property="gmtCreate" column="gmt_create" />
 		<!--记录修改时间(最近登录时间) -->
@@ -45,6 +59,12 @@
 		,username
 		,password
 		,email
+		,company_name
+		,company_address
+		,company_phone
+		,contact_name
+		,contact_phone
+		,contact_qq
 		,reg_time
 		,gmt_create
 		,gmt_modified)
@@ -55,6 +75,12 @@
 		,#{username}
 		,#{password}
 		,#{email}
+		,#{companyName}
+		,#{companyAddress}
+		,#{companyPhone}
+		,#{contactName}
+		,#{contactPhone}
+		,#{contactQq}
 		,#{regTime}
 		,#{gmtCreate}
 		,#{gmtModified}
@@ -66,4 +92,13 @@
 		update t_buyer set password = #{password}, gmt_modified=now() where id=#{id}
 	</update>
 
+	<update id="updateBuyerById" parameterType="BuyerEntity">
+		update t_buyer 
+		<set> 
+		      <if test="username != null">username=#{username},</if>
+		      <if test="logo != null">logo=#{logo},</if>
+		   	  gmt_modified=now()
+		</set>
+	   where id=#{id}
+	</update>
 </mapper>

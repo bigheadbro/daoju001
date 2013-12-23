@@ -34,11 +34,22 @@ public class CommonController extends BaseController{
 	@RequestMapping(value="/*")
 	public ModelAndView otherEnter(final HttpServletResponse response,@ModelAttribute("form")LoginForm form)
 	{
-		ModelAndView mv = new ModelAndView("index");
+		ModelAndView mv = new ModelAndView("/common/index");
 		return mv;
 	}
 
-	@RequestMapping(value="/reg")
+	/**
+	 * 其他未识别的URL都统一到
+	 * @return
+	 */
+	@RequestMapping(value="/common/index")
+	public ModelAndView index(final HttpServletResponse response,@ModelAttribute("form")LoginForm form)
+	{
+		ModelAndView mv = new ModelAndView("/common/index");
+		return mv;
+	}
+
+	@RequestMapping(value="/common/reg")
 	public ModelAndView reg(final HttpServletRequest request,
 			final HttpServletResponse response, @ModelAttribute("form")BuyerRegForm form, BindingResult result) 
 	{
@@ -56,23 +67,23 @@ public class CommonController extends BaseController{
 				account.setBuyer(false);
 				request.getSession().setAttribute("account", account);
 				// 注册成功， 跳转到登陆页面
-				return new ModelAndView(new RedirectView("index")); 
+				return new ModelAndView(new RedirectView("/common/index")); 
 			}
 			else
 			{
 				// 注册失败， 返回注册页面，并显示出错提示信息
-				ModelAndView model = new ModelAndView("reg");
+				ModelAndView model = new ModelAndView("/common/reg");
 				return model;
 			}
 		}
 		else
 		{
-			ModelAndView model = new ModelAndView("reg");
+			ModelAndView model = new ModelAndView("/common/reg");
 			return model;
 		}
 	}
 
-	@RequestMapping(value="/login")
+	@RequestMapping(value="/common/login")
 	public ModelAndView login(final HttpServletRequest request,
 			final HttpServletResponse response, @ModelAttribute("form")LoginForm form, BindingResult result) 
 	{
@@ -87,21 +98,24 @@ public class CommonController extends BaseController{
 				account.setLogin(true); // 登录成功标识
 				account.setUserName(user.getUsername()); // 用户登录名
 				account.setUserId(user.getId()); // 用户ID
+				account.setMail(user.getEmail()); // 邮箱
 				account.setBuyer(true);
+				//设置头像
+				account.setLogo(buyerService.getBuyerEntity(account.getUserId()).getLogo());
 				request.getSession().setAttribute("account", account);
 				// 注册成功， 跳转到登陆页面
-				return new ModelAndView(new RedirectView("index")); 
+				return new ModelAndView(new RedirectView("/buyer/profile")); 
 			}
 			else
 			{
 				// 注册失败， 返回注册页面，并显示出错提示信息
-				ModelAndView model = new ModelAndView(new RedirectView("buyer/accnt"));
+				ModelAndView model = new ModelAndView(new RedirectView("/buyer/profile"));
 				return model;
 			}
 		}
 		else
 		{
-			ModelAndView model = new ModelAndView("index");
+			ModelAndView model = new ModelAndView("/index");
 			return model;
 		}
 	}

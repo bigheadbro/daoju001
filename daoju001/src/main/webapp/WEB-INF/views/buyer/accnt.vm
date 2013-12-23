@@ -1,55 +1,70 @@
 #set($layout = "/layout/buyer_detail_layout.vm")
 <ul class="right-tab clearfix">
-  <li class="current">账号</li>
-  <li><a href="changepwd">密码</a></li>
-	 <li><a href="profile">个人资料</a></li>
+    <li class="current">账号</li>
+    <li>
+        <a href="changepwd">密码</a>
+    </li>
+    <li>
+        <a href="profile">个人资料</a>
+    </li>
 </ul>
 <div class="rigth-content">
-  <div>
-	  <div class="listitem clearfix">
-		  <ul class="user-info clearfix">
-			  <li class="key">
-				  账户名
-				</li>
-			  <li class="value">
-				  Bigheadbro
-				</li>
-			  <li class="operation">
-				  <a href="#">修改</a>
-				</li>
-			</ul>
-		</div>
-		<div class="seperation10">&nbsp;</div>
-	  <div class="listitem clearfix">
-		  <ul class="user-info clearfix">
-			  <li class="key">
-				  邮箱
-				</li>
-			  <li class="value">
-				  guichaoqun@gmail.com
-				</li>
-			  <li class="operation">
-				  <a href="#">修改</a>
-				</li>
-			</ul>
-		</div>
-		<div class="seperation10">&nbsp;</div>
-	  <div class="listitem clearfix">
-		  <ul class="user-info clearfix">
-			  <li class="key">
-				  头像
-				</li>
-			  <li class="value">
-				  <a href="#">
-					  <img src="../img/avatar.png" />
-					</a>
-				</li>
-			</ul>
-		</div>
-		<div class="seperation10">&nbsp;</div>
-	  <div class="listitem clearfix">
-		  <a class="save" href="#">保 存</a>
-		</div>
-	</div>
+    <div>
+		<form id="form_accnt">
+			<!-- 隐藏字段，用于标示是表单提交 -->
+			<input type="hidden" name="do_submit" value="true"/>
+    		#springBind("form.name")
+            <div class="listitem clearfix">
+                <ul class="user-info clearfix">
+                    <li class="key">
+                        账户名
+                    </li>
+                    <li class="value">
+                        <input type="text" class="dsf-form-text-input" name="${status.expression}" value="${status.value}" />
+                    </li>
+                </ul>
+            </div>
+            <div class="seperation10">&nbsp;</div>
+            #springBind("form.email")
+            <div class="listitem clearfix">
+                <ul class="user-info clearfix">
+                    <li class="key">
+                        邮箱
+                    </li>
+                    <li class="value">
+                        <input type="text" class="dsf-form-text-input" name="${status.expression}" value="${status.value}" />
+                    </li>
+                </ul>
+            </div>
+            <div class="seperation10">&nbsp;</div>
+            #springBind("form.logo")
+            <div class="listitem clearfix">
+                <ul class="user-info clearfix">
+                    <li class="key">
+                        头像
+                    </li>
+                    <li class="value">
+                        <a href="#">
+    						#if($!{form.logo})
+    							<img src="${status.value}" />
+    						#else
+    							<img src="../img/avatar.png" />
+    						#end
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="seperation10">&nbsp;</div>
+            <div class="listitem clearfix">
+                <a class="save" href="#">保 存</a>
+            </div>
+			<script>
+				$(function() {
+					$(".save").click(function () {
+						$("#form_accnt").submit();//提交
+					});
+				});
+			</script>
+		</form>
+    </div>
 </div>
-			

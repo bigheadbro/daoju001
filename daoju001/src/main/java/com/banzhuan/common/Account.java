@@ -14,6 +14,7 @@ public class Account implements Serializable{
 	private boolean isBuyer;
 	private boolean isAgent;
 	private String logo;
+	private String mail;
 	
 	public boolean isAgent() {
 		return isAgent;
@@ -74,6 +75,18 @@ public class Account implements Serializable{
 	}
 	public void setLogo(String logo) {
 		this.logo = logo;
+	}
+	/**
+	 * @return the mail
+	 */
+	public String getMail() {
+		return mail;
+	}
+	/**
+	 * @param mail the mail to set
+	 */
+	public void setMail(String mail) {
+		this.mail = mail;
 	}
 	
 

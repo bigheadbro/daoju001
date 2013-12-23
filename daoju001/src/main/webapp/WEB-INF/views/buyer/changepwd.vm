@@ -1,45 +1,51 @@
 #set($layout = "/layout/buyer_detail_layout.vm")
 <ul class="right-tab clearfix">
-  <li><a href="accnt">账号</a></li>
-  <li class="current"><a href="#">密码</a></li>
-	 <li><a href="profile">个人资料</a></li>
+    <li>
+        <a href="profile">个人资料</a>
+    </li>
+    <li class="current">
+                            密码
+    </li>
 </ul>
 <div class="rigth-content">
-  <div>
-	  <div class="listitem clearfix">
-		  <ul class="user-info clearfix">
-			  <li class="width60 key">
-				  旧密码
-				</li>
-			  <li class="value">
-				  <input type="text" />
-				</li>
-			</ul>
-		</div>
-		<div class="seperation10">&nbsp;</div>
-	  <div class="listitem clearfix">
-		  <ul class="user-info clearfix">
-			  <li class="key">
-				  新密码
-				</li>
-			  <li class="value">
-				  <input type="text" />
-				</li>
-			</ul>
-		</div>
-	  <div class="listitem clearfix">
-		  <ul class="user-info clearfix">
-			  <li class="key">
-				  确认密码
-				</li>
-			  <li class="value">
-				  <input type="text" />
-				</li>
-			</ul>
-		</div>
-		<div class="seperation10">&nbsp;</div>
-	  <div class="listitem clearfix">
-		  <a class="save" href="#">保 存</a>
-		</div>
-	</div>
+    <div>
+        <div class="listitem clearfix">
+			#springBind("form.pwd")
+            <ul class="user-info clearfix">
+                <li class="width60 key">
+                    旧密码
+                </li>
+                <li class="value">
+                    <input type="text" class="dsf-form-text-input" />
+                </li>
+            </ul>
+        </div>
+        <div class="seperation10">&nbsp;</div>
+        <div class="listitem clearfix">
+			#springBind("form.pwd1")
+            <ul class="user-info clearfix">
+                <li class="key">
+                    新密码
+                </li>
+                <li class="value">
+                    <input type="text" class="dsf-form-text-input" />
+                </li>
+            </ul>
+        </div>
+        <div class="listitem clearfix">
+			#springBind("form.pwd2")
+            <ul class="user-info clearfix">
+                <li class="key">
+                    确认密码
+                </li>
+                <li class="value">
+                    <input type="text" class="dsf-form-text-input"/>
+                </li>
+            </ul>
+        </div>
+        <div class="seperation10">&nbsp;</div>
+        <div class="listitem clearfix">
+            <a class="save" href="#">保 存</a>
+        </div>
+    </div>
 </div>

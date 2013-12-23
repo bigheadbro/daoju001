@@ -32,10 +32,10 @@
 						  #else
 							<li><a href="newquestion">我的问题</a></li>
 						  #end
-						  #if($!stringUtil.isContains($request.getServletPath(),"/accnt"))
-  							<li class="current"><a href="accnt">账户设置</a></li>
+						  #if($!stringUtil.isContains($request.getServletPath(),"/profile"))
+  							<li class="current"><a href="profile">账户设置</a></li>
 						  #else
-							<li><a href="accnt">账户设置</a></li>
+							<li><a href="profile">账户设置</a></li>
 						  #end
   						</ul>
   					</div>

@@ -1,6 +1,8 @@
 package com.banzhuan.controller;
 
+import java.io.File;
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -10,9 +12,12 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.support.DefaultMultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
@@ -22,6 +27,7 @@ import com.banzhuan.form.BuyerProfileForm;
 import com.banzhuan.form.BuyerRegForm;
 import com.banzhuan.form.LoginForm;
 import com.banzhuan.service.BuyerService;
+import com.banzhuan.util.StringUtil;
 import com.qq.connect.QQConnectException;
 import com.qq.connect.oauth.Oauth;
 import com.banzhuan.common.Account;
@@ -85,6 +91,37 @@ public class BuyerController extends BaseController{
 		account = (Account)request.getSession().getAttribute("account");
 		BuyerEntity buyer = buyerService.getBuyerEntity(account.getUserId());
 		buyerService.setBuyerProfileFormWithBuyerEntity(form, buyer);
+		return mv;
+	}
+	
+	@RequestMapping(value="/uploadlogo")
+	public ModelAndView uploadlogo(HttpServletRequest request, HttpServletResponse response, @ModelAttribute("account")Account account, 
+			@ModelAttribute("form")BuyerProfileForm form, BindingResult result)
+	{
+		ModelAndView mv = new ModelAndView("buyer/profile");
+		String size = request.getParameter("crop");
+		account = (Account)request.getSession().getAttribute("account");
+		BuyerEntity buyer = buyerService.getBuyerEntity(account.getUserId());
+		buyerService.setBuyerProfileFormWithBuyerEntity(form, buyer);
+		// /////////////////////////////////////////////////////////////获取上传的图片///////////////////////////////////
+		if (request instanceof DefaultMultipartHttpServletRequest) {
+			DefaultMultipartHttpServletRequest r = (DefaultMultipartHttpServletRequest) request;
+			List<MultipartFile> files = r.getMultiFileMap().get("logo");
+			if (files != null && files.size() > 0) {
+				MultipartFile f = files.get(0);
+				if (StringUtil.isNotEmpty(f.getOriginalFilename())) {
+					String path = request.getRealPath("/uploadfile");
+					File file = new File(path + "/" + f.getOriginalFilename());
+					account.setLogo(f.getOriginalFilename());
+					try {
+						FileCopyUtils.copy(f.getBytes(), file);
+					} catch (IOException e) {
+						logger.error("upload company logo error:"
+								+ e.getMessage());
+					}
+				}
+			}
+		}
 		return mv;
 	}
 	

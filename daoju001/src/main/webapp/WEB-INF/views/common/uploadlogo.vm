@@ -1,0 +1,29 @@
+<link rel="stylesheet" href="../css/imgup.css">
+    <div class="uploadlogo-win">
+        <h2>
+            <a href="#">x</a>
+            修改头像</h2>
+            <form action="/buyer/uploadlogo">
+                <input type="file" id="file" accept="image/*" onerror="alert('请选择一个图片')">
+                <input type="submit" class="ui_button" value="保存">
+                <input name="crop" type="hidden">
+   		    </form>
+<div class="cont">
+    <div id="preview" class="preview"></div>
+    <div class="thumb"></div>
+</div>
+<script type="text/javascript" src="../js/imagepreview.js"></script>
+<script type="text/javascript" src="../js/jquery.crop.js"></script>
+<script>
+    imagepreview(document.getElementById("file"), document.getElementById("preview"), function(info){
+    alert("文件名:" + info.name + "\r\n图片原始高度:" + info.height + "\r\n图片原始宽度:" + info.width);
+    //这里若return false则不预览图片
+    $("#preview").css({
+    background: "none"
+    });
+    $("#preview").crop( function(e){
+    $("input[type='hidden']").val([e.top, e.left, e.height, e.width].toString());
+    }, ".thumb");
+    });
+</script>
+</div>

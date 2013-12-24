@@ -271,7 +271,13 @@ opacity: .3;
 .alert-content-right{float:right}
 .alert-btn{display: block;color: white;font-size: 24px;text-align: center;line-height: 35px;width:115px;height:41px;background:url(../img/green.png);}
 .alert-footer{margin: 0 35px 20px 35px;float:right;color:#d2d2d2}
-
+/*上传头像*/
+.uploadlogo-win{position:absolute;top:50px;right:400px;z-index:10002;width:400px;padding: 5px;border-radius: 5px;background:url(../img/transGray.png);font-size:13px;}
+.uploadlogo-win h2{background-color:#0099cb;}
+.uploadlogo-win h2 a{float:right;}
+.uploadlogo-win .cont{}
+.uploadlogo-win .cont .preview{height:300px;width:300px;}
+.uploadlogo-win .cont .thumb{height:120px;width:120px;}
 .ml30{margin-left:30px}
 .width462{width:462px;}
 .width630{width:630px;}

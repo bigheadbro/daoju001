@@ -1,5 +1,4 @@
 var loginshow = false;
-var loginfirst = true;
 $(function() {
 	$("#login").click(function() {
 		showlogin();

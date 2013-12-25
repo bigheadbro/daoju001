@@ -40,7 +40,11 @@
                 　                      #else
                 <a class="top-user" href="/buyer/main">
 					<span class="name">${account.userName}</span>
-					<img src="../img/avatar.png" />
+					#if($!{account.logo})
+						<img src="../uploadfile/$!{account.logo}"  />
+					#else
+						<img src="../img/avatar.png"  />
+					#end
 				</a>
 				<ul class="top-dropdown">
 					<li><a href="/buyer/main">我的刀师傅</a></li>

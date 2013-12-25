@@ -99,6 +99,7 @@ public class CommonController extends BaseController{
 				account.setUserName(user.getUsername()); // 用户登录名
 				account.setUserId(user.getId()); // 用户ID
 				account.setMail(user.getEmail()); // 邮箱
+				account.setLogo(user.getLogo()); // 邮箱
 				account.setBuyer(true);
 				//设置头像
 				account.setLogo(buyerService.getBuyerEntity(account.getUserId()).getLogo());

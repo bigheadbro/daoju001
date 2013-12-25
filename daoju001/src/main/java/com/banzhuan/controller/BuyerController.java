@@ -89,17 +89,17 @@ public class BuyerController extends BaseController{
 			@ModelAttribute("form")BuyerProfileForm form, BindingResult result)
 	{
 		ModelAndView mv = new ModelAndView("buyer/profile");
-//		account = (Account)request.getSession().getAttribute("account");
-//		BuyerEntity buyer = buyerService.getBuyerEntity(account.getUserId());
-//		buyerService.setBuyerProfileFormWithBuyerEntity(form, buyer);
+		account = (Account)request.getSession().getAttribute("account");
+		BuyerEntity buyer = buyerService.getBuyerEntity(account.getUserId());
+		buyerService.setBuyerProfileFormWithBuyerEntity(form, buyer);
 		return mv;
 	}
 	
 	@RequestMapping(value="/uploadlogo")
 	public ModelAndView uploadlogo(HttpServletRequest request, HttpServletResponse response, @ModelAttribute("account")Account account, BindingResult result)
 	{
-		ModelAndView mv = new ModelAndView("buyer/profile");
 		String size = request.getParameter("crop");
+		account = (Account)request.getSession().getAttribute("account");
 		// /////////////////////////////////////////////////////////////获取上传的图片///////////////////////////////////
 		if (request instanceof DefaultMultipartHttpServletRequest) 
 		{
@@ -111,14 +111,19 @@ public class BuyerController extends BaseController{
 				{
 					String path = request.getSession().getServletContext().getRealPath("/uploadfile");
 					File file = new File(path + "/" + f.getOriginalFilename());
-					account.setLogo(f.getOriginalFilename());
+					account.setLogo(Util.genLogoName(f.getContentType().toString().split("/")[1]));
+					BuyerEntity buyer = new BuyerEntity();
+					buyer.setId(account.getUserId());
+					buyer.setLogo(account.getLogo());
+					buyerService.updateBuyerAccnt(buyer);
+					String aaa = request.getPathInfo();
 					try 
 					{
 						FileCopyUtils.copy(f.getBytes(), file);
 				
-						Util.cropImage("png", file.getPath(), Integer.parseInt(size.split(",")[0]),
+						Util.cropImage(f.getContentType().toString().split("/")[1], file.getPath(), Integer.parseInt(size.split(",")[0]),
 								Integer.parseInt(size.split(",")[1]), Integer.parseInt(size.split(",")[2]),
-								Integer.parseInt(size.split(",")[3]), path + "/" + f.getOriginalFilename());
+								Integer.parseInt(size.split(",")[3]), path + "/" + account.getLogo());
 
 					} catch (IOException e) {
 						logger.error("upload company logo error:"
@@ -128,12 +133,12 @@ public class BuyerController extends BaseController{
 			}
 		}
 		
-		return mv;
+		return new ModelAndView(new RedirectView("/buyer/main")); 
 	}
 	
 	@RequestMapping(value="/main")
 	public ModelAndView main(HttpServletRequest request, HttpServletResponse response) {
-		ModelAndView mv = new ModelAndView("buyer/mainpage");
+		ModelAndView mv = new ModelAndView("/buyer/mainpage");
 		return mv;
 	}
 	

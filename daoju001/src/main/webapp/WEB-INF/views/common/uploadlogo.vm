@@ -3,25 +3,27 @@
 	<div class="uploadlog-win-content">
     <h2><a class="close" href="#">x</a> 修改头像</h2>
     
-    <div class="cont clearfix">
-        <div id="preview" class="preview"></div>
-				<div class="thumb-wrap">
-					<h5>头像预览</h5>
-					<div class="thumb"></div>
+    <div class="content clearfix">
+		<div class="preview-wrap">
+			<div id="preview" class="preview"></div>
+		</div>
+		<div class="thumb-wrap clearfix">
+			<h5>头像预览</h5>
+			<div class="thumb"></div>
         </div>
     </div>
-		<form action="/buyer/uploadlogo" method="post" enctype="multipart/form-data">
+		<form id="form_uploadlogo" action="/buyer/uploadlogo" method="post" enctype="multipart/form-data">
         <input type="file" id="file" name="logo" accept="image/*" onerror="alert('请选择一个图片')">
-            <input type="submit" class="ui_button" value="保存">
+            <a class="save" href="#">保 存</a>
                 <input name="crop" type="hidden">
     </form>
 	</div>
 </div>
 <script type="text/javascript" src="../js/imagepreview.js"></script>
 <script type="text/javascript" src="../js/jquery.crop.js"></script>
+<script type="text/javascript" src="../js/uploadlogo.js"></script>
 <script>
     imagepreview(document.getElementById("file"), document.getElementById("preview"), function(info){
-    alert("文件名:" + info.name + "\r\n图片原始高度:" + info.height + "\r\n图片原始宽度:" + info.width);
     //这里若return false则不预览图片
     $("#preview").css({
     background: "none"
@@ -30,4 +32,9 @@
     $("input[type='hidden']").val([e.left, e.top, e.width,  e.height].toString());
     }, ".thumb");
     });
+	$(function() {
+		$(".save").click(function () {
+			$("#form_uploadlogo").submit();//提交
+		});
+	});
 </script>

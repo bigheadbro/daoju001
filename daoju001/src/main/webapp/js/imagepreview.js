@@ -1,16 +1,14 @@
 function imagepreview(file, view, call) {
 
-	var maxHeight = view.clientHeight,
-		maxWidth = view.clientWidth,
-		doc = document;
+	var doc = document;
 		
 	function setsize(info, img){
 		var iwidth, iheight;
-		if((info.width / maxWidth) > (info.height / maxHeight)){
-			iwidth =  maxWidth;
+		if((info.width / view.clientWidth) > (info.height / view.clientHeight)){
+			iwidth =  view.clientWidth;
 			iheight = Math.round(iwidth * info.height / info.width);
 		} else {
-			iheight = maxHeight;
+			iheight = view.clientHeight;
 			iwidth = Math.round(iheight * info.width / info.height);
 		}
 		with(view.style){

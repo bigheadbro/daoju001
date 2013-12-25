@@ -5,7 +5,9 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.Iterator;
+import java.util.UUID;
 
 import javax.imageio.ImageIO;
 import javax.imageio.ImageReadParam;
@@ -13,8 +15,8 @@ import javax.imageio.ImageReader;
 import javax.imageio.stream.ImageInputStream;
 
 public class Util {
+
 	private static int size = 300;
-	private static int ratio = 1;
 	public static void cropImage(String lastdir, String srcpath, int x, int y, int width,
             int height, String subpath) throws IOException 
 	{
@@ -49,7 +51,7 @@ public class Util {
              * 图片裁剪区域。Rectangle 指定了坐标空间中的一个区域，通过 Rectangle 对象
              * 的左上顶点的坐标（x，y）、宽度和高度可以定义这个区域。
              */
-            BufferedImage sourceImg =ImageIO.read(new FileInputStream(subpath)); 
+            BufferedImage sourceImg =ImageIO.read(new FileInputStream(srcpath)); 
             
             Rectangle rect;
             if(sourceImg.getWidth() > sourceImg.getHeight())
@@ -82,4 +84,9 @@ public class Util {
         }
 	}
 
+	public static String genLogoName(String prefix)
+	{
+		UUID uuid = UUID.randomUUID();  
+		return uuid.toString() + "." + prefix;
+	}
 }

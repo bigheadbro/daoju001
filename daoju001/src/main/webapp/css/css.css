@@ -144,6 +144,7 @@ div[contentEditable]{outline:0}
 .mainpage-container .main-right{float:left;width:700px;height:680px;border-radius:10px;background-color:#f6f6f6;padding:20px}
 .mainpage-container .main-left .main-left-content{width:100%;text-align:center}
 .mainpage-container .main-left .person-info{margin:30px auto 0;}
+.mainpage-container .main-left .person-info img{width:88px;height:88px;}
 .mainpage-container .main-left .person-info h5{font-size:18px;padding:15px 15px 0 15px;color:#606060;}
 .mainpage-container .main-left .person-info h6{font-size: 12px;color: #767676;}
 .mainpage-container .main-left .other-info{border-top:1px solid #c7c7c7;border-bottom:1px solid #c7c7c7;margin: 15px 60px 0;padding: 10px 0;}
@@ -272,14 +273,15 @@ opacity: .3;
 .alert-btn{display: block;color: white;font-size: 24px;text-align: center;line-height: 35px;width:115px;height:41px;background:url(../img/green.png);}
 .alert-footer{margin: 0 35px 20px 35px;float:right;color:#d2d2d2}
 /*上传头像*/
-.uploadlogo-win{position:absolute;top:50px;right:400px;z-index:10002;width:500px;padding: 5px;border-radius: 5px;background:url(../img/transGray.png);font-size:13px;}
+.uploadlogo-win{display:none;position:absolute;top:50px;right:400px;z-index:10002;width:500px;padding: 5px;border-radius: 5px;background:url(../img/transGray.png);font-size:13px;}
 .uploadlog-win-content{background-color:white}
 .uploadlogo-win h2{background-color:#0099cb;color:white;font-size:14px;padding:3px 10px;}
 .uploadlogo-win h2 a{float:right;}
-.uploadlogo-win .cont{margin: 10px;}
-.uploadlogo-win .cont .thumb-wrap{}
-.uploadlogo-win .cont .preview{float:left;height:300px;width:300px;border:1px solid grey}
-.uploadlogo-win .cont .thumb{float:left;height:120px;width:120px;}
+.uploadlogo-win .content{margin: 10px;}
+.uploadlogo-win .content .thumb-wrap{float:left;}
+.uploadlogo-win .content .preview-wrap{float:left;}
+.uploadlogo-win .content .preview{height:300px;width:300px;border:1px solid grey}
+.uploadlogo-win .content .thumb{height:120px;width:120px;}
 .ml30{margin-left:30px}
 .width462{width:462px;}
 .width630{width:630px;}

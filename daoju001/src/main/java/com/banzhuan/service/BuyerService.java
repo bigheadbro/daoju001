@@ -88,24 +88,10 @@ public class BuyerService {
 		return result;
 	}
 	
-	public Result updateBuyerAccnt(BuyerRegForm form, Errors errors)
+	public void updateBuyerAccnt(BuyerEntity buyer)
 	{
-		Result result = new Result();
-		BuyerEntity buyer = new BuyerEntity();
-		if(form.getName() != null)
-		{
-			buyer.setUsername(form.getName());
-		}
-		if(form.getLogo() != null)
-		{
-			buyer.setLogo(form.getLogo());
-		}
-		if(form.getUserid() != 0)
-		{
-			buyer.setId(form.getUserid());
-		}
 		buyerDAO.updateBuyerEntityById(buyer);
-		return result;
+		return;
 	}
 	
 	public BuyerEntity getBuyerEntity(int userId)
@@ -122,10 +108,6 @@ public class BuyerService {
 		if(entity.getCompanyName() != "")
 		{
 			form.setCompanyName(entity.getCompanyName());
-		}
-		else
-		{
-			
 		}
 		if(entity.getCompanyAddress() != "")
 		{

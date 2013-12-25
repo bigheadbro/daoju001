@@ -9,9 +9,13 @@
                     <div class="main-left-content">
                         <div class="person-info">
                             <a id="uploadlogo" href="#">
-                                <img src="../img/avatar.png"  />
+								#if($!{account.logo})
+									<img src="../uploadfile/$!{account.logo}"  />
+								#else
+									<img src="../img/avatar.png"  />
+								#end
                             </a>
-                            <h5>桂超群</h5>
+                            <h5>$!{account.userName}</h5>
                         </div>
                         <div class="other-info">
                             <h2>15</h2>

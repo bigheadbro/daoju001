@@ -3,8 +3,8 @@
         <h2>
             <a href="#">x</a>
             修改头像</h2>
-            <form action="/buyer/uploadlogo">
-                <input type="file" id="file" accept="image/*" onerror="alert('请选择一个图片')">
+            <form action="/buyer/uploadlogo" method="post" enctype="multipart/form-data">
+                <input type="file" id="file" name="logo" accept="image/*" onerror="alert('请选择一个图片')">
                 <input type="submit" class="ui_button" value="保存">
                 <input name="crop" type="hidden">
    		    </form>
@@ -22,7 +22,7 @@
     background: "none"
     });
     $("#preview").crop( function(e){
-    $("input[type='hidden']").val([e.top, e.left, e.height, e.width].toString());
+    $("input[type='hidden']").val([e.left, e.top, e.width,  e.height].toString());
     }, ".thumb");
     });
 </script>

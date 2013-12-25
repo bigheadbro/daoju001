@@ -28,6 +28,7 @@ import com.banzhuan.form.BuyerRegForm;
 import com.banzhuan.form.LoginForm;
 import com.banzhuan.service.BuyerService;
 import com.banzhuan.util.StringUtil;
+import com.banzhuan.util.Util;
 import com.qq.connect.QQConnectException;
 import com.qq.connect.oauth.Oauth;
 import com.banzhuan.common.Account;
@@ -88,33 +89,37 @@ public class BuyerController extends BaseController{
 			@ModelAttribute("form")BuyerProfileForm form, BindingResult result)
 	{
 		ModelAndView mv = new ModelAndView("buyer/profile");
-		account = (Account)request.getSession().getAttribute("account");
-		BuyerEntity buyer = buyerService.getBuyerEntity(account.getUserId());
-		buyerService.setBuyerProfileFormWithBuyerEntity(form, buyer);
+//		account = (Account)request.getSession().getAttribute("account");
+//		BuyerEntity buyer = buyerService.getBuyerEntity(account.getUserId());
+//		buyerService.setBuyerProfileFormWithBuyerEntity(form, buyer);
 		return mv;
 	}
 	
 	@RequestMapping(value="/uploadlogo")
-	public ModelAndView uploadlogo(HttpServletRequest request, HttpServletResponse response, @ModelAttribute("account")Account account, 
-			@ModelAttribute("form")BuyerProfileForm form, BindingResult result)
+	public ModelAndView uploadlogo(HttpServletRequest request, HttpServletResponse response, @ModelAttribute("account")Account account, BindingResult result)
 	{
 		ModelAndView mv = new ModelAndView("buyer/profile");
 		String size = request.getParameter("crop");
-		account = (Account)request.getSession().getAttribute("account");
-		BuyerEntity buyer = buyerService.getBuyerEntity(account.getUserId());
-		buyerService.setBuyerProfileFormWithBuyerEntity(form, buyer);
 		// /////////////////////////////////////////////////////////////获取上传的图片///////////////////////////////////
-		if (request instanceof DefaultMultipartHttpServletRequest) {
+		if (request instanceof DefaultMultipartHttpServletRequest) 
+		{
 			DefaultMultipartHttpServletRequest r = (DefaultMultipartHttpServletRequest) request;
 			List<MultipartFile> files = r.getMultiFileMap().get("logo");
 			if (files != null && files.size() > 0) {
 				MultipartFile f = files.get(0);
-				if (StringUtil.isNotEmpty(f.getOriginalFilename())) {
-					String path = request.getRealPath("/uploadfile");
+				if (StringUtil.isNotEmpty(f.getOriginalFilename()))
+				{
+					String path = request.getSession().getServletContext().getRealPath("/uploadfile");
 					File file = new File(path + "/" + f.getOriginalFilename());
 					account.setLogo(f.getOriginalFilename());
-					try {
+					try 
+					{
 						FileCopyUtils.copy(f.getBytes(), file);
+				
+						Util.cropImage("png", file.getPath(), Integer.parseInt(size.split(",")[0]),
+								Integer.parseInt(size.split(",")[1]), Integer.parseInt(size.split(",")[2]),
+								Integer.parseInt(size.split(",")[3]), path + "/" + f.getOriginalFilename());
+
 					} catch (IOException e) {
 						logger.error("upload company logo error:"
 								+ e.getMessage());
@@ -122,6 +127,7 @@ public class BuyerController extends BaseController{
 				}
 			}
 		}
+		
 		return mv;
 	}
 	

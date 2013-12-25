@@ -120,4 +120,14 @@ public class CommonController extends BaseController{
 			return model;
 		}
 	}
+	
+	/**
+	 * @return
+	 */
+	@RequestMapping(value = "/common/logoff")
+	public ModelAndView logoff(final HttpServletRequest request,final HttpServletResponse response) {
+		request.getSession().invalidate();
+		return new ModelAndView(new RedirectView("/common/index"));
+		
+	}
 }

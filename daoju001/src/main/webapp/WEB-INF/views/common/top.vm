@@ -50,7 +50,7 @@
 					<li><a href="/buyer/main">我的刀师傅</a></li>
 					<li><a href="/buyer/mymsg">消息</a></li>
 					<li><a href="/buyer/profile">设置</a></li>
-					<li><a href="/buyer/quit">退出</a></li>
+					<li><a href="/common/logoff">退出</a></li>
 				</ul>
             #end		
         </div>

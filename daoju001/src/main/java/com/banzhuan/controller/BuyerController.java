@@ -116,7 +116,6 @@ public class BuyerController extends BaseController{
 					buyer.setId(account.getUserId());
 					buyer.setLogo(account.getLogo());
 					buyerService.updateBuyerAccnt(buyer);
-					String aaa = request.getPathInfo();
 					try 
 					{
 						FileCopyUtils.copy(f.getBytes(), file);

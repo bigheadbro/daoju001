@@ -47,8 +47,8 @@ function imagepreview(file, view, call) {
 			reader.onerror = img.onerror = fireError;
 			img.onload = function(){
 				var info = {
-					height: img.height,
-					width: img.width,
+					height: img.height<img.width?img.height:img.width,
+					width: img.height<img.width?img.height:img.width,
 					name: image.name,
 					size: image.size
 				};

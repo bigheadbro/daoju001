@@ -1,9 +1,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <link rel="stylesheet" href="../css/css.css">
-    <link rel="stylesheet" href="../css/uploadify.css">
     <title>搬刀网</title>
     <meta property="qc:admins" content="302117775014472060734106675252263757" />
     <script type="text/javascript" src="../js/jquery-1.10.2.min.js"></script>
-	<script type="text/javascript" src="../js/jquery.uploadify.min.js"></script>
 </head>

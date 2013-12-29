@@ -48,7 +48,7 @@ public class BuyerController extends BaseController{
 	@RequestMapping(value = "/*")
 	public ModelAndView common()
 	{
-		return new ModelAndView(new RedirectView("buyer/changepwd")); 
+		return new ModelAndView(new RedirectView("/buyer/main")); 
 	}
 	
 	
@@ -61,28 +61,11 @@ public class BuyerController extends BaseController{
 		if(!isDoSubmit(request))
 			return view;
 		
-		
+		account = (Account)request.getSession().getAttribute("account");
+		form.setUserid(account.getUserId());
+		buyerService.changePwd(form, result);
 		return view;
 	}
-
-//	@RequestMapping(value="/accnt")
-//	public ModelAndView accnt(HttpServletRequest request, HttpServletResponse response, @ModelAttribute("account")Account account, 
-//			@ModelAttribute("form")BuyerRegForm form, BindingResult result) 
-//	{
-//		ModelAndView view = new ModelAndView("buyer/accnt");
-//		account = (Account)request.getSession().getAttribute("account");
-//	    form.setUserid(account.getUserId());
-//		// 非表单提交，直接显示页面
-//		if(!isDoSubmit(request))
-//		{
-//			form.setName(account.getUserName());
-//		    form.setEmail(account.getMail());
-//		    form.setLogo(account.getLogo());
-//			return view;
-//		}
-//		Result re = buyerService.updateBuyerAccnt(form, result);
-//		return view;
-//	}
 	
 	@RequestMapping(value="/profile")
 	public ModelAndView profile(HttpServletRequest request, HttpServletResponse response, @ModelAttribute("account")Account account, 
@@ -91,7 +74,14 @@ public class BuyerController extends BaseController{
 		ModelAndView mv = new ModelAndView("buyer/profile");
 		account = (Account)request.getSession().getAttribute("account");
 		BuyerEntity buyer = buyerService.getBuyerEntity(account.getUserId());
-		buyerService.setBuyerProfileFormWithBuyerEntity(form, buyer);
+		if(!isDoSubmit(request))
+		{
+			buyerService.setBuyerProfileFormWithBuyerEntity(form, buyer);
+		}
+		else
+		{
+			buyerService.updateBuyerAccnt(form, buyer);
+		}
 		return mv;
 	}
 	
@@ -111,11 +101,11 @@ public class BuyerController extends BaseController{
 				{
 					String path = request.getSession().getServletContext().getRealPath("/uploadfile");
 					File file = new File(path + "/" + f.getOriginalFilename());
-					account.setLogo(Util.genLogoName(f.getContentType().toString().split("/")[1]));
+					account.setLogo(Util.genRandomName(f.getContentType().toString().split("/")[1]));
 					BuyerEntity buyer = new BuyerEntity();
 					buyer.setId(account.getUserId());
 					buyer.setLogo(account.getLogo());
-					buyerService.updateBuyerAccnt(buyer);
+					buyerService.updateBuyerAccnt(null, buyer);
 					try 
 					{
 						FileCopyUtils.copy(f.getBytes(), file);
@@ -131,8 +121,35 @@ public class BuyerController extends BaseController{
 				}
 			}
 		}
-		
+	
 		return new ModelAndView(new RedirectView("/buyer/main")); 
+	}
+	
+	@RequestMapping(value="/addimg")
+	public ModelAndView addimg(HttpServletRequest request, HttpServletResponse response)
+	{
+		// /////////////////////////////////////////////////////////////获取上传的图片///////////////////////////////////
+		if (request instanceof DefaultMultipartHttpServletRequest) 
+		{
+			DefaultMultipartHttpServletRequest r = (DefaultMultipartHttpServletRequest) request;
+			List<MultipartFile> files = r.getMultiFileMap().get("file_upload");
+			if (files != null && files.size() > 0) {
+				MultipartFile f = files.get(0);
+				if (StringUtil.isNotEmpty(f.getOriginalFilename()))
+				{
+					String path = request.getSession().getServletContext().getRealPath("/uploadfile");
+					File file = new File(path + "/" + f.getOriginalFilename());
+					try 
+					{
+						FileCopyUtils.copy(f.getBytes(), file);
+					} catch (IOException e) {
+						logger.error("upload company logo error:"
+								+ e.getMessage());
+					}
+				}
+			}
+		}
+		return new ModelAndView(new RedirectView("/buyer/profile")); 
 	}
 	
 	@RequestMapping(value="/main")

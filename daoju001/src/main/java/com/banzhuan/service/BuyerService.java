@@ -88,8 +88,70 @@ public class BuyerService {
 		return result;
 	}
 	
-	public void updateBuyerAccnt(BuyerEntity buyer)
+	public void changePwd(BuyerRegForm form, Errors errors)
 	{
+		if(StringUtil.isEmpty(form.getPwd())) //  第三步，判断密码不能为空
+		{
+			errors.rejectValue("pwd", "PASSWORD_IS_NOT_NULL");
+			return;
+		}
+		if(StringUtil.isEmpty(form.getPwd1())) //  第三步，判断新密码不能为空
+		{
+			errors.rejectValue("pwd1", "PASSWORD_IS_NOT_NULL");
+			return;
+		}
+		if(StringUtil.isEmpty(form.getPwd2())) //  第三步，判断重复新密码不能为空
+		{
+			errors.rejectValue("pwd2", "PASSWORD_IS_NOT_NULL");
+			return;
+		}
+		
+		if(!StringUtil.isEqual(form.getPwd1(), form.getPwd2()))
+		{
+			errors.rejectValue("pwd2", "PASSWORD_IS_NOT_SAME"); // 两次新密码输入不一致
+			return;
+		}
+		
+		BuyerEntity buyer = buyerDAO.queryBuyerEntityById(form.getUserid());
+		if(StringUtil.isNotEqual(StringUtil.encrypt(form.getPwd()), buyer.getPassword()))
+		{
+			errors.rejectValue("pwd", "PASSWORD_ERROR"); // 旧密码输入不正确
+			return;
+		}
+		buyer.setPassword(StringUtil.encrypt(form.getPwd1())); // 新密码
+		buyerDAO.updateBuyerPwdById(buyer);
+	}
+	
+	public void updateBuyerAccnt(BuyerProfileForm form, BuyerEntity buyer)
+	{
+		if(form.getUserName() != "")
+		{
+			buyer.setUsername(form.getUserName());
+		}
+		if(form.getCompanyName() != "")
+		{
+			buyer.setCompanyName(form.getCompanyName());
+		}
+		if(form.getAddress() != "")
+		{
+			buyer.setCompanyAddress(form.getAddress());
+		}
+		if(form.getCompanyPhone() != "")
+		{
+			buyer.setCompanyPhone(form.getCompanyPhone());
+		}
+		if(form.getContactName() != "")
+		{
+			buyer.setContactName(form.getContactName());
+		}
+		if(form.getContactPhone() != "")
+		{
+			buyer.setContactPhone(form.getContactPhone());
+		}
+		if(form.getContactQQ() != "")
+		{
+			buyer.setContactQq(form.getContactQQ());
+		}
 		buyerDAO.updateBuyerEntityById(buyer);
 		return;
 	}

@@ -13,8 +13,9 @@
         </div>
     </div>
 		<form id="form_uploadlogo" action="/buyer/uploadlogo" method="post" enctype="multipart/form-data">
-        <input type="file" id="file" name="logo" accept="image/*" onerror="alert('请选择一个图片')">
-            <a class="save" href="#">保 存</a>
+			<input name="uploadlogo" value="true" type="hidden">
+        <input type="file" id="file" name="logo" />
+            <a id="submit_uploadlogo" class="save" href="#">保 存</a>
                 <input name="crop" type="hidden">
     </form>
 	</div>
@@ -33,7 +34,7 @@
     }, ".thumb");
     });
 	$(function() {
-		$(".save").click(function () {
+		$("#submit_uploadlogo").click(function () {
 			$("#form_uploadlogo").submit();//提交
 		});
 	});

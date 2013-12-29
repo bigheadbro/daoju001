@@ -88,7 +88,7 @@
 		)
 	</insert>
 
-	<update id="updateBuyerPwdById" parameterType="BuyerEntity">
+	<update id="updateBuyerPasswordById" parameterType="BuyerEntity">
 		update t_buyer set password = #{password}, gmt_modified=now() where id=#{id}
 	</update>
 
@@ -96,7 +96,14 @@
 		update t_buyer 
 		<set> 
 		      <if test="username != null">username=#{username},</if>
+		      <if test="companyName != null">company_name=#{companyName},</if>
+		      <if test="companyAddress != null">company_address=#{companyAddress},</if>
+		      <if test="companyPhone != null">company_phone=#{companyPhone},</if>
+		      <if test="contactName != null">contact_name=#{contactName},</if>
+		      <if test="contactPhone != null">contact_phone=#{contactPhone},</if>
+		      <if test="contactQq != null">contact_qq=#{contactQq},</if>
 		      <if test="logo != null">logo=#{logo},</if>
+	       
 		   	  gmt_modified=now()
 		</set>
 	   where id=#{id}

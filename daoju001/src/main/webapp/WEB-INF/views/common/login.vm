@@ -25,10 +25,10 @@
     					</label>
     					<a class="forgetpwd" href="#">忘记密码&nbsp;?</a>
                     </div>
-                    <a class="submit_log" href="#">登&nbsp;&nbsp;录</a>
+                    <a class="submit_log" id="submit_log" href="#">登&nbsp;&nbsp;录</a>
                 <script>
                     $(function() {
-                      $(".submit_log").click(function () {
+                      $("#submit_log").click(function () {
                         $("#form_log").submit();
                       });
                     });

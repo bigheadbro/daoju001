@@ -7,7 +7,9 @@
 </ul>
 <div class="rigth-content">
     <div>
-		<form id="form_profile">
+		<form id="form_profile" action="/buyer/profile" method="post">
+			<!-- 隐藏字段，用于标示是表单提交 -->
+		    <input type="hidden" name="do_submit" value="true"/>
 			#springBind("form.userName")
     		<div class="listitem clearfix">
                     <ul class="user-info clearfix">
@@ -86,8 +88,15 @@
                 </ul>
             </div>
             <div class="listitem mt20 clearfix">
-                <a class="save" href="#">保 存</a>
+                <a id="submit_profile" class="save" href="#">保 存</a>
             </div>
+			<script>
+				$(function() {
+					$("#submit_profile").click(function () {
+						$("#form_profile").submit();//提交
+					});
+				});
+			</script>
 		</form>
     </div>
 </div>

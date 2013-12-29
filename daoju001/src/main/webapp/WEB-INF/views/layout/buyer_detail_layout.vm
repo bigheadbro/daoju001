@@ -41,7 +41,7 @@
                                         <a href="mymsg">我的消息</a>
                                     </li>
                                 #end
-                                #if($!stringUtil.isContains($request.getServletPath(),"/newquestion"))
+                                #if($!stringUtil.isContains($request.getServletPath(),"/newquestion") || $!stringUtil.isContains($request.getServletPath(),"/oldquestion") ||$!stringUtil.isContains($request.getServletPath(),"/draft"))
                                     <li class="current">
                                         <a href="newquestion">我的问题</a>
                                     </li>
@@ -50,7 +50,7 @@
                                         <a href="newquestion">我的问题</a>
                                     </li>
                                 #end
-                                #if($!stringUtil.isContains($request.getServletPath(),"/profile"))
+                                #if($!stringUtil.isContains($request.getServletPath(),"/profile") || $!stringUtil.isContains($request.getServletPath(),"/changepwd"))
                                     <li class="current">
                                         <a href="profile">账户设置</a>
                                     </li>

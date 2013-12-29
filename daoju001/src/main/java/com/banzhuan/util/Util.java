@@ -84,7 +84,7 @@ public class Util {
         }
 	}
 
-	public static String genLogoName(String prefix)
+	public static String genRandomName(String prefix)
 	{
 		UUID uuid = UUID.randomUUID();  
 		return uuid.toString() + "." + prefix;

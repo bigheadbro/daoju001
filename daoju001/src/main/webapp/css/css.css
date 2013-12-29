@@ -282,6 +282,13 @@ opacity: .3;
 .uploadlogo-win .content .preview-wrap{float:left;}
 .uploadlogo-win .content .preview{height:300px;width:300px;border:1px solid grey}
 .uploadlogo-win .content .thumb{height:120px;width:120px;}
+
+/*插入图片*/
+.addimg-win{display:none;position:absolute;top:50px;right:400px;z-index:10002;width:500px;padding: 5px;border-radius: 5px;background:url(../img/transGray.png);font-size:13px;}
+.addimg-cont{background-color:white;height:200px;}
+.addimg-win h2{background-color:#0099cb;color:white;font-size:14px;padding:3px 10px;}
+.addimg-win h2 a{float:right;}
+
 .ml30{margin-left:30px}
 .width462{width:462px;}
 .width630{width:630px;}

@@ -1,0 +1,18 @@
+<script type="text/javascript" src="../js/addimg.js"></script>
+<div class="addimg-win">
+	<div class="addimg-cont">
+		<h2><a href="#" class="close">x</a>选择图片</h2>
+		<h3>上传图片</h3>
+		<form id="form_addimg" method="post" action="/buyer/addimg" enctype="multipart/form-data">
+		<p><input type="file" name="file_upload" id="file_upload" /></p>
+		<p><a id="submit_addimg" href="#">Upload Files</a></p>
+		</form>
+		<script>
+		$(function() {
+    		$("#submit_addimg").click(function () {
+    			$("#form_addimg").submit();//提交
+    		});
+    	});
+    	</script>
+	</div>
+</div>

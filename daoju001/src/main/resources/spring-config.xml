@@ -54,6 +54,19 @@
              <property name="exposeRequestAttributes" value="true"/>
              <property name="exposeSpringMacroHelpers" value="true" />
     </bean>  
+    
+    <mvc:interceptors>
+			<mvc:interceptor>
+				<mvc:mapping path="/buyer/main" />
+				<mvc:mapping path="/buyer/mymsg" />
+				<mvc:mapping path="/buyer/newquestion" />
+				<mvc:mapping path="/buyer/oldquestion" />
+				<mvc:mapping path="/buyer/draft" />
+				<mvc:mapping path="/buyer/changepwd" />
+				<mvc:mapping path="/buyer/profile" />
+				<bean class="com.banzhuan.interceptor.BuyerLoginInterceptor" />
+			</mvc:interceptor>
+		</mvc:interceptors>
 
 	<!-- 数据源配置 -->
 	<bean id="dataSource"

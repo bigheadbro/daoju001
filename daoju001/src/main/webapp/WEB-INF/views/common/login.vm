@@ -14,9 +14,15 @@
                     <input type="hidden" name="do_submit" value="true"/>
                     <div class="log_seg">
                         <input type="text" name="mail" placeholder="请输入邮箱"/>
-					</div>
+												#if($stringUtil.isNotEmpty($!{status.errorMessage}))
+				                    <em for="$!{status.expression}" generated="true" class="error">$!{status.errorMessage}</em>
+				                #end
+										</div>
                     <div class="log_seg">
                         <input name="password" type="password" placeholder="请输入密码"/>
+												#if($stringUtil.isNotEmpty($!{status.errorMessage}))
+				                    <em for="$!{status.expression}" generated="true" class="error">$!{status.errorMessage}</em>
+				                #end
                     </div>
                     <div class="log_seg">
                         <label for="rememberme">

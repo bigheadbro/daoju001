@@ -110,7 +110,7 @@ public class CommonController extends BaseController{
 			else
 			{
 				// 注册失败， 返回注册页面，并显示出错提示信息
-				ModelAndView model = new ModelAndView(new RedirectView("/buyer/profile"));
+				ModelAndView model = new ModelAndView(request.getRequestURI());
 				return model;
 			}
 		}

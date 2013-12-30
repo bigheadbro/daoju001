@@ -36,17 +36,12 @@ public class BuyerService {
 		}
 		else if(buyerDAO.queryBuyerEntityByMail(form.getEmail()) != null) // 第二步，判断注册用户名是否存在
 		{
-			errors.rejectValue("name", "USER_NAME_IS_EXISTS");
+			errors.rejectValue("email", "MAIL_IS_EXISTS");
 			return result;
 		}
 		if(StringUtil.isEmpty(form.getPwd())) //  第三步，判断密码不能为空
 		{
 			errors.rejectValue("pwd", "PASSWORD_IS_NOT_NULL");
-			return result;
-		}
-		if(StringUtil.isEmpty(form.getEmail()))//  第五步，判断邮箱是否输入
-		{
-			errors.rejectValue("email", "EMAIL_IS_NOT_NULL");
 			return result;
 		}
 		
@@ -70,13 +65,13 @@ public class BuyerService {
 		Result result = new Result();
 		if(StringUtil.isEmpty(form.getMail()))
 		{
-			errors.rejectValue("mail", "USER_NAME_IS_NOT_NULL"); // 用户名不能为空
+			errors.rejectValue("mail", "MAIL_IS_NOT_NULL"); // 邮箱不能为空
 			return result;
 		}
 		BuyerEntity buyer = buyerDAO.queryBuyerEntityByMail(form.getMail());
 		if(buyer == null)
 		{
-			errors.rejectValue("mail", "USER_NAME_IS_NOT_EXISTS"); // 用户不存在
+			errors.rejectValue("mail", "MAIL_IS_NOT_EXISTS"); // 邮箱不存在
 			return result;
 		}
 		if(StringUtil.isNotEqual(buyer.getPassword(), StringUtil.encrypt(form.getPassword())))

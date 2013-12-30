@@ -1,6 +1,33 @@
 #set($layout = "/layout/index_layout.vm")
 <div class="main-bk-wrapper pt0">
 	<div class="main-banner-container">
+		<link rel="stylesheet" href="../css/banner.css">
+		<script type="text/javascript" src="../js/slides.min.jquery.js"></script>
+		<script>
+		$(function() {
+		  $('.slides_container').width($('.main-banner-container').width());
+			$('.slide img').width($('.main-banner-container').width());
+			$('.slide img').height(300);
+  		$('#slides').slides({
+    		play  : 200000000,
+    		pause : 200000000,
+    		hoverPause : true
+    	});
+  	});
+		</script>
+		<div id="slides">
+			<div class="slides_container">
+				<div class="slide">
+					<a href="" title="1" target="_blank"><img src="../img/banner/slide-4.jpg"  alt="Slide 1"></a>
+				</div>
+				<div class="slide">
+					<a href="" title="2" target="_blank"><img src="../img/banner/slide-2.jpg"  alt="Slide 2"></a>
+				</div>
+				<div class="slide">
+					<a href="" title="3" target="_blank"><img src="../img/banner/slide-3.jpg"  alt="Slide 3"></a>
+				</div>
+			</div>
+		</div>
 	</div>
 	<div class="main-content-container clearfix">
 		<!-- 问题 -->
@@ -12,14 +39,14 @@
 			<div class="main-list-content">
 				<div class="hot-question-listitem first clearfix">
 					<div class="logo">
-						<img src="img/avatar.png">
+						<img src="../img/avatar.png">
 					</div>
 					<div class="content">
 						<ul>
 							<li class="name"><p>无锡Y公司</p></li>
 							<li class="title"><p>需要制造如此形状的倚天剑。不知道可以吗?</p></li>
 							<li class="text clearfix">
-								<img src="img/ques1.png" />
+								<img src="../img/ques1.png" />
 								<p>
 								我司过去使用的是R8圆刀片，加工情况尚可，63刀盘5刃，可转换6次但目前公司希望降低成本，要求其他刀具品牌参与竞争，求推荐刀具光洁度要求Ra3.2即可，主要是寿命要长
 								</p>
@@ -34,7 +61,7 @@
 								</div>
 							  <ul class="clearfix">
 								  <li class="agent-info clearfix">
-									  <img src="img/big-logo.png" />
+									  <img src="../img/big-logo.png" />
 										<h4>无锡汉尼达</h4>
 										<h5>Big刀具代理商</h5>
 									</li>
@@ -51,14 +78,14 @@
       <div class="seperation">&nbsp;</div>
 				<div class="hot-question-listitem first clearfix">
 					<div class="logo">
-						<img src="img/avatar.png">
+						<img src="../img/avatar.png">
 					</div>
 					<div class="content">
 						<ul>
 							<li class="name"><p>无锡Y公司</p></li>
 							<li class="title"><p>需要制造如此形状的倚天剑。不知道可以吗?</p></li>
 							<li class="text clearfix">
-								<img src="img/ques1.png" />
+								<img src="../img/ques1.png" />
 								<p>
 								我司过去使用的是R8圆刀片，加工情况尚可，63刀盘5刃，可转换6次但目前公司希望降低成本，要求其他刀具品牌参与竞争，求推荐刀具光洁度要求Ra3.2即可，主要是寿命要长
 								</p>
@@ -73,7 +100,7 @@
 								</div>
 							  <ul class="clearfix">
 								  <li class="agent-info clearfix">
-									  <img src="img/big-logo.png" />
+									  <img src="../img/big-logo.png" />
 										<h4>无锡汉尼达</h4>
 										<h5>Big刀具代理商</h5>
 									</li>
@@ -90,14 +117,14 @@
       <div class="seperation">&nbsp;</div>
 				<div class="hot-question-listitem first clearfix">
 					<div class="logo">
-						<img src="img/avatar.png">
+						<img src="../img/avatar.png">
 					</div>
 					<div class="content">
 						<ul>
 							<li class="name"><p>无锡Y公司</p></li>
 							<li class="title"><p>需要制造如此形状的倚天剑。不知道可以吗?</p></li>
 							<li class="text clearfix">
-								<img src="img/ques1.png" />
+								<img src="../img/ques1.png" />
 								<p>
 								我司过去使用的是R8圆刀片，加工情况尚可，63刀盘5刃，可转换6次但目前公司希望降低成本，要求其他刀具品牌参与竞争，求推荐刀具光洁度要求Ra3.2即可，主要是寿命要长
 								</p>
@@ -112,7 +139,7 @@
 								</div>
 							  <ul class="clearfix">
 								  <li class="agent-info clearfix">
-									  <img src="img/big-logo.png" />
+									  <img src="../img/big-logo.png" />
 										<h4>无锡汉尼达</h4>
 										<h5>Big刀具代理商</h5>
 									</li>
@@ -138,7 +165,7 @@
 			<div class="main-list-content">
 				<div class="new-agent-listitem clearfix">
 					<div class="logo">
-						<img src="img/big-logo.png">
+						<img src="../img/big-logo.png">
 					</div>
 					<div class="content">
 						<ul>
@@ -150,7 +177,7 @@
 				<div class="seperation">&nbsp;</div>
 				<div class="new-agent-listitem clearfix">
 					<div class="logo">
-						<img src="img/big-logo.png">
+						<img src="../img/big-logo.png">
 					</div>
 					<div class="content">
 						<ul>
@@ -162,7 +189,7 @@
 				<div class="seperation">&nbsp;</div>
 				<div class="new-agent-listitem clearfix">
 					<div class="logo">
-						<img src="img/big-logo.png">
+						<img src="../img/big-logo.png">
 					</div>
 					<div class="content">
 						<ul>
@@ -174,7 +201,7 @@
 				<div class="seperation">&nbsp;</div>
 				<div class="new-agent-listitem clearfix">
 					<div class="logo">
-						<img src="img/big-logo.png">
+						<img src="../img/big-logo.png">
 					</div>
 					<div class="content">
 						<ul>
@@ -186,7 +213,7 @@
 				<div class="seperation">&nbsp;</div>
 				<div class="new-agent-listitem clearfix">
 					<div class="logo">
-						<img src="img/big-logo.png">
+						<img src="../img/big-logo.png">
 					</div>
 					<div class="content">
 						<ul>
@@ -198,7 +225,7 @@
 				<div class="seperation">&nbsp;</div>
 				<div class="new-agent-listitem clearfix">
 					<div class="logo">
-						<img src="img/big-logo.png">
+						<img src="../img/big-logo.png">
 					</div>
 					<div class="content">
 						<ul>
@@ -219,7 +246,7 @@
 			<div class="goodcase-listitem clearfix">
 			  <div class="clearfix">
 					<div class="logo">
-						<img src="img/big-logo.png">
+						<img src="../img/big-logo.png">
 					</div>
 					<div class="content">
 						<ul>
@@ -244,7 +271,7 @@
 			<div class="goodcase-listitem clearfix">
 			  <div class="clearfix">
 					<div class="logo">
-						<img src="img/big-logo.png">
+						<img src="../img/big-logo.png">
 					</div>
 					<div class="content">
 						<ul>
@@ -269,7 +296,7 @@
 			<div class="goodcase-listitem clearfix">
 			  <div class="clearfix">
 					<div class="logo">
-						<img src="img/big-logo.png">
+						<img src="../img/big-logo.png">
 					</div>
 					<div class="content">
 						<ul>

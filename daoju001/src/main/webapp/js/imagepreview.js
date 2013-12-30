@@ -22,6 +22,8 @@ function imagepreview(file, view, call) {
 			}
 			view.innerHTML = "";
 			view.appendChild(img);
+			var tmp = (300-iheight)/2;
+			$(".cropaera").css("margin-top",tmp+"px");
 		}
 
 	}
@@ -47,8 +49,8 @@ function imagepreview(file, view, call) {
 			reader.onerror = img.onerror = fireError;
 			img.onload = function(){
 				var info = {
-					height: img.height<img.width?img.height:img.width,
-					width: img.height<img.width?img.height:img.width,
+					height: img.height,//img.height<img.width?img.height:img.width,
+					width: img.width,//img.height<img.width?img.height:img.width,
 					name: image.name,
 					size: image.size
 				};

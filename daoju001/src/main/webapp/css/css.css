@@ -94,7 +94,7 @@ div[contentEditable]{outline:0}
 .hot-question-listitem .content li.title{font-size:18px;color:#00b4ff;margin-top:5px}
 .hot-question-listitem .content li.title p{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
 .hot-question-listitem .content li.text{font-size:12px;line-height: 20px;text-overflow:ellipsis;color:#666666;margin-top:10px}
-.hot-question-listitem .content li.text img{float:left;}
+.hot-question-listitem .content li.text img{float:left;width: 106px;}
 .hot-question-listitem .content li.text p{overflow:hidden;text-overflow:ellipsis;height: 75px;padding-left:15px}
 .hot-question-listitem .content li.info{font-size:12px;line-height: 20px;color:#999999;margin: 10px 0 0 0;}
 .hot-question-listitem .content li.answer{border:1px solid #bebebe;background-color:#f0f0f0;padding:15px;border-radius: 2px;margin-top: 10px;}
@@ -120,6 +120,7 @@ div[contentEditable]{outline:0}
 .main-list-header .new-agent li a.seemore{color:#ff7e00;}
 .new-agent-listitem{margin:20px 0 10px 0}
 .new-agent-listitem .logo{float:left;}
+.new-agent-listitem .logo img{width:60px;height:60px}
 .new-agent-listitem .content{float:left;width:207px;margin-left:20px;}
 .new-agent-listitem.first .content{background:none}
 .new-agent-listitem .content li.name{font-size:16px;font-weight: 600;color:#373737;text-overflow:ellipsis;white-space:nowrap;margin-top:10px}
@@ -131,6 +132,7 @@ div[contentEditable]{outline:0}
 .main-list-header .goodcase li a.seemore{color:#ff002a;}
 .goodcase-listitem{margin:20px 0 10px 0}
 .goodcase-listitem .logo{float:left;}
+.goodcase-listitem .logo img{width:60px;height:60px}
 .goodcase-listitem .content{float:left;width:207px;margin-left:20px;}
 .goodcase-listitem.first .content{background:none}
 .goodcase-listitem .content li.name{font-size:16px;font-weight: 600;color:#373737;text-overflow:ellipsis;white-space:nowrap;margin-top:10px}
@@ -279,8 +281,8 @@ opacity: .3;
 .uploadlogo-win h2 a{float:right;}
 .uploadlogo-win .content{margin: 10px;}
 .uploadlogo-win .content .thumb-wrap{float:left;}
-.uploadlogo-win .content .preview-wrap{float:left;}
-.uploadlogo-win .content .preview{height:300px;width:300px;border:1px solid grey}
+.uploadlogo-win .content .preview-wrap{float:left;height:300px;width:300px;border:1px solid grey}
+.uploadlogo-win .content .preview{height:300px;width:300px;}
 .uploadlogo-win .content .thumb{height:120px;width:120px;}
 
 /*插入图片*/

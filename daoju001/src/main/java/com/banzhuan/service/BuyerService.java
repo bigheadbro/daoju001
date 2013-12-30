@@ -119,33 +119,36 @@ public class BuyerService {
 	
 	public void updateBuyerAccnt(BuyerProfileForm form, BuyerEntity buyer)
 	{
-		if(form.getUserName() != "")
+		if(form != null)
 		{
-			buyer.setUsername(form.getUserName());
-		}
-		if(form.getCompanyName() != "")
-		{
-			buyer.setCompanyName(form.getCompanyName());
-		}
-		if(form.getAddress() != "")
-		{
-			buyer.setCompanyAddress(form.getAddress());
-		}
-		if(form.getCompanyPhone() != "")
-		{
-			buyer.setCompanyPhone(form.getCompanyPhone());
-		}
-		if(form.getContactName() != "")
-		{
-			buyer.setContactName(form.getContactName());
-		}
-		if(form.getContactPhone() != "")
-		{
-			buyer.setContactPhone(form.getContactPhone());
-		}
-		if(form.getContactQQ() != "")
-		{
-			buyer.setContactQq(form.getContactQQ());
+			if(form.getUserName() != "")
+			{
+				buyer.setUsername(form.getUserName());
+			}
+			if(form.getCompanyName() != "")
+			{
+				buyer.setCompanyName(form.getCompanyName());
+			}
+			if(form.getAddress() != "")
+			{
+				buyer.setCompanyAddress(form.getAddress());
+			}
+			if(form.getCompanyPhone() != "")
+			{
+				buyer.setCompanyPhone(form.getCompanyPhone());
+			}
+			if(form.getContactName() != "")
+			{
+				buyer.setContactName(form.getContactName());
+			}
+			if(form.getContactPhone() != "")
+			{
+				buyer.setContactPhone(form.getContactPhone());
+			}
+			if(form.getContactQQ() != "")
+			{
+				buyer.setContactQq(form.getContactQQ());
+			}
 		}
 		buyerDAO.updateBuyerEntityById(buyer);
 		return;

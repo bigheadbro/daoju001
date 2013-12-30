@@ -57,10 +57,6 @@
 		}
 
 		function getSize(){
-			var b = mask.left.width();
-			b = mask.top.height();
-			b = mask.viewport.width();
-			b = mask.middle.height();
 			return {
 				aeraHeight: mask.mask.height(),
 				aeraWidth: mask.mask.width(),
@@ -127,10 +123,6 @@
 					offset = {
 						x: e.pageX - drag.x,
 						y: e.pageY - drag.y
-					},
-					offset1 = {
-						x: (e.pageX - drag.x > e.pageY - drag.y? e.pageX - drag.x:e.pageY - drag.y),
-						y: (e.pageX - drag.x > e.pageY - drag.y? e.pageX - drag.x:e.pageY - drag.y)
 					};
 				if(type == "move"){
 					if(mask.left.width()){
@@ -143,18 +135,18 @@
 					mask.top.height(Math.min(mask.mask.height() - mask.middle.height(), setSize.top(offset)));
 				} else {
 					if(/n/.test(type)){
-						var top = Math.min(mask.bottom.position().top, setSize.top(offset1));
+						var top = Math.min(mask.bottom.position().top, setSize.top(offset));
 						mask.top.height(top);
 						mask.middle.height(size.height + size.top - top);
 					}
 					if(/w/.test(type)){
-						setSize.left(offset1);
+						setSize.left(offset);
 					}
 					if(/e/.test(type)){
-						setSize.right(offset1);
+						setSize.right(offset);
 					}
 					if(/s/.test(type)){
-						setSize.height(offset1);
+						setSize.height(offset);
 					}
 				}
 			}

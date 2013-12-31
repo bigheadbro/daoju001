@@ -4,12 +4,15 @@ $(function() {
 		showimg();
 	});
 	$(".close").on("click", function() {
-		$(".addimg-win").hide();
-		$("#pagemask").hide();
-		addimgshow = false;
+		hideimg();
 	});
 });
 
+function hideimg(){
+	$(".addimg-win").hide();
+	$("#pagemask").hide();
+	addimgshow = false;
+}
 function showimg() {
 	$("#pagemask").css("width", $(document).width());
 	$("#pagemask").css("height", $(document).height());

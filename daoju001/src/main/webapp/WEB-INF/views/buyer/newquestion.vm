@@ -10,10 +10,17 @@
 </ul>
 <div class="rigth-content">
     <form id="form_newquestion">
+			  <input type="hidden" name="type" id="type" />
         <div class="add-question-header">
             <input type="text" class="dsf-form-text-input" placeholder="请输入标题"/>
             <div class="question-param clearfix">
-                <a class="sel fl" href="">工件名称</a>
+							<div class="question-param-li">
+                <a class="sel fl" href="">加工方式</a>
+								<ul class="">
+									<li><a href="#">搓洗</a></li>
+									<li><a href="#">加工</a></li>
+								</ul>
+							</div>
                 <a class="sel fl" href="">所属行业</a>
                 <a class="sel fl" href="">工件材质</a>
                 <a class="sel fl" href="">工件硬度</a>
@@ -22,7 +29,7 @@
         <div class="add-question-container">
             <h5 class="clearfix"><a id="addimg" class="addimg" href="#"></a>问题详情 </h5>
             <div class="add-question-wrap">
-                <div class="add-question-editor" contenteditable="true" placeholder="请输入问题详情">
+                <div id="ques-cont-editor" class="add-question-editor" contenteditable="true" placeholder="请输入问题详情">
                 </div>
             </div>
         </div>
@@ -33,6 +40,11 @@
 		<script>
 			$(function() {
 				$("#submit_public").click(function () {
+				  $("#type").val(1);
+					$("#form_newquestion").submit();//提交
+				});
+				$("#submit_draft").click(function () {
+				  $("#type").val(0);
 					$("#form_newquestion").submit();//提交
 				});
 			});

@@ -170,7 +170,7 @@
 			<div class="main-list-content">
 				<div class="new-agent-listitem clearfix">
 					<div class="logo">
-						<img src="../img/kenna.jpg">
+						<a href="#"><img src="../img/kenna.png"></a>
 					</div>
 					<div class="content">
 						<ul>

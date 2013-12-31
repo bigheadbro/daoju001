@@ -27,6 +27,7 @@ import com.banzhuan.form.BuyerProfileForm;
 import com.banzhuan.form.BuyerRegForm;
 import com.banzhuan.form.LoginForm;
 import com.banzhuan.service.BuyerService;
+import com.banzhuan.util.JsonUtil;
 import com.banzhuan.util.StringUtil;
 import com.banzhuan.util.Util;
 import com.qq.connect.QQConnectException;
@@ -86,7 +87,7 @@ public class BuyerController extends BaseController{
 	}
 	
 	@RequestMapping(value="/uploadlogo")
-	public ModelAndView uploadlogo(HttpServletRequest request, HttpServletResponse response, @ModelAttribute("account")Account account, BindingResult result)
+	public void uploadlogo(HttpServletRequest request, HttpServletResponse response, @ModelAttribute("account")Account account, BindingResult result)
 	{
 		String size = request.getParameter("crop");
 		account = (Account)request.getSession().getAttribute("account");
@@ -122,12 +123,13 @@ public class BuyerController extends BaseController{
 			}
 		}
 	
-		return new ModelAndView(new RedirectView("/buyer/main")); 
+		return; 
 	}
 	
 	@RequestMapping(value="/addimg")
-	public ModelAndView addimg(HttpServletRequest request, HttpServletResponse response)
+	public void addimg(HttpServletRequest request, HttpServletResponse response)
 	{
+		String fileName = "";
 		// /////////////////////////////////////////////////////////////获取上传的图片///////////////////////////////////
 		if (request instanceof DefaultMultipartHttpServletRequest) 
 		{
@@ -138,7 +140,8 @@ public class BuyerController extends BaseController{
 				if (StringUtil.isNotEmpty(f.getOriginalFilename()))
 				{
 					String path = request.getSession().getServletContext().getRealPath("/uploadfile");
-					File file = new File(path + "/" + f.getOriginalFilename());
+					fileName = Util.genRandomName(f.getContentType().toString().split("/")[1]);
+					File file = new File(path + "/" + fileName);
 					try 
 					{
 						FileCopyUtils.copy(f.getBytes(), file);
@@ -149,7 +152,8 @@ public class BuyerController extends BaseController{
 				}
 			}
 		}
-		return new ModelAndView(new RedirectView("/buyer/profile")); 
+		JsonUtil.sendImg(response, fileName);
+		return ; 
 	}
 	
 	@RequestMapping(value="/main")

@@ -59,7 +59,7 @@
 			<mvc:interceptor>
 				<mvc:mapping path="/buyer/main" />
 				<mvc:mapping path="/buyer/mymsg" />
-				<mvc:mapping path="/buyer/newquestion" />
+<!-- 				<mvc:mapping path="/buyer/newquestion" /> -->
 				<mvc:mapping path="/buyer/oldquestion" />
 				<mvc:mapping path="/buyer/draft" />
 				<mvc:mapping path="/buyer/changepwd" />

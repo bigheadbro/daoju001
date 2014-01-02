@@ -25,6 +25,12 @@ public class QuestionEntity implements Serializable {
 	private String gmtCreate;
 	// 记录修改时间
 	private String gmtModify;
+	
+	private int industry;
+	private int processMethod;
+	private int wpHardness;
+	private int wpMaterial;
+	private boolean hasPic;
 
 	/**
 	 * @return the id
@@ -166,6 +172,76 @@ public class QuestionEntity implements Serializable {
 	 */
 	public static long getSerialversionuid() {
 		return serialVersionUID;
+	}
+
+	/**
+	 * @return the industry
+	 */
+	public int getIndustry() {
+		return industry;
+	}
+
+	/**
+	 * @param industry the industry to set
+	 */
+	public void setIndustry(int industry) {
+		this.industry = industry;
+	}
+
+	/**
+	 * @return the processMethod
+	 */
+	public int getProcessMethod() {
+		return processMethod;
+	}
+
+	/**
+	 * @param processMethod the processMethod to set
+	 */
+	public void setProcessMethod(int processMethod) {
+		this.processMethod = processMethod;
+	}
+
+	/**
+	 * @return the wpHardness
+	 */
+	public int getWpHardness() {
+		return wpHardness;
+	}
+
+	/**
+	 * @param wpHardness the wpHardness to set
+	 */
+	public void setWpHardness(int wpHardness) {
+		this.wpHardness = wpHardness;
+	}
+
+	/**
+	 * @return the hasPic
+	 */
+	public boolean isHasPic() {
+		return hasPic;
+	}
+
+	/**
+	 * @param hasPic the hasPic to set
+	 */
+	public void setHasPic(boolean hasPic) {
+		this.hasPic = hasPic;
+	}
+
+	/**
+	 * @return the wpMaterial
+	 */
+	public int getWpMaterial() {
+		return wpMaterial;
+	}
+
+	/**
+	 * @param wpMaterial the wpMaterial to set
+	 */
+	public void setWpMaterial(int wpMaterial) {
+		this.wpMaterial = wpMaterial;
 	}
 
 	

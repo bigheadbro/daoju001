@@ -174,6 +174,11 @@ public class BuyerController extends BaseController{
 			@ModelAttribute("form")QuestionForm form, BindingResult result) 
 	{
 		ModelAndView mv = new ModelAndView("buyer/newquestion");
+		if(!isDoSubmit(request))
+			return mv;
+		account = (Account)request.getSession().getAttribute("account");
+		form.setUserid(account.getUserId());
+		buyerService.insertQuestion(form);
 		return mv;
 	}
 	

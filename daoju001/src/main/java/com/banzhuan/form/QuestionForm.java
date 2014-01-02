@@ -15,6 +15,7 @@ public class QuestionForm implements Serializable {
 	private int wpMaterial;
 	private int wpHardness;
 	private String content;
+	private int userid;
 
 	public int getProcessMethod() {
 		return processMethod;
@@ -54,5 +55,17 @@ public class QuestionForm implements Serializable {
 	}
 	public void setType(int type) {
 		this.type = type;
+	}
+	/**
+	 * @return the userid
+	 */
+	public int getUserid() {
+		return userid;
+	}
+	/**
+	 * @param userid the userid to set
+	 */
+	public void setUserid(int userid) {
+		this.userid = userid;
 	}
 }

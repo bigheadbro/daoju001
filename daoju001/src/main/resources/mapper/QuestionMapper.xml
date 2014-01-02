@@ -20,6 +20,16 @@
 		<id property="gmtCreate" column="gmt_create" />
 		<!--记录修改时间 -->
 		<id property="gmtModify" column="gmt_modify" />
+		<!---->
+		<id property="industry" column="industry"/>
+			  <!---->
+		<id property="processMethod" column="process_method"/>
+			  <!---->
+		<id property="wpHardness" column="wp_hardness"/>
+			  <!---->
+		<id property="wpMaterial" column="wp_material"/>
+			  <!---->
+		<id property="hasPic" column="has_pic"/>
 	</resultMap>
 
 	<select id="queryQuestionEntityById" parameterType="int"
@@ -43,6 +53,11 @@
 		,state
 		,gmt_create
 		,gmt_modify)
+		,industry
+		,process_method
+		,wp_hardness
+		,wp_material
+		,has_pic
 		values
 		(
 		#{title}
@@ -53,6 +68,11 @@
 		,#{state}
 		,#{gmtCreate}
 		,#{gmtModify}
+		,#{industry}
+		,#{processMethod}
+		,#{wpHardness}
+		,#{wpMaterial}
+		,#{hasPic}
 		)
 	</insert>
 

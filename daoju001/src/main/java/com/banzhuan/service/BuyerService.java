@@ -7,11 +7,13 @@ import org.springframework.validation.Errors;
 
 import com.banzhuan.dao.BuyerDAO;
 import com.banzhuan.entity.BuyerEntity;
+import com.banzhuan.entity.QuestionEntity;
 import com.banzhuan.common.Account;
 import com.banzhuan.common.Result;
 import com.banzhuan.form.BuyerProfileForm;
 import com.banzhuan.form.BuyerRegForm;
 import com.banzhuan.form.LoginForm;
+import com.banzhuan.form.QuestionForm;
 import com.banzhuan.entity.BuyerEntity;
 import com.banzhuan.util.StringUtil;
 
@@ -189,5 +191,14 @@ public class BuyerService {
 		{
 			form.setContactQQ(entity.getContactQq());
 		}
+	}
+	
+	public Result insertQuestion(QuestionForm form)
+	{
+		Result result = new Result();
+		
+		QuestionEntity question = new QuestionEntity();
+		
+		return result;
 	}
 }

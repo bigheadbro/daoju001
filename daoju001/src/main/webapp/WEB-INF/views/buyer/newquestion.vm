@@ -1,4 +1,5 @@
 #set($layout = "/layout/buyer_detail_layout.vm")
+<script type="text/javascript" src="../js/ques-type.js"></script>
 <ul class="right-tab clearfix">
     <li class="current">新建问题</li>
     <li>
@@ -14,17 +15,42 @@
         <div class="add-question-header">
             <input type="text" class="dsf-form-text-input" placeholder="请输入标题"/>
             <div class="question-param clearfix">
-							<div class="question-param-li">
-                <a class="sel fl" href="">加工方式</a>
-								<ul class="">
+							<div class="question-param-li clearfix">
+								#springBind("form.processMethod")
+								<input type="hidden" name="${status.expression}" />
+                <a class="sel" href="">加工方式</a>
+								<ul>
 									<li><a href="#">搓洗</a></li>
 									<li><a href="#">加工</a></li>
 								</ul>
 							</div>
-                <a class="sel fl" href="">所属行业</a>
-                <a class="sel fl" href="">工件材质</a>
-                <a class="sel fl" href="">工件硬度</a>
-            </div>
+							<div class="question-param-li clearfix">
+								#springBind("form.industry")
+								<input type="hidden" name="${status.expression}" />
+                <a class="sel" href="">所属行业</a>
+								<ul>
+									<li><a href="#">搓洗</a></li>
+									<li><a href="#">加工</a></li>
+								</ul>
+              </div>
+							<div class="question-param-li clearfix">
+								#springBind("form.wpMaterial")
+								<input type="hidden" name="${status.expression}" />
+                <a class="sel" href="">工件材质</a>
+								<ul>
+									<li><a href="#">搓洗</a></li>
+									<li><a href="#">加工</a></li>
+								</ul>
+              </div>
+						  <div class="question-param-li clearfix">
+								#springBind("form.wpHardness")
+								<input type="hidden" name="${status.expression}" />
+                <a class="sel" href="">工件硬度</a>
+								<ul>
+									<li><a href="#">搓洗</a></li>
+									<li><a href="#">加工</a></li>
+								</ul>
+              </div>
         </div>
         <div class="add-question-container">
             <h5 class="clearfix"><a id="addimg" class="addimg" href="#"></a>问题详情 </h5>

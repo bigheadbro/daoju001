@@ -26,6 +26,7 @@ import com.banzhuan.entity.BuyerEntity;
 import com.banzhuan.form.BuyerProfileForm;
 import com.banzhuan.form.BuyerRegForm;
 import com.banzhuan.form.LoginForm;
+import com.banzhuan.form.QuestionForm;
 import com.banzhuan.service.BuyerService;
 import com.banzhuan.util.JsonUtil;
 import com.banzhuan.util.StringUtil;
@@ -169,7 +170,9 @@ public class BuyerController extends BaseController{
 	}
 	
 	@RequestMapping(value="/newquestion")
-	public ModelAndView newquestion(HttpServletRequest request, HttpServletResponse response) {
+	public ModelAndView newquestion(HttpServletRequest request, HttpServletResponse response, @ModelAttribute("account")Account account, 
+			@ModelAttribute("form")QuestionForm form, BindingResult result) 
+	{
 		ModelAndView mv = new ModelAndView("buyer/newquestion");
 		return mv;
 	}

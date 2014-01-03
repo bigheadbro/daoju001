@@ -1,7 +1,10 @@
 var loginshow = false;
+
 $(function() {
 	$("#login").click(function() {
 		showlogin();
+		$("input[name='mail']").text($.cookie('mail'));
+		$("input[name='mail']").val($.cookie('mail'));
 	});
 	$(".closealert").on("click", function() {
 		$(".log-win").hide();

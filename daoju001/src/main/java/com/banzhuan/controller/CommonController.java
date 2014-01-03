@@ -101,22 +101,27 @@ public class CommonController extends BaseController{
 				account.setMail(user.getEmail()); // 邮箱
 				account.setLogo(user.getLogo()); // 邮箱
 				account.setBuyer(true);
+				//set cookie
+				if(form.getRememberme())
+				{
+					this.addCookie(response, "mail", user.getEmail(), Integer.MAX_VALUE);
+				}
 				//设置头像
 				account.setLogo(buyerService.getBuyerEntity(account.getUserId()).getLogo());
 				request.getSession().setAttribute("account", account);
-				// 注册成功， 跳转到登陆页面
-				return new ModelAndView(new RedirectView("/buyer/profile")); 
+				// 登陆成功， 跳转到登陆页面
+				return new ModelAndView(new RedirectView("/buyer/main")); 
 			}
 			else
 			{
-				// 注册失败， 返回注册页面，并显示出错提示信息
+				// 登陆失败， 返回注册页面，并显示出错提示信息
 				ModelAndView model = new ModelAndView(request.getRequestURI());
 				return model;
 			}
 		}
 		else
 		{
-			ModelAndView model = new ModelAndView("/index");
+			ModelAndView model = new ModelAndView("/common/index");
 			return model;
 		}
 	}

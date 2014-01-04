@@ -57,6 +57,74 @@ public class BuyerController extends BaseController{
 	}
 	
 	
+	@RequestMapping(value="/reg")
+	public ModelAndView reg(final HttpServletRequest request,
+			final HttpServletResponse response, @ModelAttribute("form")BuyerRegForm form, BindingResult result) 
+	{
+		if(isDoSubmit(request))
+		{
+			Result re = buyerService.register(form, result);
+			
+			if(!result.hasErrors())
+			{
+				BuyerEntity user = (BuyerEntity)re.get("buyer");
+				Account account = new Account();
+				account.setLogin(true); // 登录成功标识
+				account.setUserName(user.getUsername()); // 用户登录名
+				account.setUserId(user.getId()); // 用户ID
+				account.setBuyer(false);
+				request.getSession().setAttribute("account", account);
+				// 注册成功， 跳转到登陆页面
+				return new ModelAndView(new RedirectView("/common/index")); 
+			}
+			else
+			{
+				// 注册失败， 返回注册页面，并显示出错提示信息
+				ModelAndView model = new ModelAndView("/buyer/reg");
+				return model;
+			}
+		}
+		else
+		{
+			ModelAndView model = new ModelAndView("/buyer/reg");
+			return model;
+		}
+	}
+	
+	@RequestMapping(value="/log")
+	public ModelAndView login(final HttpServletRequest request,
+			final HttpServletResponse response, @ModelAttribute("form")LoginForm form, BindingResult result) throws IOException 
+	{
+		if(isDoSubmit(request))
+		{
+			Result re = buyerService.checkLogin(form, result);
+			
+			if(!result.hasErrors())
+			{
+				BuyerEntity user = (BuyerEntity)re.get("buyer");
+				Account account = new Account();
+				account.setLogin(true); // 登录成功标识
+				account.setUserName(user.getUsername()); // 用户登录名
+				account.setUserId(user.getId()); // 用户ID
+				account.setMail(user.getEmail()); // 邮箱
+				account.setLogo(user.getLogo()); // 邮箱
+				account.setBuyer(true);
+				//set cookie
+				if(form.getRememberme() != null && form.getRememberme())
+				{
+					this.addCookie(response, "mail", user.getEmail(), Integer.MAX_VALUE);
+				}
+				//设置头像
+				account.setLogo(buyerService.getBuyerEntity(account.getUserId()).getLogo());
+				request.getSession().setAttribute("account", account);
+				// 登陆成功， 跳转到登陆页面
+				return new ModelAndView(new RedirectView("/buyer/main"));
+			}
+		}
+		return new ModelAndView("/buyer/log");
+		
+	}
+	
 	@RequestMapping(value="/changepwd")
 	public ModelAndView changepwd(HttpServletRequest request, HttpServletResponse response, @ModelAttribute("account")Account account, 
 			@ModelAttribute("form")BuyerRegForm form, BindingResult result) 

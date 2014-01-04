@@ -2,10 +2,12 @@
 <html>
   #parse("/common/header.vm")
   <body>
-  	#parse("/common/top.vm")
-
-	$screen_content
-
-    #parse("/common/footer.vm")
+	<div class="body-wrapper">
+      	#parse("/common/top.vm")
+    
+    	$screen_content
+    
+        #parse("/common/footer.vm")
+	</div>
   </body>
 </html>

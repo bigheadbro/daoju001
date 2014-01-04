@@ -4,8 +4,9 @@ body,h1,h2,h3,h4,h5,h6,hr,p,blockquote,dl,dt,dd,ul,ol,li,pre,form,fieldset,legen
 	font-family: "微软雅黑";
 	font-size:12px/1.5;
 }
+body{}position: relative;height: 100%;}
 img{border:none;}
-html{overflow-y:scroll;}  
+html{flow-y:scroll;height:100%;background: url(../img/bk.jpg) repeat 0 0;}  
 table{border-collapse: collapse;border-spacing: 0;}
 em{font-style:normal}
 ul, li, ol {
@@ -32,13 +33,15 @@ a{text-decoration: none;color: inherit;}
 .bbg{border-bottom:1px solid #b3b3b3}
 .btg{border-top:1px solid #b3b3b3}
 .blrg{border-right: 1px solid #ccc;border-left: 1px solid #ccc;}
-.sel{background: url(../img/selb.png) no-repeat 0 0;width: 82px;height: 24px;display: block;font-size: 13px;color: #b8b8b8;padding: 2px 0 0 8px;}
+.sel{width: 100px;height: 24px;display: block;font-size: 13px;color: #b8b8b8;padding: 2px 0 0 8px;border: 1px solid #ccc;border-radius: 40px;}
 .addimg{background: url(../img/addimg.png) no-repeat 0 0;width: 18px;height: 17px;display: block;}
 
 .dsf-form-text-input {padding: 8px 10px;font-size: 13px;line-height: 15px;box-shadow: 0 1px 1px rgba(0,0,0,.1) inset;border-radius: 3px;background: #fff;border: 1px solid #ccc;color: #222;}
 div[contentEditable]{outline:0}
+.body-wrapper {position: relative;min-height: 100%;}
 /*footer-container*/
-.footer-container{background:#eeeeee;width:100%;height:100px}
+.clear-footer{height:100px;}
+.footer-container{position:absolute;bottom:0;background:#eeeeee;width:100%;height:100px}
 .footer-content{margin:0 auto;padding-top: 25px;}
 .footer-content p{text-align:center;font-size:12px;padding:5px}
 .footer-content p.top{color:#333333;}
@@ -58,9 +61,9 @@ div[contentEditable]{outline:0}
 .main-head-container .main-head-content .ask{float:left;margin: 13px;}
 .main-head-container .main-head-content .ask a{display:block;text-align: center;padding:5px 10px;border-radius:3px;font-size:18px;background-color:#ff6600;}
 
-.main-head-container .main-head-content .login a.top-user{display: block;position:relative;height:60px;text-indent:45px;}
+.main-head-container .main-head-content .login a.top-user{display: block;position:relative;height:60px;text-indent:55px;}
 .main-head-container .main-head-content .login a.top-user .name{line-height:57px;font-size: 18px;}
-.main-head-container .main-head-content .login a.top-user img{width:30px;height:30px;position:absolute;top: 17px;left: 10px;}
+.main-head-container .main-head-content .login a.top-user img{width:30px;height:30px;position:absolute;top: 15px;left: 10px;}
 
 .main-head-container .main-head-content .login .top-dropdown{position:absolute;display:none;background-color: #007298;top: 60px;min-width: 140px;z-index: 100;}
 .main-head-container .main-head-content .login ul.top-dropdown li a{display:block;text-align:center;padding:10px;}
@@ -68,7 +71,7 @@ div[contentEditable]{outline:0}
 /*main banner*/
 .main-banner-container{background:#a6cad9;width:100%;height:300px;opacity:0.8;position:relative;}
 
-.main-bk-wrapper{background: url(../img/bk.jpg) repeat 0 0;width:100%;padding-bottom: 30px;padding-top: 10px;z-index: 1;}
+.main-bk-wrapper{width:100%;padding-bottom: 30px;padding-top: 10px;z-index: 1;}
 .pt0{padding-top:0px}
 .main-content-container{margin:0 auto;width:960px;margin-top:30px;padding:10px;border-radius: 4px;background-color: #f7f7f7;}
 
@@ -144,7 +147,7 @@ div[contentEditable]{outline:0}
 /*买家--我的搬刀*/
 .mainpage-container{margin:0 auto;width:960px;padding-top:30px;}
 .mainpage-container .main-left{float:left;width:200px;height:720px;margin-right:20px;border-radius:10px;background-color:#f6f6f6;}
-.mainpage-container .main-right{float:left;width:700px;height:680px;border-radius:10px;background-color:#f6f6f6;padding:20px}
+.mainpage-container .main-right{float:left;width:700px;min-height:680px;border-radius:10px;background-color:#f6f6f6;padding:20px}
 .mainpage-container .main-left .main-left-content{width:100%;text-align:center}
 .mainpage-container .main-left .person-info{margin:30px auto 0;}
 .mainpage-container .main-left .person-info img{width:88px;height:88px;}
@@ -181,9 +184,10 @@ div[contentEditable]{outline:0}
 .upload-gc p{font-size:11px;color:#9d9d9d}
 .mainpage-container .main-right .add-question-header input[type="text"]{width:450px;height: 25px;font-size: 14px;}
 .mainpage-container .main-right .add-question-header .question-param{margin: 20px 0 20px 0;}
-.mainpage-container .main-right .add-question-header .question-param .question-param-li{float:left;}
+.mainpage-container .main-right .add-question-header .question-param .question-param-li{float:left;margin-right: 5px;}
 .question-param-li ul{display:none;position:absolute;}
 .question-param-li ul li{font-size:13px;padding: 1px 9px;}
+.question-param-li ul li a{width:100px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
 .mainpage-container .main-right .add-question-container{width:600px;}
 .mainpage-container .main-right .add-question-container .add-question-wrap{overflow-y: auto;max-height: 390px;padding: 8px 10px;border: 1px solid #ccc;border-radius: 3px;box-shadow: 0 0 4px 0 rgba(0,0,0,.1) inset;-webkit-transition: min-height .25s ease-out;background: #fff;}
 .mainpage-container .main-right .add-question-container .addimg{float:right;}
@@ -207,7 +211,7 @@ div[contentEditable]{outline:0}
 .mainpage-container .main-right .rigth-content .listitem .save{background-color:#63a200;color:white;font-size:16px;padding: 10px 35px;line-height: 35px;border-radius:4px;}
 .mainpage-container .main-right .rigth-content .listitem .user-info input[type="text"]{width:200px}
 
-.reg-left{background-color:#f6f6f6;float:left;width: 340px;padding:40px 45px 15px;border-radius: 10px;margin-right: 100px;}
+.reg-left{background-color:#f6f6f6;float:left;width: 340px;padding:40px 45px 15px;border-radius: 10px;margin-right: 100px;min-height: 490px;}
 .reg-left h2{color:#737373;font-size:18px;}
 .reg-left h2 span{float:right;color:#bababa;font-size:14px;line-height: 26px;}
 .reg-left h2 span a{color:#0099cb;margin-left:3px;}
@@ -219,7 +223,9 @@ div[contentEditable]{outline:0}
 .reg-left ul li.value input[type="text"]{width: 226px;height: 24px;}
 .reg-left ul li.value input[type="password"]{width: 226px;height: 24px;}
 .reg-left ul li.value label{font-size:14px;color:#7a7a7a}
-.reg-left ul li.value label #agree{width:12px;}
+.reg-left ul li.value label #agree{width:12px;height: 12px;}
+.reg-left ul li.value label #rememberme{width:12px;height: 12px;}
+.reg-left ul li.value .forgetpwd{color: #7a7a7a;font-size: 15px;padding-left: 90px;}
 .reg-left ul li.value .protocol{font-size:14px;color:#00b4ff}
 .reg-left ul li.value .reg{font-size:18px;background-color:#63a200;color:white;border-radius: 5px;padding: 10px 70px;}
 .reg-left ul li.value .qqlogin{font-size:18px;color:white;background-color:#0081b7;border-radius: 5px;padding: 10px 22px 10px 70px;background-image: url(../img/reg3.png);background-repeat:no-repeat;background-position: 40px 12px;}

@@ -1,5 +1,4 @@
 <script type="text/javascript" src="../js/jquery.cookie.js"></script>
-<script type="text/javascript" src="../js/showlogin.js"></script>
 <script type="text/javascript" src="../js/top-nav.js"></script>
 <div class="main-head-container">
     <div class="main-head-content clearfix">
@@ -32,10 +31,10 @@
             #if(!$!session.getAttribute("account"))  
 			<ul class="no-auth">
                 <li>
-                    <a href="/common/reg">注册</a>
+                    <a href="/buyer/reg">注册</a>
                 </li>
                 <li>
-                    <a id="login" href="#">登录</a>
+                    <a href="/buyer/log">登录</a>
                 </li>
 			</ul>
                 　                      #else
@@ -57,4 +56,3 @@
         </div>
     </div>
 </div>
-#parse("/common/login.vm")

@@ -2,38 +2,20 @@
 <div class="main-bk-wrapper">
   <div class="mainpage-container clearfix">
 	  <div class="reg-left">
-		  <h2><span>我已经账号<a href="#">立即登录</a></span>注册</h2>
-		  <form id="form_reg">
-			<ul class="reg-listitem clearfix">
-			  <li class="key">
-				  账户类型
-				</li>
-			  <li class="value">
-				  <a class="type current" href="#">我是客户</a>
-				  <a class="type" href="#">我是师傅</a>
-				</li>
-			</ul>
+		  <h2><span>我还没有账号<a href="/buyer/reg">立即注册</a></span>登录</h2>
+		  <form id="form_log">
 			<!-- 隐藏字段，用于标示是表单提交 -->
 		    <input type="hidden" name="do_submit" value="true"/>
-			#springBind("form.name")
+			#springBind("form.mail")
 			<ul class="reg-listitem clearfix">
 			  <li class="key">
-				  用户名
+				  邮箱
 				</li>
 			  <li class="value">
 				  <input type="text"  name="$!{status.expression}"/>
 				</li>
 			</ul>
-			#springBind("form.email")
-			<ul class="reg-listitem clearfix">
-			  <li class="key">
-				  邮箱地址
-				</li>
-			  <li class="value">
-				  <input type="text"  name="$!{status.expression}" />
-				</li>
-			</ul>
-			#springBind("form.pwd")
+			#springBind("form.password")
 			<ul class="reg-listitem clearfix">
 			  <li class="key">
 				  密码
@@ -47,11 +29,11 @@
 				  &nbsp;
 				</li>
 			  <li class="value">
-				  <label for="agree">
-					  <input id="agree" type="checkbox">
-						同意
-					</label>
-					<a class="protocol" href="#">刀师傅协议</a>
+				    <label for="rememberme">
+						<input id="rememberme" name="rememberme" type="checkbox" />
+						记住我
+                    </label>
+                    <a class="forgetpwd" href="#">忘记密码&nbsp;?</a>
 				</li>
 			</ul>
 			<ul class="reg-listitem clearfix">
@@ -59,14 +41,16 @@
 				  &nbsp;
 				</li>
 			  <li class="value">
-					<a class="reg" id="submit_reg" href="#">注册刀师傅</a>
+					<a class="reg" id="submit_log" href="#">登录刀师傅</a>
 				</li>
 			</ul>
 			<script>
 				$(function() {
-					$("#submit_reg").click(function () {
-						$("#form_reg").submit();//提交
-					});
+					$(function() {
+                      $("#submit_log").click(function () {
+                        $("#form_log").submit();//提交
+                      });
+                    });
 				});
 			</script>
 		  </form>

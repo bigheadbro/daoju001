@@ -2,48 +2,50 @@
 <html>
   #parse("/common/agent_header.vm")
   <body>
-  	#parse("/common/top.vm")
-		<div class="main-bk-wrapper">
-  	  <div class="mainpage-container clearfix">
-  		  <div class="main-left clearfix">
-  			  <div class="main-left-content">
-  					<div class="person-info">
-  						<img src="../img/avatar.png" />
-  						<h5>无锡汉尼达</h5>
-  						<h6>代理刀具品牌：黛杰</h6>
-  					</div>
-  					<div class="agent-other-info">
-  					  <ul class="clearfix">
-  						  <li class="ml30">
-  								<h2>15</h2>
-  								<p>回答</p>
-  						  </li>
-  						  <li class="blrg">
-  								<h2>3</h2>
-  								<p>样本</p>
-  						  </li>
-  						  <li>
-  								<h2>28</h2>
-  								<p>案例</p>
-  						  </li>
-  					  </ul>
-  					</div>
-  					<div class="function">
-  						<ul>
-  							<li class="current"><a href="main">我的搬刀</a></li>
-  							<li><a href="mymsg">我的消息</a></li>
-  							<li><a href="newquestion">我的问题</a></li>
-  							<li><a href="goodcase">我的案例</a></li>
-  							<li><a href="accnt">账户设置</a></li>
-  						</ul>
-  					</div>
-  			  </div>
-  			</div>
-  		  <div class="main-right">
-				  $screen_content
-  			</div>
-  		</div>
-    </div>
-    #parse("/common/footer.vm")
+	<div class="body-wrapper">
+      	#parse("/common/top.vm")
+    	<div class="main-bk-wrapper">
+      	  <div class="mainpage-container clearfix">
+      		  <div class="main-left clearfix">
+      			  <div class="main-left-content">
+      					<div class="person-info">
+      						<img src="../img/avatar.png" />
+      						<h5>无锡汉尼达</h5>
+      						<h6>代理刀具品牌：黛杰</h6>
+      					</div>
+      					<div class="agent-other-info">
+      					  <ul class="clearfix">
+      						  <li class="ml30">
+      								<h2>15</h2>
+      								<p>回答</p>
+      						  </li>
+      						  <li class="blrg">
+      								<h2>3</h2>
+      								<p>样本</p>
+      						  </li>
+      						  <li>
+      								<h2>28</h2>
+      								<p>案例</p>
+      						  </li>
+      					  </ul>
+      					</div>
+      					<div class="function">
+      						<ul>
+      							<li class="current"><a href="main">我的搬刀</a></li>
+      							<li><a href="mymsg">我的消息</a></li>
+      							<li><a href="newquestion">我的问题</a></li>
+      							<li><a href="goodcase">我的案例</a></li>
+      							<li><a href="accnt">账户设置</a></li>
+      						</ul>
+      					</div>
+      			  </div>
+      			</div>
+      		  <div class="main-right">
+    				  $screen_content
+      			</div>
+      		</div>
+        </div>
+        #parse("/common/footer.vm")
+	</div>
   </body>
 </html>

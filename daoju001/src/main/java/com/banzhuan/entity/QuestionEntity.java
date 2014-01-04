@@ -10,7 +10,7 @@ public class QuestionEntity implements Serializable {
 	//
 	private int id;
 	// 问题名称
-	private String title;
+	private int type;
 	// 问题内容
 	private String content;
 	// 买家id
@@ -50,16 +50,16 @@ public class QuestionEntity implements Serializable {
 	/**
 	 * @return the title
 	 */
-	public String getTitle() {
-		return title;
+	public int getType() {
+		return type;
 	}
 
 	/**
 	 * @param title
 	 *            the title to set
 	 */
-	public void setTitle(String title) {
-		this.title = title;
+	public void setType(int type) {
+		this.type = type;
 	}
 
 	/**

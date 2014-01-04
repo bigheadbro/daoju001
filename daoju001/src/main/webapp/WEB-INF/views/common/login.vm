@@ -14,28 +14,27 @@
                     <input type="hidden" name="do_submit" value="true"/>
                     <div class="log_seg">
                         <input type="text" name="mail" placeholder="请输入邮箱"/>
-												#if($stringUtil.isNotEmpty($!{status.errorMessage}))
-				                    <em for="$!{status.expression}" generated="true" class="error">$!{status.errorMessage}</em>
-				                #end
+				                #if($stringUtil.isNotEmpty($!{status.errorMessage}))
+        						        <em for="$!{status.expression}" generated="true" class="error">$!{status.errorMessage}</em>
+        						    #end
 										</div>
                     <div class="log_seg">
                         <input name="password" type="password" placeholder="请输入密码"/>
-												#if($stringUtil.isNotEmpty($!{status.errorMessage}))
-				                    <em for="$!{status.expression}" generated="true" class="error">$!{status.errorMessage}</em>
-				                #end
+				                <em id="pwd" class="error"></em>
                     </div>
                     <div class="log_seg">
                         <label for="rememberme">
-    					  <input id="rememberme" name="rememberme" type="checkbox">
-    						记住我
-    					</label>
-    					<a class="forgetpwd" href="#">忘记密码&nbsp;?</a>
+              					  <input id="rememberme" name="rememberme" type="checkbox" />
+              						记住我
+              					</label>
+              					<a class="forgetpwd" href="#">忘记密码&nbsp;?</a>
                     </div>
                     <a class="submit_log" id="submit_log" href="#">登&nbsp;&nbsp;录</a>
                 <script>
+
                     $(function() {
                       $("#submit_log").click(function () {
-                        $("#form_log").submit();
+                        $("#form_log").submit();//提交
                       });
                     });
                 </script>

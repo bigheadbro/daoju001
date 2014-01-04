@@ -15,7 +15,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.support.DefaultMultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
@@ -37,6 +39,7 @@ import com.banzhuan.common.Account;
 
 @Controller
 @RequestMapping("/buyer")
+@SessionAttributes({"account"})
 public class BuyerController extends BaseController{
 	private Logger logger = LoggerFactory.getLogger(BuyerController.class);
 	@Autowired
@@ -63,7 +66,6 @@ public class BuyerController extends BaseController{
 		if(!isDoSubmit(request))
 			return view;
 		
-		account = (Account)request.getSession().getAttribute("account");
 		form.setUserid(account.getUserId());
 		buyerService.changePwd(form, result);
 		return view;
@@ -74,7 +76,7 @@ public class BuyerController extends BaseController{
 			@ModelAttribute("form")BuyerProfileForm form, BindingResult result)
 	{
 		ModelAndView mv = new ModelAndView("buyer/profile");
-		account = (Account)request.getSession().getAttribute("account");
+		
 		BuyerEntity buyer = buyerService.getBuyerEntity(account.getUserId());
 		if(!isDoSubmit(request))
 		{
@@ -91,7 +93,7 @@ public class BuyerController extends BaseController{
 	public void uploadlogo(HttpServletRequest request, HttpServletResponse response, @ModelAttribute("account")Account account, BindingResult result)
 	{
 		String size = request.getParameter("crop");
-		account = (Account)request.getSession().getAttribute("account");
+		
 		// /////////////////////////////////////////////////////////////获取上传的图片///////////////////////////////////
 		if (request instanceof DefaultMultipartHttpServletRequest) 
 		{
@@ -176,15 +178,31 @@ public class BuyerController extends BaseController{
 		ModelAndView mv = new ModelAndView("buyer/newquestion");
 		if(!isDoSubmit(request))
 			return mv;
-		account = (Account)request.getSession().getAttribute("account");
+		
 		form.setUserid(account.getUserId());
-		buyerService.insertQuestion(form);
+		buyerService.insertQuestion(form, result);
 		return mv;
 	}
 	
 	@RequestMapping(value="/oldquestion")
-	public ModelAndView oldquestion(HttpServletRequest request, HttpServletResponse response) {
+	public ModelAndView oldquestion(HttpServletRequest request, HttpServletResponse response, @ModelAttribute("account")Account account) {
 		ModelAndView mv = new ModelAndView("buyer/oldquestion");
+		int userId = account.getUserId();
+		Result result = buyerService.queryQuestionsByUserId(userId);
+		mv.addObject("questions", result.get("questions"));
+		return mv;
+	}
+	
+	@RequestMapping(value="/question/{id}")
+	public ModelAndView question(HttpServletRequest request, HttpServletResponse response,@PathVariable String id, @ModelAttribute("account")Account account,
+			BindingResult result) {
+		
+		int questionId = Integer.parseInt(id);
+		
+		QuestionForm form = buyerService.getQuestionEntity(questionId);
+
+		//return newquestion(request, response, account, form, result);
+		ModelAndView mv = new ModelAndView(new RedirectView("/buyer/newquestion"));
 		return mv;
 	}
 	

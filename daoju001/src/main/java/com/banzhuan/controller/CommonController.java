@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
@@ -19,10 +20,12 @@ import com.banzhuan.entity.BuyerEntity;
 import com.banzhuan.form.BuyerRegForm;
 import com.banzhuan.form.LoginForm;
 import com.banzhuan.service.BuyerService;
+import com.banzhuan.util.JsonUtil;
 import com.banzhuan.common.Account;
 
 @Controller
 @RequestMapping("/")
+@SessionAttributes({"account"})
 public class CommonController extends BaseController{
 	@Autowired
 	@Qualifier("buyerService")
@@ -85,7 +88,7 @@ public class CommonController extends BaseController{
 
 	@RequestMapping(value="/common/login")
 	public ModelAndView login(final HttpServletRequest request,
-			final HttpServletResponse response, @ModelAttribute("form")LoginForm form, BindingResult result) 
+			final HttpServletResponse response, @ModelAttribute("form")LoginForm form, BindingResult result) throws IOException 
 	{
 		if(isDoSubmit(request))
 		{
@@ -102,7 +105,7 @@ public class CommonController extends BaseController{
 				account.setLogo(user.getLogo()); // 邮箱
 				account.setBuyer(true);
 				//set cookie
-				if(form.getRememberme())
+				if(form.getRememberme() != null && form.getRememberme())
 				{
 					this.addCookie(response, "mail", user.getEmail(), Integer.MAX_VALUE);
 				}
@@ -110,20 +113,11 @@ public class CommonController extends BaseController{
 				account.setLogo(buyerService.getBuyerEntity(account.getUserId()).getLogo());
 				request.getSession().setAttribute("account", account);
 				// 登陆成功， 跳转到登陆页面
-				return new ModelAndView(new RedirectView("/buyer/main")); 
-			}
-			else
-			{
-				// 登陆失败， 返回注册页面，并显示出错提示信息
-				ModelAndView model = new ModelAndView(request.getRequestURI());
-				return model;
+				return new ModelAndView(new RedirectView("/buyer/main"));
 			}
 		}
-		else
-		{
-			ModelAndView model = new ModelAndView("/common/index");
-			return model;
-		}
+		return new ModelAndView("/common/index");
+		
 	}
 	
 	/**

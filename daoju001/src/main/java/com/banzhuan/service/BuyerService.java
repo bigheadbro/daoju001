@@ -1,11 +1,14 @@
 package com.banzhuan.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.Errors;
 
 import com.banzhuan.dao.BuyerDAO;
+import com.banzhuan.dao.QuestionDAO;
 import com.banzhuan.entity.BuyerEntity;
 import com.banzhuan.entity.QuestionEntity;
 import com.banzhuan.common.Account;
@@ -27,6 +30,10 @@ public class BuyerService {
 	@Qualifier("buyerDAO")
 	private BuyerDAO buyerDAO;
 
+	@Autowired
+	@Qualifier("questionDAO")
+	private QuestionDAO questionDAO;
+	
 	public Result register(BuyerRegForm form, Errors errors)
 	{
 		Result result = new Result();
@@ -193,12 +200,49 @@ public class BuyerService {
 		}
 	}
 	
-	public Result insertQuestion(QuestionForm form)
+	public Result insertQuestion(QuestionForm form, Errors errors)
 	{
 		Result result = new Result();
 		
+		if(form.getType() == 0)// 问题类型为空
+		{
+			errors.rejectValue("type", "QUESTION_TYPE_IS_NULL");
+			return result;
+		}
+
+		if(StringUtil.isEmpty(form.getContent())) //  问题内容为空
+		{
+			errors.rejectValue("content", "QUESTOIN_CONTENT_IS_NULL");
+			return result;
+		}
 		QuestionEntity question = new QuestionEntity();
+		question.setIndustry(form.getIndustry());
+		question.setProcessMethod(form.getProcessMethod());
+		question.setWpHardness(form.getWpHardness());
+		question.setWpMaterial(form.getWpMaterial());
+		question.setType(form.getType());
+		question.setContent(form.getContent());
+		question.setBuyerId(form.getUserid());
+		
+		questionDAO.insertQuestionEntity(question);
 		
 		return result;
 	}
+
+	public Result queryQuestionsByUserId(int userId)
+	{
+		Result result = new Result();
+		List<QuestionEntity> questions = questionDAO.queryQuestionsByUserid(userId);
+		result.add("questions", questions);
+		return result;
+	}
+	
+	public QuestionForm getQuestionEntity(int id)
+	{
+		QuestionEntity question = questionDAO.queryQuestionEntityById(id);
+		QuestionForm form = new QuestionForm();
+		return form;
+	}
+	
+
 }

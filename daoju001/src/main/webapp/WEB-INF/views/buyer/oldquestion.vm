@@ -6,50 +6,16 @@
 </ul>
 <div class="rigth-content">
 	<div class="buyer-list">
-		<div class="listitem">
-			<p>刀具是机械制造中用于切削加工的工具，又称切削工具?<span>2013-08-08</span></p>
-			<div class="operation clearfix">
-				<a href="#">3个问题</a><span>|</span>
-				<a href="#">查看详情</a><span>|</span>
-				<a href="#">编辑</a><span>|</span>
-				<a href="#">删除</a>
-			</div>
-		</div>
-		<div class="listitem">
-			<p>刀具是机械制造中用于切削加工的工具，又称切削工具?<span>2013-08-08</span></p>
-			<div class="operation clearfix">
-				<a href="#">3个问题</a><span>|</span>
-				<a href="#">查看详情</a><span>|</span>
-				<a href="#">编辑</a><span>|</span>
-				<a href="#">删除</a>
-			</div>
-		</div>
-		<div class="listitem">
-			<p>刀具是机械制造中用于切削加工的工具，又称切削工具?<span>2013-08-08</span></p>
-			<div class="operation clearfix">
-				<a href="#">3个问题</a><span>|</span>
-				<a href="#">查看详情</a><span>|</span>
-				<a href="#">编辑</a><span>|</span>
-				<a href="#">删除</a>
-			</div>
-		</div>
-		<div class="listitem">
-			<p>刀具是机械制造中用于切削加工的工具，又称切削工具?<span>2013-08-08</span></p>
-			<div class="operation clearfix">
-				<a href="#">3个问题</a><span>|</span>
-				<a href="#">查看详情</a><span>|</span>
-				<a href="#">编辑</a><span>|</span>
-				<a href="#">删除</a>
-			</div>
-		</div>
-		<div class="listitem">
-			<p>刀具是机械制造中用于切削加工的工具，又称切削工具?<span>2013-08-08</span></p>
-			<div class="operation clearfix">
-				<a href="#">3个问题</a><span>|</span>
-				<a href="#">查看详情</a><span>|</span>
-				<a href="#">编辑</a><span>|</span>
-				<a href="#">删除</a>
-			</div>
-		</div>
+	  #foreach($question in $questions)
+  		<div class="listitem">
+  			<p>$!{question.content}<span>$stringUtil.formatDate($!{question.gmtCreate})</span></p>
+  			<div class="operation clearfix">
+  				<a href="#">$!{question.cntCA}个专业回答	</a><span>|</span>
+  				<a href="#">$!{question.id}查看详情</a><span>|</span>
+  				<a href="/buyer/question/$!{question.id}">编辑</a><span>|</span>
+  				<a href="#">删除</a>
+  			</div>
+  		</div>
+		#end
 	</div>
 </div>

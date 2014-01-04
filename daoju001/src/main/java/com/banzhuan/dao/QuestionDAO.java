@@ -1,11 +1,15 @@
 package com.banzhuan.dao;
 
+import java.util.List;
+
 import com.banzhuan.entity.QuestionEntity;;
 
 public interface QuestionDAO {
 	QuestionEntity queryQuestionEntityById(int id);
 	
-	public int insertQuestionEntity(QuestionEntity buyer);
+	public int insertQuestionEntity(QuestionEntity question);
 	
-	public int updateQuestionById(QuestionEntity buyer);
+	public int updateQuestionById(QuestionEntity question);
+	
+	public List<QuestionEntity> queryQuestionsByUserid(int userid);
 }

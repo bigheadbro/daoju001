@@ -131,4 +131,23 @@ public class JsonUtil {
             out.close();  
         }  
 	}
+	
+	public static void sendLoginError(HttpServletResponse response, String mail, String pwd)
+	{
+		JSONObject object = new JSONObject();  
+        response.setContentType("text/Xml;charset=gbk");  
+        object.element("mail", mail);
+        object.element("pwd", pwd);
+        PrintWriter out = null;  
+        try {  
+            out = response.getWriter();  
+            out.println(object.toString());  
+        }  
+        catch (IOException ex1) {  
+            ex1.printStackTrace();  
+        }  
+        finally {  
+            out.close();  
+        }  
+	}
 }

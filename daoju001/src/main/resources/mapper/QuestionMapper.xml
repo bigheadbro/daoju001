@@ -5,7 +5,7 @@
 	  <!---->
 		<id property="id" column="id" />
 		<!--问题名称 -->
-		<id property="title" column="title" />
+		<id property="type" column="type" />
 		<!--问题内容 -->
 		<id property="content" column="content" />
 		<!--买家id -->
@@ -45,22 +45,22 @@
 		</selectKey>
 		insert into t_question
 		(
-		title
+		type
 		,content
 		,buyer_id
 		,cnt_PA
 		,cnt_CA
 		,state
 		,gmt_create
-		,gmt_modify)
+		,gmt_modify
 		,industry
 		,process_method
 		,wp_hardness
 		,wp_material
-		,has_pic
+		,has_pic)
 		values
 		(
-		#{title}
+		#{type}
 		,#{content}
 		,#{buyerId}
 		,#{cntPA}
@@ -76,8 +76,15 @@
 		)
 	</insert>
 
+	<select id="queryQuestionsByUserId" parameterType="int"
+			resultMap="QuestionResultMap">
+		<![CDATA[
+			SELECT * from t_question t where t.state = 0 and t.buyer_id=#{id} order by gmt_create desc
+		]]>
+	</select>
+	
 	<update id="updateTitleById" parameterType="QuestionEntity">
 		update t_question
-		set title = #{title}, gmt_modified=now() where id=#{id}
+		set title = #{type}, gmt_modified=now() where id=#{id}
 	</update>
 </mapper>

@@ -93,10 +93,10 @@ div[contentEditable]{outline:0}
 .hot-question-listitem .content li.name p{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
 .hot-question-listitem .content li.title{font-size:18px;color:#00b4ff;margin-top:5px}
 .hot-question-listitem .content li.title p{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
-.hot-question-listitem .content li.text{font-size:12px;line-height: 20px;text-overflow:ellipsis;color:#666666;margin-top:10px}
+.hot-question-listitem .content li.text{font-size:13px;line-height: 20px;text-overflow:ellipsis;color:#666666;margin-top:10px}
 .hot-question-listitem .content li.text img{float:left;width: 106px;}
 .hot-question-listitem .content li.text p{overflow:hidden;text-overflow:ellipsis;height: 75px;padding-left:15px;font-size: 13px;}
-.hot-question-listitem .content li.info{font-size:12px;line-height: 20px;color:#999999;margin: 10px 0 0 0;}
+.hot-question-listitem .content li.info{font-size:13px;line-height: 20px;color:#999999;margin: 10px 0 0 0;}
 .hot-question-listitem .content li.answer{border:1px solid #bebebe;background-color:#f0f0f0;padding:15px;border-radius: 2px;margin-top: 10px;}
 .hot-question-listitem .content li.answer .answer-arrow{position: absolute;z-index: 0;width: 22px;cursor: default;font-size: 23px;margin-top:-31px}
 .hot-question-listitem .content li.answer .answer-arrow *{position: absolute;}
@@ -125,7 +125,7 @@ div[contentEditable]{outline:0}
 .new-agent-listitem .content{float:left;width:207px;margin-left:20px;}
 .new-agent-listitem.first .content{background:none}
 .new-agent-listitem .content li.name{font-size:16px;font-weight: 600;color:#373737;text-overflow:ellipsis;white-space:nowrap;margin-top:10px}
-.new-agent-listitem .content li.title{font-size:12px;color:#939393;text-overflow:ellipsis;margin-top:3px}
+.new-agent-listitem .content li.title{font-size:13px;color:#939393;text-overflow:ellipsis;margin-top:3px}
 
 /*good case*/
 .main-list-header .goodcase{color:#ff002a;}
@@ -137,8 +137,8 @@ div[contentEditable]{outline:0}
 .goodcase-listitem .content{float:left;width:207px;margin-left:20px;}
 .goodcase-listitem.first .content{background:none}
 .goodcase-listitem .content li.name{font-size:16px;font-weight: 600;color:#373737;text-overflow:ellipsis;white-space:nowrap;margin-top:10px}
-.goodcase-listitem .content li.title{font-size:12px;color:#939393;text-overflow:ellipsis;margin-top:3px}
-.goodcase-listitem  .property{font-size:12px;color:#939393;text-overflow:ellipsis;margin-top:3px}
+.goodcase-listitem .content li.title{font-size:13px;color:#939393;text-overflow:ellipsis;margin-top:3px}
+.goodcase-listitem  .property{font-size:13px;color:#939393;text-overflow:ellipsis;margin-top:3px}
 .goodcase-listitem  .property span{display: block;float: left;margin: 0 5px 5px 0;background-color:#dddddd;border-radius: 6px;padding: 3px;line-height: 24px;}
 
 /*买家--我的搬刀*/
@@ -167,10 +167,10 @@ div[contentEditable]{outline:0}
 .mainpage-container .main-right .buyer-list .listitem{border-bottom:1px solid #b3b3b3;padding-bottom:5px;margin-bottom:10px;}
 .mainpage-container .main-right .buyer-list .listitem p{font-size:14px;color:#4799b1;padding-bottom:5px}
 .mainpage-container .main-right .buyer-list .listitem p em{font-size:14px;color:#464646;padding:0px 5px}
-.mainpage-container .main-right .buyer-list .listitem p span{float:right;font-size:12px;color:#666666;line-height: 18px;}
-.mainpage-container .main-right .buyer-list .listitem  .operation a{font-size:11px;color:#b3b3b3;float:left;}
-.mainpage-container .main-right .buyer-list .listitem  .operation span{font-size:11px;color:#b3b3b3;padding:0 5px 0 5px;float:left;}
-.mainpage-container .main-right .rigth-content .buyer-list .listitem  .operation a{font-size:11px;color:#b3b3b3;float:left;}
+.mainpage-container .main-right .buyer-list .listitem p span{float:right;font-size:13px;color:#666666;line-height: 18px;}
+.mainpage-container .main-right .buyer-list .listitem  .operation a{font-size:12px;color:#b3b3b3;float:left;}
+.mainpage-container .main-right .buyer-list .listitem  .operation span{font-size:12px;color:#b3b3b3;padding:0 5px 0 5px;float:left;}
+.mainpage-container .main-right .rigth-content .buyer-list .listitem  .operation a{font-size:12px;color:#b3b3b3;float:left;}
 .mainpage-container .main-right .rigth-content .buyer-list .listitem  .operation span{font-size:11px;color:#b3b3b3;padding:0 5px 0 5px;float:left;}
 .mainpage-container .main-right .go-ask{margin-bottom:30px;margin-top:25px;}
 .mainpage-container .main-right .go-ask h2{color:#0088b5;font-size:18px;padding:0}
@@ -203,7 +203,7 @@ div[contentEditable]{outline:0}
 .mainpage-container .main-right .rigth-content .listitem .user-info li{float:left;font-size:14px;}
 .mainpage-container .main-right .rigth-content .listitem .user-info li.key{color:#464646;padding:10px 65px 10px 0;width:70px;}
 .mainpage-container .main-right .rigth-content .listitem .user-info li.value{color:#464646;padding:10px 15px 10px 0}
-.mainpage-container .main-right .rigth-content .listitem .user-info li.operation{color:#ccc;padding:10px 0 10px 0;font-size:12px;line-height: 21px;}
+.mainpage-container .main-right .rigth-content .listitem .user-info li.operation{color:#ccc;padding:10px 0 10px 0;font-size:13px;line-height: 21px;}
 .mainpage-container .main-right .rigth-content .listitem .save{background-color:#63a200;color:white;font-size:16px;padding: 10px 35px;line-height: 35px;border-radius:4px;}
 .mainpage-container .main-right .rigth-content .listitem .user-info input[type="text"]{width:200px}
 
@@ -229,10 +229,10 @@ div[contentEditable]{outline:0}
 .reg-right p{color:#707070;font-size:18px;line-height: 30px;}
 .reg-right .verified{background:url(../img/reg1.png) no-repeat 0 0;padding-left: 100px;margin: 35px 0 45px;}
 .reg-right .verified h2{font-size:24px;color:#707070;}
-.reg-right .verified p{font-size:12px;color:#707070;line-height:20px;}
+.reg-right .verified p{font-size:13px;color:#707070;line-height:20px;}
 .reg-right .goodservice{background:url(../img/reg2.png) no-repeat 0 0;padding-left: 100px;}
 .reg-right .goodservice h2{font-size:24px;color:#707070;}
-.reg-right .goodservice p{font-size:12px;color:#707070;line-height:20px;}
+.reg-right .goodservice p{font-size:13px;color:#707070;line-height:20px;}
 
 
 #pagemask {

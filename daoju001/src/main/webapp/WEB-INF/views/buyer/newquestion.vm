@@ -13,7 +13,8 @@
     <form id="form_newquestion" method="post">
 		<!-- 隐藏字段，用于标示是表单提交 -->
 		<input type="hidden" name="do_submit" value="true"/>
-        <input type="hidden" name="submittype" id="submittype" />
+        <input type="hidden" name="state" id="state" />
+		<input type="hidden" name="hasPic" id="hasPic" />
         <div class="add-question-header">
 					<h5>选择问题类型</h5>
 					<input type="hidden" name="type" id="type" />
@@ -131,7 +132,7 @@
                     </ul>
                 </div>
                 <div class="question-param-li hardness clearfix">
-                    #springBind("form.wpMaterial")
+                    #springBind("form.wpHardness")
                     <input type="hidden" name="${status.expression}" />
                     <a class="sel" >工件硬度</a>
                     <ul>
@@ -165,7 +166,7 @@
                     </ul>
                 </div>
                 <div class="question-param-li material clearfix">
-                    #springBind("form.wpHardness")
+                    #springBind("form.wpMaterial")
                     <input type="hidden" name="${status.expression}" />
                     <a class="sel" >工件材质</a>
                     <ul>
@@ -215,12 +216,13 @@
         <script>
             $(function() {
                 $("#submit_public").click(function () {
-                	$("#submittype").val(1);
+                	$("#state").val(1);
 					$(".add-question-container").children("input").val($("#ques-cont-editor").html());
                 	$("#form_newquestion").submit();//提交
                 });
                 $("#submit_draft").click(function () {
-                	$("#submittype").val(0);
+                	$("#state").val(0);
+					$(".add-question-container").children("input").val($("#ques-cont-editor").html());
                 	$("#form_newquestion").submit();//提交
                 });
             });

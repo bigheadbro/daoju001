@@ -12,4 +12,6 @@ public interface QuestionDAO {
 	public int updateQuestionById(QuestionEntity question);
 	
 	public List<QuestionEntity> queryQuestionsByUserid(int userid);
+	
+	public List<QuestionEntity> queryDraftsByUserid(int userid);
 }

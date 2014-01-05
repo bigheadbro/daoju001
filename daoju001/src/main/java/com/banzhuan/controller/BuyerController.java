@@ -3,6 +3,7 @@ package com.banzhuan.controller;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -22,6 +23,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.support.DefaultMultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 
 import com.banzhuan.common.Result;
@@ -252,12 +254,29 @@ public class BuyerController extends BaseController{
 	
 	@RequestMapping(value="/newquestion")
 	public ModelAndView newquestion(HttpServletRequest request, HttpServletResponse response, @ModelAttribute("account")Account account, 
-			@ModelAttribute("form")QuestionForm form, BindingResult result) 
+			@ModelAttribute("form")QuestionForm form, @ModelAttribute("questionid") final Object questionid, BindingResult result) 
 	{
 		ModelAndView mv = new ModelAndView("buyer/newquestion");
 		if(!isDoSubmit(request))
+		{
+			if(questionid != null)
+			{
+				try
+				{
+					int qid = Integer.parseInt(questionid.toString());
+					if(qid > 0)
+					{
+						form = buyerService.getQuestionEntity(qid);
+					}
+				}
+				catch(NumberFormatException ex)
+				{
+					
+				}
+			}
 			return mv;
-		
+		}
+
 		form.setUserid(account.getUserId());
 		buyerService.insertQuestion(form, result);
 		return mv;
@@ -274,20 +293,21 @@ public class BuyerController extends BaseController{
 	
 	@RequestMapping(value="/question/{id}")
 	public ModelAndView question(HttpServletRequest request, HttpServletResponse response,@PathVariable String id, @ModelAttribute("account")Account account,
-			BindingResult result) {
+			final RedirectAttributes redirectAttributes) {
 		
 		int questionId = Integer.parseInt(id);
 		
-		QuestionForm form = buyerService.getQuestionEntity(questionId);
-
-		//return newquestion(request, response, account, form, result);
 		ModelAndView mv = new ModelAndView(new RedirectView("/buyer/newquestion"));
+		redirectAttributes.addFlashAttribute("questionid",questionId);
 		return mv;
 	}
 	
 	@RequestMapping(value="/draft")
-	public ModelAndView draft(HttpServletRequest request, HttpServletResponse response) {
+	public ModelAndView draft(HttpServletRequest request, HttpServletResponse response, @ModelAttribute("account")Account account) {
 		ModelAndView mv = new ModelAndView("buyer/draft");
+		int userId = account.getUserId();
+		Result result = buyerService.queryQuestionsByUserId(userId);
+		mv.addObject("questions", result.get("questions"));
 		return mv;
 	}
 	

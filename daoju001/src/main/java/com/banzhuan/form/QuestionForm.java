@@ -16,6 +16,8 @@ public class QuestionForm implements Serializable {
 	private int wpHardness;
 	private String content;
 	private int userid;
+	private int state;//1:publish,0:draft
+	private boolean hasPic;
 
 	public int getProcessMethod() {
 		return processMethod;
@@ -67,5 +69,29 @@ public class QuestionForm implements Serializable {
 	 */
 	public void setUserid(int userid) {
 		this.userid = userid;
+	}
+	/**
+	 * @return the state
+	 */
+	public int getState() {
+		return state;
+	}
+	/**
+	 * @param state the state to set
+	 */
+	public void setState(int state) {
+		this.state = state;
+	}
+	/**
+	 * @return the hasPic
+	 */
+	public boolean getHasPic() {
+		return hasPic;
+	}
+	/**
+	 * @param hasPic the hasPic to set
+	 */
+	public void setHasPic(boolean hasPic) {
+		this.hasPic = hasPic;
 	}
 }

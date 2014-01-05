@@ -32,5 +32,11 @@ public class QuestionDAOImpl extends SqlSessionDaoSupport implements QuestionDAO
 	{
 		return this.getSqlSession().selectList("queryQuestionsByUserId", userid);
 	}
+	
+	@Override
+	public List<QuestionEntity> queryDraftsByUserid(int userid)
+	{
+		return this.getSqlSession().selectList("queryDraftsByUserId", userid);
+	}
 
 }

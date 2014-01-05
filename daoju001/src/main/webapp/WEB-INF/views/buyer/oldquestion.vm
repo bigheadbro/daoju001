@@ -9,10 +9,10 @@
 	<div class="buyer-list">
 	  #foreach($question in $questions)
   		<div class="listitem">
-				<div class="clearfix">
-  			  <div class="mixed">$!{question.content}</div>
-					<span>$stringUtil.formatDate($!{question.gmtCreate})</span>
-				</div>
+			<div class="clearfix">
+  			    <div class="mixed">$!{question.content}</div>
+			    <span>$stringUtil.formatDate($!{question.gmtCreate})</span>
+			</div>
   			<div class="operation clearfix">
   				<a href="#">$!{question.cntCA}个专业回答	</a><span>|</span>
   				<a href="#">查看详情</a><span>|</span>

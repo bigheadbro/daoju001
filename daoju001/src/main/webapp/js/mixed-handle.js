@@ -1,4 +1,7 @@
 $(function() {
-  $text = $(".mixed").text();
-  $(".mixed").html($text);
+  $(".mixed").each(function(){
+	  $text = $(this).text();
+	  $(this).html($text);
+  });
+
 });

@@ -223,12 +223,15 @@ public class BuyerService {
 		question.setType(form.getType());
 		question.setContent(form.getContent());
 		question.setBuyerId(form.getUserid());
+		question.setState(form.getState());
+		question.setHasPic(form.getHasPic());
 		
 		questionDAO.insertQuestionEntity(question);
 		
 		return result;
 	}
 
+	
 	public Result queryQuestionsByUserId(int userId)
 	{
 		Result result = new Result();

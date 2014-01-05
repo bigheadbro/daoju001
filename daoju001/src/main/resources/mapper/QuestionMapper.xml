@@ -79,6 +79,13 @@
 	<select id="queryQuestionsByUserId" parameterType="int"
 			resultMap="QuestionResultMap">
 		<![CDATA[
+			SELECT * from t_question t where t.state = 1 and t.buyer_id=#{id} order by gmt_create desc
+		]]>
+	</select>
+	
+	<select id="queryDraftsByUserId" parameterType="int"
+			resultMap="QuestionResultMap">
+		<![CDATA[
 			SELECT * from t_question t where t.state = 0 and t.buyer_id=#{id} order by gmt_create desc
 		]]>
 	</select>

@@ -13,162 +13,185 @@
     <form id="form_newquestion" method="post">
 		<!-- 隐藏字段，用于标示是表单提交 -->
 		<input type="hidden" name="do_submit" value="true"/>
-        <input type="hidden" name="type" id="type" />
+        <input type="hidden" name="submittype" id="submittype" />
         <div class="add-question-header">
-			<h5>选择问题类型</h5>
-            
+					<h5>选择问题类型</h5>
+					<input type="hidden" name="type" id="type" />
+					<div class="question-type-list clearfix">
+            <div class="question-type">
+  						<a value="0">求 精</a>
+  						<p>正常生产，希望找到更好的刀具提升效率</p>
+  					</div>
+  					<div class="question-type">
+  						<a value="1">解 难</a>
+  						<p>现有刀具影响生产，想换新的刀具</p>
+  					</div>
+  					<div class="question-type">
+  						<a value="2">求 新</a>
+  						<p>需要开发新的产品，不知道应该使用何种刀具？</p>
+  					</div>
+					</div>
         </div>
+				<script>
+				  $(function() {
+					  $(".question-type a").click(function(){
+						  $("#type").val($(this).attr("value"));
+						  $(".question-type a").css("background-color","#D2D2D2");
+						  $(this).css("background-color","#0088b5");
+						});
+					});
+				</script>
 		<div class="choose-param">
 			<h5>选择刀具条件</h5>
             <div class="question-param clearfix">
                 <div class="question-param-li process clearfix">
                     #springBind("form.processMethod")
                     <input type="hidden" name="${status.expression}" />
-                    <a class="sel" href="">加工方式</a>
+                    <a class="sel" >加工方式</a>
                     <ul>
                         <li>
-                            <a href="">平面铣削</a>
+                            <a>平面铣削</a>
                         </li>
                         <li>
-                            <a href="">侧壁铣削</a>
+                            <a>侧壁铣削</a>
                         </li>
     					<li>
-                            <a href="">曲面铣削</a>
+                            <a>曲面铣削</a>
                         </li>
                         <li>
-                            <a href="">铣槽</a>
+                            <a>铣槽</a>
                         </li>
     					<li>
-                            <a href="">钻孔</a>
+                            <a>钻孔</a>
                         </li>
                         <li>
-                            <a href="">镗孔</a>
+                            <a>镗孔</a>
                         </li>
     					<li>
-                            <a href="">铰孔</a>
+                            <a>铰孔</a>
                         </li>
                         <li>
-                            <a href="">螺纹铣削</a>
+                            <a>螺纹铣削</a>
                         </li>
     					<li>
-                            <a href="">车削(粗加工）</a>
+                            <a>车削(粗加工）</a>
                         </li>
                         <li>
-                            <a href="">车削(槽加工）</a>
+                            <a>车削(槽加工）</a>
                         </li>
     					<li>
-                            <a href="">车削(螺纹加工）</a>
+                            <a>车削(螺纹加工）</a>
                         </li>
                         <li>
-                            <a href="">去毛刺</a>
+                            <a>去毛刺</a>
                         </li>
                     </ul>
                 </div>
                 <div class="question-param-li industry clearfix">
                     #springBind("form.industry")
                     <input type="hidden" name="${status.expression}" />
-                    <a class="sel" href="">所属行业</a>
+                    <a class="sel" >所属行业</a>
                     <ul>
                         <li>
-                            <a href="">模具</a>
+                            <a>模具</a>
                         </li>
                         <li>
-                            <a href="">船舶</a>
+                            <a>船舶</a>
                         </li>
     					<li>
-                            <a href="">石油设备</a>
+                            <a>石油设备</a>
                         </li>
     					<li>
-                            <a href="">散热器/空调</a>
+                            <a>散热器/空调</a>
                         </li>
     					<li>
-                            <a href="">发电设备</a>
+                            <a>发电设备</a>
                         </li>
     					<li>
-                            <a href="">塑料机械</a>
+                            <a>塑料机械</a>
                         </li>
     					<li>
-                            <a href="">内燃机</a>
+                            <a>内燃机</a>
                         </li>
     					<li>
-                            <a href="">大型机械设备</a>
+                            <a>大型机械设备</a>
                         </li>
     					<li>
-                            <a href="">汽车零件</a>
+                            <a>汽车零件</a>
                         </li>
     					<li>
-                            <a href="">电子行业</a>
+                            <a>电子行业</a>
                         </li>
     					<li>
-                            <a href="">通用零件</a>
+                            <a>通用零件</a>
                         </li>
     					<li>
-                            <a href="">其它</a>
+                            <a>其它</a>
                         </li>
                     </ul>
                 </div>
                 <div class="question-param-li hardness clearfix">
                     #springBind("form.wpMaterial")
                     <input type="hidden" name="${status.expression}" />
-                    <a class="sel" href="">工件硬度</a>
+                    <a class="sel" >工件硬度</a>
                     <ul>
                         <li>
-                            <a href="">HRC20以下</a>
+                            <a>HRC20以下</a>
                         </li>
                         <li>
-                            <a href="">HRC20-30</a>
+                            <a>HRC20-30</a>
                         </li>
     					<li>
-                            <a href="">HRC30-40</a>
+                            <a>HRC30-40</a>
                         </li>
                         <li>
-                            <a href="">HRC40-50</a>
+                            <a>HRC40-50</a>
                         </li>
     					<li>
-                            <a href="">HRC50-58</a>
+                            <a>HRC50-58</a>
                         </li>
                         <li>
-                            <a href="">HRC58-62</a>
+                            <a>HRC58-62</a>
                         </li>
     					<li>
-                            <a href="">HRC62-65</a>
+                            <a>HRC62-65</a>
                         </li>
                         <li>
-                            <a href="">HRC65-68</a>
+                            <a>HRC65-68</a>
                         </li>
     					<li>
-                            <a href="">HRC68以上</a>
+                            <a>HRC68以上</a>
                         </li>
                     </ul>
                 </div>
                 <div class="question-param-li material clearfix">
                     #springBind("form.wpHardness")
                     <input type="hidden" name="${status.expression}" />
-                    <a class="sel" href="">工件材质</a>
+                    <a class="sel" >工件材质</a>
                     <ul>
                         <li>
-                            <a href="">钢</a>
+                            <a>钢</a>
                         </li>
                         <li>
-                            <a href="">铸铁</a>
+                            <a>铸铁</a>
                         </li>
     					<li>
-                            <a href="">不锈钢</a>
+                            <a>不锈钢</a>
                         </li>
                         <li>
-                            <a href="">高温合金</a>
+                            <a>高温合金</a>
                         </li>
     					<li>
-                            <a href="">铝</a>
+                            <a>铝</a>
                         </li>
                         <li>
-                            <a href="">有色金属</a>
+                            <a>有色金属</a>
                         </li>
     					<li>
-                            <a href="">石墨</a>
+                            <a>石墨</a>
                         </li>
                         <li>
-                            <a href="">树脂</a>
+                            <a>树脂</a>
                         </li>
                     </ul>
                 </div>
@@ -192,12 +215,12 @@
         <script>
             $(function() {
                 $("#submit_public").click(function () {
-                	$("#type").val(1);
+                	$("#submittype").val(1);
 					$(".add-question-container").children("input").val($("#ques-cont-editor").html());
                 	$("#form_newquestion").submit();//提交
                 });
                 $("#submit_draft").click(function () {
-                	$("#type").val(0);
+                	$("#submittype").val(0);
                 	$("#form_newquestion").submit();//提交
                 });
             });

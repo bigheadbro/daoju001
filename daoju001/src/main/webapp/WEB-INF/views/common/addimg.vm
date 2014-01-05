@@ -1,4 +1,5 @@
 <script type="text/javascript" src="../js/addimg.js"></script>
+<div id="pagemask"></div>
 <div class="addimg-win">
 	<div class="addimg-cont">
 		<h2><a href="#" class="close">x</a>选择图片</h2>

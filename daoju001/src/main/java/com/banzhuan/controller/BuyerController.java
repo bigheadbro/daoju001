@@ -12,6 +12,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -125,6 +126,16 @@ public class BuyerController extends BaseController{
 		
 	}
 	
+	/**
+	 * @return
+	 */
+	@RequestMapping(value = "/logoff")
+	public ModelAndView logoff(final HttpServletRequest request,final HttpServletResponse response, Model model) {
+		request.getSession().invalidate();
+		model.asMap().remove("account");
+		return new ModelAndView(new RedirectView("/common/index"));
+		
+	}
 	@RequestMapping(value="/changepwd")
 	public ModelAndView changepwd(HttpServletRequest request, HttpServletResponse response, @ModelAttribute("account")Account account, 
 			@ModelAttribute("form")BuyerRegForm form, BindingResult result) 

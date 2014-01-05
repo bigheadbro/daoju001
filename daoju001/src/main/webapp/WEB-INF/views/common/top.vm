@@ -3,7 +3,7 @@
 <div class="main-head-container">
     <div class="main-head-content clearfix">
         <div class="logo">
-            <h2>搬刀网</h2>
+            <h2>刀师傅</h2>
         </div>
         <div class="nav">
             <ul>
@@ -50,7 +50,7 @@
 					<li><a href="/buyer/main">我的刀师傅</a></li>
 					<li><a href="/buyer/mymsg">消息</a></li>
 					<li><a href="/buyer/profile">设置</a></li>
-					<li><a href="/common/logoff">退出</a></li>
+					<li><a href="/buyer/logoff">退出</a></li>
 				</ul>
             #end		
         </div>

@@ -240,6 +240,14 @@ public class BuyerService {
 		return result;
 	}
 	
+	public Result queryDraftsByUserId(int userId)
+	{
+		Result result = new Result();
+		List<QuestionEntity> questions = questionDAO.queryDraftsByUserid(userId);
+		result.add("questions", questions);
+		return result;
+	}
+	
 	public QuestionForm getQuestionEntity(int id)
 	{
 		QuestionEntity question = questionDAO.queryQuestionEntityById(id);

@@ -51,13 +51,16 @@ div[contentEditable]{outline:0}
 .main-head-container{background:#0099cb;width:100%;}
 .main-head-content{margin:0 auto;width:960px;color:white;}
 .main-head-container .main-head-content .logo{float:left;}
-.main-head-container .main-head-content .logo h2{font-family:"幼圆";font-size:34px;padding:10px}
+.main-head-container .main-head-content .logo h2{font-family:"幼圆";font-size:34px;padding:10px;padding-top:9px;}
 .main-head-container .main-head-content .nav{float:left;}
-.main-head-container .main-head-content .nav ul li{display:inline-block;padding:16px 15px 16px 15px ;font-size: 21px;}
+.main-head-container .main-head-content .nav ul li{display:inline-block;padding:12px 15px 16px 15px ;font-size: 21px;}
 .main-head-container .main-head-content .nav ul li.current {background:#006e9c}
-.main-head-container .main-head-content .login{float:right;min-width:140px;}
-.main-head-container .main-head-content .login ul.no-auth li{display:inline-block;margin:13px;margin-top:20px;font-size: 12px;}
-.main-head-container .main-head-content .ask{float:left;margin: 13px;}
+.main-head-container .main-head-content .login{float:right;min-width:140px;font-size:14px;color:white;text-align: center;height: 59px;}
+.main-head-container .main-head-content .login .auth-reg{display:block;padding:19px;text-align:center;}
+.main-head-container .main-head-content .login .top-dropdown-reg{position:absolute;display:none;background-color: #007298;z-index: 100;min-width: 140px;}
+.main-head-container .main-head-content .login .top-dropdown-reg li a{display:block;padding: 19px;text-align: center;}
+.main-head-container .main-head-content .login .top-dropdown-reg li a:hover{background-color:#0099cb;}
+.main-head-container .main-head-content .ask{float:left;margin: 13px;margin-top:10px;}
 .main-head-container .main-head-content .ask a{display:block;text-align: center;padding:5px 10px;border-radius:3px;font-size:18px;background-color:#ff6600;}
 
 .main-head-container .main-head-content .login a.top-user{display: block;position:relative;height:60px;text-indent:55px;}

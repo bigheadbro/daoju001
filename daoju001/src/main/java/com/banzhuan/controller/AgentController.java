@@ -41,9 +41,9 @@ public class AgentController {
 	}
 	
 	
-	@RequestMapping(value="/login")
+	@RequestMapping(value="/log")
 	public ModelAndView login(HttpServletRequest request, HttpServletResponse response, @ModelAttribute("form")LoginForm form, BindingResult result1) {
-		ModelAndView mv = new ModelAndView("agent/login");
+		ModelAndView mv = new ModelAndView("/agent/login");
 		Result result = agentService.test(form, result1);
 		if(result1.hasErrors())
 		{

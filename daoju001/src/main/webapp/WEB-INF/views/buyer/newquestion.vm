@@ -12,12 +12,17 @@
 <div class="rigth-content">
     <form id="form_newquestion" method="post">
 		<!-- 隐藏字段，用于标示是表单提交 -->
-		<input type="hidden" name="do_submit" value="true"/>
-        <input type="hidden" name="state" id="state" />
-		<input type="hidden" name="hasPic" id="hasPic" />
+			  <input type="hidden" name="do_submit" value="true"/>
+			  #springBind("form.state")
+        <input type="hidden" name="${status.expression}" value="$!{status.value}" id="state" />
+				#springBind("form.hasPic")
+		    <input type="hidden" name="${status.expression}" value="$!{status.value}" id="hasPic" />
+		    #springBind("form.isEdit")
+		    <input type="hidden" name="${status.expression}" value="$!{status.value}" id="isEdit" />
         <div class="add-question-header">
 					<h5>选择问题类型</h5>
-					<input type="hidden" name="type" id="type" />
+					#springBind("form.type")
+					<input type="hidden" name="${status.expression}" value="1" id="type" />
 					<div class="question-type-list clearfix">
             <div class="question-type">
   						<a value="0">求 精</a>
@@ -47,7 +52,7 @@
             <div class="question-param clearfix">
                 <div class="question-param-li process clearfix">
                     #springBind("form.processMethod")
-                    <input type="hidden" name="${status.expression}" />
+                    <input type="hidden" name="${status.expression}"  value="2" />
                     <a class="sel" >加工方式</a>
                     <ul>
                         <li>
@@ -90,7 +95,7 @@
                 </div>
                 <div class="question-param-li industry clearfix">
                     #springBind("form.industry")
-                    <input type="hidden" name="${status.expression}" />
+                    <input type="hidden" name="${status.expression}"  value="$!{status.value}" />
                     <a class="sel" >所属行业</a>
                     <ul>
                         <li>
@@ -133,7 +138,7 @@
                 </div>
                 <div class="question-param-li hardness clearfix">
                     #springBind("form.wpHardness")
-                    <input type="hidden" name="${status.expression}" />
+                    <input type="hidden" name="${status.expression}"  value="$!{status.value}" />
                     <a class="sel" >工件硬度</a>
                     <ul>
                         <li>
@@ -167,7 +172,7 @@
                 </div>
                 <div class="question-param-li material clearfix">
                     #springBind("form.wpMaterial")
-                    <input type="hidden" name="${status.expression}" />
+                    <input type="hidden" name="${status.expression}"  value="$!{status.value}" />
                     <a class="sel" >工件材质</a>
                     <ul>
                         <li>
@@ -200,7 +205,7 @@
 		</div>
         <div class="add-question-container">
 			#springBind("form.content")
-			<input type="hidden" name="${status.expression}" />
+			<input type="hidden" name="${status.expression}"  value="$!{status.value}" />
             <h5 class="clearfix">
                 <a id="addimg" class="addimg" href="#">点击插入图片</a>
                 填写问题详情 </h5>

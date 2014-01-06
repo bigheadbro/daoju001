@@ -24,6 +24,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.support.DefaultMultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.servlet.support.RequestContextUtils;
 import org.springframework.web.servlet.view.RedirectView;
 
 import com.banzhuan.common.Result;
@@ -259,19 +260,13 @@ public class BuyerController extends BaseController{
 		ModelAndView mv = new ModelAndView("buyer/newquestion");
 		if(!isDoSubmit(request))
 		{
-			if(questionid != null)
+			Map<String,?> map = RequestContextUtils.getInputFlashMap(request);
+			if(map != null)
 			{
-				try
+				int qid = Integer.parseInt(questionid.toString());
+				if(qid > 0)
 				{
-					int qid = Integer.parseInt(questionid.toString());
-					if(qid > 0)
-					{
-						form = buyerService.getQuestionEntity(qid);
-					}
-				}
-				catch(NumberFormatException ex)
-				{
-					
+					form = buyerService.getQuestionEntity(qid);
 				}
 			}
 			return mv;
@@ -306,7 +301,7 @@ public class BuyerController extends BaseController{
 	public ModelAndView draft(HttpServletRequest request, HttpServletResponse response, @ModelAttribute("account")Account account) {
 		ModelAndView mv = new ModelAndView("buyer/draft");
 		int userId = account.getUserId();
-		Result result = buyerService.queryQuestionsByUserId(userId);
+		Result result = buyerService.queryDraftsByUserId(userId);
 		mv.addObject("questions", result.get("questions"));
 		return mv;
 	}

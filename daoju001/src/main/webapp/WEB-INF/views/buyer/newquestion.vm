@@ -13,27 +13,27 @@
     <form id="form_newquestion" method="post">
 		<!-- 隐藏字段，用于标示是表单提交 -->
 			  <input type="hidden" name="do_submit" value="true"/>
-			  #springBind("form.state")
+			  #springBind("questionForm.state")
         <input type="hidden" name="${status.expression}" value="$!{status.value}" id="state" />
-				#springBind("form.hasPic")
+				#springBind("questionForm.hasPic")
 		    <input type="hidden" name="${status.expression}" value="$!{status.value}" id="hasPic" />
-		    #springBind("form.isEdit")
+		    #springBind("questionForm.isEdit")
 		    <input type="hidden" name="${status.expression}" value="$!{status.value}" id="isEdit" />
         <div class="add-question-header">
 					<h5>选择问题类型</h5>
-					#springBind("form.type")
-					<input type="hidden" name="${status.expression}" value="1" id="type" />
+					#springBind("questionForm.type")
+					<input type="hidden" name="${status.expression}" value="$!{status.value}" id="type" />
 					<div class="question-type-list clearfix">
             <div class="question-type">
-  						<a value="0">求 精</a>
+  						<a value="1">求 精</a>
   						<p>正常生产，希望找到更好的刀具提升效率</p>
   					</div>
   					<div class="question-type">
-  						<a value="1">解 难</a>
+  						<a value="2">解 难</a>
   						<p>现有刀具影响生产，想换新的刀具</p>
   					</div>
   					<div class="question-type">
-  						<a value="2">求 新</a>
+  						<a value="3">求 新</a>
   						<p>需要开发新的产品，不知道应该使用何种刀具？</p>
   					</div>
 					</div>
@@ -51,8 +51,8 @@
 			<h5>选择刀具条件</h5>
             <div class="question-param clearfix">
                 <div class="question-param-li process clearfix">
-                    #springBind("form.processMethod")
-                    <input type="hidden" name="${status.expression}"  value="2" />
+                    #springBind("questionForm.processMethod")
+                    <input type="hidden" name="${status.expression}"  value="$!{status.value}" />
                     <a class="sel" >加工方式</a>
                     <ul>
                         <li>
@@ -94,7 +94,7 @@
                     </ul>
                 </div>
                 <div class="question-param-li industry clearfix">
-                    #springBind("form.industry")
+                    #springBind("questionForm.industry")
                     <input type="hidden" name="${status.expression}"  value="$!{status.value}" />
                     <a class="sel" >所属行业</a>
                     <ul>
@@ -137,7 +137,7 @@
                     </ul>
                 </div>
                 <div class="question-param-li hardness clearfix">
-                    #springBind("form.wpHardness")
+                    #springBind("questionForm.wpHardness")
                     <input type="hidden" name="${status.expression}"  value="$!{status.value}" />
                     <a class="sel" >工件硬度</a>
                     <ul>
@@ -171,7 +171,7 @@
                     </ul>
                 </div>
                 <div class="question-param-li material clearfix">
-                    #springBind("form.wpMaterial")
+                    #springBind("questionForm.wpMaterial")
                     <input type="hidden" name="${status.expression}"  value="$!{status.value}" />
                     <a class="sel" >工件材质</a>
                     <ul>
@@ -204,7 +204,7 @@
             </div>
 		</div>
         <div class="add-question-container">
-			#springBind("form.content")
+			#springBind("questionForm.content")
 			<input type="hidden" name="${status.expression}"  value="$!{status.value}" />
             <h5 class="clearfix">
                 <a id="addimg" class="addimg" href="#">点击插入图片</a>

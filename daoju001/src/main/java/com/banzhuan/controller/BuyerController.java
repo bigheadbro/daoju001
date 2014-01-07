@@ -122,7 +122,7 @@ public class BuyerController extends BaseController{
 				account.setLogo(buyerService.getBuyerEntity(account.getUserId()).getLogo());
 				request.getSession().setAttribute("account", account);
 				// 登陆成功， 跳转到登陆页面
-				return new ModelAndView(new RedirectView("/buyer/main"));
+				return new ModelAndView(new RedirectView("/buyer/newquestion"));
 			}
 		}
 		return new ModelAndView("/buyer/log");
@@ -255,7 +255,7 @@ public class BuyerController extends BaseController{
 	
 	@RequestMapping(value="/newquestion")
 	public ModelAndView newquestion(HttpServletRequest request, HttpServletResponse response, @ModelAttribute("account")Account account, 
-			@ModelAttribute("form")QuestionForm form, @ModelAttribute("questionid") final Object questionid, BindingResult result) 
+			@ModelAttribute("questionForm")QuestionForm form, @ModelAttribute("questionid") final Object questionid, BindingResult result) 
 	{
 		ModelAndView mv = new ModelAndView("buyer/newquestion");
 		if(!isDoSubmit(request))
@@ -266,13 +266,15 @@ public class BuyerController extends BaseController{
 				int qid = Integer.parseInt(questionid.toString());
 				if(qid > 0)
 				{
-					form = buyerService.getQuestionEntity(qid);
+					buyerService.setQuestionFormWithQid(form,qid);
+					form.setIsEdit(1);
 				}
 			}
 			return mv;
 		}
 
 		form.setUserid(account.getUserId());
+		form.setContent(form.getContent().replace('"', '\''));
 		buyerService.insertQuestion(form, result);
 		return mv;
 	}

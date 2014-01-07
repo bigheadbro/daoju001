@@ -129,4 +129,12 @@ public class CommonController extends BaseController{
 		return new ModelAndView(new RedirectView("/common/index"));
 		
 	}
+	
+
+	@RequestMapping(value = "/question")
+	public ModelAndView allquestion(final HttpServletRequest request,final HttpServletResponse response) {
+		ModelAndView mv = new ModelAndView("/common/question");
+		return mv;
+		
+	}
 }

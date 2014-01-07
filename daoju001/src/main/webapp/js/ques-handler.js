@@ -1,4 +1,5 @@
 $(function() {
+	show_question();
 	$(".question-param-li").mouseenter(function(){
 		$(this).css("overflow","visible");
 		$(this).css("height","inherit");
@@ -23,33 +24,41 @@ $(function() {
 });
 
 function show_question(){
-	if($("#isEdit").val()>0))
+	if($("#isEdit").val()>0)
 	{
-		if($("#type").val() == $(".ques-type a").attr("value"))
-		{
-			$(this).css("background-color","#0088b5");
-		}
+		var tmp;
+		$(".question-type a").each(function(){
+			if($("#type").val() == $(this).attr("value"))
+			{
+				$(this).css("background-color","#0088b5");
+			}
+		});
+
 		if($('input[name="processMethod"]').val() >= 0 )
 		{
-			$(".process .sel").text($(".process li:nth-child($('input[name="processMethod"]').val())").text());
+			tmp = $('input[name="processMethod"]').val();
+			$(".process .sel").text($(".process li:nth-child(" + tmp + ")").text());
 			$(".process").css("background","#0088b5");
 			$(".process .sel").css("color","#fff");
 		}
 		if($('input[name="industry"]').val() >= 0 )
 		{
-			$(".industry .sel").text($(".industry li:nth-child($('input[name="industry"]').val())").text());
+			tmp = $('input[name="industry"]').val();
+			$(".industry .sel").text($(".industry li:nth-child(" + tmp + ")").text());
 			$(".industry").css("background","#0088b5");
 			$(".industry .sel").css("color","#fff");
 		}
 		if($('input[name="wpHardness"]').val() >= 0 )
 		{
-			$(".hardness .sel").text($(".hardness li:nth-child($('input[name="wpHardness"]').val())").text());
+			tmp = $('input[name="wpHardness"]').val();
+			$(".hardness .sel").text($(".hardness li:nth-child(" + tmp + ")").text());
 			$(".hardness").css("background","#0088b5");
 			$(".hardness .sel").css("color","#fff");
 		}
 		if($('input[name="wpMaterial"]').val() >= 0 )
 		{
-			$(".material .sel").text($(".material li:nth-child($('input[name="wpMaterial"]').val())").text());
+			tmp = $('input[name="wpMaterial"]').val();
+			$(".material .sel").text($(".material li:nth-child(" + tmp + ")").text());
 			$(".material").css("background","#0088b5");
 			$(".material .sel").css("color","#fff");
 		}

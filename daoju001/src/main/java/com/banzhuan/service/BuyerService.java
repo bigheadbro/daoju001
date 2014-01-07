@@ -248,11 +248,41 @@ public class BuyerService {
 		return result;
 	}
 	
-	public QuestionForm getQuestionEntity(int id)
+	public void setQuestionFormWithQid(QuestionForm form, int id)
 	{
 		QuestionEntity question = questionDAO.queryQuestionEntityById(id);
-		QuestionForm form = new QuestionForm();
-		return form;
+		if(question.getType() >=0)
+		{
+			form.setType(question.getType());
+		}
+		if(question.getIndustry() >=0)
+		{
+			form.setIndustry(question.getIndustry());
+		}
+		if(question.getProcessMethod() >=0)
+		{
+			form.setProcessMethod(question.getProcessMethod());
+		}
+		if(question.getWpHardness() >=0)
+		{
+			form.setWpHardness(question.getWpHardness());
+		}
+		if(question.getWpMaterial() >=0)
+		{
+			form.setWpMaterial(question.getWpMaterial());
+		}
+		if(question.getContent() != null)
+		{
+			form.setContent(question.getContent());
+		}
+		if(question.getBuyerId() > 0)
+		{
+			form.setUserid(question.getBuyerId());
+		}
+		if(question.getState() >= 0)
+		{
+			form.setState(question.getState());
+		}
 	}
 	
 

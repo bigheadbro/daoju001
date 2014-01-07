@@ -15,7 +15,7 @@
     					<span>$stringUtil.formatDate($!{question.gmtCreate})</span>
     				</div>
       			<div class="operation clearfix">
-      				<a href="/buyer/newquestion/$!{question.id}">编辑</a><span>|</span>
+      				<a href="/buyer/question/$!{question.id}">编辑</a><span>|</span>
       				<a href="#">删除</a>
       			</div>
       		</div>

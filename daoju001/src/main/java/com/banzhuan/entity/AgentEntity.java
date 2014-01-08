@@ -15,6 +15,7 @@ public class AgentEntity implements Serializable {
 	private String qqConnectId;
 	// 登录密码
 	private String password;
+	private String mail;
 	// 公司名称
 	private String companyName;
 	// 代理品牌名称
@@ -317,6 +318,14 @@ public class AgentEntity implements Serializable {
 	 */
 	public static long getSerialversionuid() {
 		return serialVersionUID;
+	}
+
+	public String getMail() {
+		return mail;
+	}
+
+	public void setMail(String mail) {
+		this.mail = mail;
 	}
 
 	

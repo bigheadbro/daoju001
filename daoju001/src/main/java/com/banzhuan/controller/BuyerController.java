@@ -30,7 +30,7 @@ import org.springframework.web.servlet.view.RedirectView;
 import com.banzhuan.common.Result;
 import com.banzhuan.entity.BuyerEntity;
 import com.banzhuan.form.BuyerProfileForm;
-import com.banzhuan.form.BuyerRegForm;
+import com.banzhuan.form.RegForm;
 import com.banzhuan.form.LoginForm;
 import com.banzhuan.form.QuestionForm;
 import com.banzhuan.service.BuyerService;
@@ -63,7 +63,7 @@ public class BuyerController extends BaseController{
 	
 	@RequestMapping(value="/reg")
 	public ModelAndView reg(final HttpServletRequest request,
-			final HttpServletResponse response, @ModelAttribute("form")BuyerRegForm form, BindingResult result) 
+			final HttpServletResponse response, @ModelAttribute("form")RegForm form, BindingResult result) 
 	{
 		if(isDoSubmit(request))
 		{
@@ -76,10 +76,11 @@ public class BuyerController extends BaseController{
 				account.setLogin(true); // 登录成功标识
 				account.setUserName(user.getUsername()); // 用户登录名
 				account.setUserId(user.getId()); // 用户ID
-				account.setBuyer(false);
+				account.setBuyer(true);
+				account.setAgent(false);
 				request.getSession().setAttribute("account", account);
 				// 注册成功， 跳转到登陆页面
-				return new ModelAndView(new RedirectView("/common/index")); 
+				return new ModelAndView(new RedirectView("/buyer/log")); 
 			}
 			else
 			{
@@ -141,7 +142,7 @@ public class BuyerController extends BaseController{
 	}
 	@RequestMapping(value="/changepwd")
 	public ModelAndView changepwd(HttpServletRequest request, HttpServletResponse response, @ModelAttribute("account")Account account, 
-			@ModelAttribute("form")BuyerRegForm form, BindingResult result) 
+			@ModelAttribute("form")RegForm form, BindingResult result) 
 	{
 		ModelAndView view = new ModelAndView("buyer/changepwd");
 		// 非表单提交，直接显示页面

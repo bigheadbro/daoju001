@@ -10,6 +10,8 @@
 		<id property="qqConnectId" column="qq_connect_id" />
 		<!--登录密码 -->
 		<id property="password" column="password" />
+		<!--电子邮箱 -->
+		<id property="mail" column="email" />
 		<!--公司名称 -->
 		<id property="companyName" column="company_name" />
 		<!--代理品牌名称 -->
@@ -50,6 +52,12 @@
 	]]>
 	</select>
 	
+	<select id="queryAgentEntityByMail" parameterType="String" resultMap="AgentResultMap">
+	<![CDATA[
+		SELECT * from t_agent t WHERE t.email = #{mail}
+	]]>
+	</select>
+	
 	<!-- 新代理商信息 -->
 	<insert id="insertAgentEntity" parameterType="AgentEntity">
 		<selectKey resultType="int" order="AFTER" keyProperty="id">
@@ -60,6 +68,7 @@
       nick
    	  ,qq_connect_id
    	  ,password
+   	  ,email
    	  ,company_name
    	  ,brand_name
    	  ,logo
@@ -80,6 +89,7 @@
    	  #{nick}
    	  ,#{qqConnectId}
    	  ,#{password}
+   	  ,#{mail}
    	  ,#{companyName}
    	  ,#{brandName}
    	  ,#{logo}

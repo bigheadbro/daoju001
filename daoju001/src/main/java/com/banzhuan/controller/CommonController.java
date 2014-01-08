@@ -17,7 +17,7 @@ import org.springframework.web.servlet.view.RedirectView;
 
 import com.banzhuan.common.Result;
 import com.banzhuan.entity.BuyerEntity;
-import com.banzhuan.form.BuyerRegForm;
+import com.banzhuan.form.RegForm;
 import com.banzhuan.form.LoginForm;
 import com.banzhuan.service.BuyerService;
 import com.banzhuan.util.JsonUtil;
@@ -54,7 +54,7 @@ public class CommonController extends BaseController{
 
 	@RequestMapping(value="/common/reg")
 	public ModelAndView reg(final HttpServletRequest request,
-			final HttpServletResponse response, @ModelAttribute("form")BuyerRegForm form, BindingResult result) 
+			final HttpServletResponse response, @ModelAttribute("form")RegForm form, BindingResult result) 
 	{
 		if(isDoSubmit(request))
 		{

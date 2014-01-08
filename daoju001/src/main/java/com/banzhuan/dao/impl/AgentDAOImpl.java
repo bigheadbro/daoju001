@@ -17,8 +17,14 @@ import com.banzhuan.entity.AgentEntity;
 public class AgentDAOImpl extends SqlSessionDaoSupport implements AgentDAO {
 
 	@Override
-	public AgentEntity queryUserEntityById(int id) {
+	public AgentEntity queryAgentEntityById(int id) {
 		return this.getSqlSession().selectOne("queryAgentEntityById", id);
+	}
+	
+	@Override
+	public AgentEntity queryAgentEntityByMail(String mail)
+	{
+		return this.getSqlSession().selectOne("queryAgentEntityByMail", mail);
 	}
 
 	@Override

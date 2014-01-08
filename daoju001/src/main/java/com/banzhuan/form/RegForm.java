@@ -2,7 +2,7 @@ package com.banzhuan.form;
 
 import java.io.Serializable;
 
-public class BuyerRegForm implements Serializable {
+public class RegForm implements Serializable {
 	/**
 	 * 
 	 */

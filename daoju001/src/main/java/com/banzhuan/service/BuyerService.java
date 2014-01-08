@@ -14,7 +14,7 @@ import com.banzhuan.entity.QuestionEntity;
 import com.banzhuan.common.Account;
 import com.banzhuan.common.Result;
 import com.banzhuan.form.BuyerProfileForm;
-import com.banzhuan.form.BuyerRegForm;
+import com.banzhuan.form.RegForm;
 import com.banzhuan.form.LoginForm;
 import com.banzhuan.form.QuestionForm;
 import com.banzhuan.entity.BuyerEntity;
@@ -34,7 +34,7 @@ public class BuyerService {
 	@Qualifier("questionDAO")
 	private QuestionDAO questionDAO;
 	
-	public Result register(BuyerRegForm form, Errors errors)
+	public Result register(RegForm form, Errors errors)
 	{
 		Result result = new Result();
 		
@@ -92,7 +92,7 @@ public class BuyerService {
 		return result;
 	}
 	
-	public void changePwd(BuyerRegForm form, Errors errors)
+	public void changePwd(RegForm form, Errors errors)
 	{
 		if(StringUtil.isEmpty(form.getPwd())) //  第三步，判断密码不能为空
 		{

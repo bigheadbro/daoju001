@@ -31,11 +31,36 @@
       					</div>
       					<div class="function">
       						<ul>
-      							<li class="current"><a href="main">我的搬刀</a></li>
-      							<li><a href="mymsg">我的消息</a></li>
-      							<li><a href="newquestion">我的问题</a></li>
-      							<li><a href="goodcase">我的案例</a></li>
-      							<li><a href="accnt">账户设置</a></li>
+										#if($!stringUtil.isContains($request.getServletPath(),"/main"))
+											<li class="current"><a href="main">我的搬刀</a></li>
+										#else
+											<li><a href="main">我的搬刀</a></li>
+										#end
+										#if($!stringUtil.isContains($request.getServletPath(),"/mymsg"))
+											<li class="current"><a href="mymsg">我的消息</a></li>
+										#else
+											<li><a href="mymsg">我的消息</a></li>
+										#end
+										#if($!stringUtil.isContains($request.getServletPath(),"/newquestion") || $!stringUtil.isContains($request.getServletPath(),"/answer") ||$!stringUtil.isContains($request.getServletPath(),"/draft"))
+      							  <li class="current"><a href="newquestion">我的回答</a></li>
+										#else
+											<li><a href="newquestion">我的回答</a></li>
+										#end
+										#if($!stringUtil.isContains($request.getServletPath(),"/mycase"))
+      							<li class="current"><a href="goodcase">我的案例</a></li>
+										#else
+											<li><a href="goodcase">我的案例</a></li>
+											#end
+										#if($!stringUtil.isContains($request.getServletPath(),"/mysample"))
+      							  <li><a href="goodcase">我的样本</a></li>
+										#else
+											<li class="current"><a href="goodcase">我的样本</a></li>
+										#end
+										#if($!stringUtil.isContains($request.getServletPath(),"/profile") || $!stringUtil.isContains($request.getServletPath(),"/changepwd"))
+      							  <li class="current"><a href="accnt">账户设置</a></li>
+										#else
+											<li><a href="accnt">账户设置</a></li>
+										#end
       						</ul>
       					</div>
       			  </div>

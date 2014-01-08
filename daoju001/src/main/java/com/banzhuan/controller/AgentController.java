@@ -13,10 +13,15 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
+import com.banzhuan.common.Account;
 import com.banzhuan.common.Result;
+import com.banzhuan.entity.AgentEntity;
+import com.banzhuan.entity.BuyerEntity;
+import com.banzhuan.form.RegForm;
 import com.banzhuan.form.LoginForm;
 import com.banzhuan.service.AgentService;
 import com.qq.connect.QQConnectException;
@@ -24,7 +29,8 @@ import com.qq.connect.oauth.Oauth;
 
 @Controller
 @RequestMapping("/agent")
-public class AgentController {
+@SessionAttributes({"account"})
+public class AgentController extends BaseController{
 	private Logger logger = LoggerFactory.getLogger(AgentController.class);
 	@Autowired
 	@Qualifier("agentService")
@@ -40,17 +46,71 @@ public class AgentController {
 		return new ModelAndView(new RedirectView("agent/mainpage")); 
 	}
 	
+	@RequestMapping(value="/reg")
+	public ModelAndView reg(final HttpServletRequest request,
+			final HttpServletResponse response, @ModelAttribute("form")RegForm form, BindingResult result) 
+	{
+		if(isDoSubmit(request))
+		{
+			Result re = agentService.register(form, result);
+			
+			if(!result.hasErrors())
+			{
+				AgentEntity user = (AgentEntity)re.get("buyer");
+				Account account = new Account();
+				account.setLogin(true); // 登录成功标识
+				account.setUserName(user.getCompanyName()); // 用户登录名
+				account.setUserId(user.getId()); // 用户ID
+				account.setBuyer(false);
+				account.setAgent(true);
+				request.getSession().setAttribute("account", account);
+				// 注册成功， 跳转到登陆页面
+				return new ModelAndView(new RedirectView("/agent/log")); 
+			}
+			else
+			{
+				// 注册失败， 返回注册页面，并显示出错提示信息
+				ModelAndView model = new ModelAndView("/agnte/reg");
+				return model;
+			}
+		}
+		else
+		{
+			ModelAndView model = new ModelAndView("/agent/reg");
+			return model;
+		}
+	}
 	
 	@RequestMapping(value="/log")
-	public ModelAndView login(HttpServletRequest request, HttpServletResponse response, @ModelAttribute("form")LoginForm form, BindingResult result1) {
-		ModelAndView mv = new ModelAndView("/agent/log");
-		Result result = agentService.test(form, result1);
-		if(result1.hasErrors())
+	public ModelAndView login(HttpServletRequest request, HttpServletResponse response, @ModelAttribute("form")LoginForm form, BindingResult result) {
+		if(isDoSubmit(request))
 		{
-			return mv;
+			Result re = agentService.checkLogin(form, result);
+			
+			if(!result.hasErrors())
+			{
+				AgentEntity user = (AgentEntity)re.get("agent");
+				Account account = new Account();
+				account.setLogin(true); // 登录成功标识
+				account.setUserName(user.getCompanyName()); // 用户登录名
+				account.setUserId(user.getId()); // 用户ID
+				account.setMail(user.getMail()); // 邮箱
+				account.setLogo(user.getLogo()); // 邮箱
+				account.setBuyer(false);
+				account.setAgent(true);
+				//set cookie
+				if(form.getRememberme() != null && form.getRememberme())
+				{
+					this.addCookie(response, "mail", user.getMail(), Integer.MAX_VALUE);
+				}
+				//设置头像
+				account.setLogo(agentService.getAgentEntity(account.getUserId()).getLogo());
+				request.getSession().setAttribute("account", account);
+				// 登陆成功， 跳转到登陆页面
+				return new ModelAndView(new RedirectView("/buyer/newquestion"));
+			}
 		}
-
-		return mv;
+		return new ModelAndView("/buyer/log");
 	}
 	
 	/**

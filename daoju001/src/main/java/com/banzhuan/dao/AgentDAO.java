@@ -1,6 +1,7 @@
 package com.banzhuan.dao;
 
 import com.banzhuan.entity.AgentEntity;
+import com.banzhuan.entity.BuyerEntity;
 
 /**
  * 代理商DAO
@@ -12,7 +13,9 @@ public interface AgentDAO {
 	 * @param id
 	 * @return
 	 */
-	AgentEntity queryUserEntityById(int id);
+	AgentEntity queryAgentEntityById(int id);
+	
+	AgentEntity queryAgentEntityByMail(String mail);
 	
 	/**
 	 * 插入代理商信息
@@ -28,5 +31,6 @@ public interface AgentDAO {
 	 * @return
 	 */
 	public int updateAgentPwdById(AgentEntity agent);
+	
 
 }

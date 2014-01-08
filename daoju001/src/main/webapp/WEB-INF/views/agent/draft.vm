@@ -1,7 +1,7 @@
 #set($layout = "/layout/agent_detail_layout.vm")
 <ul class="right-tab clearfix">
   <li><a href="newquestion">最新问题</a></li>
-  <li><a href="oldquestion">已回答的问题</a></li>
+  <li><a href="answer">已回答的问题</a></li>
   <li class="current"><a href="#">草稿箱</a></li>
 </ul>
 <div class="rigth-content">

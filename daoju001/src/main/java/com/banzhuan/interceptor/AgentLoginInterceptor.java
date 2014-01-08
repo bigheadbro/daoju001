@@ -1,5 +1,4 @@
 package com.banzhuan.interceptor;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -11,15 +10,15 @@ import org.springframework.web.util.WebUtils;
 
 import com.banzhuan.common.Account;
 
-public class BuyerLoginInterceptor extends HandlerInterceptorAdapter {
+public class AgentLoginInterceptor extends HandlerInterceptorAdapter {
 
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
 		
 		
 		Account account = (Account) WebUtils.getSessionAttribute(request, "account");
-		if (account == null || !account.isLogin() || !account.isBuyer()) {
-			ModelAndView modelAndView = new ModelAndView(new RedirectView("/buyer/log"));
+		if (account == null || !account.isLogin() || !account.isAgent()) {
+			ModelAndView modelAndView = new ModelAndView(new RedirectView("/agent/log"));
 			String host=request.getLocalAddr();
 			int port = request.getLocalPort();
 			String contextPath = request.getContextPath();

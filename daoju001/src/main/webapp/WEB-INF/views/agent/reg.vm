@@ -2,14 +2,14 @@
 <div class="main-bk-wrapper">
   <div class="mainpage-container clearfix">
 	  <div class="reg-left">
-		  <h2><span>我已经有账号<a href="/buyer/log">立即登录</a></span>注册</h2>
-		  <form id="form_log">
+		  <h2><span>我已经有账号<a href="/agent/log">立即登录</a></span>注册</h2>
+		  <form id="form_reg">
 			<!-- 隐藏字段，用于标示是表单提交 -->
 		    <input type="hidden" name="do_submit" value="true"/>
 			#springBind("form.name")
 			<ul class="reg-listitem clearfix">
 			  <li class="key">
-				  用户名
+				  公司名
 				</li>
 			  <li class="value">
 				  <input type="text"  name="$!{status.expression}"/>

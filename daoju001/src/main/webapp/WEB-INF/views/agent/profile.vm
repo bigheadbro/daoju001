@@ -1,13 +1,10 @@
 #set($layout = "/layout/agent_detail_layout.vm")
 <ul class="right-tab clearfix">
-    <li>
-        <a href="accnt">账号</a>
-    </li>
-    <li>
-        <a href="changepwd">密码</a>
-    </li>
     <li class="current">
-        <a href="#">个人资料</a>
+        <a href="profile">个人资料</a>
+    </li>
+	<li>
+		 <a href="changepwd">密码</a>
     </li>
 </ul>
 <div class="rigth-content">
@@ -16,6 +13,26 @@
             <ul class="user-info clearfix">
                 <li class="key">
                     公司名称
+                </li>
+                <li class="value">
+                    <input type="text" class="dsf-form-text-input"/>
+                </li>
+            </ul>
+        </div>
+		<div class="listitem clearfix">
+            <ul class="user-info clearfix">
+                <li class="key">
+                    邮箱
+                </li>
+                <li class="value">
+                    <input type="text" class="dsf-form-text-input"/>
+                </li>
+            </ul>
+        </div>
+		<div class="listitem clearfix">
+            <ul class="user-info clearfix">
+                <li class="key">
+                    代理刀具品牌
                 </li>
                 <li class="value">
                     <input type="text" class="dsf-form-text-input"/>
@@ -66,6 +83,26 @@
             <ul class="user-info clearfix">
                 <li class="key">
                     QQ
+                </li>
+                <li class="value">
+                    <input type="text" class="dsf-form-text-input"/>
+                </li>
+            </ul>
+        </div>
+		<div class="listitem clearfix">
+            <ul class="user-info clearfix">
+                <li class="key">
+                    公司简介
+                </li>
+                <li class="value">
+                    <textarea class="dsf-form-text-input company-info">$!{status.value}</textarea></li>		
+                </li>
+            </ul>
+        </div>
+		<div class="listitem clearfix">
+            <ul class="user-info clearfix">
+                <li class="key">
+                    代理证书
                 </li>
                 <li class="value">
                     <input type="text" class="dsf-form-text-input"/>

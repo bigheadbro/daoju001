@@ -49,7 +49,7 @@ public class AgentService {
 		agent.setPassword(StringUtil.encrypt(form.getPwd())); // 对密码加密
 		agent.setMail(form.getEmail()); // 设置邮箱地址
 		agentDAO.insertAgentEntity(agent);
-		result.add("buyer", agent);
+		result.add("agent", agent);
 		return result;
 	}
 	

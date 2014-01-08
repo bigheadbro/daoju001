@@ -24,31 +24,68 @@
                 </li>
             </ul>
         </div>
-    		<div class="ask">
-    			<a href="/buyer/newquestion">提问</a>
-    		</div>
+        <div class="ask">
+            <a href="/buyer/newquestion">提问</a>
+        </div>
         <div class="login">
             #if(!$!session.getAttribute("account"))  
-              <a class="auth-reg" href="">注册/登陆</a>
-							<ul class="top-dropdown-reg">
-      					<li><a href="/buyer/log">买家</a></li>
-      					<li><a href="/agent/log">代理商</a></li>
-							</ul>
+                <a class="auth-reg" href="">注册/登陆</a>
+                <ul class="top-dropdown-reg">
+                    <li>
+                        <a href="/buyer/log">买家</a>
+                    </li>
+                    <li>
+                        <a href="/agent/log">代理商</a>
+                    </li>
+                </ul>
                 　                      #else
-                <a class="top-user" href="/buyer/main">
-        					<span class="name">${account.userName}</span>
-        					#if($!{account.logo})
-        						<img src="../uploadfile/$!{account.logo}"  />
-        					#else
-        						<img src="../img/avatar.png"  />
-        					#end
-        				</a>
-        				<ul class="top-dropdown">
-        					<li><a href="/buyer/main">我的刀师傅</a></li>
-        					<li><a href="/buyer/mymsg">消息</a></li>
-        					<li><a href="/buyer/profile">设置</a></li>
-        					<li><a href="/buyer/logoff">退出</a></li>
-        				</ul>
+					#if($!{account.isBuyer})
+                        <a class="top-user" href="/buyer/main">
+                            <span class="name">${account.userName}</span>
+                            #if($!{account.logo})
+                                <img src="../uploadfile/$!{account.logo}"  />
+                                #else
+                                    <img src="../img/avatar.png"  />
+                            #end
+                        </a>
+                        <ul class="top-dropdown">
+                            <li>
+                                <a href="/buyer/main">我的刀师傅</a>
+                            </li>
+                            <li>
+                                <a href="/buyer/mymsg">消息</a>
+                            </li>
+                            <li>
+                                <a href="/buyer/profile">设置</a>
+                            </li>
+                            <li>
+                                <a href="/buyer/logoff">退出</a>
+                            </li>
+                        </ul>
+					#else
+						<a class="top-user" href="/agent/main">
+                        <span class="name">${account.userName}</span>
+                        #if($!{account.logo})
+                            <img src="../uploadfile/$!{account.logo}"  />
+                            #else
+                                <img src="../img/avatar.png"  />
+                        #end
+                    </a>
+                    <ul class="top-dropdown">
+                        <li>
+                            <a href="/agent/main">我的刀师傅</a>
+                        </li>
+                        <li>
+                            <a href="/agent/mymsg">消息</a>
+                        </li>
+                        <li>
+                            <a href="/agent/profile">设置</a>
+                        </li>
+                        <li>
+                            <a href="/agent/logoff">退出</a>
+                        </li>
+                    </ul>
+					#end
             #end		
         </div>
     </div>

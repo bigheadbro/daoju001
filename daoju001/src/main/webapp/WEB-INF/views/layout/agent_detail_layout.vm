@@ -46,20 +46,20 @@
 										#else
 											<li><a href="newquestion">我的回答</a></li>
 										#end
-										#if($!stringUtil.isContains($request.getServletPath(),"/mycase"))
+										#if($!stringUtil.isContains($request.getServletPath(),"/goodcase") || $!stringUtil.isContains($request.getServletPath(),"/uploadgc"))
       							<li class="current"><a href="goodcase">我的案例</a></li>
 										#else
 											<li><a href="goodcase">我的案例</a></li>
 											#end
-										#if($!stringUtil.isContains($request.getServletPath(),"/mysample"))
-      							  <li><a href="goodcase">我的样本</a></li>
+										#if($!stringUtil.isContains($request.getServletPath(),"/mysample") || $!stringUtil.isContains($request.getServletPath(),"/uploadsample"))
+      							  <li class="current"><a href="mysample">我的样本</a></li>
 										#else
-											<li class="current"><a href="goodcase">我的样本</a></li>
+											<li><a href="mysample">我的样本</a></li>
 										#end
 										#if($!stringUtil.isContains($request.getServletPath(),"/profile") || $!stringUtil.isContains($request.getServletPath(),"/changepwd"))
-      							  <li class="current"><a href="accnt">账户设置</a></li>
+      							  <li class="current"><a href="profile">账户设置</a></li>
 										#else
-											<li><a href="accnt">账户设置</a></li>
+											<li><a href="profile">账户设置</a></li>
 										#end
       						</ul>
       					</div>

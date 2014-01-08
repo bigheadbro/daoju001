@@ -4,7 +4,7 @@ body,h1,h2,h3,h4,h5,h6,hr,p,blockquote,dl,dt,dd,ul,ol,li,pre,form,fieldset,legen
 	font-family: "微软雅黑";
 	font-size:12px/1.5;
 }
-body{}position: relative;height: 100%;}
+body{position: relative;height: 100%;}
 img{border:none;}
 html{flow-y:scroll;height:100%;background: url(../img/bk.jpg) repeat 0 0;}  
 table{border-collapse: collapse;border-spacing: 0;}
@@ -27,6 +27,8 @@ a{text-decoration: none;color: inherit;cursor:pointer;}
 .fl{float:left;}
 .mt20{margin-top:20px}
 .mb20{margin-bottom:20px}
+.mb15{margin-bottom:15px}
+.pb15{padding-bottom:15px;}
 .mb0{margin-bottom:0px}
 .pt20{padding-top:20px}
 .ml30{margin-left:30px}
@@ -35,7 +37,8 @@ a{text-decoration: none;color: inherit;cursor:pointer;}
 .blrg{border-right: 1px solid #ccc;border-left: 1px solid #ccc;}
 
 
-.dsf-form-text-input {padding: 8px 10px;font-size: 13px;line-height: 15px;box-shadow: 0 1px 1px rgba(0,0,0,.1) inset;border-radius: 3px;background: #fff;border: 1px solid #ccc;color: #222;}
+.dsf-form-text-input {padding: 4px 10px;font-size: 13px;line-height: 15px;box-shadow: 0 1px 1px rgba(0,0,0,.1) inset;border-radius: 3px;background: #fff;border: 1px solid #ccc;color: #222;}
+.company-info{width:400px;height:65px;resize:none;}
 div[contentEditable]{outline:0}
 .body-wrapper {position: relative;min-height: 100%;}
 /*footer-container*/
@@ -67,7 +70,7 @@ div[contentEditable]{outline:0}
 .main-head-container .main-head-content .login a.top-user .name{line-height:57px;font-size: 18px;}
 .main-head-container .main-head-content .login a.top-user img{width:30px;height:30px;position:absolute;top: 15px;left: 10px;}
 
-.main-head-container .main-head-content .login .top-dropdown{position:absolute;display:none;background-color: #007298;top: 60px;min-width: 140px;z-index: 100;}
+.main-head-container .main-head-content .login .top-dropdown{position:absolute;display:none;background-color: #007298;top: 59px;min-width: 140px;z-index: 100;}
 .main-head-container .main-head-content .login ul.top-dropdown li a{display:block;text-align:center;padding:10px;}
 .main-head-container .main-head-content .login ul.top-dropdown li a:hover{background-color:#0099cb;}
 /*main banner*/
@@ -217,7 +220,7 @@ div[contentEditable]{outline:0}
 
 
 
-.mainpage-container .main-right .rigth-content{background-color:white;margin-top:10px;padding:30px;height: 570px;}
+.mainpage-container .main-right .rigth-content{background-color:white;margin-top:10px;padding:30px;padding-top: 15px;height: 585px;}
 .mainpage-container .main-right .rigth-content .listitem{font-size:14px}
 .mainpage-container .main-right .notread{font-weight:700;}
 .mainpage-container .main-right .rigth-content .buyer-list .listitem a{color:#0099cb}
@@ -225,7 +228,7 @@ div[contentEditable]{outline:0}
 .mainpage-container .main-right .right-tab  li{float:left;padding: 8px 50px;font-size:14px;color:#6a6a6a}
 .mainpage-container .main-right .right-tab  li.current{color:white;background-color:#0099cb;}
 .mainpage-container .main-right .rigth-content .listitem .user-info li{float:left;font-size:14px;}
-.mainpage-container .main-right .rigth-content .listitem .user-info li.key{color:#464646;padding:10px 65px 10px 0;width:70px;}
+.mainpage-container .main-right .rigth-content .listitem .user-info li.key{color:#464646;padding:10px 65px 10px 0;width:85px;}
 .mainpage-container .main-right .rigth-content .listitem .user-info li.value{color:#464646;padding:10px 15px 10px 0}
 .mainpage-container .main-right .rigth-content .listitem .user-info li.operation{color:#ccc;padding:10px 0 10px 0;font-size:13px;line-height: 21px;}
 .mainpage-container .main-right .rigth-content .listitem .save{background-color:#63a200;color:white;font-size:16px;padding: 10px 35px;line-height: 35px;border-radius:4px;}

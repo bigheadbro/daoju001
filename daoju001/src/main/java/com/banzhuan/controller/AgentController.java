@@ -10,6 +10,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -56,7 +57,7 @@ public class AgentController extends BaseController{
 			
 			if(!result.hasErrors())
 			{
-				AgentEntity user = (AgentEntity)re.get("buyer");
+				AgentEntity user = (AgentEntity)re.get("agent");
 				Account account = new Account();
 				account.setLogin(true); // 登录成功标识
 				account.setUserName(user.getCompanyName()); // 用户登录名
@@ -70,7 +71,7 @@ public class AgentController extends BaseController{
 			else
 			{
 				// 注册失败， 返回注册页面，并显示出错提示信息
-				ModelAndView model = new ModelAndView("/agnte/reg");
+				ModelAndView model = new ModelAndView("/agent/reg");
 				return model;
 			}
 		}
@@ -107,10 +108,18 @@ public class AgentController extends BaseController{
 				account.setLogo(agentService.getAgentEntity(account.getUserId()).getLogo());
 				request.getSession().setAttribute("account", account);
 				// 登陆成功， 跳转到登陆页面
-				return new ModelAndView(new RedirectView("/buyer/newquestion"));
+				return new ModelAndView(new RedirectView("/agent/main"));
 			}
 		}
-		return new ModelAndView("/buyer/log");
+		return new ModelAndView("/agent/log");
+	}
+	
+	@RequestMapping(value = "/logoff")
+	public ModelAndView logoff(final HttpServletRequest request,final HttpServletResponse response, Model model) {
+		request.getSession().invalidate();
+		model.asMap().remove("account");
+		return new ModelAndView(new RedirectView("/common/index"));
+		
 	}
 	
 	/**
@@ -130,9 +139,17 @@ public class AgentController extends BaseController{
 	}
 	
 	@RequestMapping(value="/changepwd")
-	public ModelAndView changepwd(HttpServletRequest request, HttpServletResponse response) {
-		ModelAndView mv = new ModelAndView("agent/changepwd");
-		return mv;
+	public ModelAndView changepwd(HttpServletRequest request, HttpServletResponse response, @ModelAttribute("account")Account account, 
+			@ModelAttribute("form")RegForm form, BindingResult result)
+	{ 
+		ModelAndView view = new ModelAndView("agent/changepwd");
+		// 非表单提交，直接显示页面
+		if(!isDoSubmit(request))
+			return view;
+		
+		form.setUserid(account.getUserId());
+		agentService.changePwd(form, result);
+		return view;
 	}
 
 	@RequestMapping(value="/accnt")
@@ -165,9 +182,9 @@ public class AgentController extends BaseController{
 		return mv;
 	}
 	
-	@RequestMapping(value="/oldquestion")
+	@RequestMapping(value="/answer")
 	public ModelAndView oldquestion(HttpServletRequest request, HttpServletResponse response) {
-		ModelAndView mv = new ModelAndView("agent/oldquestion");
+		ModelAndView mv = new ModelAndView("agent/answer");
 		return mv;
 	}
 	
@@ -186,6 +203,12 @@ public class AgentController extends BaseController{
 	@RequestMapping(value="/uploadgc")
 	public ModelAndView uploadgc(HttpServletRequest request, HttpServletResponse response) {
 		ModelAndView mv = new ModelAndView("agent/uploadgc");
+		return mv;
+	}
+	
+	@RequestMapping(value="/mysample")
+	public ModelAndView mysample(HttpServletRequest request, HttpServletResponse response) {
+		ModelAndView mv = new ModelAndView("agent/mysample");
 		return mv;
 	}
 }

@@ -48,24 +48,5 @@ public class AgentDAOTest extends BaseTest {
 		//agentDAO.deleteCompanyUserEntityById(id);
 		//agentDAO.deleteCompanyEntityByUserId(id);
 	 }
-	 
-	 @Test
-	 public void queryCompanyUserEntityById()
-	 {
-		 AgentEntity agent = agentDAO.queryUserEntityById(id);
-		 System.out.print("start:");
-		 Assert.assertNotNull(agent);
-		 System.out.print(agent.getNick());
-	 }
-	 
-	 @Test
-	 public void updateAgentPwdEntity()
-	 {
-		 AgentEntity agent = agentDAO.queryUserEntityById(id);
-		 Assert.assertNotNull(agent);
-		 agent.setPassword("333");
-		 agentDAO.updateAgentPwdById(agent);
-		 agent = agentDAO.queryUserEntityById(id);
-		 Assert.assertEquals("333", agent.getPassword());
-	 }
+
 }

@@ -9,6 +9,7 @@ import com.banzhuan.dao.AgentDAO;
 import com.banzhuan.entity.AgentEntity;
 import com.banzhuan.entity.BuyerEntity;
 import com.banzhuan.common.Result;
+import com.banzhuan.form.AgentProfileForm;
 import com.banzhuan.form.BuyerProfileForm;
 import com.banzhuan.form.LoginForm;
 import com.banzhuan.form.RegForm;
@@ -113,5 +114,42 @@ public class AgentService {
 	public AgentEntity getAgentEntity(int userId)
 	{
 		return agentDAO.queryAgentEntityById(userId);
+	}
+	
+	public void updateAgentAccnt(AgentProfileForm form, AgentEntity agent)
+	{
+		if(form != null)
+		{
+			if(form.getUserName() != "")
+			{
+				
+			}
+			if(form.getCompanyName() != "")
+			{
+				
+			}
+			if(form.getAddress() != "")
+			{
+				
+			}
+			if(form.getCompanyPhone() != "")
+			{
+				
+			}
+			if(form.getContactName() != "")
+			{
+				
+			}
+			if(form.getContactPhone() != "")
+			{
+				
+			}
+			if(form.getContactQQ() != "")
+			{
+				
+			}
+		}
+		agentDAO.updateAgentEntityById(agent);
+		return;
 	}
 }

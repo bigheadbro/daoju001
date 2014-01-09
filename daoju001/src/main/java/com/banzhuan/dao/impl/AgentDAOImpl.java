@@ -37,4 +37,10 @@ public class AgentDAOImpl extends SqlSessionDaoSupport implements AgentDAO {
 	public int updateAgentPwdById(AgentEntity agent) {
 		return this.getSqlSession().update("updateAgentPwdById", agent);
 	}
+	
+	@Override
+	public int updateAgentEntityById(AgentEntity agent) {
+		return this.getSqlSession().update("updateAgentEntityById", agent);
+	}
+
 }

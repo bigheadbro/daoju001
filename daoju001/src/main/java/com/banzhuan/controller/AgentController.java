@@ -1,6 +1,8 @@
 package com.banzhuan.controller;
 
+import java.io.File;
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -11,10 +13,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.support.DefaultMultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
@@ -25,6 +30,8 @@ import com.banzhuan.entity.BuyerEntity;
 import com.banzhuan.form.RegForm;
 import com.banzhuan.form.LoginForm;
 import com.banzhuan.service.AgentService;
+import com.banzhuan.util.StringUtil;
+import com.banzhuan.util.Util;
 import com.qq.connect.QQConnectException;
 import com.qq.connect.oauth.Oauth;
 
@@ -136,6 +143,46 @@ public class AgentController extends BaseController{
 			logger.error("qqLoginException:"+e.getMessage());
 		}
 			
+	}
+	
+	@RequestMapping(value="/uploadlogo")
+	public void uploadlogo(HttpServletRequest request, HttpServletResponse response, @ModelAttribute("account")Account account, BindingResult result)
+	{
+		String size = request.getParameter("crop");
+		
+		// /////////////////////////////////////////////////////////////获取上传的图片///////////////////////////////////
+		if (request instanceof DefaultMultipartHttpServletRequest) 
+		{
+			DefaultMultipartHttpServletRequest r = (DefaultMultipartHttpServletRequest) request;
+			List<MultipartFile> files = r.getMultiFileMap().get("logo");
+			if (files != null && files.size() > 0) {
+				MultipartFile f = files.get(0);
+				if (StringUtil.isNotEmpty(f.getOriginalFilename()))
+				{
+					String path = request.getSession().getServletContext().getRealPath("/uploadfile");
+					File file = new File(path + "/" + f.getOriginalFilename());
+					account.setLogo(Util.genRandomName(f.getContentType().toString().split("/")[1]));
+					AgentEntity agent = new AgentEntity();
+					agent.setId(account.getUserId());
+					agent.setLogo(account.getLogo());
+					agentService.updateAgentAccnt(null, agent);
+					try 
+					{
+						FileCopyUtils.copy(f.getBytes(), file);
+				
+						Util.cropImage(f.getContentType().toString().split("/")[1], file.getPath(), Integer.parseInt(size.split(",")[0]),
+								Integer.parseInt(size.split(",")[1]), Integer.parseInt(size.split(",")[2]),
+								Integer.parseInt(size.split(",")[3]), path + "/" + account.getLogo());
+
+					} catch (IOException e) {
+						logger.error("upload company logo error:"
+								+ e.getMessage());
+					}
+				}
+			}
+		}
+	
+		return; 
 	}
 	
 	@RequestMapping(value="/changepwd")

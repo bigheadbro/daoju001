@@ -32,5 +32,7 @@ public interface AgentDAO {
 	 */
 	public int updateAgentPwdById(AgentEntity agent);
 	
+	public int updateAgentEntityById(AgentEntity agent);
+	
 
 }

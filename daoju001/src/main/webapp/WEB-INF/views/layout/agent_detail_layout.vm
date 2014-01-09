@@ -9,7 +9,13 @@
       		  <div class="main-left clearfix">
       			  <div class="main-left-content">
       					<div class="person-info">
-      						<img src="../img/avatar.png" />
+      						<a id="uploadlogo" href="#">
+    								#if($!{account.logo})
+    									<img src="../uploadfile/$!{account.logo}"  />
+    								#else
+    									<img src="../img/avatar.png"  />
+    								#end
+                  </a>
       						<h5>无锡汉尼达</h5>
       						<h6>代理刀具品牌：黛杰</h6>
       					</div>
@@ -70,6 +76,7 @@
       			</div>
       		</div>
         </div>
+				#parse("/common/uploadlogo.vm")
         #parse("/common/footer.vm")
 	</div>
   </body>

@@ -15,7 +15,7 @@
 		<!--工件硬度 -->
 		<id property="workSolidity" column="work_solidity" />
 		<!--加工方式 -->
-		<id property="workType" column="work_type" />
+		<id property="processMethod" column="work_type" />
 		<!--代理商id -->
 		<id property="agentId" column="agent_id" />
 		<!--代理商名字 -->
@@ -65,7 +65,7 @@
 		,#{workName}
 		,#{workMaterial}
 		,#{workSolidity}
-		,#{workType}
+		,#{processMethod}
 		,#{agentId}
 		,#{agentName}
 		,#{agentLogo}
@@ -81,4 +81,11 @@
 		update t_goodcase
 		set password = #{password}, gmt_modified=now() where id=#{id}
 	</update>
+	
+	<select id="queryGCEntityByUserid" parameterType="int"
+			resultMap="GoodcaseResultMap">
+		<![CDATA[
+			SELECT * from t_goodcase t where t.agent_id=#{id} order by gmt_create desc
+		]]>
+	</select>
 </mapper>

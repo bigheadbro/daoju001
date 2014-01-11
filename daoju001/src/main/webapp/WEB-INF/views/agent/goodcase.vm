@@ -5,19 +5,14 @@
 </ul>
 <div class="rigth-content">
 	<div class="buyer-list">
-		<div class="listitem">
-			<p>刀具是机械制造中用于切削加工的工具，又称切削工具?<span>2013-08-08</span></p>
-			<div class="operation clearfix">
-				<a href="#">编辑</a><span>|</span>
-				<a href="#">删除</a>
-			</div>
-		</div>
-		<div class="listitem">
-			<p>刀具是机械制造中用于切削加工的工具，又称切削工具?<span>2013-08-08</span></p>
-			<div class="operation clearfix">
-				<a href="#">编辑</a><span>|</span>
-				<a href="#">删除</a>
-			</div>
-		</div>
+		#foreach($gc in $goodcases)
+    		<div class="listitem">
+    			<p>$!{gc.name}<span>$stringUtil.formatDate($!{gc.gmtCreate})</span></p>
+    			<div class="operation clearfix">
+    				<a href="#">编辑</a><span>|</span>
+    				<a href="#">删除</a>
+    			</div>
+    		</div>
+		#end
 	</div>
 </div>

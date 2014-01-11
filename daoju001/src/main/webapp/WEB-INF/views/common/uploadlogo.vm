@@ -1,4 +1,5 @@
 <link rel="stylesheet" href="../css/imgup.css">
+<div id="pagemask"></div>
 <div class="uploadlogo-win">
 	<div class="uploadlog-win-content">
     <h2><a class="close" href="#">x</a> 修改头像</h2>
@@ -12,7 +13,11 @@
 			<div class="thumb"></div>
         </div>
     </div>
+	#if($!{account.isBuyer})
 		<form id="form_uploadlogo" action="/buyer/uploadlogo" method="post" enctype="multipart/form-data">
+	#else
+		<form id="form_uploadlogo" action="/agent/uploadlogo" method="post" enctype="multipart/form-data">
+	#end
 			<input name="uploadlogo" value="true" type="hidden">
         <input type="file" id="file" name="logo" />
             <a id="submit_uploadlogo" class="save" href="#">保 存</a>

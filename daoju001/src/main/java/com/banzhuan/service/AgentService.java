@@ -1,19 +1,33 @@
 package com.banzhuan.service;
 
+import java.io.File;
+import java.io.IOException;
+import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.validation.Errors;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.support.DefaultMultipartHttpServletRequest;
 
 import com.banzhuan.dao.AgentDAO;
+import com.banzhuan.dao.GoodcaseDAO;
 import com.banzhuan.entity.AgentEntity;
 import com.banzhuan.entity.BuyerEntity;
+import com.banzhuan.entity.GoodcaseEntity;
+import com.banzhuan.entity.QuestionEntity;
 import com.banzhuan.common.Result;
 import com.banzhuan.form.AgentProfileForm;
 import com.banzhuan.form.BuyerProfileForm;
+import com.banzhuan.form.GoodcaseForm;
 import com.banzhuan.form.LoginForm;
 import com.banzhuan.form.RegForm;
 import com.banzhuan.util.StringUtil;
+import com.banzhuan.util.Util;
 
 /**
  * @author guichaoqun
@@ -24,6 +38,10 @@ public class AgentService {
 	@Autowired
 	@Qualifier("agentDAO")
 	private AgentDAO agentDAO;
+	
+	@Autowired
+	@Qualifier("gcDAO")
+	private GoodcaseDAO gcDAO;
 	
 	public Result register(RegForm form, Errors errors)
 	{
@@ -116,40 +134,158 @@ public class AgentService {
 		return agentDAO.queryAgentEntityById(userId);
 	}
 	
-	public void updateAgentAccnt(AgentProfileForm form, AgentEntity agent)
+	public void updateAgentAccnt(HttpServletRequest request, AgentProfileForm form, AgentEntity agent)
 	{
 		if(form != null)
 		{
-			if(form.getUserName() != "")
+			if(StringUtil.isNotEmpty(form.getEmail()))
 			{
-				
+				agent.setMail(form.getEmail());
 			}
-			if(form.getCompanyName() != "")
+			if(StringUtil.isNotEmpty(form.getCompanyName()))
 			{
-				
+				agent.setCompanyName(form.getCompanyName());
 			}
-			if(form.getAddress() != "")
+			if(StringUtil.isNotEmpty(form.getAddress()))
 			{
-				
+				agent.setAddress(form.getAddress());
 			}
-			if(form.getCompanyPhone() != "")
+			if(StringUtil.isNotEmpty(form.getBrandName()))
 			{
-				
+				agent.setBrandName(form.getBrandName());
 			}
-			if(form.getContactName() != "")
+			if(StringUtil.isNotEmpty(form.getCompanyPhone()))
 			{
-				
+				agent.setPhone(form.getCompanyName());
 			}
-			if(form.getContactPhone() != "")
+			if(StringUtil.isNotEmpty(form.getContactName()))
 			{
-				
+				agent.setContactName(form.getContactName());
 			}
-			if(form.getContactQQ() != "")
+			if(StringUtil.isNotEmpty(form.getContactPhone()))
 			{
-				
+				agent.setContactPhone(form.getContactPhone());
+			}
+			if(StringUtil.isNotEmpty(form.getContactQQ()))
+			{
+				agent.setContactQq(form.getContactQQ());
+			}
+			if(StringUtil.isNotEmpty(form.getDescription()))
+			{
+				agent.setDescription(form.getDescription());
+			}
+
+			// /////////////////////////////////////////////////////////////获取上传的文件///////////////////////////////////
+			if (request instanceof DefaultMultipartHttpServletRequest) 
+			{
+				DefaultMultipartHttpServletRequest r = (DefaultMultipartHttpServletRequest) request;
+				List<MultipartFile> files = r.getMultiFileMap().get("verifiedLink");
+				if (files != null && files.size() > 0) {
+					MultipartFile f = files.get(0);
+					if (StringUtil.isNotEmpty(f.getOriginalFilename()))
+					{
+						String path = request.getSession().getServletContext().getRealPath("/verified");
+						String fileName = Util.genRandomName(f.getContentType().toString().split("/")[1]);
+						File file = new File(path + "/" + fileName);
+						agent.setVerifiedLink(fileName);
+						try 
+						{
+							FileCopyUtils.copy(f.getBytes(), file);
+
+						} catch (IOException e) {
+
+						}
+					}
+				}
 			}
 		}
+		
+		
 		agentDAO.updateAgentEntityById(agent);
 		return;
+	}
+	
+	public void setAgentProfileFormWithBuyerEntity(AgentProfileForm form, AgentEntity agent)
+	{
+		if(agent != null)
+		{
+			if(StringUtil.isNotEmpty(agent.getMail()))
+			{
+				form.setEmail(agent.getMail());
+			}
+			if(StringUtil.isNotEmpty(agent.getCompanyName()))
+			{
+				form.setCompanyName(agent.getCompanyName());
+			}
+			if(StringUtil.isNotEmpty(agent.getAddress()))
+			{
+				form.setAddress(agent.getAddress());
+			}
+			if(StringUtil.isNotEmpty(agent.getBrandName()))
+			{
+				form.setBrandName(agent.getBrandName());
+			}
+			if(StringUtil.isNotEmpty(agent.getPhone()))
+			{
+				form.setCompanyPhone(agent.getPhone());
+			}
+			if(StringUtil.isNotEmpty(agent.getContactName()))
+			{
+				form.setContactName(agent.getContactName());
+			}
+			if(StringUtil.isNotEmpty(agent.getContactPhone()))
+			{
+				form.setContactPhone(agent.getContactPhone());
+			}
+			if(StringUtil.isNotEmpty(agent.getContactQq()))
+			{
+				form.setContactQQ(agent.getContactQq());
+			}
+			if(StringUtil.isNotEmpty(agent.getDescription()))
+			{
+				form.setDescription(agent.getDescription());
+			}
+		}
+	}
+
+    public Result insertGoodcase(GoodcaseForm form, GoodcaseEntity gc, Errors errors)
+    {
+    	Result result = new Result();
+    	if(StringUtil.isEmpty(form.getName()))
+		{
+    		errors.rejectValue("name", "GOODCASE_NAME_IS_NOT_NULL");
+			return result;
+		}
+    	if(StringUtil.isNotEmpty(form.getName()))
+    	{
+    		gc.setName(form.getName());
+    	}
+    	if(form.getIndustry() != 0)
+    	{
+    		gc.setIndustry(form.getIndustry());
+    	}
+    	if(form.getProcessMethod() != 0)
+    	{
+    		gc.setProcessMethod(form.getProcessMethod());
+    	}
+    	if(form.getWpHardness() != 0)
+    	{
+    		gc.setWorkSolidity(form.getWpHardness());
+    	}
+    	if(form.getWpMaterial() != 0)
+    	{
+    		gc.setWorkMaterial(form.getWpMaterial());
+    	}
+    	gcDAO.insertGoodcaseEntity(gc);
+    	return result;
+    	
+    }
+    
+    public Result queryGoodcasesByUserid(int userId)
+	{
+		Result result = new Result();
+		List<GoodcaseEntity> goodcases = gcDAO.queryGCEntityByUserid(userId);
+		result.add("goodcases", goodcases);
+		return result;
 	}
 }

@@ -3,7 +3,7 @@
 <div class="main-head-container">
     <div class="main-head-content clearfix">
         <div class="logo">
-            <h2>刀师傅</h2>
+            <img src="../img/logo.png" />
         </div>
         <div class="nav">
             <ul>

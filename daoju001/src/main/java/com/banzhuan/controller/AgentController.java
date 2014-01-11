@@ -27,6 +27,10 @@ import com.banzhuan.common.Account;
 import com.banzhuan.common.Result;
 import com.banzhuan.entity.AgentEntity;
 import com.banzhuan.entity.BuyerEntity;
+import com.banzhuan.entity.GoodcaseEntity;
+import com.banzhuan.form.AgentProfileForm;
+import com.banzhuan.form.BuyerProfileForm;
+import com.banzhuan.form.GoodcaseForm;
 import com.banzhuan.form.RegForm;
 import com.banzhuan.form.LoginForm;
 import com.banzhuan.service.AgentService;
@@ -161,16 +165,16 @@ public class AgentController extends BaseController{
 				{
 					String path = request.getSession().getServletContext().getRealPath("/uploadfile");
 					File file = new File(path + "/" + f.getOriginalFilename());
-					account.setLogo(Util.genRandomName(f.getContentType().toString().split("/")[1]));
+					account.setLogo(Util.genRandomName(f.getOriginalFilename().substring(f.getOriginalFilename().lastIndexOf("."))));
 					AgentEntity agent = new AgentEntity();
 					agent.setId(account.getUserId());
 					agent.setLogo(account.getLogo());
-					agentService.updateAgentAccnt(null, agent);
+					agentService.updateAgentAccnt(null, null, agent);
 					try 
 					{
 						FileCopyUtils.copy(f.getBytes(), file);
 				
-						Util.cropImage(f.getContentType().toString().split("/")[1], file.getPath(), Integer.parseInt(size.split(",")[0]),
+						Util.cropImage(f.getOriginalFilename().substring(f.getOriginalFilename().lastIndexOf(".")), file.getPath(), Integer.parseInt(size.split(",")[0]),
 								Integer.parseInt(size.split(",")[1]), Integer.parseInt(size.split(",")[2]),
 								Integer.parseInt(size.split(",")[3]), path + "/" + account.getLogo());
 
@@ -206,8 +210,20 @@ public class AgentController extends BaseController{
 	}
 	
 	@RequestMapping(value="/profile")
-	public ModelAndView profile(HttpServletRequest request, HttpServletResponse response) {
+	public ModelAndView profile(HttpServletRequest request, HttpServletResponse response, @ModelAttribute("account")Account account, 
+			@ModelAttribute("form")AgentProfileForm form, BindingResult result)
+	{
 		ModelAndView mv = new ModelAndView("agent/profile");
+		
+		AgentEntity agent = agentService.getAgentEntity(account.getUserId());
+		if(!isDoSubmit(request))
+		{
+			agentService.setAgentProfileFormWithBuyerEntity(form, agent);
+		}
+		else
+		{
+			agentService.updateAgentAccnt(request, form, agent);
+		}
 		return mv;
 	}
 	
@@ -242,20 +258,67 @@ public class AgentController extends BaseController{
 	}
 	
 	@RequestMapping(value="/goodcase")
-	public ModelAndView goodcase(HttpServletRequest request, HttpServletResponse response) {
+	public ModelAndView goodcase(HttpServletRequest request, HttpServletResponse response, @ModelAttribute("account")Account account) {
 		ModelAndView mv = new ModelAndView("agent/goodcase");
+		int userId = account.getUserId();
+		Result result = agentService.queryGoodcasesByUserid(userId);
+		mv.addObject("goodcases", result.get("goodcases"));
 		return mv;
 	}
 	
 	@RequestMapping(value="/uploadgc")
-	public ModelAndView uploadgc(HttpServletRequest request, HttpServletResponse response) {
+	public ModelAndView uploadgc(HttpServletRequest request, HttpServletResponse response, @ModelAttribute("account")Account account, 
+			@ModelAttribute("form")GoodcaseForm form, BindingResult result)
+	{
 		ModelAndView mv = new ModelAndView("agent/uploadgc");
+		if(isDoSubmit(request))
+		{
+			GoodcaseEntity gc = new GoodcaseEntity();
+			gc.setAgentId(account.getUserId());
+			gc.setAgentLogo(account.getLogo());
+			gc.setAgentName(account.getUserName());
+			// /////////////////////////////////////////////////////////////获取上传的文件///////////////////////////////////
+			if (request instanceof DefaultMultipartHttpServletRequest) 
+			{
+				DefaultMultipartHttpServletRequest r = (DefaultMultipartHttpServletRequest) request;
+				List<MultipartFile> files = r.getMultiFileMap().get("link");
+				if (files != null && files.size() > 0) {
+					MultipartFile f = files.get(0);
+					if (StringUtil.isNotEmpty(f.getOriginalFilename()))
+					{
+						String path = request.getSession().getServletContext().getRealPath("/goodcase");
+						String fileName = Util.genRandomName(f.getOriginalFilename().substring(f.getOriginalFilename().lastIndexOf(".")));
+						File file = new File(path + "/" + fileName);
+						gc.setLink(fileName);
+						try 
+						{
+							FileCopyUtils.copy(f.getBytes(), file);
+	
+						} catch (IOException e) {
+	
+						}
+					}
+				}
+			}
+			agentService.insertGoodcase(form, gc, result);
+			if(result.hasErrors())
+			{
+				mv = new ModelAndView("agent/uploadgc");
+				return mv;
+			}
+		}
 		return mv;
 	}
 	
 	@RequestMapping(value="/mysample")
 	public ModelAndView mysample(HttpServletRequest request, HttpServletResponse response) {
 		ModelAndView mv = new ModelAndView("agent/mysample");
+		return mv;
+	}
+	
+	@RequestMapping(value="/uploadsample")
+	public ModelAndView uploadsample(HttpServletRequest request, HttpServletResponse response) {
+		ModelAndView mv = new ModelAndView("agent/uploadsample");
 		return mv;
 	}
 }

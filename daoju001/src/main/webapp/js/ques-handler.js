@@ -5,17 +5,27 @@ $(function() {
 		$(this).css("height","inherit");
 		$(this).css("background","#fff");
 		$(this).children(".sel").css("color","#b8b8b8");
+		$(this).children(".sel").css("background","url(../img/dropdown.png) no-repeat 67px 7px");
 	}).mouseleave(function(){
+		if($(this).children("input").val()>0)
+		{
+			$(this).css("background","#0088b5");
+			$(this).children(".sel").css("color","#fff");
+			$(this).children(".sel").css("background","none");
+		}
 		$(this).css("overflow","hidden");
 		$(this).css("height","21px");
+
 	});
 	$(".question-param-li ul li").click(function(){
-		$(this).parent().parent().children("input").val($(this).index());
+		var value = $(this).index() + 1;
+		$(this).parent().parent().children("input").val(value);
 		$(this).parent().parent().children(".sel").text(this.innerText);
 		$(this).parent().parent().css("overflow","hidden");
 		$(this).parent().parent().css("height","18px");
 		$(this).parent().parent().css("background","#0088b5");
 		$(this).parent().parent().children(".sel").css("color","#fff");
+		$(this).parent().parent().children(".sel").css("background","none");
 	}).mouseenter(function(){
 		$(this).css('background', '#7a7a7a');
 	}).mouseleave(function(){

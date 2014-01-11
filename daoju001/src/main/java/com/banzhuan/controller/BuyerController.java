@@ -188,7 +188,7 @@ public class BuyerController extends BaseController{
 				{
 					String path = request.getSession().getServletContext().getRealPath("/uploadfile");
 					File file = new File(path + "/" + f.getOriginalFilename());
-					account.setLogo(Util.genRandomName(f.getContentType().toString().split("/")[1]));
+					account.setLogo(Util.genRandomName(f.getOriginalFilename().substring(f.getOriginalFilename().lastIndexOf("."))));
 					BuyerEntity buyer = new BuyerEntity();
 					buyer.setId(account.getUserId());
 					buyer.setLogo(account.getLogo());
@@ -197,7 +197,7 @@ public class BuyerController extends BaseController{
 					{
 						FileCopyUtils.copy(f.getBytes(), file);
 				
-						Util.cropImage(f.getContentType().toString().split("/")[1], file.getPath(), Integer.parseInt(size.split(",")[0]),
+						Util.cropImage(f.getOriginalFilename().substring(f.getOriginalFilename().lastIndexOf(".")), file.getPath(), Integer.parseInt(size.split(",")[0]),
 								Integer.parseInt(size.split(",")[1]), Integer.parseInt(size.split(",")[2]),
 								Integer.parseInt(size.split(",")[3]), path + "/" + account.getLogo());
 
@@ -226,7 +226,7 @@ public class BuyerController extends BaseController{
 				if (StringUtil.isNotEmpty(f.getOriginalFilename()))
 				{
 					String path = request.getSession().getServletContext().getRealPath("/uploadfile");
-					fileName = Util.genRandomName(f.getContentType().toString().split("/")[1]);
+					fileName = Util.genRandomName(f.getOriginalFilename().substring(f.getOriginalFilename().lastIndexOf(".")));
 					File file = new File(path + "/" + fileName);
 					try 
 					{

@@ -11,16 +11,16 @@ public class GoodcaseEntity implements Serializable {
 	private int id;
 	// 案例名称
 	private String name;
-	// 行业
-	private String industry;
 	// 工件名称
-	private int workName;
+	private String workName;
+	// 行业
+	private int industry;
 	// 工件材质
 	private int workMaterial;
 	// 工件硬度
 	private int workSolidity;
 	// 加工方式
-	private int workType;
+	private int processMethod;
 	// 代理商id
 	private int agentId;
 	// 代理商名字
@@ -69,7 +69,7 @@ public class GoodcaseEntity implements Serializable {
 	/**
 	 * @return the industry
 	 */
-	public String getIndustry() {
+	public int getIndustry() {
 		return industry;
 	}
 
@@ -77,23 +77,8 @@ public class GoodcaseEntity implements Serializable {
 	 * @param industry
 	 *            the industry to set
 	 */
-	public void setIndustry(String industry) {
+	public void setIndustry(int industry) {
 		this.industry = industry;
-	}
-
-	/**
-	 * @return the workName
-	 */
-	public int getWorkName() {
-		return workName;
-	}
-
-	/**
-	 * @param workName
-	 *            the workName to set
-	 */
-	public void setWorkName(int workName) {
-		this.workName = workName;
 	}
 
 	/**
@@ -129,16 +114,16 @@ public class GoodcaseEntity implements Serializable {
 	/**
 	 * @return the workType
 	 */
-	public int getWorkType() {
-		return workType;
+	public int getProcessMethod() {
+		return processMethod;
 	}
 
 	/**
 	 * @param workType
 	 *            the workType to set
 	 */
-	public void setWorkType(int workType) {
-		this.workType = workType;
+	public void setProcessMethod(int workType) {
+		this.processMethod = workType;
 	}
 
 	/**
@@ -251,6 +236,20 @@ public class GoodcaseEntity implements Serializable {
 	 */
 	public static long getSerialversionuid() {
 		return serialVersionUID;
+	}
+
+	/**
+	 * @return the workName
+	 */
+	public String getWorkName() {
+		return workName;
+	}
+
+	/**
+	 * @param workName the workName to set
+	 */
+	public void setWorkName(String workName) {
+		this.workName = workName;
 	}
 
 	

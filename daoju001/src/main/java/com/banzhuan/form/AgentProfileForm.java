@@ -9,25 +9,28 @@ public class AgentProfileForm implements Serializable {
 	 */
 	private static final long serialVersionUID = -8707564076021726273L;
 	
-	private String userName;
+	private String email;
 	private String companyName;
+	private String brandName;
 	private String address;
 	private String companyPhone;
 	private String contactName;
 	private String contactPhone;
 	private String contactQQ;
+	private String verifiedLink;
+	private String description;
 	
 	/**
 	 * @return the userName
 	 */
-	public String getUserName() {
-		return userName;
+	public String getEmail() {
+		return email;
 	}
 	/**
 	 * @param userName the userName to set
 	 */
-	public void setUserName(String userName) {
-		this.userName = userName;
+	public void setEmail(String email) {
+		this.email = email;
 	}
 	/**
 	 * @return the companyName
@@ -106,6 +109,42 @@ public class AgentProfileForm implements Serializable {
 	 */
 	public static long getSerialversionuid() {
 		return serialVersionUID;
+	}
+	/**
+	 * @return the brandName
+	 */
+	public String getBrandName() {
+		return brandName;
+	}
+	/**
+	 * @param brandName the brandName to set
+	 */
+	public void setBrandName(String brandName) {
+		this.brandName = brandName;
+	}
+	/**
+	 * @return the verifiedLink
+	 */
+	public String getVerifiedLink() {
+		return verifiedLink;
+	}
+	/**
+	 * @param verifiedLink the verifiedLink to set
+	 */
+	public void setVerifiedLink(String verifiedLink) {
+		this.verifiedLink = verifiedLink;
+	}
+	/**
+	 * @return the description
+	 */
+	public String getDescription() {
+		return description;
+	}
+	/**
+	 * @param description the description to set
+	 */
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
 }

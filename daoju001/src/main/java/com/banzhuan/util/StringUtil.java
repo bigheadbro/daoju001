@@ -478,42 +478,44 @@ public class StringUtil {
 	
 	
 	
-	private static Map<String, String> industryMap = new HashMap<String, String>();
-	private static Map<String, String> hopePositionMap = new HashMap<String, String>();
+	private static Map<Integer, String> industryMap = new HashMap<Integer, String>();
+	private static Map<Integer, String> processMethodMap = new HashMap<Integer, String>();
+	private static Map<Integer, String> wpMaterialMap = new HashMap<Integer, String>();
+	private static Map<Integer, String> wpHardnessMap = new HashMap<Integer, String>();
 	
 	static
 	{
-		industryMap.put("3", "男装/女装");
-		industryMap.put("4", "箱包/鞋帽");
-		industryMap.put("5", "首饰/珠宝");
-		industryMap.put("6", "彩妆/护肤");
-		industryMap.put("1", "电脑/配件");
+		industryMap.put(1, "模具");
+		industryMap.put(2, "船舶");
+		industryMap.put(3, "石油设备");
+		industryMap.put(4, "散热器/空调");
+		industryMap.put(5, "发电设备");
+		industryMap.put(6, "塑料机械");
+		industryMap.put(7, "内燃机");
+		industryMap.put(8, "大型机械设备");
+		industryMap.put(9, "汽车零件");
+		industryMap.put(10, "电子行业");
+		industryMap.put(11, "通用零件(阀、泵、螺栓等)");
+		industryMap.put(12, "其他");
 		
-		industryMap.put("13", "收藏品");
-		industryMap.put("2", "手机/数码");
-		industryMap.put("14", "家电/办公");
-		industryMap.put("9", "母婴/儿童");
-		industryMap.put("10", "食品/保健");
-		
-		industryMap.put("11", "运动/户外");
-		industryMap.put("8", "文化/娱乐");
-		industryMap.put("16", "玩具");
-		industryMap.put("12", "其他");
-		
-		
-		hopePositionMap.put("0", "售前客服");
-		hopePositionMap.put("1", "售后客服");
-		hopePositionMap.put("2", "客服主管");
-		
+		processMethodMap.put(1, "平面铣削");
+		processMethodMap.put(2, "侧壁铣削");
+		processMethodMap.put(3, "曲面铣削");
+		processMethodMap.put(4, "铣槽");
+		processMethodMap.put(5, "钻孔");
+		processMethodMap.put(6, "镗孔");
+		processMethodMap.put(7, "铰孔");
+		processMethodMap.put(8, "螺纹铣削");
+		processMethodMap.put(9, "车削(粗加工）");
+		processMethodMap.put(10, "车削(槽加工）");
+		processMethodMap.put(11, "车削(螺纹加工）");
+		processMethodMap.put(12, "去毛刺");
+
 		
 	}
 	public static String getIndustry(String key)
 	{
 		return industryMap.get(key);
-	}
-	public static String getHopePosition(String key)
-	{
-		return hopePositionMap.get(key);
 	}
 	
 	public static Map<String, String> genMap()

@@ -1,8 +1,6 @@
 package com.banzhuan.dao;
 
 import com.banzhuan.entity.AgentEntity;
-import com.banzhuan.entity.BuyerEntity;
-
 /**
  * 代理商DAO
  * @author guichaoqun

@@ -1,11 +1,13 @@
 package com.banzhuan.dao;
 
+import java.util.List;
+
 import com.banzhuan.entity.GoodcaseEntity;;
 
 public interface GoodcaseDAO {
-	GoodcaseEntity queryBuyerEntityById(int id);
+	List<GoodcaseEntity> queryGCEntityByUserid(int id);
 	
-	public int insertGoodcaseEntity(GoodcaseEntity buyer);
+	public int insertGoodcaseEntity(GoodcaseEntity gc);
 	
-	public int updateGoodcaseById(GoodcaseEntity buyer);
+	public int updateGoodcaseById(GoodcaseEntity gc);
 }

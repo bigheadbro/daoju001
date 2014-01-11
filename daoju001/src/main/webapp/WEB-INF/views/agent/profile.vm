@@ -9,93 +9,105 @@
 </ul>
 <div class="rigth-content">
     <div>
+		<form id="form_profile" method="post" enctype="multipart/form-data">
+		<!-- 隐藏字段，用于标示是表单提交 -->
+		<input type="hidden" name="do_submit" value="true"/>
         <div class="listitem clearfix">
+			#springBind("form.companyName")
             <ul class="user-info clearfix">
                 <li class="key">
                     公司名称
                 </li>
                 <li class="value">
-                    <input type="text" class="dsf-form-text-input"/>
+                    <input type="text" class="dsf-form-text-input" name="${status.expression}" value="$!{status.value}" />
                 </li>
             </ul>
         </div>
 		<div class="listitem clearfix">
+			#springBind("form.email")
             <ul class="user-info clearfix">
                 <li class="key">
                     邮箱
                 </li>
                 <li class="value">
-                    <input type="text" class="dsf-form-text-input"/>
+                    <input type="text" class="dsf-form-text-input" name="${status.expression}" value="$!{status.value}" />
                 </li>
             </ul>
         </div>
 		<div class="listitem clearfix">
+			#springBind("form.brandName")
             <ul class="user-info clearfix">
                 <li class="key">
                     代理刀具品牌
                 </li>
                 <li class="value">
-                    <input type="text" class="dsf-form-text-input"/>
+                    <input type="text" class="dsf-form-text-input" name="${status.expression}" value="$!{status.value}" />
                 </li>
             </ul>
         </div>
         <div class="listitem clearfix">
+			#springBind("form.address")
             <ul class="user-info clearfix">
                 <li class="key">
                     公司地址
                 </li>
                 <li class="value">
-                    <input type="text" class="dsf-form-text-input"/>
+                    <input type="text" class="dsf-form-text-input" name="${status.expression}" value="$!{status.value}" />
                 </li>
             </ul>
         </div>
         <div class="listitem clearfix">
+			#springBind("form.companyPhone")
             <ul class="user-info clearfix">
                 <li class="key">
                     公司电话
                 </li>
                 <li class="value">
-                    <input type="text" class="dsf-form-text-input"/>
+                    <input type="text" class="dsf-form-text-input" name="${status.expression}" value="$!{status.value}" />
                 </li>
             </ul>
         </div>
         <div class="listitem clearfix">
+			#springBind("form.contactName")
             <ul class="user-info clearfix">
                 <li class="key">
                     联系人姓名
                 </li>
                 <li class="value">
-                    <input type="text" class="dsf-form-text-input"/>
+                    <input type="text" class="dsf-form-text-input" name="${status.expression}" value="$!{status.value}" />
                 </li>
             </ul>
         </div>
         <div class="listitem clearfix">
+			#springBind("form.contactPhone")
             <ul class="user-info clearfix">
                 <li class="key">
                     手机
                 </li>
                 <li class="value">
-                    <input type="text" class="dsf-form-text-input"/>
+                    <input type="text" class="dsf-form-text-input" name="${status.expression}" value="$!{status.value}" />
                 </li>
             </ul>
         </div>
         <div class="listitem clearfix">
+			#springBind("form.contactQQ")
             <ul class="user-info clearfix">
                 <li class="key">
                     QQ
                 </li>
                 <li class="value">
-                    <input type="text" class="dsf-form-text-input"/>
+                    <input type="text" class="dsf-form-text-input" name="${status.expression}" value="$!{status.value}" />
                 </li>
             </ul>
         </div>
 		<div class="listitem clearfix">
+			#springBind("form.description")
             <ul class="user-info clearfix">
                 <li class="key">
                     公司简介
                 </li>
                 <li class="value">
-                    <textarea class="dsf-form-text-input company-info">$!{status.value}</textarea></li>		
+                    <textarea class="dsf-form-text-input company-info" name="${status.expression}" >$!{status.value}</textarea></li>		
                 </li>
             </ul>
         </div>
@@ -105,12 +117,22 @@
                     代理证书
                 </li>
                 <li class="value">
-                    <input type="text" class="dsf-form-text-input"/>
+					<a id="uploadsample">上传证书</a>
+                    <input type="file" name="verifiedLink" />
+					<p id="uploadsample-p">上传证书后，通过后台审核，可以得到我们对您的<i></i>认证</p>
                 </li>
             </ul>
         </div>
-        <div class="listitem mt20 clearfix">
-            <a class="save" href="#">保 存</a>
+        <div class="listitem mt15 clearfix">
+            <a id="submit_profile" class="save" href="#">保 存</a>
         </div>
+		<script>
+			$(function() {
+				$("#submit_profile").click(function () {
+					$("#form_profile").submit();//提交
+				});
+			});
+		</script>
+		</form>
     </div>
 </div>

@@ -54,7 +54,7 @@
                     #springBind("questionForm.processMethod")
                     <input type="hidden" name="${status.expression}"  value="$!{status.value}" />
                     <a class="sel" >加工方式</a>
-                    <ul>
+                    <ul class="param">
                         <li>
                             <a>平面铣削</a>
                         </li>
@@ -97,7 +97,7 @@
                     #springBind("questionForm.industry")
                     <input type="hidden" name="${status.expression}"  value="$!{status.value}" />
                     <a class="sel" >所属行业</a>
-                    <ul>
+                    <ul class="param">
                         <li>
                             <a>模具</a>
                         </li>
@@ -140,7 +140,7 @@
                     #springBind("questionForm.wpHardness")
                     <input type="hidden" name="${status.expression}"  value="$!{status.value}" />
                     <a class="sel" >工件硬度</a>
-                    <ul>
+                    <ul class="param">
                         <li>
                             <a>HRC20以下</a>
                         </li>
@@ -174,7 +174,7 @@
                     #springBind("questionForm.wpMaterial")
                     <input type="hidden" name="${status.expression}"  value="$!{status.value}" />
                     <a class="sel" >工件材质</a>
-                    <ul>
+                    <ul class="param">
                         <li>
                             <a>钢</a>
                         </li>

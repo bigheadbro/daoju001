@@ -113,4 +113,24 @@
 	<update id="updateAgentPwdById" parameterType="AgentEntity">
 		update t_agent set password = #{password}, gmt_modified=now() where id=#{id}
 	</update>
+	
+	<update id="updateAgentEntityById" parameterType="AgentEntity">
+		update t_agent
+		<set> 
+		      <if test="mail != null">email=#{mail},</if>
+		      <if test="companyName != null">company_name=#{companyName},</if>
+		      <if test="brandName != null">brand_name=#{brandName},</if>
+		      <if test="address != null">address=#{address},</if>
+		      <if test="phone != null">phone=#{phone},</if>
+		      <if test="fax != null">fax=#{fax},</if>
+		      <if test="description != null">description=#{description},</if>
+		      <if test="verifiedLink != null">verified_link=#{verifiedLink},</if>
+		      <if test="contactName != null">contact_name=#{contactName},</if>
+		      <if test="contactPhone != null">contact_phone=#{contactPhone},</if>
+		      <if test="contactQq != null">contact_qq=#{contactQq},</if>
+		      <if test="logo != null">logo=#{logo},</if>
+		   	  gmt_modified=now()
+		</set>
+	   where id=#{id}
+	</update>
 </mapper>

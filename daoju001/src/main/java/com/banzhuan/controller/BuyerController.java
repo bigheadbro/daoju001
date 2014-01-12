@@ -186,7 +186,7 @@ public class BuyerController extends BaseController{
 				MultipartFile f = files.get(0);
 				if (StringUtil.isNotEmpty(f.getOriginalFilename()))
 				{
-					String path = request.getSession().getServletContext().getRealPath("/uploadfile");
+					String path = request.getSession().getServletContext().getRealPath("/logo");
 					File file = new File(path + "/" + f.getOriginalFilename());
 					account.setLogo(Util.genRandomName(f.getOriginalFilename().substring(f.getOriginalFilename().lastIndexOf("."))));
 					BuyerEntity buyer = new BuyerEntity();
@@ -269,6 +269,7 @@ public class BuyerController extends BaseController{
 				{
 					buyerService.setQuestionFormWithQid(form,qid);
 					form.setIsEdit(1);
+					form.setQid(qid);
 				}
 			}
 			return mv;
@@ -276,7 +277,14 @@ public class BuyerController extends BaseController{
 
 		form.setUserid(account.getUserId());
 		form.setContent(form.getContent().replace('"', '\''));
-		buyerService.insertQuestion(form, result);
+		if(form.getIsEdit() > 0)
+		{
+			buyerService.updateQuestionById(form, result);
+		}
+		else
+		{
+			buyerService.insertQuestion(form, result);
+		}
 		return mv;
 	}
 	

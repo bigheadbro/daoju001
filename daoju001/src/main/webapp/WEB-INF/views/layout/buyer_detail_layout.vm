@@ -11,7 +11,7 @@
                             <div class="person-info">
                                 <a id="uploadlogo" href="#">
     								#if($!{account.logo})
-    									<img src="../uploadfile/$!{account.logo}"  />
+    									<img src="../logo/$!{account.logo}"  />
     								#else
     									<img src="../img/avatar.png"  />
     								#end

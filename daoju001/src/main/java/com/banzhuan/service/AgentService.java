@@ -281,6 +281,43 @@ public class AgentService {
     	
     }
     
+    public Result updateGoodcaseById(GoodcaseForm form, GoodcaseEntity gc, Errors errors)
+    {
+    	Result result = new Result();
+    	if(StringUtil.isEmpty(form.getName()))
+		{
+    		errors.rejectValue("name", "GOODCASE_NAME_IS_NOT_NULL");
+			return result;
+		}
+    	if(form.getGcid() != 0)
+    	{
+    		gc.setId(form.getGcid());
+    	}
+    	if(StringUtil.isNotEmpty(form.getName()))
+    	{
+    		gc.setName(form.getName());
+    	}
+    	if(form.getIndustry() != 0)
+    	{
+    		gc.setIndustry(form.getIndustry());
+    	}
+    	if(form.getProcessMethod() != 0)
+    	{
+    		gc.setProcessMethod(form.getProcessMethod());
+    	}
+    	if(form.getWpHardness() != 0)
+    	{
+    		gc.setWorkSolidity(form.getWpHardness());
+    	}
+    	if(form.getWpMaterial() != 0)
+    	{
+    		gc.setWorkMaterial(form.getWpMaterial());
+    	}
+    	gcDAO.updateGoodcaseById(gc);
+    	return result;
+    	
+    }
+    
     public Result queryGoodcasesByUserid(int userId)
 	{
 		Result result = new Result();
@@ -288,4 +325,33 @@ public class AgentService {
 		result.add("goodcases", goodcases);
 		return result;
 	}
+    
+    public void setGoodcaseFormByGcid(GoodcaseForm form, int gcid)
+    {
+    	GoodcaseEntity gc = gcDAO.queryGCEntityById(gcid);
+    	if(StringUtil.isNotEmpty(gc.getName()))
+    	{
+    		form.setName(gc.getName());
+    	}
+    	if(gc.getIndustry() >=0)
+		{
+			form.setIndustry(gc.getIndustry());
+		}
+		if(gc.getProcessMethod() >=0)
+		{
+			form.setProcessMethod(gc.getProcessMethod());
+		}
+		if(gc.getWorkSolidity() >=0)
+		{
+			form.setWpHardness(gc.getWorkSolidity());
+		}
+		if(gc.getWorkMaterial() >=0)
+		{
+			form.setWpMaterial(gc.getWorkMaterial());
+		}
+		if(StringUtil.isNotEmpty(gc.getLink()))
+    	{
+    		form.setLink(gc.getLink());
+    	}
+    }
 }

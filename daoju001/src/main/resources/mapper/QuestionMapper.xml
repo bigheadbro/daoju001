@@ -90,8 +90,19 @@
 		]]>
 	</select>
 	
-	<update id="updateTitleById" parameterType="QuestionEntity">
+	<update id="updateQuestionById" parameterType="QuestionEntity">
 		update t_question
-		set title = #{type}, gmt_modified=now() where id=#{id}
+		<set> 
+		      <if test="type != null">type=#{type},</if>
+		      <if test="content != null">content=#{content},</if>
+		      <if test="state != null">state=#{state},</if>
+		      <if test="industry != null">industry=#{industry},</if>
+		      <if test="processMethod != null">process_method=#{processMethod},</if>
+		      <if test="wpHardness != null">wp_hardness=#{wpHardness},</if>
+		      <if test="wpMaterial != null">wp_material=#{wpMaterial},</if>
+	       
+		   	  gmt_modify=now()
+		</set>
+		where id=#{id}
 	</update>
 </mapper>

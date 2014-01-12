@@ -12,13 +12,15 @@
 <div class="rigth-content">
     <form id="form_newquestion" method="post">
 		<!-- 隐藏字段，用于标示是表单提交 -->
-			  <input type="hidden" name="do_submit" value="true"/>
-			  #springBind("questionForm.state")
-        <input type="hidden" name="${status.expression}" value="$!{status.value}" id="state" />
-				#springBind("questionForm.hasPic")
-		    <input type="hidden" name="${status.expression}" value="$!{status.value}" id="hasPic" />
-		    #springBind("questionForm.isEdit")
-		    <input type="hidden" name="${status.expression}" value="$!{status.value}" id="isEdit" />
+	    <input type="hidden" name="do_submit" value="true"/>
+		#springBind("questionForm.qid")
+	    <input type="hidden" name="${status.expression}" value="$!{status.value}" id="qid" />
+	    #springBind("questionForm.state")
+	    <input type="hidden" name="${status.expression}" value="$!{status.value}" id="state" />
+	    #springBind("questionForm.hasPic")
+        <input type="hidden" name="${status.expression}" value="$!{status.value}" id="hasPic" />
+        #springBind("questionForm.isEdit")
+	    <input type="hidden" name="${status.expression}" value="$!{status.value}" id="isEdit" />
         <div class="add-question-header">
 					<h5>选择问题类型</h5>
 					#springBind("questionForm.type")

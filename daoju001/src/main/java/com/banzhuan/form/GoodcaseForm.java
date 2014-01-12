@@ -15,6 +15,9 @@ public class GoodcaseForm implements Serializable {
 	private int wpHardness;
 	private String name;
 	private String link;
+	private int isEdit;
+	private int gcid;
+	
 	/**
 	 * @return the processMethod
 	 */
@@ -92,6 +95,30 @@ public class GoodcaseForm implements Serializable {
 	 */
 	public static long getSerialversionuid() {
 		return serialVersionUID;
+	}
+	/**
+	 * @return the isEdit
+	 */
+	public int getIsEdit() {
+		return isEdit;
+	}
+	/**
+	 * @param isEdit the isEdit to set
+	 */
+	public void setEdit(int isEdit) {
+		this.isEdit = isEdit;
+	}
+	/**
+	 * @return the gcid
+	 */
+	public int getGcid() {
+		return gcid;
+	}
+	/**
+	 * @param gcid the gcid to set
+	 */
+	public void setGcid(int gcid) {
+		this.gcid = gcid;
 	}
 
 }

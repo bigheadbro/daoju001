@@ -9,7 +9,7 @@
     		<div class="listitem">
     			<p>$!{gc.name}<span>$stringUtil.formatDate($!{gc.gmtCreate})</span></p>
     			<div class="operation clearfix">
-    				<a href="#">编辑</a><span>|</span>
+    				<a href="/agent/gc/$!{gc.id}">编辑</a><span>|</span>
     				<a href="#">删除</a>
     			</div>
     		</div>

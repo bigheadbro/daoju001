@@ -476,7 +476,33 @@ public class StringUtil {
 		System.out.println(diffTimeYear("1985-10-25 00:00:00"));
 	}
 	
+	public static boolean isProperImageFile(String type)
+	{
+		if(type == "jpg" || type == "jpeg" || type == "gif")
+		{
+			return true;
+		}
+
+		return false;
+	}
 	
+	public static boolean isProperFile(String type)
+	{
+		if(type == "jpg" || type == "jpeg" || type == "gif" || type == "doc" || type == "docx" || type == "xls" || type == "pdf")
+		{
+			return true;
+		}
+
+		return false;
+	}
+	
+	public static String getTodayString()
+	{
+		Date currentTime = new Date();
+	    SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMddHHmmss");
+	    String dateString = formatter.format(currentTime);
+		return dateString;
+	}
 	
 	private static Map<Integer, String> industryMap = new HashMap<Integer, String>();
 	private static Map<Integer, String> processMethodMap = new HashMap<Integer, String>();
@@ -510,14 +536,46 @@ public class StringUtil {
 		processMethodMap.put(10, "车削(槽加工）");
 		processMethodMap.put(11, "车削(螺纹加工）");
 		processMethodMap.put(12, "去毛刺");
+		
+		wpMaterialMap.put(1, "钢");
+		wpMaterialMap.put(2, "铸铁");
+		wpMaterialMap.put(3, "不锈钢");
+		wpMaterialMap.put(4, "高温合金");
+		wpMaterialMap.put(5, "铝");
+		wpMaterialMap.put(6, "有色金属");
+		wpMaterialMap.put(7, "石墨");
+		wpMaterialMap.put(8, "树脂");
 
+		wpHardnessMap.put(1, "HRC20以下");
+		wpHardnessMap.put(2, "HRC20-30");
+		wpHardnessMap.put(3, "HRC30-40");
+		wpHardnessMap.put(4, "HRC40-50");
+		wpHardnessMap.put(5, "HRC50-58");
+		wpHardnessMap.put(6, "HRC58-62");
+		wpHardnessMap.put(7, "HRC62-65");
+		wpHardnessMap.put(8, "HRC65-68");
+		wpHardnessMap.put(9, "HRC68以上");
 		
 	}
-	public static String getIndustry(String key)
+	public static String getIndustry(int key)
 	{
 		return industryMap.get(key);
 	}
 	
+	public static String getMaterial(int key)
+	{
+		return wpMaterialMap.get(key);
+	}
+	
+	public static String getHardness(int key)
+	{
+		return wpHardnessMap.get(key);
+	}
+	
+	public static String getMethod(int key)
+	{
+		return processMethodMap.get(key);
+	}
 	public static Map<String, String> genMap()
 	{
 		return new HashMap<String, String>(10);

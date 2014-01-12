@@ -8,6 +8,10 @@
 	<form id="form_uploadgc" method="post" enctype="multipart/form-data">
 		<!-- 隐藏字段，用于标示是表单提交 -->
 		<input type="hidden" name="do_submit" value="true"/>
+		#springBind("form.gcid")
+	    <input type="hidden" name="${status.expression}" value="$!{status.value}" id="gcid" />
+		#springBind("form.isEdit")
+	    <input type="hidden" name="${status.expression}" value="$!{status.value}" id="isEdit" />
     	#springBind("form.name")
     	<div class="listitem clearfix">
     		<ul class="user-info clearfix">

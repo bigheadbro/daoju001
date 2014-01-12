@@ -27,6 +27,8 @@ public class GoodcaseEntity implements Serializable {
 	private String agentName;
 	// 代理商logo
 	private String agentLogo;
+	// 代理品牌
+	private String brandName;
 	// 下载链接
 	private String link;
 	// 下载次数
@@ -250,6 +252,20 @@ public class GoodcaseEntity implements Serializable {
 	 */
 	public void setWorkName(String workName) {
 		this.workName = workName;
+	}
+
+	/**
+	 * @return the brandName
+	 */
+	public String getBrandName() {
+		return brandName;
+	}
+
+	/**
+	 * @param brandName the brandName to set
+	 */
+	public void setBrandName(String brandName) {
+		this.brandName = brandName;
 	}
 
 	

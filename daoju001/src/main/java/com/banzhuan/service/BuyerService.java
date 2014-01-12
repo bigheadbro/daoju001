@@ -231,7 +231,38 @@ public class BuyerService {
 		return result;
 	}
 
-	
+	public Result updateQuestionById(QuestionForm form, Errors errors)
+	{
+		Result result = new Result();
+		
+		if(form.getType() == 0)// 问题类型为空
+		{
+			errors.rejectValue("type", "QUESTION_TYPE_IS_NULL");
+			return result;
+		}
+
+		if(StringUtil.isEmpty(form.getContent())) //  问题内容为空
+		{
+			errors.rejectValue("content", "QUESTOIN_CONTENT_IS_NULL");
+			return result;
+		}
+		QuestionEntity question = new QuestionEntity();
+		question.setId(form.getQid());
+		question.setIndustry(form.getIndustry());
+		question.setProcessMethod(form.getProcessMethod());
+		question.setWpHardness(form.getWpHardness());
+		question.setWpMaterial(form.getWpMaterial());
+		question.setType(form.getType());
+		question.setContent(form.getContent());
+		question.setBuyerId(form.getUserid());
+		question.setState(form.getState());
+		question.setHasPic(form.getHasPic());
+		
+		questionDAO.updateQuestionById(question);
+		
+		return result;
+	}
+
 	public Result queryQuestionsByUserId(int userId)
 	{
 		Result result = new Result();

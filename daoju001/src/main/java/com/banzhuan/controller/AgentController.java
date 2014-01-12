@@ -2,7 +2,9 @@ package com.banzhuan.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -16,11 +18,14 @@ import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.support.DefaultMultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.servlet.support.RequestContextUtils;
 import org.springframework.web.servlet.view.RedirectView;
 
 import com.banzhuan.common.Account;
@@ -108,6 +113,7 @@ public class AgentController extends BaseController{
 				account.setUserId(user.getId()); // 用户ID
 				account.setMail(user.getMail()); // 邮箱
 				account.setLogo(user.getLogo()); // 邮箱
+				account.setBrandName(user.getBrandName());
 				account.setBuyer(false);
 				account.setAgent(true);
 				//set cookie
@@ -163,7 +169,7 @@ public class AgentController extends BaseController{
 				MultipartFile f = files.get(0);
 				if (StringUtil.isNotEmpty(f.getOriginalFilename()))
 				{
-					String path = request.getSession().getServletContext().getRealPath("/uploadfile");
+					String path = request.getSession().getServletContext().getRealPath("/logo");
 					File file = new File(path + "/" + f.getOriginalFilename());
 					account.setLogo(Util.genRandomName(f.getOriginalFilename().substring(f.getOriginalFilename().lastIndexOf("."))));
 					AgentEntity agent = new AgentEntity();
@@ -266,9 +272,20 @@ public class AgentController extends BaseController{
 		return mv;
 	}
 	
+	@RequestMapping(value="/gc/{id}")
+	public ModelAndView question(HttpServletRequest request, HttpServletResponse response,@PathVariable String id, @ModelAttribute("account")Account account,
+			final RedirectAttributes redirectAttributes) {
+		
+		int gcId = Integer.parseInt(id);
+		
+		ModelAndView mv = new ModelAndView(new RedirectView("/agent/uploadgc"));
+		redirectAttributes.addFlashAttribute("gcid",gcId);
+		return mv;
+	}
+	
 	@RequestMapping(value="/uploadgc")
 	public ModelAndView uploadgc(HttpServletRequest request, HttpServletResponse response, @ModelAttribute("account")Account account, 
-			@ModelAttribute("form")GoodcaseForm form, BindingResult result)
+			@ModelAttribute("form")GoodcaseForm form, BindingResult result, @ModelAttribute("gcid") final Object gcid)
 	{
 		ModelAndView mv = new ModelAndView("agent/uploadgc");
 		if(isDoSubmit(request))
@@ -277,6 +294,8 @@ public class AgentController extends BaseController{
 			gc.setAgentId(account.getUserId());
 			gc.setAgentLogo(account.getLogo());
 			gc.setAgentName(account.getUserName());
+			gc.setBrandName(account.getBrandName());
+			
 			// /////////////////////////////////////////////////////////////获取上传的文件///////////////////////////////////
 			if (request instanceof DefaultMultipartHttpServletRequest) 
 			{
@@ -287,9 +306,11 @@ public class AgentController extends BaseController{
 					if (StringUtil.isNotEmpty(f.getOriginalFilename()))
 					{
 						String path = request.getSession().getServletContext().getRealPath("/goodcase");
-						String fileName = Util.genRandomName(f.getOriginalFilename().substring(f.getOriginalFilename().lastIndexOf(".")));
-						File file = new File(path + "/" + fileName);
-						gc.setLink(fileName);
+						String link = "/goodcase/" + String.valueOf(account.getUserId()) + "/" + StringUtil.getTodayString() + "/" + f.getOriginalFilename();
+						path += "/" + String.valueOf(account.getUserId()) + "/" + StringUtil.getTodayString() + "/";
+						File file = new File(path + f.getOriginalFilename());
+						file.getParentFile().mkdirs();  
+						gc.setLink(link);
 						try 
 						{
 							FileCopyUtils.copy(f.getBytes(), file);
@@ -300,14 +321,36 @@ public class AgentController extends BaseController{
 					}
 				}
 			}
-			agentService.insertGoodcase(form, gc, result);
+			if(form.getIsEdit() > 0)
+			{
+				agentService.updateGoodcaseById(form, gc, result);
+			}
+			else
+			{
+				agentService.insertGoodcase(form, gc, result);
+			}
 			if(result.hasErrors())
 			{
 				mv = new ModelAndView("agent/uploadgc");
 				return mv;
 			}
+			return mv;
 		}
-		return mv;
+		else
+		{
+			Map<String,?> map = RequestContextUtils.getInputFlashMap(request);
+			if(map != null)
+			{
+				int id = Integer.parseInt(gcid.toString());
+				if(id > 0)
+				{
+					form.setEdit(1);
+					form.setGcid(id);
+					agentService.setGoodcaseFormByGcid(form, id);
+				}
+			}
+			return mv;
+		}
 	}
 	
 	@RequestMapping(value="/mysample")

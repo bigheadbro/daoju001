@@ -11,6 +11,12 @@ import com.banzhuan.entity.GoodcaseEntity;
 public class GoodcaseDAOImpl extends SqlSessionDaoSupport implements GoodcaseDAO {
 
 	@Override
+	public GoodcaseEntity queryGCEntityById(int id)
+	{
+		return this.getSqlSession().selectOne("queryGCEntityById", id);
+	}
+	
+	@Override
 	public List<GoodcaseEntity> queryGCEntityByUserid(int id) {
 		return this.getSqlSession().selectList("queryGCEntityByUserid", id);
 	}
@@ -23,8 +29,12 @@ public class GoodcaseDAOImpl extends SqlSessionDaoSupport implements GoodcaseDAO
 
 	@Override
 	public int updateGoodcaseById(GoodcaseEntity gc) {
-		// TODO Auto-generated method stub
-		return 0;
+		return this.getSqlSession().update("updateGoodcaseById", gc);
 	}
 
+	@Override
+	public List<GoodcaseEntity> getAllGoodcasesByType(GoodcaseEntity gc)
+	{
+		return this.getSqlSession().selectList("getAllGoodcasesByType", gc);
+	}
 }

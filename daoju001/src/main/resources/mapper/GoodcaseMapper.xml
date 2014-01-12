@@ -22,6 +22,8 @@
 		<id property="agentName" column="agent_name" />
 		<!--代理商logo -->
 		<id property="agentLogo" column="agent_logo" />
+		<!--代理品牌 -->
+		<id property="brandName" column="brand_name" />
 		<!--下载链接 -->
 		<id property="link" column="link" />
 		<!--下载次数 -->
@@ -32,7 +34,7 @@
 		<id property="gmtModified" column="gmt_modified" />
 	</resultMap>
 
-	<select id="queryGoodcaseEntityById" parameterType="int"
+	<select id="queryGCEntityById" parameterType="int"
 		resultMap="GoodcaseResultMap">
 	<![CDATA[
 		SELECT * from t_goodcase t WHERE t.id = #{id}
@@ -54,6 +56,7 @@
 		,agent_id
 		,agent_name
 		,agent_logo
+		,brand_name
 		,link
 		,count
 		,gmt_create
@@ -69,6 +72,7 @@
 		,#{agentId}
 		,#{agentName}
 		,#{agentLogo}
+		,#{brandName}
 		,#{link}
 		,#{count}
 		,#{gmtCreate}
@@ -77,9 +81,18 @@
 		)
 	</insert>
 
-	<update id="updateBuyerPwdById" parameterType="GoodcaseEntity">
+	<update id="updateGoodcaseById" parameterType="GoodcaseEntity">
 		update t_goodcase
-		set password = #{password}, gmt_modified=now() where id=#{id}
+		<set> 
+		      <if test="name != null">name=#{name},</if>
+		      <if test="industry != null">industry=#{industry},</if>
+		      <if test="processMethod != null">work_type=#{processMethod},</if>
+		      <if test="workSolidity != null">work_solidity=#{workSolidity},</if>
+		      <if test="wpMaterial != null">wp_material=#{wpMaterial},</if>
+		      <if test="link != null">link=#{link},</if>
+		   	  gmt_modified=now()
+		</set>
+		where id=#{id}
 	</update>
 	
 	<select id="queryGCEntityByUserid" parameterType="int"
@@ -88,4 +101,17 @@
 			SELECT * from t_goodcase t where t.agent_id=#{id} order by gmt_create desc
 		]]>
 	</select>
+	
+	<select id="getAllGoodcasesByType" parameterType="GoodcaseEntity"
+			resultMap="GoodcaseResultMap">
+		SELECT * from t_goodcase t 
+			<where>
+				<if test="industry != 0">AND industry=#{industry}</if>
+			    <if test="processMethod != 0">AND work_type=#{processMethod}</if>
+			    <if test="workSolidity != 0">AND work_solidity=#{workSolidity}</if>
+			    <if test="workMaterial != 0">AND work_material=#{workMaterial}</if>
+		    </where> 
+			order by gmt_create desc
+	</select>
+	
 </mapper>

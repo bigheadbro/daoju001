@@ -22,15 +22,14 @@ public class QuestionDAOImpl extends SqlSessionDaoSupport implements QuestionDAO
 	}
 
 	@Override
-	public int updateQuestionById(QuestionEntity buyer) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int updateQuestionById(QuestionEntity question) {
+		return this.getSqlSession().update("updateQuestionById", question);
 	}
 	
 	@Override
-	public List<QuestionEntity> queryQuestionsByUserid(int userid)
+	public List<QuestionEntity> queryQuestionsByUserid(int qid)
 	{
-		return this.getSqlSession().selectList("queryQuestionsByUserId", userid);
+		return this.getSqlSession().selectList("queryQuestionsByUserId", qid);
 	}
 	
 	@Override

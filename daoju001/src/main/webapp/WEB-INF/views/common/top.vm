@@ -14,10 +14,10 @@
                     <a href="#">所有问题</a>
                 </li>
                 <li>
-                    <a href="#">代理商</a>
+                    <a href="">代理商</a>
                 </li>
                 <li>
-                    <a href="#">成功案例</a>
+                    <a href="/goodcases">成功案例</a>
                 </li>
                 <li>
                     <a href="#">刀具样本</a>
@@ -63,14 +63,18 @@
                             </li>
                         </ul>
 					#else
-						<a class="top-user" href="/agent/main">
-                        <span class="name">${account.userName}</span>
-                        #if($!{account.logo})
-                            <img src="../uploadfile/$!{account.logo}"  />
-                            #else
-                                <img src="../img/avatar.png"  />
-                        #end
-                    </a>
+						#if($!{account.isBuyer})
+							<a class="top-user" href="/buyer/main">
+						#else
+							<a class="top-user" href="/agent/main">
+						#end
+                                <span class="name">${account.userName}</span>
+                                #if($!{account.logo})
+                                    <img src="../logo/$!{account.logo}"  />
+                                #else
+                                    <img src="../img/avatar.png"  />
+                                #end
+                            </a>
                     <ul class="top-dropdown">
                         <li>
                             <a href="/agent/main">我的刀师傅</a>

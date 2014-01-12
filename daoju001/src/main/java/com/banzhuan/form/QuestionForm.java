@@ -19,6 +19,7 @@ public class QuestionForm implements Serializable {
 	private int state;//1:publish,0:draft
 	private boolean hasPic;
 	private int isEdit;
+	private int qid;
 
 	public int getProcessMethod() {
 		return processMethod;
@@ -106,5 +107,17 @@ public class QuestionForm implements Serializable {
 	 */
 	public void setIsEdit(int isEdit) {
 		this.isEdit = isEdit;
+	}
+	/**
+	 * @return the qid
+	 */
+	public int getQid() {
+		return qid;
+	}
+	/**
+	 * @param qid the qid to set
+	 */
+	public void setQid(int qid) {
+		this.qid = qid;
 	}
 }

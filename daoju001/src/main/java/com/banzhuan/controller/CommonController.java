@@ -1,6 +1,8 @@
 package com.banzhuan.controller;
 
-import java.io.IOException;
+
+import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -8,22 +10,16 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.view.RedirectView;
 
 import com.banzhuan.common.Result;
-import com.banzhuan.entity.BuyerEntity;
+import com.banzhuan.entity.AgentEntity;
 import com.banzhuan.form.GoodcaseForm;
-import com.banzhuan.form.RegForm;
 import com.banzhuan.form.LoginForm;
-import com.banzhuan.service.BuyerService;
 import com.banzhuan.service.CommonService;
-import com.banzhuan.util.JsonUtil;
-import com.banzhuan.common.Account;
 
 @Controller
 @RequestMapping("/")
@@ -67,6 +63,20 @@ public class CommonController extends BaseController{
 		
 		Result result = commonService.getAllGoodcases(form);
 		mv.addObject("goodcases", result.get("goodcases"));
+		return mv;
+		
+	}
+	
+	@RequestMapping(value = "agents")
+	public ModelAndView allagents(final HttpServletRequest request,final HttpServletResponse response, @ModelAttribute("form")GoodcaseForm form) {
+		ModelAndView mv = new ModelAndView("/common/agents");
+		
+		Map<Integer,List<AgentEntity>> agentMap = commonService.getAllAgents();
+		for(int i = 1; i <=26; i++)
+		{
+			mv.addObject("agent" + String.valueOf(i), agentMap.get(i));
+		}
+		
 		return mv;
 		
 	}

@@ -3,6 +3,8 @@
  */
 package com.banzhuan.dao.impl;
 
+import java.util.List;
+
 import org.mybatis.spring.support.SqlSessionDaoSupport;
 import org.springframework.stereotype.Repository;
 
@@ -41,6 +43,12 @@ public class AgentDAOImpl extends SqlSessionDaoSupport implements AgentDAO {
 	@Override
 	public int updateAgentEntityById(AgentEntity agent) {
 		return this.getSqlSession().update("updateAgentEntityById", agent);
+	}
+	
+	@Override
+	public List<AgentEntity> getAllagents()
+	{
+		return this.getSqlSession().selectList("getAllAgents");
 	}
 
 }

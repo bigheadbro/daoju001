@@ -16,16 +16,16 @@ import org.springframework.web.multipart.support.DefaultMultipartHttpServletRequ
 
 import com.banzhuan.dao.AgentDAO;
 import com.banzhuan.dao.GoodcaseDAO;
+import com.banzhuan.dao.SampleDAO;
 import com.banzhuan.entity.AgentEntity;
-import com.banzhuan.entity.BuyerEntity;
 import com.banzhuan.entity.GoodcaseEntity;
-import com.banzhuan.entity.QuestionEntity;
+import com.banzhuan.entity.SampleEntity;
 import com.banzhuan.common.Result;
 import com.banzhuan.form.AgentProfileForm;
-import com.banzhuan.form.BuyerProfileForm;
 import com.banzhuan.form.GoodcaseForm;
 import com.banzhuan.form.LoginForm;
 import com.banzhuan.form.RegForm;
+import com.banzhuan.form.SampleForm;
 import com.banzhuan.util.StringUtil;
 import com.banzhuan.util.Util;
 
@@ -42,6 +42,10 @@ public class AgentService {
 	@Autowired
 	@Qualifier("gcDAO")
 	private GoodcaseDAO gcDAO;
+	
+	@Autowired
+	@Qualifier("sampleDAO")
+	private SampleDAO sampleDAO;
 	
 	public Result register(RegForm form, Errors errors)
 	{
@@ -354,4 +358,64 @@ public class AgentService {
     		form.setLink(gc.getLink());
     	}
     }
+
+    public Result querySamplesByUserid(int userId)
+	{
+		Result result = new Result();
+		List<SampleEntity> samples = sampleDAO.querySampleEntityByUserid(userId);
+		result.add("samples", samples);
+		return result;
+	}
+
+    public Result insertSample(SampleForm form, SampleEntity sample, Errors errors)
+    {
+    	Result result = new Result();
+    	if(StringUtil.isEmpty(form.getName()))
+		{
+    		errors.rejectValue("name", "SAMPLE_NAME_IS_NOT_NULL");
+			return result;
+		}
+    	if(StringUtil.isNotEmpty(form.getName()))
+    	{
+    		sample.setName(form.getName());
+    	}
+    	sampleDAO.insertSampleEntity(sample);
+    	return result;
+    	
+    }
+    
+    public Result updateSampleById(SampleForm form, SampleEntity sample, Errors errors)
+    {
+    	Result result = new Result();
+    	if(StringUtil.isEmpty(form.getName()))
+		{
+    		errors.rejectValue("name", "SAMPLE_NAME_IS_NOT_NULL");
+			return result;
+		}
+    	if(form.getSid() != 0)
+    	{
+    		sample.setId(form.getSid());
+    	}
+    	if(StringUtil.isNotEmpty(form.getName()))
+    	{
+    		sample.setName(form.getName());
+    	}
+    	sampleDAO.updateSampleById(sample);
+    	return result;
+    	
+    }
+    
+    public void setSampleFormBySid(SampleForm form, int sid)
+    {
+    	SampleEntity sample = sampleDAO.querySampleEntityById(sid);
+    	if(StringUtil.isNotEmpty(sample.getName()))
+    	{
+    		form.setName(sample.getName());
+    	}
+		if(StringUtil.isNotEmpty(sample.getLink()))
+    	{
+    		form.setLink(sample.getLink());
+    	}
+    }
+    
 }

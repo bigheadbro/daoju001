@@ -17,6 +17,7 @@ public class SampleEntity implements Serializable {
 	private String agentName;
 	// 代理商logo
 	private String agentLogo;
+	private String brandName;
 	// 下载链接
 	private String link;
 	// 下载次数
@@ -166,6 +167,14 @@ public class SampleEntity implements Serializable {
 	 */
 	public static long getSerialversionuid() {
 		return serialVersionUID;
+	}
+
+	public String getBrandName() {
+		return brandName;
+	}
+
+	public void setBrandName(String brandName) {
+		this.brandName = brandName;
 	}
 
 	

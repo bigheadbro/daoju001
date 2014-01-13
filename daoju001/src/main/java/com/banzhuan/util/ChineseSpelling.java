@@ -8,8 +8,16 @@ public final class ChineseSpelling {
             4027, 4086, 4390, 4558, 4684, 4925, 5249, 5590 };  
     private final static String[] lc_FirstLetter = { "a", "b", "c", "d", "e",  
             "f", "g", "h", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s",  
-            "t", "w", "x", "y", "z" };  
+            "t", "w", "x", "y", "z" };
+	private static ChineseSpelling cte;  
   
+	public static ChineseSpelling getCte() {
+		return cte;
+	}
+
+	public static void setCte(ChineseSpelling cte) {
+		ChineseSpelling.cte = cte;
+	}  
     /** 
      * 取得给定汉字串的首字母串,即声母串 
      * @param str 给定汉字串 
@@ -80,9 +88,16 @@ public final class ChineseSpelling {
         return str;  
     }  
   
+    public static int letterToNum(String input) 
+    {
+    	int i = input.charAt(0) - 96;
+    	return i;
+    }
     public static void main(String[] args) {  
-    	ChineseSpelling cte = new ChineseSpelling();  
-        System.out.println("获取拼音首字母："+ cte.getFirstLetter("ss时达"));  
-    }  
+    	setCte(new ChineseSpelling());  
+        System.out.println("获取拼音首字母："+ letterToNum(ChineseSpelling.getFirstLetter("操你妈")));  
+    }
+
+	
   
 }  

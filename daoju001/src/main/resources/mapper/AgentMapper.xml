@@ -58,6 +58,11 @@
 	]]>
 	</select>
 	
+	<select id="getAllagents" 
+			resultMap="AgentResultMap">
+		SELECT * from t_agent t order by gmt_create desc
+	</select>
+	
 	<!-- 新代理商信息 -->
 	<insert id="insertAgentEntity" parameterType="AgentEntity">
 		<selectKey resultType="int" order="AFTER" keyProperty="id">

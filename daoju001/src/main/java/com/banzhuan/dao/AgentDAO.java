@@ -1,5 +1,7 @@
 package com.banzhuan.dao;
 
+import java.util.List;
+
 import com.banzhuan.entity.AgentEntity;
 /**
  * 代理商DAO
@@ -32,5 +34,6 @@ public interface AgentDAO {
 	
 	public int updateAgentEntityById(AgentEntity agent);
 	
+	List<AgentEntity> getAllagents();
 
 }

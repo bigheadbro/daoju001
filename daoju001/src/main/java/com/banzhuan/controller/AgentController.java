@@ -2,7 +2,6 @@ package com.banzhuan.controller;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -31,13 +30,13 @@ import org.springframework.web.servlet.view.RedirectView;
 import com.banzhuan.common.Account;
 import com.banzhuan.common.Result;
 import com.banzhuan.entity.AgentEntity;
-import com.banzhuan.entity.BuyerEntity;
 import com.banzhuan.entity.GoodcaseEntity;
+import com.banzhuan.entity.SampleEntity;
 import com.banzhuan.form.AgentProfileForm;
-import com.banzhuan.form.BuyerProfileForm;
 import com.banzhuan.form.GoodcaseForm;
 import com.banzhuan.form.RegForm;
 import com.banzhuan.form.LoginForm;
+import com.banzhuan.form.SampleForm;
 import com.banzhuan.service.AgentService;
 import com.banzhuan.util.StringUtil;
 import com.banzhuan.util.Util;
@@ -354,14 +353,93 @@ public class AgentController extends BaseController{
 	}
 	
 	@RequestMapping(value="/mysample")
-	public ModelAndView mysample(HttpServletRequest request, HttpServletResponse response) {
+	public ModelAndView mysample(HttpServletRequest request, HttpServletResponse response, @ModelAttribute("account")Account account) {
 		ModelAndView mv = new ModelAndView("agent/mysample");
+		int userId = account.getUserId();
+		Result result = agentService.queryGoodcasesByUserid(userId);
+		mv.addObject("samples", result.get("samples"));
 		return mv;
 	}
 	
 	@RequestMapping(value="/uploadsample")
-	public ModelAndView uploadsample(HttpServletRequest request, HttpServletResponse response) {
+	public ModelAndView uploadsample(HttpServletRequest request, HttpServletResponse response, @ModelAttribute("account")Account account, 
+			@ModelAttribute("form")SampleForm form, BindingResult result, @ModelAttribute("sid") final Object sid) 
+	{
 		ModelAndView mv = new ModelAndView("agent/uploadsample");
+		if(isDoSubmit(request))
+		{
+			SampleEntity sample = new SampleEntity();
+			sample.setAgentId(account.getUserId());
+			sample.setAgentLogo(account.getLogo());
+			sample.setAgentName(account.getUserName());
+			sample.setBrandName(account.getBrandName());
+			
+			// /////////////////////////////////////////////////////////////获取上传的文件///////////////////////////////////
+			if (request instanceof DefaultMultipartHttpServletRequest) 
+			{
+				DefaultMultipartHttpServletRequest r = (DefaultMultipartHttpServletRequest) request;
+				List<MultipartFile> files = r.getMultiFileMap().get("link");
+				if (files != null && files.size() > 0) {
+					MultipartFile f = files.get(0);
+					if (StringUtil.isNotEmpty(f.getOriginalFilename()))
+					{
+						String path = request.getSession().getServletContext().getRealPath("/sample");
+						String link = "/sample/" + String.valueOf(account.getUserId()) + "/" + StringUtil.getTodayString() + "/" + f.getOriginalFilename();
+						path += "/" + String.valueOf(account.getUserId()) + "/" + StringUtil.getTodayString() + "/";
+						File file = new File(path + f.getOriginalFilename());
+						file.getParentFile().mkdirs();  
+						sample.setLink(link);
+						try 
+						{
+							FileCopyUtils.copy(f.getBytes(), file);
+	
+						} catch (IOException e) {
+	
+						}
+					}
+				}
+			}
+			if(form.getIsEdit() > 0)
+			{
+				agentService.updateSampleById(form, sample, result);
+			}
+			else
+			{
+				agentService.insertSample(form, sample, result);
+			}
+			if(result.hasErrors())
+			{
+				mv = new ModelAndView("agent/uploadsample");
+				return mv;
+			}
+			return mv;
+		}
+		else
+		{
+			Map<String,?> map = RequestContextUtils.getInputFlashMap(request);
+			if(map != null)
+			{
+				int id = Integer.parseInt(sid.toString());
+				if(id > 0)
+				{
+					form.setIsEdit(1);
+					form.setSid(id);
+					agentService.setSampleFormBySid(form, id);
+				}
+			}
+			return mv;
+		}
+	}
+
+	@RequestMapping(value="/sample/{id}")
+	public ModelAndView sample(HttpServletRequest request, HttpServletResponse response,@PathVariable String id, @ModelAttribute("account")Account account,
+			final RedirectAttributes redirectAttributes) {
+		
+		int sid = Integer.parseInt(id);
+		
+		ModelAndView mv = new ModelAndView(new RedirectView("/agent/uploadsample"));
+		redirectAttributes.addFlashAttribute("sid",sid);
 		return mv;
 	}
+
 }

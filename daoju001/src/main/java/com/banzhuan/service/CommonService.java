@@ -1,28 +1,22 @@
 package com.banzhuan.service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
-import org.springframework.validation.Errors;
 
 import com.banzhuan.dao.AgentDAO;
 import com.banzhuan.dao.BuyerDAO;
 import com.banzhuan.dao.GoodcaseDAO;
 import com.banzhuan.dao.QuestionDAO;
-import com.banzhuan.entity.BuyerEntity;
+import com.banzhuan.entity.AgentEntity;
 import com.banzhuan.entity.GoodcaseEntity;
-import com.banzhuan.entity.QuestionEntity;
-import com.banzhuan.common.Account;
 import com.banzhuan.common.Result;
-import com.banzhuan.form.BuyerProfileForm;
 import com.banzhuan.form.GoodcaseForm;
-import com.banzhuan.form.RegForm;
-import com.banzhuan.form.LoginForm;
-import com.banzhuan.form.QuestionForm;
-import com.banzhuan.entity.BuyerEntity;
-import com.banzhuan.util.StringUtil;
+import com.banzhuan.util.ChineseSpelling;
 
 /**
  * @author guichaoqun
@@ -69,6 +63,21 @@ public class CommonService {
 		List<GoodcaseEntity> goodcases = gcDAO.getAllGoodcasesByType(gc);
 		result.add("goodcases", goodcases);
 		return result;
+	}
+	
+	public Map<Integer,List<AgentEntity>> getAllAgents()
+	{
+		List<AgentEntity> agents = agentDAO.getAllagents();
+		
+		Map<Integer,List<AgentEntity>> agentMap = new HashMap<Integer,List<AgentEntity>>();
+		for(int i = 0;i < agents.size(); i++)
+		{
+			List<AgentEntity> tmp = agentMap.get(ChineseSpelling.letterToNum(ChineseSpelling.getFirstLetter(((AgentEntity)agents.get(i)).getCompanyName())));
+			tmp.add((AgentEntity)agents.get(i));
+			agentMap.put(ChineseSpelling.letterToNum(ChineseSpelling.getFirstLetter(((AgentEntity)agents.get(i)).getCompanyName())), tmp);
+		}
+
+		return agentMap;
 	}
 	
 

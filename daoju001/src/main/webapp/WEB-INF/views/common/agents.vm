@@ -13,6 +13,18 @@
 				</div>
 			</div>
 			<div class="main-list-content">
+				<div class="">
+					<h2>$stringUtil.convertToChar(11)</h2>
+    				#foreach($agent in ${agent11})
+    					<div class="agent-info clearfix">
+							<div class="agent-logo"><a><img src="../logo/$!{agent.logo}" /></a></div>
+							<div class="agent-detail">
+								<h2>$!{agent.companyName}</h2>
+								<h4>$!{agent.brandName}</h4>
+							</div>
+						</div>
+					#end
+				</div>
 			</div>
 		</div>
 	</div>

@@ -14,7 +14,7 @@
                     <a href="#">所有问题</a>
                 </li>
                 <li>
-                    <a href="">代理商</a>
+                    <a href="/agents">代理商</a>
                 </li>
                 <li>
                     <a href="/goodcases">成功案例</a>

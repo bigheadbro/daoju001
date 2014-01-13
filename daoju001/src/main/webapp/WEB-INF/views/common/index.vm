@@ -13,13 +13,13 @@
 	<div class="flexslider">
       <ul class="slides">
         <li>
-    	    <a href="#"><img src="../img/banner/slide-4.jpg" /></a>
+    	    <a href="#"><img src="../img/banner/banner1.jpg" /></a>
     	</li>
 		<li>
-    	    <a href="#"><img src="../img/banner/slide-4.jpg" /></a>
+    	    <a href="#"><img src="../img/banner/banner2.jpg" /></a>
     	</li>
 		<li>
-    	    <a href="#"><img src="../img/banner/slide-4.jpg" /></a>
+    	    <a href="#"><img src="../img/banner/banner3.jpg" /></a>
     	</li>
 
       </ul>

@@ -166,7 +166,7 @@
             		<div class="listitem gc-li">
 						<div class="gc-name">$!{gc.name}</div>
 						<div class="agent-info clearfix">
-							<div class="agent-logo"><a><img src="../uploadfile/$!{gc.agentLogo}" /></a></div>
+							<div class="agent-logo"><a><img src="../logo/$!{gc.agentLogo}" /></a></div>
 							<div class="agent-detail">
 								<h2>$!{gc.agentName}</h2>
 								<h4>$!{gc.brandName}</h4>

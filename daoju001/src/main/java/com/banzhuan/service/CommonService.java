@@ -1,5 +1,6 @@
 package com.banzhuan.service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -70,9 +71,14 @@ public class CommonService {
 		List<AgentEntity> agents = agentDAO.getAllagents();
 		
 		Map<Integer,List<AgentEntity>> agentMap = new HashMap<Integer,List<AgentEntity>>();
+
 		for(int i = 0;i < agents.size(); i++)
 		{
 			List<AgentEntity> tmp = agentMap.get(ChineseSpelling.letterToNum(ChineseSpelling.getFirstLetter(((AgentEntity)agents.get(i)).getCompanyName())));
+			if(tmp == null)
+			{
+				tmp = new ArrayList<AgentEntity>();
+			}
 			tmp.add((AgentEntity)agents.get(i));
 			agentMap.put(ChineseSpelling.letterToNum(ChineseSpelling.getFirstLetter(((AgentEntity)agents.get(i)).getCompanyName())), tmp);
 		}

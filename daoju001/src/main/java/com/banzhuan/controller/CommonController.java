@@ -74,6 +74,7 @@ public class CommonController extends BaseController{
 		Map<Integer,List<AgentEntity>> agentMap = commonService.getAllAgents();
 		for(int i = 1; i <=26; i++)
 		{
+			List<AgentEntity> l = agentMap.get(i);
 			mv.addObject("agent" + String.valueOf(i), agentMap.get(i));
 		}
 		

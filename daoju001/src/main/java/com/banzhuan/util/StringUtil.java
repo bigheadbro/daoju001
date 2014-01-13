@@ -504,6 +504,13 @@ public class StringUtil {
 		return dateString;
 	}
 	
+	public static String convertToChar(int i)
+	{
+		String str = "";
+		char c = (char)(i + 96);
+		str = String.valueOf(c).toUpperCase();
+		return str;
+	}
 	private static Map<Integer, String> industryMap = new HashMap<Integer, String>();
 	private static Map<Integer, String> processMethodMap = new HashMap<Integer, String>();
 	private static Map<Integer, String> wpMaterialMap = new HashMap<Integer, String>();

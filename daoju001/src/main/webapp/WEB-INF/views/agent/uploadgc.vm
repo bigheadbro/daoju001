@@ -207,9 +207,15 @@
     		<a id="submit_uploadgc" class="save" href="#">上传案例</a>
     	</div>
 		<script>
+		  function processJson(data) { 
+  			showAlert(data.title,data.content,data.info,data.btn,data.link);
+  		}
 		  $(function() {
 			  $("#submit_uploadgc").click(function(){
-				  $("#form_uploadgc").submit();//提交
+				  $("#form_uploadgc").ajaxSubmit({
+						dataType:'json',
+						success:processJson
+					});
 				});
 			});
 		</script>

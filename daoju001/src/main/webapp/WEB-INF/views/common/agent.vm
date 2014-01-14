@@ -1,0 +1,60 @@
+#set($layout = "/layout/index_layout.vm")
+
+<div class="main-bk-wrapper pt0">
+	<div class="main-content-container clearfix">
+		<div class="main-list-container width630">
+			<div class="gc-list-header">
+				<h1>代理商 >$!{agent.companyName}</h1>
+			</div>
+			<div class="company-detail">
+				<div class="left">
+					<div class="logo">
+						<a href="#"><img src="../logo/$!{agent.logo}"></a>
+					</div>
+				</div>
+				<div class="right">
+					<div class="comapny-base-info">
+						<h3>$!{agent.companyName}</h3>
+						<h4>代理刀具品牌：$!{agent.brandName}</h4>
+						<h5>已回答个问题</h5>
+					</div>
+					<div class="comapny-contact-info">
+						
+					</div>
+					<div class="comapny-description">
+						<h2>公司简介</h2>
+						<p>$!{agent.description}</p>
+					</div>
+					<div class="company-sample">
+						<h2>刀具样本</h2>
+						#foreach($sample in $samples)
+							<a href="$!{sample.link}">$!{sample.name}</a>
+						#end
+					</div>
+					<div class="company-goodcase">
+						<h2>成功案例</h2>
+						#foreach($gc in $goodcases)
+            		<div class="listitem gc-li">
+      						<div class="gc-name"><a href="$!{gc.link}">$!{gc.name}</a></div>
+      						<div class="gc-param">
+      							#if($!{gc.industry} > 0)
+      								<span>$stringUtil.getIndustry($!{gc.industry})</span>
+      							#end
+      							#if($!{gc.processMethod} > 0)
+      								<span>$stringUtil.getMethod($!{gc.processMethod})</span>
+      							#end
+      							#if($!{gc.workMaterial} > 0)
+      								<span>$stringUtil.getMaterial($!{gc.workMaterial})</span>
+      							#end
+      							#if($!{gc.workSolidity} > 0)
+      								<span>$stringUtil.getHardness($!{gc.workSolidity})</span>
+      							#end
+      						</div>
+            		</div>
+        		#end
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

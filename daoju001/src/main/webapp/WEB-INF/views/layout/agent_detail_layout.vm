@@ -9,13 +9,15 @@
       		  <div class="main-left clearfix">
       			  <div class="main-left-content">
       					<div class="person-info">
-      						<a id="uploadlogo" href="#">
-    								#if($!{account.logo})
-    									<img src="../logo/$!{account.logo}"  />
-    								#else
-    									<img src="../img/avatar.png"  />
-    								#end
-                  </a>
+									<div class="logo">
+        						<a id="uploadlogo" href="#">
+      								#if($!{account.logo})
+      									<img src="../logo/$!{account.logo}"  />
+      								#else
+      									<img src="../img/avatar.png"  />
+      								#end
+                    </a>
+									</div>
       						<h5>无锡汉尼达</h5>
       						<h6>代理刀具品牌：黛杰</h6>
       					</div>

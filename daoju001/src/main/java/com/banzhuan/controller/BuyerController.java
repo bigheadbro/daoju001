@@ -151,6 +151,11 @@ public class BuyerController extends BaseController{
 		
 		form.setUserid(account.getUserId());
 		buyerService.changePwd(form, result);
+		if(result.hasErrors())
+		{
+			return view;
+		}
+		JsonUtil.showAlert(response, "修改密码", "修改密码成功~~", "确定", "", "");
 		return view;
 	}
 	
@@ -168,6 +173,11 @@ public class BuyerController extends BaseController{
 		else
 		{
 			buyerService.updateBuyerAccnt(form, buyer);
+			if(result.hasErrors())
+			{
+				return mv;
+			}
+			JsonUtil.showAlert(response, "更新资料", "个人资料更新成功~~", "确定", "", "");
 		}
 		return mv;
 	}
@@ -280,10 +290,20 @@ public class BuyerController extends BaseController{
 		if(form.getIsEdit() > 0)
 		{
 			buyerService.updateQuestionById(form, result);
+			if(result.hasErrors())
+			{
+				return mv;
+			}
+			JsonUtil.showAlert(response, "编辑问题", "问题内容更新成功~~", "确定", "", "");
 		}
 		else
 		{
 			buyerService.insertQuestion(form, result);
+			if(result.hasErrors())
+			{
+				return mv;
+			}
+			JsonUtil.showAlert(response, "新建问题", "问题新建成功~~", "确定", "", "");
 		}
 		return mv;
 	}

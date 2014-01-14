@@ -52,9 +52,9 @@ div[contentEditable]{outline:0}
 .main-head-container .main-head-content .ask{float:left;margin: 13px;margin-top:10px;}
 .main-head-container .main-head-content .ask a{display:block;text-align: center;padding:5px 10px;border-radius:3px;font-size:18px;background-color:#ff6600;}
 
-.main-head-container .main-head-content .login a.top-user{display: block;position:relative;height:59px;text-indent:35px;overflow: hidden;}
-.main-head-container .main-head-content .login a.top-user .name{line-height:57px;font-size: 18px;}
-.main-head-container .main-head-content .login a.top-user img{width:30px;height:30px;position:absolute;top: 15px;left: 10px;}
+.main-head-container .main-head-content .login .top-user{display: block;position:relative;height:59px;text-indent:35px;overflow: hidden;}
+.main-head-container .main-head-content .login .top-user .name{line-height:57px;font-size: 18px;}
+.main-head-container .main-head-content .login .top-user .logo{width:30px;height:30px;position:absolute;top: 15px;left: 10px;}
 
 .main-head-container .main-head-content .login .top-dropdown{position:absolute;display:none;background-color: #007298;top: 59px;min-width: 140px;z-index: 100;}
 .main-head-container .main-head-content .login ul.top-dropdown li a{display:block;text-align:center;padding:10px;}
@@ -159,7 +159,7 @@ div[contentEditable]{outline:0}
 .mainpage-container .main-right{float:left;width:700px;min-height:680px;border-radius:10px;background-color:#f6f6f6;padding:20px}
 .mainpage-container .main-left .main-left-content{width:100%;text-align:center}
 .mainpage-container .main-left .person-info{margin:30px auto 0;}
-.mainpage-container .main-left .person-info img{width:88px;height:88px;}
+.mainpage-container .main-left .person-info .logo{width:88px;height:88px;}
 .mainpage-container .main-left .person-info h5{font-size:18px;padding:15px 15px 0 15px;color:#606060;}
 .mainpage-container .main-left .person-info h6{font-size: 12px;color: #767676;}
 .mainpage-container .main-left .other-info{border-top:1px solid #c7c7c7;border-bottom:1px solid #c7c7c7;margin: 15px 60px 0;padding: 10px 0;}
@@ -285,6 +285,7 @@ opacity: .3;
 .log-con .right h2{font-size:18px;color:#9c9c9c;margin-bottom: 80px;}
 .log-con .right a{font-size:18px;color:white;background-color:#0081b7;border-radius: 5px;padding: 10px 35px 10px 70px;background-image: url(../img/reg3.png);background-repeat:no-repeat;background-position: 40px 12px;}
 .log-con .right p{font-size:14px;color:#cccccc;margin-top:60px;line-height: 22px;}
+
 /*系统提示框*/
 .alert-wrapper{position:absolute;display:none;z-index:10002;width:480px;padding: 5px;border-radius: 5px;background:url(../img/transGray.png);font-size:13px;}
 .alert-layer{background:white;padding-bottom: 10px;}
@@ -334,6 +335,9 @@ opacity: .3;
 .gc-list-header h1{color:#0088b5;font-size:16px;}
 .question-param-wrap{border:1px solid #0088b5;border-left:none;border-right:none;height: 40px;margin-top: 5px;}
 
+/*代理商详细页面*/
+.company-detail .left{float:left}
+.company-detail .right{float:left}
 /*common style*/
 .fr{float:right;}
 .fl{float:left;}

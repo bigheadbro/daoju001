@@ -38,6 +38,7 @@ import com.banzhuan.form.RegForm;
 import com.banzhuan.form.LoginForm;
 import com.banzhuan.form.SampleForm;
 import com.banzhuan.service.AgentService;
+import com.banzhuan.util.JsonUtil;
 import com.banzhuan.util.StringUtil;
 import com.banzhuan.util.Util;
 import com.qq.connect.QQConnectException;
@@ -174,7 +175,7 @@ public class AgentController extends BaseController{
 					AgentEntity agent = new AgentEntity();
 					agent.setId(account.getUserId());
 					agent.setLogo(account.getLogo());
-					agentService.updateAgentAccnt(null, null, agent);
+					agentService.updateAgentAccnt(null, null, agent, result);
 					try 
 					{
 						FileCopyUtils.copy(f.getBytes(), file);
@@ -205,13 +206,12 @@ public class AgentController extends BaseController{
 		
 		form.setUserid(account.getUserId());
 		agentService.changePwd(form, result);
+		if(result.hasErrors())
+		{
+			return view;
+		}
+		JsonUtil.showAlert(response, "修改密码", "修改密码成功~~", "确定", "", "");
 		return view;
-	}
-
-	@RequestMapping(value="/accnt")
-	public ModelAndView accnt(HttpServletRequest request, HttpServletResponse response) {
-		ModelAndView mv = new ModelAndView("agent/accnt");
-		return mv;
 	}
 	
 	@RequestMapping(value="/profile")
@@ -227,7 +227,12 @@ public class AgentController extends BaseController{
 		}
 		else
 		{
-			agentService.updateAgentAccnt(request, form, agent);
+			agentService.updateAgentAccnt(request, form, agent, result);
+			if(result.hasErrors())
+			{
+				return mv;
+			}
+			JsonUtil.showAlert(response, "更新资料", "公司资料更新成功~~", "确定", "", "");
 		}
 		return mv;
 	}
@@ -305,7 +310,7 @@ public class AgentController extends BaseController{
 					if (StringUtil.isNotEmpty(f.getOriginalFilename()))
 					{
 						String path = request.getSession().getServletContext().getRealPath("/goodcase");
-						String link = "/goodcase/" + String.valueOf(account.getUserId()) + "/" + StringUtil.getTodayString() + "/" + f.getOriginalFilename();
+						String link = "../goodcase/" + String.valueOf(account.getUserId()) + "/" + StringUtil.getTodayString() + "/" + f.getOriginalFilename();
 						path += "/" + String.valueOf(account.getUserId()) + "/" + StringUtil.getTodayString() + "/";
 						File file = new File(path + f.getOriginalFilename());
 						file.getParentFile().mkdirs();  
@@ -323,15 +328,20 @@ public class AgentController extends BaseController{
 			if(form.getIsEdit() > 0)
 			{
 				agentService.updateGoodcaseById(form, gc, result);
+				if(result.hasErrors())
+				{
+					return mv;
+				}
+				JsonUtil.showAlert(response, "更新案例", "成功案例更新成功~~", "确定", "", "");
 			}
 			else
 			{
 				agentService.insertGoodcase(form, gc, result);
-			}
-			if(result.hasErrors())
-			{
-				mv = new ModelAndView("agent/uploadgc");
-				return mv;
+				if(result.hasErrors())
+				{
+					return mv;
+				}
+				JsonUtil.showAlert(response, "上传案例", "上传案例成功~~", "确定", "", "");
 			}
 			return mv;
 		}
@@ -384,7 +394,7 @@ public class AgentController extends BaseController{
 					if (StringUtil.isNotEmpty(f.getOriginalFilename()))
 					{
 						String path = request.getSession().getServletContext().getRealPath("/sample");
-						String link = "/sample/" + String.valueOf(account.getUserId()) + "/" + StringUtil.getTodayString() + "/" + f.getOriginalFilename();
+						String link = "../sample/" + String.valueOf(account.getUserId()) + "/" + StringUtil.getTodayString() + "/" + f.getOriginalFilename();
 						path += "/" + String.valueOf(account.getUserId()) + "/" + StringUtil.getTodayString() + "/";
 						File file = new File(path + f.getOriginalFilename());
 						file.getParentFile().mkdirs();  
@@ -402,10 +412,21 @@ public class AgentController extends BaseController{
 			if(form.getIsEdit() > 0)
 			{
 				agentService.updateSampleById(form, sample, result);
+				if(result.hasErrors())
+				{
+					return mv;
+				}
+				JsonUtil.showAlert(response, "上传样本", "更新样本成功~~", "确定", "", "");
+				
 			}
 			else
 			{
 				agentService.insertSample(form, sample, result);
+				if(result.hasErrors())
+				{
+					return mv;
+				}
+				JsonUtil.showAlert(response, "上传样本", "上传样本成功~~", "确定", "", "");
 			}
 			if(result.hasErrors())
 			{

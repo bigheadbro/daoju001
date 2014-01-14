@@ -19,6 +19,7 @@ import com.banzhuan.common.Result;
 import com.banzhuan.entity.AgentEntity;
 import com.banzhuan.form.GoodcaseForm;
 import com.banzhuan.form.LoginForm;
+import com.banzhuan.service.AgentService;
 import com.banzhuan.service.CommonService;
 
 @Controller
@@ -28,6 +29,9 @@ public class CommonController extends BaseController{
 	@Autowired
 	@Qualifier("commonService")
 	private CommonService commonService;
+	@Autowired
+	@Qualifier("agentService")
+	private AgentService agentService;
 	/**
 	 * 其他未识别的URL都统一到
 	 * @return
@@ -68,15 +72,32 @@ public class CommonController extends BaseController{
 	}
 	
 	@RequestMapping(value = "agents")
-	public ModelAndView allagents(final HttpServletRequest request,final HttpServletResponse response, @ModelAttribute("form")GoodcaseForm form) {
+	public ModelAndView allagents(final HttpServletRequest request,final HttpServletResponse response, @ModelAttribute("form")GoodcaseForm form)
+	{
 		ModelAndView mv = new ModelAndView("/common/agents");
 		
 		Map<Integer,List<AgentEntity>> agentMap = commonService.getAllAgents();
-		for(int i = 1; i <=26; i++)
-		{
-			List<AgentEntity> l = agentMap.get(i);
-			mv.addObject("agent" + String.valueOf(i), agentMap.get(i));
-		}
+		mv.addObject("agentMap", agentMap);
+		
+		return mv;
+		
+	}
+	
+	@RequestMapping(value = "agent/{id}")
+	public ModelAndView agent(final HttpServletRequest request,final HttpServletResponse response, @ModelAttribute("aid") final Object aid)
+	{
+		ModelAndView mv = new ModelAndView("/common/agent");
+		Result result = new Result();
+		int userid = Integer.parseInt(aid.toString());
+		//add agent
+		AgentEntity agent = agentService.getAgentEntity(userid);
+		mv.addObject("agent", agent);
+		//add good cases
+		result = agentService.queryGoodcasesByUserid(userid);
+		mv.addObject("goodcases", result.get("goodcases"));
+		//add good cases
+		result = agentService.querySamplesByUserid(userid);
+		mv.addObject("samples", result.get("samples"));
 		
 		return mv;
 		

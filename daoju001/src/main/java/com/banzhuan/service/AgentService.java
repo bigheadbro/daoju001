@@ -138,14 +138,10 @@ public class AgentService {
 		return agentDAO.queryAgentEntityById(userId);
 	}
 	
-	public void updateAgentAccnt(HttpServletRequest request, AgentProfileForm form, AgentEntity agent)
+	public void updateAgentAccnt(HttpServletRequest request, AgentProfileForm form, AgentEntity agent, Errors errors)
 	{
 		if(form != null)
 		{
-			if(StringUtil.isNotEmpty(form.getEmail()))
-			{
-				agent.setMail(form.getEmail());
-			}
 			if(StringUtil.isNotEmpty(form.getCompanyName()))
 			{
 				agent.setCompanyName(form.getCompanyName());

@@ -49,9 +49,15 @@
                 <a id="submit_changepwd" class="save" href="#">保 存</a>
             </div>
 			<script>
+					function processJson(data) { 
+						showAlert(data.title,data.content,data.info,data.btn,data.link);
+					}
     			$(function() {
     				$("#submit_changepwd").click(function () {
-    					$("#form_changepwd").submit();//提交
+    					$("#form_changepwd").ajaxSubmit({
+								dataType:'json',
+								success:processJson
+							});
     				});
     			});
     		</script>

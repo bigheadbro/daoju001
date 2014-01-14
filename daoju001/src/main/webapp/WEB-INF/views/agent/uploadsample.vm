@@ -39,9 +39,15 @@
 		  <a id="submit_uploadsample" class="save" href="#">上传样本</a>
 		</div>
 		<script>
+		  function processJson(data) { 
+  			showAlert(data.title,data.content,data.info,data.btn,data.link);
+  		}
 		  $(function() {
 			  $("#submit_uploadsample").click(function(){
-				  $("#form_uploadsample").submit();//提交
+				  $("#form_uploadsample").ajaxSubmit({
+						dataType:'json',
+						success:processJson
+					});
 				});
 			});
 		</script>

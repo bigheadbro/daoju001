@@ -91,11 +91,17 @@
                 <a id="submit_profile" class="save" href="#">保 存</a>
             </div>
 			<script>
+			  function processJson(data) { 
+					showAlert(data.title,data.content,data.info,data.btn,data.link);
+				}
 				$(function() {
 					$("#submit_profile").click(function () {
-						$("#form_profile").submit();//提交
-					});
-				});
+						$("#form_profile").ajaxSubmit({
+  						dataType:'json',
+  						success:processJson
+  					});
+  				});
+  			});
 			</script>
 		</form>
     </div>

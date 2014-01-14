@@ -592,4 +592,10 @@ public class StringUtil {
 	{
 		return new TreeMap<String, String>();
 	}
+	
+	public static void test(boolean b)
+	{
+		boolean a = b;
+		String.valueOf(a);
+	}
 }

@@ -1,85 +1,109 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html>
-  #parse("/common/agent_header.vm")
-  <body>
-	<div class="body-wrapper">
-      	#parse("/common/top.vm")
-    	<div class="main-bk-wrapper">
-      	  <div class="mainpage-container clearfix">
-      		  <div class="main-left clearfix">
-      			  <div class="main-left-content">
-      					<div class="person-info">
-									<div class="logo">
-        						<a id="uploadlogo" href="#">
-      								#if($!{account.logo})
-      									<img src="../logo/$!{account.logo}"  />
-      								#else
-      									<img src="../img/avatar.png"  />
-      								#end
-                    </a>
-									</div>
-      						<h5>无锡汉尼达</h5>
-      						<h6>代理刀具品牌：黛杰</h6>
-      					</div>
-      					<div class="agent-other-info">
-      					  <ul class="clearfix">
-      						  <li class="ml30">
-      								<h2>15</h2>
-      								<p>回答</p>
-      						  </li>
-      						  <li class="blrg">
-      								<h2>3</h2>
-      								<p>样本</p>
-      						  </li>
-      						  <li>
-      								<h2>28</h2>
-      								<p>案例</p>
-      						  </li>
-      					  </ul>
-      					</div>
-      					<div class="function">
-      						<ul>
-										#if($!stringUtil.isContains($request.getServletPath(),"/main"))
-											<li class="current"><a href="main">我的搬刀</a></li>
-										#else
-											<li><a href="main">我的搬刀</a></li>
-										#end
-										#if($!stringUtil.isContains($request.getServletPath(),"/mymsg"))
-											<li class="current"><a href="mymsg">我的消息</a></li>
-										#else
-											<li><a href="mymsg">我的消息</a></li>
-										#end
-										#if($!stringUtil.isContains($request.getServletPath(),"/newquestion") || $!stringUtil.isContains($request.getServletPath(),"/answer") ||$!stringUtil.isContains($request.getServletPath(),"/draft"))
-      							  <li class="current"><a href="newquestion">我的回答</a></li>
-										#else
-											<li><a href="newquestion">我的回答</a></li>
-										#end
-										#if($!stringUtil.isContains($request.getServletPath(),"/goodcase") || $!stringUtil.isContains($request.getServletPath(),"/uploadgc"))
-      							<li class="current"><a href="uploadgc">我的案例</a></li>
-										#else
-											<li><a href="uploadgc">我的案例</a></li>
-											#end
-										#if($!stringUtil.isContains($request.getServletPath(),"/mysample") || $!stringUtil.isContains($request.getServletPath(),"/uploadsample"))
-      							  <li class="current"><a href="uploadsample">我的样本</a></li>
-										#else
-											<li><a href="uploadsample">我的样本</a></li>
-										#end
-										#if($!stringUtil.isContains($request.getServletPath(),"/profile") || $!stringUtil.isContains($request.getServletPath(),"/changepwd"))
-      							  <li class="current"><a href="profile">账户设置</a></li>
-										#else
-											<li><a href="profile">账户设置</a></li>
-										#end
-      						</ul>
-      					</div>
-      			  </div>
-      			</div>
-      		  <div class="main-right">
-    				  $screen_content
-      			</div>
-      		</div>
+    #parse("/common/agent_header.vm")
+    <body>
+        <div class="body-wrapper">
+            #parse("/common/top.vm")
+            <div class="main-bk-wrapper">
+                <div class="mainpage-container clearfix">
+                    <div class="main-left clearfix">
+                        <div class="main-left-content">
+                            <div class="person-info">
+                                <div class="logo">
+                                    <a id="uploadlogo" href="#">
+                                        #if($!{account.logo})
+                                            <img src="../logo/$!{account.logo}"  />
+                                        #else
+                                            <img src="../img/avatar.png"  />
+                                        #end
+                                    </a>
+                                </div>
+                                <h5>$!{account.userName}</h5>
+                                <h6>$!{account.brandName}</h6>
+                            </div>
+                            <div class="agent-other-info">
+                                <ul class="clearfix">
+                                    <li class="ml30">
+                                        <h2>15</h2>
+                                        <p>回答</p>
+                                    </li>
+                                    <li class="blrg">
+                                        <h2>3</h2>
+                                        <p>样本</p>
+                                    </li>
+                                    <li>
+                                        <h2>28</h2>
+                                        <p>案例</p>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="function">
+                                <ul>
+                                    #if($!stringUtil.isContains($request.getServletPath(),"/main"))
+                                        <li class="current">
+                                            <a href="main">我的搬刀</a>
+                                        </li>
+                                    #else
+                                        <li>
+                                            <a href="main">我的搬刀</a>
+                                        </li>
+                                    #end
+                                    #if($!stringUtil.isContains($request.getServletPath(),"/mymsg"))
+                                        <li class="current">
+                                            <a href="mymsg">我的消息</a>
+                                        </li>
+                                    #else
+                                        <li>
+                                            <a href="mymsg">我的消息</a>
+                                        </li>
+                                    #end
+                                    #if($!stringUtil.isContains($request.getServletPath(),"/newquestion") || $!stringUtil.isContains($request.getServletPath(),"/answer") ||$!stringUtil.isContains($request.getServletPath(),"/draft"))
+                                        <li class="current">
+                                            <a href="newquestion">我的回答</a>
+                                        </li>
+                                    #else
+                                        <li>
+                                            <a href="newquestion">我的回答</a>
+                                        </li>
+                                    #end
+                                    #if($!stringUtil.isContains($request.getServletPath(),"/goodcase") || $!stringUtil.isContains($request.getServletPath(),"/uploadgc"))
+                                        <li class="current">
+                                            <a href="uploadgc">我的案例</a>
+                                        </li>
+                                    #else
+                                        <li>
+                                            <a href="uploadgc">我的案例</a>
+                                        </li>
+                                    #end
+                                    #if($!stringUtil.isContains($request.getServletPath(),"/mysample") || $!stringUtil.isContains($request.getServletPath(),"/uploadsample"))
+                                        <li class="current">
+                                            <a href="uploadsample">我的样本</a>
+                                        </li>
+                                    #else
+                                        <li>
+                                            <a href="uploadsample">我的样本</a>
+                                        </li>
+                                    #end
+                                    #if($!stringUtil.isContains($request.getServletPath(),"/profile") || $!stringUtil.isContains($request.getServletPath(),"/changepwd"))
+                                        <li class="current">
+                                            <a href="profile">账户设置</a>
+                                        </li>
+                                    #else
+                                        <li>
+                                            <a href="profile">账户设置</a>
+                                        </li>
+                                    #end
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="main-right">
+                        $screen_content
+                    </div>
+                </div>
+            </div>
+            #parse("/common/uploadlogo.vm")
+            #parse("/common/footer.vm")
         </div>
-				#parse("/common/uploadlogo.vm")
-        #parse("/common/footer.vm")
-	</div>
-  </body>
+    </body>
 </html>

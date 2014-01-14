@@ -26,6 +26,8 @@
 		<id property="fax" column="fax" />
 		<!--公司介绍 -->
 		<id property="description" column="description" />
+		<!--是否认证 -->
+		<id property="isVerified" column="is_verified" />
 		<!--证书链接 -->
 		<id property="verifiedLink" column="verified_link" />
 		<!--联系人名称 -->

@@ -18,7 +18,7 @@
   				案例名称
   			</li>
   			<li class="value">
-  				<input type="text" />
+  				<input class="dsf-form-text-input" type="text" name="${status.expression}"  value="$!{status.value}" />
   			</li>
   		</ul>
   	</div>

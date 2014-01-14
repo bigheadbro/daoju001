@@ -30,6 +30,8 @@ public class AgentEntity implements Serializable {
 	private String fax;
 	// 公司介绍
 	private String description;
+	// 是否认证
+	private boolean isVerified;
 	// 证书链接
 	private String verifiedLink;
 	// 联系人名称
@@ -46,6 +48,7 @@ public class AgentEntity implements Serializable {
 	private String gmtCreate;
 	// 记录修改时间(最近登录时间)
 	private String gmtModified;
+	
 
 	/**
 	 * @return the id
@@ -326,6 +329,20 @@ public class AgentEntity implements Serializable {
 
 	public void setMail(String mail) {
 		this.mail = mail;
+	}
+
+	/**
+	 * @return the isVerified
+	 */
+	public boolean isVerified() {
+		return isVerified;
+	}
+
+	/**
+	 * @param isVerified the isVerified to set
+	 */
+	public void setVerified(boolean isVerified) {
+		this.isVerified = isVerified;
 	}
 
 	

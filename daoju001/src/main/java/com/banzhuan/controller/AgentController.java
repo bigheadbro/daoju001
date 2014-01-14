@@ -180,7 +180,7 @@ public class AgentController extends BaseController{
 					{
 						FileCopyUtils.copy(f.getBytes(), file);
 				
-						Util.cropImage(f.getOriginalFilename().substring(f.getOriginalFilename().lastIndexOf(".")), file.getPath(), Integer.parseInt(size.split(",")[0]),
+						Util.cropImage(f.getContentType().split("/")[1], file.getPath(), Integer.parseInt(size.split(",")[0]),
 								Integer.parseInt(size.split(",")[1]), Integer.parseInt(size.split(",")[2]),
 								Integer.parseInt(size.split(",")[3]), path + "/" + account.getLogo());
 

@@ -18,6 +18,8 @@ public class SampleEntity implements Serializable {
 	// 代理商logo
 	private String agentLogo;
 	private String brandName;
+	// 是否认证
+	private boolean isVerified;
 	// 下载链接
 	private String link;
 	// 下载次数
@@ -175,6 +177,20 @@ public class SampleEntity implements Serializable {
 
 	public void setBrandName(String brandName) {
 		this.brandName = brandName;
+	}
+
+	/**
+	 * @return the isVerified
+	 */
+	public boolean isVerified() {
+		return isVerified;
+	}
+
+	/**
+	 * @param isVerified the isVerified to set
+	 */
+	public void setVerified(boolean isVerified) {
+		this.isVerified = isVerified;
 	}
 
 	

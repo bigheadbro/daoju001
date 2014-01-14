@@ -2,7 +2,7 @@
 <script type="text/javascript" src="../js/top-nav.js"></script>
 <div class="main-head-container">
     <div class="main-head-content clearfix">
-        <div class="logo">
+        <div class="main-logo">
             <img src="../img/logo.png" />
         </div>
         <div class="nav">

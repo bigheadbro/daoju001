@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
@@ -104,12 +105,12 @@ public class CommonController extends BaseController{
 		
 	}
 	
-	@RequestMapping(value = "agent/{id}")
-	public ModelAndView agent(final HttpServletRequest request,final HttpServletResponse response, @ModelAttribute("aid") final Object aid)
+	@RequestMapping(value = "agent/{aid}")
+	public ModelAndView agent(final HttpServletRequest request,final HttpServletResponse response, @PathVariable String aid)
 	{
 		ModelAndView mv = new ModelAndView("/common/agent");
 		Result result = new Result();
-		int userid = Integer.parseInt(aid.toString());
+		int userid = Integer.parseInt(aid);
 		//add agent
 		AgentEntity agent = agentService.getAgentEntity(userid);
 		mv.addObject("agent", agent);

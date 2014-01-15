@@ -30,6 +30,7 @@
   			<li class="value">
   				<div class="upload-gc">
   					<a class="" href="">点击上传</a>
+					<input type="file" name="link" />
   					<p>仅支持DOC、PDF格式，文件小于5M</p>
   				</div>
   			</li>

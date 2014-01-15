@@ -328,7 +328,7 @@ public class AgentController extends BaseController{
 			if(form.getIsEdit() > 0)
 			{
 				agentService.updateGoodcaseById(form, gc, result);
-				if(result.hasErrors())
+				if(result.hasErrors() && (result.getErrorCount()>1 || !result.hasFieldErrors("link")))
 				{
 					return mv;
 				}
@@ -337,7 +337,7 @@ public class AgentController extends BaseController{
 			else
 			{
 				agentService.insertGoodcase(form, gc, result);
-				if(result.hasErrors())
+				if(result.hasErrors() && (result.getErrorCount()>1 || !result.hasFieldErrors("link")))
 				{
 					return mv;
 				}
@@ -412,7 +412,7 @@ public class AgentController extends BaseController{
 			if(form.getIsEdit() > 0)
 			{
 				agentService.updateSampleById(form, sample, result);
-				if(result.hasErrors())
+				if(result.hasErrors() && (result.getErrorCount()>1 || !result.hasFieldErrors("link")))
 				{
 					return mv;
 				}
@@ -422,7 +422,7 @@ public class AgentController extends BaseController{
 			else
 			{
 				agentService.insertSample(form, sample, result);
-				if(result.hasErrors())
+				if(result.hasErrors() && (result.getErrorCount()>1 || !result.hasFieldErrors("link")))
 				{
 					return mv;
 				}

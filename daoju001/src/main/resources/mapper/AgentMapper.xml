@@ -67,7 +67,7 @@
 	
 	<select id="getMainagents" 
 			resultMap="AgentResultMap">
-		SELECT top 6 * from t_agent t order by gmt_create desc
+		SELECT * from t_agent t order by gmt_create desc limit 6
 	</select>
 	
 	<!-- 新代理商信息 -->

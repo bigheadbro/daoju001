@@ -120,6 +120,6 @@
 	
 	<select id="getMainquestions" parameterType="QuestionEntity"
 			resultMap="QuestionResultMap">
-		SELECT top 3 * from t_question t order by gmt_create desc
+		SELECT * from t_question t order by gmt_create desc limit 3
 	</select>
 </mapper>

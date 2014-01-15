@@ -179,7 +179,7 @@
 								<h2>
 									$!{gc.agentName}
 									#if($gc.isVerified())
-										<a href="$!{gc.verifiedLink}"><img src="../img/v.png" /></a>
+										<a target="_blank" href="$!{gc.verifiedLink}"><img src="../img/v.png" /></a>
 									#end
 								</h2>
 								<h4>$!{gc.brandName}</h4>

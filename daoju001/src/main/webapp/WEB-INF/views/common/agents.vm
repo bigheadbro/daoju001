@@ -52,9 +52,9 @@
                                     </div>
                                     <div class="agent-detail">
                                         <h2>
-											$!{agent.companyName}
+											<a href="/agent/$!{agent.id}">$!{agent.companyName}</a>
 											#if($agent.isVerified())
-												<a href="$!{agent.verifiedLink}"><img src="../img/v.png" /></a>
+												<a target="_blank" href="$!{agent.verifiedLink}"><img src="../img/v.png" /></a>
 											#end
 										</h2>
                                         <h4>$!{agent.brandName}</h4>

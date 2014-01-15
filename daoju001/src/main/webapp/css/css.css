@@ -137,22 +137,24 @@ div[contentEditable]{outline:0}
 .new-agent-listitem .logo img{margin:0 auto;max-width:60px;max-height:60px;}
 .new-agent-listitem .content{float:left;width:207px;margin-left:20px;}
 .new-agent-listitem.first .content{background:none}
-.new-agent-listitem .content li.name{font-size:16px;font-weight: 600;color:#373737;text-overflow:ellipsis;white-space:nowrap;margin-top:10px}
-.new-agent-listitem .content li.title{font-size:13px;color:#939393;text-overflow:ellipsis;margin-top:3px}
+.new-agent-listitem .content li.name{font-size:16px;font-weight: 600;color:#373737;text-overflow:ellipsis;white-space:nowrap;overflow: hidden;white-space: nowrap;margin-top:10px}
+.new-agent-listitem .content li.title{font-size:13px;color:#939393;text-overflow:ellipsis;overflow: hidden;white-space: nowrap;margin-top:3px;padding-left:2px;}
 
 /*good case*/
 .main-list-header .goodcase{color:#ff002a;}
 .main-list-header .goodcase li{border-bottom:3px solid #ff002a;}
 .main-list-header .goodcase li a.seemore{color:#ff002a;}
 .goodcase-listitem{margin:20px 0 10px 0}
-.goodcase-listitem .logo{float:left;}
-.goodcase-listitem .logo img{width:60px;height:60px}
+.goodcase-listitem .agent{margin-bottom:10px;}
+.goodcase-listitem .logo{border-radius: 5px;width:60px;height:60px;overflow:hidden;text-align:center;display:table;float:left;background-color:white;}
+.goodcase-listitem .logo a{display:table-cell;vertical-align:middle;}
+.goodcase-listitem .logo img{margin:0 auto;max-width:60px;max-height:60px;}
 .goodcase-listitem .content{float:left;width:207px;margin-left:20px;}
 .goodcase-listitem.first .content{background:none}
-.goodcase-listitem .content li.name{font-size:16px;font-weight: 600;color:#373737;text-overflow:ellipsis;white-space:nowrap;margin-top:10px}
-.goodcase-listitem .content li.title{font-size:13px;color:#939393;text-overflow:ellipsis;margin-top:3px}
+.goodcase-listitem .content li.name{font-size:16px;font-weight: 600;color:#373737;margin-top:10px;text-overflow:ellipsis;white-space:nowrap;overflow: hidden;}
+.goodcase-listitem .content li.title{font-size:13px;color:#939393;text-overflow:ellipsis;margin-top:3px;overflow: hidden;white-space: nowrap;padding-left:2px;}
 .goodcase-listitem  .property{font-size:13px;color:#939393;text-overflow:ellipsis;margin-top:3px}
-.goodcase-listitem  .property span{display: block;float: left;margin: 0 5px 5px 0;background-color:#dddddd;border-radius: 6px;padding: 3px;line-height: 24px;}
+.goodcase-listitem  .property span{display: block;float: left;margin: 0 5px 5px 0;background-color:#dddddd;border-radius: 6px;padding: 3px;line-height: 24px;min-width: 35px;text-align: center;}
 
 /*买家--我的搬刀*/
 .mainpage-container{margin:0 auto;width:960px;padding-top:30px;}
@@ -350,8 +352,36 @@ opacity: .3;
 .question-param-wrap{border:1px solid #0088b5;border-left:none;border-right:none;height: 40px;margin-top: 5px;}
 
 /*代理商详细页面*/
-.company-detail .left{float:left}
-.company-detail .right{float:left}
+.agent-list-header h1{color: #585858;font-size: 18px;padding-bottom: 5px;}
+.agent-list-header h1 span{color:#0088b5;}
+.company-detail{margin-top:20px;}
+.company-detail .left{float:left;margin-left:20px;}
+.company-detail .right{float:left;margin-left:20px;max-width:530px;}
+.company-detail .left .logo{border-radius: 5px;width:60px;height:60px;overflow:hidden;text-align:center;display:table;float:left;background-color:white;}
+.company-detail .left .logo a{display:table-cell;vertical-align:middle;}
+.company-detail .left .logo img{margin:0 auto;max-width:60px;max-height:60px;}
+.company-base-info h3{color:#2e2e2e;font-size:24px;margin-bottom: 5px;}
+.company-base-info h4{color:#767676;font-size:18px;margin-bottom: 5px;}
+.company-base-info h5{color:#0088b5;font-size:12px;margin-bottom: 5px;}
+.company-base-info{border-bottom:1px solid #b9b9b9}
+.company-contact-info{margin-top:10px;padding-bottom:10px;border-bottom:1px solid #b9b9b9}
+.company-contact-info .item .key{float:left;width:100px;text-align:right;font-size:14px;color:#898989;}
+.company-contact-info .item .value{float:left;font-size:14px;color:#383838;margin-left:10px;}
+.company-contact-info .item{margin-bottom:5px;}
+.company-description{margin-top:10px;padding-bottom:10px;border-bottom:1px solid #b9b9b9}
+.company-description h2{color:#555;font-size:18px;margin-bottom: 5px;}
+.company-description p{font-size:14px;color:#383838;}
+.company-sample{margin-top:10px;padding-bottom:10px;border-bottom:1px solid #b9b9b9}
+.company-sample h2{color:#555;font-size:18px;margin-bottom: 5px;}
+.company-sample a.sample{color:#0099cb;font-size:14px;margin-right:10px;}
+.company-goodcase{margin-top:10px;padding-bottom:10px;border-bottom:1px solid #b9b9b9}
+.company-goodcase h2{color:#555;font-size:18px;margin-bottom: 5px;}
+
+
+
+
+
+
 /*common style*/
 .fr{float:right;}
 .fl{float:left;}

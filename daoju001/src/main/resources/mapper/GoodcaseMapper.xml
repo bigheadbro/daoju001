@@ -120,7 +120,7 @@
 	
 	<select id="getMainGoodcasesByType" parameterType="GoodcaseEntity"
 			resultMap="GoodcaseResultMap">
-		SELECT top 3 * from t_goodcase t order by gmt_create desc
+		SELECT * from t_goodcase t order by gmt_create desc limit 3
 	</select>
 	
 </mapper>

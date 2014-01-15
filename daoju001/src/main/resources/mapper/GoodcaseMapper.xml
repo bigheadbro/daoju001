@@ -26,6 +26,8 @@
 		<id property="brandName" column="brand_name" />
 		<!--是否认证 -->
 		<id property="isVerified" column="is_verified" />
+		<!--认证文件 -->
+		<id property="verifiedLink" column="verified_link" />
 		<!--下载链接 -->
 		<id property="link" column="link" />
 		<!--下载次数 -->
@@ -114,6 +116,11 @@
 			    <if test="workMaterial != 0">AND work_material=#{workMaterial}</if>
 		    </where> 
 			order by gmt_create desc
+	</select>
+	
+	<select id="getMainGoodcasesByType" parameterType="GoodcaseEntity"
+			resultMap="GoodcaseResultMap">
+		SELECT top 3 * from t_goodcase t order by gmt_create desc
 	</select>
 	
 </mapper>

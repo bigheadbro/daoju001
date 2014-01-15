@@ -37,4 +37,11 @@ public class GoodcaseDAOImpl extends SqlSessionDaoSupport implements GoodcaseDAO
 	{
 		return this.getSqlSession().selectList("getAllGoodcasesByType", gc);
 	}
+	
+	@Override
+	public List<GoodcaseEntity> getMainGoodcasesByType()
+	{
+		return this.getSqlSession().selectList("getMainGoodcasesByType");
+	}
+	
 }

@@ -105,4 +105,21 @@
 		</set>
 		where id=#{id}
 	</update>
+	
+	<select id="getAllquestions" parameterType="QuestionEntity"
+			resultMap="QuestionResultMap">
+		SELECT * from t_question t 
+			<where>
+				<if test="industry != 0">AND industry=#{industry}</if>
+			    <if test="processMethod != 0">AND process_method=#{processMethod}</if>
+			    <if test="wpHardness != 0">AND wp_hardness=#{wpHardness}</if>
+			    <if test="wpMaterial != 0">AND wp_material=#{wpMaterial}</if>
+		    </where> 
+			order by gmt_create desc
+	</select>
+	
+	<select id="getMainquestions" parameterType="QuestionEntity"
+			resultMap="QuestionResultMap">
+		SELECT top 3 * from t_question t order by gmt_create desc
+	</select>
 </mapper>

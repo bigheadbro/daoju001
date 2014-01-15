@@ -50,5 +50,11 @@ public class AgentDAOImpl extends SqlSessionDaoSupport implements AgentDAO {
 	{
 		return this.getSqlSession().selectList("getAllagents");
 	}
+	
+	@Override
+	public List<AgentEntity> getMainagents()
+	{
+		return this.getSqlSession().selectList("getMainagents");
+	}
 
 }

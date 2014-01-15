@@ -31,6 +31,8 @@ public class GoodcaseEntity implements Serializable {
 	private String brandName;
 	// 是否认证
 	private boolean isVerified;
+	//
+	private String verifiedLink;
 	// 下载链接
 	private String link;
 	// 下载次数
@@ -282,6 +284,14 @@ public class GoodcaseEntity implements Serializable {
 	 */
 	public void setVerified(boolean isVerified) {
 		this.isVerified = isVerified;
+	}
+
+	public String getVerifiedLink() {
+		return verifiedLink;
+	}
+
+	public void setVerifiedLink(String verifiedLink) {
+		this.verifiedLink = verifiedLink;
 	}
 
 	

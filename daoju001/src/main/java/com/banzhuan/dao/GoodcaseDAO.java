@@ -14,4 +14,6 @@ public interface GoodcaseDAO {
 	public int updateGoodcaseById(GoodcaseEntity gc);
 	
 	List<GoodcaseEntity> getAllGoodcasesByType(GoodcaseEntity gc);
+	
+	List<GoodcaseEntity> getMainGoodcasesByType();
 }

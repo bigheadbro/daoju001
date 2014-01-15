@@ -14,6 +14,8 @@
 		<id property="agentLogo" column="agent_logo" />
 		<!--是否认证 -->
 		<id property="isVerified" column="is_verified" />
+		<!--认证文件 -->
+		<id property="verifiedLink" column="verified_link" />
 		<!--下载链接 -->
 		<id property="link" column="link" />
 		<!--下载次数 -->

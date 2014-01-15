@@ -15,8 +15,10 @@ import com.banzhuan.dao.GoodcaseDAO;
 import com.banzhuan.dao.QuestionDAO;
 import com.banzhuan.entity.AgentEntity;
 import com.banzhuan.entity.GoodcaseEntity;
+import com.banzhuan.entity.QuestionEntity;
 import com.banzhuan.common.Result;
 import com.banzhuan.form.GoodcaseForm;
+import com.banzhuan.form.QuestionForm;
 import com.banzhuan.util.ChineseSpelling;
 
 /**
@@ -66,6 +68,30 @@ public class CommonService {
 		return result;
 	}
 	
+	public Result getAllquestions(QuestionForm form)
+	{
+		Result result = new Result();
+		QuestionEntity ques = new QuestionEntity();
+		if(form.getIndustry() != 0)
+    	{
+			ques.setIndustry(form.getIndustry());
+    	}
+    	if(form.getProcessMethod() != 0)
+    	{
+    		ques.setProcessMethod(form.getProcessMethod());
+    	}
+    	if(form.getWpHardness() != 0)
+    	{
+    		ques.setWpHardness(form.getWpHardness());
+    	}
+    	if(form.getWpMaterial() != 0)
+    	{
+    		ques.setWpMaterial(form.getWpMaterial());
+    	}
+		List<QuestionEntity> questions = questionDAO.getAllquestions(ques);
+		result.add("questions", questions);
+		return result;
+	}
 	public Map<Integer,List<AgentEntity>> getAllAgents()
 	{
 		List<AgentEntity> agents = agentDAO.getAllagents();
@@ -84,6 +110,30 @@ public class CommonService {
 		}
 
 		return agentMap;
+	}
+	
+	public Result getMainquestions()
+	{
+		Result result = new Result();
+		List<QuestionEntity> questions = questionDAO.getMainquestions();
+		result.add("questions", questions);
+		return result;
+	}
+	
+	public Result getMainagents()
+	{
+		Result result = new Result();
+		List<AgentEntity> agents = agentDAO.getMainagents();
+		result.add("agents", agents);
+		return result;
+	}
+	
+	public Result getMaingoodcases()
+	{
+		Result result = new Result();
+		List<GoodcaseEntity> goodcases = gcDAO.getMainGoodcasesByType();
+		result.add("goodcases", goodcases);
+		return result;
 	}
 	
 

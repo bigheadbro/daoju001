@@ -14,4 +14,8 @@ public interface QuestionDAO {
 	public List<QuestionEntity> queryQuestionsByUserid(int userid);
 	
 	public List<QuestionEntity> queryDraftsByUserid(int userid);
+	
+	public List<QuestionEntity> getAllquestions(QuestionEntity question);
+	
+	public List<QuestionEntity> getMainquestions();
 }

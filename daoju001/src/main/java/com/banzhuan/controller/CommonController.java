@@ -1,6 +1,7 @@
 package com.banzhuan.controller;
 
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -19,6 +20,7 @@ import com.banzhuan.common.Result;
 import com.banzhuan.entity.AgentEntity;
 import com.banzhuan.form.GoodcaseForm;
 import com.banzhuan.form.LoginForm;
+import com.banzhuan.form.QuestionForm;
 import com.banzhuan.service.AgentService;
 import com.banzhuan.service.CommonService;
 
@@ -39,7 +41,8 @@ public class CommonController extends BaseController{
 	@RequestMapping(value="*")
 	public ModelAndView otherEnter(final HttpServletResponse response,@ModelAttribute("form")LoginForm form)
 	{
-		ModelAndView mv = new ModelAndView("/common/index");
+		ModelAndView mv = new ModelAndView("/common/index2");
+		
 		return mv;
 	}
 
@@ -48,15 +51,32 @@ public class CommonController extends BaseController{
 	 * @return
 	 */
 	@RequestMapping(value="/common/index")
-	public ModelAndView index(final HttpServletResponse response,@ModelAttribute("form")LoginForm form)
+	public ModelAndView index(final HttpServletResponse response)
 	{
 		ModelAndView mv = new ModelAndView("/common/index");
+		
+		Result result = new Result();
+		
+		result = commonService.getMainagents();
+		mv.addObject("agents", result.get("agents"));
+		
+		result = commonService.getMaingoodcases();
+		mv.addObject("goodcases", result.get("goodcases"));
+		
+		result = commonService.getMainquestions();
+		mv.addObject("questions", result.get("questions"));
+		
+		
 		return mv;
 	}
 
 	@RequestMapping(value = "/question")
-	public ModelAndView allquestion(final HttpServletRequest request,final HttpServletResponse response) {
+	public ModelAndView allquestion(final HttpServletRequest request,final HttpServletResponse response, @ModelAttribute("form")QuestionForm form) 
+	{
 		ModelAndView mv = new ModelAndView("/common/question");
+		
+		Result result = commonService.getAllquestions(form);
+		
 		return mv;
 		
 	}
@@ -77,6 +97,7 @@ public class CommonController extends BaseController{
 		ModelAndView mv = new ModelAndView("/common/agents");
 		
 		Map<Integer,List<AgentEntity>> agentMap = commonService.getAllAgents();
+
 		mv.addObject("agentMap", agentMap);
 		
 		return mv;

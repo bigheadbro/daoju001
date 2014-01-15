@@ -35,5 +35,7 @@ public interface AgentDAO {
 	public int updateAgentEntityById(AgentEntity agent);
 	
 	List<AgentEntity> getAllagents();
+	
+	List<AgentEntity> getMainagents();
 
 }

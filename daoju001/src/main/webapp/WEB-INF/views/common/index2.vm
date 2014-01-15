@@ -29,7 +29,7 @@
 		<div class="main-list-container width630">
 			<div class="main-list-header">
                                                  热门问题
-             <a href="questions">点击查看更多问题</a>
+             <a href="#">点击查看更多问题</a>
 			</div>
 			<div class="main-list-content">
 				<div class="hot-question-listitem first clearfix">
@@ -160,83 +160,163 @@
 		<div class="main-list-container width300 ml30">
 			<div class="main-list-header  ff7e00">
                                                           最新代理商
-				<a class="seemore" href="/agents">查看更多</a>
+				<a class="seemore" href="#">查看更多</a>
 			</div>
 			<div class="main-list-content">
-				#foreach($agent in $agents)
-  				<div class="new-agent-listitem clearfix">
-  					<div class="logo">
-  						<a href="/agent/${agent.id}">
-								#if($!{agent.logo})
-									<img src="../logo/$!{agent.logo}" />
-								#else
-									<img src="../img/avatar.png" />
-								#end
-							</a>
-  					</div>
-  					<div class="content">
-  						<ul>
-  							<li class="name">
-									$!{agent.companyName}
-									#if($agent.isVerified())
-										<a href="$!{agent.verifiedLink}"><img src="../img/v.png" /></a>
-									#end
-								</li>
-  							<li class="title">$!{agent.brandName}</li>
-  						</ul>
-  					</div>
-  				</div>
-  				<div class="seperation">&nbsp;</div>
-				#end
+				<div class="new-agent-listitem clearfix">
+					<div class="logo">
+						<a href="#"><img src="../img/kenna.png"></a>
+					</div>
+					<div class="content">
+						<ul>
+							<li class="name">深圳精联</li>
+							<li class="title">KENNA刀具代理商</li>
+						</ul>
+					</div>
+				</div>
+				<div class="seperation">&nbsp;</div>
+				<div class="new-agent-listitem clearfix">
+					<div class="logo">
+						<img src="../img/zcct.jpg">
+					</div>
+					<div class="content">
+						<ul>
+							<li class="name">海德尔</li>
+							<li class="title">株洲钻石刀具代理商</li>
+						</ul>
+					</div>
+				</div>
+				<div class="seperation">&nbsp;</div>
+				<div class="new-agent-listitem clearfix">
+					<div class="logo">
+						<img src="../img/rego.jpg">
+					</div>
+					<div class="content">
+						<ul>
+							<li class="name">北京天航星光</li>
+							<li class="title">REGO-FIX刀具代理商</li>
+						</ul>
+					</div>
+				</div>
+				<div class="seperation">&nbsp;</div>
+				<div class="new-agent-listitem clearfix">
+					<div class="logo">
+						<img src="../img/mit.jpg">
+					</div>
+					<div class="content">
+						<ul>
+							<li class="name">常州神骏</li>
+							<li class="title">三菱刀具代理商</li>
+						</ul>
+					</div>
+				</div>
+				<div class="seperation">&nbsp;</div>
+				<div class="new-agent-listitem clearfix">
+					<div class="logo">
+						<img src="../img/nsc.jpg">
+					</div>
+					<div class="content">
+						<ul>
+							<li class="name">上海名古屋</li>
+							<li class="title">非标制作刀具代理商</li>
+						</ul>
+					</div>
+				</div>
+				<div class="seperation">&nbsp;</div>
+				<div class="new-agent-listitem clearfix">
+					<div class="logo">
+						<img src="../img/greenleaf.jpg">
+					</div>
+					<div class="content">
+						<ul>
+							<li class="name">苏州盖尔卡特</li>
+							<li class="title">绿叶刀具代理商</li>
+						</ul>
+					</div>
+				</div>
+				<div class="seperation">&nbsp;</div>
    </div>
 		</div>
 	    <!-- 成功案例 -->
 		<div class="main-list-container width300 ml30">
 			<div class="main-list-header ff002a">
 				成功案例
-			  <a class="seemore" href="/goodcases">查看更多</a>
+			  <a class="seemore" href="#">查看更多</a>
 			</div>
-			#foreach($gc in $goodcases)
 			<div class="goodcase-listitem clearfix">
 			  <div class="clearfix">
 					<div class="logo">
-						<a>
-							#if($!{gc.agentLogo})
-								<img src="../logo/$!{gc.agentLogo}" />
-							#else
-								<img src="../img/avatar.png" />
-							#end
-						</a>
+						<img src="../img/big-logo.png">
 					</div>
 					<div class="content">
 						<ul>
-							<li class="name">
-								$!{gc.agentName}
-								#if($gc.isVerified())
-									<a href="$!{gc.verifiedLink}"><img src="../img/v.png" /></a>
-								#end
-							</li>
-							<li class="title">$!{gc.brandName}</li>
+							<li class="name">无锡汉尼达</li>
+							<li class="title">Big刀具代理商</li>
 						</ul>
 					</div>
-				</div>
+      </div>
 				<div class="property">
-					#if($!{gc.industry} > 0)
-						<span>$stringUtil.getIndustry($!{gc.industry})</span>
-					#end
-					#if($!{gc.processMethod} > 0)
-						<span>$stringUtil.getMethod($!{gc.processMethod})</span>
-					#end
-					#if($!{gc.workMaterial} > 0)
-						<span>$stringUtil.getMaterial($!{gc.workMaterial})</span>
-					#end
-					#if($!{gc.workSolidity} > 0)
-						<span>$stringUtil.getHardness($!{gc.workSolidity})</span>
-					#end
-				</div>
+					<span>汽车零件</span>
+					<span>涡轮壳</span>
+					<span>平面铣削</span>
+					<span>不锈钢</span>
+					<span>HRC20-30</span>
+					<span>1.4837</span>
+					<span>AP=1.2</span>
+					<span>Vc=100</span>
+					<span>Fz=0.24</span>
 			</div>
+  </div>
 	    <div class="seperation">&nbsp;</div>
-			#end
+			<div class="goodcase-listitem clearfix">
+			  <div class="clearfix">
+					<div class="logo">
+						<img src="../img/dijet.jpg">
+					</div>
+					<div class="content">
+						<ul>
+							<li class="name">上海时达 </li>
+							<li class="title">DIJET刀具代理商</li>
+						</ul>
+					</div>
+      </div>
+				<div class="property">
+					<span>空调 容器板</span>
+					<span>钻孔</span>
+					<span>平面锉削</span>
+					<span>钢件</span>
+					<span>HRC20</span>
+					<span>Q345R</span>
+					<span>Vc=60</span>
+					<span>F=300</span>
+			</div>
+  </div>
+	    <div class="seperation">&nbsp;</div>
+			<div class="goodcase-listitem clearfix">
+			  <div class="clearfix">
+					<div class="logo">
+						<img src="../img/big-logo.png">
+					</div>
+					<div class="content">
+						<ul>
+							<li class="name">无锡汉尼达</li>
+							<li class="title">Big刀具代理商</li>
+						</ul>
+					</div>
+      </div>
+				<div class="property">
+					<span>汽车零件</span>
+					<span>涡轮壳</span>
+					<span>平面铣削</span>
+					<span>不锈钢</span>
+					<span>HRC20-30</span>
+					<span>1.4837</span>
+					<span>AP=1.2</span>
+					<span>Vc=100</span>
+					<span>Fz=0.24</span>
+			</div>
+  </div>
+	    <div class="seperation">&nbsp;</div>
 		</div>
 	</div>
 </div>

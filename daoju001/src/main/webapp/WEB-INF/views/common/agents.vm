@@ -53,7 +53,7 @@
                                     <div class="agent-detail">
                                         <h2>
 											$!{agent.companyName}
-											#if($!stringUtil.test($!{agent.isVerified}))
+											#if($agent.isVerified())
 												<a href="$!{agent.verifiedLink}"><img src="../img/v.png" /></a>
 											#end
 										</h2>

@@ -51,7 +51,7 @@ public class CommonController extends BaseController{
 	 * 其他未识别的URL都统一到
 	 * @return
 	 */
-	@RequestMapping(value="/common/index")
+	@RequestMapping(value="/index")
 	public ModelAndView index(final HttpServletResponse response)
 	{
 		ModelAndView mv = new ModelAndView("/common/index");
@@ -71,13 +71,19 @@ public class CommonController extends BaseController{
 		return mv;
 	}
 
-	@RequestMapping(value = "/question")
+	@RequestMapping(value = "/questions")
 	public ModelAndView allquestion(final HttpServletRequest request,final HttpServletResponse response, @ModelAttribute("form")QuestionForm form) 
 	{
-		ModelAndView mv = new ModelAndView("/common/question");
+		ModelAndView mv = new ModelAndView("/common/questions");
 		
 		Result result = commonService.getAllquestions(form);
+		mv.addObject("questions", result.get("questions"));
 		
+		result = commonService.getMainagents();
+		mv.addObject("agents", result.get("agents"));
+		
+		result = commonService.getMaingoodcases();
+		mv.addObject("goodcases", result.get("goodcases"));
 		return mv;
 		
 	}

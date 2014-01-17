@@ -135,7 +135,7 @@ public class AgentController extends BaseController{
 	public ModelAndView logoff(final HttpServletRequest request,final HttpServletResponse response, Model model) {
 		request.getSession().invalidate();
 		model.asMap().remove("account");
-		return new ModelAndView(new RedirectView("/common/index"));
+		return new ModelAndView(new RedirectView("/index"));
 		
 	}
 	

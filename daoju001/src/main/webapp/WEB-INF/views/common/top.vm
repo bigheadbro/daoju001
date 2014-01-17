@@ -8,10 +8,10 @@
         <div class="nav">
             <ul>
                 <li>
-                    <a href="/common/index">首页</a>
+                    <a href="/index">首页</a>
                 </li>
                 <li>
-                    <a href="#">所有问题</a>
+                    <a href="/questions">所有问题</a>
                 </li>
                 <li>
                     <a href="/agents">代理商</a>
@@ -39,61 +39,61 @@
                     </li>
                 </ul>
                 　                      #else
-					#if($!{account.isBuyer})
-            <div class="top-user" href="/buyer/main">
-                <span class="name">${account.userName}</span>
-								<div class="logo">
-									<a href="#">
-                #if($!{account.logo})
-                    <img src="../uploadfile/$!{account.logo}"  />
-                #else
-                    <img src="../img/avatar.png"  />
-								#end
-									</a>
-								</div>
-            </div>
-            <ul class="top-dropdown">
-                <li>
-                    <a href="/buyer/main">我的刀师傅</a>
-                </li>
-                <li>
-                    <a href="/buyer/mymsg">消息</a>
-                </li>
-                <li>
-                    <a href="/buyer/profile">设置</a>
-                </li>
-                <li>
-                    <a href="/buyer/logoff">退出</a>
-                </li>
-            </ul>
-					#else
-							<div class="top-user" href="/agent/main">
-                  <span class="name">${account.userName}</span>
-									<div class="logo">
-										<a href="#">
-                  #if($!{account.logo})
-                      <img src="../logo/$!{account.logo}"  />
-                  #else
-                      <img src="../img/avatar.png"  />
-									#end
-										</a>
-									</div>
-              </div>
-            <ul class="top-dropdown">
-                <li>
-                    <a href="/agent/main">我的刀师傅</a>
-                </li>
-                <li>
-                    <a href="/agent/mymsg">消息</a>
-                </li>
-                <li>
-                    <a href="/agent/profile">设置</a>
-                </li>
-                <li>
-                    <a href="/agent/logoff">退出</a>
-                </li>
-            </ul>
-					#end
+                    #if($account.isBuyer())
+                        <div class="top-user" href="/buyer/main">
+                            <span class="name">${account.userName}</span>
+                            <div class="logo">
+                                <a href="#">
+                                    #if($!{account.logo})
+                                        <img src="../logo/$!{account.logo}"  />
+                                        #else
+                                            <img src="../img/avatar.png"  />
+                                    #end
+                                </a>
+                            </div>
+                        </div>
+                        <ul class="top-dropdown">
+                            <li>
+                                <a href="/buyer/main">我的刀师傅</a>
+                            </li>
+                            <li>
+                                <a href="/buyer/mymsg">消息</a>
+                            </li>
+                            <li>
+                                <a href="/buyer/profile">设置</a>
+                            </li>
+                            <li>
+                                <a href="/buyer/logoff">退出</a>
+                            </li>
+                        </ul>
+                  	#else
+                            <div class="top-user" href="/agent/main">
+                                <span class="name">${account.userName}</span>
+                                <div class="logo">
+                                    <a href="#">
+                                        #if($!{account.logo})
+                                            <img src="../logo/$!{account.logo}"  />
+                                            #else
+                                                <img src="../img/avatar.png"  />
+                                        #end
+                                    </a>
+                                </div>
+                            </div>
+                            <ul class="top-dropdown">
+                                <li>
+                                    <a href="/agent/main">我的刀师傅</a>
+                                </li>
+                                <li>
+                                    <a href="/agent/mymsg">消息</a>
+                                </li>
+                                <li>
+                                    <a href="/agent/profile">设置</a>
+                                </li>
+                                <li>
+                                    <a href="/agent/logoff">退出</a>
+                                </li>
+                            </ul>
+                    #end
             #end		
         </div>
     </div>

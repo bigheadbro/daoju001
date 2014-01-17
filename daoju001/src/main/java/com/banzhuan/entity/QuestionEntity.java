@@ -25,7 +25,10 @@ public class QuestionEntity implements Serializable {
 	private String gmtCreate;
 	// 记录修改时间
 	private String gmtModify;
-	
+	// 用户字
+	private String userName;
+	// 用户logo
+	private String userLogo;
 	private int industry;
 	private int processMethod;
 	private int wpHardness;
@@ -242,6 +245,34 @@ public class QuestionEntity implements Serializable {
 	 */
 	public void setWpMaterial(int wpMaterial) {
 		this.wpMaterial = wpMaterial;
+	}
+
+	/**
+	 * @return the userName
+	 */
+	public String getUserName() {
+		return userName;
+	}
+
+	/**
+	 * @param userName the userName to set
+	 */
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+
+	/**
+	 * @return the userLogo
+	 */
+	public String getUserLogo() {
+		return userLogo;
+	}
+
+	/**
+	 * @param userLogo the userLogo to set
+	 */
+	public void setUserLogo(String userLogo) {
+		this.userLogo = userLogo;
 	}
 
 	

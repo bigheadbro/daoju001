@@ -16,6 +16,10 @@
 		<id property="cntCA" column="cnt_CA" />
 		<!--0=已发布，1=草稿 -->
 		<id property="state" column="state" />
+		<!--用户名字 -->
+		<id property="userName" column="user_name" />
+		<!--用户logo -->
+		<id property="userLogo" column="user_logo" />
 		<!--记录创建时间 -->
 		<id property="gmtCreate" column="gmt_create" />
 		<!--记录修改时间 -->

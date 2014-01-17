@@ -13,7 +13,7 @@
 		  hideimg();
 			if($("#ques-cont-editor").length > 0)
 			{
-				$("#ques-cont-editor").append("<img class=\"img-in-question\" src=\"../uploadfile/" + data.addr + " \"/>");
+				$("#ques-cont-editor").append("<img class=\"img-in-question\" src=\"../uploadfile/" + data.addr + "\"/>");
 				$("#hasPic").val(1);
 			}
 		}

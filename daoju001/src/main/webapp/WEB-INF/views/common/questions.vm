@@ -1,0 +1,326 @@
+#set($layout = "/layout/index_layout.vm")
+<script type="text/javascript" src="../js/ques-handler.js"></script>
+<script type="text/javascript" src="../js/questions.js"></script>
+<div class="main-bk-wrapper pt0">
+	<div class="main-content-container clearfix">
+		<!-- 问题 -->
+		<div class="main-list-container width630">
+			<div class="gc-list-header">
+				<h1>所有问题</h1>
+				<div class="question-param-wrap">
+    				<div class="mi question-param clearfix">
+                        <div class="question-param-li process clearfix">
+                            #springBind("form.processMethod")
+                            <input type="hidden" name="${status.expression}"  value="$!{status.value}" />
+                            <a class="sel" >加工方式</a>
+                            <ul class="param">
+                                <li>
+                                    <a>平面铣削</a>
+                                </li>
+                                <li>
+                                    <a>侧壁铣削</a>
+                                </li>
+            					<li>
+                                    <a>曲面铣削</a>
+                                </li>
+                                <li>
+                                    <a>铣槽</a>
+                                </li>
+            					<li>
+                                    <a>钻孔</a>
+                                </li>
+                                <li>
+                                    <a>镗孔</a>
+                                </li>
+            					<li>
+                                    <a>铰孔</a>
+                                </li>
+                                <li>
+                                    <a>螺纹铣削</a>
+                                </li>
+            					<li>
+                                    <a>车削(粗加工）</a>
+                                </li>
+                                <li>
+                                    <a>车削(槽加工）</a>
+                                </li>
+            					<li>
+                                    <a>车削(螺纹加工）</a>
+                                </li>
+                                <li>
+                                    <a>去毛刺</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="question-param-li industry clearfix">
+                            #springBind("form.industry")
+                            <input type="hidden" name="${status.expression}"  value="$!{status.value}" />
+                            <a class="sel" >所属行业</a>
+                            <ul class="param">
+                                <li>
+                                    <a>模具</a>
+                                </li>
+                                <li>
+                                    <a>船舶</a>
+                                </li>
+            					<li>
+                                    <a>石油设备</a>
+                                </li>
+            					<li>
+                                    <a>散热器/空调</a>
+                                </li>
+            					<li>
+                                    <a>发电设备</a>
+                                </li>
+            					<li>
+                                    <a>塑料机械</a>
+                                </li>
+            					<li>
+                                    <a>内燃机</a>
+                                </li>
+            					<li>
+                                    <a>大型机械设备</a>
+                                </li>
+            					<li>
+                                    <a>汽车零件</a>
+                                </li>
+            					<li>
+                                    <a>电子行业</a>
+                                </li>
+            					<li>
+                                    <a>通用零件</a>
+                                </li>
+            					<li>
+                                    <a>其它</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="question-param-li hardness clearfix">
+                            #springBind("form.wpHardness")
+                            <input type="hidden" name="${status.expression}"  value="$!{status.value}" />
+                            <a class="sel" >工件硬度</a>
+                            <ul class="param">
+                                <li>
+                                    <a>HRC20以下</a>
+                                </li>
+                                <li>
+                                    <a>HRC20-30</a>
+                                </li>
+            					<li>
+                                    <a>HRC30-40</a>
+                                </li>
+                                <li>
+                                    <a>HRC40-50</a>
+                                </li>
+            					<li>
+                                    <a>HRC50-58</a>
+                                </li>
+                                <li>
+                                    <a>HRC58-62</a>
+                                </li>
+            					<li>
+                                    <a>HRC62-65</a>
+                                </li>
+                                <li>
+                                    <a>HRC65-68</a>
+                                </li>
+            					<li>
+                                    <a>HRC68以上</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="question-param-li material clearfix">
+        					#springBind("form.wpMaterial")
+                            <input type="hidden" name="${status.expression}"  value="$!{status.value}" />
+                            <a class="sel" >工件材质</a>
+                            <ul class="param">
+                                <li>
+                                    <a>钢</a>
+                                </li>
+                                <li>
+                                    <a>铸铁</a>
+                                </li>
+            					<li>
+                                    <a>不锈钢</a>
+                                </li>
+                                <li>
+                                    <a>高温合金</a>
+                                </li>
+            					<li>
+                                    <a>铝</a>
+                                </li>
+                                <li>
+                                    <a>有色金属</a>
+                                </li>
+            					<li>
+                                    <a>石墨</a>
+                                </li>
+                                <li>
+                                    <a>树脂</a>
+                                </li>
+                            </ul>
+    					</div>    
+    				</div>
+				</div>
+			</div>
+			<div class="main-list-content">
+				#foreach($question in $questions)
+				
+				<div class="hot-question-listitem first clearfix">
+					<div class="hidden">$!{question.content}</div>
+					<div class="logo">
+						<a>
+    						#if($!{question.userLogo})
+    							<img src="../logo/$!{question.userLogo}" />
+    						#else
+    							<img src="../img/avatar.png" />
+    						#end
+    					</a>
+					</div>
+					<div class="content">
+						<ul>
+							<li class="name"><p>$!{question.userName}</p></li>
+							<li class="title clearfix">
+    							<div class="questions-param">
+        							#if($!{question.industry} > 0)
+        								<span>$stringUtil.getIndustry($!{question.industry})</span>
+        							#end
+        							#if($!{question.processMethod} > 0)
+        								<span>$stringUtil.getMethod($!{question.processMethod})</span>
+        							#end
+        							#if($!{question.wpHardness} > 0)
+        								<span>$stringUtil.getMaterial($!{question.wpHardness})</span>
+        							#end
+        							#if($!{question.wpMaterial} > 0)
+        								<span>$stringUtil.getHardness($!{question.wpMaterial})</span>
+        							#end
+        						</div>
+								<div class="questions-type">
+									#if($!{question.type} == 1)
+										<span class="type1">求精</span>
+									#elseif($!{question.type} == 2)
+										<span class="type2">解难</span>
+									#else
+										<span class="type3">求新</span>
+									#end
+									<span class="time">$stringUtil.formatDate($!{question.gmtModify})</span>
+								</div>
+							</li>
+							<li class="text clearfix">
+								
+								<p>
+								我司过去使用的是R8圆刀片，加工情况尚可，63刀盘5刃，可转换6次但目前公司希望降低成本，要求其他刀具品牌参与竞争，求推荐刀具光洁度要求Ra3.2即可，主要是寿命要长
+								</p>
+							</li>
+							<li class="info">
+								<p> 1 个专业回答 <span>|</span> 3 个普通回答 <span>|</span> 查看详情 </p>
+							</li>
+							<li class="answer">
+							  <div class="answer-arrow">
+								  <em class="S_line1_c">◆</em>
+								  <em class="S_bg1_c">◆</em>
+								</div>
+							  <ul class="clearfix">
+								  <li class="agent-info clearfix">
+									  <img src="../img/big-logo.png" />
+										<h4>无锡汉尼达</h4>
+										<h5>Big刀具代理商</h5>
+									</li>
+								  <li class="answer-cont">
+									  <p>
+										  您好,根据您的情况，加工条件和选刀已比较合适，但刀片仅单侧6刃可用，这方面可进行提高，请参考我司M1200产品（右图）。63刀盘为六刃，根据我们以往的经验，可按照相同的Vc和更高的Fz进行加工，即AP=1.2 N=500 F=800这样可以提高30%的效率..
+										</p>
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</div>
+				</div>
+				<div class="seperation">&nbsp;</div>
+				#end
+			</div>
+		</div>
+		<!-- 代理商 -->
+		<div class="main-list-container width300 ml30">
+			<div class="main-list-header  ff7e00">
+                                                          最新代理商
+				<a class="seemore" href="/agents">查看更多</a>
+			</div>
+			<div class="main-list-content">
+				#foreach($agent in $agents)
+  				<div class="new-agent-listitem clearfix">
+  					<div class="logo">
+  						<a href="/agent/${agent.id}">
+								#if($!{agent.logo})
+									<img src="../logo/$!{agent.logo}" />
+								#else
+									<img src="../img/avatar.png" />
+								#end
+							</a>
+  					</div>
+  					<div class="content">
+  						<ul>
+  							<li class="name">
+									<a href="/agent/$!{agent.id}">$!{agent.companyName}</a>
+									#if($agent.isVerified())
+										<a href="$!{agent.verifiedLink}"><img src="../img/v.png" /></a>
+									#end
+								</li>
+  							<li class="title">$!{agent.brandName}</li>
+  						</ul>
+  					</div>
+  				</div>
+  				<div class="seperation">&nbsp;</div>
+				#end
+   </div>
+		</div>
+	    <!-- 成功案例 -->
+		<div class="main-list-container width300 ml30">
+			<div class="main-list-header ff002a">
+				成功案例
+			  <a class="seemore" href="/goodcases">查看更多</a>
+			</div>
+			#foreach($gc in $goodcases)
+			<div class="goodcase-listitem clearfix">
+			  <div class="agent clearfix">
+					<div class="logo">
+						<a>
+							#if($!{gc.agentLogo})
+								<img src="../logo/$!{gc.agentLogo}" />
+							#else
+								<img src="../img/avatar.png" />
+							#end
+						</a>
+					</div>
+					<div class="content">
+						<ul>
+							<li class="name">
+								<a href="/agent/$!{gc.agentId}">$!{gc.agentName}</a>
+								#if($gc.isVerified())
+									<a href="$!{gc.verifiedLink}"><img src="../img/v.png" /></a>
+								#end
+							</li>
+							<li class="title">$!{gc.brandName}</li>
+						</ul>
+					</div>
+				</div>
+				<div class="property">
+					#if($!{gc.industry} > 0)
+						<span>$stringUtil.getIndustry($!{gc.industry})</span>
+					#end
+					#if($!{gc.processMethod} > 0)
+						<span>$stringUtil.getMethod($!{gc.processMethod})</span>
+					#end
+					#if($!{gc.workMaterial} > 0)
+						<span>$stringUtil.getMaterial($!{gc.workMaterial})</span>
+					#end
+					#if($!{gc.workSolidity} > 0)
+						<span>$stringUtil.getHardness($!{gc.workSolidity})</span>
+					#end
+				</div>
+			</div>
+	    <div class="seperation">&nbsp;</div>
+			#end
+		</div>
+	</div>
+</div>

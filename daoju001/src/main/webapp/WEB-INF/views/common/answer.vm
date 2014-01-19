@@ -1,0 +1,78 @@
+<div id="pagemask"></div>
+<div class="answer-win">
+    <div class="answer-win-content">
+        <h2>
+            <a class="close-answer" href="#">x</a>
+				填写专业方案
+		</h2>
+		<form id="form_answer" action="/agent/answer" method="post">
+			<!-- 隐藏字段，用于标示是表单提交 -->
+            <input type="hidden" name="do_submit" value="true"/>
+            #springBind("answerForm.question.id")
+            <input type="hidden" name="${status.expression}" value="$!{status.value}" id="qid" />
+			#springBind("answerForm.question.buyerId")
+            <input type="hidden" name="${status.expression}" value="$!{status.value}" id="bid" />
+            #springBind("answerForm.answer.state")
+            <input type="hidden" name="${status.expression}" value="$!{status.value}" id="state" />
+            #springBind("answerForm.answer.hasPic")
+            <input type="hidden" name="${status.expression}" value="$!{status.value}" id="hasPic" />
+            #springBind("answerForm.hasEdit")
+            <input type="hidden" name="${status.expression}" value="$!{status.value}" id="isEdit" />
+            <div class="content">
+                <div class="answer-container">
+					#springBind("answerForm.answer.content")
+                    <input type="hidden" name="${status.expression}"   />
+                    <h5 class="clearfix">
+                        <a id="addimg" class="addimg-s" href="#"></a>
+							请输入方案详情
+					</h5>
+                    <div class="answer-wrap">
+                        <div id="answer-editor" class="add-question-editor" contenteditable="true" placeholder="请输入问题详情">
+                        </div>
+                    </div>
+					<h4>请输入报价<span>为防止恶性竞价，此条信息仅对提问者显示</span></h4>
+					#springBind("answerForm.answer.price")
+					<textarea class="dsf-form-text-input bargin" name="${status.expression}" ></textarea></li>	
+					<label for="freeuse">
+						#springBind("answerForm.answer.FreeUse")
+						<input id="freeuse" name="${status.expression}" value="$!{status.value}" type="checkbox" />
+						是否愿意提供免费试用
+                    </label>
+                </div>
+				<div class="answer-op clearfix">
+                    <a class="publish" id="submit_public" href="#">发  布</a>
+                    <a class="savedraft" id="submit_draft" href="#">保存草稿</a>
+                </div>
+            </div>
+			<script>
+			$(function() {
+                $("#submit_public").click(function () {
+                    $("#state").val(1);
+                    $(".answer-container").children("input").val($("#answer-editor").html());
+                    $("#form_answer").ajaxSubmit({
+                        dataType:'json',
+                        success:function(data) { 
+                        	showAlert(data.title,data.content,data.info,data.btn,data.link);
+                        }
+                    });
+					hideanswer();
+            	});
+				$("#submit_draft").click(function () {
+                    $("#state").val(0);
+                    $(".answer-container").children("input").val($("#answer-editor").html());
+                    $("#form_answer").ajaxSubmit({
+                        dataType:'json',
+                        success:function(data) { 
+                        	showAlert(data.title,data.content,data.info,data.btn,data.link);
+                        }
+                    });
+					hideanswer();
+                });
+				
+
+            });
+			</script>
+		</form>
+    </div>
+</div>
+#parse("/common/addimg.vm")

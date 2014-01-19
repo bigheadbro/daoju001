@@ -78,6 +78,7 @@
 				<mvc:mapping path="/agent/uploadsample" />
 				<mvc:mapping path="/agent/changepwd" />
 				<mvc:mapping path="/agent/profile" />
+				<mvc:mapping path="/agent/uploadlogo" />
 				<bean class="com.banzhuan.interceptor.AgentLoginInterceptor" />
 			</mvc:interceptor>
 		</mvc:interceptors>

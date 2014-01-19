@@ -11,13 +11,11 @@ import com.banzhuan.dao.BuyerDAO;
 import com.banzhuan.dao.QuestionDAO;
 import com.banzhuan.entity.BuyerEntity;
 import com.banzhuan.entity.QuestionEntity;
-import com.banzhuan.common.Account;
 import com.banzhuan.common.Result;
 import com.banzhuan.form.BuyerProfileForm;
 import com.banzhuan.form.RegForm;
 import com.banzhuan.form.LoginForm;
 import com.banzhuan.form.QuestionForm;
-import com.banzhuan.entity.BuyerEntity;
 import com.banzhuan.util.StringUtil;
 
 /**
@@ -33,6 +31,27 @@ public class BuyerService {
 	@Autowired
 	@Qualifier("questionDAO")
 	private QuestionDAO questionDAO;
+	
+	/**
+	 * 模拟QQ回调处理逻辑
+	 * @param uuid: 唯一ID
+	 * @param nick: qq 昵称
+	 * @return
+	 */
+	public BuyerEntity doQqConnectEnter(String qqConnectId, String nick)
+	{
+		
+		BuyerEntity user = buyerDAO.buyerLoginByQQConnect(qqConnectId);
+		if(user == null)
+		{
+			user  = new BuyerEntity();
+			user.setQqConnectId(qqConnectId);
+			user.setNick(nick);
+			buyerDAO.insertBuyerEntity(user); // 初始化用户信息
+		}
+		return user;
+	}
+
 	
 	public Result register(RegForm form, Errors errors)
 	{

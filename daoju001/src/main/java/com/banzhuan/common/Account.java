@@ -16,6 +16,8 @@ public class Account implements Serializable{
 	private String logo;
 	private String mail;
 	private String brandName;
+	private boolean isVerified;
+	private String verifiedLink;
 	
 	public boolean isAgent() {
 		return isAgent;
@@ -100,6 +102,30 @@ public class Account implements Serializable{
 	 */
 	public void setBrandName(String brandName) {
 		this.brandName = brandName;
+	}
+	/**
+	 * @return the isVerified
+	 */
+	public boolean isVerified() {
+		return isVerified;
+	}
+	/**
+	 * @param isVerified the isVerified to set
+	 */
+	public void setVerified(boolean isVerified) {
+		this.isVerified = isVerified;
+	}
+	/**
+	 * @return the verifiedLink
+	 */
+	public String getVerifiedLink() {
+		return verifiedLink;
+	}
+	/**
+	 * @param verifiedLink the verifiedLink to set
+	 */
+	public void setVerifiedLink(String verifiedLink) {
+		this.verifiedLink = verifiedLink;
 	}
 	
 

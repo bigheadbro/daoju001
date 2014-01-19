@@ -1,4 +1,5 @@
 #set($layout = "/layout/agent_detail_layout.vm")
+<script type="text/javascript" src="../js/mixed-handle.js"></script>
 <ul class="right-tab clearfix">
   <li class="current"><a href="#">最新问题</a></li>
   <li><a href="answer">已回答的问题</a></li>
@@ -6,40 +7,13 @@
 </ul>
 <div class="rigth-content">
   <div class="buyer-list">
+	#foreach($question in $questions)
 		<div class="listitem">
-			<p>刀具是机械制造中用于切削加工的工具，又称切削工具?<span>2013-08-08</span></p>
-			<div class="operation clearfix">
-				<a href="#">编辑</a><span>|</span>
-				<a href="#">删除</a>
+			<div class="clearfix">
+    			<div class="mixed">$!{question.content}</div>
+    			<span>$stringUtil.formatDate($!{question.gmtCreate})</span>
 			</div>
 		</div>
-		<div class="listitem">
-			<p>刀具是机械制造中用于切削加工的工具，又称切削工具?<span>2013-08-08</span></p>
-			<div class="operation clearfix">
-				<a href="#">编辑</a><span>|</span>
-				<a href="#">删除</a>
-			</div>
-		</div>
-		<div class="listitem">
-			<p>刀具是机械制造中用于切削加工的工具，又称切削工具?<span>2013-08-08</span></p>
-			<div class="operation clearfix">
-				<a href="#">编辑</a><span>|</span>
-				<a href="#">删除</a>
-			</div>
-		</div>
-		<div class="listitem">
-			<p>刀具是机械制造中用于切削加工的工具，又称切削工具?<span>2013-08-08</span></p>
-			<div class="operation clearfix">
-				<a href="#">编辑</a><span>|</span>
-				<a href="#">删除</a>
-			</div>
-		</div>
-		<div class="listitem">
-			<p>刀具是机械制造中用于切削加工的工具，又称切削工具?<span>2013-08-08</span></p>
-			<div class="operation clearfix">
-				<a href="#">编辑</a><span>|</span>
-				<a href="#">删除</a>
-			</div>
-		</div>
+	#end
 	</div>
 </div>

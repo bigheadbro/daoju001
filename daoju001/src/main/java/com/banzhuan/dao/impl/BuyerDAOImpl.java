@@ -35,5 +35,10 @@ public class BuyerDAOImpl extends SqlSessionDaoSupport implements BuyerDAO {
 		return this.getSqlSession().update("updateBuyerById", buyer);
 	}
 
+	@Override
+	public BuyerEntity buyerLoginByQQConnect(String qqConncetId)
+	{
+		return  this.getSqlSession().selectOne("buyerLoginByQQConnect", qqConncetId);
+	}
 
 }

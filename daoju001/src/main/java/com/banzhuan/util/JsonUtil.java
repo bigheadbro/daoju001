@@ -132,6 +132,41 @@ public class JsonUtil {
         }  
 	}
 	
+	public static void checkAnswerStatus(HttpServletResponse response, int status)
+	{
+		JSONObject object = new JSONObject();  
+		String strStatus = "";
+        response.setContentType("text/Xml;charset=gbk");  
+       	switch(status)
+       	{
+       	case 1:
+       		strStatus = "代理商登录后，才可以回答问题";
+       		break;
+       	case 2:
+       		strStatus = "普通用户不能提供专业解决方案，请使用回复进行交流！";
+       		break;
+       	case 3:
+       		strStatus = "未认证代理商不能提供专业解决方案，需要认证请联系我们！";
+       		break;
+       	case 4:
+       		strStatus = "";
+       	}
+	
+        object.element("status", status);
+        object.element("code", strStatus);
+        PrintWriter out = null;  
+        try {  
+            out = response.getWriter();  
+            out.println(object.toString());  
+        }  
+        catch (IOException ex1) {  
+            ex1.printStackTrace();  
+        }  
+        finally {  
+            out.close();  
+        }  
+	}
+	
 	public static void sendLoginError(HttpServletResponse response, String mail, String pwd)
 	{
 		JSONObject object = new JSONObject();  

@@ -12,7 +12,7 @@
 				  邮箱
 				</li>
 			  <li class="value">
-				  <input type="text"  name="$!{status.expression}"/>
+				  <input type="text"  name="$!{status.expression}"  class="dsf-form-text-input"/>
 				</li>
 			</ul>
 			#springBind("form.password")
@@ -21,7 +21,7 @@
 				  密码
 				</li>
 			  <li class="value">
-				  <input type="password"  name="$!{status.expression}"/>
+				  <input type="password"  name="$!{status.expression}"  class="dsf-form-text-input"/>
 				</li>
 			</ul>
 			<ul class="reg-listitem clearfix">
@@ -46,23 +46,17 @@
 			</ul>
 			<script>
 				$(function() {
-					$(function() {
-                      $("#submit_log").click(function () {
-                        $("#form_log").submit();//提交
-                      });
-                    });
+				  $('input').bind("keypress",function(event){
+				    if (event.keyCode == 13) {
+                      $("#form_log").trigger("submit");
+                    }
+				  });
+                  $("#submit_log").click(function () {
+                    $("#form_log").submit();//提交
+                  });
 				});
 			</script>
 		  </form>
-		  <div class="seperation">&nbsp;</div>
-		  <ul class="mb0 reg-listitem clearfix">
-			  <li class="key">
-				  或者
-				</li>
-			  <li class="value">
-					<a class="qqlogin" href="#">直接使用QQ登录</a>
-				</li>
-			</ul>
       </div>
       <div class="reg-right">
     	  <div class="header">

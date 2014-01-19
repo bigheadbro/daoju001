@@ -42,6 +42,12 @@
 	]]>
 	</select>
 	
+	<select id="buyerLoginByQQConnect" parameterType="int" resultMap="BuyerResultMap">
+	<![CDATA[
+		SELECT * from t_buyer t WHERE t.qq_connect_id = #{qqConnectId}
+	]]>
+	</select>
+	
 	<select id="queryBuyerEntityByMail" parameterType="String" resultMap="BuyerResultMap">
 	<![CDATA[
 		SELECT * from t_buyer t WHERE t.email = #{mail}

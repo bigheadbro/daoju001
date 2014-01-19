@@ -16,14 +16,21 @@ import org.springframework.web.multipart.support.DefaultMultipartHttpServletRequ
 
 import com.banzhuan.dao.AgentDAO;
 import com.banzhuan.dao.GoodcaseDAO;
+import com.banzhuan.dao.ProfessionalAnswerDAO;
+import com.banzhuan.dao.QuestionDAO;
 import com.banzhuan.dao.SampleDAO;
 import com.banzhuan.entity.AgentEntity;
 import com.banzhuan.entity.GoodcaseEntity;
+import com.banzhuan.entity.ProfessionalAnswerEntity;
+import com.banzhuan.entity.QuestionEntity;
 import com.banzhuan.entity.SampleEntity;
+import com.banzhuan.common.Account;
 import com.banzhuan.common.Result;
 import com.banzhuan.form.AgentProfileForm;
 import com.banzhuan.form.GoodcaseForm;
 import com.banzhuan.form.LoginForm;
+import com.banzhuan.form.ProfessionalAnswerForm;
+import com.banzhuan.form.QuestionForm;
 import com.banzhuan.form.RegForm;
 import com.banzhuan.form.SampleForm;
 import com.banzhuan.util.StringUtil;
@@ -46,6 +53,14 @@ public class AgentService {
 	@Autowired
 	@Qualifier("sampleDAO")
 	private SampleDAO sampleDAO;
+	
+	@Autowired
+	@Qualifier("questionDAO")
+	private QuestionDAO questionDAO;
+	
+	@Autowired
+	@Qualifier("paDAO")
+	private ProfessionalAnswerDAO paDAO;
 	
 	public Result register(RegForm form, Errors errors)
 	{
@@ -281,6 +296,21 @@ public class AgentService {
     	
     }
     
+    public Result insertAnswer(ProfessionalAnswerForm answerForm, Account account)
+    {
+    	Result result = new Result();
+    	ProfessionalAnswerEntity pa = answerForm.getAnswer();
+    	pa.setAgentId(account.getUserId());
+    	pa.setAgentName(account.getUserName());
+    	pa.setAgentLogo(account.getLogo());
+    	pa.setBrandName(account.getBrandName());
+    	pa.setVerifiedLink(account.getVerifiedLink());
+    	pa.setQuestionId(answerForm.getQuestion().getId());
+    	pa.setBuyerId(answerForm.getQuestion().getBuyerId());
+    	
+    	paDAO.insertProfessionalAnswerEntity(pa);
+    	return result;
+    }
     public Result updateGoodcaseById(GoodcaseForm form, GoodcaseEntity gc, Errors errors)
     {
     	Result result = new Result();
@@ -413,5 +443,23 @@ public class AgentService {
     		form.setLink(sample.getLink());
     	}
     }
+    
+    public Result queryQuestionById(int id)
+	{
+		Result result = new Result();
+		QuestionEntity question = questionDAO.queryQuestionEntityById(id);
+		result.add("question", question);
+		return result;
+	}
+    
+    public Result getAllquestions()
+	{
+		Result result = new Result();
+		QuestionEntity ques = new QuestionEntity();
+
+		List<QuestionEntity> questions = questionDAO.getAllquestions(ques);
+		result.add("questions", questions);
+		return result;
+	}
     
 }

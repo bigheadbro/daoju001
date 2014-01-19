@@ -9,14 +9,14 @@ public class ProfessionalAnswerEntity implements Serializable {
 	private static final long serialVersionUID = -6679115751261653584L;
 	//
 	private int id;
-	// 回答名称
-	private String title;
 	// 回答内容
 	private String content;
 	// 报价
-	private int price;
+	private String price;
 	// 0=已发布，1=草稿
 	private int state;
+	
+	private boolean hasPic;
 	// 买家id
 	private int buyerId;
 	// 问题id
@@ -25,8 +25,14 @@ public class ProfessionalAnswerEntity implements Serializable {
 	private int agentId;
 	// 代理商名字
 	private String agentName;
+	private String brandName;
 	// 代理商logo
 	private String agentLogo;
+	
+	private String verifiedLink;
+	
+	private boolean FreeUse;
+	
 	// 记录创建时间
 	private String gmtCreate;
 	// 记录修改时间
@@ -47,20 +53,6 @@ public class ProfessionalAnswerEntity implements Serializable {
 		this.id = id;
 	}
 
-	/**
-	 * @return the title
-	 */
-	public String getTitle() {
-		return title;
-	}
-
-	/**
-	 * @param title
-	 *            the title to set
-	 */
-	public void setTitle(String title) {
-		this.title = title;
-	}
 
 	/**
 	 * @return the content
@@ -80,7 +72,7 @@ public class ProfessionalAnswerEntity implements Serializable {
 	/**
 	 * @return the price
 	 */
-	public int getPrice() {
+	public String getPrice() {
 		return price;
 	}
 
@@ -88,7 +80,7 @@ public class ProfessionalAnswerEntity implements Serializable {
 	 * @param price
 	 *            the price to set
 	 */
-	public void setPrice(int price) {
+	public void setPrice(String price) {
 		this.price = price;
 	}
 
@@ -218,6 +210,63 @@ public class ProfessionalAnswerEntity implements Serializable {
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
+
+	/**
+	 * @return the verifiedLink
+	 */
+	public String getVerifiedLink() {
+		return verifiedLink;
+	}
+
+	/**
+	 * @param verifiedLink the verifiedLink to set
+	 */
+	public void setVerifiedLink(String verifiedLink) {
+		this.verifiedLink = verifiedLink;
+	}
+
+	/**
+	 * @return the isFreeUse
+	 */
+	public boolean isFreeUse() {
+		return FreeUse;
+	}
+
+	/**
+	 * @param isFreeUse the isFreeUse to set
+	 */
+	public void setFreeUse(boolean isFreeUse) {
+		this.FreeUse = isFreeUse;
+	}
+
+	/**
+	 * @return the hasPic
+	 */
+	public boolean isHasPic() {
+		return hasPic;
+	}
+
+	/**
+	 * @param hasPic the hasPic to set
+	 */
+	public void setHasPic(boolean hasPic) {
+		this.hasPic = hasPic;
+	}
+
+	/**
+	 * @return the brandName
+	 */
+	public String getBrandName() {
+		return brandName;
+	}
+
+	/**
+	 * @param brandName the brandName to set
+	 */
+	public void setBrandName(String brandName) {
+		this.brandName = brandName;
+	}
+
 
 	
 }

@@ -421,11 +421,37 @@ public class StringUtil {
 			SimpleDateFormat df = new SimpleDateFormat(srcFormat);
 			Date date = df.parse(timeStr);
 			SimpleDateFormat dateFormat = new SimpleDateFormat(desFormat);
-			return dateFormat.format(date);
+			SimpleDateFormat todayFormat = new SimpleDateFormat("HH:mm");
+			if(isToday(date))
+			{
+				return todayFormat.format(date);
+			}
+			else
+			{
+				return dateFormat.format(date);
+			}
 		} catch (ParseException e) {
 		}
 		return "";
 	}
+	
+	public static boolean isToday(Date date)
+	{
+        Date now = new Date();
+
+        boolean result = true;
+
+        result &= date.getYear()==now.getYear();
+
+        result &= date.getMonth()==now.getMonth();
+
+        result &= date.getDate()==now.getDate();
+
+        return result;
+
+    }
+
+
 	
 	/**
 	 * 获取格式化后的日期字符串(默认原始串格式化表达式为yyyy-MM-dd HH:mm:ss 默认目标串格式化表达式为yyyy-MM-dd)
@@ -515,9 +541,13 @@ public class StringUtil {
 	private static Map<Integer, String> processMethodMap = new HashMap<Integer, String>();
 	private static Map<Integer, String> wpMaterialMap = new HashMap<Integer, String>();
 	private static Map<Integer, String> wpHardnessMap = new HashMap<Integer, String>();
+	private static Map<Integer, String> msgTypeMap = new HashMap<Integer, String>();
 	
 	static
 	{
+		msgTypeMap.put(1, "提供了专业解决方案");
+		msgTypeMap.put(2, "回复了你");
+		
 		industryMap.put(1, "模具");
 		industryMap.put(2, "船舶");
 		industryMap.put(3, "石油设备");

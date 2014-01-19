@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -27,6 +28,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.support.RequestContextUtils;
 import org.springframework.web.servlet.view.RedirectView;
 
+import com.banzhuan.common.Constant;
 import com.banzhuan.common.Result;
 import com.banzhuan.entity.BuyerEntity;
 import com.banzhuan.form.BuyerProfileForm;
@@ -38,6 +40,10 @@ import com.banzhuan.util.JsonUtil;
 import com.banzhuan.util.StringUtil;
 import com.banzhuan.util.Util;
 import com.qq.connect.QQConnectException;
+import com.qq.connect.api.OpenID;
+import com.qq.connect.api.qzone.UserInfo;
+import com.qq.connect.javabeans.AccessToken;
+import com.qq.connect.javabeans.qzone.UserInfoBean;
 import com.qq.connect.oauth.Oauth;
 import com.banzhuan.common.Account;
 
@@ -117,7 +123,7 @@ public class BuyerController extends BaseController{
 				//set cookie
 				if(form.getRememberme() != null && form.getRememberme())
 				{
-					this.addCookie(response, "mail", user.getEmail(), Integer.MAX_VALUE);
+					this.addCookie(response, Constant.LOGIN_MAIL, user.getEmail(), Integer.MAX_VALUE);
 				}
 				//设置头像
 				account.setLogo(buyerService.getBuyerEntity(account.getUserId()).getLogo());
@@ -128,6 +134,67 @@ public class BuyerController extends BaseController{
 		}
 		return new ModelAndView("/buyer/log");
 		
+	}
+	
+	/**
+	 * @return
+	 */
+	@RequestMapping(value = "/qqlogin")
+	public void qqLogin(final HttpServletRequest request,final HttpServletResponse response) {
+	 	try
+	 	{
+			response.sendRedirect(new Oauth().getAuthorizeURL(request));
+		} catch (QQConnectException e) {
+			logger.error("QQConnectException:"+e.getMessage());
+		} catch (IOException e) {
+			logger.error("qqLoginException:"+e.getMessage());
+		}
+			
+	}
+	
+	/**
+	 * qq connect 回调接口
+	 * 
+	 * @return
+	 */
+	@RequestMapping(value = "/qq_connect")
+	public ModelAndView qqConnect(final HttpServletRequest request, final HttpServletResponse response, final ModelMap modelMap) {
+		try {
+			AccessToken accessTokenObj = (new Oauth())
+					.getAccessTokenByRequest(request);
+			String accessToken = null, openID = null;
+			long tokenExpireIn = 0L;
+
+			if (accessTokenObj.getAccessToken().equals("")) {
+				return new ModelAndView(new RedirectView("error")); // 定向到统一的错误页面
+			} else {
+				accessToken = accessTokenObj.getAccessToken();
+				tokenExpireIn = accessTokenObj.getExpireIn();
+				//this.addCookie(response, Constant.TKF_QQ_ACCESS_TOKET, accessToken, (int)tokenExpireIn);
+				// 利用获取到的accessToken 去获取当前用的openid -------- start
+				OpenID openIDObj = new OpenID(accessToken);
+				openID = openIDObj.getUserOpenID();
+				UserInfo qzoneUserInfo = new UserInfo(accessToken, openID);
+                UserInfoBean userInfo = qzoneUserInfo.getUserInfo();
+                String nick = userInfo.getNickname();
+                
+                BuyerEntity user = buyerService.doQqConnectEnter(openID, nick);
+				Account account = new Account();
+				account.setQqConnectId(openID);
+				account.setAccessToken(accessToken);
+				account.setUserName(nick);
+				account.setUserId(user.getId());
+				account.setLogin(true);
+				account.setBuyer(true);
+
+				//account.setLogo(resume.getHeadUrl());
+				request.getSession().setAttribute("account", account);
+				return new ModelAndView(new RedirectView("profile"));
+			}
+		} catch (Exception e) {
+			logger.error("qqConnect:"+e.getMessage());
+			return new ModelAndView(new RedirectView("error")); // 定向到统一的错误页面
+		}
 	}
 	
 	/**

@@ -19,6 +19,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.support.DefaultMultipartHttpServletRequest;
@@ -26,6 +27,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.support.RequestContextUtils;
 import org.springframework.web.servlet.view.RedirectView;
+import org.springframework.web.util.WebUtils;
 
 import com.banzhuan.common.Account;
 import com.banzhuan.common.Result;
@@ -34,6 +36,7 @@ import com.banzhuan.entity.GoodcaseEntity;
 import com.banzhuan.entity.SampleEntity;
 import com.banzhuan.form.AgentProfileForm;
 import com.banzhuan.form.GoodcaseForm;
+import com.banzhuan.form.ProfessionalAnswerForm;
 import com.banzhuan.form.RegForm;
 import com.banzhuan.form.LoginForm;
 import com.banzhuan.form.SampleForm;
@@ -112,10 +115,12 @@ public class AgentController extends BaseController{
 				account.setUserName(user.getCompanyName()); // 用户登录名
 				account.setUserId(user.getId()); // 用户ID
 				account.setMail(user.getMail()); // 邮箱
-				account.setLogo(user.getLogo()); // 邮箱
+				account.setLogo(user.getLogo()); // logo
 				account.setBrandName(user.getBrandName());
 				account.setBuyer(false);
 				account.setAgent(true);
+				account.setVerified(user.isVerified());
+				account.setVerifiedLink(user.getVerifiedLink());
 				//set cookie
 				if(form.getRememberme() != null && form.getRememberme())
 				{
@@ -252,13 +257,50 @@ public class AgentController extends BaseController{
 	@RequestMapping(value="/newquestion")
 	public ModelAndView newquestion(HttpServletRequest request, HttpServletResponse response) {
 		ModelAndView mv = new ModelAndView("agent/newquestion");
+		Result result = agentService.getAllquestions();
+		mv.addObject("questions", result.get("questions"));
 		return mv;
 	}
 	
 	@RequestMapping(value="/answer")
-	public ModelAndView oldquestion(HttpServletRequest request, HttpServletResponse response) {
+	public ModelAndView answer(HttpServletRequest request, HttpServletResponse response, @ModelAttribute("account")Account account,
+			@ModelAttribute("answerForm")ProfessionalAnswerForm answerForm,BindingResult result) 
+	{
 		ModelAndView mv = new ModelAndView("agent/answer");
+		agentService.insertAnswer(answerForm, account);
 		return mv;
+	}
+	
+	@RequestMapping(value="/showanswer")
+	public void showanswer(HttpServletRequest request, HttpServletResponse response) 
+	{
+		Account account = (Account) WebUtils.getSessionAttribute(request, "account");
+		if(account == null)
+		{
+			JsonUtil.checkAnswerStatus(response, 1);
+			return;
+		}
+		else
+		{
+			if(account.isLogin())
+			{
+				if(account.isBuyer())
+				{
+					JsonUtil.checkAnswerStatus(response, 2);
+				}
+				if(account.isAgent())
+				{
+					if(!account.isVerified())
+					{
+						JsonUtil.checkAnswerStatus(response, 3);
+					}
+					else
+					{
+						JsonUtil.checkAnswerStatus(response, 4);
+					}
+				}
+			}
+		}
 	}
 	
 	@RequestMapping(value="/draft")
@@ -299,6 +341,8 @@ public class AgentController extends BaseController{
 			gc.setAgentLogo(account.getLogo());
 			gc.setAgentName(account.getUserName());
 			gc.setBrandName(account.getBrandName());
+			gc.setVerified(account.isVerified());
+			gc.setVerifiedLink(account.getVerifiedLink());
 			
 			// /////////////////////////////////////////////////////////////获取上传的文件///////////////////////////////////
 			if (request instanceof DefaultMultipartHttpServletRequest) 
@@ -383,6 +427,8 @@ public class AgentController extends BaseController{
 			sample.setAgentLogo(account.getLogo());
 			sample.setAgentName(account.getUserName());
 			sample.setBrandName(account.getBrandName());
+			sample.setVerified(account.isVerified());
+			sample.setVerifiedLink(account.getVerifiedLink());
 			
 			// /////////////////////////////////////////////////////////////获取上传的文件///////////////////////////////////
 			if (request instanceof DefaultMultipartHttpServletRequest) 

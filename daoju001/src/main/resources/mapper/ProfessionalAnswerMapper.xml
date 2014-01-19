@@ -4,12 +4,12 @@
 	<resultMap type="ProfessionalAnswerEntity" id="ProfessionalAnswerResultMap">
 	  <!---->
 		<id property="id" column="id" />
-		<!--回答名称 -->
-		<id property="title" column="title" />
 		<!--回答内容 -->
 		<id property="content" column="content" />
 		<!--报价 -->
 		<id property="price" column="price" />
+		<id property="FreeUse" column="is_free_use" />
+		<id property="hasPic" column="has_pic" />
 		<!--0=已发布，1=草稿 -->
 		<id property="state" column="state" />
 		<!--买家id -->
@@ -20,8 +20,10 @@
 		<id property="agentId" column="agent_id" />
 		<!--代理商名字 -->
 		<id property="agentName" column="agent_name" />
+		<id property="brandName" column="brand_name" />
 		<!--代理商logo -->
 		<id property="agentLogo" column="agent_logo" />
+		<id property="verifiedLink" column="verified_link" />
 		<!--记录创建时间 -->
 		<id property="gmtCreate" column="gmt_create" />
 		<!--记录修改时间 -->
@@ -41,28 +43,34 @@
 		</selectKey>
 		insert into t_professional_answer
 		(
-		title
-		,content
+		content
 		,price
+		,is_free_use
+		,has_pic
 		,state
 		,buyer_id
 		,question_id
 		,agent_id
 		,agent_name
+		,brand_name
 		,agent_logo
+		,verified_link
 		,gmt_create
 		,gmt_modify)
 		values
 		(
-		#{title}
-		,#{content}
+		#{content}
 		,#{price}
+		,#{FreeUse}
+		,#{hasPic}
 		,#{state}
 		,#{buyerId}
 		,#{questionId}
 		,#{agentId}
 		,#{agentName}
+		,#{brandName}
 		,#{agentLogo}
+		,#{verifiedLink}
 		,#{gmtCreate}
 		,#{gmtModify}
 

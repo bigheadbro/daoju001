@@ -61,6 +61,8 @@
 		,agent_name
 		,agent_logo
 		,brand_name
+		,is_verified
+		,verified_link
 		,link
 		,count
 		,gmt_create
@@ -77,6 +79,8 @@
 		,#{agentName}
 		,#{agentLogo}
 		,#{brandName}
+		,#{isVerified}
+		,#{verifiedLink}
 		,#{link}
 		,#{count}
 		,#{gmtCreate}

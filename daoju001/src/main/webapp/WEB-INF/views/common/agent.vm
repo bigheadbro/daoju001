@@ -3,8 +3,8 @@
 <div class="main-bk-wrapper pt0">
 	<div class="main-content-container clearfix">
 		<div class="main-list-container width630">
-			<div class="agent-list-header">
-				<h1><span><a href="/agents">代理商</a> ></span>$!{agent.companyName}</h1>
+			<div class="gc-list-header">
+				<h1><span><a href="/agents">代理商</a> ></span><span class="regular">$!{agent.companyName}</span></h1>
 			</div>
 			<div class="company-detail clearfix">
 				<div class="left">
@@ -20,14 +20,13 @@
 				</div>
 				<div class="right">
 					<div class="company-base-info">
-						<h3>
-							$!{agent.companyName}
+						<h3 class="clearfix">
+							<span>$!{agent.companyName}</span>
 							#if($agent.isVerified())
-								<a target="_blank" href="$!{agent.verifiedLink}"><img src="../img/v.png" /></a>
+								<a class="fancybox-v" title="$!{agent.companyName}的代理证书" href="$!{agent.verifiedLink}"><img src="../img/v.png" /></a>
 							#end
 						</h3>
 						<h4>代理刀具品牌：$!{agent.brandName}</h4>
-						<h5>已回答x个问题</h5>
 					</div>
 					<div class="company-contact-info">
 						<div class="item clearfix">

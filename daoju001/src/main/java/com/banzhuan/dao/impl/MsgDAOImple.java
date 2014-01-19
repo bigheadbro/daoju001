@@ -1,9 +1,13 @@
 package com.banzhuan.dao.impl;
 
+import org.mybatis.spring.support.SqlSessionDaoSupport;
+import org.springframework.stereotype.Repository;
+
 import com.banzhuan.dao.MsgDAO;
 import com.banzhuan.entity.MessageEntity;
 
-public class MsgDAOImple implements MsgDAO {
+@Repository("msgDAO")
+public class MsgDAOImple extends SqlSessionDaoSupport implements MsgDAO {
 
 	@Override
 	public MessageEntity queryBuyerEntityById(int id) {

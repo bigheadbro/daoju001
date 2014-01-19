@@ -7,21 +7,51 @@
         </div>
         <div class="nav">
             <ul>
-                <li>
+				#if($!stringUtil.isContains($request.getServletPath(),"/index"))
+                <li class="current">
                     <a href="/index">首页</a>
                 </li>
-                <li>
+				#else
+				<li>
+                    <a href="/index">首页</a>
+                </li>
+				#end
+				#if($!stringUtil.isContains($request.getServletPath(),"/questions"))
+                <li class="current">
                     <a href="/questions">所有问题</a>
                 </li>
-                <li>
+				#else
+				<li>
+                    <a href="/questions">所有问题</a>
+                </li>
+				#end
+				#if($!stringUtil.isContains($request.getServletPath(),"/agents"))
+                <li class="current">
                     <a href="/agents">代理商</a>
                 </li>
-                <li>
+				#else
+				<li>
+                    <a href="/agents">代理商</a>
+                </li>
+				#end
+				#if($!stringUtil.isContains($request.getServletPath(),"/goodcases"))
+                <li class="current">
                     <a href="/goodcases">成功案例</a>
                 </li>
-                <li>
-                    <a href="#">刀具样本</a>
+				#else
+				<li>
+                    <a href="/goodcases">成功案例</a>
                 </li>
+				#end
+				#if($!stringUtil.isContains($request.getServletPath(),"/samples"))
+                <li class="current">
+                    <a href="samples">刀具样本</a>
+                </li>
+				#else
+				<li>
+                    <a href="/samples">刀具样本</a>
+                </li>
+				#end
             </ul>
         </div>
         <div class="ask">

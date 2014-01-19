@@ -12,7 +12,7 @@
 				  用户名
 				</li>
 			  <li class="value">
-				  <input type="text"  name="$!{status.expression}"/>
+				  <input type="text"  name="$!{status.expression}"  class="dsf-form-text-input" />
 				</li>
 			</ul>
 			#springBind("form.email")
@@ -21,7 +21,7 @@
 				  邮箱地址
 				</li>
 			  <li class="value">
-				  <input type="text"  name="$!{status.expression}" />
+				  <input type="text"  name="$!{status.expression}"  class="dsf-form-text-input" />
 				</li>
 			</ul>
 			#springBind("form.pwd")
@@ -30,7 +30,7 @@
 				  密码
 				</li>
 			  <li class="value">
-				  <input type="password"  name="$!{status.expression}"/>
+				  <input type="password"  name="$!{status.expression}"  class="dsf-form-text-input" />
 				</li>
 			</ul>
 			<ul class="reg-listitem clearfix">
@@ -55,6 +55,11 @@
 			</ul>
 			<script>
 				$(function() {
+				    $('input').bind("keypress",function(event){
+				      if (event.keyCode == 13) {
+                        $("#form_reg").trigger("submit");
+                      }
+				    });
 					$("#submit_reg").click(function () {
 						$("#form_reg").submit();//提交
 					});

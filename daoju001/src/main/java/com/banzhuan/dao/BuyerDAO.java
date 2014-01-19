@@ -31,4 +31,6 @@ public interface BuyerDAO {
 	public int updateBuyerPwdById(BuyerEntity buyer);
 	
 	public int updateBuyerEntityById(BuyerEntity buyer);
+	
+	public BuyerEntity buyerLoginByQQConnect(String qqConncetId);
 }

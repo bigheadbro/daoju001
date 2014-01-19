@@ -21,6 +21,7 @@ import com.banzhuan.common.Result;
 import com.banzhuan.entity.AgentEntity;
 import com.banzhuan.form.GoodcaseForm;
 import com.banzhuan.form.LoginForm;
+import com.banzhuan.form.ProfessionalAnswerForm;
 import com.banzhuan.form.QuestionForm;
 import com.banzhuan.service.AgentService;
 import com.banzhuan.service.CommonService;
@@ -72,7 +73,8 @@ public class CommonController extends BaseController{
 	}
 
 	@RequestMapping(value = "/questions")
-	public ModelAndView allquestion(final HttpServletRequest request,final HttpServletResponse response, @ModelAttribute("form")QuestionForm form) 
+	public ModelAndView allquestion(final HttpServletRequest request,final HttpServletResponse response, @ModelAttribute("form")QuestionForm form, 
+			@ModelAttribute("answerForm")ProfessionalAnswerForm answerForm) 
 	{
 		ModelAndView mv = new ModelAndView("/common/questions");
 		
@@ -84,6 +86,19 @@ public class CommonController extends BaseController{
 		
 		result = commonService.getMaingoodcases();
 		mv.addObject("goodcases", result.get("goodcases"));
+		return mv;
+		
+	}
+	
+	@RequestMapping(value = "question/{qid}")
+	public ModelAndView question(final HttpServletRequest request,final HttpServletResponse response, @PathVariable String qid)
+	{
+		ModelAndView mv = new ModelAndView("/common/agent");
+		Result result = new Result();
+		int questionid = Integer.parseInt(qid);
+		result = agentService.queryQuestionById(questionid);
+		mv.addObject("question", result.get("question"));
+		
 		return mv;
 		
 	}

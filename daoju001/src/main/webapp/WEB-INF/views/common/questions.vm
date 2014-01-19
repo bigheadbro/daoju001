@@ -1,6 +1,7 @@
 #set($layout = "/layout/index_layout.vm")
 <script type="text/javascript" src="../js/ques-handler.js"></script>
 <script type="text/javascript" src="../js/questions.js"></script>
+<script type="text/javascript" src="../js/answer.js"></script>
 <div class="main-bk-wrapper pt0">
 	<div class="main-content-container clearfix">
 		<!-- 问题 -->
@@ -213,36 +214,17 @@
 								</p>
 							</li>
 							<li class="info">
-								<p> 1 个专业回答 <span>|</span> 3 个普通回答 <span>|</span> 查看详情 </p>
-							</li>
-							<li class="answer">
-							  <div class="answer-arrow">
-								  <em class="S_line1_c">◆</em>
-								  <em class="S_bg1_c">◆</em>
-								</div>
-							  <ul class="clearfix">
-								  <li class="agent-info clearfix">
-									  <img src="../img/big-logo.png" />
-										<h4>无锡汉尼达</h4>
-										<h5>Big刀具代理商</h5>
-									</li>
-								  <li class="answer-cont">
-									  <p>
-										  您好,根据您的情况，加工条件和选刀已比较合适，但刀片仅单侧6刃可用，这方面可进行提高，请参考我司M1200产品（右图）。63刀盘为六刃，根据我们以往的经验，可按照相同的Vc和更高的Fz进行加工，即AP=1.2 N=500 F=800这样可以提高30%的效率..
-										</p>
-									</li>
-								</ul>
+								<p> 1 个专业回答 <span>|</span> 3 个普通回答 <span>|</span> <a href="/question/$!{question.id}">查看详情</a> <span class="answer"><a class="solution" qid="$!{question.id}" bid="$!{question.buyerId}">提供专业方案</a> | <a class="reply">回复</a></span></p>
 							</li>
 						</ul>
 					</div>
 				</div>
-				<div class="seperation">&nbsp;</div>
 				#end
 			</div>
 		</div>
 		<!-- 代理商 -->
 		<div class="main-list-container width300 ml30">
-			<div class="main-list-header  ff7e00">
+			<div class="main-list-header ">
                                                           最新代理商
 				<a class="seemore" href="/agents">查看更多</a>
 			</div>
@@ -260,23 +242,22 @@
   					</div>
   					<div class="content">
   						<ul>
-  							<li class="name">
+  							<li class="name clearfix">
 									<a href="/agent/$!{agent.id}">$!{agent.companyName}</a>
 									#if($agent.isVerified())
-										<a href="$!{agent.verifiedLink}"><img src="../img/v.png" /></a>
+										<a class="fancybox-v" title="$!{agent.companyName}的代理证书" href="$!{agent.verifiedLink}"><img src="../img/v.png" /></a>
 									#end
 								</li>
   							<li class="title">$!{agent.brandName}</li>
   						</ul>
   					</div>
   				</div>
-  				<div class="seperation">&nbsp;</div>
 				#end
    </div>
 		</div>
 	    <!-- 成功案例 -->
 		<div class="main-list-container width300 ml30">
-			<div class="main-list-header ff002a">
+			<div class="main-list-header">
 				成功案例
 			  <a class="seemore" href="/goodcases">查看更多</a>
 			</div>
@@ -294,10 +275,10 @@
 					</div>
 					<div class="content">
 						<ul>
-							<li class="name">
+							<li class="name clearfix">
 								<a href="/agent/$!{gc.agentId}">$!{gc.agentName}</a>
 								#if($gc.isVerified())
-									<a href="$!{gc.verifiedLink}"><img src="../img/v.png" /></a>
+									<a  class="fancybox-v" title="$!{gc.agentName}的代理证书" href="$!{gc.verifiedLink}"><img src="../img/v.png" /></a>
 								#end
 							</li>
 							<li class="title">$!{gc.brandName}</li>
@@ -319,8 +300,8 @@
 					#end
 				</div>
 			</div>
-	    <div class="seperation">&nbsp;</div>
 			#end
 		</div>
 	</div>
 </div>
+#parse("/common/answer.vm")

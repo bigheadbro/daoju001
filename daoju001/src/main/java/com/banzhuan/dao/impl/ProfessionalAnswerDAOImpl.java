@@ -1,5 +1,7 @@
 package com.banzhuan.dao.impl;
 
+import java.util.List;
+
 import org.mybatis.spring.support.SqlSessionDaoSupport;
 import org.springframework.stereotype.Repository;
 
@@ -25,6 +27,12 @@ public class ProfessionalAnswerDAOImpl extends SqlSessionDaoSupport implements P
 	public int updateProfessionalAnswerById(ProfessionalAnswerEntity buyer) {
 		// TODO Auto-generated method stub
 		return 0;
+	}
+	
+	@Override
+	public List<ProfessionalAnswerEntity> queryAnswersByQid(int qid)
+	{
+		return this.getSqlSession().selectList("queryAnswersByQid", qid);
 	}
 
 }

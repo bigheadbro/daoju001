@@ -16,7 +16,7 @@
                     <a href="/index">首页</a>
                 </li>
 				#end
-				#if($!stringUtil.isContains($request.getServletPath(),"/questions"))
+				#if($!stringUtil.isContains($request.getServletPath(),"/questions") || $!stringUtil.isContains($request.getServletPath(),"/question"))
                 <li class="current">
                     <a href="/questions">所有问题</a>
                 </li>
@@ -25,7 +25,7 @@
                     <a href="/questions">所有问题</a>
                 </li>
 				#end
-				#if($!stringUtil.isContains($request.getServletPath(),"/agents"))
+				#if($!stringUtil.isContains($request.getServletPath(),"/agents") || $!stringUtil.isContains($request.getServletPath(),"/agent"))
                 <li class="current">
                     <a href="/agents">代理商</a>
                 </li>

@@ -1,5 +1,7 @@
 package com.banzhuan.dao;
 
+import java.util.List;
+
 import com.banzhuan.entity.ProfessionalAnswerEntity;;
 
 public interface ProfessionalAnswerDAO {
@@ -8,4 +10,6 @@ public interface ProfessionalAnswerDAO {
 	public int insertProfessionalAnswerEntity(ProfessionalAnswerEntity pa);
 	
 	public int updateProfessionalAnswerById(ProfessionalAnswerEntity pa);
+	
+	List<ProfessionalAnswerEntity> queryAnswersByQid(int qid);
 }

@@ -452,6 +452,14 @@ public class AgentService {
 		return result;
 	}
     
+    public Result queryAnswersByQid(int qid)
+	{
+		Result result = new Result();
+		List<ProfessionalAnswerEntity> answers = paDAO.queryAnswersByQid(qid);
+		result.add("answers", answers);
+		return result;
+	}
+    
     public Result getAllquestions()
 	{
 		Result result = new Result();

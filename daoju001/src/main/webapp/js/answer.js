@@ -43,7 +43,7 @@ function showanswer() {
 	$("#pagemask").css("width", $(document).width());
 	$("#pagemask").css("height", $(document).height());
 	$("#pagemask").show();
-	$(".log-win").css("top",
+	$(".answer-win").css("top",
 			$(window).height() / 2 + $(document).scrollTop() - 220);
 	$(".answer-win").css("left", $(document).width() / 2 - 300);
 	if (!answershow) {

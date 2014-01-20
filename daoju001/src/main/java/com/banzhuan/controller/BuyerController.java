@@ -183,6 +183,10 @@ public class BuyerController extends BaseController{
 				account.setQqConnectId(openID);
 				account.setAccessToken(accessToken);
 				account.setUserName(nick);
+				if(user.getUsername() != null)
+				{
+					account.setUserName(user.getUsername());
+				}
 				account.setUserId(user.getId());
 				account.setLogin(true);
 				account.setBuyer(true);

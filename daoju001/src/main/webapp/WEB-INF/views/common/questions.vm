@@ -190,10 +190,10 @@
         								<span>$stringUtil.getMethod($!{question.processMethod})</span>
         							#end
         							#if($!{question.wpHardness} > 0)
-        								<span>$stringUtil.getMaterial($!{question.wpHardness})</span>
+        								<span>$stringUtil.getHardness($!{question.wpHardness})</span>
         							#end
         							#if($!{question.wpMaterial} > 0)
-        								<span>$stringUtil.getHardness($!{question.wpMaterial})</span>
+        								<span>$stringUtil.getMaterial($!{question.wpMaterial})</span>
         							#end
         						</div>
 								<div class="questions-type">
@@ -214,7 +214,7 @@
 								</p>
 							</li>
 							<li class="info">
-								<p> 1 个专业回答 <span>|</span> 3 个普通回答 <span>|</span> <a href="/question/$!{question.id}">查看详情</a> <span class="answer"><a class="solution" qid="$!{question.id}" bid="$!{question.buyerId}">提供专业方案</a> | <a class="reply">回复</a></span></p>
+								<p> $!{question.cntPA}个专业回答 <span>|</span> $!{question.cntCA}个普通回答 <span>|</span> <a href="/question/$!{question.id}">查看详情</a> <span class="answer"><a class="solution" qid="$!{question.id}" bid="$!{question.buyerId}">提供专业方案</a> | <a class="reply">回复</a></span></p>
 							</li>
 						</ul>
 					</div>

@@ -86,9 +86,9 @@ div[contentEditable]{outline:0}
 .seperation{background: url(../img/question-sep.png) repeat-x 0 0;margin-top:15px;margin-bottom: 15px;height: 2px;}
 .seperation10{background: url(../img/question-sep.png) repeat-x 0 0;margin-top:10px;margin-bottom: 10px;height: 2px;}
 
-.hot-question-listitem .logo{float:left;border-radius: 5px;width:66px;height:66px;overflow:hidden;text-align:center;display:table;background-color:white;}
+.hot-question-listitem .logo{float:left;border-radius: 5px;width:44px;height:44px;overflow:hidden;text-align:center;display:table;background-color:white;}
 .hot-question-listitem .logo a{display:table-cell;vertical-align:middle;}
-.hot-question-listitem .logo img{margin:0 auto;max-width:66px;max-height:66px;}
+.hot-question-listitem .logo img{margin:0 auto;max-width:44px;max-height:44px;}
 .hot-question-listitem .content{float:left;width:504px;margin-left:10px;}
 .hot-question-listitem.first .content{background:none}
 .hot-question-listitem .content li.name{font-size:14px;font-weight: 700;color:#606060;margin-top:7px}
@@ -108,14 +108,15 @@ div[contentEditable]{outline:0}
 .hot-question-listitem .content li.info span.answer{float:right;}
 .hot-question-listitem .content li.info a:hover{text-decoration:underline;color:#00c0ff}
 
-.hot-question-listitem .content li.answer{border:1px solid #bebebe;background-color:#f0f0f0;padding:15px;border-radius: 2px;margin-top: 10px;}
+/*专业方案*/
+.hot-question-listitem .content li.answer{display:none;border:1px solid #bebebe;background-color:#f0f0f0;padding:15px;border-radius: 2px;margin-top: 10px;}
 .hot-question-listitem .content li.answer .answer-arrow{position: absolute;z-index: 0;width: 22px;cursor: default;font-size: 23px;margin-top:-31px}
 .hot-question-listitem .content li.answer .answer-arrow *{position: absolute;}
 .hot-question-listitem .content li.answer .answer-arrow .S_line1_c{color: #bebebe;}
 .hot-question-listitem .content li.answer .answer-arrow .S_bg1_c{margin-top:1px;color:#f0f0f0}
-.hot-question-listitem .content li.answer li.agent-info img{float:left;height:42px;width:42px}
-.hot-question-listitem .content li.answer li.agent-info h4{margin-left:52px;font-size:14px;line-height: 20px;color:#606060}
-.hot-question-listitem .content li.answer li.agent-info h5{margin-left:52px;font-size:11px;line-height: 20px;color:#999}
+.hot-question-listitem .content li.answer ul.pa-answer{border-bottom:1px solid #dbdbdb;padding-bottom:10px;}
+.answer-price{float: left;margin-left: 12px;margin-top: 20px;font-size:12px;}
+.answer-price span{color:white;background-color:#FFA35A;display:inline-block;padding:2px 5px;border-radius:4px;}
 .hot-question-listitem .content li.answer li.answer-cont{margin-top:10px;color:#676767;font-size:13px;line-height: 20px;}
 .hot-question-listitem .content li.answer li.comment-cont{margin-top:5px;font-size:11px;color:#999;}
 .hot-question-listitem .content li.answer li.comment-cont a{float:right;margin-right:10px;}
@@ -125,6 +126,30 @@ div[contentEditable]{outline:0}
 .hot-question-listitem .content li.answer .comment-list .comment-arrow .S_line1_c{color: #bebebe;}
 .hot-question-listitem .content li.answer .comment-list .comment-arrow .S_bg1_c{margin-top:1px;color:#f0f0f0}
 .hot-question-listitem .content li.answer .comment-list .comment-listitem{border-bottom:1px solid #ccc;padding-bottom:5px;}
+/*追问追答*/
+.hot-question-listitem .content li.comment{display:none;border:1px solid #bebebe;background-color:#f0f0f0;padding:15px;border-radius: 2px;margin-top: 10px;}
+.hot-question-listitem .content li.comment .comment-arrow{position: absolute;z-index: 0;width: 22px;cursor: default;font-size: 23px;margin-top:-31px}
+.hot-question-listitem .content li.comment .comment-arrow *{position: absolute;}
+.hot-question-listitem .content li.comment .comment-arrow .S_line1_c{color: #bebebe;}
+.hot-question-listitem .content li.comment .comment-arrow .S_bg1_c{margin-top:1px;color:#f0f0f0}
+/*普通回答*/
+.hot-question-listitem .content li.answer-c{position: relative;display:none;border:1px solid #bebebe;background-color:#f0f0f0;padding:15px;border-radius: 2px;margin-top: 10px;}
+.hot-question-listitem .content li.answer-c .answer-arrow{position: absolute;left:100px;z-index: 0;width: 22px;cursor: default;font-size: 23px;margin-top:-31px}
+.hot-question-listitem .content li.answer-c .answer-arrow *{position: absolute;}
+.hot-question-listitem .content li.answer-c .answer-arrow .S_line1_c{color: #bebebe;}
+.hot-question-listitem .content li.answer-c .answer-arrow .S_bg1_c{margin-top:1px;color:#f0f0f0}
+.hot-question-listitem .content li.answer-c li.agent-info img{float:left;height:42px;width:42px}
+.hot-question-listitem .content li.answer-c li.agent-info h4{margin-left:52px;font-size:14px;line-height: 20px;color:#606060}
+.hot-question-listitem .content li.answer-c li.agent-info h5{margin-left:52px;font-size:11px;line-height: 20px;color:#999}
+.hot-question-listitem .content li.answer-c li.answer-cont{margin-top:10px;color:#676767;font-size:13px;line-height: 20px;}
+.hot-question-listitem .content li.answer-c li.comment-cont{margin-top:5px;font-size:11px;color:#999;}
+.hot-question-listitem .content li.answer-c li.comment-cont a{float:right;margin-right:10px;}
+.hot-question-listitem .content li.answer-c .comment-list{border:1px solid #bebebe;background-color:#f0f0f0;padding: 15px 15px 15px 27px;border-radius: 2px;margin-top: 10px;}
+.hot-question-listitem .content li.answer-c .comment-list .comment-arrow{position: absolute;z-index: 0;width: 22px;cursor: default;font-size: 23px;margin-top:-31px}
+.hot-question-listitem .content li.answer-c .comment-list .comment-arrow *{position: absolute;}
+.hot-question-listitem .content li.answer-c .comment-list .comment-arrow .S_line1_c{color: #bebebe;}
+.hot-question-listitem .content li.answer-c .comment-list .comment-arrow .S_bg1_c{margin-top:1px;color:#f0f0f0}
+.hot-question-listitem .content li.answer-c .comment-list .comment-listitem{border-bottom:1px solid #ccc;padding-bottom:5px;}
 
 .mainpage-container .main-right .rigth-content{background-color:white;margin-top:10px;padding:30px;padding-top: 15px;height: 585px;}
 .mainpage-container .main-right .rigth-content .listitem{font-size:14px}
@@ -275,7 +300,7 @@ div[contentEditable]{outline:0}
 
 #uploadsample{color:white;background-color:#ff9000;border-radius:5px;padding:3px;}
 
-#pagemask #pagemask-img{
+#pagemask{
 position: absolute;
 display: none;
 top: 0;
@@ -287,6 +312,17 @@ filter: alpha(opacity=30);
 opacity: .3;
 }
 
+#pagemask-img{
+position: absolute;
+display: none;
+top: 0;
+left: 0;
+width: 100%;
+background: #333;
+z-index: 10002;
+filter: alpha(opacity=30);
+opacity: .3;
+}
 /*系统提示框*/
 .log-win{display:none;position:absolute;top:50px;right:400px;z-index:10002;width:600px;padding: 5px;border-radius: 5px;background:url(../img/transGray.png);font-size:13px;}
 .log-layer{background:white;padding-bottom: 10px;}
@@ -358,11 +394,11 @@ opacity: .3;
 .mixed{float:left;text-overflow: ellipsis;white-space: nowrap;width:460px;overflow:hidden;color:#0088b5;}
 
 /*成功案例*/
-.agent-logo{border-radius: 5px;width:60px;height:60px;overflow:hidden;text-align:center;display:table;float:left;background-color:white;}
+.agent-logo{border-radius: 5px;width:50px;height:50px;overflow:hidden;text-align:center;display:table;float:left;background-color:white;}
 .agent-logo a{display:table-cell;vertical-align:middle;}
-.agent-logo a img{margin:0 auto;max-width:60px;max-height:60px;}
+.agent-logo a img{margin:0 auto;max-width:50px;max-height:50px;}
 .gc-name{color:#383838;font-size:18px;padding-bottom: 5px;}
-.agent-detail{float:left;width: 88px;margin-left:12px;margin-top: 5px;}
+.agent-detail{float:left;width: 88px;margin-left:12px;margin-top: 0px;}
 .agent-detail h2{color:#606060;font-size:14px;padding: 5px 5px 3px 0;}
 .agent-detail h2 a.agent-name{overflow:hidden;white-space:nowrap;text-overflow:ellipsis;display:inline-block;width:67px;}
 .agent-detail h4{color:#606060;font-size:12px;font-weight:600;overflow:hidden;white-space:nowrap;}

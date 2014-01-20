@@ -10,9 +10,7 @@ $(function() {
 
 function hideimg(){
 	$(".addimg-win").hide();
-	if(!$('.answer-win').is(':visible')){
-		$("#pagemask-img").hide();
-	}
+	$("#pagemask-img").hide();
 	addimgshow = false;
 }
 function showimg() {

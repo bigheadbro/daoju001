@@ -91,13 +91,20 @@ public class CommonController extends BaseController{
 	}
 	
 	@RequestMapping(value = "question/{qid}")
-	public ModelAndView question(final HttpServletRequest request,final HttpServletResponse response, @PathVariable String qid)
+	public ModelAndView question(final HttpServletRequest request,final HttpServletResponse response, @PathVariable String qid,
+			@ModelAttribute("answerForm")ProfessionalAnswerForm answerForm)
 	{
-		ModelAndView mv = new ModelAndView("/common/agent");
+		ModelAndView mv = new ModelAndView("/common/question");
 		Result result = new Result();
 		int questionid = Integer.parseInt(qid);
 		result = agentService.queryQuestionById(questionid);
 		mv.addObject("question", result.get("question"));
+		
+		result = agentService.queryAnswersByQid(questionid);
+		mv.addObject("answers", result.get("answers"));
+		
+		result = commonService.getMaingoodcases();
+		mv.addObject("goodcases", result.get("goodcases"));
 		
 		return mv;
 		

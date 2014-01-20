@@ -36,6 +36,11 @@
 		SELECT * from t_professional_answer t WHERE t.id = #{id}
 	]]>
 	</select>
+	
+	<select id="queryAnswersByQid" parameterType="int"
+			resultMap="ProfessionalAnswerResultMap">
+		SELECT * from t_professional_answer t WHERE t.question_id = #{qid} order by gmt_create desc
+	</select>
 
 	<insert id="insertProfessionalAnswerEntity" parameterType="ProfessionalAnswerEntity">
 		<selectKey resultType="int" order="AFTER" keyProperty="id">

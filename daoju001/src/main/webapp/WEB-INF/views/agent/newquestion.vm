@@ -10,7 +10,7 @@
 	#foreach($question in $questions)
 		<div class="listitem">
 			<div class="clearfix">
-    			<div class="mixed">$!{question.content}</div>
+    			<a class="mixed" href="/question/$!{question.id}">$!{question.content}</a>
     			<span>$stringUtil.formatDate($!{question.gmtCreate})</span>
 			</div>
 		</div>

@@ -3,6 +3,37 @@
   <div class="mainpage-container clearfix">
 	  <div class="reg-left">
 		  <h2><span>我已经有账号<a href="/buyer/log">立即登录</a></span>注册</h2>
+			<script>
+				$(function() {	
+					$("#form_reg").validate({
+						rules:{
+							name:{
+								required:true
+							},
+							email:{
+								required:true,
+								email:true
+							},
+							pwd:{
+								required:true
+							}
+						},
+						messages:{
+							name:{
+								required:"请输入公司名称"
+							},
+							email:{
+								required:"请输入邮箱地址"，
+								required:"邮箱格式不正确"
+							},
+							pwd:{
+								required:"请输入密码" 
+							}
+						},
+						errorElement:"em"
+					});
+				});
+			</script>
 		  <form id="form_log" method="post">
 			<!-- 隐藏字段，用于标示是表单提交 -->
 		    <input type="hidden" name="do_submit" value="true"/>
@@ -13,6 +44,7 @@
 				</li>
 			  <li class="value">
 				  <input type="text"  name="$!{status.expression}"  class="dsf-form-text-input" />
+					<em for="$!{status.expression}" generated="true" class="error">$!{status.errorMessage}</em>
 				</li>
 			</ul>
 			#springBind("form.email")
@@ -22,6 +54,7 @@
 				</li>
 			  <li class="value">
 				  <input type="text"  name="$!{status.expression}"  class="dsf-form-text-input" />
+					<em for="$!{status.expression}" generated="true" class="error">$!{status.errorMessage}</em>
 				</li>
 			</ul>
 			#springBind("form.pwd")
@@ -31,6 +64,7 @@
 				</li>
 			  <li class="value">
 				  <input type="password"  name="$!{status.expression}"  class="dsf-form-text-input" />
+					<em for="$!{status.expression}" generated="true" class="error">$!{status.errorMessage}</em>
 				</li>
 			</ul>
 			<ul class="reg-listitem clearfix">

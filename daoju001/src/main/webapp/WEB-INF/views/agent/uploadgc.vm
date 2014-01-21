@@ -5,6 +5,29 @@
   <li><a href="goodcase">案例管理</a></li>
 </ul>
 <div class="rigth-content">
+	<script>
+		$(function() {	
+			$("#form_uploadgc").validate({
+				rules:{
+					name:{
+						required:true
+					}，
+					link:{
+						required:true
+					}
+				},
+				messages:{
+					name:{
+						required:"请输入案例名称"
+					},
+					name:{
+						required:"请上传文件"
+					}
+				},
+				errorElement:"em"
+			});
+		});
+	</script>
 	<form id="form_uploadgc" method="post" enctype="multipart/form-data">
 		<!-- 隐藏字段，用于标示是表单提交 -->
 		<input type="hidden" name="do_submit" value="true"/>
@@ -20,6 +43,7 @@
     			</li>
     			<li class="value">
     				<input type="text" class="dsf-form-text-input" name="${status.expression}"  value="$!{status.value}" />
+						<em for="$!{status.expression}" generated="true" class="error">$!{status.errorMessage}</em>
     			</li>
     		</ul>
     	</div>
@@ -198,6 +222,7 @@
     					<a class="" href="">点击上传</a>
     					<input type="file" name="link" />
     					<p>仅支持DOC、PDF格式，文件小于5M</p>
+							<em for="link" generated="true" class="error">$!{status.errorMessage}</em>
     				</div>
     			</li>
     		</ul>

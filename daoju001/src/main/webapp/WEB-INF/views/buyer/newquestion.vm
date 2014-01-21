@@ -10,6 +10,29 @@
     </li>
 </ul>
 <div class="rigth-content">
+	  <script>
+				$(function() {	
+					$("#form_newquestion").validate({
+						rules:{
+							type:{
+								required:true
+							},
+							password:{
+								required:true
+							}
+						},
+						messages:{
+							type:{
+								required:"请选择问题类型"
+							},
+							password:{
+								required:"请输入密码"
+							}
+						},
+						errorElement: "em"
+					});
+				});
+		</script>
     <form id="form_newquestion" method="post">
         <!-- 隐藏字段，用于标示是表单提交 -->
         <input type="hidden" name="do_submit" value="true"/>
@@ -39,6 +62,7 @@
                     <p>需要开发新的产品，不知道应该使用何种刀具？</p>
                 </div>
             </div>
+						<em for="$!{status.expression}" generated="true" class="error">$!{status.errorMessage}</em>
         </div>
         <script>
             $(function() {

@@ -7,6 +7,23 @@
 </ul>
 <div class="rigth-content">
     <div>
+			<script>
+				$(function() {	
+					$("#form_profile").validate({
+						rules:{
+							userName:{
+								required:true
+							}
+						},
+						messages:{
+							userName:{
+								required:"请输入用户名称"
+							}
+						},
+						errorElement:"em"
+					});
+				});
+			</script>
 		<form id="form_profile" action="/buyer/profile" method="post">
 			<!-- 隐藏字段，用于标示是表单提交 -->
 		    <input type="hidden" name="do_submit" value="true"/>
@@ -18,6 +35,7 @@
                         </li>
                         <li class="value">
                             <input type="text" class="dsf-form-text-input" name="${status.expression}" value="$!{status.value}" />
+														<em for="$!{status.expression}" generated="true" class="error">$!{status.errorMessage}</em>
                         </li>
                     </ul>
             </div>

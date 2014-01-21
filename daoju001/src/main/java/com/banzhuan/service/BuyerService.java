@@ -8,8 +8,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.validation.Errors;
 
 import com.banzhuan.dao.BuyerDAO;
+import com.banzhuan.dao.MsgDAO;
 import com.banzhuan.dao.QuestionDAO;
 import com.banzhuan.entity.BuyerEntity;
+import com.banzhuan.entity.MessageEntity;
 import com.banzhuan.entity.QuestionEntity;
 import com.banzhuan.common.Result;
 import com.banzhuan.form.BuyerProfileForm;
@@ -32,6 +34,9 @@ public class BuyerService {
 	@Qualifier("questionDAO")
 	private QuestionDAO questionDAO;
 	
+	@Autowired
+	@Qualifier("msgDAO")
+	private MsgDAO msgDAO;
 	/**
 	 * 模拟QQ回调处理逻辑
 	 * @param uuid: 唯一ID
@@ -333,6 +338,19 @@ public class BuyerService {
 		{
 			form.setState(question.getState());
 		}
+	}
+	
+	public int getUnreadMsgCount(int userid)
+	{
+		return msgDAO.getUnreadMsgCount(userid);
+	}
+	
+	public Result getAllMsgs(int userid)
+	{
+		Result result = new Result();
+		List<MessageEntity> msgs = msgDAO.getMsgsByUserid(userid);
+		result.add("msgs", msgs);
+		return result;
 	}
 	
 

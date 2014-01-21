@@ -1,14 +1,35 @@
 #set($layout = "/layout/buyer_detail_layout.vm")
 <h2>全部消息</h2>
 <div class="rigth-content">
-  <div class="buyer-list">
-	  <div class="listitem notread clearfix">
-		  <a href="#">无锡汉尼达</a>回答了您的问题<a href="#">需要制造如此形状的倚天剑。不知道可以吗?</a>
-			<span>2013-12-01</span>
-		</div>
-	  <div class="listitem clearfix">
-		  <a href="#">上海时达</a>回答了您的问题<a href="#">需要制造如此形状的倚天剑。不知道可以吗?</a>
-			<span>2013-12-01</span>
-		</div>
-	</div>
+    <div class="buyer-list">
+        #foreach($msg in $msgs)
+			#if($!{msg.hasRead})
+				<div class="listitem clearfix">
+			#else
+				<div class="listitem notread clearfix">
+			#end
+                
+				#if($!{msg.type} == 1)	
+					<a href="/agents/$!{msg.senderId}">$!{msg.senderName}</a>
+				#elseif($!{msg.type} == 2)
+					<a href="/agents/$!{msg.senderId}">$!{msg.senderName}</a>
+				#elseif($!{msg.type} == 3)
+					<a href="/buyer/$!{msg.senderId}">$!{msg.senderName}</a>
+				#else
+					系统信息,
+				#end
+				#if($!{msg.type} == 1)	
+					提供了解决方案,
+				#elseif($!{msg.type} == 2)
+					回复了你,
+				#elseif($!{msg.type} == 3)
+					回复了你,
+				#else
+					系统信息,
+				#end
+				<a href="/questions/$!{msg.questionId}">查看详情</a>
+                <span>$stringUtil.formatDate($!{msg.gmtCreate})</span>
+            </div>
+        #end
+    </div>
 </div>

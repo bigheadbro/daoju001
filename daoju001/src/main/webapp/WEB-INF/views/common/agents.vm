@@ -52,7 +52,7 @@
                                     </div>
                                     <div class="agent-detail">
                                         <h2>
-											<a class="agent-name" href="/agent/$!{agent.id}">$!{agent.companyName}</a>
+											<a class="agent-name" href="/agents/$!{agent.id}">$!{agent.companyName}</a>
 											#if($agent.isVerified())
 												<a class="fancybox-v" title="$!{agent.companyName}的代理证书" href="$!{agent.verifiedLink}"><img src="../img/v.png" /></a>
 											#end

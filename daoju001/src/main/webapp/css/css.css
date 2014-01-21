@@ -24,6 +24,22 @@ a{text-decoration: none;color: inherit;cursor:pointer;}
 
 
 .dsf-form-text-input {padding: 4px 10px;font-size: 13px;line-height: 15px;box-shadow: 0 1px 1px rgba(0,0,0,.1) inset;border-radius: 3px;background: #fff;border: 1px solid #ccc;color: #222;}
+.zg-noti-number {background: #BF1031;border: 1px solid #B11331;box-shadow: 0 1px 2px rgba(0,0,0,.1),inset 0 1px 0 rgba(255,255,255,.15);
+color: #fff;
+display: inline-block;
+font-size: 11px;
+font-weight: 700;
+padding: 0 5px;
+height: 16px;
+line-height: 16px;
+border-radius: 16px;
+text-indent: 0;
+text-align: center;
+text-decoration: none;
+position: absolute;
+top: 12px;
+margin-left: 15px;
+}
 .company-info{width:400px;height:65px;resize:none;}
 div[contentEditable]{outline:0}
 .body-wrapper {position: relative;min-height: 100%;}
@@ -62,6 +78,7 @@ div[contentEditable]{outline:0}
 .main-head-container .main-head-content .login .top-user .logo a{display:table-cell;vertical-align:middle;}
 .main-head-container .main-head-content .login .top-user .logo img{margin:0 auto;max-width:30px;max-height:30px;}
 .main-head-container .main-head-content .login .top-dropdown{position:absolute;display:none;background-color: #007298;top: 59px;min-width: 140px;z-index: 100;}
+.main-head-container .main-head-content .login .top-dropdown li{position:relative;}
 .main-head-container .main-head-content .login ul.top-dropdown li a{display:block;text-align:center;padding:10px;}
 .main-head-container .main-head-content .login ul.top-dropdown li a:hover{background-color:#0099cb;}
 /*main banner*/

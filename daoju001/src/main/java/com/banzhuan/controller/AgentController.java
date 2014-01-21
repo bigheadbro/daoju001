@@ -126,7 +126,7 @@ public class AgentController extends BaseController{
 					this.addCookie(response, "mail", user.getMail(), Integer.MAX_VALUE);
 				}
 				//设置头像
-				account.setLogo(agentService.getAgentEntity(account.getUserId()).getLogo());
+				account.setLogo(user.getLogo());
 				request.getSession().setAttribute("account", account);
 				// 登陆成功， 跳转到登陆页面
 				return new ModelAndView(new RedirectView("/agent/main"));
@@ -224,7 +224,7 @@ public class AgentController extends BaseController{
 	{
 		ModelAndView mv = new ModelAndView("agent/profile");
 		
-		AgentEntity agent = agentService.getAgentEntity(account.getUserId());
+		AgentEntity agent = (AgentEntity)agentService.getAgentEntity(account.getUserId()).get("agent");
 		if(!isDoSubmit(request))
 		{
 			agentService.setAgentProfileFormWithBuyerEntity(form, agent);

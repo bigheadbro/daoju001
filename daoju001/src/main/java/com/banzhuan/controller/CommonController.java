@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.view.RedirectView;
 
 import com.banzhuan.common.Result;
 import com.banzhuan.entity.AgentEntity;
@@ -90,7 +91,7 @@ public class CommonController extends BaseController{
 		
 	}
 	
-	@RequestMapping(value = "question/{qid}")
+	@RequestMapping(value = "questions/{qid}")
 	public ModelAndView question(final HttpServletRequest request,final HttpServletResponse response, @PathVariable String qid,
 			@ModelAttribute("answerForm")ProfessionalAnswerForm answerForm)
 	{
@@ -98,6 +99,10 @@ public class CommonController extends BaseController{
 		Result result = new Result();
 		int questionid = Integer.parseInt(qid);
 		result = agentService.queryQuestionById(questionid);
+		if(result.get("question") == null)
+		{
+			return new ModelAndView(new RedirectView("/questions")); 
+		}
 		mv.addObject("question", result.get("question"));
 		
 		result = agentService.queryAnswersByQid(questionid);
@@ -133,15 +138,19 @@ public class CommonController extends BaseController{
 		
 	}
 	
-	@RequestMapping(value = "agent/{aid}")
+	@RequestMapping(value = "agents/{aid}")
 	public ModelAndView agent(final HttpServletRequest request,final HttpServletResponse response, @PathVariable String aid)
 	{
 		ModelAndView mv = new ModelAndView("/common/agent");
 		Result result = new Result();
 		int userid = Integer.parseInt(aid);
 		//add agent
-		AgentEntity agent = agentService.getAgentEntity(userid);
-		mv.addObject("agent", agent);
+		result = agentService.getAgentEntity(userid);
+		if(result.get("agent") == null)
+		{
+			return new ModelAndView(new RedirectView("/agents")); 
+		}
+		mv.addObject("agent", result.get("agent"));
 		//add good cases
 		result = agentService.queryGoodcasesByUserid(userid);
 		mv.addObject("goodcases", result.get("goodcases"));

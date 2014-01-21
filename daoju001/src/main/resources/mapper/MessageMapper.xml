@@ -7,9 +7,15 @@
 		<!--消息名称 -->
 		<id property="title" column="title" />
 		<!--消息内容 -->
-		<id property="content" column="content" />
+		<id property="questionId" column="question_id" />
+		<!--消息type,1是代理商专业回答了你，2是代理商回复了你，3是买家回复了你，4是系统消息 -->
+		<id property="type" column="type" />
+		<!--消息内容 -->
+		<id property="hasRead" column="has_read" />
 		<!--发送人id -->
 		<id property="senderId" column="sender_id" />
+		<!--发送人id -->
+		<id property="senderName" column="sender_name" />
 		<!--接收人id -->
 		<id property="receiverId" column="receiver_id" />
 		<!--记录创建时间 -->
@@ -22,6 +28,12 @@
 		SELECT * from t_message t WHERE t.id = #{id}
 	]]>
 	</select>
+	
+	<select id="getUnreadMsgCount" parameterType="int"
+		resultType="int">
+		SELECT count(1) from 
+		t_message a where receiver_id=#{userid} and is_read = 0
+	</select>
 
 	<insert id="insertMessageEntity" parameterType="MessageEntity">
 		<selectKey resultType="int" order="AFTER" keyProperty="id">
@@ -30,20 +42,29 @@
 		insert into t_message
 		(
 		title
-		,content
+		,type
+		,question_id
 		,sender_id
+		,sender_name
 		,receiver_id
 		,gmt_create)
 		values
 		(
 		#{title}
-		,#{content}
+		,#{type}
+		,#{questionId}
 		,#{senderId}
+		,#{senderName}
 		,#{receiverId}
 		,#{gmtCreate}
 
 		)
 
 	</insert>
+	
+	<select id="getMsgsByUserid" parameterType="int"
+			resultMap="MsgResultMap">
+		SELECT * from t_message t where receiver_id=#{userid} order by gmt_create desc
+	</select>
 
 </mapper>

@@ -148,9 +148,12 @@ public class AgentService {
 		agentDAO.updateAgentPwdById(agent);
 	}
 
-	public AgentEntity getAgentEntity(int userId)
+	public Result getAgentEntity(int userId)
 	{
-		return agentDAO.queryAgentEntityById(userId);
+		Result result = new Result();
+		AgentEntity agent = agentDAO.queryAgentEntityById(userId);
+		result.add("agent", agent);
+		return result;
 	}
 	
 	public void updateAgentAccnt(HttpServletRequest request, AgentProfileForm form, AgentEntity agent, Errors errors)

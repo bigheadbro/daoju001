@@ -113,6 +113,7 @@ public class BuyerController extends BaseController{
 			if(!result.hasErrors())
 			{
 				BuyerEntity user = (BuyerEntity)re.get("buyer");
+				int unreadMsgCount = buyerService.getUnreadMsgCount(user.getId());
 				Account account = new Account();
 				account.setLogin(true); // 登录成功标识
 				account.setUserName(user.getUsername()); // 用户登录名
@@ -120,6 +121,8 @@ public class BuyerController extends BaseController{
 				account.setMail(user.getEmail()); // 邮箱
 				account.setLogo(user.getLogo()); // 邮箱
 				account.setBuyer(true);
+				account.setUnreadMsgCount(unreadMsgCount);
+				
 				//set cookie
 				if(form.getRememberme() != null && form.getRememberme())
 				{
@@ -129,7 +132,7 @@ public class BuyerController extends BaseController{
 				account.setLogo(buyerService.getBuyerEntity(account.getUserId()).getLogo());
 				request.getSession().setAttribute("account", account);
 				// 登陆成功， 跳转到登陆页面
-				return new ModelAndView(new RedirectView("/buyer/newquestion"));
+				return new ModelAndView(new RedirectView("/buyer/main"));
 			}
 		}
 		return new ModelAndView("/buyer/log");
@@ -330,8 +333,11 @@ public class BuyerController extends BaseController{
 	}
 	
 	@RequestMapping(value="/mymsg")
-	public ModelAndView mymsg(HttpServletRequest request, HttpServletResponse response) {
+	public ModelAndView mymsg(HttpServletRequest request, HttpServletResponse response, @ModelAttribute("account")Account account) {
 		ModelAndView mv = new ModelAndView("buyer/mymsg");
+		int userId = account.getUserId();
+		Result result = buyerService.getAllMsgs(userId);
+		mv.addObject("msgs", result.get("msgs"));
 		return mv;
 	}
 	
@@ -407,6 +413,8 @@ public class BuyerController extends BaseController{
 		mv.addObject("questions", result.get("questions"));
 		return mv;
 	}
+	
+	
 	
 	
 }

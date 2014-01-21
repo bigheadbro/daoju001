@@ -18,6 +18,7 @@ public class Account implements Serializable{
 	private String brandName;
 	private boolean isVerified;
 	private String verifiedLink;
+	private int unreadMsgCount;
 	
 	public boolean isAgent() {
 		return isAgent;
@@ -126,6 +127,18 @@ public class Account implements Serializable{
 	 */
 	public void setVerifiedLink(String verifiedLink) {
 		this.verifiedLink = verifiedLink;
+	}
+	/**
+	 * @return the unreadMsgCount
+	 */
+	public int getUnreadMsgCount() {
+		return unreadMsgCount;
+	}
+	/**
+	 * @param unreadMsgCount the unreadMsgCount to set
+	 */
+	public void setUnreadMsgCount(int unreadMsgCount) {
+		this.unreadMsgCount = unreadMsgCount;
 	}
 	
 

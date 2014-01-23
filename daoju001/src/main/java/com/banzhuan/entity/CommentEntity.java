@@ -10,22 +10,26 @@ public class CommentEntity implements Serializable {
 	//
 	private int id;
 
-	// 0=PA的评论，1=CA的评论
+	// 0=question的评论，1=answer的评论
 	private int type;
 	// 评论内容
 	private String content;
-	// 买家id
-	private int buyerId;
-	// 卖家id，如果type是1，应该为null
-	private int agentId;
+	
+	private boolean userType;
+	//
+	private int userid;
 	// 上一条评论id
 	private int parent;
+	// question id
+	private int questionId;
 	// 回答id
 	private int answerId;
 	// 用户名称
 	private String userName;
 	// 用户头像
 	private String userAvatar;
+	//
+	private String link;
 	// 记录创建时间
 	private String gmtCreate;
 	
@@ -72,36 +76,6 @@ public class CommentEntity implements Serializable {
 	 */
 	public void setContent(String content) {
 		this.content = content;
-	}
-
-	/**
-	 * @return the buyerId
-	 */
-	public int getBuyerId() {
-		return buyerId;
-	}
-
-	/**
-	 * @param buyerId
-	 *            the buyerId to set
-	 */
-	public void setBuyerId(int buyerId) {
-		this.buyerId = buyerId;
-	}
-
-	/**
-	 * @return the agentId
-	 */
-	public int getAgentId() {
-		return agentId;
-	}
-
-	/**
-	 * @param agentId
-	 *            the agentId to set
-	 */
-	public void setAgentId(int agentId) {
-		this.agentId = agentId;
 	}
 
 	/**
@@ -184,6 +158,38 @@ public class CommentEntity implements Serializable {
 	 */
 	public static long getSerialversionuid() {
 		return serialVersionUID;
+	}
+
+	public int getQuestionId() {
+		return questionId;
+	}
+
+	public void setQuestionId(int questionId) {
+		this.questionId = questionId;
+	}
+
+	public String getLink() {
+		return link;
+	}
+
+	public void setLink(String link) {
+		this.link = link;
+	}
+
+	public int getUserid() {
+		return userid;
+	}
+
+	public void setUserid(int userid) {
+		this.userid = userid;
+	}
+
+	public boolean isUserType() {
+		return userType;
+	}
+
+	public void setUserType(boolean userType) {
+		this.userType = userType;
 	}
 
 	

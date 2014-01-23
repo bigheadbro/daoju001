@@ -8,10 +8,6 @@
 		<id property="type" column="type" />
 		<!--评论内容 -->
 		<id property="content" column="content" />
-		<!--买家id -->
-		<id property="buyerId" column="buyer_id" />
-		<!--卖家id，如果type是1，应该为null -->
-		<id property="agentId" column="agent_id" />
 		<!--上一条评论id -->
 		<id property="parent" column="parent" />
 		<!--回答id -->

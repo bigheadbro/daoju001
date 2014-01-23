@@ -10,9 +10,12 @@
 							name:{
 								required:true
 							},
-							email:{
+							mail:{
 								required:true,
 								email:true
+							},
+							agree:{
+								required:true
 							},
 							pwd:{
 								required:true
@@ -22,19 +25,22 @@
 							name:{
 								required:"请输入公司名称"
 							},
-							email:{
-								required:"请输入邮箱地址"，
-								required:"邮箱格式不正确"
+							mail:{
+								required:"请输入邮箱地址",
+								email:"邮箱格式不正确"
 							},
 							pwd:{
-								required:"请输入密码" 
+								required:"请输入密码"
+							},
+							agree:{
+								required:"必须遵守刀师傅协议"
 							}
 						},
 						errorElement:"em"
 					});
 				});
 			</script>
-		  <form id="form_log" method="post">
+		  <form id="form_reg" method="post">
 			<!-- 隐藏字段，用于标示是表单提交 -->
 		    <input type="hidden" name="do_submit" value="true"/>
 			#springBind("form.name")
@@ -47,7 +53,7 @@
 					<em for="$!{status.expression}" generated="true" class="error">$!{status.errorMessage}</em>
 				</li>
 			</ul>
-			#springBind("form.email")
+			#springBind("form.mail")
 			<ul class="reg-listitem clearfix">
 			  <li class="key">
 				  邮箱地址
@@ -71,12 +77,18 @@
 			  <li class="key">
 				  &nbsp;
 				</li>
+				#springBind("form.agree")
 			  <li class="value">
 				  <label for="agree">
-					  <input id="agree" type="checkbox" />
+					  <input id="agree"  name="$!{status.expression}" type="checkbox" 	
+						#if ($status.value == "true")
+                          checked
+                        #end
+						/> 
 						同意
 					</label>
 					<a class="protocol" href="#">刀师傅协议</a>
+					<em for="$!{status.expression}" generated="true" class="error">$!{status.errorMessage}</em>
 				</li>
 			</ul>
 			<ul class="reg-listitem clearfix">

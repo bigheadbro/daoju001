@@ -12,8 +12,9 @@ public class RegForm implements Serializable {
 	private String pwd;
 	private String pwd1;
 	private String pwd2;
-	private String email;
+	private String mail;
 	private String logo;
+	private boolean agree;
 	/**
 	 * @return the userid
 	 */
@@ -53,14 +54,14 @@ public class RegForm implements Serializable {
 	/**
 	 * @return the email
 	 */
-	public String getEmail() {
-		return email;
+	public String getMail() {
+		return mail;
 	}
 	/**
 	 * @param email the email to set
 	 */
-	public void setEmail(String email) {
-		this.email = email;
+	public void setMail(String email) {
+		this.mail = email;
 	}
 	/**
 	 * @return the pwd1
@@ -97,6 +98,18 @@ public class RegForm implements Serializable {
 	 */
 	public void setLogo(String logo) {
 		this.logo = logo;
+	}
+	/**
+	 * @return the agree
+	 */
+	public boolean isAgree() {
+		return agree;
+	}
+	/**
+	 * @param agree the agree to set
+	 */
+	public void setAgree(boolean agree) {
+		this.agree = agree;
 	}
 
 }

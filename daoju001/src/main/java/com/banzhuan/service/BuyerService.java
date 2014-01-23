@@ -67,9 +67,9 @@ public class BuyerService {
 			errors.rejectValue("name", "USER_NAME_IS_NOT_NULL");
 			return result;
 		}
-		else if(buyerDAO.queryBuyerEntityByMail(form.getEmail()) != null) // 第二步，判断注册用户名是否存在
+		else if(buyerDAO.queryBuyerEntityByMail(form.getMail()) != null) // 第二步，判断注册用户名是否存在
 		{
-			errors.rejectValue("email", "MAIL_IS_EXISTS");
+			errors.rejectValue("mail", "MAIL_IS_EXISTS");
 			return result;
 		}
 		if(StringUtil.isEmpty(form.getPwd())) //  第三步，判断密码不能为空
@@ -77,11 +77,16 @@ public class BuyerService {
 			errors.rejectValue("pwd", "PASSWORD_IS_NOT_NULL");
 			return result;
 		}
+		if(!form.isAgree())
+		{
+			errors.rejectValue("agree", "MUST_FOLLOW_DAOSHIFU_RULES");
+			return result;
+		}
 		
 		BuyerEntity buyer = new BuyerEntity();
 		buyer.setUsername(form.getName());
 		buyer.setPassword(StringUtil.encrypt(form.getPwd())); // 对密码加密
-		buyer.setEmail(form.getEmail()); // 设置邮箱地址
+		buyer.setEmail(form.getMail()); // 设置邮箱地址
 		buyerDAO.insertBuyerEntity(buyer);
 		result.add("buyer", buyer);
 		return result;

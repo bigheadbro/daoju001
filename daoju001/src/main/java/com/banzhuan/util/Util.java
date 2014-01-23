@@ -109,7 +109,7 @@ public class Util {
 	    Properties props = new Properties();
 	    //设置smtp服务器地址
 	    //这里使用QQ邮箱，记得关闭独立密码保护功能和在邮箱中设置POP3/IMAP/SMTP服务
-	    props.put("mail.smtp.host", "smtp.ismail.cn");
+	    props.put("mail.smtp.host", "smtp.exmail.qq.com");
 	    //需要验证
 	    props.put("mail.smtp.auth", "true");
 	    //创建验证器
@@ -180,7 +180,7 @@ public class Util {
 	
 	public static void main(String[] args) {  
 		String rec[] = {"346938819@qq.com", "123576884@qq.com", "410526674@qq.com"};
-    	sendEmail("admin@daoshifu.com","cisco123",rec,
+    	sendEmail("noreply@daoshifu.com","cisco123",rec,
     			"找回密码", "买了一个企业邮箱，测试一下自动发邮件功能，木哈哈", null, "", "UTF-8");
     }
 }

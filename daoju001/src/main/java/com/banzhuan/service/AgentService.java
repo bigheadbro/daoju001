@@ -71,7 +71,7 @@ public class AgentService {
 			errors.rejectValue("name", "USER_NAME_IS_NOT_NULL");
 			return result;
 		}
-		else if(agentDAO.queryAgentEntityByMail(form.getEmail()) != null) // 第二步，判断注册用户名是否存在
+		else if(agentDAO.queryAgentEntityByMail(form.getMail()) != null) // 第二步，判断注册用户名是否存在
 		{
 			errors.rejectValue("email", "MAIL_IS_EXISTS");
 			return result;
@@ -85,7 +85,7 @@ public class AgentService {
 		AgentEntity agent = new AgentEntity();
 		agent.setCompanyName(form.getName());
 		agent.setPassword(StringUtil.encrypt(form.getPwd())); // 对密码加密
-		agent.setMail(form.getEmail()); // 设置邮箱地址
+		agent.setMail(form.getMail()); // 设置邮箱地址
 		agentDAO.insertAgentEntity(agent);
 		result.add("agent", agent);
 		return result;

@@ -8,10 +8,14 @@
 		<div class="preview-wrap">
 			<div id="preview" class="preview"></div>
 		</div>
-		<div class="thumb-wrap clearfix">
+		<div class="thumb-container clearfix">
 			<h5>头像预览</h5>
-			<div class="thumb"></div>
-        </div>
+			<div class="thumb-wrap">
+				<div class="thumb-out">
+  			  <div class="thumb"></div>
+          </div>
+  			</div>
+		  </div>
     </div>
 	#if($!{account.isBuyer()})
 		<form id="form_uploadlogo" action="/buyer/uploadlogo" method="post" enctype="multipart/form-data">

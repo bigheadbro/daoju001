@@ -21,7 +21,7 @@ $(function(){
 function showAlert(title,content,info,btn,link){
 	if(alertfirst){
 		alertfirst=false;
-		$("body").append("<div id=\"pagemask\"></div><div class=\"alert-wrapper\"><div class=\"alert-layer clearfix\"><h3><a class=\"closealert\">x</a>系统提示</h3><div class=\"alert-content clearfix\">					<div class=\"alert-content-left\">						<h1></h1>						<h4></h4>					</div>					<div class=\"alert-content-right\">						<a href=\"\" class=\"alert-btn\"></a>					</div>				</div>				<div class=\"alert-footer\">									</div>							</div>		</div>");
+		$("body").append("<div id=\"pagemask\"></div><div class=\"alert-wrapper\"><div class=\"alert-layer clearfix\"><h3><a href=\"\" class=\"closealert\">x</a>系统提示</h3><div class=\"alert-content clearfix\">					<div class=\"alert-content-left\">						<h1></h1>						<h4></h4>					</div>					<div class=\"alert-content-right\">						<a href=\"\" class=\"alert-btn\"></a>					</div>				</div>				<div class=\"alert-footer\">									</div>							</div>		</div>");
   }
 	$("#pagemask").css("width", $(document).width());
   $("#pagemask").css("height", $(document).height());

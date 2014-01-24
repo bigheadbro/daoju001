@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.Errors;
 
+import com.banzhuan.dao.AgentDAO;
 import com.banzhuan.dao.BuyerDAO;
 import com.banzhuan.dao.MsgDAO;
 import com.banzhuan.dao.QuestionDAO;
@@ -30,6 +31,10 @@ public class BuyerService {
 	@Qualifier("buyerDAO")
 	private BuyerDAO buyerDAO;
 
+	@Autowired
+	@Qualifier("agentDAO")
+	private AgentDAO agentDAO;
+	
 	@Autowired
 	@Qualifier("questionDAO")
 	private QuestionDAO questionDAO;
@@ -67,7 +72,7 @@ public class BuyerService {
 			errors.rejectValue("name", "USER_NAME_IS_NOT_NULL");
 			return result;
 		}
-		else if(buyerDAO.queryBuyerEntityByMail(form.getMail()) != null) // 第二步，判断注册用户名是否存在
+		else if(buyerDAO.queryBuyerEntityByMail(form.getMail()) != null || agentDAO.queryAgentEntityByMail(form.getMail()) != null) // 第二步，判断注册用户名是否存在
 		{
 			errors.rejectValue("mail", "MAIL_IS_EXISTS");
 			return result;

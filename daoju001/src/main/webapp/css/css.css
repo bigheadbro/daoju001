@@ -378,10 +378,12 @@ opacity: .3;
 .uploadlogo-win h2{background-color:#0099cb;color:white;font-size:14px;padding:3px 10px;}
 .uploadlogo-win h2 a{float:right;}
 .uploadlogo-win .content{margin: 10px;}
-.uploadlogo-win .content .thumb-wrap{float:left;}
+.uploadlogo-win .content .thumb-container{float:left;}
 .uploadlogo-win .content .preview-wrap{float:left;height:300px;width:300px;border:1px solid grey}
 .uploadlogo-win .content .preview{height:300px;width:300px;}
-.uploadlogo-win .content .thumb{height:120px;width:120px;}
+.thumb-wrap{border: 1px solid #ccc;border-radius: 5px;width:120px;height:120px;overflow:hidden;text-align:center;display:table;float:left;background-color:white;}
+.uploadlogo-win .content .thumb{margin:0 auto;max-width:120px;max-height:120px;}
+.uploadlogo-win .content .thumb-out{display:table-cell;vertical-align:middle;}
 
 /*插入图片*/
 .addimg-win{display:none;position:absolute;top:50px;right:400px;z-index:10002;width:500px;padding: 5px;border-radius: 5px;background:url(../img/transGray.png);font-size:13px;}

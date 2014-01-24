@@ -35,6 +35,7 @@ import com.banzhuan.form.BuyerProfileForm;
 import com.banzhuan.form.RegForm;
 import com.banzhuan.form.LoginForm;
 import com.banzhuan.form.QuestionForm;
+import com.banzhuan.service.AgentService;
 import com.banzhuan.service.BuyerService;
 import com.banzhuan.util.JsonUtil;
 import com.banzhuan.util.StringUtil;
@@ -55,7 +56,9 @@ public class BuyerController extends BaseController{
 	@Autowired
 	@Qualifier("buyerService")
 	private BuyerService buyerService;
-	
+	@Autowired
+	@Qualifier("agentService")
+	private AgentService agentService;
 	/**
 	 * 通用URL跳转， 统一将  /buyer/*** 等未映射的URL重定向到login页面
 	 * @return
@@ -247,6 +250,11 @@ public class BuyerController extends BaseController{
 		else
 		{
 			buyerService.updateBuyerAccnt(form, buyer);
+			if(buyer.getUsername() != null)
+			{
+				account.setUserName(buyer.getUsername());
+			}
+
 			if(result.hasErrors())
 			{
 				return mv;
@@ -343,7 +351,7 @@ public class BuyerController extends BaseController{
 	
 	@RequestMapping(value="/newquestion")
 	public ModelAndView newquestion(HttpServletRequest request, HttpServletResponse response, @ModelAttribute("account")Account account, 
-			@ModelAttribute("questionForm")QuestionForm form, @ModelAttribute("questionid") final Object questionid, BindingResult result) 
+			@ModelAttribute("questionForm")QuestionForm form, BindingResult result, @ModelAttribute("questionid") final Object questionid) 
 	{
 		ModelAndView mv = new ModelAndView("buyer/newquestion");
 		if(!isDoSubmit(request))

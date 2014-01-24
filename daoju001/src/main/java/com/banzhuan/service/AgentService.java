@@ -15,6 +15,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.support.DefaultMultipartHttpServletRequest;
 
 import com.banzhuan.dao.AgentDAO;
+import com.banzhuan.dao.BuyerDAO;
 import com.banzhuan.dao.GoodcaseDAO;
 import com.banzhuan.dao.ProfessionalAnswerDAO;
 import com.banzhuan.dao.QuestionDAO;
@@ -47,6 +48,10 @@ public class AgentService {
 	private AgentDAO agentDAO;
 	
 	@Autowired
+	@Qualifier("buyerDAO")
+	private BuyerDAO buyerDAO;
+
+	@Autowired
 	@Qualifier("gcDAO")
 	private GoodcaseDAO gcDAO;
 	
@@ -71,7 +76,7 @@ public class AgentService {
 			errors.rejectValue("name", "USER_NAME_IS_NOT_NULL");
 			return result;
 		}
-		else if(agentDAO.queryAgentEntityByMail(form.getMail()) != null) // 第二步，判断注册用户名是否存在
+		else if(agentDAO.queryAgentEntityByMail(form.getMail()) != null || buyerDAO.queryBuyerEntityByMail(form.getMail()) != null) // 第二步，判断注册用户名是否存在
 		{
 			errors.rejectValue("email", "MAIL_IS_EXISTS");
 			return result;

@@ -40,6 +40,7 @@ import com.banzhuan.form.RegForm;
 import com.banzhuan.form.LoginForm;
 import com.banzhuan.form.SampleForm;
 import com.banzhuan.service.AgentService;
+import com.banzhuan.service.BuyerService;
 import com.banzhuan.util.JsonUtil;
 import com.banzhuan.util.StringUtil;
 import com.banzhuan.util.Util;
@@ -54,7 +55,9 @@ public class AgentController extends BaseController{
 	@Autowired
 	@Qualifier("agentService")
 	private AgentService agentService;
-	
+	@Autowired
+	@Qualifier("buyerService")
+	private BuyerService buyerService;
 	/**
 	 * 通用URL跳转， 统一将  /agent/*** 等未映射的URL重定向到login页面
 	 * @return

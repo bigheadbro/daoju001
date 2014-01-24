@@ -1,3 +1,4 @@
+var ratio = 120;
 (function(win, $, doc){
 	var islteie7 /*@cc_on = (document.documentMode || 7) < 8 @*/,
 		cropmask = '<div class="mask_right"></div>';
@@ -69,9 +70,17 @@
 		}
 
 		function setThumb(){
-			var cropSize = getSize(),
-				rx = cropSize.aeraWidth / cropSize.width * thumb.width(),
-				ry = cropSize.aeraHeight / cropSize.height * thumb.height();
+			var cropSize = getSize();
+			if(cropSize.width > cropSize.height){
+				$(thumb).css("width",ratio);
+				$(thumb).css("height",ratio*cropSize.height/cropSize.width);
+			}else{
+				$(thumb).css("width",ratio*cropSize.width/cropSize.height);
+				$(thumb).css("height",ratio);
+			}
+			
+			var rx = cropSize.aeraWidth / cropSize.width * thumb.width();
+			var ry = cropSize.aeraHeight / cropSize.height * thumb.height();
 			$(thumb.children()).css({
 				width: rx,
 				height: ry,

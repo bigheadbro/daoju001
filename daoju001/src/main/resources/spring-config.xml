@@ -64,6 +64,7 @@
 				<mvc:mapping path="/buyer/draft" />
 				<mvc:mapping path="/buyer/changepwd" />
 				<mvc:mapping path="/buyer/profile" />
+				<mvc:mapping path="/buyer/uploadlogo" />
 				<bean class="com.banzhuan.interceptor.BuyerLoginInterceptor" />
 			</mvc:interceptor>
 			<mvc:interceptor>

@@ -9,29 +9,39 @@
 </ul>
 <div class="rigth-content">
     <div>
-			<script>
-				$(function() {	
-					$("#form_profile").validate({
-						rules:{
-							companyName:{
-								required:true
-							},
-							brandName:{
-								required:true
-							}
+		<script>
+			function processJson(data) { 
+      			showAlert(data.title,data.content,data.info,data.btn,data.link);
+      		}
+			$(function() {	
+				$("#form_profile").validate({
+					rules:{
+						companyName:{
+							required:true
 						},
-						messages:{
-							companyName:{
-								required:"请输入公司名称"
-							},
-							brandName:{
-								required:"请输入代理品牌"
-							}
+						brandName:{
+							required:true
+						}
+					},
+					messages:{
+						companyName:{
+							required:"请输入公司名称"
 						},
-						errorElement:"em"
-					});
+						brandName:{
+							required:"请输入代理品牌"
+						}
+					},
+					errorElement:"em",
+					submitHandler: function(form) {
+                        $(form).ajaxSubmit({
+    						dataType:'json',
+    						success:processJson
+    					});
+                      }
+
 				});
-			</script>
+			});
+		</script>
 		<form id="form_profile" method="post" enctype="multipart/form-data">
 		<!-- 隐藏字段，用于标示是表单提交 -->
 		<input type="hidden" name="do_submit" value="true"/>
@@ -143,7 +153,7 @@
                 </li>
                 <li class="value">
 					<a id="uploadsample">上传证书</a>
-                    <input type="file" name="verifiedLink" />
+                    <input type="file" name="link" />
 					<p id="uploadsample-p">上传证书后，通过后台审核，可以得到我们对您的<i></i>认证</p>
                 </li>
             </ul>
@@ -152,15 +162,10 @@
             <a id="submit_profile" class="save" href="#">保 存</a>
         </div>
 		<script>
-		  function processJson(data) { 
-  			showAlert(data.title,data.content,data.info,data.btn,data.link);
-  		}
+
 			$(function() {
 				$("#submit_profile").click(function () {
-					$("#form_profile").ajaxSubmit({
-						dataType:'json',
-						success:processJson
-					});
+                    $(this).submit();
 				});
 			});
 		</script>

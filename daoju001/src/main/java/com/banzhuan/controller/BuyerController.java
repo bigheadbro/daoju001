@@ -27,6 +27,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.support.RequestContextUtils;
 import org.springframework.web.servlet.view.RedirectView;
+import org.springframework.web.util.WebUtils;
 
 import com.banzhuan.common.Constant;
 import com.banzhuan.common.Result;
@@ -265,10 +266,9 @@ public class BuyerController extends BaseController{
 	}
 	
 	@RequestMapping(value="/uploadlogo")
-	public void uploadlogo(HttpServletRequest request, HttpServletResponse response, @ModelAttribute("account")Account account, BindingResult result)
+	public ModelAndView uploadlogo(HttpServletRequest request, HttpServletResponse response)
 	{
 		String size = request.getParameter("crop");
-		
 		// /////////////////////////////////////////////////////////////获取上传的图片///////////////////////////////////
 		if (request instanceof DefaultMultipartHttpServletRequest) 
 		{
@@ -280,6 +280,7 @@ public class BuyerController extends BaseController{
 				{
 					String path = request.getSession().getServletContext().getRealPath("/logo");
 					File file = new File(path + "/" + f.getOriginalFilename());
+					Account account = (Account) WebUtils.getSessionAttribute(request, "account");
 					account.setLogo(Util.genRandomName(f.getOriginalFilename().substring(f.getOriginalFilename().lastIndexOf("."))));
 					BuyerEntity buyer = new BuyerEntity();
 					buyer.setId(account.getUserId());
@@ -300,8 +301,7 @@ public class BuyerController extends BaseController{
 				}
 			}
 		}
-	
-		return; 
+		return new ModelAndView(new RedirectView("main")); 
 	}
 	
 	@RequestMapping(value="/addimg")
@@ -383,7 +383,7 @@ public class BuyerController extends BaseController{
 		}
 		else
 		{
-			buyerService.insertQuestion(form, result);
+			buyerService.insertQuestion(form, account, result);
 			if(result.hasErrors())
 			{
 				return mv;

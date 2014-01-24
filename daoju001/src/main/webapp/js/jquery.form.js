@@ -284,6 +284,22 @@ $.fn.ajaxSubmit = function(options) {
         return result;
     }
 
+    function beforeSubmit(arr, $form, options){
+        var fileDataIndex = -1;
+
+        $.each(arr, function(index, value) {
+             if (value.name == "fileData"){
+                 if (value.value.length == 0){
+                     fileDataIndex = index;
+                 }
+             }
+           });
+
+        if (fileDataIndex != -1){
+           arr.remove(fileDataIndex);
+        }
+    }
+    
      // XMLHttpRequest Level 2 file uploads (big hat tip to francois2metz)
     function fileUploadXhr(a) {
         var formdata = new FormData();
@@ -1275,3 +1291,4 @@ function log() {
 }
 
 }));
+

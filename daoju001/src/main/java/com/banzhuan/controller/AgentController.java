@@ -19,6 +19,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.support.DefaultMultipartHttpServletRequest;
@@ -163,7 +164,7 @@ public class AgentController extends BaseController{
 	}
 	
 	@RequestMapping(value="/uploadlogo")
-	public void uploadlogo(HttpServletRequest request, HttpServletResponse response, @ModelAttribute("account")Account account, BindingResult result)
+	public ModelAndView uploadlogo(HttpServletRequest request, HttpServletResponse response, @ModelAttribute("account")Account account, BindingResult result)
 	{
 		String size = request.getParameter("crop");
 		
@@ -199,7 +200,7 @@ public class AgentController extends BaseController{
 			}
 		}
 	
-		return; 
+		return new ModelAndView(new RedirectView("main")); 
 	}
 	
 	@RequestMapping(value="/changepwd")

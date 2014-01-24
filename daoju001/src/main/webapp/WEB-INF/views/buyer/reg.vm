@@ -87,7 +87,7 @@
 						/> 
 						同意
 					</label>
-					<a class="protocol" href="#">刀师傅协议</a>
+					<a class="protocol">刀师傅协议</a>
 					<em for="$!{status.expression}" generated="true" class="error">$!{status.errorMessage}</em>
 				</li>
 			</ul>

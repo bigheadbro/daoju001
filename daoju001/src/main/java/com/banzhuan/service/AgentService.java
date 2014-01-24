@@ -78,7 +78,7 @@ public class AgentService {
 		}
 		else if(agentDAO.queryAgentEntityByMail(form.getMail()) != null || buyerDAO.queryBuyerEntityByMail(form.getMail()) != null) // 第二步，判断注册用户名是否存在
 		{
-			errors.rejectValue("email", "MAIL_IS_EXISTS");
+			errors.rejectValue("mail", "MAIL_IS_EXISTS");
 			return result;
 		}
 		if(StringUtil.isEmpty(form.getPwd())) //  第三步，判断密码不能为空
@@ -169,14 +169,15 @@ public class AgentService {
 			{
 				agent.setCompanyName(form.getCompanyName());
 			}
-			if(StringUtil.isNotEmpty(form.getAddress()))
-			{
-				agent.setAddress(form.getAddress());
-			}
 			if(StringUtil.isNotEmpty(form.getBrandName()))
 			{
 				agent.setBrandName(form.getBrandName());
 			}
+			if(StringUtil.isNotEmpty(form.getAddress()))
+			{
+				agent.setAddress(form.getAddress());
+			}
+			
 			if(StringUtil.isNotEmpty(form.getCompanyPhone()))
 			{
 				agent.setPhone(form.getCompanyName());
@@ -202,15 +203,14 @@ public class AgentService {
 			if (request instanceof DefaultMultipartHttpServletRequest) 
 			{
 				DefaultMultipartHttpServletRequest r = (DefaultMultipartHttpServletRequest) request;
-				List<MultipartFile> files = r.getMultiFileMap().get("verifiedLink");
+				List<MultipartFile> files = r.getMultiFileMap().get("link");
 				if (files != null && files.size() > 0) {
 					MultipartFile f = files.get(0);
 					if (StringUtil.isNotEmpty(f.getOriginalFilename()))
 					{
 						String path = request.getSession().getServletContext().getRealPath("/verified");
-						String fileName = Util.genRandomName(f.getContentType().toString().split("/")[1]);
-						File file = new File(path + "/" + fileName);
-						agent.setVerifiedLink("../verified/" + fileName);
+						File file = new File(path + "/" + f.getOriginalFilename());
+						agent.setVerifiedLink("../verified/" + f.getOriginalFilename());
 						try 
 						{
 							FileCopyUtils.copy(f.getBytes(), file);

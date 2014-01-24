@@ -223,7 +223,7 @@
 			</div>
 		</div>
 		<!-- 代理商 -->
-		<div class="main-list-container width300 ml30">
+		<div class="main-list-container width300 ml50">
 			<div class="main-list-header ">
                                                           最新代理商
 				<a class="seemore" href="/agents">查看更多</a>
@@ -256,7 +256,7 @@
    </div>
 		</div>
 	    <!-- 成功案例 -->
-		<div class="main-list-container width300 ml30">
+		<div class="main-list-container width300 ml50">
 			<div class="main-list-header">
 				成功案例
 			  <a class="seemore" href="/goodcases">查看更多</a>

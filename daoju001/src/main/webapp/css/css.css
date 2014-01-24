@@ -373,15 +373,22 @@ opacity: .3;
 .alert-btn{display: block;color: white;font-size: 24px;text-align: center;line-height: 35px;width:115px;height:41px;background-color:#63a200;border-radius:4px;}
 .alert-footer{margin: 0 35px 20px 35px;float:right;color:#d2d2d2}
 /*上传头像*/
-.uploadlogo-win{display:none;position:absolute;top:50px;right:400px;z-index:10002;width:500px;padding: 5px;border-radius: 5px;background:url(../img/transGray.png);font-size:13px;}
+.uploadlogo-win{display:none;position:absolute;top:50px;right:400px;z-index:10002;width:600px;padding: 5px;border-radius: 5px;background:url(../img/transGray.png);font-size:13px;}
 .uploadlog-win-content{background-color:white}
-.uploadlogo-win h2{background-color:#0099cb;color:white;font-size:14px;padding:3px 10px;}
+.uploadlogo-win h2{background-color:#0099cb;color:white;font-size:14px;padding:3px 10px;font-weight: 600;}
 .uploadlogo-win h2 a{float:right;}
-.uploadlogo-win .content{margin: 10px;}
-.uploadlogo-win .content .thumb-container{float:left;}
-.uploadlogo-win .content .preview-wrap{float:left;height:300px;width:300px;border:1px solid grey}
-.uploadlogo-win .content .preview{height:300px;width:300px;}
-.thumb-wrap{border: 1px solid #ccc;border-radius: 5px;width:120px;height:120px;overflow:hidden;text-align:center;display:table;float:left;background-color:white;}
+.uploadlogo-win .content{margin: 50px;margin-top:20px;}
+.uploadlogo-win .content .left{float:left;width: 319px;border-right:1px solid #ccc;padding-right:20px;margin: 20px;}
+.uploadlogo-win .content .left .upload{position:relative;margin-top:20px}
+.uploadlogo-win .content .left .upload a{background-color:#00607f;color:white;border-radius:4px;text-align:center;padding:10px 28px;font-size:16px;line-height: 41px;}
+.uploadlogo-win .content .left .upload input[type="file"]{display: block;width: 104px;height: 41px;top: 0;left: 0;position: absolute;opacity:0;}
+.uploadlogo-win .content .right{float:left;margin-top:100px;}
+.uploadlogo-win .content .right .save{display:block;background-color:#63a200;color:white;border-radius:4px;text-align:center;padding:10px 20px;margin-top:20px;font-size:16px}
+.uploadlogo-win .content .thumb-container{background-color: #E0E0E0;border-radius: 8px;}
+.uploadlogo-win .content .preview-wrap{height: 200px;width: 310px;background-color: #E0E0E0;border-radius: 8px;overflow:hidden;text-align:center;display:table;}
+.uploadlogo-win .content .preview-out{display:table-cell;vertical-align:middle;}
+.uploadlogo-win .content .preview{height:200px;width:310px;}
+.thumb-wrap{border-radius: 5px;width:120px;height:120px;overflow:hidden;text-align:center;display:table;float:left;}
 .uploadlogo-win .content .thumb{margin:0 auto;max-width:120px;max-height:120px;}
 .uploadlogo-win .content .thumb-out{display:table-cell;vertical-align:middle;}
 
@@ -488,7 +495,8 @@ opacity: .3;
 .pb15{padding-bottom:15px;}
 .mb0{margin-bottom:0px}
 .pt20{padding-top:20px}
-.ml30{margin-left:50px}
+.ml30{margin-left:30px}
+.ml50{margin-left:50px}
 .bbg{border-bottom:1px solid #b3b3b3}
 .btg{border-top:1px solid #b3b3b3}
 .blrg{border-right: 1px solid #ccc;border-left: 1px solid #ccc;}

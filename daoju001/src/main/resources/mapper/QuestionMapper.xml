@@ -61,6 +61,8 @@
 		,process_method
 		,wp_hardness
 		,wp_material
+		,user_name
+		,user_logo
 		,has_pic)
 		values
 		(
@@ -76,6 +78,8 @@
 		,#{processMethod}
 		,#{wpHardness}
 		,#{wpMaterial}
+		,#{userName}
+		,#{userLogo}
 		,#{hasPic}
 		)
 	</insert>

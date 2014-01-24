@@ -14,6 +14,7 @@ import com.banzhuan.dao.QuestionDAO;
 import com.banzhuan.entity.BuyerEntity;
 import com.banzhuan.entity.MessageEntity;
 import com.banzhuan.entity.QuestionEntity;
+import com.banzhuan.common.Account;
 import com.banzhuan.common.Result;
 import com.banzhuan.form.BuyerProfileForm;
 import com.banzhuan.form.RegForm;
@@ -234,7 +235,7 @@ public class BuyerService {
 		}
 	}
 	
-	public Result insertQuestion(QuestionForm form, Errors errors)
+	public Result insertQuestion(QuestionForm form, Account account, Errors errors)
 	{
 		Result result = new Result();
 		
@@ -250,6 +251,8 @@ public class BuyerService {
 			return result;
 		}
 		QuestionEntity question = new QuestionEntity();
+		question.setUserName(account.getUserName());
+		question.setUserLogo(account.getLogo());
 		question.setIndustry(form.getIndustry());
 		question.setProcessMethod(form.getProcessMethod());
 		question.setWpHardness(form.getWpHardness());

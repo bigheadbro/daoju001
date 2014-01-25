@@ -176,8 +176,8 @@
 								</a>
 							</div>
 							<div class="agent-detail">
-								<h2>
-									$!{gc.agentName}
+								<h2 class="clearfix">
+									<a class="agent-name" href="/agents/$!{gc.agentId}">$!{gc.agentName}</a>
 									#if($gc.isVerified())
 										<a class="fancybox-v" title="$!{gc.agentName}的代理证书" href="$!{gc.verifiedLink}"><img src="../img/v.png" /></a>
 									#end

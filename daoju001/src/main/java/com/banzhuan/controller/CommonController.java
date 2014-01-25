@@ -20,6 +20,7 @@ import org.springframework.web.servlet.view.RedirectView;
 
 import com.banzhuan.common.Result;
 import com.banzhuan.entity.AgentEntity;
+import com.banzhuan.entity.SampleEntity;
 import com.banzhuan.form.GoodcaseForm;
 import com.banzhuan.form.LoginForm;
 import com.banzhuan.form.ProfessionalAnswerForm;
@@ -126,13 +127,26 @@ public class CommonController extends BaseController{
 	}
 	
 	@RequestMapping(value = "agents")
-	public ModelAndView allagents(final HttpServletRequest request,final HttpServletResponse response, @ModelAttribute("form")GoodcaseForm form)
+	public ModelAndView allagents(final HttpServletRequest request,final HttpServletResponse response)
 	{
 		ModelAndView mv = new ModelAndView("/common/agents");
 		
 		Map<Integer,List<AgentEntity>> agentMap = commonService.getAllAgents();
 
 		mv.addObject("agentMap", agentMap);
+		
+		return mv;
+		
+	}
+	
+	@RequestMapping(value = "samples")
+	public ModelAndView allsamples(final HttpServletRequest request,final HttpServletResponse response)
+	{
+		ModelAndView mv = new ModelAndView("/common/samples");
+		
+		Map<Integer,Map<Integer,List<SampleEntity>>> sampleMap = commonService.getAllSamples();
+
+		mv.addObject("sampleMap", sampleMap);
 		
 		return mv;
 		

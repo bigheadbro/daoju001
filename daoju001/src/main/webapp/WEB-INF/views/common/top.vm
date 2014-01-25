@@ -3,7 +3,7 @@
 <div class="main-head-container">
     <div class="main-head-content clearfix">
         <div class="main-logo">
-            <img src="../img/logo.png" />
+            <a href="http://www.daoshifu.com"><img src="../img/logo.png" /></a>
         </div>
         <div class="nav">
             <ul>

@@ -60,6 +60,12 @@
 	]]>
 	</select>
 	
+	<select id="getAgentsCount" resultType="int">
+	<![CDATA[
+		SELECT count(1) from t_agent t 
+	]]>
+	</select>
+	
 	<select id="getAllagents" 
 			resultMap="AgentResultMap">
 		SELECT * from t_agent t order by gmt_create desc

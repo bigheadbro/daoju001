@@ -2,6 +2,8 @@ package com.banzhuan.service;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -13,9 +15,11 @@ import com.banzhuan.dao.AgentDAO;
 import com.banzhuan.dao.BuyerDAO;
 import com.banzhuan.dao.GoodcaseDAO;
 import com.banzhuan.dao.QuestionDAO;
+import com.banzhuan.dao.SampleDAO;
 import com.banzhuan.entity.AgentEntity;
 import com.banzhuan.entity.GoodcaseEntity;
 import com.banzhuan.entity.QuestionEntity;
+import com.banzhuan.entity.SampleEntity;
 import com.banzhuan.common.Result;
 import com.banzhuan.form.GoodcaseForm;
 import com.banzhuan.form.QuestionForm;
@@ -42,6 +46,10 @@ public class CommonService {
 	@Autowired
 	@Qualifier("gcDAO")
 	private GoodcaseDAO gcDAO;
+	
+	@Autowired
+	@Qualifier("sampleDAO")
+	private SampleDAO sampleDAO;
 	
 	public Result getAllGoodcases(GoodcaseForm form)
 	{
@@ -111,6 +119,62 @@ public class CommonService {
 		}
 
 		return agentMap;
+	}
+	
+	public Map<Integer,Map<Integer,List<SampleEntity>>> getAllSamples()
+	{
+		List<SampleEntity> samples = sampleDAO.getAllsamples();
+		
+		Map<Integer,Map<Integer,List<SampleEntity>>> sampleMap = new HashMap<Integer, Map<Integer,List<SampleEntity>>>();
+		
+		for(int i = 0;i < samples.size(); i++)
+		{
+			int alpha = ChineseSpelling.letterToNum(ChineseSpelling.getFirstLetter(((SampleEntity)samples.get(i)).getAgentName()));
+			Map<Integer,List<SampleEntity>> tmpMap = sampleMap.get(alpha);
+			//是否存在该字母的代理商案例
+			if(tmpMap == null)
+			{
+				tmpMap = new HashMap<Integer,List<SampleEntity>>();
+				List<SampleEntity> tmp = new ArrayList<SampleEntity>();
+				tmp.add((SampleEntity)samples.get(i));
+				tmpMap.put(samples.get(i).getAgentId(), tmp);
+			}
+			else
+			{
+				//是否包含样本的代理商id
+				if(tmpMap.containsKey(samples.get(i).getAgentId()))
+				{
+					Iterator<Integer> iter = tmpMap.keySet().iterator(); 
+					while (iter.hasNext()) 
+					{ 
+					    int key = Integer.valueOf(iter.next().toString()); 
+					    List<SampleEntity> val = tmpMap.get(key); 
+					    if(val == null)
+						{
+					    	val = new ArrayList<SampleEntity>();
+						}
+					    //如果是同一个代理商的样本
+					    if(key == samples.get(i).getAgentId())
+					    {
+						    val.add((SampleEntity)samples.get(i));
+						    tmpMap.put(key, val);
+						    break;
+					    }
+					} 
+				}
+				else
+				{
+					List<SampleEntity> tmp = new ArrayList<SampleEntity>();
+					tmp.add((SampleEntity)samples.get(i));
+					tmpMap.put(samples.get(i).getAgentId(), tmp);
+				}
+			}
+			
+			sampleMap.put(alpha, tmpMap);
+		}
+
+
+		return sampleMap;
 	}
 	
 	public Result getMainquestions()

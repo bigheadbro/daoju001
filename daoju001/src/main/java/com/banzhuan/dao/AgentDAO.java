@@ -37,5 +37,7 @@ public interface AgentDAO {
 	List<AgentEntity> getAllagents();
 	
 	List<AgentEntity> getMainagents();
+	
+	int getAgentsCount();
 
 }

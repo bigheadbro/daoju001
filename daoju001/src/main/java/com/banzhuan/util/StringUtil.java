@@ -537,6 +537,16 @@ public class StringUtil {
 		str = String.valueOf(c).toUpperCase();
 		return str;
 	}
+	
+	public static String fileType(String type)
+	{
+		return type.substring(1);
+	}
+	
+	public static String fileSize(double size)
+	{
+		return String.valueOf(size).substring(0,4);
+	}
 	private static Map<Integer, String> industryMap = new HashMap<Integer, String>();
 	private static Map<Integer, String> processMethodMap = new HashMap<Integer, String>();
 	private static Map<Integer, String> wpMaterialMap = new HashMap<Integer, String>();

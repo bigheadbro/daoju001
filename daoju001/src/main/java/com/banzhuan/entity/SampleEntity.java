@@ -11,6 +11,8 @@ public class SampleEntity implements Serializable {
 	private int id;
 	// 样本名称
 	private String name;
+	private String type;
+	private double size;
 	// 代理商id
 	private int agentId;
 	// 代理商名字
@@ -201,6 +203,34 @@ public class SampleEntity implements Serializable {
 
 	public void setVerifiedLink(String verifiedLink) {
 		this.verifiedLink = verifiedLink;
+	}
+
+	/**
+	 * @return the type
+	 */
+	public String getType() {
+		return type;
+	}
+
+	/**
+	 * @param type the type to set
+	 */
+	public void setType(String type) {
+		this.type = type;
+	}
+
+	/**
+	 * @return the size
+	 */
+	public double getSize() {
+		return size;
+	}
+
+	/**
+	 * @param size the size to set
+	 */
+	public void setSize(double size) {
+		this.size = size/1024/1024;
 	}
 
 	

@@ -2,100 +2,126 @@
 <link rel="stylesheet" href="../css/uploadify.css">
 <script type="text/javascript" src="../js/jquery.uploadify.min.js"></script>
 <ul class="right-tab clearfix">
-  <li class="current">上传样本</li>
-  <li><a href="mysample">样本管理</a></li>
+    <li class="current">上传样本</li>
+    <li>
+        <a href="mysample">样本管理</a>
+    </li>
 </ul>
 <div class="rigth-content">
-	<script>
-		$(function() {	
-		  $("#form_uploadsample").validate({
-				rules:{
-					name:{
-						required:true
-					},
-					link:{
-						required:true
-					}
+    <script>
+        $(function() {	
+            $("#form_uploadsample").validate({
+                rules:{
+                    name:{
+                    required:true
+                    },
+                    link:{
+                    required:true
+                    }
+                    },
+                messages:{
+                    name:{
+                    required:"请输入样本名称"
+                    },
+                    name:{
+                    required:"请上传文件"
+                    }
+                    },
+                errorElement:"em",
+                submitHandler: function(form) {
+                    $(form).ajaxSubmit({
+                        dataType:'json',
+                        success:processJson
+                    });
+                }
+            });
+            $("#submit_uploadsample").click(function(){
+            	$(this).submit();
+            });
+            $("#file_upload").uploadify({  
+                'height'        : 30,   
+                'width'         : 120,    
+				'buttonText'    : '选择样本',
+				'fileSizeLimit' : '50MB',
+                'fileObjName'   : 'sampleLink',
+                'swf'           : '/js/uploadify.swf',  
+                'uploader'      : '/agent/uploadfile_sample',  
+                'auto'          : true,  
+				'fileTypeExts'  : '*.rar;*.pdf;*.doc;*.xls',  
+                'uploadLimit'   : 1, 
+                'onUploadStart' : function(file) {  
+                },  
+                'onUploadSuccess':function(file, data, response){    
+                	$("#link").val(data);
+					$("#type").val(file.type);
+					$("#size").val(file.size);
+                },  
+				'onQueueFull ' : function(){
+				    alert("只能上传一个文件！");
 				},
-				messages:{
-					name:{
-						required:"请输入样本名称"
-					},
-					name:{
-						required:"请上传文件"
-					}
-				},
-				errorElement:"em",
-				submitHandler: function(form) {
-          $(form).ajaxSubmit({
-						dataType:'json',
-						success:processJson
-					});
-				}
-			});
-			$("#submit_uploadsample").click(function(){
-			  $("#form_uploadsample").submit();
-			});
-			$("#file_upload").uploadify({  
-            'height'        : 30,   
-            'width'         : 120,    
-						'fileObjName'   : 'sampleLink',
-            'swf'           : '/js/uploadify.swf',  
-            'uploader'      : '/agent/uploadfile_sample',  
-            'auto'          : true,  
-            'fileTypeExts'  : '*.*',  
-						'uploadLimit'   : 1, 
-            'onUploadStart' : function(file) {  
-                
-            },  
-            'onUploadSuccess':function(file, data, response){    
-								$("#link").val(data);
-            },  
-            'onUploadComplete':function(){  
-            }  
-        });  
-		});
-		function processJson(data) { 
-			showAlert(data.title,data.content,data.info,data.btn,data.link);
-		}  
-	</script>
-	<form id="form_uploadsample" method="post" enctype="multipart/form-data">
-		<!-- 隐藏字段，用于标示是表单提交 -->
-		<input type="hidden" name="do_submit" value="true"/>
-		#springBind("form.sid")
-	  <input type="hidden" name="${status.expression}" value="$!{status.value}" id="gcid" />
-		#springBind("form.isEdit")
-	  <input type="hidden" name="${status.expression}" value="$!{status.value}" id="isEdit" />
-		#springBind("form.link")
-	  <input type="hidden" name="${status.expression}" value="$!{status.value}" id="link" />
-		<em for="$!{status.expression}" generated="true" class="error">$!{status.errorMessage}</em>
-  	<div class="listitem clearfix">
-  		#springBind("form.name")
-  		<ul class="user-info clearfix">
-  			<li class="key">
-  				案例名称
-  			</li>
-  			<li class="value">
-  				<input class="dsf-form-text-input" type="text" name="${status.expression}"  value="$!{status.value}" />
-  			</li>
-  		</ul>
-  	</div>
-		</form>
-  	<div class="listitem clearfix">
-  		<ul class="user-info clearfix">
-  			<li class="key">
-  				样本文件
-  			</li>
-  			<li class="value">
-  				<div class="upload-gc">
-					<input type="file" name="sampleLink" id="file_upload" />
-  					<p>仅支持DOC、PDF格式，文件小于5M</p>
-						
-  				</div>
-  			</li>
-  		</ul>
-  	</div>
-  	<div class="listitem mt20 pt20 btg clearfix">
-		  <a id="submit_uploadsample" class="save" >上传样本</a>
-		</div>
+				'overrideEvents': 'onSelectError',
+				'onSelectError' : function(file, errorCode, errorMsg) {
+					if(errorCode == SWFUpload.QUEUE_ERROR.ZERO_BYTE_FILE){
+                		this.queueData.errorMsg = "不能传空文件!!";
+                	}
+					if(errorCode == SWFUpload.QUEUE_ERROR.UPLOAD_LIMIT_EXCEEDED){
+                		this.queueData.errorMsg = "只能上传一个文件!!";
+                	}
+					if(errorCode == SWFUpload.QUEUE_ERROR.FILE_EXCEEDS_SIZE_LIMIT){
+                		this.queueData.errorMsg = "文件大小不能超过100MB!!";
+                	}
+					if(errorCode == SWFUpload.QUEUE_ERROR.INVALID_FILETYPE){
+                		this.queueData.errorMsg = "不支持该文件类型!!";
+                	}
+        		},
+                'onUploadComplete':function(){  
+                }  
+            });  
+        });
+        function processJson(data) { 
+        	showAlert(data.title,data.content,data.info,data.btn,data.link);
+        }  
+    </script>
+    <form id="form_uploadsample" method="post">
+        <!-- 隐藏字段，用于标示是表单提交 -->
+        <input type="hidden" name="do_submit" value="true"/>
+        #springBind("form.sid")
+        <input type="hidden" name="${status.expression}" value="$!{status.value}" id="gcid" />
+        #springBind("form.isEdit")
+        <input type="hidden" name="${status.expression}" value="$!{status.value}" id="isEdit" />
+        #springBind("form.link")
+        <input type="hidden" name="${status.expression}" value="$!{status.value}" id="link" />
+        <em for="$!{status.expression}" generated="true" class="error">$!{status.errorMessage}</em>
+		#springBind("form.type")
+        <input type="hidden" name="${status.expression}" value="$!{status.value}" id="type" />
+		#springBind("form.size")
+        <input type="hidden" name="${status.expression}" value="$!{status.value}" id="size" />
+        <div class="listitem clearfix">
+            #springBind("form.name")
+            <ul class="user-info clearfix">
+                <li class="key">
+                    案例名称
+                </li>
+                <li class="value">
+                    <input class="dsf-form-text-input" type="text" name="${status.expression}"  value="$!{status.value}" />
+                </li>
+            </ul>
+        </div>
+		<div class="listitem clearfix">
+            <ul class="user-info clearfix">
+                <li class="key">
+                    样本文件
+                </li>
+                <li class="value">
+                    <div class="upload-gc">
+                        <input type="file" name="sampleLink" id="file_upload" />
+                        <p>仅支持DOC、PDF，XLS，RAR格式，文件小于50M</p>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div class="listitem mt20 pt20 btg clearfix">
+            <a id="submit_uploadsample" class="save" >上传样本</a>
+        </div>
+	</form>
 </div>

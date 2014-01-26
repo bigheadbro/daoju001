@@ -69,7 +69,7 @@
     									<div class="sample-wrap clearfix">
     										<div class="detail">
 												<h2>$!{sample.name}</h2>
-												<h4>文件类型</h4>
+												<h4>$stringUtil.fileType($!{sample.type}) 文件  $stringUtil.fileSize($!{sample.size}) MB</h4>
 											</div>
 											<a href="$!{sample.link}">点击下载</a>
     									</div>

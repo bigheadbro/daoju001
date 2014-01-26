@@ -8,6 +8,9 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import net.sf.json.JSON;
+import net.sf.json.JSONObject;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -420,7 +423,7 @@ public class AgentController extends BaseController{
 	@ResponseBody
 	public String uploadfile_sample(HttpServletRequest request, HttpServletResponse response, @ModelAttribute("account")Account account)
 	{
-		String responseStr="";  
+		String responseStr = "";
 		MultipartHttpServletRequest r = (MultipartHttpServletRequest) request;
 		  
         MultipartFile f = r.getFile("sampleLink");    
@@ -428,6 +431,7 @@ public class AgentController extends BaseController{
 		String link = "../sample/" + String.valueOf(account.getUserId()) + "/" + StringUtil.getTodayString() + "/" + f.getOriginalFilename();
 		path += "/" + String.valueOf(account.getUserId()) + "/" + StringUtil.getTodayString() + "/";
 		File file = new File(path + f.getOriginalFilename());
+		
 		file.getParentFile().mkdirs();  
 
 		try 

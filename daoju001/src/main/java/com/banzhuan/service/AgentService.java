@@ -417,6 +417,14 @@ public class AgentService {
     	{
     		sample.setLink(form.getLink());
     	}
+    	if(StringUtil.isNotEmpty(form.getType()))
+    	{
+    		sample.setType(form.getType());
+    	}
+    	if(form.getSize() != 0)
+    	{
+    		sample.setSize(form.getSize());
+    	}
     	sampleDAO.insertSampleEntity(sample);
     	return result;
     	
@@ -437,6 +445,18 @@ public class AgentService {
     	if(StringUtil.isNotEmpty(form.getName()))
     	{
     		sample.setName(form.getName());
+    	}
+    	if(StringUtil.isNotEmpty(form.getLink()))
+    	{
+    		sample.setLink(form.getLink());
+    	}
+    	if(StringUtil.isNotEmpty(form.getType()))
+    	{
+    		sample.setType(form.getType());
+    	}
+    	if(form.getSize() != 0)
+    	{
+    		sample.setSize(form.getSize());
     	}
     	sampleDAO.updateSampleById(sample);
     	return result;

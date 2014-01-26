@@ -11,6 +11,8 @@ public class SampleForm implements Serializable {
 	
 	private String name;
 	private String link;
+	private String type;
+	private double size;
 	private int isEdit;
 	private int sid;
 	
@@ -40,6 +42,30 @@ public class SampleForm implements Serializable {
 	}
 	public static long getSerialversionuid() {
 		return serialVersionUID;
+	}
+	/**
+	 * @return the type
+	 */
+	public String getType() {
+		return type;
+	}
+	/**
+	 * @param type the type to set
+	 */
+	public void setType(String type) {
+		this.type = type;
+	}
+	/**
+	 * @return the size
+	 */
+	public double getSize() {
+		return size;
+	}
+	/**
+	 * @param size the size to set
+	 */
+	public void setSize(double size) {
+		this.size = size;
 	}
 	
 

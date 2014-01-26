@@ -6,6 +6,10 @@
 		<id property="id" column="id" />
 		<!--样本名称 -->
 		<id property="name" column="name" />
+		<!--样本名称 -->
+		<id property="type" column="type" />
+		<!--样本名称 -->
+		<id property="size" column="size" />
 		<!--代理商id -->
 		<id property="agentId" column="agent_id" />
 		<!--代理商名字 -->
@@ -52,6 +56,8 @@
 		insert into t_sample
 		(
 		name
+		,type
+		,size
 		,agent_id
 		,agent_name
 		,agent_logo
@@ -62,6 +68,8 @@
 		values
 		(
 		#{name}
+		,#{type}
+		,#{size}
 		,#{agentId}
 		,#{agentName}
 		,#{agentLogo}

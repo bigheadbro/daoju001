@@ -76,7 +76,7 @@
 				<mvc:mapping path="/agent/goodcase" />
 				<mvc:mapping path="/agent/uploadgc" />
 				<mvc:mapping path="/agent/mysample" />
-				<mvc:mapping path="/agent/uploadsample" />
+				<mvc:mapping path="/agent/uploadsample" /> 
 				<mvc:mapping path="/agent/changepwd" />
 				<mvc:mapping path="/agent/profile" />
 				<mvc:mapping path="/agent/uploadlogo" />

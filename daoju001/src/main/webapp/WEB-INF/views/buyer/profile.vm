@@ -20,7 +20,13 @@
 								required:"请输入用户名称"
 							}
 						},
-						errorElement:"em"
+						errorElement:"em",
+    				submitHandler: function(form) {
+              $(form).ajaxSubmit({
+    						dataType:'json',
+    						success:processJson
+    					});
+    				}
 					});
 				});
 			</script>
@@ -114,10 +120,7 @@
 				}
 				$(function() {
 					$("#submit_profile").click(function () {
-						$("#form_profile").ajaxSubmit({
-  						dataType:'json',
-  						success:processJson
-  					});
+						$("#form_profile").submit();
   				});
   			});
 			</script>

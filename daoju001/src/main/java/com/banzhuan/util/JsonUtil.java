@@ -132,6 +132,24 @@ public class JsonUtil {
         }  
 	}
 	
+	public static void sendFileLink(HttpServletResponse response, String addr)
+	{
+		JSONObject object = new JSONObject();  
+        response.setContentType("text/Xml;charset=gbk");  
+        object.element("addr", addr);
+        PrintWriter out = null;  
+        try {  
+            out = response.getWriter();  
+            out.println(object.toString());  
+        }  
+        catch (IOException ex1) {  
+            ex1.printStackTrace();  
+        }  
+        finally {  
+            out.close();  
+        }  
+	}
+	
 	public static void checkAnswerStatus(HttpServletResponse response, int status)
 	{
 		JSONObject object = new JSONObject();  

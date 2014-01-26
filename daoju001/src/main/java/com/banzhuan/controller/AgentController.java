@@ -20,8 +20,10 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.multipart.support.DefaultMultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -332,6 +334,33 @@ public class AgentController extends BaseController{
 		return mv;
 	}
 	
+	@RequestMapping(value = "uploadfile_gc")  
+	@ResponseBody
+	public String uploadfile_gc(HttpServletRequest request, HttpServletResponse response, @ModelAttribute("account")Account account)
+	{
+		String responseStr="";  
+		MultipartHttpServletRequest r = (MultipartHttpServletRequest) request;
+		  
+        MultipartFile f = r.getFile("sampleLink");    
+        String path = request.getSession().getServletContext().getRealPath("/goodcase");
+		String link = "../goodcase/" + String.valueOf(account.getUserId()) + "/" + StringUtil.getTodayString() + "/" + f.getOriginalFilename();
+		path += "/" + String.valueOf(account.getUserId()) + "/" + StringUtil.getTodayString() + "/";
+		File file = new File(path + f.getOriginalFilename());
+		file.getParentFile().mkdirs();  
+		file.getParentFile().mkdirs();  
+
+		try 
+		{
+			FileCopyUtils.copy(f.getBytes(), file);
+			responseStr = link;
+
+		} catch (IOException e) {
+
+		}
+
+		return responseStr;
+	}
+	
 	@RequestMapping(value="/uploadgc")
 	public ModelAndView uploadgc(HttpServletRequest request, HttpServletResponse response, @ModelAttribute("account")Account account, 
 			@ModelAttribute("form")GoodcaseForm form, BindingResult result, @ModelAttribute("gcid") final Object gcid)
@@ -347,47 +376,16 @@ public class AgentController extends BaseController{
 			gc.setVerified(account.isVerified());
 			gc.setVerifiedLink(account.getVerifiedLink());
 			
-			// /////////////////////////////////////////////////////////////获取上传的文件///////////////////////////////////
-			if (request instanceof DefaultMultipartHttpServletRequest) 
-			{
-				DefaultMultipartHttpServletRequest r = (DefaultMultipartHttpServletRequest) request;
-				List<MultipartFile> files = r.getMultiFileMap().get("link");
-				if (files != null && files.size() > 0) {
-					MultipartFile f = files.get(0);
-					if (StringUtil.isNotEmpty(f.getOriginalFilename()))
-					{
-						String path = request.getSession().getServletContext().getRealPath("/goodcase");
-						String link = "../goodcase/" + String.valueOf(account.getUserId()) + "/" + StringUtil.getTodayString() + "/" + f.getOriginalFilename();
-						path += "/" + String.valueOf(account.getUserId()) + "/" + StringUtil.getTodayString() + "/";
-						File file = new File(path + f.getOriginalFilename());
-						file.getParentFile().mkdirs();  
-						gc.setLink(link);
-						try 
-						{
-							FileCopyUtils.copy(f.getBytes(), file);
-	
-						} catch (IOException e) {
-	
-						}
-					}
-				}
-			}
 			if(form.getIsEdit() > 0)
 			{
 				agentService.updateGoodcaseById(form, gc, result);
-				if(result.hasErrors() && (result.getErrorCount()>1 || !result.hasFieldErrors("link")))
-				{
-					return mv;
-				}
+
 				JsonUtil.showAlert(response, "更新案例", "成功案例更新成功~~", "确定", "", "");
 			}
 			else
 			{
 				agentService.insertGoodcase(form, gc, result);
-				if(result.hasErrors() && (result.getErrorCount()>1 || !result.hasFieldErrors("link")))
-				{
-					return mv;
-				}
+
 				JsonUtil.showAlert(response, "上传案例", "上传案例成功~~", "确定", "", "");
 			}
 			return mv;
@@ -418,63 +416,59 @@ public class AgentController extends BaseController{
 		return mv;
 	}
 	
+	@RequestMapping(value = "uploadfile_sample")  
+	@ResponseBody
+	public String uploadfile_sample(HttpServletRequest request, HttpServletResponse response, @ModelAttribute("account")Account account)
+	{
+		String responseStr="";  
+		MultipartHttpServletRequest r = (MultipartHttpServletRequest) request;
+		  
+        MultipartFile f = r.getFile("sampleLink");    
+        String path = request.getSession().getServletContext().getRealPath("/sample");
+		String link = "../sample/" + String.valueOf(account.getUserId()) + "/" + StringUtil.getTodayString() + "/" + f.getOriginalFilename();
+		path += "/" + String.valueOf(account.getUserId()) + "/" + StringUtil.getTodayString() + "/";
+		File file = new File(path + f.getOriginalFilename());
+		file.getParentFile().mkdirs();  
+
+		try 
+		{
+			FileCopyUtils.copy(f.getBytes(), file);
+			responseStr = link;
+
+		} catch (IOException e) {
+
+		}
+
+		return responseStr;
+	}
+	
 	@RequestMapping(value="/uploadsample")
-	public ModelAndView uploadsample(HttpServletRequest request, HttpServletResponse response, @ModelAttribute("account")Account account, 
+	public ModelAndView uploadsample(HttpServletRequest request, HttpServletResponse response, @ModelAttribute("account")Account account,
 			@ModelAttribute("form")SampleForm form, BindingResult result, @ModelAttribute("sid") final Object sid) 
 	{
 		ModelAndView mv = new ModelAndView("agent/uploadsample");
+		
 		if(isDoSubmit(request))
 		{
 			SampleEntity sample = new SampleEntity();
-			sample.setAgentId(account.getUserId());
+ 			sample.setAgentId(account.getUserId());
 			sample.setAgentLogo(account.getLogo());
 			sample.setAgentName(account.getUserName());
 			sample.setBrandName(account.getBrandName());
 			sample.setVerified(account.isVerified());
 			sample.setVerifiedLink(account.getVerifiedLink());
 			
-			// /////////////////////////////////////////////////////////////获取上传的文件///////////////////////////////////
-			if (request instanceof DefaultMultipartHttpServletRequest) 
-			{
-				DefaultMultipartHttpServletRequest r = (DefaultMultipartHttpServletRequest) request;
-				List<MultipartFile> files = r.getMultiFileMap().get("link");
-				if (files != null && files.size() > 0) {
-					MultipartFile f = files.get(0);
-					if (StringUtil.isNotEmpty(f.getOriginalFilename()))
-					{
-						String path = request.getSession().getServletContext().getRealPath("/sample");
-						String link = "../sample/" + String.valueOf(account.getUserId()) + "/" + StringUtil.getTodayString() + "/" + f.getOriginalFilename();
-						path += "/" + String.valueOf(account.getUserId()) + "/" + StringUtil.getTodayString() + "/";
-						File file = new File(path + f.getOriginalFilename());
-						file.getParentFile().mkdirs();  
-						sample.setLink(link);
-						try 
-						{
-							FileCopyUtils.copy(f.getBytes(), file);
-	
-						} catch (IOException e) {
-	
-						}
-					}
-				}
-			}
 			if(form.getIsEdit() > 0)
 			{
 				agentService.updateSampleById(form, sample, result);
-				if(result.hasErrors() && (result.getErrorCount()>1 || !result.hasFieldErrors("link")))
-				{
-					return mv;
-				}
+
 				JsonUtil.showAlert(response, "上传样本", "更新样本成功~~", "确定", "", "");
 				
 			}
 			else
 			{
 				agentService.insertSample(form, sample, result);
-				if(result.hasErrors() && (result.getErrorCount()>1 || !result.hasFieldErrors("link")))
-				{
-					return mv;
-				}
+
 				JsonUtil.showAlert(response, "上传样本", "上传样本成功~~", "确定", "", "");
 			}
 			if(result.hasErrors())

@@ -36,7 +36,13 @@
 								equalTo: "两次输入密码不一致"  
 							}
 						},
-						errorElement:"em"
+						errorElement:"em",
+    				submitHandler: function(form) {
+              $(form).ajaxSubmit({
+    						dataType:'json',
+    						success:processJson
+    					});
+    				}
 					});
 				});
 			</script>
@@ -90,10 +96,7 @@
 					}
     			$(function() {
     				$("#submit_changepwd").click(function () {
-    					$("#form_changepwd").ajaxSubmit({
-    						dataType:'json',
-    						success:processJson
-    					});
+    					$("#form_changepwd").submit();
     				});
     			});
     		</script>

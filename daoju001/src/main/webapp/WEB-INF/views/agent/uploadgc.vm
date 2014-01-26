@@ -24,8 +24,32 @@
 						required:"请上传文件"
 					}
 				},
-				errorElement:"em"
+				errorElement:"em",
+				submitHandler: function(form) {
+          $(form).ajaxSubmit({
+						dataType:'json',
+						success:processJson
+					});
+				}
 			});
+			$("#file_upload").uploadify({  
+            'height'        : 30,   
+            'width'         : 120,    
+						'fileObjName'   : 'sampleLink',
+            'swf'           : '/js/uploadify.swf',  
+            'uploader'      : '/agent/uploadfile_sample',  
+            'auto'          : true,  
+            'fileTypeExts'  : '*.*',  
+						'uploadLimit'   : 1, 
+            'onUploadStart' : function(file) {  
+                
+            },  
+            'onUploadSuccess':function(file, data, response){    
+								$("#link").val(data);
+            },  
+            'onUploadComplete':function(){  
+            }  
+        });  
 		});
 	</script>
 	<form id="form_uploadgc" method="post" enctype="multipart/form-data">
@@ -35,6 +59,8 @@
 	    <input type="hidden" name="${status.expression}" value="$!{status.value}" id="gcid" />
 		#springBind("form.isEdit")
 	    <input type="hidden" name="${status.expression}" value="$!{status.value}" id="isEdit" />
+			#springBind("form.link")
+	    <input type="hidden" name="${status.expression}" value="$!{status.value}" id="link" />
     	#springBind("form.name")
     	<div class="listitem clearfix">
     		<ul class="user-info clearfix">
@@ -220,7 +246,7 @@
     			<li class="value">
     				<div class="upload-gc">
     					<a class="" href="">点击上传</a>
-    					<input type="file" name="link" />
+    					<input type="file" name="link" id="file_upload"/>
     					<p>仅支持DOC、PDF格式，文件小于5M</p>
 							<em for="link" generated="true" class="error">$!{status.errorMessage}</em>
     				</div>
@@ -237,10 +263,7 @@
   		}
 		  $(function() {
 			  $("#submit_uploadgc").click(function(){
-				  $("#form_uploadgc").ajaxSubmit({
-						dataType:'json',
-						success:processJson
-					});
+				  $("#form_uploadgc").submit();
 				});
 			});
 		</script>

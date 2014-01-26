@@ -172,13 +172,10 @@ div[contentEditable]{outline:0}
 .mainpage-container .main-right .rigth-content .listitem{font-size:14px}
 .mainpage-container .main-right .notread{font-weight:700;}
 .mainpage-container .main-right .rigth-content .buyer-list .listitem a{color:#0099cb}
-.mainpage-container .main-right .rigth-content .listitem span{float:right;color:#666666}
 .mainpage-container .main-right .right-tab  li{float:left;padding: 8px 50px;font-size:14px;color:#6a6a6a}
 .mainpage-container .main-right .right-tab  li.current{color:white;background-color:#0099cb;}
 .mainpage-container .main-right .rigth-content .listitem .user-info li.key{float:left;font-size:14px;color:#464646;padding:10px 65px 10px 0;width:85px;}
 .mainpage-container .main-right .rigth-content .listitem .user-info li.value{float:left;font-size:14px;position:relative;color:#464646;padding:10px 15px 10px 0}
-.mainpage-container .main-right .rigth-content .listitem .user-info li.value input[type="file"]{position: absolute;top: 6px;width: 63px;display: block;border: 2px;height: 28px;opacity:0;}
-.mainpage-container .main-right .rigth-content .listitem .user-info li.value .upload-gc input[type="file"]{position: absolute;top: 6px;width: 81px;display: block;border: 2px;height: 33px;opacity:0;}
 .mainpage-container .main-right .rigth-content .listitem .user-info li.value #uploadsample-p{font-size:11px;color:#9d9d9d;margin-top:4px;}
 .mainpage-container .main-right .rigth-content .listitem .user-info li.value #uploadsample-p i{width:15px;height:14px;display: inline-block;background: url(../img/v.png) repeat 0 0;}
 .mainpage-container .main-right .rigth-content .listitem .user-info li.operation{float:left;font-size:14px;color:#ccc;padding:10px 0 10px 0;font-size:13px;line-height: 21px;}
@@ -251,7 +248,6 @@ div[contentEditable]{outline:0}
 .mainpage-container .main-right .go-ask h2{color:#0088b5;font-size:18px;padding:0}
 .mainpage-container .main-right .go-ask a{display:block;width:110px;font-size:18px;color:white;background-color:#0088b5;padding:15px 30px 15px 30px;border-radius:4px;margin:20px 20px 0 0px;text-align:center;}
 .mainpage-container .main-right  .buyer-list .listitem a{color:#0099cb}
-.mainpage-container .main-right  .listitem span{float:right;color:#666666}
 .upload-gc a{color: white;background-color: #ff9000;padding: 5px;display: block;width: 70px;text-align: center;border-radius: 7px;line-height: 19px;margin-bottom: 10px;}
 .upload-gc p{font-size:11px;color:#9d9d9d}
 

@@ -413,6 +413,10 @@ public class AgentService {
     	{
     		sample.setName(form.getName());
     	}
+    	if(StringUtil.isNotEmpty(form.getLink()))
+    	{
+    		sample.setLink(form.getLink());
+    	}
     	sampleDAO.insertSampleEntity(sample);
     	return result;
     	

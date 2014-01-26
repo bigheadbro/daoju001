@@ -29,7 +29,13 @@
 								required:"请输入密码"
 							}
 						},
-						errorElement: "em"
+						errorElement: "em",
+    				submitHandler: function(form) {
+              $(form).ajaxSubmit({
+    						dataType:'json',
+    						success:processJson
+    					});
+    				}
 					});
 				});
 		</script>
@@ -239,32 +245,25 @@
                     <div id="ques-cont-editor" class="add-question-editor" contenteditable="true" placeholder="请输入问题详情">
                     </div>
                 </div>
-        </div>
+        </div>	
         <div class="question-op clearfix">
             <a class="publish" id="submit_public" href="#">发  布</a>
             <a class="savedraft" id="submit_draft" href="#">保存草稿</a>
         </div>
         <script>
+					function processJson(data) { 
+  					showAlert(data.title,data.content,data.info,data.btn,data.link);
+  				}
             $(function() {
                 $("#submit_public").click(function () {
                     $("#state").val(1);
                     $(".add-question-container").children("input").val($("#ques-cont-editor").html());
-                    $("#form_newquestion").ajaxSubmit({
-                        dataType:'json',
-                        success:function(data) { 
-                        	showAlert(data.title,data.content,data.info,data.btn,data.link);
-                        }
-                    });
+                    $("#form_newquestion").submit();
             	});
 				$("#submit_draft").click(function () {
                     $("#state").val(0);
                     $(".add-question-container").children("input").val($("#ques-cont-editor").html());
-                    $("#form_newquestion").ajaxSubmit({
-                        dataType:'json',
-                        success:function(data) { 
-                        	showAlert(data.title,data.content,data.info,data.btn,data.link);
-                        }
-                    });
+                    $("#form_newquestion").submit();
                 });
 				
 

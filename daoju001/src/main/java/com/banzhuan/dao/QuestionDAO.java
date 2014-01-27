@@ -18,4 +18,6 @@ public interface QuestionDAO {
 	public List<QuestionEntity> getAllquestions(QuestionEntity question);
 	
 	public List<QuestionEntity> getMainquestions();
+	
+	int getQuestionCount(int userid);
 }

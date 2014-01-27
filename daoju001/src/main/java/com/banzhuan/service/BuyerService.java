@@ -358,6 +358,11 @@ public class BuyerService {
 		return msgDAO.getUnreadMsgCount(userid);
 	}
 	
+	public int getQuestionCount(int userid)
+	{
+		return questionDAO.getQuestionCount(userid);
+	}
+	
 	public Result getAllMsgs(int userid)
 	{
 		Result result = new Result();

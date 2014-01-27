@@ -37,6 +37,13 @@
 	]]>
 	</select>
 	
+	<select id="getSampleCount" parameterType="int"
+			resultMap="int">
+		<![CDATA[
+			SELECT count(1) from t_sample t WHERE t.agent_id = #{agentId};
+		]]>
+	</select>
+	
 	<select id="querySampleEntityByUserid" parameterType="int"
 			resultMap="SampleResultMap">
 		<![CDATA[

@@ -37,6 +37,13 @@
 	]]>
 	</select>
 	
+	<select id="getAnswerCount" parameterType="int"
+			resultMap="int">
+		<![CDATA[
+			SELECT count(1) from t_professional_answer t WHERE t.agent_id = #{agentId} and state = 0;
+		]]>
+	</select>
+	
 	<select id="queryAnswersByQid" parameterType="int"
 			resultMap="ProfessionalAnswerResultMap">
 		SELECT * from t_professional_answer t WHERE t.question_id = #{qid} order by gmt_create desc

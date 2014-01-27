@@ -19,6 +19,9 @@ public class Account implements Serializable{
 	private boolean isVerified;
 	private String verifiedLink;
 	private int unreadMsgCount;
+	private int questionCnt;
+	private int sampleCnt;
+	private int gcCnt;
 	
 	public boolean isAgent() {
 		return isAgent;
@@ -139,6 +142,24 @@ public class Account implements Serializable{
 	 */
 	public void setUnreadMsgCount(int unreadMsgCount) {
 		this.unreadMsgCount = unreadMsgCount;
+	}
+	public int getQuestionCnt() {
+		return questionCnt;
+	}
+	public void setQuestionCnt(int questionCnt) {
+		this.questionCnt = questionCnt;
+	}
+	public int getSampleCnt() {
+		return sampleCnt;
+	}
+	public void setSampleCnt(int sampleCnt) {
+		this.sampleCnt = sampleCnt;
+	}
+	public int getGcCnt() {
+		return gcCnt;
+	}
+	public void setGcCnt(int gcCnt) {
+		this.gcCnt = gcCnt;
 	}
 	
 

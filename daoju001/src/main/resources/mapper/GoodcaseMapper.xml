@@ -44,6 +44,13 @@
 		SELECT * from t_goodcase t WHERE t.id = #{id}
 	]]>
 	</select>
+	
+	<select id="getGoodcaseCount" parameterType="int"
+			resultMap="int">
+		<![CDATA[
+			SELECT count(1) from t_goodcase t WHERE t.agent_id = #{agentId};
+		]]>
+	</select>
 
 	<insert id="insertGoodcaseEntity" parameterType="GoodcaseEntity">
 		<selectKey resultType="int" order="AFTER" keyProperty="id">

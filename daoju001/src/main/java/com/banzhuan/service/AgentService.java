@@ -17,6 +17,7 @@ import org.springframework.web.multipart.support.DefaultMultipartHttpServletRequ
 import com.banzhuan.dao.AgentDAO;
 import com.banzhuan.dao.BuyerDAO;
 import com.banzhuan.dao.GoodcaseDAO;
+import com.banzhuan.dao.MsgDAO;
 import com.banzhuan.dao.ProfessionalAnswerDAO;
 import com.banzhuan.dao.QuestionDAO;
 import com.banzhuan.dao.SampleDAO;
@@ -66,6 +67,10 @@ public class AgentService {
 	@Autowired
 	@Qualifier("paDAO")
 	private ProfessionalAnswerDAO paDAO;
+	
+	@Autowired
+	@Qualifier("msgDAO")
+	private MsgDAO msgDAO;
 	
 	public Result register(RegForm form, Errors errors)
 	{
@@ -501,5 +506,26 @@ public class AgentService {
 		result.add("questions", questions);
 		return result;
 	}
+    
+    public int getGoodcaseCount(int userid)
+	{
+		return gcDAO.getGoodcaseCount(userid);
+	}
+    
+    public int getSampleCount(int userid)
+	{
+		return sampleDAO.getSampleCount(userid);
+	}
+    
+    public int getAnswerCount(int userid)
+	{
+		return paDAO.getAnswerCount(userid);
+	}
+    
+    public int getUnreadMsgCount(int userid)
+	{
+		return msgDAO.getUnreadMsgCount(userid);
+	}
+
     
 }

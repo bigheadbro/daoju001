@@ -12,4 +12,6 @@ public interface ProfessionalAnswerDAO {
 	public int updateProfessionalAnswerById(ProfessionalAnswerEntity pa);
 	
 	List<ProfessionalAnswerEntity> queryAnswersByQid(int qid);
+	
+	int getAnswerCount(int userid);
 }

@@ -49,5 +49,11 @@ public class QuestionDAOImpl extends SqlSessionDaoSupport implements QuestionDAO
 	{
 		return this.getSqlSession().selectList("getMainquestions");
 	}
+	
+	@Override
+	public int getQuestionCount(int userid)
+	{
+		return this.getSqlSession().selectOne("getQuestionCount", userid);
+	}
 
 }

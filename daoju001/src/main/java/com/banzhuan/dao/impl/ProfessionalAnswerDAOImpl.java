@@ -34,5 +34,11 @@ public class ProfessionalAnswerDAOImpl extends SqlSessionDaoSupport implements P
 	{
 		return this.getSqlSession().selectList("queryAnswersByQid", qid);
 	}
+	
+	@Override
+	public int getAnswerCount(int userid)
+	{
+		return this.getSqlSession().selectOne("getAnswerCount", userid);
+	}
 
 }

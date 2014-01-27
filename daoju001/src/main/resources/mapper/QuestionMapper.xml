@@ -43,6 +43,12 @@
 	]]>
 	</select>
 
+	<select id="getQuestionCount" parameterType="int"
+			resultMap="int">
+		<![CDATA[
+			SELECT count(1) from t_question t WHERE t.buyer_id = #{buyerId} and state = 0;
+		]]>
+	</select>
 	<insert id="insertQuestionEntity" parameterType="QuestionEntity">
 		<selectKey resultType="int" order="AFTER" keyProperty="id">
 			SELECT LAST_INSERT_ID() AS id

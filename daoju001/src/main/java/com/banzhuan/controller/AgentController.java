@@ -118,6 +118,10 @@ public class AgentController extends BaseController{
 			if(!result.hasErrors())
 			{
 				AgentEntity user = (AgentEntity)re.get("agent");
+				int unreadMsgCount = agentService.getUnreadMsgCount(user.getId());
+				int answerCnt = agentService.getAnswerCount(user.getId());
+				int sampleCnt = agentService.getSampleCount(user.getId());
+				int gcCnt = agentService.getGoodcaseCount(user.getId());
 				Account account = new Account();
 				account.setLogin(true); // 登录成功标识
 				account.setUserName(user.getCompanyName()); // 用户登录名
@@ -129,6 +133,11 @@ public class AgentController extends BaseController{
 				account.setAgent(true);
 				account.setVerified(user.isVerified());
 				account.setVerifiedLink(user.getVerifiedLink());
+				account.setUnreadMsgCount(unreadMsgCount);
+				account.setSampleCnt(sampleCnt);
+				account.setGcCnt(gcCnt);
+				account.setQuestionCnt(answerCnt);
+				
 				//set cookie
 				if(form.getRememberme() != null && form.getRememberme())
 				{

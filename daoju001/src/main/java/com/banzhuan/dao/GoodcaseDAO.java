@@ -16,4 +16,6 @@ public interface GoodcaseDAO {
 	List<GoodcaseEntity> getAllGoodcasesByType(GoodcaseEntity gc);
 	
 	List<GoodcaseEntity> getMainGoodcasesByType();
+	
+	int getGoodcaseCount(int userid);
 }

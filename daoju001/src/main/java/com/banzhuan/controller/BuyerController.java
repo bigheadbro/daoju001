@@ -118,6 +118,7 @@ public class BuyerController extends BaseController{
 			{
 				BuyerEntity user = (BuyerEntity)re.get("buyer");
 				int unreadMsgCount = buyerService.getUnreadMsgCount(user.getId());
+				int questionCnt = buyerService.getQuestionCount(user.getId());
 				Account account = new Account();
 				account.setLogin(true); // 登录成功标识
 				account.setUserName(user.getUsername()); // 用户登录名
@@ -126,6 +127,7 @@ public class BuyerController extends BaseController{
 				account.setLogo(user.getLogo()); // 邮箱
 				account.setBuyer(true);
 				account.setUnreadMsgCount(unreadMsgCount);
+				account.setQuestionCnt(questionCnt);
 				
 				//set cookie
 				if(form.getRememberme() != null && form.getRememberme())

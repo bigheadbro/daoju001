@@ -14,4 +14,6 @@ public interface SampleDAO {
 	public List<SampleEntity> querySampleEntityByUserid(int id);
 	
 	List<SampleEntity> getAllsamples();
+	
+	int getSampleCount(int userid);
 }

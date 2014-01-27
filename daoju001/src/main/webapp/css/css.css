@@ -310,6 +310,8 @@ div[contentEditable]{outline:0}
 .reg-right .goodservice h2{font-size:24px;color:#707070;}
 .reg-right .goodservice p{font-size:13px;color:#707070;line-height:20px;}
 
+.error-msg{border-radius:8px;background-color:pink;border:1px solid black;text-align:center;color:#white;font-size:14px;}
+.error{display:none;}
 
 #uploadsample{color:white;background-color:#ff9000;border-radius:5px;padding:3px;}
 

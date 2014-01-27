@@ -35,7 +35,11 @@
 					<textarea class="dsf-form-text-input bargin" name="${status.expression}" ></textarea></li>	
 					<label for="freeuse">
 						#springBind("answerForm.answer.FreeUse")
-						<input id="freeuse" name="${status.expression}" value="$!{status.value}" type="checkbox" />
+						<input id="freeuse" name="${status.expression}" type="checkbox" 
+							#if ($status.value == "true")
+                          checked
+                        #end
+						/>
 						是否愿意提供免费试用
                     </label>
                 </div>

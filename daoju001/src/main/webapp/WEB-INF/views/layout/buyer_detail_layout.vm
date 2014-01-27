@@ -37,11 +37,19 @@
                                     #end
                                     #if($!stringUtil.isContains($request.getServletPath(),"/mymsg"))
                                         <li class="current">
-                                            <a href="mymsg">我的消息</a>
+                                            <a href="mymsg">我的消息
+																							#if($!{account.unreadMsgCount} > 0)
+																								<span class="zg-noti-number">$!{account.unreadMsgCount}</span>
+																							#end
+																						</a>
                                         </li>
                                     #else
                                         <li>
-                                            <a href="mymsg">我的消息</a>
+                                            <a href="mymsg">我的消息
+																							#if($!{account.unreadMsgCount} > 0)
+																								<span class="zg-noti-number">$!{account.unreadMsgCount}</span>
+																							#end
+																						</a>
                                         </li>
                                     #end
                                     #if($!stringUtil.isContains($request.getServletPath(),"/newquestion") || $!stringUtil.isContains($request.getServletPath(),"/oldquestion") ||$!stringUtil.isContains($request.getServletPath(),"/draft"))

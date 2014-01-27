@@ -46,7 +46,7 @@
 	</select>
 	
 	<select id="getGoodcaseCount" parameterType="int"
-			resultMap="int">
+			resultType="int">
 		<![CDATA[
 			SELECT count(1) from t_goodcase t WHERE t.agent_id = #{agentId};
 		]]>

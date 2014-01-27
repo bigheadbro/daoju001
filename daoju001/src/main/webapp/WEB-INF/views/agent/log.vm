@@ -23,9 +23,13 @@
 								}
 							},
 							errorPlacement: function(error, element) {   
-									$(".error-msg").empty();
-                  error.appendTo($(".error-msg"));                           
-              },
+								$(".error-msg").empty();
+								$(".error-msg").show();   
+                                error.appendTo($(".error-msg"));                           
+                            },
+							success : function(label) {   
+								$(".error-msg").hide();                  
+                            }
 						});
 					});
 			</script>

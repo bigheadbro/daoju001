@@ -8,6 +8,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -169,7 +170,7 @@ public class CommonController extends BaseController{
 		result = agentService.queryGoodcasesByUserid(userid);
 		mv.addObject("goodcases", result.get("goodcases"));
 		//add good cases
-		result = agentService.querySamplesByUserid(userid);
+		result = agentService.querySamplesByUserid(userid, new RowBounds(0, Integer.MAX_VALUE));
 		mv.addObject("samples", result.get("samples"));
 		
 		return mv;

@@ -1,0 +1,32 @@
+.page {
+            font-size: 80%;
+						margin-top:15px;
+						float:right;
+        }
+        
+.page a {
+    text-decoration: none;
+	border: solid 1px #c9c9c9;
+	color: #000;
+}
+
+.page a, .page span {
+    display: block;
+    float: left;
+    padding: 0.3em 0.5em;
+    margin-right: 5px;
+	margin-bottom: 5px;
+}
+
+.page .current.prev, .page .current.next{
+	color:#999;
+	background:#fff;
+}
+
+.page .next, .page .prev{background:#f30;color:white;}
+
+.page .current {
+    background: #d6d6d6;
+    color: #000;
+	border: solid 1px c9c9c9;
+}

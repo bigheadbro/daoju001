@@ -38,7 +38,7 @@
 	</select>
 	
 	<select id="getAnswerCount" parameterType="int"
-			resultMap="int">
+			resultType="int">
 		<![CDATA[
 			SELECT count(1) from t_professional_answer t WHERE t.agent_id = #{agentId} and state = 0;
 		]]>

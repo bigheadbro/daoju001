@@ -281,7 +281,7 @@ div[contentEditable]{outline:0}
 .question-op .savedraft{background-color:#dd5a5a;color:white;border-radius:4px;display: block;float: left;width: 100px;text-align: center;padding: 10px;}
 
 
-.reg-left{background-color:#f6f6f6;float:left;width: 340px;padding:40px 45px 15px;border-radius: 10px;margin-right: 100px;min-height: 490px;}
+.reg-left{background-color:#f6f6f6;float:left;width: 340px;padding:40px 45px 15px;border-radius: 10px;margin-right: 100px;min-height: 400px;}
 .reg-left h2{color:#737373;font-size:18px;}
 .reg-left h2 span{float:right;color:#bababa;font-size:14px;line-height: 26px;}
 .reg-left h2 span a{color:#0099cb;margin-left:3px;}
@@ -301,7 +301,7 @@ div[contentEditable]{outline:0}
 .reg-left ul li.value .qqlogin{font-size:18px;color:white;background-color:#0081b7;border-radius: 5px;padding: 10px 22px 10px 70px;background-image: url(../img/reg3.png);background-repeat:no-repeat;background-position: 40px 12px;}
 .reg-right{float:left;}
 .reg-right .header{margin-bottom:20px;}
-.reg-right h1{color:#0099cb;font-size:48px;margin-top: 60px;margin-bottom: 20px;}
+.reg-right h1{color:#0099cb;font-size:48px;margin-top: 30px;margin-bottom: 20px;}
 .reg-right p{color:#707070;font-size:18px;line-height: 30px;}
 .reg-right .verified{background:url(../img/reg1.png) no-repeat 0 0;padding-left: 100px;margin: 35px 0 45px;}
 .reg-right .verified h2{font-size:24px;color:#707070;}
@@ -310,8 +310,8 @@ div[contentEditable]{outline:0}
 .reg-right .goodservice h2{font-size:24px;color:#707070;}
 .reg-right .goodservice p{font-size:13px;color:#707070;line-height:20px;}
 
-.error-msg{border-radius:8px;background-color:pink;border:1px solid black;text-align:center;color:#white;font-size:14px;}
-.error{display:none;}
+.error-msg{display:none;border-radius:8px;background-color:#ffc8c8;border:1px solid #cc3333;text-align:center;color:#cc3333;font-size:14px;line-height: 40px;}
+em.error{display:none;}
 
 #uploadsample{color:white;background-color:#ff9000;border-radius:5px;padding:3px;}
 

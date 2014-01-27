@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import net.sf.json.JSON;
 import net.sf.json.JSONObject;
 
+import org.apache.ibatis.session.RowBounds;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,6 +36,7 @@ import org.springframework.web.servlet.view.RedirectView;
 import org.springframework.web.util.WebUtils;
 
 import com.banzhuan.common.Account;
+import com.banzhuan.common.Constant;
 import com.banzhuan.common.Result;
 import com.banzhuan.entity.AgentEntity;
 import com.banzhuan.entity.GoodcaseEntity;
@@ -422,8 +424,26 @@ public class AgentController extends BaseController{
 	@RequestMapping(value="/mysample")
 	public ModelAndView mysample(HttpServletRequest request, HttpServletResponse response, @ModelAttribute("account")Account account) {
 		ModelAndView mv = new ModelAndView("agent/mysample");
+		int page = 1;
+		if(request.getParameter("page") != null)
+		{
+			page = Integer.valueOf(request.getParameter("page"));
+		}
 		int userId = account.getUserId();
-		Result result = agentService.queryGoodcasesByUserid(userId);
+		Result result = new Result();
+		
+		int total=agentService.getSampleCount(userId);
+		int totalPage=0;
+		if(total % Constant.COMMON_PAGE_SIZE == 0)
+			totalPage=total/Constant.COMMON_PAGE_SIZE;
+		else
+			totalPage=total/Constant.COMMON_PAGE_SIZE+1;
+		totalPage=totalPage==0?1:totalPage;
+		mv.addObject("page", page);
+		mv.addObject("total", total);
+		mv.addObject("totalPage", totalPage);
+
+		result = agentService.querySamplesByUserid(userId, new RowBounds((page-1)*Constant.COMMON_PAGE_SIZE, Constant.COMMON_PAGE_SIZE));
 		mv.addObject("samples", result.get("samples"));
 		return mv;
 	}

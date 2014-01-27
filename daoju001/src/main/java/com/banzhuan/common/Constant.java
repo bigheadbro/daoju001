@@ -14,6 +14,6 @@ public class Constant {
 	
 	public static final int MAX_DOWN_RESUME_NUM=10;
 	
-	public static final int COMMON_PAGE_SIZE=20;
+	public static final int COMMON_PAGE_SIZE=5;
 
 }

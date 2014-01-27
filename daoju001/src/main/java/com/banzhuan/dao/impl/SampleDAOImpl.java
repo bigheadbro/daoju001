@@ -2,6 +2,7 @@ package com.banzhuan.dao.impl;
 
 import java.util.List;
 
+import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.support.SqlSessionDaoSupport;
 import org.springframework.stereotype.Repository;
 
@@ -28,8 +29,8 @@ public class SampleDAOImpl extends SqlSessionDaoSupport implements SampleDAO {
 	}
 	
 	@Override
-	public List<SampleEntity> querySampleEntityByUserid(int id) {
-		return this.getSqlSession().selectList("querySampleEntityByUserid", id);
+	public List<SampleEntity> querySampleEntityByUserid(int id, RowBounds bound) {
+		return this.getSqlSession().selectList("querySampleEntityByUserid", id, bound);
 	}
 	
 	@Override

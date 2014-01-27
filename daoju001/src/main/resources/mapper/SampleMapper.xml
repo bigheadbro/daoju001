@@ -38,7 +38,7 @@
 	</select>
 	
 	<select id="getSampleCount" parameterType="int"
-			resultMap="int">
+			resultType="int">
 		<![CDATA[
 			SELECT count(1) from t_sample t WHERE t.agent_id = #{agentId};
 		]]>

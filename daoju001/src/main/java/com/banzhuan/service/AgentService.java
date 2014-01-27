@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -397,12 +398,13 @@ public class AgentService {
     		form.setLink(gc.getLink());
     	}
     }
-
-    public Result querySamplesByUserid(int userId)
+    
+    public Result querySamplesByUserid(int userId, RowBounds bound)
 	{
 		Result result = new Result();
-		List<SampleEntity> samples = sampleDAO.querySampleEntityByUserid(userId);
+		List<SampleEntity> samples = sampleDAO.querySampleEntityByUserid(userId, bound);
 		result.add("samples", samples);
+		result.add("count", samples.size());
 		return result;
 	}
 

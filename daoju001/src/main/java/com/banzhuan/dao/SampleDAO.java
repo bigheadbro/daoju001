@@ -2,6 +2,8 @@ package com.banzhuan.dao;
 
 import java.util.List;
 
+import org.apache.ibatis.session.RowBounds;
+
 import com.banzhuan.entity.SampleEntity;;
 
 public interface SampleDAO {
@@ -11,7 +13,7 @@ public interface SampleDAO {
 	
 	public int updateSampleById(SampleEntity buyer);
 	
-	public List<SampleEntity> querySampleEntityByUserid(int id);
+	public List<SampleEntity> querySampleEntityByUserid(int id, RowBounds bound);
 	
 	List<SampleEntity> getAllsamples();
 	

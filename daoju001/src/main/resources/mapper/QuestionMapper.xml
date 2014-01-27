@@ -44,7 +44,7 @@
 	</select>
 
 	<select id="getQuestionCount" parameterType="int"
-			resultMap="int">
+			resultType="int">
 		<![CDATA[
 			SELECT count(1) from t_question t WHERE t.buyer_id = #{buyerId} and state = 0;
 		]]>

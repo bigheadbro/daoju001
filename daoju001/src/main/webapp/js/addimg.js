@@ -6,6 +6,9 @@ $(function() {
 	$(".close").on("click", function() {
 		hideimg();
 	});
+	$(".cancel").on("click", function() {
+		hideimg();
+	});
 });
 
 function hideimg(){

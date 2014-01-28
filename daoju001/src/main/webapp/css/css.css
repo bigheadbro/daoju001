@@ -39,6 +39,7 @@ text-decoration: none;
 position: absolute;
 top: 12px;
 margin-left: 15px;
+border: 2px solid #B1B1B1;
 }
 .company-info{width:400px;height:65px;resize:none;}
 div[contentEditable]{outline:0}
@@ -96,7 +97,7 @@ div[contentEditable]{outline:0}
 .main-list-header a{float:right;font-size: 12px;line-height: 24px;font-weight: 600;color:#acacac}
 .main-list-header a:hover{color:#00c0ff}
 .ques-sort{background: url(../img/sort.png) no-repeat 51px 9px;color: #9d9d9d;padding-right: 15px;}
-.ques-type{border-bottom: 2px solid #00b4ff;margin-top: 5px;}
+.ques-type{border-bottom: 2px solid #00b4ff;margin-top: 5px;position:relative;}
 
 /*hot question*/
 .hot-question-listitem{margin:10px 0 10px 0;border-bottom: 1px solid #ECECEC;padding-bottom: 8px;margin-top: 13px;}
@@ -168,7 +169,7 @@ div[contentEditable]{outline:0}
 .hot-question-listitem .content li.answer-c .comment-list .comment-arrow .S_bg1_c{margin-top:1px;color:#f0f0f0}
 .hot-question-listitem .content li.answer-c .comment-list .comment-listitem{border-bottom:1px solid #ccc;padding-bottom:5px;}
 
-.mainpage-container .main-right .rigth-content{background-color:white;margin-top:10px;padding:30px;padding-top: 15px;height: 585px;}
+.mainpage-container .main-right .rigth-content{background-color:white;margin-top:10px;padding:30px;padding-top: 15px;height: 585px;position: relative;}
 .mainpage-container .main-right .rigth-content .listitem{font-size:14px}
 .mainpage-container .main-right .notread{font-weight:700;}
 .mainpage-container .main-right .rigth-content .buyer-list .listitem a{color:#0099cb}
@@ -232,7 +233,7 @@ div[contentEditable]{outline:0}
 
 .mainpage-container .main-left .function{margin:20px auto;}
 .mainpage-container .main-left .function ul li{padding:15px;color:#9b9b9b;font-size:14px}
-.mainpage-container .main-left .function ul li.current{color:white;background-color:#4799b1}
+.mainpage-container .main-left .function ul li.current{color:white;background-color:#4799b1;position: relative;}
 .mainpage-container .main-right h2{font-size:14px;color:#656565;padding:8.5px;}
 .mainpage-container .main-right h1{font-size:16px;color:#626262;border-bottom:1px solid #088bb7;padding-bottom:5px;margin-bottom:10px;}
 .mainpage-container .main-right h1 a{font-size:11px;float:right;}
@@ -311,7 +312,7 @@ div[contentEditable]{outline:0}
 .reg-right .goodservice p{font-size:13px;color:#707070;line-height:20px;}
 
 .error-msg{display:none;border-radius:8px;background-color:#ffc8c8;border:1px solid #cc3333;text-align:center;color:#cc3333;font-size:14px;line-height: 40px;}
-em.error{display:none;}
+/* em.error{display:none;} */
 
 #uploadsample{color:white;background-color:#ff9000;border-radius:5px;padding:3px;}
 
@@ -391,8 +392,18 @@ opacity: .3;
 .uploadlogo-win .content .thumb-out{display:table-cell;vertical-align:middle;}
 
 /*插入图片*/
-.addimg-win{display:none;position:absolute;top:50px;right:400px;z-index:10002;width:500px;padding: 5px;border-radius: 5px;background:url(../img/transGray.png);font-size:13px;}
-.addimg-cont{background-color:white;height:200px;}
+.addimg-win{display:none;position:absolute;top:50px;right:400px;z-index:10002;width:450px;padding: 5px;border-radius: 5px;background:url(../img/transGray.png);font-size:13px;}
+.addimg-cont{background-color:white;height:230px;}
+.mainpage-container .main-right .addimg-cont h2{color:white;}
+.addimg-cont h3{color:#323232;font-size:18px;margin: 25px;margin-bottom: 15px;}
+.addimg-cont .choose-wrap{position:relative;margin-left:25px;margin-right: 25px;padding-bottom: 15px;border-bottom: 1px solid #989898;}
+.addimg-cont .choose-wrap input{position: absolute;top: 0;left: 0;width: 104px;height: 41px;opacity:0;}
+.addimg-cont .choose-pic{background-color:#0099cb;color:white;padding:10px 20px;font-size:16px;display:inline-block}
+.addimg-cont p{color: #7a7a7a;font-size: 12px;margin-top: 5px;text-indent: 25px;}
+.addimg-cont .operation{margin-right: 25px;}
+.addimg-cont .operation #submit_addimg{background-color: #0099cb;color: white;padding: 5px 10px;border-radius: 5px;}
+.addimg-cont .operation .cancel{line-height: 33px;margin-left: 10px;color: #0099cb;}
+.addimg-cont .operation a{display:inline-block;float:right;}
 .addimg-win h2{background-color:#0099cb;color:white;font-size:14px;padding:3px 10px;}
 .addimg-win h2 a{float:right;}
 
@@ -507,6 +518,7 @@ opacity: .3;
 .fr{float:right;}
 .fl{float:left;}
 .mainpage-container .main-right .mi{margin: initial;}
+.mt5{margin-top:5px}
 .ml15{margin-left:15px}
 .mt20{margin-top:20px}
 .mt15{margin-top:15px}

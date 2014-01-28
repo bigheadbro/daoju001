@@ -44,5 +44,10 @@ public class SampleDAOImpl extends SqlSessionDaoSupport implements SampleDAO {
 		return this.getSqlSession().selectOne("getSampleCount", userid);
 	}
 	
+	@Override
+	public void delSample(int sid)
+	{
+		this.getSqlSession().delete("delSample", sid);
+	}
 
 }

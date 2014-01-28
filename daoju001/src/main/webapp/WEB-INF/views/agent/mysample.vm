@@ -10,61 +10,11 @@
 			<p>$!{sample.name}<span>$stringUtil.formatDate($!{sample.gmtCreate})</span></p>
 			<div class="operation clearfix">
 				<a href="/agent/sample/$!{sample.id}">编辑</a><span>|</span>
-				<a href="#">删除</a>
+				<a id="del-sample" href="/agent/delsample/$!{sample.id}">删除</a>
 			</div>
 		</div>
 		#end
-		<div id="Pagination1" class="page">
-			#if($page > 1)
-				#set($prePage = $page - 1)
-			    <a class="prev" href="mysample?page=$prePage">上一页</a>
-			#else
-				<span class="current prev">上一页</span>
-			#end
-			
-			#set($start = $page - 3)
-            #set($end = $page + 3)
-
-            #if($start < 1)
-            	#set($start = 1)
-            #end
-            #if($end > $totalPage)
-            	#set($end = $totalPage)
-			#end
-
-			#foreach($i in [$start..$end])
-                #if($i==$page)
-                <span class="current">$i</span>
-                #else 
-                <a href="mysample?page=$i">$i</a>
-                #end
-            #end
-            
-            #if($end < $totalPage)
-            
-                #set($start = $totalPage - 3)
-                #if($start > $end + 1)
-                  <a class="prev" href="#">.</a>
-				  <a class="prev" href="#">.</a>
-				  <a class="prev" href="#">.</a>
-                #end
-                
-                #if($start <= $end)
-                	#set($start = $end + 1)
-                #end
-                
-                #foreach($i in [$start..$totalPage])
-                	<a href="mysample?page=$i">$i</a>
-                #end
-			#end
-			
-			#if($page < $totalPage)
-				#set($nextPage = $page + 1)
-			    <a class="next" href="mysample?page=$nextPage">下一页</a>
-			#else
-				<span class="current next" href="#">下一页</span>
-			#end
-			
-		</div>
 	</div>
+	#parse("/common/page.vm")
 </div>
+

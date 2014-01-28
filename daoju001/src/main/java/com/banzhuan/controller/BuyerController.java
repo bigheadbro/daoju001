@@ -268,7 +268,7 @@ public class BuyerController extends BaseController{
 	}
 	
 	@RequestMapping(value="/uploadlogo")
-	public ModelAndView uploadlogo(HttpServletRequest request, HttpServletResponse response)
+	public void uploadlogo(HttpServletRequest request, HttpServletResponse response) throws IOException
 	{
 		String size = request.getParameter("crop");
 		// /////////////////////////////////////////////////////////////获取上传的图片///////////////////////////////////
@@ -303,7 +303,8 @@ public class BuyerController extends BaseController{
 				}
 			}
 		}
-		return new ModelAndView(new RedirectView("main")); 
+		String url = request.getHeader("Referer");
+		response.sendRedirect(url);
 	}
 	
 	@RequestMapping(value="/addimg")

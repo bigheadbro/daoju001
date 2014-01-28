@@ -180,8 +180,9 @@ public class AgentController extends BaseController{
 	}
 	
 	@RequestMapping(value="/uploadlogo")
-	public ModelAndView uploadlogo(HttpServletRequest request, HttpServletResponse response, @ModelAttribute("account")Account account, BindingResult result)
+	public void uploadlogo(HttpServletRequest request, HttpServletResponse response, @ModelAttribute("account")Account account, BindingResult result) throws IOException
 	{
+		String url = request.getHeader("Referer");
 		String size = request.getParameter("crop");
 		
 		// /////////////////////////////////////////////////////////////获取上传的图片///////////////////////////////////
@@ -216,7 +217,7 @@ public class AgentController extends BaseController{
 			}
 		}
 	
-		return new ModelAndView(new RedirectView("main")); 
+		response.sendRedirect(url);
 	}
 	
 	@RequestMapping(value="/changepwd")
@@ -355,7 +356,7 @@ public class AgentController extends BaseController{
 		String responseStr="";  
 		MultipartHttpServletRequest r = (MultipartHttpServletRequest) request;
 		  
-        MultipartFile f = r.getFile("sampleLink");    
+        MultipartFile f = r.getFile("gcLink");    
         String path = request.getSession().getServletContext().getRealPath("/goodcase");
 		String link = "../goodcase/" + String.valueOf(account.getUserId()) + "/" + StringUtil.getTodayString() + "/" + f.getOriginalFilename();
 		path += "/" + String.valueOf(account.getUserId()) + "/" + StringUtil.getTodayString() + "/";
@@ -393,12 +394,26 @@ public class AgentController extends BaseController{
 			if(form.getIsEdit() > 0)
 			{
 				agentService.updateGoodcaseById(form, gc, result);
+				
+				if(result.hasErrors())
+				{
+					mv = new ModelAndView("agent/uploadgc");
+					return mv;
+				}
+
 
 				JsonUtil.showAlert(response, "更新案例", "成功案例更新成功~~", "确定", "", "");
 			}
 			else
 			{
 				agentService.insertGoodcase(form, gc, result);
+				
+				if(result.hasErrors())
+				{
+					mv = new ModelAndView("agent/uploadgc");
+					return mv;
+				}
+
 
 				JsonUtil.showAlert(response, "上传案例", "上传案例成功~~", "确定", "", "");
 			}
@@ -494,6 +509,12 @@ public class AgentController extends BaseController{
 			if(form.getIsEdit() > 0)
 			{
 				agentService.updateSampleById(form, sample, result);
+				
+				if(result.hasErrors())
+				{
+					mv = new ModelAndView("agent/uploadsample");
+					return mv;
+				}
 
 				JsonUtil.showAlert(response, "上传样本", "更新样本成功~~", "确定", "", "");
 				
@@ -502,13 +523,15 @@ public class AgentController extends BaseController{
 			{
 				agentService.insertSample(form, sample, result);
 
+				if(result.hasErrors())
+				{
+					mv = new ModelAndView("agent/uploadsample");
+					return mv;
+				}
+				
 				JsonUtil.showAlert(response, "上传样本", "上传样本成功~~", "确定", "", "");
 			}
-			if(result.hasErrors())
-			{
-				mv = new ModelAndView("agent/uploadsample");
-				return mv;
-			}
+			
 			return mv;
 		}
 		else
@@ -528,6 +551,24 @@ public class AgentController extends BaseController{
 		}
 	}
 
+	@RequestMapping(value="/delsample/{id}")
+	public void delsample(HttpServletRequest request, HttpServletResponse response, @PathVariable String id, @ModelAttribute("account")Account account) throws IOException 
+	{
+		String url = request.getHeader("Referer");
+		int sid = Integer.parseInt(id);
+		agentService.delSample(sid);
+		response.sendRedirect(url);
+	}
+	
+	@RequestMapping(value="/delgc/{id}")
+	public void delgc(HttpServletRequest request, HttpServletResponse response, @PathVariable String id, @ModelAttribute("account")Account account) throws IOException 
+	{
+		String url = request.getHeader("Referer");
+		int gid = Integer.parseInt(id);
+		agentService.delGoodcase(gid);
+		response.sendRedirect(url);
+	}
+	
 	@RequestMapping(value="/sample/{id}")
 	public ModelAndView sample(HttpServletRequest request, HttpServletResponse response,@PathVariable String id, @ModelAttribute("account")Account account,
 			final RedirectAttributes redirectAttributes) {

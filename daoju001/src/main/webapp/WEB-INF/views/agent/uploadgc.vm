@@ -1,5 +1,7 @@
 #set($layout = "/layout/agent_detail_layout.vm")
 <script type="text/javascript" src="../js/ques-handler.js"></script>
+<link rel="stylesheet" href="../css/uploadify.css">
+<script type="text/javascript" src="../js/jquery.uploadify.min.js"></script>
 <ul class="right-tab clearfix">
   <li class="current">上传案例</li>
   <li><a href="goodcase">案例管理</a></li>
@@ -8,10 +10,11 @@
 	<script>
 		$(function() {	
 			$("#form_uploadgc").validate({
+				ignore: [],
 				rules:{
 					name:{
 						required:true
-					}，
+					},
 					link:{
 						required:true
 					}
@@ -20,7 +23,7 @@
 					name:{
 						required:"请输入案例名称"
 					},
-					name:{
+					link:{
 						required:"请上传文件"
 					}
 				},
@@ -32,24 +35,61 @@
 					});
 				}
 			});
-			$("#file_upload").uploadify({  
+		  $("#file_upload").uploadify({  
             'height'        : 30,   
             'width'         : 120,    
-						'fileObjName'   : 'sampleLink',
+        				'fileObjName'   : 'sampleLink',
             'swf'           : '/js/uploadify.swf',  
-            'uploader'      : '/agent/uploadfile_sample',  
+            'uploader'      : '/agent/uploadfile_gc',  
             'auto'          : true,  
             'fileTypeExts'  : '*.*',  
-						'uploadLimit'   : 1, 
+        				'uploadLimit'   : 1, 
             'onUploadStart' : function(file) {  
                 
             },  
             'onUploadSuccess':function(file, data, response){    
-								$("#link").val(data);
+        						$("#link").val(data);
             },  
             'onUploadComplete':function(){  
             }  
         });  
+		$("#file_upload").uploadify({  
+                'height'        : 30,   
+                'width'         : 120,    
+				'buttonText'    : '选择案例',
+				'fileSizeLimit' : '5MB',
+                'fileObjName'   : 'gcLink',
+                'swf'           : '/js/uploadify.swf',  
+                'uploader'      : '/agent/uploadfile_gc',  
+                'auto'          : true,  
+				'fileTypeExts'  : '*.rar;*.pdf;*.doc;*.xls',  
+                'uploadLimit'   : 1, 
+                'onUploadStart' : function(file) {  
+                },  
+                'onUploadSuccess':function(file, data, response){    
+                	$("#link").val(data);
+                },  
+				'onQueueFull ' : function(){
+				    alert("只能上传一个文件！");
+				},
+				'overrideEvents': 'onSelectError',
+				'onSelectError' : function(file, errorCode, errorMsg) {
+					if(errorCode == SWFUpload.QUEUE_ERROR.ZERO_BYTE_FILE){
+                		this.queueData.errorMsg = "不能传空文件!!";
+                	}
+					if(errorCode == SWFUpload.QUEUE_ERROR.UPLOAD_LIMIT_EXCEEDED){
+                		this.queueData.errorMsg = "只能上传一个文件!!";
+                	}
+					if(errorCode == SWFUpload.QUEUE_ERROR.FILE_EXCEEDS_SIZE_LIMIT){
+                		this.queueData.errorMsg = "文件大小不能超过5MB!!";
+                	}
+					if(errorCode == SWFUpload.QUEUE_ERROR.INVALID_FILETYPE){
+                		this.queueData.errorMsg = "不支持该文件类型!!";
+                	}
+        		},
+                'onUploadComplete':function(){  
+                }  
+            });  
 		});
 	</script>
 	<form id="form_uploadgc" method="post" enctype="multipart/form-data">
@@ -59,7 +99,7 @@
 	    <input type="hidden" name="${status.expression}" value="$!{status.value}" id="gcid" />
 		#springBind("form.isEdit")
 	    <input type="hidden" name="${status.expression}" value="$!{status.value}" id="isEdit" />
-			#springBind("form.link")
+		#springBind("form.link")
 	    <input type="hidden" name="${status.expression}" value="$!{status.value}" id="link" />
     	#springBind("form.name")
     	<div class="listitem clearfix">
@@ -245,8 +285,7 @@
     			</li>
     			<li class="value">
     				<div class="upload-gc">
-    					<a class="" href="">点击上传</a>
-    					<input type="file" name="link" id="file_upload"/>
+    					<input type="file" name="gcLink" id="file_upload"/>
     					<p>仅支持DOC、PDF格式，文件小于5M</p>
 							<em for="link" generated="true" class="error">$!{status.errorMessage}</em>
     				</div>

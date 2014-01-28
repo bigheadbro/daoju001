@@ -50,6 +50,12 @@ public class GoodcaseDAOImpl extends SqlSessionDaoSupport implements GoodcaseDAO
 		return this.getSqlSession().selectOne("getGoodcaseCount", userid);
 	}
 	
+	@Override
+	public void delGoodcase(int id)
+	{
+		this.getSqlSession().delete("delGoodcase", id);
+	}
+	
 	
 	
 }

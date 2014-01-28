@@ -5,8 +5,14 @@
 		<h2><a href="#" class="close">x</a>选择图片</h2>
 		<h3>上传图片</h3>
 		<form id="form_addimg" method="post" action="/buyer/addimg" enctype="multipart/form-data">
-		<p><input type="file" name="file_upload" id="file_upload" /></p>
-		<p><a id="submit_addimg" href="#">Upload Files</a></p>
+			<div class="choose-wrap">
+    			<a class="choose-pic">选择图片</a>
+    			<input type="file" name="file_upload" id="file_upload" />
+			</div>
+			<p>请不要上传与问题无关的图片！</p>
+			<div class="operation clearfix">
+			<a class="cancel">取消</a><a id="submit_addimg" href="#">上传</a>
+			</div>
 		</form>
 		<script>
 		function processJson(data) { 

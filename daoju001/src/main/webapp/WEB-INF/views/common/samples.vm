@@ -1,88 +1,86 @@
 #set($layout = "/layout/index_layout.vm")
-<div class="main-bk-wrapper pt0">
-    <div class="main-content-container clearfix">
-        <div class="main-list-container width630 ml15">
-            <div class="gc-list-header">
-                <h1>刀具样本</h1>
-                <div class="a-zlist clearfix">
-                    <a class="current">A</a>
-                    <a>B</a>
-                    <a>C</a>
-                    <a>D</a>
-                    <a>E</a>
-                    <a>F</a>
-                    <a>G</a>
-                    <a>H</a>
-                    <a>I</a>
-                    <a>J</a>
-                    <a>K</a>
-                    <a>L</a>
-                    <a>M</a>
-                    <a>N</a>
-                    <a>O</a>
-                    <a>P</a>
-                    <a>Q</a>
-                    <a>R</a>
-                    <a>S</a>
-                    <a>T</a>
-                    <a>U</a>
-                    <a>V</a>
-                    <a>W</a>
-                    <a>X</a>
-                    <a>Y</a>
-                    <a>Z</a>
-                </div>
+<div class="main-content-container clearfix">
+    <div class="main-list-container width630 ml15">
+        <div class="gc-list-header">
+            <h1>刀具样本</h1>
+            <div class="a-zlist clearfix">
+                <a class="current">A</a>
+                <a>B</a>
+                <a>C</a>
+                <a>D</a>
+                <a>E</a>
+                <a>F</a>
+                <a>G</a>
+                <a>H</a>
+                <a>I</a>
+                <a>J</a>
+                <a>K</a>
+                <a>L</a>
+                <a>M</a>
+                <a>N</a>
+                <a>O</a>
+                <a>P</a>
+                <a>Q</a>
+                <a>R</a>
+                <a>S</a>
+                <a>T</a>
+                <a>U</a>
+                <a>V</a>
+                <a>W</a>
+                <a>X</a>
+                <a>Y</a>
+                <a>Z</a>
             </div>
-            <div class="agent-list-content">
-                #foreach ($mapEntry in $sampleMap.entrySet())
-                    #if ($mapEntry.key)
-                        <div class="sample-item clearfix">
-                            <h1>$stringUtil.convertToChar($mapEntry.key)</h1>
-							#set ($sampleMap2 = $mapEntry.value)
-							#foreach ($mapEntry2 in $sampleMap2.entrySet())
-								#set ($sampleList = $mapEntry2.value)
-                                #foreach($sample in $sampleList)
-									#if($velocityCount == 1)
-										<div class="agent-sample clearfix">
-                                        <div class="agent-info clearfix">
-                                            <div class="agent-logo">
-                                                <a>
-        											#if($!{sample.agentLogo})
-        												<img src="../logo/$!{sample.agentLogo}" />
-        											#else
-        												<img src="../img/avatar.png" />
-        											#end
-                                                </a>
-                                            </div>
-                                            <div class="agent-detail">
-                                                <h2>
-        											<a class="agent-name" href="/agents/$!{sample.agentId}">$!{sample.agentName}</a>
-        											#if($sample.isVerified())
-        												<a class="fancybox-v" title="$!{sample.agentName}的代理证书" href="$!{sample.verifiedLink}"><img src="../img/v.png" /></a>
-        											#end
-        										</h2>
-                                                <h4>$!{sample.brandName}</h4>
-                                            </div>
+        </div>
+        <div class="agent-list-content">
+            #foreach ($mapEntry in $sampleMap.entrySet())
+                #if ($mapEntry.key)
+                    <div class="sample-item clearfix">
+                        <h1>$stringUtil.convertToChar($mapEntry.key)</h1>
+						#set ($sampleMap2 = $mapEntry.value)
+						#foreach ($mapEntry2 in $sampleMap2.entrySet())
+							#set ($sampleList = $mapEntry2.value)
+                            #foreach($sample in $sampleList)
+								#if($velocityCount == 1)
+									<div class="agent-sample clearfix">
+                                    <div class="agent-info clearfix">
+                                        <div class="agent-logo">
+                                            <a>
+    											#if($!{sample.agentLogo})
+    												<img src="../logo/$!{sample.agentLogo}" />
+    											#else
+    												<img src="../img/avatar.png" />
+    											#end
+                                            </a>
                                         </div>
-									<div class="sample-list">
-									#end
-    									<div class="sample-wrap clearfix">
-    										<div class="detail">
-												<h2>$!{sample.name}</h2>
-												<h4>$stringUtil.fileType($!{sample.type}) 文件  $stringUtil.fileSize($!{sample.size}) MB</h4>
-											</div>
-											<a href="$!{sample.link}">点击下载</a>
-    									</div>
-									#if($velocityCount == $sampleList.size())
+                                        <div class="agent-detail">
+                                            <h2>
+    											<a class="agent-name" href="/agents/$!{sample.agentId}">$!{sample.agentName}</a>
+    											#if($sample.isVerified())
+    												<a class="fancybox-v" title="$!{sample.agentName}的代理证书" href="$!{sample.verifiedLink}"><img src="../img/v.png" /></a>
+    											#end
+    										</h2>
+                                            <h4>$!{sample.brandName}</h4>
+                                        </div>
+                                    </div>
+								<div class="sample-list">
+								#end
+									<div class="sample-wrap clearfix">
+										<div class="detail">
+											<h2>$!{sample.name}</h2>
+											<h4>$stringUtil.fileType($!{sample.type}) 文件  $stringUtil.fileSize($!{sample.size}) MB</h4>
 										</div>
+										<a href="$!{sample.link}">点击下载</a>
 									</div>
-									#end
-    							#end
+								#if($velocityCount == $sampleList.size())
+									</div>
+								</div>
+								#end
 							#end
-                        </div>
-                    #end
+						#end
+                    </div>
                 #end
-            </div>
+            #end
         </div>
     </div>
 </div>

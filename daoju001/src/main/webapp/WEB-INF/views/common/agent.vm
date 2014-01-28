@@ -1,87 +1,84 @@
 #set($layout = "/layout/index_layout.vm")
-
-<div class="main-bk-wrapper pt0">
-	<div class="main-content-container clearfix">
-		<div class="main-list-container width630">
-			<div class="gc-list-header">
-				<h1><span><a href="/agents">代理商</a> ></span><span class="regular">$!{agent.companyName}</span></h1>
+<div class="main-content-container clearfix">
+	<div class="main-list-container width630">
+		<div class="gc-list-header">
+			<h1><span><a href="/agents">代理商</a> ></span><span class="regular">$!{agent.companyName}</span></h1>
+		</div>
+		<div class="company-detail clearfix">
+			<div class="left">
+				<div class="logo">
+					<a href="#">
+						#if($!{agent.logo})
+							<img src="../logo/$!{agent.logo}" />
+						#else
+							<img src="../img/avatar.png" />
+						#end
+					</a>
+				</div>
 			</div>
-			<div class="company-detail clearfix">
-				<div class="left">
-					<div class="logo">
-						<a href="#">
-							#if($!{agent.logo})
-								<img src="../logo/$!{agent.logo}" />
-							#else
-								<img src="../img/avatar.png" />
-							#end
-						</a>
+			<div class="right">
+				<div class="company-base-info">
+					<h3 class="clearfix">
+						<span>$!{agent.companyName}</span>
+						#if($agent.isVerified())
+							<a class="fancybox-v" title="$!{agent.companyName}的代理证书" href="$!{agent.verifiedLink}"><img src="../img/v.png" /></a>
+						#end
+					</h3>
+					<h4>代理刀具品牌：$!{agent.brandName}</h4>
+				</div>
+				<div class="company-contact-info">
+					<div class="item clearfix">
+						<div class="key">地址：</div>
+						<div class="value">$!{agent.address}</div>
+					</div>
+					<div class="item clearfix">
+						<div class="key">电话：</div>
+						<div class="value">$!{agent.phone}</div>
+					</div>
+					<div class="item clearfix">
+						<div class="key">联系人姓名：</div>
+						<div class="value">$!{agent.contactName}</div>
+					</div>
+					<div class="item clearfix">
+						<div class="key">手机：</div>
+						<div class="value">$!{agent.contactPhone}</div>
+					</div>
+					<div class="item clearfix">
+						<div class="key">QQ：</div>
+						<div class="value">$!{agent.contactQq}</div>
 					</div>
 				</div>
-				<div class="right">
-					<div class="company-base-info">
-						<h3 class="clearfix">
-							<span>$!{agent.companyName}</span>
-							#if($agent.isVerified())
-								<a class="fancybox-v" title="$!{agent.companyName}的代理证书" href="$!{agent.verifiedLink}"><img src="../img/v.png" /></a>
-							#end
-						</h3>
-						<h4>代理刀具品牌：$!{agent.brandName}</h4>
-					</div>
-					<div class="company-contact-info">
-						<div class="item clearfix">
-							<div class="key">地址：</div>
-							<div class="value">$!{agent.address}</div>
-						</div>
-						<div class="item clearfix">
-							<div class="key">电话：</div>
-							<div class="value">$!{agent.phone}</div>
-						</div>
-						<div class="item clearfix">
-							<div class="key">联系人姓名：</div>
-							<div class="value">$!{agent.contactName}</div>
-						</div>
-						<div class="item clearfix">
-							<div class="key">手机：</div>
-							<div class="value">$!{agent.contactPhone}</div>
-						</div>
-						<div class="item clearfix">
-							<div class="key">QQ：</div>
-							<div class="value">$!{agent.contactQq}</div>
-						</div>
-					</div>
-					<div class="company-description">
-						<h2>公司简介</h2>
-						<p>$!{agent.description}</p>
-					</div>
-					<div class="company-sample">
-						<h2>样本下载</h2>
-						#foreach($sample in $samples)
-							<a class="sample" target="_blank" href="$!{sample.link}">$!{sample.name}</a>
-						#end
-					</div>
-					<div class="company-goodcase">
-						<h2>成功案例</h2>
-						#foreach($gc in $goodcases)
-            		<div class="listitem gc-li">
-      						<div class="gc-name"><a target="_blank" href="$!{gc.link}">$!{gc.name}</a></div>
-      						<div class="gc-param">
-      							#if($!{gc.industry} > 0)
-      								<span>$stringUtil.getIndustry($!{gc.industry})</span>
-      							#end
-      							#if($!{gc.processMethod} > 0)
-      								<span>$stringUtil.getMethod($!{gc.processMethod})</span>
-      							#end
-      							#if($!{gc.workMaterial} > 0)
-      								<span>$stringUtil.getMaterial($!{gc.workMaterial})</span>
-      							#end
-      							#if($!{gc.workSolidity} > 0)
-      								<span>$stringUtil.getHardness($!{gc.workSolidity})</span>
-      							#end
-      						</div>
-            		</div>
-        		#end
-					</div>
+				<div class="company-description">
+					<h2>公司简介</h2>
+					<p>$!{agent.description}</p>
+				</div>
+				<div class="company-sample">
+					<h2>样本下载</h2>
+					#foreach($sample in $samples)
+						<a class="sample" target="_blank" href="$!{sample.link}">$!{sample.name}</a>
+					#end
+				</div>
+				<div class="company-goodcase">
+					<h2>成功案例</h2>
+					#foreach($gc in $goodcases)
+        		<div class="listitem gc-li">
+  						<div class="gc-name"><a target="_blank" href="$!{gc.link}">$!{gc.name}</a></div>
+  						<div class="gc-param">
+  							#if($!{gc.industry} > 0)
+  								<span>$stringUtil.getIndustry($!{gc.industry})</span>
+  							#end
+  							#if($!{gc.processMethod} > 0)
+  								<span>$stringUtil.getMethod($!{gc.processMethod})</span>
+  							#end
+  							#if($!{gc.workMaterial} > 0)
+  								<span>$stringUtil.getMaterial($!{gc.workMaterial})</span>
+  							#end
+  							#if($!{gc.workSolidity} > 0)
+  								<span>$stringUtil.getHardness($!{gc.workSolidity})</span>
+  							#end
+  						</div>
+        		</div>
+    		#end
 				</div>
 			</div>
 		</div>

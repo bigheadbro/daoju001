@@ -18,4 +18,6 @@ public interface SampleDAO {
 	List<SampleEntity> getAllsamples();
 	
 	int getSampleCount(int userid);
+	
+	void delSample(int sid);
 }

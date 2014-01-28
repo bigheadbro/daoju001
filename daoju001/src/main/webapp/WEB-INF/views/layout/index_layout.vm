@@ -4,11 +4,11 @@
   <body>
 	<div class="body-wrapper">
       	#parse("/common/top.vm")
-    
-    	$screen_content
-    
-        #parse("/common/footer.vm")
+		<div class="main-bk-wrapper pt0">
+			$screen_content
+		</div>
 		#parse("/common/connectus.vm")
+        #parse("/common/footer.vm")
 	</div>
   </body>
 </html>

@@ -11,6 +11,7 @@
     <script>
         $(function() {	
             $("#form_uploadsample").validate({
+				ignore: [],
                 rules:{
                     name:{
                     required:true
@@ -18,15 +19,15 @@
                     link:{
                     required:true
                     }
-                    },
+                },
                 messages:{
                     name:{
                     required:"请输入样本名称"
                     },
-                    name:{
+                    link:{
                     required:"请上传文件"
                     }
-                    },
+                },
                 errorElement:"em",
                 submitHandler: function(form) {
                     $(form).ajaxSubmit({

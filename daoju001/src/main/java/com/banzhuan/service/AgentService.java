@@ -285,9 +285,18 @@ public class AgentService {
     		errors.rejectValue("name", "GOODCASE_NAME_IS_NOT_NULL");
 			return result;
 		}
+    	if(StringUtil.isEmpty(form.getLink()))
+		{
+    		errors.rejectValue("link", "GOODCASE_LINK_IS_NOT_NULL");
+			return result;
+		}
     	if(StringUtil.isNotEmpty(form.getName()))
     	{
     		gc.setName(form.getName());
+    	}
+    	if(StringUtil.isNotEmpty(form.getLink()))
+    	{
+    		gc.setLink(form.getLink());
     	}
     	if(form.getIndustry() != 0)
     	{
@@ -333,6 +342,11 @@ public class AgentService {
     		errors.rejectValue("name", "GOODCASE_NAME_IS_NOT_NULL");
 			return result;
 		}
+    	if(StringUtil.isEmpty(form.getLink()))
+		{
+    		errors.rejectValue("link", "GOODCASE_LINK_IS_NOT_NULL");
+			return result;
+		}
     	if(form.getGcid() != 0)
     	{
     		gc.setId(form.getGcid());
@@ -340,6 +354,10 @@ public class AgentService {
     	if(StringUtil.isNotEmpty(form.getName()))
     	{
     		gc.setName(form.getName());
+    	}
+    	if(StringUtil.isNotEmpty(form.getLink()))
+    	{
+    		gc.setLink(form.getLink());
     	}
     	if(form.getIndustry() != 0)
     	{
@@ -416,6 +434,11 @@ public class AgentService {
     		errors.rejectValue("name", "SAMPLE_NAME_IS_NOT_NULL");
 			return result;
 		}
+    	if(StringUtil.isEmpty(form.getLink()))
+		{
+    		errors.rejectValue("link", "SAMPLE_LINK_IS_NOT_NULL");
+			return result;
+		}
     	if(StringUtil.isNotEmpty(form.getName()))
     	{
     		sample.setName(form.getName());
@@ -437,12 +460,27 @@ public class AgentService {
     	
     }
     
+    public void delSample(int id)
+    {
+    	sampleDAO.delSample(id);
+    }
+    
+    public void delGoodcase(int id)
+    {
+    	gcDAO.delGoodcase(id);
+    }
+    
     public Result updateSampleById(SampleForm form, SampleEntity sample, Errors errors)
     {
     	Result result = new Result();
     	if(StringUtil.isEmpty(form.getName()))
 		{
     		errors.rejectValue("name", "SAMPLE_NAME_IS_NOT_NULL");
+			return result;
+		}
+    	if(StringUtil.isEmpty(form.getLink()))
+		{
+    		errors.rejectValue("link", "SAMPLE_LINK_IS_NOT_NULL");
 			return result;
 		}
     	if(form.getSid() != 0)

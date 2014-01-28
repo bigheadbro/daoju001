@@ -37,6 +37,10 @@
 	]]>
 	</select>
 	
+	<delete id="delSample"  parameterType="int">
+	delete from t_sample where id =#{id};
+	</delete>
+
 	<select id="getSampleCount" parameterType="int"
 			resultType="int">
 		<![CDATA[

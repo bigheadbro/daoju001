@@ -52,7 +52,7 @@
                                         <li class="current">
                                             <a href="mymsg">我的消息
 																							#if($!{account.unreadMsgCount} > 0)
-																								<span class="zg-noti-number">$!{account.unreadMsgCount}</span>
+																								<span class="zg-noti-number mt5">$!{account.unreadMsgCount}</span>
 																							#end
 																						</a>
                                         </li>
@@ -60,7 +60,7 @@
                                         <li>
                                             <a href="mymsg">我的消息
 																							#if($!{account.unreadMsgCount} > 0)
-																								<span class="zg-noti-number">$!{account.unreadMsgCount}</span>
+																								<span class="zg-noti-number mt5">$!{account.unreadMsgCount}</span>
 																							#end
 																						</a>
                                         </li>

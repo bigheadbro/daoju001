@@ -1,8 +1,4 @@
-.page {
-            font-size: 80%;
-						margin-top:15px;
-						float:right;
-        }
+.page {font-size: 80%;position: absolute;bottom: 20px;right: 20px;}
         
 .page a {
     text-decoration: none;

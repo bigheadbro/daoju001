@@ -3,205 +3,203 @@
 <script type="text/javascript" src="../js/questions.js"></script>
 <script type="text/javascript" src="../js/answer.js"></script>
 <script type="text/javascript" src="../js/showa.js"></script>
-<div class="main-bk-wrapper pt0">
-	<div class="main-content-container clearfix">
-		<!-- 问题 -->
-		<div class="main-list-container width630">
-			<div class="gc-list-header">
-				<h1><span><a href="/questions">所有问题</a> ></span><span class="regular">详细问题</span></h1>
-			</div>
-			<div class="main-list-content">
-				<div class="hot-question-listitem first clearfix">
-					<div class="hidden">$!{question.content}</div>
-					<div class="logo">
-						<a>
-    						#if($!{question.userLogo})
-    							<img src="../logo/$!{question.userLogo}" />
-    						#else
-    							<img src="../img/avatar.png" />
-    						#end
-    					</a>
-					</div>
-					<div class="content">
-						<ul>
-							<li class="name"><p>$!{question.userName}</p></li>
-							<li class="title clearfix">
-    							<div class="questions-param">
-        							#if($!{question.industry} > 0)
-        								<span>$stringUtil.getIndustry($!{question.industry})</span>
-        							#end
-        							#if($!{question.processMethod} > 0)
-        								<span>$stringUtil.getMethod($!{question.processMethod})</span>
-        							#end
-        							#if($!{question.wpHardness} > 0)
-        								<span>$stringUtil.getMaterial($!{question.wpHardness})</span>
-        							#end
-        							#if($!{question.wpMaterial} > 0)
-        								<span>$stringUtil.getHardness($!{question.wpMaterial})</span>
-        							#end
-        						</div>
-								<div class="questions-type">
-									#if($!{question.type} == 1)
-										<span class="type1">求精</span>
-									#elseif($!{question.type} == 2)
-										<span class="type2">解难</span>
-									#else
-										<span class="type3">求新</span>
-									#end
-									<span class="time">$stringUtil.formatDate($!{question.gmtModify})</span>
-								</div>
-							</li>
-							<li class="text clearfix">
-								<p>$!{question.content}</p>
-							</li>
-							<li class="info">
-								<p> <a class="showpa">$!{question.cntPA} 个专业回答 </a><span>|</span> <a class="showca">$!{question.cntCA} 个普通回答</a>  <span class="answer"><a class="solution" qid="$!{question.id}" bid="$!{question.buyerId}">提供专业方案</a> | <a class="reply">回复</a></span></p>
-							</li>
-							<li class="answer">
-							    <div class="answer-arrow">
-								  <em class="S_line1_c">◆</em>
-								  <em class="S_bg1_c">◆</em>
-								</div>
-								#foreach($answer in $answers)
-							    <ul class="pa-answer clearfix">
-								    <li class="agent-info clearfix">
-									    <div class="logo">
-                    						<a>
-                        						#if($!{answer.agentLogo})
-                        							<img src="../logo/$!{answer.agentLogo}" />
-                        						#else
-                        							<img src="../img/avatar.png" />
-                        						#end
-                        					</a>
-                    					</div>
-										<div class="agent-detail">
-    										<h2>
-    											$!{answer.agentName}
-                    							<a class="fancybox-v" title="$!{answer.agentName}的代理证书" href="$!{answer.verifiedLink}"><img src="../img/v.png" /></a>
-    										</h2>
-    										<h4>$!{answer.brandName}</h4>
-										</div>
-										<div class="answer-price">
-											#if($!{answer.price})
-												<span>已报价</span>
-											#end
-											#if($!{answer.FreeUse})
-												<span>免费试用</span>
-											#end
-										</div>
-									</li>
-								    <li class="answer-cont">
-									    <p>$!{answer.content}</p>
-									</li>
-									<li class="info">
-        								<p> <a class="">0 追问追答 </a>  <span class="answer"><a class="reply-comment">回复</a></span></p>
-        							</li>
-									<li class="comment">
-        							    <div class="comment-arrow">
-        								  <em class="S_line1_c">◆</em>
-        								  <em class="S_bg1_c">◆</em>
-        								</div>
-        							    <ul class="pa-answer clearfix">
-        								    <li class="comment-info clearfix">
-        									    <div class="logo">
-                            						<a>
-                                						#if($!{answer.agentLogo})
-                                							<img src="../logo/$!{answer.agentLogo}" />
-                                						#else
-                                							<img src="../img/avatar.png" />
-                                						#end
-                                					</a>
-                            					</div>
-        										<div class="agent-detail">
-            										<h2>
-            											$!{answer.agentName}
-                            							<a class="fancybox-v" title="$!{answer.agentName}的代理证书" href="$!{answer.verifiedLink}"><img src="../img/v.png" /></a>
-            										</h2>
-            										<h4>$!{answer.brandName}</h4>
-        										</div>
-        									</li>
-        								    <li class="comment-cont">
-        									    <p>这不是一个好主意，我以前试过，真的</p>
-        									</li>
-        									<li class="info">
-                								<p><span class="answer"><a class="reply">回复</a></span></p>
-                							</li>
-        								</ul>
-        							</li>
-								</ul>
-								#end
-							</li>
-							<li class="answer-c">
-							  <div class="answer-arrow">
-								  <em class="S_line1_c">◆</em>
-								  <em class="S_bg1_c">◆</em>
-								</div>
-							  <ul class="clearfix">
-								  <li class="agent-info clearfix">
-									  <img src="../img/big-logo.png" />
-										<h4>无锡汉尼达</h4>
-										<h5>Big刀具代理商</h5>
-									</li>
-								  <li class="answer-cont">
-									  <p>
-										  您好,根据您的情况，加工条件和选刀已比较合适，但刀片仅单侧6刃可用，这方面可进行提高，请参考我司M1200产品（右图）。63刀盘为六刃，根据我们以往的经验，可按照相同的Vc和更高的Fz进行加工，即AP=1.2 N=500 F=800这样可以提高30%的效率..
-										  另外刀片正反两面12个刃可用，若每刃加工时间可以相同甚至超过您先用刀具,那么性价比的提升是非常明显的。
-										</p>
-									</li>
-								</ul>
-							</li>
-						</ul>
-					</div>
-				</div>
-			</div>
+<div class="main-content-container clearfix">
+	<!-- 问题 -->
+	<div class="main-list-container width630">
+		<div class="gc-list-header">
+			<h1><span><a href="/questions">所有问题</a> ></span><span class="regular">详细问题</span></h1>
 		</div>
-	    <!-- 成功案例 -->
-		<div class="main-list-container width300 ml50">
-			<div class="main-list-header">
-				成功案例
-			  <a class="seemore" href="/goodcases">查看更多</a>
-			</div>
-			#foreach($gc in $goodcases)
-			<div class="goodcase-listitem clearfix">
-			  <div class="agent clearfix">
-					<div class="logo">
-						<a>
-							#if($!{gc.agentLogo})
-								<img src="../logo/$!{gc.agentLogo}" />
-							#else
-								<img src="../img/avatar.png" />
+		<div class="main-list-content">
+			<div class="hot-question-listitem first clearfix">
+				<div class="hidden">$!{question.content}</div>
+				<div class="logo">
+					<a>
+						#if($!{question.userLogo})
+							<img src="../logo/$!{question.userLogo}" />
+						#else
+							<img src="../img/avatar.png" />
+						#end
+					</a>
+				</div>
+				<div class="content">
+					<ul>
+						<li class="name"><p>$!{question.userName}</p></li>
+						<li class="title clearfix">
+							<div class="questions-param">
+    							#if($!{question.industry} > 0)
+    								<span>$stringUtil.getIndustry($!{question.industry})</span>
+    							#end
+    							#if($!{question.processMethod} > 0)
+    								<span>$stringUtil.getMethod($!{question.processMethod})</span>
+    							#end
+    							#if($!{question.wpHardness} > 0)
+    								<span>$stringUtil.getMaterial($!{question.wpHardness})</span>
+    							#end
+    							#if($!{question.wpMaterial} > 0)
+    								<span>$stringUtil.getHardness($!{question.wpMaterial})</span>
+    							#end
+    						</div>
+							<div class="questions-type">
+								#if($!{question.type} == 1)
+									<span class="type1">求精</span>
+								#elseif($!{question.type} == 2)
+									<span class="type2">解难</span>
+								#else
+									<span class="type3">求新</span>
+								#end
+								<span class="time">$stringUtil.formatDate($!{question.gmtModify})</span>
+							</div>
+						</li>
+						<li class="text clearfix">
+							<p>$!{question.content}</p>
+						</li>
+						<li class="info">
+							<p> <a class="showpa">$!{question.cntPA} 个专业回答 </a><span>|</span> <a class="showca">$!{question.cntCA} 个普通回答</a>  <span class="answer"><a class="solution" qid="$!{question.id}" bid="$!{question.buyerId}">提供专业方案</a> | <a class="reply">回复</a></span></p>
+						</li>
+						<li class="answer">
+						    <div class="answer-arrow">
+							  <em class="S_line1_c">◆</em>
+							  <em class="S_bg1_c">◆</em>
+							</div>
+							#foreach($answer in $answers)
+						    <ul class="pa-answer clearfix">
+							    <li class="agent-info clearfix">
+								    <div class="logo">
+                						<a>
+                    						#if($!{answer.agentLogo})
+                    							<img src="../logo/$!{answer.agentLogo}" />
+                    						#else
+                    							<img src="../img/avatar.png" />
+                    						#end
+                    					</a>
+                					</div>
+									<div class="agent-detail">
+										<h2>
+											$!{answer.agentName}
+                							<a class="fancybox-v" title="$!{answer.agentName}的代理证书" href="$!{answer.verifiedLink}"><img src="../img/v.png" /></a>
+										</h2>
+										<h4>$!{answer.brandName}</h4>
+									</div>
+									<div class="answer-price">
+										#if($!{answer.price})
+											<span>已报价</span>
+										#end
+										#if($!{answer.FreeUse})
+											<span>免费试用</span>
+										#end
+									</div>
+								</li>
+							    <li class="answer-cont">
+								    <p>$!{answer.content}</p>
+								</li>
+								<li class="info">
+    								<p> <a class="">0 追问追答 </a>  <span class="answer"><a class="reply-comment">回复</a></span></p>
+    							</li>
+								<li class="comment">
+    							    <div class="comment-arrow">
+    								  <em class="S_line1_c">◆</em>
+    								  <em class="S_bg1_c">◆</em>
+    								</div>
+    							    <ul class="pa-answer clearfix">
+    								    <li class="comment-info clearfix">
+    									    <div class="logo">
+                        						<a>
+                            						#if($!{answer.agentLogo})
+                            							<img src="../logo/$!{answer.agentLogo}" />
+                            						#else
+                            							<img src="../img/avatar.png" />
+                            						#end
+                            					</a>
+                        					</div>
+    										<div class="agent-detail">
+        										<h2>
+        											$!{answer.agentName}
+                        							<a class="fancybox-v" title="$!{answer.agentName}的代理证书" href="$!{answer.verifiedLink}"><img src="../img/v.png" /></a>
+        										</h2>
+        										<h4>$!{answer.brandName}</h4>
+    										</div>
+    									</li>
+    								    <li class="comment-cont">
+    									    <p>这不是一个好主意，我以前试过，真的</p>
+    									</li>
+    									<li class="info">
+            								<p><span class="answer"><a class="reply">回复</a></span></p>
+            							</li>
+    								</ul>
+    							</li>
+							</ul>
 							#end
-						</a>
-					</div>
-					<div class="content">
-						<ul>
-							<li class="name clearfix">
-								<a href="/agent/$!{gc.agentId}">$!{gc.agentName}</a>
-								#if($gc.isVerified())
-									<a  class="fancybox-v" title="$!{gc.agentName}的代理证书" href="$!{gc.verifiedLink}"><img src="../img/v.png" /></a>
-								#end
-							</li>
-							<li class="title">$!{gc.brandName}</li>
-						</ul>
-					</div>
-				</div>
-				<div class="property">
-					#if($!{gc.industry} > 0)
-						<span>$stringUtil.getIndustry($!{gc.industry})</span>
-					#end
-					#if($!{gc.processMethod} > 0)
-						<span>$stringUtil.getMethod($!{gc.processMethod})</span>
-					#end
-					#if($!{gc.workMaterial} > 0)
-						<span>$stringUtil.getMaterial($!{gc.workMaterial})</span>
-					#end
-					#if($!{gc.workSolidity} > 0)
-						<span>$stringUtil.getHardness($!{gc.workSolidity})</span>
-					#end
+						</li>
+						<li class="answer-c">
+						  <div class="answer-arrow">
+							  <em class="S_line1_c">◆</em>
+							  <em class="S_bg1_c">◆</em>
+							</div>
+						  <ul class="clearfix">
+							  <li class="agent-info clearfix">
+								  <img src="../img/big-logo.png" />
+									<h4>无锡汉尼达</h4>
+									<h5>Big刀具代理商</h5>
+								</li>
+							  <li class="answer-cont">
+								  <p>
+									  您好,根据您的情况，加工条件和选刀已比较合适，但刀片仅单侧6刃可用，这方面可进行提高，请参考我司M1200产品（右图）。63刀盘为六刃，根据我们以往的经验，可按照相同的Vc和更高的Fz进行加工，即AP=1.2 N=500 F=800这样可以提高30%的效率..
+									  另外刀片正反两面12个刃可用，若每刃加工时间可以相同甚至超过您先用刀具,那么性价比的提升是非常明显的。
+									</p>
+								</li>
+							</ul>
+						</li>
+					</ul>
 				</div>
 			</div>
-			#end
 		</div>
+	</div>
+    <!-- 成功案例 -->
+	<div class="main-list-container width300 ml50">
+		<div class="main-list-header">
+			成功案例
+		  <a class="seemore" href="/goodcases">查看更多</a>
+		</div>
+		#foreach($gc in $goodcases)
+		<div class="goodcase-listitem clearfix">
+		  <div class="agent clearfix">
+				<div class="logo">
+					<a>
+						#if($!{gc.agentLogo})
+							<img src="../logo/$!{gc.agentLogo}" />
+						#else
+							<img src="../img/avatar.png" />
+						#end
+					</a>
+				</div>
+				<div class="content">
+					<ul>
+						<li class="name clearfix">
+							<a href="/agent/$!{gc.agentId}">$!{gc.agentName}</a>
+							#if($gc.isVerified())
+								<a  class="fancybox-v" title="$!{gc.agentName}的代理证书" href="$!{gc.verifiedLink}"><img src="../img/v.png" /></a>
+							#end
+						</li>
+						<li class="title">$!{gc.brandName}</li>
+					</ul>
+				</div>
+			</div>
+			<div class="property">
+				#if($!{gc.industry} > 0)
+					<span>$stringUtil.getIndustry($!{gc.industry})</span>
+				#end
+				#if($!{gc.processMethod} > 0)
+					<span>$stringUtil.getMethod($!{gc.processMethod})</span>
+				#end
+				#if($!{gc.workMaterial} > 0)
+					<span>$stringUtil.getMaterial($!{gc.workMaterial})</span>
+				#end
+				#if($!{gc.workSolidity} > 0)
+					<span>$stringUtil.getHardness($!{gc.workSolidity})</span>
+				#end
+			</div>
+		</div>
+		#end
 	</div>
 </div>
 #parse("/common/answer.vm")

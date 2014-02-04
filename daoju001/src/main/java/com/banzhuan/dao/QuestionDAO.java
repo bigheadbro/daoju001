@@ -2,6 +2,8 @@ package com.banzhuan.dao;
 
 import java.util.List;
 
+import org.apache.ibatis.session.RowBounds;
+
 import com.banzhuan.entity.QuestionEntity;;
 
 public interface QuestionDAO {
@@ -17,7 +19,11 @@ public interface QuestionDAO {
 	
 	public List<QuestionEntity> getAllquestions(QuestionEntity question);
 	
+	public List<QuestionEntity> getAllquestions(QuestionEntity question, RowBounds bound);
+	
 	public List<QuestionEntity> getMainquestions();
 	
-	int getQuestionCount(int userid);
+	int getUserQuestionCount(int userid);
+	
+	int getAllQuestionCount(QuestionEntity question);
 }

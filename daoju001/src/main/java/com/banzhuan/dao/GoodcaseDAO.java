@@ -2,6 +2,8 @@ package com.banzhuan.dao;
 
 import java.util.List;
 
+import org.apache.ibatis.session.RowBounds;
+
 import com.banzhuan.entity.GoodcaseEntity;;
 
 public interface GoodcaseDAO {
@@ -15,7 +17,11 @@ public interface GoodcaseDAO {
 	
 	List<GoodcaseEntity> getAllGoodcasesByType(GoodcaseEntity gc);
 	
+	List<GoodcaseEntity> getAllGoodcasesByType(GoodcaseEntity gc, RowBounds bound);
+	
 	List<GoodcaseEntity> getMainGoodcasesByType();
+	
+	int getGoodcaseCountByType(GoodcaseEntity gc);
 	
 	int getGoodcaseCount(int userid);
 	

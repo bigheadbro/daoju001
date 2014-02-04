@@ -558,6 +558,7 @@ public class StringUtil {
 		msgTypeMap.put(1, "提供了专业解决方案");
 		msgTypeMap.put(2, "回复了你");
 		
+		industryMap.put(0, "不限");
 		industryMap.put(1, "模具");
 		industryMap.put(2, "船舶");
 		industryMap.put(3, "石油设备");
@@ -571,6 +572,7 @@ public class StringUtil {
 		industryMap.put(11, "通用零件(阀、泵、螺栓等)");
 		industryMap.put(12, "其他");
 		
+		processMethodMap.put(0, "不限");
 		processMethodMap.put(1, "平面铣削");
 		processMethodMap.put(2, "侧壁铣削");
 		processMethodMap.put(3, "曲面铣削");
@@ -584,6 +586,7 @@ public class StringUtil {
 		processMethodMap.put(11, "车削(螺纹加工）");
 		processMethodMap.put(12, "去毛刺");
 		
+		wpMaterialMap.put(0, "不限");
 		wpMaterialMap.put(1, "钢");
 		wpMaterialMap.put(2, "铸铁");
 		wpMaterialMap.put(3, "不锈钢");
@@ -593,6 +596,7 @@ public class StringUtil {
 		wpMaterialMap.put(7, "石墨");
 		wpMaterialMap.put(8, "树脂");
 
+		wpHardnessMap.put(0, "不限");
 		wpHardnessMap.put(1, "HRC20以下");
 		wpHardnessMap.put(2, "HRC20-30");
 		wpHardnessMap.put(3, "HRC30-40");

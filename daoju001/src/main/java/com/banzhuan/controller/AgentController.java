@@ -152,6 +152,7 @@ public class AgentController extends BaseController{
 				return new ModelAndView(new RedirectView("/agent/main"));
 			}
 		}
+		
 		return new ModelAndView("/agent/log");
 	}
 	
@@ -269,8 +270,11 @@ public class AgentController extends BaseController{
 	}
 	
 	@RequestMapping(value="/mymsg")
-	public ModelAndView mymsg(HttpServletRequest request, HttpServletResponse response) {
+	public ModelAndView mymsg(HttpServletRequest request, HttpServletResponse response, @ModelAttribute("account")Account account) {
 		ModelAndView mv = new ModelAndView("agent/mymsg");
+		int userId = account.getUserId();
+		Result result = agentService.getAllMsgs(userId);
+		mv.addObject("msgs", result.get("msgs"));
 		return mv;
 	}
 	

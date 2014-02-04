@@ -118,8 +118,9 @@ public class BuyerController extends BaseController{
 			{
 				BuyerEntity user = (BuyerEntity)re.get("buyer");
 				int unreadMsgCount = buyerService.getUnreadMsgCount(user.getId());
-				int questionCnt = buyerService.getQuestionCount(user.getId());
+				int questionCnt = buyerService.getUserQuestionCount(user.getId());
 				Account account = new Account();
+				account.setUserId(user.getId());
 				account.setLogin(true); // 登录成功标识
 				account.setUserName(user.getUsername()); // 用户登录名
 				account.setUserId(user.getId()); // 用户ID

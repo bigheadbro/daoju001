@@ -1,39 +1,17 @@
 #set($layout = "/layout/index_layout.vm")
+<script type="text/javascript" src="../js/azlist.js"></script>
 <div class="main-content-container clearfix">
     <div class="main-list-container width630 ml15">
         <div class="gc-list-header">
             <h1>刀具样本</h1>
             <div class="a-zlist clearfix">
-                <a class="current">A</a>
-                <a>B</a>
-                <a>C</a>
-                <a>D</a>
-                <a>E</a>
-                <a>F</a>
-                <a>G</a>
-                <a>H</a>
-                <a>I</a>
-                <a>J</a>
-                <a>K</a>
-                <a>L</a>
-                <a>M</a>
-                <a>N</a>
-                <a>O</a>
-                <a>P</a>
-                <a>Q</a>
-                <a>R</a>
-                <a>S</a>
-                <a>T</a>
-                <a>U</a>
-                <a>V</a>
-                <a>W</a>
-                <a>X</a>
-                <a>Y</a>
-                <a>Z</a>
+                #foreach ($mapEntry in $sampleMap)
+					<a>$stringUtil.convertToChar($mapEntry.key)</a>
+				#end
             </div>
         </div>
         <div class="agent-list-content">
-            #foreach ($mapEntry in $sampleMap.entrySet())
+            #foreach ($mapEntry in $sampleMap)
                 #if ($mapEntry.key)
                     <div class="sample-item clearfix">
                         <h1>$stringUtil.convertToChar($mapEntry.key)</h1>

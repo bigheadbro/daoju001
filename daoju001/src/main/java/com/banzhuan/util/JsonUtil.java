@@ -132,6 +132,30 @@ public class JsonUtil {
         }  
 	}
 	
+	public static void sendComment(HttpServletResponse response, String comment, String userName, String logo, String brandName, String verifiedLink, String time)
+	{
+		JSONObject object = new JSONObject();  
+        response.setContentType("text/Xml;charset=gbk");  
+        object.element("comment", comment);
+        object.element("userName", userName);
+        object.element("logo", logo);
+        object.element("brandName", brandName);
+        object.element("verifiedLink", verifiedLink);
+        object.element("time", time);
+        
+        PrintWriter out = null;  
+        try {  
+            out = response.getWriter();  
+            out.println(object.toString());  
+        }  
+        catch (IOException ex1) {  
+            ex1.printStackTrace();  
+        }  
+        finally {  
+            out.close();  
+        }  
+	}
+	
 	public static void sendFileLink(HttpServletResponse response, String addr)
 	{
 		JSONObject object = new JSONObject();  
@@ -183,6 +207,24 @@ public class JsonUtil {
         finally {  
             out.close();  
         }  
+	}
+	
+	public static void showErrorMsg(HttpServletResponse response)
+	{
+		PrintWriter out = null;  
+        try {  
+            out = response.getWriter();  
+            out.println("<script type=\"text/javascript\">");  
+    		out.println("$(\".error-msg\").attr(\"display\",\"block\");");  
+    		out.println("</script>");
+        }  
+        catch (IOException ex1) {  
+            ex1.printStackTrace();  
+        }  
+        finally {  
+            out.close();  
+        }  
+		
 	}
 	
 	public static void sendLoginError(HttpServletResponse response, String mail, String pwd)

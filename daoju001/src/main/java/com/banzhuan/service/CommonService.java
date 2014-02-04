@@ -7,20 +7,24 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import com.banzhuan.dao.AgentDAO;
 import com.banzhuan.dao.BuyerDAO;
+import com.banzhuan.dao.CommentDAO;
 import com.banzhuan.dao.GoodcaseDAO;
 import com.banzhuan.dao.QuestionDAO;
 import com.banzhuan.dao.SampleDAO;
 import com.banzhuan.entity.AgentEntity;
+import com.banzhuan.entity.CommentEntity;
 import com.banzhuan.entity.GoodcaseEntity;
 import com.banzhuan.entity.QuestionEntity;
 import com.banzhuan.entity.SampleEntity;
 import com.banzhuan.common.Result;
+import com.banzhuan.form.CommentForm;
 import com.banzhuan.form.GoodcaseForm;
 import com.banzhuan.form.QuestionForm;
 import com.banzhuan.util.ChineseSpelling;
@@ -51,7 +55,33 @@ public class CommonService {
 	@Qualifier("sampleDAO")
 	private SampleDAO sampleDAO;
 	
-	public Result getAllGoodcases(GoodcaseForm form)
+	@Autowired
+	@Qualifier("commentDAO")
+	private CommentDAO commentDAO;
+	
+	public int getGoodcaseCountByType(GoodcaseForm form)
+	{
+		GoodcaseEntity gc = new GoodcaseEntity();
+		if(form.getIndustry() != 0)
+    	{
+    		gc.setIndustry(form.getIndustry());
+    	}
+    	if(form.getProcessMethod() != 0)
+    	{
+    		gc.setProcessMethod(form.getProcessMethod());
+    	}
+    	if(form.getWpHardness() != 0)
+    	{
+    		gc.setWorkSolidity(form.getWpHardness());
+    	}
+    	if(form.getWpMaterial() != 0)
+    	{
+    		gc.setWorkMaterial(form.getWpMaterial());
+    	}
+    	return gcDAO.getGoodcaseCountByType(gc);
+	}
+	
+	public Result getAllGoodcases(GoodcaseForm form, RowBounds bound)
 	{
 		Result result = new Result();
 		GoodcaseEntity gc = new GoodcaseEntity();
@@ -71,12 +101,41 @@ public class CommonService {
     	{
     		gc.setWorkMaterial(form.getWpMaterial());
     	}
-		List<GoodcaseEntity> goodcases = gcDAO.getAllGoodcasesByType(gc);
+		List<GoodcaseEntity> goodcases;
+		if(bound == null)
+    	{
+			goodcases = gcDAO.getAllGoodcasesByType(gc);
+    	}
+    	else
+    	{
+    		goodcases = gcDAO.getAllGoodcasesByType(gc, bound);
+    	}
 		result.add("goodcases", goodcases);
 		return result;
 	}
 	
-	public Result getAllquestions(QuestionForm form)
+	public int getAllquestionsCount(QuestionForm form)
+	{
+		QuestionEntity ques = new QuestionEntity();
+		if(form.getIndustry() != 0)
+    	{
+			ques.setIndustry(form.getIndustry());
+    	}
+    	if(form.getProcessMethod() != 0)
+    	{
+    		ques.setProcessMethod(form.getProcessMethod());
+    	}
+    	if(form.getWpHardness() != 0)
+    	{
+    		ques.setWpHardness(form.getWpHardness());
+    	}
+    	if(form.getWpMaterial() != 0)
+    	{
+    		ques.setWpMaterial(form.getWpMaterial());
+    	}
+		return questionDAO.getAllQuestionCount(ques);
+	}
+	public Result getAllquestions(QuestionForm form, RowBounds bound)
 	{
 		Result result = new Result();
 		QuestionEntity ques = new QuestionEntity();
@@ -96,7 +155,15 @@ public class CommonService {
     	{
     		ques.setWpMaterial(form.getWpMaterial());
     	}
-		List<QuestionEntity> questions = questionDAO.getAllquestions(ques);
+    	List<QuestionEntity> questions;
+    	if(bound == null)
+    	{
+    		questions = questionDAO.getAllquestions(ques);
+    	}
+    	else
+    	{
+    		questions = questionDAO.getAllquestions(ques, bound);
+    	}
 		result.add("questions", questions);
 		return result;
 	}
@@ -201,5 +268,63 @@ public class CommonService {
 		return result;
 	}
 	
+	public Result getCommentsByPid(int qid)
+	{
+		Result result = new Result();
+		List<CommentEntity> comments = commentDAO.getCommentsByParentid(qid);
+		result.add("commentsCnt", comments.size());
+		result.add("comments", comments);
+		return result;
+	}
+	
+	
+	public int insertComment(CommentForm form)
+	{
+		CommentEntity comment = new CommentEntity();
+		
+		if(form.getParentId() != 0)
+		{
+			comment.setParent(form.getParentId());
+		}
+		if(form.getType() != 0)
+		{
+			comment.setType(form.getType());
+		}
+		if(form.getContent() != null)
+		{
+			comment.setContent(form.getContent());
+		}
+		
+		if(form.getAgentId() > 0)
+		{
+			comment.setAgentId(form.getAgentId());
+		}
+		if(form.getBrandName() != null)
+		{
+			comment.setBrandName(form.getBrandName());
+		}
+		if(form.getVerifiedLink() != null)
+		{
+			comment.setLink(form.getVerifiedLink());
+		}
+		
+		if(form.getUserLogo() != null)
+		{
+			comment.setUserAvatar(form.getUserLogo());
+		}
+		if(form.getUserName() != null)
+		{
+			comment.setUserName(form.getUserName());
+		}
+		
+		if(form.getBuyerId() > 0)
+		{
+			comment.setBuyerId(form.getBuyerId());
+		}
 
+
+		int result = commentDAO.insertCommentEntity(comment);
+		return result;
+	}
+	
 }

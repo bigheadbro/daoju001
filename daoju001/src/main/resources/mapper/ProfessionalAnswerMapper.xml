@@ -12,6 +12,7 @@
 		<id property="hasPic" column="has_pic" />
 		<!--0=已发布，1=草稿 -->
 		<id property="state" column="state" />
+		<id property="cntComment" column="cnt_comment" />
 		<!--买家id -->
 		<id property="buyerId" column="buyer_id" />
 		<!--问题id -->
@@ -60,6 +61,7 @@
 		,is_free_use
 		,has_pic
 		,state
+		,cnt_comment
 		,buyer_id
 		,question_id
 		,agent_id
@@ -76,6 +78,7 @@
 		,#{FreeUse}
 		,#{hasPic}
 		,#{state}
+		,#{cntComment}
 		,#{buyerId}
 		,#{questionId}
 		,#{agentId}

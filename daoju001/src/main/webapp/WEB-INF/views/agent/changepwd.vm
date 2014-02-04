@@ -36,9 +36,17 @@
 								equalTo: "两次输入密码不一致"  
 							}
 						},
-						errorElement:"em",
-    				submitHandler: function(form) {
-              $(form).ajaxSubmit({
+						errorPlacement: function(error, element) {   
+							$(".error-msg").empty();   
+							$(".error-msg").show();   
+                            error.appendTo($(".error-msg"));     
+                        },
+						success:function(label)(){
+							$(".error-msg").empty();   
+							$(".error-msg").hide();   
+						},
+        				submitHandler: function(form) {
+                  		$(form).ajaxSubmit({
     						dataType:'json',
     						success:processJson
     					});
@@ -46,6 +54,18 @@
 					});
 				});
 			</script>
+			<div class="error-msg">
+    			#springBind("form")
+                #if($status.errors.hasErrors())
+                    ## Field error messages
+                    #foreach($f in $status.errors.fieldErrors)
+                        #springBind("form.${f.field}")
+                        #foreach($e in $status.errorMessages)
+                            <label for="$!{status.expression}" generated="true" class="error">${e}</label>
+                        #end
+                    #end
+                #end
+    		</div>
 		<form id="form_changepwd" method="post" action="/agent/changepwd">
 			<!-- 隐藏字段，用于标示是表单提交 -->
 		    <input type="hidden" name="do_submit" value="true"/>
@@ -57,7 +77,6 @@
                     </li>
                     <li class="value">
                         <input type="password" name="${status.expression}" class="dsf-form-text-input" />
-												<em for="$!{status.expression}" generated="true" class="error">$!{status.errorMessage}</em>
                     </li>
                 </ul>
             </div>
@@ -68,8 +87,7 @@
                         新密码
                     </li>
                     <li class="value">
-                        <input type="password" name="${status.expression}" class="dsf-form-text-input" />
-												<em for="$!{status.expression}" generated="true" class="error">$!{status.errorMessage}</em>
+                        <input type="password" name="${status.expression}" id="pwd1" class="dsf-form-text-input" />
                     </li>
                 </ul>
             </div>
@@ -81,7 +99,6 @@
                     </li>
                     <li class="value">
                         <input type="password" name="${status.expression}" class="dsf-form-text-input" />
-												<em for="$!{status.expression}" generated="true" class="error">$!{status.errorMessage}</em>
                     </li>
                 </ul>
             </div>

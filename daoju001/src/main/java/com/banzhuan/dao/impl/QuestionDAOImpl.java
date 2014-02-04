@@ -2,10 +2,12 @@ package com.banzhuan.dao.impl;
 
 import java.util.List;
 
+import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.support.SqlSessionDaoSupport;
 import org.springframework.stereotype.Repository;
 import com.banzhuan.dao.QuestionDAO;
 import com.banzhuan.entity.QuestionEntity;
+import com.banzhuan.entity.SampleEntity;
 
 @Repository("questionDAO")
 public class QuestionDAOImpl extends SqlSessionDaoSupport implements QuestionDAO {
@@ -51,9 +53,20 @@ public class QuestionDAOImpl extends SqlSessionDaoSupport implements QuestionDAO
 	}
 	
 	@Override
-	public int getQuestionCount(int userid)
+	public int getUserQuestionCount(int userid)
 	{
-		return this.getSqlSession().selectOne("getQuestionCount", userid);
+		return this.getSqlSession().selectOne("getUserQuestionCount", userid);
+	}
+	
+	@Override
+	public int getAllQuestionCount(QuestionEntity question)
+	{
+		return this.getSqlSession().selectOne("getAllQuestionCount",question);
+	}
+
+	@Override
+	public List<QuestionEntity> getAllquestions(QuestionEntity question, RowBounds bound) {
+		return this.getSqlSession().selectList("getAllquestions", question, bound);
 	}
 
 }

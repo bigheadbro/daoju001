@@ -121,6 +121,19 @@
 		]]>
 	</select>
 	
+	<select id="getGoodcaseCountByType" parameterType="GoodcaseEntity"
+			resultType="int">
+			SELECT count(1) from t_goodcase t 
+			<where>
+				<if test="industry != 0">AND industry=#{industry}</if>
+			    <if test="processMethod != 0">AND work_type=#{processMethod}</if>
+			    <if test="workSolidity != 0">AND work_solidity=#{workSolidity}</if>
+			    <if test="workMaterial != 0">AND work_material=#{workMaterial}</if>
+		    </where> 
+			order by gmt_create desc
+	</select>
+	
+	
 	<select id="getAllGoodcasesByType" parameterType="GoodcaseEntity"
 			resultMap="GoodcaseResultMap">
 		SELECT * from t_goodcase t 

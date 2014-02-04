@@ -1,8 +1,9 @@
 #if($totalPage > 1)
+#set($url = "$!request.getServletPath()")
 <div id="Pagination1" class="page">
 	#if($page > 1)
 		#set($prePage = $page - 1)
-	    <a class="prev" href="mysample?page=$prePage">上一页</a>
+	    <a class="prev" href="$url?page=$prePage">上一页</a>
 	#else
 		<span class="current prev">上一页</span>
 	#end
@@ -21,7 +22,7 @@
         #if($i==$page)
         <span class="current">$i</span>
         #else 
-        <a href="mysample?page=$i">$i</a>
+        <a href="$url?page=$i">$i</a>
         #end
     #end
     
@@ -39,13 +40,13 @@
         #end
         
         #foreach($i in [$start..$totalPage])
-        	<a href="mysample?page=$i">$i</a>
+        	<a href="$url?page=$i">$i</a>
         #end
 	#end
 	
 	#if($page < $totalPage)
 		#set($nextPage = $page + 1)
-	    <a class="next" href="mysample?page=$nextPage">下一页</a>
+	    <a class="next" href="$url?page=$nextPage">下一页</a>
 	#else
 		<span class="current next" href="#">下一页</span>
 	#end

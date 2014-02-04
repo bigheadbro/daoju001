@@ -43,11 +43,23 @@
 	]]>
 	</select>
 
-	<select id="getQuestionCount" parameterType="int"
+	<select id="getUserQuestionCount" parameterType="int"
 			resultType="int">
 		<![CDATA[
 			SELECT count(1) from t_question t WHERE t.buyer_id = #{buyerId} and state = 0;
 		]]>
+	</select>
+	
+	<select id="getAllQuestionCount" parameterType="QuestionEntity"
+			resultType="int">
+			SELECT count(1) from t_question t
+			<where>
+				<if test="industry != 0">AND industry=#{industry}</if>
+			    <if test="processMethod != 0">AND process_method=#{processMethod}</if>
+			    <if test="wpHardness != 0">AND wp_hardness=#{wpHardness}</if>
+			    <if test="wpMaterial != 0">AND wp_material=#{wpMaterial}</if>
+			    AND state = 0
+		    </where> 
 	</select>
 	<insert id="insertQuestionEntity" parameterType="QuestionEntity">
 		<selectKey resultType="int" order="AFTER" keyProperty="id">
@@ -128,6 +140,7 @@
 			    <if test="processMethod != 0">AND process_method=#{processMethod}</if>
 			    <if test="wpHardness != 0">AND wp_hardness=#{wpHardness}</if>
 			    <if test="wpMaterial != 0">AND wp_material=#{wpMaterial}</if>
+			    AND state = 0
 		    </where> 
 			order by gmt_create desc
 	</select>

@@ -358,9 +358,9 @@ public class BuyerService {
 		return msgDAO.getUnreadMsgCount(userid);
 	}
 	
-	public int getQuestionCount(int userid)
+	public int getUserQuestionCount(int userid)
 	{
-		return questionDAO.getQuestionCount(userid);
+		return questionDAO.getUserQuestionCount(userid);
 	}
 	
 	public Result getAllMsgs(int userid)

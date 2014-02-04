@@ -1,6 +1,13 @@
 package com.banzhuan.controller;
 
 
+import java.io.File;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -9,30 +16,43 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.ibatis.session.RowBounds;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.FileCopyUtils;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.support.DefaultMultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
+import com.banzhuan.common.Account;
+import com.banzhuan.common.Constant;
 import com.banzhuan.common.Result;
 import com.banzhuan.entity.AgentEntity;
 import com.banzhuan.entity.SampleEntity;
+import com.banzhuan.form.CommentForm;
 import com.banzhuan.form.GoodcaseForm;
 import com.banzhuan.form.LoginForm;
 import com.banzhuan.form.ProfessionalAnswerForm;
 import com.banzhuan.form.QuestionForm;
 import com.banzhuan.service.AgentService;
 import com.banzhuan.service.CommonService;
+import com.banzhuan.util.JsonUtil;
+import com.banzhuan.util.StringUtil;
+import com.banzhuan.util.Util;
 
 @Controller
 @RequestMapping("/")
 @SessionAttributes({"account"})
 public class CommonController extends BaseController{
+	private Logger logger = LoggerFactory.getLogger(CommonController.class);
 	@Autowired
 	@Qualifier("commonService")
 	private CommonService commonService;
@@ -81,12 +101,25 @@ public class CommonController extends BaseController{
 	{
 		ModelAndView mv = new ModelAndView("/common/questions");
 		
-		Result result = commonService.getAllquestions(form);
+		int page = 1;
+		if(request.getParameter("page") != null)
+		{
+			page = Integer.valueOf(request.getParameter("page"));
+		}
+		
+		Result result = commonService.getAllquestions(form,new RowBounds((page-1)*Constant.ALL_QUESTION_PAGE_SIZE, Constant.ALL_QUESTION_PAGE_SIZE));
 		mv.addObject("questions", result.get("questions"));
-		
-		result = commonService.getMainagents();
-		mv.addObject("agents", result.get("agents"));
-		
+		int total= commonService.getAllquestionsCount(form);
+		int totalPage=0;
+		if(total % Constant.ALL_QUESTION_PAGE_SIZE == 0)
+			totalPage=total/Constant.ALL_QUESTION_PAGE_SIZE;
+		else
+			totalPage=total/Constant.ALL_QUESTION_PAGE_SIZE+1;
+		totalPage=totalPage==0?1:totalPage;
+		mv.addObject("page", page);
+		mv.addObject("total", total);
+		mv.addObject("totalPage", totalPage);
+
 		result = commonService.getMaingoodcases();
 		mv.addObject("goodcases", result.get("goodcases"));
 		return mv;
@@ -95,7 +128,7 @@ public class CommonController extends BaseController{
 	
 	@RequestMapping(value = "questions/{qid}")
 	public ModelAndView question(final HttpServletRequest request,final HttpServletResponse response, @PathVariable String qid,
-			@ModelAttribute("answerForm")ProfessionalAnswerForm answerForm)
+			@ModelAttribute("answerForm")ProfessionalAnswerForm answerForm, @ModelAttribute("form")CommentForm form)
 	{
 		ModelAndView mv = new ModelAndView("/common/question");
 		Result result = new Result();
@@ -113,16 +146,59 @@ public class CommonController extends BaseController{
 		result = commonService.getMaingoodcases();
 		mv.addObject("goodcases", result.get("goodcases"));
 		
+		result = commonService.getCommentsByPid(questionid);
+		mv.addObject("commentsCnt", result.get("commentsCnt"));
+		mv.addObject("comments", result.get("comments"));
+		
 		return mv;
 		
+	}
+	
+	@RequestMapping(value="/addcomment")
+	public void addcomment(HttpServletRequest request, HttpServletResponse response, @ModelAttribute("account")Account account
+			, @ModelAttribute("form")CommentForm form, BindingResult result) 
+	{
+		if(isDoSubmit(request))
+		{
+			if(form.getContent() == "")
+			{
+				JsonUtil.showAlert(response, "回复内容不能为空", "", "确定", "", "");
+				return;
+			}
+			int ret = commonService.insertComment(form);
+			if(ret >= 0)
+			{
+				Date now = new Date();
+				SimpleDateFormat time=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"); 
+				String aa = time.format(now);
+				JsonUtil.sendComment(response, form.getContent(), form.getUserName(), form.getUserLogo(), form.getBrandName(), form.getVerifiedLink(), StringUtil.formatDate(aa));
+			}
+		}
+		return; 
 	}
 	
 	@RequestMapping(value = "goodcases")
 	public ModelAndView allcase(final HttpServletRequest request,final HttpServletResponse response, @ModelAttribute("form")GoodcaseForm form) {
 		ModelAndView mv = new ModelAndView("/common/goodcases");
+
+		int page = 1;
+		if(request.getParameter("page") != null)
+		{
+			page = Integer.valueOf(request.getParameter("page"));
+		}
 		
-		Result result = commonService.getAllGoodcases(form);
+		Result result = commonService.getAllGoodcases(form,new RowBounds((page-1)*Constant.ALL_GOOD_CASE_PAGE_SIZE, Constant.ALL_GOOD_CASE_PAGE_SIZE));
 		mv.addObject("goodcases", result.get("goodcases"));
+		int total= commonService.getGoodcaseCountByType(form);
+		int totalPage=0;
+		if(total % Constant.ALL_GOOD_CASE_PAGE_SIZE == 0)
+			totalPage=total/Constant.ALL_GOOD_CASE_PAGE_SIZE;
+		else
+			totalPage=total/Constant.ALL_GOOD_CASE_PAGE_SIZE+1;
+		totalPage=totalPage==0?1:totalPage;
+		mv.addObject("page", page);
+		mv.addObject("total", total);
+		mv.addObject("totalPage", totalPage);
 		return mv;
 		
 	}
@@ -134,7 +210,15 @@ public class CommonController extends BaseController{
 		
 		Map<Integer,List<AgentEntity>> agentMap = commonService.getAllAgents();
 
-		mv.addObject("agentMap", agentMap);
+		//对key进行排序--字母
+		List<Map.Entry<Integer,List<AgentEntity>>> infoIds = new ArrayList<Map.Entry<Integer,List<AgentEntity>>>(agentMap.entrySet());
+		Collections.sort(infoIds, new Comparator<Map.Entry<Integer,List<AgentEntity>>>() {   
+		    public int compare(Map.Entry<Integer,List<AgentEntity>> o1, Map.Entry<Integer,List<AgentEntity>> o2) {      
+		        return (o1.getKey()-o2.getKey());
+		    }
+		}); 
+
+		mv.addObject("agentMap", infoIds);
 		
 		return mv;
 		
@@ -147,7 +231,15 @@ public class CommonController extends BaseController{
 		
 		Map<Integer,Map<Integer,List<SampleEntity>>> sampleMap = commonService.getAllSamples();
 
-		mv.addObject("sampleMap", sampleMap);
+		//对key进行排序--字母
+		List<Map.Entry<Integer,Map<Integer,List<SampleEntity>>>> infoIds = new ArrayList<Map.Entry<Integer,Map<Integer,List<SampleEntity>>>>(sampleMap.entrySet());
+		Collections.sort(infoIds, new Comparator<Map.Entry<Integer,Map<Integer,List<SampleEntity>>>>() {   
+		    public int compare(Map.Entry<Integer,Map<Integer,List<SampleEntity>>> o1, Map.Entry<Integer,Map<Integer,List<SampleEntity>>> o2) {      
+		        return (o1.getKey()-o2.getKey());
+		    }
+		}); 
+		
+		mv.addObject("sampleMap", infoIds);
 		
 		return mv;
 		

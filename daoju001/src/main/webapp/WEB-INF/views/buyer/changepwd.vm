@@ -69,7 +69,7 @@
                         新密码
                     </li>
                     <li class="value">
-                        <input type="password" name="${status.expression}" class="dsf-form-text-input" />
+                        <input type="password" name="${status.expression}" class="dsf-form-text-input" id="pwd1"/>
 												<em for="$!{status.expression}" generated="true" class="error">$!{status.errorMessage}</em>
                     </li>
                 </ul>

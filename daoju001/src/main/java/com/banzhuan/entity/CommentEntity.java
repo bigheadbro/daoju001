@@ -15,17 +15,14 @@ public class CommentEntity implements Serializable {
 	// 评论内容
 	private String content;
 	
-	private boolean userType;
-	//
-	private int userid;
+	private int agentId;
+	private int buyerId;
 	// 上一条评论id
 	private int parent;
-	// question id
-	private int questionId;
-	// 回答id
-	private int answerId;
 	// 用户名称
 	private String userName;
+	
+	private String brandName;
 	// 用户头像
 	private String userAvatar;
 	//
@@ -94,21 +91,6 @@ public class CommentEntity implements Serializable {
 	}
 
 	/**
-	 * @return the answerId
-	 */
-	public int getAnswerId() {
-		return answerId;
-	}
-
-	/**
-	 * @param answerId
-	 *            the answerId to set
-	 */
-	public void setAnswerId(int answerId) {
-		this.answerId = answerId;
-	}
-
-	/**
 	 * @return the userName
 	 */
 	public String getUserName() {
@@ -160,14 +142,6 @@ public class CommentEntity implements Serializable {
 		return serialVersionUID;
 	}
 
-	public int getQuestionId() {
-		return questionId;
-	}
-
-	public void setQuestionId(int questionId) {
-		this.questionId = questionId;
-	}
-
 	public String getLink() {
 		return link;
 	}
@@ -176,20 +150,46 @@ public class CommentEntity implements Serializable {
 		this.link = link;
 	}
 
-	public int getUserid() {
-		return userid;
+	/**
+	 * @return the brandName
+	 */
+	public String getBrandName() {
+		return brandName;
 	}
 
-	public void setUserid(int userid) {
-		this.userid = userid;
+	/**
+	 * @param brandName the brandName to set
+	 */
+	public void setBrandName(String brandName) {
+		this.brandName = brandName;
 	}
 
-	public boolean isUserType() {
-		return userType;
+	/**
+	 * @return the agentId
+	 */
+	public int getAgentId() {
+		return agentId;
 	}
 
-	public void setUserType(boolean userType) {
-		this.userType = userType;
+	/**
+	 * @param agentId the agentId to set
+	 */
+	public void setAgentId(int agentId) {
+		this.agentId = agentId;
+	}
+
+	/**
+	 * @return the buyerId
+	 */
+	public int getBuyerId() {
+		return buyerId;
+	}
+
+	/**
+	 * @param buyerId the buyerId to set
+	 */
+	public void setBuyerId(int buyerId) {
+		this.buyerId = buyerId;
 	}
 
 	

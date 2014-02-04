@@ -1,5 +1,6 @@
 package com.banzhuan.dao.impl;
 
+import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.support.SqlSessionDaoSupport;
 import org.springframework.stereotype.Repository;
 import java.util.List;
@@ -39,6 +40,12 @@ public class GoodcaseDAOImpl extends SqlSessionDaoSupport implements GoodcaseDAO
 	}
 	
 	@Override
+	public List<GoodcaseEntity> getAllGoodcasesByType(GoodcaseEntity gc, RowBounds bound)
+	{
+		return this.getSqlSession().selectList("getAllGoodcasesByType", gc, bound);
+	}
+	
+	@Override
 	public List<GoodcaseEntity> getMainGoodcasesByType()
 	{
 		return this.getSqlSession().selectList("getMainGoodcasesByType");
@@ -48,6 +55,12 @@ public class GoodcaseDAOImpl extends SqlSessionDaoSupport implements GoodcaseDAO
 	public int getGoodcaseCount(int userid)
 	{
 		return this.getSqlSession().selectOne("getGoodcaseCount", userid);
+	}
+	
+	@Override
+	public int getGoodcaseCountByType(GoodcaseEntity gc)
+	{
+		return this.getSqlSession().selectOne("getGoodcaseCountByType", gc);
 	}
 	
 	@Override

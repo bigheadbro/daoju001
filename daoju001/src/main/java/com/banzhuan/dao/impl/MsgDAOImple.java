@@ -44,5 +44,6 @@ public class MsgDAOImple extends SqlSessionDaoSupport implements MsgDAO {
 	{
 		return this.getSqlSession().selectList("getMsgsByUserid", userid);
 	}
+	
 
 }

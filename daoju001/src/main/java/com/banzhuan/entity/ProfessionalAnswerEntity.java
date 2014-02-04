@@ -1,6 +1,7 @@
 package com.banzhuan.entity;
 
 import java.io.Serializable;
+import java.util.List;
 
 public class ProfessionalAnswerEntity implements Serializable {
 	/**
@@ -21,6 +22,8 @@ public class ProfessionalAnswerEntity implements Serializable {
 	private int buyerId;
 	// 问题id
 	private int questionId;
+	
+	private int cntComment;
 	// 代理商id
 	private int agentId;
 	// 代理商名字
@@ -33,6 +36,7 @@ public class ProfessionalAnswerEntity implements Serializable {
 	
 	private boolean FreeUse;
 	
+	private List<CommentEntity> comments;
 	// 记录创建时间
 	private String gmtCreate;
 	// 记录修改时间
@@ -265,6 +269,34 @@ public class ProfessionalAnswerEntity implements Serializable {
 	 */
 	public void setBrandName(String brandName) {
 		this.brandName = brandName;
+	}
+
+	/**
+	 * @return the cntComment
+	 */
+	public int getCntComment() {
+		return cntComment;
+	}
+
+	/**
+	 * @param cntComment the cntComment to set
+	 */
+	public void setCntComment(int cntComment) {
+		this.cntComment = cntComment;
+	}
+
+	/**
+	 * @return the comments
+	 */
+	public List<CommentEntity> getComments() {
+		return comments;
+	}
+
+	/**
+	 * @param comments the comments to set
+	 */
+	public void setComments(List<CommentEntity> comments) {
+		this.comments = comments;
 	}
 
 

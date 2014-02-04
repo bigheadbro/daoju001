@@ -14,4 +14,5 @@ public interface MsgDAO {
 	public int getUnreadMsgCount(int userid);
 	
 	public List<MessageEntity> getMsgsByUserid(int userid);
+	
 }

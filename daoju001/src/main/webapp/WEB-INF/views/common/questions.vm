@@ -9,11 +9,15 @@
 			<h1>所有问题</h1>
 			<div class="question-param-wrap">
 				<div class="mi question-param clearfix">
+					<form  id="form_questions" method="post" action="/questions">
                     <div class="question-param-li process clearfix">
                         #springBind("form.processMethod")
                         <input type="hidden" name="${status.expression}"  value="$!{status.value}" />
                         <a class="sel" >加工方式</a>
                         <ul class="param">
+							<li>
+                                <a>不限</a>
+                            </li>
                             <li>
                                 <a>平面铣削</a>
                             </li>
@@ -57,6 +61,9 @@
                         <input type="hidden" name="${status.expression}"  value="$!{status.value}" />
                         <a class="sel" >所属行业</a>
                         <ul class="param">
+							<li>
+                                <a>不限</a>
+                            </li>
                             <li>
                                 <a>模具</a>
                             </li>
@@ -100,6 +107,9 @@
                         <input type="hidden" name="${status.expression}"  value="$!{status.value}" />
                         <a class="sel" >工件硬度</a>
                         <ul class="param">
+							<li>
+                                <a>不限</a>
+                            </li>
                             <li>
                                 <a>HRC20以下</a>
                             </li>
@@ -134,6 +144,9 @@
                         <input type="hidden" name="${status.expression}"  value="$!{status.value}" />
                         <a class="sel" >工件材质</a>
                         <ul class="param">
+							<li>
+                                <a>不限</a>
+                            </li>
                             <li>
                                 <a>钢</a>
                             </li>
@@ -160,6 +173,14 @@
                             </li>
                         </ul>
 					</div>    
+					<script>
+						$(function(){
+							$(".question-param-li input").change(function(){
+								$("#form_questions").submit();//提交
+							});
+						});
+					</script>
+					</form>
 				</div>
 			</div>
 		</div>
@@ -213,46 +234,14 @@
 							</p>
 						</li>
 						<li class="info">
-							<p> $!{question.cntPA}个专业回答 <span>|</span> $!{question.cntCA}个普通回答 <span>|</span> <a href="/questions/$!{question.id}">查看详情</a> <span class="answer"><a class="solution" qid="$!{question.id}" bid="$!{question.buyerId}">提供专业方案</a> | <a class="reply">回复</a></span></p>
+							<p> $!{question.cntPA}个解决方案 <span>|</span> $!{question.cntCA}条评论 <span>|</span> <a href="/questions/$!{question.id}">查看详情</a> <span class="answer"><a class="solution" qid="$!{question.id}" bid="$!{question.buyerId}">提供专业方案</a> | <a class="reply">回复</a></span></p>
 						</li>
 					</ul>
 				</div>
 			</div>
 			#end
 		</div>
-	</div>
-	<!-- 代理商 -->
-	<div class="main-list-container width300 ml50">
-		<div class="main-list-header ">
-                                                      最新代理商
-			<a class="seemore" href="/agents">查看更多</a>
-		</div>
-		<div class="main-list-content">
-			#foreach($agent in $agents)
-			<div class="new-agent-listitem clearfix">
-				<div class="logo">
-					<a href="/agent/${agent.id}">
-							#if($!{agent.logo})
-								<img src="../logo/$!{agent.logo}" />
-							#else
-								<img src="../img/avatar.png" />
-							#end
-						</a>
-				</div>
-				<div class="content">
-					<ul>
-						<li class="name clearfix">
-								<a href="/agents/$!{agent.id}">$!{agent.companyName}</a>
-								#if($agent.isVerified())
-									<a class="fancybox-v" title="$!{agent.companyName}的代理证书" href="$!{agent.verifiedLink}"><img src="../img/v.png" /></a>
-								#end
-							</li>
-						<li class="title">$!{agent.brandName}</li>
-					</ul>
-				</div>
-			</div>
-				#end
-   </div>
+		#parse("/common/page.vm")
 	</div>
     <!-- 成功案例 -->
 	<div class="main-list-container width300 ml50">

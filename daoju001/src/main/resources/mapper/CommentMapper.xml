@@ -4,16 +4,24 @@
 	<resultMap type="CommentEntity" id="CommentResultMap">
 	  <!---->
 		<id property="id" column="id" />
-		<!--0=PA的评论，1=CA的评论 -->
+
 		<id property="type" column="type" />
 		<!--评论内容 -->
 		<id property="content" column="content" />
-		<!--上一条评论id -->
-		<id property="parent" column="parent" />
+		<!--评论内容 -->
+		<id property="buyerId" column="buyer_id" />
+		<!--评论内容 -->
+		<id property="agentId" column="agent_id" />
+		<!--类型：0是问题，1是回答 -->
+		<id property="type" column="type" />
+		<id property="userAvatar" column="logo" />
+		<id property="link" column="verified_link" />
 		<!--回答id -->
-		<id property="answerId" column="answer_id" />
+		<id property="parent" column="parent" />
 		<!--用户名称 -->
 		<id property="userName" column="user_name" />
+		<!--用户名称 -->
+		<id property="brandName" column="brand_name" />
 		<!--用户头像 -->
 		<id property="userAvatar" column="user_avatar" />
 		<!--记录创建时间 -->
@@ -24,6 +32,13 @@
 		resultMap="CommentResultMap">
 	<![CDATA[
 		SELECT * from t_comment t WHERE t.id = #{id}
+	]]>
+	</select>
+	
+	<select id="getCommentsByParentid" parameterType="int"
+		resultMap="CommentResultMap">
+	<![CDATA[
+		SELECT * from t_comment t WHERE t.parent = #{parent}
 	]]>
 	</select>
 
@@ -37,9 +52,11 @@
 		,content
 		,buyer_id
 		,agent_id
+		,logo
+		,verified_link
 		,parent
-		,answer_id
 		,user_name
+		,brand_name
 		,user_avatar
 		,gmt_create)
 		values
@@ -48,9 +65,11 @@
 		,#{content}
 		,#{buyerId}
 		,#{agentId}
+		,#{userAvatar}
+		,#{link}
 		,#{parent}
-		,#{answerId}
 		,#{userName}
+		,#{brandName}
 		,#{userAvatar}
 		,#{gmtCreate}
 

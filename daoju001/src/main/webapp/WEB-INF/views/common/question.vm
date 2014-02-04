@@ -54,100 +54,242 @@
 							<p>$!{question.content}</p>
 						</li>
 						<li class="info">
-							<p> <a class="showpa">$!{question.cntPA} 个专业回答 </a><span>|</span> <a class="showca">$!{question.cntCA} 个普通回答</a>  <span class="answer"><a class="solution" qid="$!{question.id}" bid="$!{question.buyerId}">提供专业方案</a> | <a class="reply">回复</a></span></p>
+							<p class="clearfix"><span class="answer"> <a class="comments">评论(<span id="question-comments">$!{commentsCnt}</span>)</a></span></p>
 						</li>
-						<li class="answer">
+						<li class="comment">
 						    <div class="answer-arrow">
-							  <em class="S_line1_c">◆</em>
-							  <em class="S_bg1_c">◆</em>
+							    <em class="S_line1_c">◆</em>
+							    <em class="S_bg1_c">◆</em>
 							</div>
-							#foreach($answer in $answers)
-						    <ul class="pa-answer clearfix">
-							    <li class="agent-info clearfix">
-								    <div class="logo">
+							#foreach($comment in $comments)
+						  	<ul class="comment-item clearfix">
+								<li class="agent-info clearfix">
+									<div class="logo">
                 						<a>
-                    						#if($!{answer.agentLogo})
-                    							<img src="../logo/$!{answer.agentLogo}" />
+                    						#if($!{comment.userAvatar})
+                    							<img src="../logo/$!{comment.userAvatar}" />
                     						#else
                     							<img src="../img/avatar.png" />
                     						#end
                     					</a>
                 					</div>
-									<div class="agent-detail">
-										<h2>
-											$!{answer.agentName}
-                							<a class="fancybox-v" title="$!{answer.agentName}的代理证书" href="$!{answer.verifiedLink}"><img src="../img/v.png" /></a>
-										</h2>
-										<h4>$!{answer.brandName}</h4>
-									</div>
-									<div class="answer-price">
-										#if($!{answer.price})
-											<span>已报价</span>
-										#end
-										#if($!{answer.FreeUse})
-											<span>免费试用</span>
-										#end
-									</div>
-								</li>
-							    <li class="answer-cont">
-								    <p>$!{answer.content}</p>
-								</li>
-								<li class="info">
-    								<p> <a class="">0 追问追答 </a>  <span class="answer"><a class="reply-comment">回复</a></span></p>
-    							</li>
-								<li class="comment">
-    							    <div class="comment-arrow">
-    								  <em class="S_line1_c">◆</em>
-    								  <em class="S_bg1_c">◆</em>
-    								</div>
-    							    <ul class="pa-answer clearfix">
-    								    <li class="comment-info clearfix">
-    									    <div class="logo">
-                        						<a>
-                            						#if($!{answer.agentLogo})
-                            							<img src="../logo/$!{answer.agentLogo}" />
-                            						#else
-                            							<img src="../img/avatar.png" />
-                            						#end
-                            					</a>
-                        					</div>
-    										<div class="agent-detail">
-        										<h2>
-        											$!{answer.agentName}
-                        							<a class="fancybox-v" title="$!{answer.agentName}的代理证书" href="$!{answer.verifiedLink}"><img src="../img/v.png" /></a>
-        										</h2>
-        										<h4>$!{answer.brandName}</h4>
-    										</div>
-    									</li>
-    								    <li class="comment-cont">
-    									    <p>这不是一个好主意，我以前试过，真的</p>
-    									</li>
-    									<li class="info">
-            								<p><span class="answer"><a class="reply">回复</a></span></p>
-            							</li>
-    								</ul>
-    							</li>
+            						<div class="agent-detail">
+            							<h2 class="clearfix">
+											#if($!{comment.agentId})
+												<a class="agent-name" href="/agents/$!{comment.agentId}">$!{comment.userName}</a>
+											#else
+												<a class="agent-name" href="">$!{comment.userName}</a>
+											#end
+											#if($!{comment.link})
+												<a class="fancybox-v" title="$!{comment.userName}的代理证书" href="$!{comment.link}"><img src="../img/v.png" /></a>
+											#end
+            							</h2>
+            							<h4>$!{comment.brandName}</h4>
+            						</div>
+							  </li>
+							  <li class="comment-cont">
+								  <p>
+									 $!{comment.content}
+								  </p>
+							  </li>
+							  <li class="info">
+								<p class="clearfix"><span class="time">$stringUtil.formatDate($!{comment.gmtCreate})</span><a class="reply-comment">回复</a></p>
+							  </li>
 							</ul>
 							#end
+							<form id="form_comment" method="post" action="/addcomment">
+								<!-- 隐藏字段，用于标示是表单提交 -->
+								<input type="hidden" name="do_submit" value="true"/>
+								#springBind("form.parentId")
+								<input type="hidden" name="${status.expression}" value="$!{question.id}" />
+								#springBind("form.userName")
+    							<input type="hidden" name="${status.expression}" value="$!{account.userName}" />
+								#springBind("form.userLogo")
+    							<input type="hidden" name="${status.expression}" value="$!{account.logo}" />
+								#if($account.isAgent())
+    								#springBind("form.agentId")
+    								<input type="hidden" name="${status.expression}" value="$!{account.userId}" />
+									#springBind("form.brandName")
+    								<input type="hidden" name="${status.expression}" value="$!{account.brandName}" />
+									#springBind("form.verifiedLink")
+    								<input type="hidden" name="${status.expression}" value="$!{account.verifiedLink}" />
+								#end
+								#if($account.isBuyer())
+    								#springBind("form.buyerId")
+    								<input type="hidden" name="${status.expression}" value="$!{account.userId}" />
+								#end
+								<div class="reply-cont clearfix">
+									#springBind("form.content")
+                        			<input type="text" name="${status.expression}" class="dsf-form-text-input bargin" />
+									<a id="submit_comment" class="reply">回   复</a>
+                    			</div>
+								<script>
+                    				$(function() {	
+                    					$("#form_comment").validate({
+                    						rules:{
+                    							content:{
+                    								required:true
+                    							}
+                    						},
+                    						messages:{
+                    							content:{
+                    								required:"请输入评论内容"
+                    							}
+                    						},
+                    						errorElement:"em",
+                            				submitHandler: function(form) {
+                                      			$(form).ajaxSubmit({
+                            						dataType:'json',
+                            						success:processComment
+                            					});
+												$(form)[0].reset();
+                            				}
+                    					});
+										$("#submit_comment").click(function () {
+                        					$(this).submit();
+                        				});
+                    				});
+									
+                    			</script>
+							</form>
 						</li>
-						<li class="answer-c">
-						  <div class="answer-arrow">
-							  <em class="S_line1_c">◆</em>
-							  <em class="S_bg1_c">◆</em>
-							</div>
-						  <ul class="clearfix">
-							  <li class="agent-info clearfix">
-								  <img src="../img/big-logo.png" />
-									<h4>无锡汉尼达</h4>
-									<h5>Big刀具代理商</h5>
-								</li>
-							  <li class="answer-cont">
-								  <p>
-									  您好,根据您的情况，加工条件和选刀已比较合适，但刀片仅单侧6刃可用，这方面可进行提高，请参考我司M1200产品（右图）。63刀盘为六刃，根据我们以往的经验，可按照相同的Vc和更高的Fz进行加工，即AP=1.2 N=500 F=800这样可以提高30%的效率..
-									  另外刀片正反两面12个刃可用，若每刃加工时间可以相同甚至超过您先用刀具,那么性价比的提升是非常明显的。
-									</p>
-								</li>
-							</ul>
+						<li class="answer">
+							<h2 class="header">$!{question.cntPA}个解决方案  <a class="solution" qid="$!{question.id}" bid="$!{question.buyerId}">提供专业方案</a></h2>
+							#foreach($answer in $answers)
+                			    <ul class="pa-answer clearfix">
+                				    <li class="agent-info clearfix">
+                					    <div class="logo">
+                    						<a>
+                        						#if($!{answer.agentLogo})
+                        							<img src="../logo/$!{answer.agentLogo}" />
+                        						#else
+                        							<img src="../img/avatar.png" />
+                        						#end
+                        					</a>
+                    					</div>
+                						<div class="agent-detail">
+                							<h2 class="clearfix">
+												<a class="agent-name" href="/agents/$!{answer.agentId}">$!{answer.agentName}</a>
+                    							<a class="fancybox-v" title="$!{answer.agentName}的代理证书" href="$!{answer.verifiedLink}"><img src="../img/v.png" /></a>
+                							</h2>
+                							<h4>$!{answer.brandName}</h4>
+                						</div>
+                						<div class="answer-price">
+                							#if($!{answer.price})
+                								<span>已报价</span>
+                							#end
+                							#if($!{answer.FreeUse})
+                								<span>免费试用</span>
+                							#end
+                						</div>
+                					</li>
+                				    <li class="answer-cont">
+                					    <p>$!{answer.content}</p>
+                					</li>
+                					<li class="info clearfix">
+                						<p> <span class="answer"><a class="comments">评论(<span id="answer-comments">$!{answer.cntComment}</span>)</a></span></p>
+                					</li>
+                					<li class="comment">
+            						    <div class="answer-arrow">
+            							    <em class="S_line1_c">◆</em>
+            							    <em class="S_bg1_c">◆</em>
+            							</div>
+            							#foreach($comment in ${answer.comments})
+            						  	<ul class="comment-item clearfix">
+            								<li class="agent-info clearfix">
+            									<div class="logo">
+                            						<a>
+                                						#if($!{comment.userAvatar})
+                                							<img src="../logo/$!{comment.userAvatar}" />
+                                						#else
+                                							<img src="../img/avatar.png" />
+                                						#end
+                                					</a>
+                            					</div>
+                        						<div class="agent-detail">
+                        							<h2 class="clearfix">
+            											#if($!{comment.agentId})
+            												<a class="agent-name" href="/agents/$!{comment.agentId}">$!{comment.userName}</a>
+            											#else
+            												<a class="agent-name" href="">$!{comment.userName}</a>
+            											#end
+            											#if($!{comment.link})
+            												<a class="fancybox-v" title="$!{comment.userName}的代理证书" href="$!{comment.link}"><img src="../img/v.png" /></a>
+            											#end
+                        							</h2>
+                        							<h4>$!{comment.brandName}</h4>
+                        						</div>
+            							  </li>
+            							  <li class="comment-cont">
+            								  <p>
+            									 $!{comment.content}
+            								  </p>
+            							  </li>
+            							  <li class="info">
+            								<p class="clearfix"><span class="time">$stringUtil.formatDate($!{comment.gmtCreate})</span><a class="reply-comment">回复</a></p>
+            							  </li>
+            							</ul>
+            							#end
+            							<form id="form_comment_answer" method="post" action="/addcomment">
+            								<!-- 隐藏字段，用于标示是表单提交 -->
+            								<input type="hidden" name="do_submit" value="true"/>
+											#springBind("form.type")
+            								<input type="hidden" name="${status.expression}" value="1" />
+            								#springBind("form.parentId")
+            								<input type="hidden" name="${status.expression}" value="$!{answer.id}" />
+            								#springBind("form.userName")
+                							<input type="hidden" name="${status.expression}" value="$!{account.userName}" />
+            								#springBind("form.userLogo")
+                							<input type="hidden" name="${status.expression}" value="$!{account.logo}" />
+            								#if($account.isAgent())
+                								#springBind("form.agentId")
+                								<input type="hidden" name="${status.expression}" value="$!{account.userId}" />
+            									#springBind("form.brandName")
+                								<input type="hidden" name="${status.expression}" value="$!{account.brandName}" />
+            									#springBind("form.verifiedLink")
+                								<input type="hidden" name="${status.expression}" value="$!{account.verifiedLink}" />
+            								#end
+            								#if($account.isBuyer())
+                								#springBind("form.buyerId")
+                								<input type="hidden" name="${status.expression}" value="$!{account.userId}" />
+            								#end
+            								<div class="reply-cont clearfix">
+            									#springBind("form.content")
+                                    			<input type="text" name="${status.expression}" class="dsf-form-text-input bargin" />
+            									<a id="submit_comment_answer" class="reply">回   复</a>
+                                			</div>
+            								<script>
+                                				$(function() {	
+                                					$("#form_comment_answer").validate({
+                                						rules:{
+                                							content:{
+                                								required:true
+                                							}
+                                						},
+                                						messages:{
+                                							content:{
+                                								required:"请输入评论内容"
+                                							}
+                                						},
+                                						errorElement:"em",
+														submitHandler: function(form) {
+                                                 		 	$(form).ajaxSubmit({
+                                        						dataType:'json',
+                                        						success:processAnswerComment
+                                        					});
+															$(form)[0].reset();
+                                        				}
+                                					});
+            										$("#submit_comment_answer").click(function () {
+                                    					$(this).submit();
+                                    				});
+                                				});
+            									
+                                			</script>
+            							</form>
+            						</li>
+                				</ul>
+                			#end
 						</li>
 					</ul>
 				</div>

@@ -17,13 +17,16 @@ import org.springframework.web.multipart.support.DefaultMultipartHttpServletRequ
 
 import com.banzhuan.dao.AgentDAO;
 import com.banzhuan.dao.BuyerDAO;
+import com.banzhuan.dao.CommentDAO;
 import com.banzhuan.dao.GoodcaseDAO;
 import com.banzhuan.dao.MsgDAO;
 import com.banzhuan.dao.ProfessionalAnswerDAO;
 import com.banzhuan.dao.QuestionDAO;
 import com.banzhuan.dao.SampleDAO;
 import com.banzhuan.entity.AgentEntity;
+import com.banzhuan.entity.CommentEntity;
 import com.banzhuan.entity.GoodcaseEntity;
+import com.banzhuan.entity.MessageEntity;
 import com.banzhuan.entity.ProfessionalAnswerEntity;
 import com.banzhuan.entity.QuestionEntity;
 import com.banzhuan.entity.SampleEntity;
@@ -72,6 +75,10 @@ public class AgentService {
 	@Autowired
 	@Qualifier("msgDAO")
 	private MsgDAO msgDAO;
+	
+	@Autowired
+	@Qualifier("commentDAO")
+	private CommentDAO commentDAO;
 	
 	public Result register(RegForm form, Errors errors)
 	{
@@ -152,7 +159,7 @@ public class AgentService {
 		AgentEntity agent = agentDAO.queryAgentEntityById(form.getUserid());
 		if(StringUtil.isNotEqual(StringUtil.encrypt(form.getPwd()), agent.getPassword()))
 		{
-			errors.rejectValue("pwd", "PASSWORD_ERROR"); // 旧密码输入不正确
+			errors.rejectValue("pwd", "OLD_PASSWORD_ERROR"); // 旧密码输入不正确
 			return;
 		}
 		agent.setPassword(StringUtil.encrypt(form.getPwd1())); // 新密码
@@ -525,6 +532,7 @@ public class AgentService {
 	{
 		Result result = new Result();
 		QuestionEntity question = questionDAO.queryQuestionEntityById(id);
+		
 		result.add("question", question);
 		return result;
 	}
@@ -533,7 +541,14 @@ public class AgentService {
 	{
 		Result result = new Result();
 		List<ProfessionalAnswerEntity> answers = paDAO.queryAnswersByQid(qid);
+		for(int i=0;i<answers.size();i++)
+		{
+			List<CommentEntity> comments = commentDAO.getCommentsByParentid(answers.get(i).getId());
+			answers.get(i).setComments(comments);
+			answers.get(i).setCntComment(comments.size());
+		}
 		result.add("answers", answers);
+		
 		return result;
 	}
     
@@ -565,6 +580,14 @@ public class AgentService {
     public int getUnreadMsgCount(int userid)
 	{
 		return msgDAO.getUnreadMsgCount(userid);
+	}
+    
+    public Result getAllMsgs(int userid)
+	{
+		Result result = new Result();
+		List<MessageEntity> msgs = msgDAO.getMsgsByUserid(userid);
+		result.add("msgs", msgs);
+		return result;
 	}
 
     

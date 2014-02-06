@@ -11,6 +11,7 @@ import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
+import org.springframework.validation.Errors;
 
 import com.banzhuan.dao.AgentDAO;
 import com.banzhuan.dao.BuyerDAO;
@@ -19,6 +20,7 @@ import com.banzhuan.dao.GoodcaseDAO;
 import com.banzhuan.dao.QuestionDAO;
 import com.banzhuan.dao.SampleDAO;
 import com.banzhuan.entity.AgentEntity;
+import com.banzhuan.entity.BuyerEntity;
 import com.banzhuan.entity.CommentEntity;
 import com.banzhuan.entity.GoodcaseEntity;
 import com.banzhuan.entity.QuestionEntity;
@@ -26,8 +28,10 @@ import com.banzhuan.entity.SampleEntity;
 import com.banzhuan.common.Result;
 import com.banzhuan.form.CommentForm;
 import com.banzhuan.form.GoodcaseForm;
+import com.banzhuan.form.LoginForm;
 import com.banzhuan.form.QuestionForm;
 import com.banzhuan.util.ChineseSpelling;
+import com.banzhuan.util.StringUtil;
 
 /**
  * @author guichaoqun
@@ -58,6 +62,68 @@ public class CommonService {
 	@Autowired
 	@Qualifier("commentDAO")
 	private CommentDAO commentDAO;
+	
+	public Result checkLogin(LoginForm form, Errors errors)
+	{
+		Result result = new Result();
+		if(StringUtil.isEmpty(form.getMail()))
+		{
+			errors.rejectValue("mail", "MAIL_IS_NOT_NULL"); // 邮箱不能为空
+			return result;
+		}
+		BuyerEntity buyer = buyerDAO.queryBuyerEntityByMail(form.getMail());
+		if(buyer == null)
+		{
+			AgentEntity agent = agentDAO.queryAgentEntityByMail(form.getMail());
+			if(agent == null)
+			{
+				errors.rejectValue("mail", "MAIL_IS_NOT_EXISTS"); // 邮箱不存在
+				return result;
+			}
+			if(StringUtil.isNotEqual(agent.getPassword(), StringUtil.encrypt(form.getPassword())))
+			{
+				errors.rejectValue("password", "PASSWORD_ERROR"); // 密码错误
+				return result;
+			}
+			result.add("user", agent);
+			result.add("userType", 0);
+			return result;
+		}
+		
+		if(StringUtil.isNotEqual(buyer.getPassword(), StringUtil.encrypt(form.getPassword())))
+		{
+			errors.rejectValue("password", "PASSWORD_ERROR"); // 密码错误
+			return result;
+		}
+		
+		result.add("user", buyer);
+		result.add("userType", 1);
+		return result;
+	}
+	
+	public Result changpwd(String mail, String pwd, Errors errors)
+	{
+		Result result = new Result();
+		BuyerEntity buyer = buyerDAO.queryBuyerEntityByMail(mail);
+		if(buyer == null)
+		{
+			AgentEntity agent = agentDAO.queryAgentEntityByMail(mail);
+			if(agent == null)
+			{
+				errors.rejectValue("mail", "MAIL_IS_NOT_EXISTS"); // 邮箱不存在
+				return result;
+			}
+			agent.setPassword(StringUtil.encrypt(pwd)); 
+			agentDAO.updateAgentPwdById(agent);
+			return result;
+		}
+		else
+		{
+			buyer.setPassword(StringUtil.encrypt(pwd));
+			buyerDAO.updateBuyerPwdById(buyer);
+		}
+		return result;
+	}
 	
 	public int getGoodcaseCountByType(GoodcaseForm form)
 	{

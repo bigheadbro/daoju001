@@ -41,11 +41,11 @@
                                 <ul>
                                     #if($!stringUtil.isContains($request.getServletPath(),"/main"))
                                         <li class="current">
-                                            <a href="main">我的搬刀</a>
+                                            <a href="main">我的刀师傅</a>
                                         </li>
                                     #else
                                         <li>
-                                            <a href="main">我的搬刀</a>
+                                            <a href="main">我的刀师傅</a>
                                         </li>
                                     #end
                                     #if($!stringUtil.isContains($request.getServletPath(),"/mymsg"))

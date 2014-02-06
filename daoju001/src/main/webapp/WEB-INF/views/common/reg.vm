@@ -1,0 +1,60 @@
+﻿#set($layout = "/layout/index_layout.vm")
+<script>
+	$(function() {
+	  $(".client a").mouseenter(function () {
+		$(this).parent().children("a").css("background-color","#0081b7");
+		$(this).parent().children("a").css("color","white");
+		$(this).parent().children("p").css("color","#0081b7");
+	  }).mouseleave(function(){
+	  	$(this).parent().children("a").css("background-color","#dfdfdf");
+		$(this).parent().children("a").css("color","#707070");
+		$(this).parent().children("p").css("color","#707070");
+	  });
+	  $(".master a").mouseenter(function () {
+		$(this).parent().children("a").css("background-color","#0081b7");
+		$(this).parent().children("a").css("color","white");
+		$(this).parent().children("p").css("color","#0081b7");
+	  }).mouseleave(function(){
+	  	$(this).parent().children("a").css("background-color","#dfdfdf");
+		$(this).parent().children("a").css("color","#707070");
+		$(this).parent().children("p").css("color","#707070");
+	  });
+	});
+</script>
+<div class="main-bk-wrapper">
+  <div class="mainpage-container clearfix">
+	  <div class="reg-left">
+		  <h2><span>我已经有账号<a href="/log">立即登录</a></span>注册</h2>
+		  <div class="auth-header clearfix">
+            <div class="first current">
+            	<a href="/reg">1.选择账户类型</a>
+            </div>
+            <div class="second">
+            	2.填写账户信息
+            </div>
+		  </div>
+		  <div class="auth-content">
+			<h2>账户类型</h2>
+			<div class="client clearfix">
+				<a href="/buyer/reg">我是客户</a>
+				<p>我是客户，<br>我希望找到适合我的刀具方案</p>
+			</div>
+			<div class="master clearfix">
+				<a href="/agent/reg">我是师傅</a>
+				<p>我是刀具代理商，<br>我来为客户提供专业刀具方案</p>
+			</div>
+		  </div>
+      </div>
+      <div class="reg-right">
+		<div class="erweima-reg">
+			<img src="../img/2.png" />
+		</div>
+		<div class="erweima-bottom">
+    		<div class="title">
+				<span>微信平台</span>
+    		</div>
+    		<p>马上扫描二维码，关注刀师傅微信平台<br>更多专业信息，推送到您的手机</p>
+		</div>
+      </div>
+	</div>
+ </div>

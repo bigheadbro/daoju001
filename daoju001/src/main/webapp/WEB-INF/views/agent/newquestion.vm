@@ -2,7 +2,7 @@
 <script type="text/javascript" src="../js/mixed-handle.js"></script>
 <ul class="right-tab clearfix">
   <li class="current"><a href="#">最新问题</a></li>
-  <li><a href="answer">已回答的问题</a></li>
+  <li><a href="oldquestion">已回答的问题</a></li>
   <li><a href="draft">草稿箱</a></li>
 </ul>
 <div class="rigth-content">

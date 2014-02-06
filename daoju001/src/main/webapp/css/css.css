@@ -518,6 +518,26 @@ opacity: .3;
 .agent-list-content .gc-item .see-detail{float:left;margin-top: 10px;}
 .agent-list-content .gc-item .see-detail a{display:block;background-color:#63a200;color:white;border-radius:5px;font-size:12px;padding:10px 20px;}
 
+
+.auth-header{color:white;margin-top: 15px;font-size: 14px;margin-bottom: 20px;}
+.auth-header .first{float:left;line-height:40px;background:url(../img/step1.png) no-repeat 0 0;width: 171px;text-align: center;}
+.auth-header .first.current{background:url(../img/step1-c.png)}
+.auth-header .second{float:left;line-height:40px;background:url(../img/step2.png) no-repeat 0 0;width: 169px;text-align: center;}
+.auth-header .second.current{background:url(../img/step2-c.png)}
+.auth-content h2{margin-top:50px;font-size:14px;color:#737373;margin-bottom: 20px;}
+.auth-content div{display:block;color:#707070;}
+.auth-content .client{padding-bottom:20px;border-bottom:1px solid #dfdfdf}
+.auth-content .master{margin-top:20px;}
+.auth-content div a{float:left;display:block;border-radius:8px;background-color:#dfdfdf;padding:15px 20px;}
+.auth-content div p{font-size:12px;float:left;margin-left:20px;line-height:20px;padding-top:5px;}
+.reg-right .erweima-reg{width:400px;margin-top: 50px;text-align: center;}
+.reg-right .erweima-bottom{color:#707070}
+.reg-right .erweima-bottom .title{margin-top:50px;padding-bottom:20px;border-bottom:1px solid #B4B4B4;text-align: center;}
+.reg-right .erweima-bottom .title span{background:url(../img/daoshifu-reg.png) no-repeat 0 4px;padding-left: 85px;}
+.reg-right .erweima-bottom span{font-size:24px;}
+.reg-right .erweima-bottom p{font-size:14px;text-align: center;margin-top:10px}
+
+p.forget{font-size: 12px;margin: 10px;color: #707070;}
 /*common style*/
 .fr{float:right;}
 .fl{float:left;}
@@ -528,6 +548,7 @@ opacity: .3;
 .mt15{margin-top:15px}
 .mb20{margin-bottom:20px}
 .mb15{margin-bottom:15px}
+.mb60{margin-bottom:60px}
 .pb15{padding-bottom:15px;}
 .mb0{margin-bottom:0px}
 .pt20{padding-top:20px}

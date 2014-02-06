@@ -36,13 +36,28 @@
 								equalTo: "两次输入密码不一致"  
 							}
 						},
-						errorElement:"em",
-    				submitHandler: function(form) {
-              $(form).ajaxSubmit({
-    						dataType:'json',
-    						success:processJson
-    					});
-    				}
+						errorPlacement: function(error, element) {  
+							//$(".error-msg").empty();   
+							//$(".error-msg").show();   
+							//alert(error.attr("for"));
+                            //error.appendTo($(".error-msg"));     
+							var hasError = true;
+							$(".error-msg label").each(function(){
+								if($(this).attr("for") == error.attr("for")){
+									hasError = false;
+								}
+							});
+							if(hasError)
+							{
+                            	error.appendTo($(".error-msg"));     
+							}
+                        },
+    					submitHandler: function(form) {
+                  			$(form).ajaxSubmit({
+        						dataType:'json',
+        						success:processJson
+        					});
+        				}
 					});
 				});
 			</script>

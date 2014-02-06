@@ -19,7 +19,7 @@ public class BuyerLoginInterceptor extends HandlerInterceptorAdapter {
 		
 		Account account = (Account) WebUtils.getSessionAttribute(request, "account");
 		if (account == null || !account.isLogin() || !account.isBuyer()) {
-			ModelAndView modelAndView = new ModelAndView(new RedirectView("/buyer/log"));
+			ModelAndView modelAndView = new ModelAndView(new RedirectView("/log"));
 			String host=request.getLocalAddr();
 			int port = request.getLocalPort();
 			String contextPath = request.getContextPath();

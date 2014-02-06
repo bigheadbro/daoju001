@@ -11,6 +11,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -36,6 +37,7 @@ import com.banzhuan.common.Account;
 import com.banzhuan.common.Constant;
 import com.banzhuan.common.Result;
 import com.banzhuan.entity.AgentEntity;
+import com.banzhuan.entity.BuyerEntity;
 import com.banzhuan.entity.SampleEntity;
 import com.banzhuan.form.CommentForm;
 import com.banzhuan.form.GoodcaseForm;
@@ -43,6 +45,7 @@ import com.banzhuan.form.LoginForm;
 import com.banzhuan.form.ProfessionalAnswerForm;
 import com.banzhuan.form.QuestionForm;
 import com.banzhuan.service.AgentService;
+import com.banzhuan.service.BuyerService;
 import com.banzhuan.service.CommonService;
 import com.banzhuan.util.JsonUtil;
 import com.banzhuan.util.StringUtil;
@@ -59,6 +62,9 @@ public class CommonController extends BaseController{
 	@Autowired
 	@Qualifier("agentService")
 	private AgentService agentService;
+	@Autowired
+	@Qualifier("buyerService")
+	private BuyerService buyerService;
 	/**
 	 * 其他未识别的URL都统一到
 	 * @return
@@ -71,10 +77,109 @@ public class CommonController extends BaseController{
 		return mv;
 	}
 
-	/**
-	 * 其他未识别的URL都统一到
-	 * @return
-	 */
+	@RequestMapping(value="/reg")
+	public ModelAndView reg(final HttpServletResponse response)
+	{
+		ModelAndView mv = new ModelAndView("/common/reg");
+		
+		return mv;
+	}
+	
+	@RequestMapping(value="/forgetpwd")
+	public ModelAndView forgetpwd(final HttpServletRequest request, final HttpServletResponse response, @ModelAttribute("form")LoginForm form, BindingResult result)
+	{
+		ModelAndView mv = new ModelAndView("/common/forgetpwd");
+		if(isDoSubmit(request))
+		{
+			String rec[] ={form.getMail()};
+			String pwd = UUID.randomUUID().toString().substring(0,6);
+			String date = StringUtil.getCurrentDate();
+			String content = "亲爱的"+form.getMail()+":\n\n欢迎使用刀师傅的找回密码功能，您的新密码是"+pwd+"，请使用该密码登录刀师傅后，在账户设置中修改此密码\n\n请勿回复此邮件\n\n此致\n\n刀师傅敬上\n"+date;
+			commonService.changpwd(form.getMail(), pwd, result);
+			if(!result.hasErrors())
+			{
+				Util.sendEmail("noreply@daoshifu.com","cisco123",rec,"找回密码", content, null, "", "UTF-8");
+			}
+			return new ModelAndView("/common/log");
+		}
+		return mv;
+	}
+	
+	@RequestMapping(value="/log")
+	public ModelAndView log(final HttpServletRequest request,
+			final HttpServletResponse response, @ModelAttribute("form")LoginForm form, BindingResult result) throws IOException 
+	{
+		ModelAndView mv = new ModelAndView("/common/log");
+		if(isDoSubmit(request))
+		{
+			Result re = commonService.checkLogin(form, result);
+			
+			if(!result.hasErrors())
+			{
+				int userType = Integer.parseInt(re.get("userType").toString());
+				Account account = new Account();
+				if(userType == 1)
+				{
+					BuyerEntity user = (BuyerEntity)re.get("user");
+					int unreadMsgCount = buyerService.getUnreadMsgCount(user.getId());
+					int questionCnt = buyerService.getUserQuestionCount(user.getId());
+					account.setUserId(user.getId());
+					account.setLogin(true); // 登录成功标识
+					account.setUserName(user.getUsername()); // 用户登录名
+					account.setUserId(user.getId()); // 用户ID
+					account.setMail(user.getEmail()); // 邮箱
+					account.setLogo(user.getLogo()); // 邮箱
+					account.setBuyer(true);
+					account.setUnreadMsgCount(unreadMsgCount);
+					account.setQuestionCnt(questionCnt);
+					//set cookie
+					if(form.getRememberme() != null && form.getRememberme())
+					{
+						this.addCookie(response, Constant.LOGIN_MAIL, user.getEmail(), Integer.MAX_VALUE);
+					}
+					//设置头像
+					account.setLogo(user.getLogo());
+					request.getSession().setAttribute("account", account);
+					// 登陆成功， 跳转到登陆页面
+					return new ModelAndView(new RedirectView("/buyer/main"));
+				}
+				else
+				{
+					AgentEntity user = (AgentEntity)re.get("user");
+					int unreadMsgCount = agentService.getUnreadMsgCount(user.getId());
+					int answerCnt = agentService.getAnswerCount(user.getId());
+					int sampleCnt = agentService.getSampleCount(user.getId());
+					int gcCnt = agentService.getGoodcaseCount(user.getId());
+					account.setLogin(true); // 登录成功标识
+					account.setUserName(user.getCompanyName()); // 用户登录名
+					account.setUserId(user.getId()); // 用户ID
+					account.setMail(user.getMail()); // 邮箱
+					account.setLogo(user.getLogo()); // logo
+					account.setBrandName(user.getBrandName());
+					account.setBuyer(false);
+					account.setAgent(true);
+					account.setVerified(user.isVerified());
+					account.setVerifiedLink(user.getVerifiedLink());
+					account.setUnreadMsgCount(unreadMsgCount);
+					account.setSampleCnt(sampleCnt);
+					account.setGcCnt(gcCnt);
+					account.setQuestionCnt(answerCnt);
+					//set cookie
+					if(form.getRememberme() != null && form.getRememberme())
+					{
+						this.addCookie(response, Constant.LOGIN_MAIL, user.getMail(), Integer.MAX_VALUE);
+					}
+					//设置头像
+					account.setLogo(user.getLogo());
+					request.getSession().setAttribute("account", account);
+					// 登陆成功， 跳转到登陆页面
+					return new ModelAndView(new RedirectView("/agent/main"));
+				}
+			}
+		}
+		return mv;
+	}
+	
 	@RequestMapping(value="/index")
 	public ModelAndView index(final HttpServletResponse response)
 	{

@@ -2,7 +2,7 @@
 <div class="main-bk-wrapper">
   <div class="mainpage-container clearfix">
 	  <div class="reg-left">
-		  <h2><span>我已经有账号<a href="/agent/log">立即登录</a></span>注册</h2>
+		  <h2><span>我已经有账号<a href="/log">立即登录</a></span>注册</h2>
 			<script>
 				$(function() {	
 					$("#form_reg").validate({
@@ -70,74 +70,82 @@
                     #end
                 #end
     		</div>
-		  <form id="form_reg" method="post">
-			<!-- 隐藏字段，用于标示是表单提交 -->
-		    <input type="hidden" name="do_submit" value="true"/>
-			#springBind("form.name")
-			<ul class="reg-listitem clearfix">
-			  <li class="key">
-				  公司名
-				</li>
-			  <li class="value">
-				  <input type="text"  name="$!{status.expression}"  class="dsf-form-text-input"/>
-				</li>
-			</ul>
-			#springBind("form.mail")
-			<ul class="reg-listitem clearfix">
-			  <li class="key">
-				  邮箱地址
-				</li>
-			  <li class="value">
-				  <input type="text"  name="$!{status.expression}"  class="dsf-form-text-input" />
-				</li>
-			</ul>
-			#springBind("form.pwd")
-			<ul class="reg-listitem clearfix">
-			  <li class="key">
-				  密码
-				</li>
-			  <li class="value">
-				  <input type="password"  name="$!{status.expression}"  class="dsf-form-text-input"/>
-				</li>
-			</ul>
-			#springBind("form.agree")
-			<ul class="reg-listitem clearfix">
-			  <li class="key">
-				  &nbsp;
-				</li>
-			  <li class="value">
-				  <label for="agree">
-					  <input id="agree"  name="$!{status.expression}" type="checkbox" 	
-						#if ($status.value == "true")
-                          checked
-                        #end
-						/> 
-						同意
-					</label>
-					<a class="protocol" href="#">刀师傅协议</a>
-				</li>
-			</ul>
-			<ul class="reg-listitem clearfix">
-			  <li class="key">
-				  &nbsp;
-				</li>
-			  <li class="value">
-					<a class="reg" id="submit_reg" >注册刀师傅</a>
-				</li>
-			</ul>
-			<script>
-				$(function() {
-				  $('input').bind("keypress",function(event){
-				    if (event.keyCode == 13) {
-                      $("#form_reg").trigger("submit");
-                    }
-				  });
-				  $("#submit_reg").click(function () {
-					$("#form_reg").submit();//提交
-				  });
-				});
-			</script>
-		  </form>
+			<div class="auth-header clearfix">
+				<div class="first">
+					<a href="/reg">1.选择账户类型</a>
+				</div>
+				<div class="second current">
+					2.填写账户信息
+				</div>
+			</div>
+		    <form id="form_reg" method="post">
+    			<!-- 隐藏字段，用于标示是表单提交 -->
+    		    <input type="hidden" name="do_submit" value="true"/>
+    			#springBind("form.name")
+    			<ul class="reg-listitem clearfix">
+    			  <li class="key">
+    				  公司名
+    				</li>
+    			  <li class="value">
+    				  <input type="text"  name="$!{status.expression}"  class="dsf-form-text-input"/>
+    				</li>
+    			</ul>
+    			#springBind("form.mail")
+    			<ul class="reg-listitem clearfix">
+    			  <li class="key">
+    				  邮箱地址
+    				</li>
+    			  <li class="value">
+    				  <input type="text"  name="$!{status.expression}"  class="dsf-form-text-input" />
+    				</li>
+    			</ul>
+    			#springBind("form.pwd")
+    			<ul class="reg-listitem clearfix">
+    			  <li class="key">
+    				  密码
+    				</li>
+    			  <li class="value">
+    				  <input type="password"  name="$!{status.expression}"  class="dsf-form-text-input"/>
+    				</li>
+    			</ul>
+    			#springBind("form.agree")
+    			<ul class="reg-listitem clearfix">
+    			  <li class="key">
+    				  &nbsp;
+    				</li>
+    			  <li class="value">
+    				  <label for="agree">
+    					  <input id="agree"  name="$!{status.expression}" type="checkbox" 	
+    						#if ($status.value == "true")
+                              checked
+                            #end
+    						/> 
+    						同意
+    					</label>
+    					<a class="protocol" href="#">刀师傅协议</a>
+    				</li>
+    			</ul>
+    			<ul class="reg-listitem clearfix">
+    			  <li class="key">
+    				  &nbsp;
+    				</li>
+    			  <li class="value">
+    					<a class="reg" id="submit_reg" >注册刀师傅</a>
+    				</li>
+    			</ul>
+    			<script>
+    				$(function() {
+    				  $('input').bind("keypress",function(event){
+    				    if (event.keyCode == 13) {
+                          $("#form_reg").trigger("submit");
+                        }
+    				  });
+    				  $("#submit_reg").click(function () {
+    					$("#form_reg").submit();//提交
+    				  });
+    				});
+    			</script>
+		    </form>
       </div>
       <div class="reg-right">
     	  <div class="header">

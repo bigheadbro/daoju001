@@ -2,7 +2,7 @@
 <div class="main-bk-wrapper">
   <div class="mainpage-container clearfix">
 	  <div class="reg-left">
-		  <h2><span>我已经有账号<a href="/buyer/log">立即登录</a></span>注册</h2>
+		  <h2><span>我已经有账号<a href="/log">立即登录</a></span>注册</h2>
 			<script>
 				$(function() {	
 					$("#form_reg").validate({
@@ -36,10 +36,48 @@
 								required:"必须遵守刀师傅协议"
 							}
 						},
-						errorElement:"em"
+						errorPlacement: function(error, element) {  
+							//$(".error-msg").empty();   
+							//$(".error-msg").show();   
+							//alert(error.attr("for"));
+                            //error.appendTo($(".error-msg"));     
+							var hasError = true;
+							$(".error-msg label").each(function(){
+								if($(this).attr("for") == error.attr("for")){
+									hasError = false;
+								}
+							});
+							if(hasError)
+							{
+                            	error.appendTo($(".error-msg"));     
+							}
+                        },
+						success:function(label){
+							$(label).text("");
+						}
 					});
 				});
 			</script>
+			<div class="error-msg">
+    			#springBind("form")
+                #if($status.errors.hasErrors())
+                    ## Field error messages
+                    #foreach($f in $status.errors.fieldErrors)
+                        #springBind("form.${f.field}")
+                        #foreach($e in $status.errorMessages)
+                            <label for="$!{status.expression}" generated="true" class="error">${e}</label>
+                        #end
+                    #end
+                #end
+    		</div>
+			<div class="auth-header clearfix">
+				<div class="first">
+					<a href="/reg">1.选择账户类型</a>
+				</div>
+				<div class="second current">
+					2.填写账户信息
+				</div>
+			</div>
 		  <form id="form_reg" method="post">
 			<!-- 隐藏字段，用于标示是表单提交 -->
 		    <input type="hidden" name="do_submit" value="true"/>
@@ -50,7 +88,6 @@
 				</li>
 			  <li class="value">
 				  <input type="text"  name="$!{status.expression}"  class="dsf-form-text-input" />
-					<em for="$!{status.expression}" generated="true" class="error">$!{status.errorMessage}</em>
 				</li>
 			</ul>
 			#springBind("form.mail")
@@ -60,7 +97,6 @@
 				</li>
 			  <li class="value">
 				  <input type="text"  name="$!{status.expression}"  class="dsf-form-text-input" />
-					<em for="$!{status.expression}" generated="true" class="error">$!{status.errorMessage}</em>
 				</li>
 			</ul>
 			#springBind("form.pwd")
@@ -70,7 +106,6 @@
 				</li>
 			  <li class="value">
 				  <input type="password"  name="$!{status.expression}"  class="dsf-form-text-input" />
-					<em for="$!{status.expression}" generated="true" class="error">$!{status.errorMessage}</em>
 				</li>
 			</ul>
 			<ul class="reg-listitem clearfix">
@@ -88,7 +123,6 @@
 						同意
 					</label>
 					<a class="protocol">刀师傅协议</a>
-					<em for="$!{status.expression}" generated="true" class="error">$!{status.errorMessage}</em>
 				</li>
 			</ul>
 			<ul class="reg-listitem clearfix">

@@ -530,6 +530,14 @@ public class StringUtil {
 		return dateString;
 	}
 	
+	public static String getCurrentDate()
+	{
+		Date currentTime = new Date();
+	    SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+	    String dateString = formatter.format(currentTime);
+		return dateString;
+	}
+	
 	public static String convertToChar(int i)
 	{
 		String str = "";

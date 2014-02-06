@@ -286,6 +286,13 @@ public class AgentController extends BaseController{
 		return mv;
 	}
 	
+	@RequestMapping(value="/oldquestion")
+	public ModelAndView oldquestion(HttpServletRequest request, HttpServletResponse response) {
+		ModelAndView mv = new ModelAndView("agent/oldquestion");
+
+		return mv;
+	}
+	
 	@RequestMapping(value="/answer")
 	public ModelAndView answer(HttpServletRequest request, HttpServletResponse response, @ModelAttribute("account")Account account,
 			@ModelAttribute("answerForm")ProfessionalAnswerForm answerForm,BindingResult result) 

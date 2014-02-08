@@ -56,35 +56,42 @@
     </bean>  
     
     <mvc:interceptors>
-			<mvc:interceptor>
-				<mvc:mapping path="/buyer/main" />
-				<mvc:mapping path="/buyer/mymsg" />
-				<mvc:mapping path="/buyer/newquestion" />
-				<mvc:mapping path="/buyer/oldquestion" />
-				<mvc:mapping path="/buyer/draft" />
-				<mvc:mapping path="/buyer/changepwd" />
-				<mvc:mapping path="/buyer/profile" />
-				<mvc:mapping path="/buyer/uploadlogo" />
-				<mvc:mapping path="/addcomment" />
-				<bean class="com.banzhuan.interceptor.BuyerLoginInterceptor" />
-			</mvc:interceptor>
-			<mvc:interceptor>
-				<mvc:mapping path="/agent/main" />
-				<mvc:mapping path="/agent/mymsg" />
-				<mvc:mapping path="/agent/newquestion" />
-				<mvc:mapping path="/agent/answer" />
-				<mvc:mapping path="/agent/draft" />
-				<mvc:mapping path="/agent/goodcase" />
-				<mvc:mapping path="/agent/uploadgc" />
-				<mvc:mapping path="/agent/mysample" />
-				<mvc:mapping path="/agent/uploadsample" /> 
-				<mvc:mapping path="/agent/changepwd" />
-				<mvc:mapping path="/agent/profile" />
-				<mvc:mapping path="/agent/uploadlogo" />
-				<mvc:mapping path="/addcomment" />
-				<bean class="com.banzhuan.interceptor.AgentLoginInterceptor" />
-			</mvc:interceptor>
-		</mvc:interceptors>
+   		<mvc:interceptor>
+   			<mvc:mapping path="/*" />
+   			<bean class="com.banzhuan.interceptor.AutoLoginInterceptor" />
+		</mvc:interceptor>
+		<mvc:interceptor>
+   			<mvc:mapping path="/addcomment" />
+   			<bean class="com.banzhuan.interceptor.UserLoginInterceptor" />
+		</mvc:interceptor>
+		<mvc:interceptor>
+			<mvc:mapping path="/buyer/main" />
+			<mvc:mapping path="/buyer/mymsg" />
+			<mvc:mapping path="/buyer/newquestion" />
+			<mvc:mapping path="/buyer/oldquestion" />
+			<mvc:mapping path="/buyer/draft" />
+			<mvc:mapping path="/buyer/changepwd" />
+			<mvc:mapping path="/buyer/profile" />
+			<mvc:mapping path="/buyer/uploadlogo" />
+			<bean class="com.banzhuan.interceptor.BuyerLoginInterceptor" />
+		</mvc:interceptor>
+		<mvc:interceptor>
+			<mvc:mapping path="/agent/main" />
+			<mvc:mapping path="/agent/mymsg" />
+			<mvc:mapping path="/agent/newquestion" />
+			<mvc:mapping path="/agent/oldquestion" />
+			<mvc:mapping path="/agent/answer" />
+			<mvc:mapping path="/agent/draft" />
+			<mvc:mapping path="/agent/goodcase" />
+			<mvc:mapping path="/agent/uploadgc" />
+			<mvc:mapping path="/agent/mysample" />
+			<mvc:mapping path="/agent/uploadsample" /> 
+			<mvc:mapping path="/agent/changepwd" />
+			<mvc:mapping path="/agent/profile" />
+			<mvc:mapping path="/agent/uploadlogo" />
+			<bean class="com.banzhuan.interceptor.AgentLoginInterceptor" />
+		</mvc:interceptor>
+	</mvc:interceptors>
 
 	<!-- 数据源配置 -->
 	<bean id="dataSource"

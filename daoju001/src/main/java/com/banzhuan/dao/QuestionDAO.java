@@ -17,6 +17,12 @@ public interface QuestionDAO {
 	
 	public List<QuestionEntity> queryDraftsByUserid(int userid);
 	
+	public List<QuestionEntity> queryQuestionsByUserid(int userid, RowBounds bound);
+	
+	public List<QuestionEntity> queryDraftsByUserid(int userid, RowBounds bound);
+	
+	int queryDraftsCountByUserid(int userid);
+	
 	public List<QuestionEntity> getAllquestions(QuestionEntity question);
 	
 	public List<QuestionEntity> getAllquestions(QuestionEntity question, RowBounds bound);

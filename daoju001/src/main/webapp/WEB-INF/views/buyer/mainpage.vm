@@ -1,65 +1,36 @@
 #set($layout = "/layout/buyer_detail_layout.vm")
-<h1><a href="#">点击查看我的问题</a>我提的问题</h1>
-<div class="buyer-list">
-  <div class="listitem">
-	  <p>刀具是机械制造中用于切削加工的工具，又称切削工具?<span>2013-08-08</span></p>
-		<div class="operation clearfix">
-		  <a href="#">3个问题</a><span>|</span>
-		  <a href="#">查看详情</a><span>|</span>
-		  <a href="#">编辑</a><span>|</span>
-		  <a href="#">删除</a>
+<h1><a href="/buyer/profile">点击编辑</a>个人信息</h1>
+<div class="profile-list clearfix">
+    <div class="listitem">
+		<div class="content">
+			<span>账户名</span>$!{name}
 		</div>
 	</div>
-  <div class="listitem">
-	  <p>刀具是机械制造中用于切削加工的工具，又称切削工具?<span>2013-08-08</span></p>
-		<div class="operation clearfix">
-		  <a href="#">3个问题</a><span>|</span>
-		  <a href="#">查看详情</a><span>|</span>
-		  <a href="#">编辑</a><span>|</span>
-		  <a href="#">删除</a>
+    <div class="listitem">
+		<div class="content">
+			<span>邮箱</span>$!{mail}
 		</div>
 	</div>
-  <div class="listitem">
-	  <p>刀具是机械制造中用于切削加工的工具，又称切削工具?<span>2013-08-08</span></p>
-		<div class="operation clearfix">
-		  <a href="#">3个问题</a><span>|</span>
-		  <a href="#">查看详情</a><span>|</span>
-		  <a href="#">编辑</a><span>|</span>
-		  <a href="#">删除</a>
-		</div>
-	</div>
-  <div class="listitem">
-	  <p>刀具是机械制造中用于切削加工的工具，又称切削工具?<span>2013-08-08</span></p>
-		<div class="operation clearfix">
-		  <a href="#">3个问题</a><span>|</span>
-		  <a href="#">查看详情</a><span>|</span>
-		  <a href="#">编辑</a><span>|</span>
-		  <a href="#">删除</a>
-		</div>
-	</div>
-  <div class="listitem">
-	  <p>刀具是机械制造中用于切削加工的工具，又称切削工具?<span>2013-08-08</span></p>
-		<div class="operation clearfix">
-		  <a href="#">3个问题</a><span>|</span>
-		  <a href="#">查看详情</a><span>|</span>
-		  <a href="#">编辑</a><span>|</span>
-		  <a href="#">删除</a>
+    <div class="listitem">
+		<div class="content">
+			<span>公司</span>$!{company}
 		</div>
 	</div>
 </div>
-<div class="go-ask clearfix">
-  <h2>还没有找到专业的刀具解决方案？</h2>
-	<a href="/buyer/newquestion">马上去提问</a>
-</div>
-<h1><a href="#">点击查看所有消息</a>我的消息</h1>
-<div class="buyer-list">
-  <div class="listitem notread">
-	  <p><a href="#">无锡汉尼达</a><em>回答了您的问题</em><a href="#">需要制造如此形状的倚天剑。不知道可以吗?</a><span>2013-08-08</span></p>
+<p class="profile-info">真实的个人信息，可以更快增加您的信誉度，为您带来更多便捷！</p>
+<h1>我的问题</h1>
+<div class="mainpage">
+	<h2>专业刀具咨询平台</h2>
+	<div class="mainpage-content clearfix">
+    	<div class="left">
+    		<p>刀具咨询？<br>还在等什么！</p>
+    		<a href="/buyer/newquestion">新建问题</a>
+    	</div>
+    	<div class="right">
+    		<h3>永久免费</h3>
+    		<p class="mb15">刀师傅为用户与代理商双方提供优质交流平台，终身免收任何费用。</p>
+    		<h3>专业方案</h3>
+    		<p>您发布问题后，专业代理商将会为您量身定做专业道具解决方案，并提供合理、公平的报价。为建立公平、良好的交流平台，报价部分只有提问者才能看到。</p>
 	</div>
-  <div class="listitem">
-	  <p><a href="#">无锡汉尼达</a><em>回答了您的问题</em><a href="#">需要制造如此形状的倚天剑。不知道可以吗?</a><span>2013-08-08</span></p>
-	</div>
-  <div class="listitem">
-	  <p><a href="#">无锡汉尼达</a><em>回答了您的问题</em><a href="#">需要制造如此形状的倚天剑。不知道可以吗?</a><span>2013-08-08</span></p>
 	</div>
 </div>

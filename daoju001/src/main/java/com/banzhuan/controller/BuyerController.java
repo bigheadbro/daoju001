@@ -8,6 +8,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.ibatis.session.RowBounds;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,6 +39,7 @@ import com.banzhuan.form.LoginForm;
 import com.banzhuan.form.QuestionForm;
 import com.banzhuan.service.AgentService;
 import com.banzhuan.service.BuyerService;
+import com.banzhuan.util.CookieUtil;
 import com.banzhuan.util.JsonUtil;
 import com.banzhuan.util.StringUtil;
 import com.banzhuan.util.Util;
@@ -81,14 +83,6 @@ public class BuyerController extends BaseController{
 			
 			if(!result.hasErrors())
 			{
-				BuyerEntity user = (BuyerEntity)re.get("buyer");
-				Account account = new Account();
-				account.setLogin(true); // 登录成功标识
-				account.setUserName(user.getUsername()); // 用户登录名
-				account.setUserId(user.getId()); // 用户ID
-				account.setBuyer(true);
-				account.setAgent(false);
-				request.getSession().setAttribute("account", account);
 				// 注册成功， 跳转到登陆页面
 				return new ModelAndView(new RedirectView("/buyer/log")); 
 			}
@@ -110,39 +104,7 @@ public class BuyerController extends BaseController{
 	public ModelAndView login(final HttpServletRequest request,
 			final HttpServletResponse response, @ModelAttribute("form")LoginForm form, BindingResult result) throws IOException 
 	{
-		if(isDoSubmit(request))
-		{
-			Result re = buyerService.checkLogin(form, result);
-			
-			if(!result.hasErrors())
-			{
-				BuyerEntity user = (BuyerEntity)re.get("buyer");
-				int unreadMsgCount = buyerService.getUnreadMsgCount(user.getId());
-				int questionCnt = buyerService.getUserQuestionCount(user.getId());
-				Account account = new Account();
-				account.setUserId(user.getId());
-				account.setLogin(true); // 登录成功标识
-				account.setUserName(user.getUsername()); // 用户登录名
-				account.setUserId(user.getId()); // 用户ID
-				account.setMail(user.getEmail()); // 邮箱
-				account.setLogo(user.getLogo()); // 邮箱
-				account.setBuyer(true);
-				account.setUnreadMsgCount(unreadMsgCount);
-				account.setQuestionCnt(questionCnt);
-				
-				//set cookie
-				if(form.getRememberme() != null && form.getRememberme())
-				{
-					this.addCookie(response, Constant.LOGIN_MAIL, user.getEmail(), Integer.MAX_VALUE);
-				}
-				//设置头像
-				account.setLogo(buyerService.getBuyerEntity(account.getUserId()).getLogo());
-				request.getSession().setAttribute("account", account);
-				// 登陆成功， 跳转到登陆页面
-				return new ModelAndView(new RedirectView("/buyer/main"));
-			}
-		}
-		return new ModelAndView("/buyer/log");
+		return new ModelAndView(new RedirectView("/log"));
 		
 	}
 	
@@ -218,6 +180,7 @@ public class BuyerController extends BaseController{
 	public ModelAndView logoff(final HttpServletRequest request,final HttpServletResponse response, Model model) {
 		request.getSession().invalidate();
 		model.asMap().remove("account");
+		CookieUtil.removeCookie(request, response, Constant.REMEMBER_ME);
 		return new ModelAndView(new RedirectView("/index"));
 		
 	}
@@ -339,16 +302,39 @@ public class BuyerController extends BaseController{
 	}
 	
 	@RequestMapping(value="/main")
-	public ModelAndView main(HttpServletRequest request, HttpServletResponse response) {
+	public ModelAndView main(HttpServletRequest request, HttpServletResponse response, @ModelAttribute("account")Account account) 
+	{
 		ModelAndView mv = new ModelAndView("/buyer/mainpage");
+		mv.addObject("name", account.getUserName());
+		mv.addObject("mail", account.getMail());
+		mv.addObject("company", account.getCompanyName());
 		return mv;
 	}
 	
 	@RequestMapping(value="/mymsg")
 	public ModelAndView mymsg(HttpServletRequest request, HttpServletResponse response, @ModelAttribute("account")Account account) {
 		ModelAndView mv = new ModelAndView("buyer/mymsg");
+		int page = 1;
+		if(request.getParameter("page") != null)
+		{
+			page = Integer.valueOf(request.getParameter("page"));
+		}
 		int userId = account.getUserId();
-		Result result = buyerService.getAllMsgs(userId);
+		Result result = new Result();
+		
+		int total=buyerService.getMsgCount(userId);
+		int totalPage=0;
+		if(total % Constant.LIST_PAGE_SIZE == 0)
+			totalPage=total/Constant.LIST_PAGE_SIZE;
+		else
+			totalPage=total/Constant.LIST_PAGE_SIZE+1;
+		totalPage=totalPage==0?1:totalPage;
+		mv.addObject("page", page);
+		mv.addObject("total", total);
+		mv.addObject("totalPage", totalPage);
+
+		result = buyerService.getAllMsgs(userId, new RowBounds((page-1)*Constant.LIST_PAGE_SIZE, Constant.LIST_PAGE_SIZE));
+		
 		mv.addObject("msgs", result.get("msgs"));
 		return mv;
 	}
@@ -400,8 +386,27 @@ public class BuyerController extends BaseController{
 	@RequestMapping(value="/oldquestion")
 	public ModelAndView oldquestion(HttpServletRequest request, HttpServletResponse response, @ModelAttribute("account")Account account) {
 		ModelAndView mv = new ModelAndView("buyer/oldquestion");
+		int page = 1;
+		if(request.getParameter("page") != null)
+		{
+			page = Integer.valueOf(request.getParameter("page"));
+		}
 		int userId = account.getUserId();
-		Result result = buyerService.queryQuestionsByUserId(userId);
+		Result result = new Result();
+		
+		int total=buyerService.getUserQuestionCount(userId);
+		int totalPage=0;
+		if(total % Constant.LIST_PAGE_SIZE == 0)
+			totalPage=total/Constant.LIST_PAGE_SIZE;
+		else
+			totalPage=total/Constant.LIST_PAGE_SIZE+1;
+		totalPage=totalPage==0?1:totalPage;
+		mv.addObject("page", page);
+		mv.addObject("total", total);
+		mv.addObject("totalPage", totalPage);
+
+		result = buyerService.queryQuestionsByUserId(userId, new RowBounds((page-1)*Constant.LIST_PAGE_SIZE, Constant.LIST_PAGE_SIZE));
+		
 		mv.addObject("questions", result.get("questions"));
 		return mv;
 	}
@@ -420,8 +425,27 @@ public class BuyerController extends BaseController{
 	@RequestMapping(value="/draft")
 	public ModelAndView draft(HttpServletRequest request, HttpServletResponse response, @ModelAttribute("account")Account account) {
 		ModelAndView mv = new ModelAndView("buyer/draft");
+		int page = 1;
+		if(request.getParameter("page") != null)
+		{
+			page = Integer.valueOf(request.getParameter("page"));
+		}
 		int userId = account.getUserId();
-		Result result = buyerService.queryDraftsByUserId(userId);
+		Result result = new Result();
+
+		int total=buyerService.getUserDraftCount(userId);
+		int totalPage=0;
+		if(total % Constant.LIST_PAGE_SIZE == 0)
+			totalPage=total/Constant.LIST_PAGE_SIZE;
+		else
+			totalPage=total/Constant.LIST_PAGE_SIZE+1;
+		totalPage=totalPage==0?1:totalPage;
+		mv.addObject("page", page);
+		mv.addObject("total", total);
+		mv.addObject("totalPage", totalPage);
+
+		result = buyerService.queryDraftsByUserId(userId, new RowBounds((page-1)*Constant.LIST_PAGE_SIZE, Constant.LIST_PAGE_SIZE));
+		
 		mv.addObject("questions", result.get("questions"));
 		return mv;
 	}

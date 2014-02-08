@@ -341,6 +341,13 @@ public class AgentService {
     	paDAO.insertProfessionalAnswerEntity(pa);
     	return result;
     }
+    
+    public void updateAnswer(ProfessionalAnswerForm answerForm)
+    {
+    	ProfessionalAnswerEntity pa = answerForm.getAnswer();
+    	paDAO.updateProfessionalAnswerById(pa);
+    }
+    
     public Result updateGoodcaseById(GoodcaseForm form, GoodcaseEntity gc, Errors errors)
     {
     	Result result = new Result();
@@ -387,6 +394,14 @@ public class AgentService {
     	
     }
     
+    public Result queryGoodcasesByUserid(int userId, RowBounds bound)
+	{
+		Result result = new Result();
+		List<GoodcaseEntity> goodcases = gcDAO.queryGCEntityByUserid(userId,bound);
+		result.add("goodcases", goodcases);
+		return result;
+	}
+    
     public Result queryGoodcasesByUserid(int userId)
 	{
 		Result result = new Result();
@@ -394,7 +409,6 @@ public class AgentService {
 		result.add("goodcases", goodcases);
 		return result;
 	}
-    
     public void setGoodcaseFormByGcid(GoodcaseForm form, int gcid)
     {
     	GoodcaseEntity gc = gcDAO.queryGCEntityById(gcid);
@@ -552,6 +566,50 @@ public class AgentService {
 		return result;
 	}
     
+    public Result queryAnswersByUserid(int userid)
+	{
+		Result result = new Result();
+		List<ProfessionalAnswerEntity> answers = paDAO.queryAnswersByUserid(userid);
+		result.add("answers", answers);
+		
+		return result;
+	}
+    
+    public Result queryAnswersByUserid(int userid, RowBounds bound)
+	{
+		Result result = new Result();
+		List<ProfessionalAnswerEntity> answers = paDAO.queryAnswersByUserid(userid, bound);
+		result.add("answers", answers);
+		
+		return result;
+	}
+    
+    public ProfessionalAnswerEntity queryProfessionalAnswerEntityById(int id)
+	{
+		ProfessionalAnswerEntity answer = paDAO.queryProfessionalAnswerEntityById(id);
+		
+		return answer;
+	}
+    
+    
+    public Result queryDraftsByUserid(int userid)
+	{
+		Result result = new Result();
+		List<ProfessionalAnswerEntity> answers = paDAO.queryDraftsByUserid(userid);
+		result.add("answers", answers);
+		
+		return result;
+	}
+    
+    public Result queryDraftsByUserid(int userid, RowBounds bound)
+	{
+		Result result = new Result();
+		List<ProfessionalAnswerEntity> answers = paDAO.queryDraftsByUserid(userid, bound);
+		result.add("answers", answers);
+		
+		return result;
+	}
+    
     public Result getAllquestions()
 	{
 		Result result = new Result();
@@ -562,6 +620,15 @@ public class AgentService {
 		return result;
 	}
     
+    public Result getAllquestions(RowBounds bound)
+	{
+		Result result = new Result();
+		QuestionEntity ques = new QuestionEntity();
+
+		List<QuestionEntity> questions = questionDAO.getAllquestions(ques,bound);
+		result.add("questions", questions);
+		return result;
+	}
     public int getGoodcaseCount(int userid)
 	{
 		return gcDAO.getGoodcaseCount(userid);
@@ -582,12 +649,23 @@ public class AgentService {
 		return msgDAO.getUnreadMsgCount(userid);
 	}
     
-    public Result getAllMsgs(int userid)
+    public Result getAllMsgs(int userid, RowBounds bound)
 	{
 		Result result = new Result();
-		List<MessageEntity> msgs = msgDAO.getMsgsByUserid(userid);
+		List<MessageEntity> msgs = msgDAO.getMsgsByUserid(userid,bound);
 		result.add("msgs", msgs);
 		return result;
+	}
+    
+    public int getMsgCount(int userid)
+	{
+		return msgDAO.getMsgCount(userid);
+	}
+    
+    public int getAllquestionsCount()
+	{
+		QuestionEntity ques = new QuestionEntity();
+		return questionDAO.getAllQuestionCount(ques);
 	}
 
     

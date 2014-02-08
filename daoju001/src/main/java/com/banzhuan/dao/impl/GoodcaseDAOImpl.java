@@ -18,10 +18,15 @@ public class GoodcaseDAOImpl extends SqlSessionDaoSupport implements GoodcaseDAO
 	}
 	
 	@Override
+	public List<GoodcaseEntity> queryGCEntityByUserid(int id, RowBounds bound) {
+		return this.getSqlSession().selectList("queryGCEntityByUserid", id, bound);
+	}
+
+	@Override
 	public List<GoodcaseEntity> queryGCEntityByUserid(int id) {
 		return this.getSqlSession().selectList("queryGCEntityByUserid", id);
 	}
-
+	
 	@Override
 	public int insertGoodcaseEntity(GoodcaseEntity gc) {
 		this.getSqlSession().insert("insertGoodcaseEntity", gc);

@@ -2,7 +2,7 @@
 <div class="main-bk-wrapper">
   <div class="mainpage-container clearfix">
 	  <div class="reg-left">
-		  <h2><span>我还没有账号<a href="/buyer/reg">立即注册</a></span>登录</h2>
+		  <h2><span>我还没有账号<a href="/reg">立即注册</a></span>登录</h2>
 			<script>
 					$(function() {	
 						$("#form_log").validate({
@@ -112,15 +112,6 @@
 				});
 			</script>
 		  </form>
-		  <div class="seperation">&nbsp;</div>
-		  <ul class="mb0 reg-listitem clearfix">
-			  <li class="key">
-				  或者
-				</li>
-			  <li class="value">
-					<a class="qqlogin" href="/buyer/qqlogin">直接使用QQ登录</a>
-				</li>
-			</ul>
       </div>
       <div class="reg-right">
     	  <div class="header">

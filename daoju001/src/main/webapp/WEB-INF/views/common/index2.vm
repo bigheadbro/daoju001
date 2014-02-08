@@ -1,4 +1,4 @@
 #set($layout = "/layout/working_layout.vm")
-<div class="working-content">
-<img src="../img/working.gif" />
+<div class="go-content">
+<img src="../img/go.jpg" />
 </div>

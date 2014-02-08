@@ -2,6 +2,7 @@ package com.banzhuan.service;
 
 import java.util.List;
 
+import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -300,19 +301,21 @@ public class BuyerService {
 		return result;
 	}
 
-	public Result queryQuestionsByUserId(int userId)
+	public Result queryQuestionsByUserId(int userId, RowBounds bound)
 	{
 		Result result = new Result();
-		List<QuestionEntity> questions = questionDAO.queryQuestionsByUserid(userId);
+		List<QuestionEntity> questions = questionDAO.queryQuestionsByUserid(userId,bound);
 		result.add("questions", questions);
+
 		return result;
 	}
 	
-	public Result queryDraftsByUserId(int userId)
+	public Result queryDraftsByUserId(int userId, RowBounds bound)
 	{
 		Result result = new Result();
-		List<QuestionEntity> questions = questionDAO.queryDraftsByUserid(userId);
+		List<QuestionEntity> questions = questionDAO.queryDraftsByUserid(userId,bound);
 		result.add("questions", questions);
+
 		return result;
 	}
 	
@@ -358,15 +361,24 @@ public class BuyerService {
 		return msgDAO.getUnreadMsgCount(userid);
 	}
 	
+	public int getMsgCount(int userid)
+	{
+		return msgDAO.getMsgCount(userid);
+	}
+	
 	public int getUserQuestionCount(int userid)
 	{
 		return questionDAO.getUserQuestionCount(userid);
 	}
 	
-	public Result getAllMsgs(int userid)
+	public int getUserDraftCount(int userid)
+	{
+		return questionDAO.queryDraftsCountByUserid(userid);
+	}
+	public Result getAllMsgs(int userid, RowBounds bound)
 	{
 		Result result = new Result();
-		List<MessageEntity> msgs = msgDAO.getMsgsByUserid(userid);
+		List<MessageEntity> msgs = msgDAO.getMsgsByUserid(userid,bound);
 		result.add("msgs", msgs);
 		return result;
 	}

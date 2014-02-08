@@ -1,5 +1,6 @@
 #set($layout = "/layout/index_layout.vm")
 <link rel="stylesheet" href="../css/flexslider.css">
+<script type="text/javascript" src="../js/questions.js"></script>
 <script type="text/javascript" src="../js/jquery.flexslider-min.js"></script>
 <script>
 $(function() {
@@ -15,145 +16,113 @@ $(function() {
 	    <a href="#"><img src="../img/banner/banner1.jpg" /></a>
 	</li>
 	<li>
-	    <a href="#"><img src="../img/banner/banner2.jpg" /></a>
+	    <a href="/reg"><img src="../img/banner/banner2.jpg" /></a>
 	</li>
 	<li>
-	    <a href="#"><img src="../img/banner/banner3.jpg" /></a>
+	    <a href="/reg"><img src="../img/banner/banner3.jpg" /></a>
 	</li>
 
   </ul>
 </div>
 <div class="main-content-container clearfix">
 	<!-- 问题 -->
-	<div class="main-list-container width630">
+	<div class="main-list-container width630 mh600">
 		<div class="main-list-header">
                                              热门问题
          <a href="questions">点击查看更多问题</a>
 		</div>
 		<div class="main-list-content">
+			#foreach($question in $questions)
 			<div class="hot-question-listitem first clearfix">
+				<div class="hidden">$!{question.content}</div>
 				<div class="logo">
-					<img src="../img/avatar.png">
+					<a>
+						#if($!{question.userLogo})
+							<img src="../logo/$!{question.userLogo}" />
+						#else
+							<img src="../img/avatar.png" />
+						#end
+					</a>
 				</div>
 				<div class="content">
 					<ul>
-						<li class="name"><p>无锡Y公司</p></li>
-						<li class="title"><p>现在在正常生产，有没有性价比更好的刀具？</p></li>
+						<li class="name"><p>$!{question.userName}</p></li>
+						<li class="title clearfix">
+							<div class="questions-param">
+    							#if($!{question.industry} > 0)
+    								<span>$stringUtil.getIndustry($!{question.industry})</span>
+    							#end
+    							#if($!{question.processMethod} > 0)
+    								<span>$stringUtil.getMethod($!{question.processMethod})</span>
+    							#end
+    							#if($!{question.wpHardness} > 0)
+    								<span>$stringUtil.getHardness($!{question.wpHardness})</span>
+    							#end
+    							#if($!{question.wpMaterial} > 0)
+    								<span>$stringUtil.getMaterial($!{question.wpMaterial})</span>
+    							#end
+    						</div>
+							<div class="questions-type">
+								#if($!{question.type} == 1)
+									<span class="type1">求精</span>
+								#elseif($!{question.type} == 2)
+									<span class="type2">解难</span>
+								#else
+									<span class="type3">求新</span>
+								#end
+								<span class="time">$stringUtil.formatDate($!{question.gmtModify})</span>
+							</div>
+						</li>
 						<li class="text clearfix">
-							<img src="../img/ques1.png" />
-							<p>
-							我司过去使用的是R8圆刀片，加工情况尚可，63刀盘5刃，可转换6次但目前公司希望降低成本，要求其他刀具品牌参与竞争，求推荐刀具光洁度要求Ra3.2即可，主要是寿命要长
-							</p>
+							<p></p>
 						</li>
 						<li class="info">
-							<p> 1 个专业回答 <span>|</span> 3 个普通回答 <span>|</span> 查看详情 </p>
+							<p> $!{question.cntPA}个解决方案 <span>|</span> $!{question.cntCA}条评论 <span>|</span> <a href="/questions/$!{question.id}">查看详情</a> <span class="answer"></span></p>
 						</li>
-						<li class="answer">
-						  <div class="answer-arrow">
-							  <em class="S_line1_c">◆</em>
-							  <em class="S_bg1_c">◆</em>
+						<li class="index-answer">
+							#set($tmp = $!{velocityCount})
+							#set($index = $tmp - 1)
+							<div class="hidden">$!{answers[$index].content}</div>
+						    <div class="answer-arrow">
+							    <em class="S_line1_c">◆</em>
+							    <em class="S_bg1_c">◆</em>
 							</div>
-						  <ul class="clearfix">
-							  <li class="agent-info clearfix">
-								  <img src="../img/big-logo.png" />
-									<h4>无锡汉尼达</h4>
-									<h5>Big刀具代理商</h5>
-								</li>
-							  <li class="answer-cont">
-								  <p>
-									  您好,根据您的情况，加工条件和选刀已比较合适，但刀片仅单侧6刃可用，这方面可进行提高，请参考我司M1200产品（右图）。63刀盘为六刃，根据我们以往的经验，可按照相同的Vc和更高的Fz进行加工，即AP=1.2 N=500 F=800这样可以提高30%的效率..
-									  另外刀片正反两面12个刃可用，若每刃加工时间可以相同甚至超过您先用刀具,那么性价比的提升是非常明显的。
-									</p>
-								</li>
+							<ul class="pa-answer clearfix">
+            				    <li class="agent-info clearfix">
+            					    <div class="logo">
+                						<a>
+                    						#if($!{answers[$index].agentLogo})
+                    							<img src="../logo/$!{answers[$index].agentLogo}" />
+                    						#else
+                    							<img src="../img/avatar.png" />
+                    						#end
+                    					</a>
+                					</div>
+            						<div class="agent-detail">
+            							<h2 class="clearfix">
+											<a class="agent-name" href="/agents/$!{answers[$index].agentId}">$!{answers[$index].agentName}</a>
+                							<a class="fancybox-v" title="$!{answers[$index].agentName}的代理证书" href="$!{answers[$index].verifiedLink}"><img src="../img/v.png" /></a>
+            							</h2>
+            							<h4>$!{answers[$index].brandName}</h4>
+            						</div>
+            						<div class="answer-price">
+            							#if($!{answers[$index].price})
+            								<span>已报价</span>
+            							#end
+            							#if($!{answers[$index].FreeUse})
+            								<span>免费试用</span>
+            							#end
+            						</div>
+            					</li>
+            				    <li class="answer-cont">
+            					    <p></p>
+            					</li>
 							</ul>
 						</li>
 					</ul>
 				</div>
 			</div>
-			<div class="seperation">&nbsp;</div>
-			<div class="hot-question-listitem first clearfix">
-				<div class="logo">
-					<img src="../img/avatar.png">
-				</div>
-				<div class="content">
-					<ul>
-						<li class="name"><p>上海FT空调</p></li>
-						<li class="title"><p>现在生产中有点问题，有没有更合适的刀具？</p></li>
-						<li class="text clearfix">
-							<img src="../img/ques2.jpg" />
-							<p>
-							公司机床较老，使用整体合金钻头一直断，使用肯纳的皇冠钻效果也不理想，偶有折断，老板要求本月底一定要正常开工，希望有品质好的，刚性好的刀具来试验孔直径19.25 +0.07 -0.1 ,光洁度要求不高
-							</p>
-						</li>
-						<li class="info">
-							<p> 1 个专业回答 <span>|</span> 3 个普通回答 <span>|</span> 查看详情 </p>
-						</li>
-						<li class="answer">
-						  <div class="answer-arrow">
-							  <em class="S_line1_c">◆</em>
-							  <em class="S_bg1_c">◆</em>
-							</div>
-						  <ul class="clearfix">
-							  <li class="agent-info clearfix">
-								  <img src="../img/dijet.jpg" />
-									<h4>上海时达</h4>
-									<h5>DIJET刀具代理商</h5>
-								</li>
-							  <li class="answer-cont">
-								  <p>
-									  您好，根据您描述的情况应该是机床的钢性不好或是加工时有一定震动。相对合金钻头，我司的焊接钻头因为柄部是钢材料，不易折断。<br/>
-									  方案1：SCD-1925-MS 加工条件 N=1000 F=300 光洁度可满足Ra3.2<br/>
-									 方案2：TEZ1930刀片配钻杆，形式与肯纳皇冠钻一样，刃型不同，条件也是N=1000 F=300<br/>
-									方案1折断可能性极小，寿命上也可以根据实际情况多次重磨，但管理较麻烦<br/>
-									方案2因为贵司试用过类似产品，有较大问题，因此只作为备选<br/>
-									两种都可以试一试，具体选哪一种再决定
-									</p>
-								</li>
-							</ul>
-						</li>
-					</ul>
-				</div>
-			</div>
-			<div class="seperation">&nbsp;</div>
-			<div class="hot-question-listitem first clearfix">
-				<div class="logo">
-					<img src="../img/avatar.png">
-				</div>
-				<div class="content">
-					<ul>
-						<li class="name"><p>无锡Y公司</p></li>
-						<li class="title"><p>现在在正常生产，有没有性价比更好的刀具？</p></li>
-						<li class="text clearfix">
-							<img src="../img/ques1.png" />
-							<p>
-							我司过去使用的是R8圆刀片，加工情况尚可，63刀盘5刃，可转换6次但目前公司希望降低成本，要求其他刀具品牌参与竞争，求推荐刀具光洁度要求Ra3.2即可，主要是寿命要长
-							</p>
-						</li>
-						<li class="info">
-							<p> 1 个专业回答 <span>|</span> 3 个普通回答 <span>|</span> 查看详情 </p>
-						</li>
-						<li class="answer">
-						  <div class="answer-arrow">
-							  <em class="S_line1_c">◆</em>
-							  <em class="S_bg1_c">◆</em>
-							</div>
-						  <ul class="clearfix">
-							  <li class="agent-info clearfix">
-								  <img src="../img/big-logo.png" />
-									<h4>无锡汉尼达</h4>
-									<h5>Big刀具代理商</h5>
-								</li>
-							  <li class="answer-cont">
-								  <p>
-									  您好,根据您的情况，加工条件和选刀已比较合适，但刀片仅单侧6刃可用，这方面可进行提高，请参考我司M1200产品（右图）。63刀盘为六刃，根据我们以往的经验，可按照相同的Vc和更高的Fz进行加工，即AP=1.2 N=500 F=800这样可以提高30%的效率..
-									</p>
-								</li>
-							</ul>
-						</li>
-					</ul>
-				</div>
-			</div>
-  <div class="seperation">&nbsp;</div>
+			#end
 		</div>
 	</div>
 	<!-- 代理商 -->

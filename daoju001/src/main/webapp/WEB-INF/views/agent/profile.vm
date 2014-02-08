@@ -153,7 +153,7 @@
                 </li>
                 <li class="value">
 					<a id="uploadsample">上传证书</a>
-                    <input type="file" name="link" />
+                    <input class="uploadv" type="file" name="link" />
 					<p id="uploadsample-p">上传证书后，通过后台审核，可以得到我们对您的<i></i>认证</p>
                 </li>
             </ul>

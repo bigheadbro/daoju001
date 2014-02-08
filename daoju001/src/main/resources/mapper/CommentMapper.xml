@@ -8,6 +8,8 @@
 		<id property="type" column="type" />
 		<!--评论内容 -->
 		<id property="content" column="content" />
+		
+		<id property="commentId" column="comment_id" />
 		<!--评论内容 -->
 		<id property="buyerId" column="buyer_id" />
 		<!--评论内容 -->
@@ -38,7 +40,7 @@
 	<select id="getCommentsByParentid" parameterType="int"
 		resultMap="CommentResultMap">
 	<![CDATA[
-		SELECT * from t_comment t WHERE t.parent = #{parent}
+		SELECT * from t_comment t WHERE t.parent = #{parent} order by gmt_create
 	]]>
 	</select>
 
@@ -50,6 +52,7 @@
 		(
 		type
 		,content
+		,comment_id
 		,buyer_id
 		,agent_id
 		,logo
@@ -63,6 +66,7 @@
 		(
 		#{type}
 		,#{content}
+		,#{commentId}
 		,#{buyerId}
 		,#{agentId}
 		,#{userAvatar}

@@ -204,7 +204,7 @@
 							</h2>
 							<h4>$!{gc.brandName}</h4>
 						</div>
-						<div class="download"><a>点击下载</a></div>
+						<div class="download"><a href="$!{gc.link}">点击下载</a></div>
 					</div>
 					<div class="gc-param">
 						#if($!{gc.industry} > 0)

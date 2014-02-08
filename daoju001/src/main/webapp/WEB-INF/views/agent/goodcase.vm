@@ -15,4 +15,5 @@
     		</div>
 		#end
 	</div>
+	#parse("/common/page.vm")
 </div>

@@ -2,6 +2,7 @@ package com.banzhuan.dao.impl;
 
 import java.util.List;
 
+import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.support.SqlSessionDaoSupport;
 import org.springframework.stereotype.Repository;
 
@@ -13,8 +14,7 @@ public class ProfessionalAnswerDAOImpl extends SqlSessionDaoSupport implements P
 
 	@Override
 	public ProfessionalAnswerEntity queryProfessionalAnswerEntityById(int id) {
-		// TODO Auto-generated method stub
-		return null;
+		return this.getSqlSession().selectOne("queryProfessionalAnswerEntityById", id);
 	}
 
 	@Override
@@ -24,15 +24,38 @@ public class ProfessionalAnswerDAOImpl extends SqlSessionDaoSupport implements P
 	}
 
 	@Override
-	public int updateProfessionalAnswerById(ProfessionalAnswerEntity buyer) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int updateProfessionalAnswerById(ProfessionalAnswerEntity pa) {
+		return this.getSqlSession().update("updateProfessionalAnswerById", pa);
 	}
 	
 	@Override
 	public List<ProfessionalAnswerEntity> queryAnswersByQid(int qid)
 	{
 		return this.getSqlSession().selectList("queryAnswersByQid", qid);
+	}
+	
+	@Override
+	public List<ProfessionalAnswerEntity> queryDraftsByUserid(int userid)
+	{
+		return this.getSqlSession().selectList("queryDraftsByUserid", userid);
+	}
+	
+	@Override
+	public List<ProfessionalAnswerEntity> queryDraftsByUserid(int userid, RowBounds bound)
+	{
+		return this.getSqlSession().selectList("queryDraftsByUserid", userid, bound);
+	}
+	
+	@Override
+	public List<ProfessionalAnswerEntity> queryAnswersByUserid(int userid)
+	{
+		return this.getSqlSession().selectList("queryAnswersByUserid", userid);
+	}
+	
+	@Override
+	public List<ProfessionalAnswerEntity> queryAnswersByUserid(int userid, RowBounds bound)
+	{
+		return this.getSqlSession().selectList("queryAnswersByUserid", userid, bound);
 	}
 	
 	@Override

@@ -1,4 +1,5 @@
 #set($layout = "/layout/buyer_detail_layout.vm")
+<script type="text/javascript" src="../js/setread.js"></script>
 <h2>全部消息</h2>
 <div class="rigth-content">
     <div class="buyer-list">
@@ -27,9 +28,10 @@
 				#else
 					系统信息,
 				#end
-				<a href="/questions/$!{msg.questionId}">查看详情</a>
-                <span>$stringUtil.formatDate($!{msg.gmtCreate})</span>
+				<a msgid="$!{msg.id}" class="setread" href="/questions/$!{msg.questionId}">查看详情</a>
+                <span class="time">$stringUtil.formatDate($!{msg.gmtCreate})</span>
             </div>
         #end
     </div>
+	#parse("/common/page.vm")
 </div>

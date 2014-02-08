@@ -46,6 +46,13 @@
 	<select id="getUserQuestionCount" parameterType="int"
 			resultType="int">
 		<![CDATA[
+			SELECT count(1) from t_question t WHERE t.buyer_id = #{buyerId} and state = 1;
+		]]>
+	</select>
+	
+	<select id="queryDraftsCountByUserid" parameterType="int"
+			resultType="int">
+		<![CDATA[
 			SELECT count(1) from t_question t WHERE t.buyer_id = #{buyerId} and state = 0;
 		]]>
 	</select>
@@ -58,7 +65,7 @@
 			    <if test="processMethod != 0">AND process_method=#{processMethod}</if>
 			    <if test="wpHardness != 0">AND wp_hardness=#{wpHardness}</if>
 			    <if test="wpMaterial != 0">AND wp_material=#{wpMaterial}</if>
-			    AND state = 0
+			    AND state = 1
 		    </where> 
 	</select>
 	<insert id="insertQuestionEntity" parameterType="QuestionEntity">
@@ -140,13 +147,13 @@
 			    <if test="processMethod != 0">AND process_method=#{processMethod}</if>
 			    <if test="wpHardness != 0">AND wp_hardness=#{wpHardness}</if>
 			    <if test="wpMaterial != 0">AND wp_material=#{wpMaterial}</if>
-			    AND state = 0
+			    AND state = 1
 		    </where> 
 			order by gmt_create desc
 	</select>
 	
 	<select id="getMainquestions" parameterType="QuestionEntity"
 			resultMap="QuestionResultMap">
-		SELECT * from t_question t order by gmt_create desc limit 3
+		SELECT * from t_question t where state = 1 and cnt_PA > 0 order by gmt_create desc limit 3
 	</select>
 </mapper>

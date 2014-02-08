@@ -40,6 +40,7 @@ import com.banzhuan.common.Constant;
 import com.banzhuan.common.Result;
 import com.banzhuan.entity.AgentEntity;
 import com.banzhuan.entity.GoodcaseEntity;
+import com.banzhuan.entity.ProfessionalAnswerEntity;
 import com.banzhuan.entity.SampleEntity;
 import com.banzhuan.form.AgentProfileForm;
 import com.banzhuan.form.GoodcaseForm;
@@ -49,6 +50,7 @@ import com.banzhuan.form.LoginForm;
 import com.banzhuan.form.SampleForm;
 import com.banzhuan.service.AgentService;
 import com.banzhuan.service.BuyerService;
+import com.banzhuan.util.CookieUtil;
 import com.banzhuan.util.JsonUtil;
 import com.banzhuan.util.StringUtil;
 import com.banzhuan.util.Util;
@@ -86,14 +88,6 @@ public class AgentController extends BaseController{
 			
 			if(!result.hasErrors())
 			{
-				AgentEntity user = (AgentEntity)re.get("agent");
-				Account account = new Account();
-				account.setLogin(true); // 登录成功标识
-				account.setUserName(user.getCompanyName()); // 用户登录名
-				account.setUserId(user.getId()); // 用户ID
-				account.setBuyer(false);
-				account.setAgent(true);
-				request.getSession().setAttribute("account", account);
 				// 注册成功， 跳转到登陆页面
 				return new ModelAndView(new RedirectView("/agent/log")); 
 			}
@@ -113,53 +107,14 @@ public class AgentController extends BaseController{
 	
 	@RequestMapping(value="/log")
 	public ModelAndView login(HttpServletRequest request, HttpServletResponse response, @ModelAttribute("form")LoginForm form, BindingResult result) {
-		if(isDoSubmit(request))
-		{
-			Result re = agentService.checkLogin(form, result);
-			
-			if(!result.hasErrors())
-			{
-				AgentEntity user = (AgentEntity)re.get("agent");
-				int unreadMsgCount = agentService.getUnreadMsgCount(user.getId());
-				int answerCnt = agentService.getAnswerCount(user.getId());
-				int sampleCnt = agentService.getSampleCount(user.getId());
-				int gcCnt = agentService.getGoodcaseCount(user.getId());
-				Account account = new Account();
-				account.setLogin(true); // 登录成功标识
-				account.setUserName(user.getCompanyName()); // 用户登录名
-				account.setUserId(user.getId()); // 用户ID
-				account.setMail(user.getMail()); // 邮箱
-				account.setLogo(user.getLogo()); // logo
-				account.setBrandName(user.getBrandName());
-				account.setBuyer(false);
-				account.setAgent(true);
-				account.setVerified(user.isVerified());
-				account.setVerifiedLink(user.getVerifiedLink());
-				account.setUnreadMsgCount(unreadMsgCount);
-				account.setSampleCnt(sampleCnt);
-				account.setGcCnt(gcCnt);
-				account.setQuestionCnt(answerCnt);
-				
-				//set cookie
-				if(form.getRememberme() != null && form.getRememberme())
-				{
-					this.addCookie(response, "mail", user.getMail(), Integer.MAX_VALUE);
-				}
-				//设置头像
-				account.setLogo(user.getLogo());
-				request.getSession().setAttribute("account", account);
-				// 登陆成功， 跳转到登陆页面
-				return new ModelAndView(new RedirectView("/agent/main"));
-			}
-		}
-		
-		return new ModelAndView("/agent/log");
+		return new ModelAndView(new RedirectView("/log"));
 	}
 	
 	@RequestMapping(value = "/logoff")
 	public ModelAndView logoff(final HttpServletRequest request,final HttpServletResponse response, Model model) {
 		request.getSession().invalidate();
 		model.asMap().remove("account");
+		CookieUtil.removeCookie(request, response, Constant.REMEMBER_ME);
 		return new ModelAndView(new RedirectView("/index"));
 		
 	}
@@ -264,16 +219,38 @@ public class AgentController extends BaseController{
 	}
 	
 	@RequestMapping(value="/main")
-	public ModelAndView main(HttpServletRequest request, HttpServletResponse response) {
+	public ModelAndView main(HttpServletRequest request, HttpServletResponse response, @ModelAttribute("account")Account account) {
 		ModelAndView mv = new ModelAndView("agent/mainpage");
+		mv.addObject("name", account.getUserName());
+		mv.addObject("mail", account.getMail());
+		mv.addObject("brand", account.getBrandName());
 		return mv;
 	}
 	
 	@RequestMapping(value="/mymsg")
 	public ModelAndView mymsg(HttpServletRequest request, HttpServletResponse response, @ModelAttribute("account")Account account) {
 		ModelAndView mv = new ModelAndView("agent/mymsg");
+		int page = 1;
+		if(request.getParameter("page") != null)
+		{
+			page = Integer.valueOf(request.getParameter("page"));
+		}
 		int userId = account.getUserId();
-		Result result = agentService.getAllMsgs(userId);
+		Result result = new Result();
+		
+		int total=agentService.getMsgCount(userId);
+		int totalPage=0;
+		if(total % Constant.LIST_PAGE_SIZE == 0)
+			totalPage=total/Constant.LIST_PAGE_SIZE;
+		else
+			totalPage=total/Constant.LIST_PAGE_SIZE+1;
+		totalPage=totalPage==0?1:totalPage;
+		mv.addObject("page", page);
+		mv.addObject("total", total);
+		mv.addObject("totalPage", totalPage);
+
+		result = buyerService.getAllMsgs(userId, new RowBounds((page-1)*Constant.LIST_PAGE_SIZE, Constant.LIST_PAGE_SIZE));
+		
 		mv.addObject("msgs", result.get("msgs"));
 		return mv;
 	}
@@ -281,25 +258,81 @@ public class AgentController extends BaseController{
 	@RequestMapping(value="/newquestion")
 	public ModelAndView newquestion(HttpServletRequest request, HttpServletResponse response) {
 		ModelAndView mv = new ModelAndView("agent/newquestion");
-		Result result = agentService.getAllquestions();
+		
+		int page = 1;
+		if(request.getParameter("page") != null)
+		{
+			page = Integer.valueOf(request.getParameter("page"));
+		}
+		
+		Result result = new Result();
+		
+		int total=agentService.getAllquestionsCount();
+		int totalPage=0;
+		if(total % Constant.LIST_PAGE_SIZE == 0)
+			totalPage=total/Constant.LIST_PAGE_SIZE;
+		else
+			totalPage=total/Constant.LIST_PAGE_SIZE+1;
+		totalPage=totalPage==0?1:totalPage;
+		mv.addObject("page", page);
+		mv.addObject("total", total);
+		mv.addObject("totalPage", totalPage);
+
+		result = agentService.getAllquestions(new RowBounds((page-1)*Constant.LIST_PAGE_SIZE, Constant.LIST_PAGE_SIZE));
+		
 		mv.addObject("questions", result.get("questions"));
 		return mv;
 	}
 	
 	@RequestMapping(value="/oldquestion")
-	public ModelAndView oldquestion(HttpServletRequest request, HttpServletResponse response) {
+	public ModelAndView oldquestion(HttpServletRequest request, HttpServletResponse response, @ModelAttribute("account")Account account, @ModelAttribute("answerForm")ProfessionalAnswerForm answerForm) {
 		ModelAndView mv = new ModelAndView("agent/oldquestion");
+		
+		int page = 1;
+		if(request.getParameter("page") != null)
+		{
+			page = Integer.valueOf(request.getParameter("page"));
+		}
+		int userId = account.getUserId();
+		Result result = new Result();
+		
+		int total=agentService.getAnswerCount(userId);
+		int totalPage=0;
+		if(total % Constant.LIST_PAGE_SIZE == 0)
+			totalPage=total/Constant.LIST_PAGE_SIZE;
+		else
+			totalPage=total/Constant.LIST_PAGE_SIZE+1;
+		totalPage=totalPage==0?1:totalPage;
+		mv.addObject("page", page);
+		mv.addObject("total", total);
+		mv.addObject("totalPage", totalPage);
 
+		result = agentService.queryAnswersByUserid(userId, new RowBounds((page-1)*Constant.LIST_PAGE_SIZE, Constant.LIST_PAGE_SIZE));
+		mv.addObject("answers", result.get("answers"));
 		return mv;
 	}
 	
 	@RequestMapping(value="/answer")
-	public ModelAndView answer(HttpServletRequest request, HttpServletResponse response, @ModelAttribute("account")Account account,
+	public void answer(HttpServletRequest request, HttpServletResponse response, @ModelAttribute("account")Account account,
 			@ModelAttribute("answerForm")ProfessionalAnswerForm answerForm,BindingResult result) 
 	{
-		ModelAndView mv = new ModelAndView("agent/answer");
-		agentService.insertAnswer(answerForm, account);
-		return mv;
+		if(answerForm.isHasEdit())
+		{
+			agentService.updateAnswer(answerForm);
+		}
+		else
+		{
+			agentService.insertAnswer(answerForm, account);
+		}
+	}
+	
+	@RequestMapping(value="/editanswer")
+	public void editanswer(HttpServletRequest request, HttpServletResponse response) 
+	{
+		int answerid = Integer.parseInt(request.getParameter("answerid"));
+		ProfessionalAnswerEntity answer = agentService.queryProfessionalAnswerEntityById(answerid);
+		
+		JsonUtil.sendAnswernt(response, answer.getState(), answer.getContent(), answer.getPrice(), answer.isFreeUse());
 	}
 	
 	@RequestMapping(value="/showanswer")
@@ -335,16 +368,57 @@ public class AgentController extends BaseController{
 	}
 	
 	@RequestMapping(value="/draft")
-	public ModelAndView draft(HttpServletRequest request, HttpServletResponse response) {
+	public ModelAndView draft(HttpServletRequest request, HttpServletResponse response, @ModelAttribute("account")Account account, @ModelAttribute("answerForm")ProfessionalAnswerForm answerForm) {
 		ModelAndView mv = new ModelAndView("agent/draft");
+		int page = 1;
+		if(request.getParameter("page") != null)
+		{
+			page = Integer.valueOf(request.getParameter("page"));
+		}
+		int userId = account.getUserId();
+		Result result = new Result();
+		
+		int total=agentService.getAnswerCount(userId);
+		int totalPage=0;
+		if(total % Constant.LIST_PAGE_SIZE == 0)
+			totalPage=total/Constant.LIST_PAGE_SIZE;
+		else
+			totalPage=total/Constant.LIST_PAGE_SIZE+1;
+		totalPage=totalPage==0?1:totalPage;
+		mv.addObject("page", page);
+		mv.addObject("total", total);
+		mv.addObject("totalPage", totalPage);
+
+		result = agentService.queryDraftsByUserid(userId, new RowBounds((page-1)*Constant.LIST_PAGE_SIZE, Constant.LIST_PAGE_SIZE));
+
+		mv.addObject("answers", result.get("answers"));
 		return mv;
 	}
 	
 	@RequestMapping(value="/goodcase")
 	public ModelAndView goodcase(HttpServletRequest request, HttpServletResponse response, @ModelAttribute("account")Account account) {
 		ModelAndView mv = new ModelAndView("agent/goodcase");
+		int page = 1;
+		if(request.getParameter("page") != null)
+		{
+			page = Integer.valueOf(request.getParameter("page"));
+		}
 		int userId = account.getUserId();
-		Result result = agentService.queryGoodcasesByUserid(userId);
+		Result result = new Result();
+		
+		int total=agentService.getGoodcaseCount(userId);
+		int totalPage=0;
+		if(total % Constant.LIST_PAGE_SIZE == 0)
+			totalPage=total/Constant.LIST_PAGE_SIZE;
+		else
+			totalPage=total/Constant.LIST_PAGE_SIZE+1;
+		totalPage=totalPage==0?1:totalPage;
+		mv.addObject("page", page);
+		mv.addObject("total", total);
+		mv.addObject("totalPage", totalPage);
+
+		result = agentService.queryGoodcasesByUserid(userId, new RowBounds((page-1)*Constant.LIST_PAGE_SIZE, Constant.LIST_PAGE_SIZE));
+
 		mv.addObject("goodcases", result.get("goodcases"));
 		return mv;
 	}
@@ -360,7 +434,7 @@ public class AgentController extends BaseController{
 		return mv;
 	}
 	
-	@RequestMapping(value = "uploadfile_gc")  
+	@RequestMapping(value = "uploadfile_gc", produces="text/plain;charset=UTF-8")  
 	@ResponseBody
 	public String uploadfile_gc(HttpServletRequest request, HttpServletResponse response, @ModelAttribute("account")Account account)
 	{
@@ -474,7 +548,7 @@ public class AgentController extends BaseController{
 		return mv;
 	}
 	
-	@RequestMapping(value = "uploadfile_sample")  
+	@RequestMapping(value = "uploadfile_sample", produces="text/plain;charset=UTF-8")  
 	@ResponseBody
 	public String uploadfile_sample(HttpServletRequest request, HttpServletResponse response, @ModelAttribute("account")Account account)
 	{
@@ -497,7 +571,6 @@ public class AgentController extends BaseController{
 		} catch (IOException e) {
 
 		}
-
 		return responseStr;
 	}
 	

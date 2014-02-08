@@ -11,7 +11,7 @@
 		<!--消息type,1是代理商专业回答了你，2是代理商回复了你，3是买家回复了你，4是系统消息 -->
 		<id property="type" column="type" />
 		<!--消息内容 -->
-		<id property="hasRead" column="has_read" />
+		<id property="hasRead" column="is_read" />
 		<!--发送人id -->
 		<id property="senderId" column="sender_id" />
 		<!--发送人id -->
@@ -33,6 +33,12 @@
 		resultType="int">
 		SELECT count(1) from 
 		t_message a where receiver_id=#{userid} and is_read = 0
+	</select>
+	
+	<select id="getMsgCount" parameterType="int"
+		resultType="int">
+		SELECT count(1) from 
+		t_message a where receiver_id=#{userid} 
 	</select>
 
 	<insert id="insertMessageEntity" parameterType="MessageEntity">
@@ -66,5 +72,14 @@
 			resultMap="MsgResultMap">
 		SELECT * from t_message t where receiver_id=#{userid} order by gmt_create desc
 	</select>
+	
+	<select id="getMsgsCountByUserid" parameterType="int"
+			resultMap="MsgResultMap">
+		SELECT count(1) from t_message t where receiver_id=#{userid} order by gmt_create desc
+	</select>
+	
+	<update id="setMsgAsRead" parameterType="int">
+		update t_message set is_read = 1 where id=#{id}
+	</update>
 
 </mapper>

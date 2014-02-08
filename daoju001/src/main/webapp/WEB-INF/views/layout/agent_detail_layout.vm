@@ -65,7 +65,7 @@
 																						</a>
                                         </li>
                                     #end
-                                    #if($!stringUtil.isContains($request.getServletPath(),"/newquestion") || $!stringUtil.isContains($request.getServletPath(),"/answer") ||$!stringUtil.isContains($request.getServletPath(),"/draft"))
+                                    #if($!stringUtil.isContains($request.getServletPath(),"/newquestion") || $!stringUtil.isContains($request.getServletPath(),"/oldquestion") ||$!stringUtil.isContains($request.getServletPath(),"/draft"))
                                         <li class="current">
                                             <a href="newquestion">我的回答</a>
                                         </li>

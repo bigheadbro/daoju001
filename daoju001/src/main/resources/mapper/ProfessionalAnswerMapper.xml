@@ -41,13 +41,23 @@
 	<select id="getAnswerCount" parameterType="int"
 			resultType="int">
 		<![CDATA[
-			SELECT count(1) from t_professional_answer t WHERE t.agent_id = #{agentId} and state = 0;
+			SELECT count(1) from t_professional_answer t WHERE t.agent_id = #{agentId} and state = 1;
 		]]>
 	</select>
 	
 	<select id="queryAnswersByQid" parameterType="int"
 			resultMap="ProfessionalAnswerResultMap">
-		SELECT * from t_professional_answer t WHERE t.question_id = #{qid} order by gmt_create desc
+		SELECT * from t_professional_answer t WHERE t.question_id = #{qid} and state = 1 order by gmt_create desc
+	</select>
+	
+	<select id="queryAnswersByUserid" parameterType="int"
+			resultMap="ProfessionalAnswerResultMap">
+		SELECT * from t_professional_answer t WHERE t.agent_id = #{userid} and state = 1 order by gmt_create desc
+	</select>
+	
+	<select id="queryDraftsByUserid" parameterType="int"
+			resultMap="ProfessionalAnswerResultMap">
+		SELECT * from t_professional_answer t WHERE t.agent_id = #{userid} and state = 0 order by gmt_create desc
 	</select>
 
 	<insert id="insertProfessionalAnswerEntity" parameterType="ProfessionalAnswerEntity">
@@ -92,6 +102,17 @@
 		)
 	</insert>
 
+	<update id="updateProfessionalAnswerById" parameterType="ProfessionalAnswerEntity">
+		update t_professional_answer
+		<set> 
+		      <if test="content != null">content=#{content},</if>
+		   	  <if test="price != null">price=#{price},</if>
+		   	  <if test="FreeUse != null">is_free_use=#{FreeUse},</if>
+		   	  <if test="state != null">state=#{state},</if>
+		   	  gmt_modify=now()
+		</set>
+	   where id=#{id}
+	</update>
 	<update id="updateById" parameterType="ProfessionalAnswerEntity">
 		update
 		t_professional_answer set password = #{password}, gmt_modified=now()

@@ -31,13 +31,16 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.support.DefaultMultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.ModelAndViewDefiningException;
 import org.springframework.web.servlet.view.RedirectView;
+import org.springframework.web.util.WebUtils;
 
 import com.banzhuan.common.Account;
 import com.banzhuan.common.Constant;
 import com.banzhuan.common.Result;
 import com.banzhuan.entity.AgentEntity;
 import com.banzhuan.entity.BuyerEntity;
+import com.banzhuan.entity.ProfessionalAnswerEntity;
 import com.banzhuan.entity.SampleEntity;
 import com.banzhuan.form.CommentForm;
 import com.banzhuan.form.GoodcaseForm;
@@ -126,6 +129,7 @@ public class CommonController extends BaseController{
 					account.setUserId(user.getId());
 					account.setLogin(true); // 登录成功标识
 					account.setUserName(user.getUsername()); // 用户登录名
+					account.setCompanyName(user.getCompanyName());
 					account.setUserId(user.getId()); // 用户ID
 					account.setMail(user.getEmail()); // 邮箱
 					account.setLogo(user.getLogo()); // 邮箱
@@ -136,6 +140,11 @@ public class CommonController extends BaseController{
 					if(form.getRememberme() != null && form.getRememberme())
 					{
 						this.addCookie(response, Constant.LOGIN_MAIL, user.getEmail(), Integer.MAX_VALUE);
+						this.addCookie(response, Constant.REMEMBER_ME, "1", Integer.MAX_VALUE);
+					}
+					else
+					{
+						this.addCookie(response, Constant.REMEMBER_ME, "0", Integer.MAX_VALUE);
 					}
 					//设置头像
 					account.setLogo(user.getLogo());
@@ -152,6 +161,7 @@ public class CommonController extends BaseController{
 					int gcCnt = agentService.getGoodcaseCount(user.getId());
 					account.setLogin(true); // 登录成功标识
 					account.setUserName(user.getCompanyName()); // 用户登录名
+					account.setCompanyName(user.getCompanyName());
 					account.setUserId(user.getId()); // 用户ID
 					account.setMail(user.getMail()); // 邮箱
 					account.setLogo(user.getLogo()); // logo
@@ -168,6 +178,11 @@ public class CommonController extends BaseController{
 					if(form.getRememberme() != null && form.getRememberme())
 					{
 						this.addCookie(response, Constant.LOGIN_MAIL, user.getMail(), Integer.MAX_VALUE);
+						this.addCookie(response, Constant.REMEMBER_ME, "1", Integer.MAX_VALUE);
+					}
+					else
+					{
+						this.addCookie(response, Constant.REMEMBER_ME, "0", Integer.MAX_VALUE);
 					}
 					//设置头像
 					account.setLogo(user.getLogo());
@@ -195,7 +210,7 @@ public class CommonController extends BaseController{
 		
 		result = commonService.getMainquestions();
 		mv.addObject("questions", result.get("questions"));
-		
+		mv.addObject("answers", result.get("answers"));
 		
 		return mv;
 	}
@@ -260,8 +275,7 @@ public class CommonController extends BaseController{
 	}
 	
 	@RequestMapping(value="/addcomment")
-	public void addcomment(HttpServletRequest request, HttpServletResponse response, @ModelAttribute("account")Account account
-			, @ModelAttribute("form")CommentForm form, BindingResult result) 
+	public void addcomment(HttpServletRequest request, HttpServletResponse response, @ModelAttribute("form")CommentForm form, BindingResult result) 
 	{
 		if(isDoSubmit(request))
 		{
@@ -280,6 +294,27 @@ public class CommonController extends BaseController{
 			}
 		}
 		return; 
+	}
+	
+	@RequestMapping(value="/setread")
+	public void setread(HttpServletRequest request, HttpServletResponse response) 
+	{
+		int msgid = Integer.parseInt(request.getParameter("msgid"));
+		commonService.setMsgAsRead(msgid);
+		Account account = (Account) WebUtils.getSessionAttribute(request, "account");
+		if(account.isAgent())
+		{
+			
+			int unreadMsgCount = agentService.getUnreadMsgCount(account.getUserId());
+			account.setUnreadMsgCount(unreadMsgCount);
+		}
+		else
+		{
+			int unreadMsgCount = buyerService.getUnreadMsgCount(account.getUserId());
+			account.setUnreadMsgCount(unreadMsgCount);
+		}
+		
+
 	}
 	
 	@RequestMapping(value = "goodcases")

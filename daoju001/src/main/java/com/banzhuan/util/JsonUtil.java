@@ -132,6 +132,29 @@ public class JsonUtil {
         }  
 	}
 	
+	public static void sendAnswernt(HttpServletResponse response,int state, String content, String price, boolean freeuse)
+	{
+		JSONObject object = new JSONObject();  
+        response.setContentType("text/Xml;charset=gbk");  
+
+        object.element("state", state);
+        object.element("content", content);
+        object.element("price", price);
+        object.element("freeuse", freeuse);
+        
+        PrintWriter out = null;  
+        try {  
+            out = response.getWriter();  
+            out.println(object.toString());  
+        }  
+        catch (IOException ex1) {  
+            ex1.printStackTrace();  
+        }  
+        finally {  
+            out.close();  
+        }  
+	}
+	
 	public static void sendComment(HttpServletResponse response, String comment, String userName, String logo, String brandName, String verifiedLink, String time)
 	{
 		JSONObject object = new JSONObject();  

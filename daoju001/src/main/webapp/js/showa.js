@@ -6,9 +6,13 @@ $(function() {
 		else{
 			$(this).parent().parent().parent().parent().children(".comment").hide();
 		}
-		
 	});
-	
+	$(".reply-comment").click(function(){
+		$("#commentId").val($(this).attr("commentid"));
+		var name = $(this).parent().parent().parent().children(".agent-info").children(".agent-detail").children("h2").children(".agent-name").text();
+		$("#commentContent").val("回复" + name + "：");
+		$("#commentContent").focus();
+	});
 });
 
 function processComment(data) { 
@@ -34,10 +38,6 @@ function processComment(data) {
 	}
 }
 function processAnswerComment(data) { 
-	if(data.content == undefined){
-		showAlert(data.title,data.content,data.info,data.btn,data.link);
-		return;
-	}
 	var count = $("#answer-comments").text();
 	count = parseFloat(count) + 1;
 	$("#answer-comments").text(count);

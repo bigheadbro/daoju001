@@ -11,15 +11,15 @@
   		<div class="listitem">
 			<div class="clearfix">
   			    <div class="mixed">$!{question.content}</div>
-			    <span>$stringUtil.formatDate($!{question.gmtCreate})</span>
+			    <span class="time">$stringUtil.formatDate($!{question.gmtCreate})</span>
 			</div>
   			<div class="operation clearfix">
-  				<a href="#">$!{question.cntCA}个专业回答	</a><span>|</span>
-  				<a href="#">查看详情</a><span>|</span>
-  				<a href="/buyer/question/$!{question.id}">编辑</a><span>|</span>
-  				<a href="#">删除</a>
+  				<span >$!{question.cntPA}个解决方案	</span><span>|</span>
+  				<a href="/questions/$!{question.id}">查看详情</a><span>|</span>
+  				<a href="/buyer/question/$!{question.id}">编辑</a>
   			</div>
   		</div>
 		#end
 	</div>
+	#parse("/common/page.vm")
 </div>

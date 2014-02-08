@@ -11,9 +11,10 @@
 		<div class="listitem">
 			<div class="clearfix">
     			<a class="mixed" href="/question/$!{question.id}">$!{question.content}</a>
-    			<span>$stringUtil.formatDate($!{question.gmtCreate})</span>
+    			<span class="time">$stringUtil.formatDate($!{question.gmtCreate})</span>
 			</div>
 		</div>
 	#end
 	</div>
+	#parse("/common/page.vm")
 </div>

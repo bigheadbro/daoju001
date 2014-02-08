@@ -16,6 +16,7 @@ public class Account implements Serializable{
 	private String logo;
 	private String mail;
 	private String brandName;
+	private String companyName;
 	private boolean isVerified;
 	private String verifiedLink;
 	private int unreadMsgCount;
@@ -160,6 +161,18 @@ public class Account implements Serializable{
 	}
 	public void setGcCnt(int gcCnt) {
 		this.gcCnt = gcCnt;
+	}
+	/**
+	 * @return the companyName
+	 */
+	public String getCompanyName() {
+		return companyName;
+	}
+	/**
+	 * @param companyName the companyName to set
+	 */
+	public void setCompanyName(String companyName) {
+		this.companyName = companyName;
 	}
 	
 

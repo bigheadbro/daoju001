@@ -12,6 +12,8 @@
             <input type="hidden" name="${status.expression}" value="$!{status.value}" id="qid" />
 			#springBind("answerForm.question.buyerId")
             <input type="hidden" name="${status.expression}" value="$!{status.value}" id="bid" />
+			#springBind("answerForm.answer.id")
+            <input type="hidden" name="${status.expression}" value="$!{status.value}" id="aid" />
             #springBind("answerForm.answer.state")
             <input type="hidden" name="${status.expression}" value="$!{status.value}" id="state" />
             #springBind("answerForm.answer.hasPic")
@@ -32,7 +34,7 @@
                     </div>
 					<h4>请输入报价<span>为防止恶性竞价，此条信息仅对提问者显示</span></h4>
 					#springBind("answerForm.answer.price")
-					<textarea class="dsf-form-text-input bargin" name="${status.expression}" ></textarea></li>	
+					<textarea id="bargin" class="dsf-form-text-input bargin" name="${status.expression}" ></textarea></li>	
 					<label for="freeuse">
 						#springBind("answerForm.answer.FreeUse")
 						<input id="freeuse" name="${status.expression}" type="checkbox" 
@@ -57,6 +59,7 @@
                         dataType:'json',
                         success:function(data) { 
                         	showAlert(data.title,data.content,data.info,data.btn,data.link);
+							$("#form_answer")[0].reset();
                         }
                     });
 					hideanswer();
@@ -69,6 +72,7 @@
                         dataType:'json',
                         success:function(data) { 
                         	showAlert(data.title,data.content,data.info,data.btn,data.link);
+							$("#form_answer")[0].reset();
                         }
                     });
 					hideanswer();

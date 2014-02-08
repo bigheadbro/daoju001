@@ -17,12 +17,15 @@ import com.banzhuan.dao.AgentDAO;
 import com.banzhuan.dao.BuyerDAO;
 import com.banzhuan.dao.CommentDAO;
 import com.banzhuan.dao.GoodcaseDAO;
+import com.banzhuan.dao.MsgDAO;
+import com.banzhuan.dao.ProfessionalAnswerDAO;
 import com.banzhuan.dao.QuestionDAO;
 import com.banzhuan.dao.SampleDAO;
 import com.banzhuan.entity.AgentEntity;
 import com.banzhuan.entity.BuyerEntity;
 import com.banzhuan.entity.CommentEntity;
 import com.banzhuan.entity.GoodcaseEntity;
+import com.banzhuan.entity.ProfessionalAnswerEntity;
 import com.banzhuan.entity.QuestionEntity;
 import com.banzhuan.entity.SampleEntity;
 import com.banzhuan.common.Result;
@@ -62,6 +65,14 @@ public class CommonService {
 	@Autowired
 	@Qualifier("commentDAO")
 	private CommentDAO commentDAO;
+	
+	@Autowired
+	@Qualifier("msgDAO")
+	private MsgDAO msgDAO;
+	
+	@Autowired
+	@Qualifier("paDAO")
+	private ProfessionalAnswerDAO paDAO;
 	
 	public Result checkLogin(LoginForm form, Errors errors)
 	{
@@ -314,7 +325,14 @@ public class CommonService {
 	{
 		Result result = new Result();
 		List<QuestionEntity> questions = questionDAO.getMainquestions();
+		List<ProfessionalAnswerEntity> answers = new ArrayList<ProfessionalAnswerEntity>();
+		for(int i = 0;i< questions.size();i++)
+		{
+			answers.add(paDAO.queryAnswersByQid(questions.get(i).getId()).get(0));
+		}
+		
 		result.add("questions", questions);
+		result.add("answers", answers);
 		return result;
 	}
 	
@@ -352,11 +370,15 @@ public class CommonService {
 		{
 			comment.setParent(form.getParentId());
 		}
+		if(form.getCommentId() != 0)
+		{
+			comment.setCommentId(form.getCommentId());
+		}
 		if(form.getType() != 0)
 		{
 			comment.setType(form.getType());
 		}
-		if(form.getContent() != null)
+		if(form.getContent() != "")
 		{
 			comment.setContent(form.getContent());
 		}
@@ -365,20 +387,20 @@ public class CommonService {
 		{
 			comment.setAgentId(form.getAgentId());
 		}
-		if(form.getBrandName() != null)
+		if(form.getBrandName() != "")
 		{
 			comment.setBrandName(form.getBrandName());
 		}
-		if(form.getVerifiedLink() != null)
+		if(form.getVerifiedLink() != "")
 		{
 			comment.setLink(form.getVerifiedLink());
 		}
 		
-		if(form.getUserLogo() != null)
+		if(form.getUserLogo() != "")
 		{
 			comment.setUserAvatar(form.getUserLogo());
 		}
-		if(form.getUserName() != null)
+		if(form.getUserName() != "")
 		{
 			comment.setUserName(form.getUserName());
 		}
@@ -393,4 +415,8 @@ public class CommonService {
 		return result;
 	}
 	
+	public void setMsgAsRead(int id)
+	{
+		msgDAO.setMsgAsRead(id);
+	}
 }

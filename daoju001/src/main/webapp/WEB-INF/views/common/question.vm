@@ -1,6 +1,5 @@
 #set($layout = "/layout/index_layout.vm")
 <script type="text/javascript" src="../js/ques-handler.js"></script>
-<script type="text/javascript" src="../js/questions.js"></script>
 <script type="text/javascript" src="../js/answer.js"></script>
 <script type="text/javascript" src="../js/showa.js"></script>
 <div class="main-content-container clearfix">
@@ -93,13 +92,15 @@
 								  </p>
 							  </li>
 							  <li class="info">
-								<p class="clearfix"><span class="time">$stringUtil.formatDate($!{comment.gmtCreate})</span><a class="reply-comment">回复</a></p>
+								<p class="clearfix"><span class="time">$stringUtil.formatDate($!{comment.gmtCreate})</span><a class="reply-comment" commentid="$!{comment.id}">回复</a></p>
 							  </li>
 							</ul>
 							#end
 							<form id="form_comment" method="post" action="/addcomment">
 								<!-- 隐藏字段，用于标示是表单提交 -->
 								<input type="hidden" name="do_submit" value="true"/>
+								#springBind("form.commentId")
+								<input type="hidden" name="${status.expression}" id="commentId" value="0" />
 								#springBind("form.parentId")
 								<input type="hidden" name="${status.expression}" value="$!{question.id}" />
 								#springBind("form.userName")
@@ -120,7 +121,7 @@
 								#end
 								<div class="reply-cont clearfix">
 									#springBind("form.content")
-                        			<input type="text" name="${status.expression}" class="dsf-form-text-input bargin" />
+                        			<input type="text" name="${status.expression}" id="commentContent" class="dsf-form-text-input bargin" />
 									<a id="submit_comment" class="reply">回   复</a>
                     			</div>
 								<script>

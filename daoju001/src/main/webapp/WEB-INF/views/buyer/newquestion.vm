@@ -30,12 +30,13 @@
 							}
 						},
 						errorElement: "em",
-    				submitHandler: function(form) {
-              $(form).ajaxSubmit({
-    						dataType:'json',
-    						success:processJson
-    					});
-    				}
+    					submitHandler: function(form) {
+                  			$(form).ajaxSubmit({
+        						dataType:'json',
+        						success:processQuestion
+        					});
+							$(form)[0].reset();
+        				}
 					});
 				});
 		</script>
@@ -263,7 +264,7 @@
             <a class="savedraft" id="submit_draft" href="#">保存草稿</a>
         </div>
         <script>
-					function processJson(data) { 
+				function processQuestion(data) { 
   					showAlert(data.title,data.content,data.info,data.btn,data.link);
   				}
             $(function() {

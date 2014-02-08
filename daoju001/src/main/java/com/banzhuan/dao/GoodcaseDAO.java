@@ -11,6 +11,8 @@ public interface GoodcaseDAO {
 	
 	List<GoodcaseEntity> queryGCEntityByUserid(int id);
 	
+	List<GoodcaseEntity> queryGCEntityByUserid(int id, RowBounds bound);
+	
 	public int insertGoodcaseEntity(GoodcaseEntity gc);
 	
 	public int updateGoodcaseById(GoodcaseEntity gc);

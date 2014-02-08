@@ -146,15 +146,6 @@
 				});
 			</script>
 		  </form>
-		  <div class="seperation">&nbsp;</div>
-		  <ul class="mb0 reg-listitem clearfix">
-			  <li class="key">
-				  或者
-				</li>
-			  <li class="value">
-					<a class="qqlogin" href="#">直接使用QQ登录</a>
-				</li>
-			</ul>
       </div>
       <div class="reg-right">
     	  <div class="header">

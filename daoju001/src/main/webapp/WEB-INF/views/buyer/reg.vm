@@ -36,11 +36,7 @@
 								required:"必须遵守刀师傅协议"
 							}
 						},
-						errorPlacement: function(error, element) {  
-							//$(".error-msg").empty();   
-							//$(".error-msg").show();   
-							//alert(error.attr("for"));
-                            //error.appendTo($(".error-msg"));     
+						errorPlacement: function(error, element) {    
 							var hasError = true;
 							$(".error-msg label").each(function(){
 								if($(this).attr("for") == error.attr("for")){
@@ -51,9 +47,21 @@
 							{
                             	error.appendTo($(".error-msg"));     
 							}
+							else
+							{
+								$(".error-msg label").each(function(){
+								if($(this).attr("for") == error.attr("for")){
+									$(this).text(error.text());
+								}
+							});
+							}
                         },
 						success:function(label){
-							$(label).text("");
+							$(".error-msg label").each(function(){
+								if($(this).attr("for") == $(label).attr("for")){
+									$(this).text("");
+								}
+							}); 
 						}
 					});
 				});

@@ -11,10 +11,8 @@ public class CookieUtil {
   
 	public static String getCookie(HttpServletRequest request, String key) {  
         Cookie[] cookies = request.getCookies();  
-        //System.out.println("cookies: " + cookies);  
         if (cookies != null) {  
             for (Cookie cookie : cookies) {  
-                //System.out.println("cookieName: " + cookie.getName());  
                 if (key.equals(cookie.getName())) {  
                     String value = cookie.getValue();  
                     //System.out.println("cookieValue: " + cookie.getValue());  
@@ -26,14 +24,11 @@ public class CookieUtil {
     }  
     
 	public static void removeCookie(HttpServletRequest request, HttpServletResponse response, String key) {  
-        Cookie[] cookies = request.getCookies();  
-        //System.out.println("cookies: " + cookies);  
+        Cookie[] cookies = request.getCookies();   
         if (cookies != null) {  
             for (Cookie cookie : cookies) {  
-                //System.out.println("cookieName: " + cookie.getName());  
                 if (key.equals(cookie.getName())) {  
                 	cookie.setMaxAge(0);
-                	cookie.setValue("");
                 	response.addCookie(cookie);
                 }  
             }  

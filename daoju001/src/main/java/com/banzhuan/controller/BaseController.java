@@ -121,6 +121,7 @@ public class BaseController {
 	public void addCookie(HttpServletResponse response, String key, String value, int expiry)
 	{
 		Cookie cookie = new Cookie(key, value);
+		cookie.setPath("/");
 		cookie.setMaxAge(expiry);
 		response.addCookie(cookie);
 	}

@@ -103,7 +103,11 @@ public class CommonController extends BaseController{
 			{
 				Util.sendEmail("noreply@daoshifu.com","cisco123",rec,"找回密码", content, null, "", "UTF-8");
 			}
-			return new ModelAndView("/common/log");
+			else
+			{
+				return mv;
+			}
+			return new ModelAndView(new RedirectView("/log"));
 		}
 		return mv;
 	}
@@ -142,10 +146,6 @@ public class CommonController extends BaseController{
 						this.addCookie(response, Constant.LOGIN_MAIL, user.getEmail(), Integer.MAX_VALUE);
 						this.addCookie(response, Constant.REMEMBER_ME, "1", Integer.MAX_VALUE);
 					}
-					else
-					{
-						this.addCookie(response, Constant.REMEMBER_ME, "0", Integer.MAX_VALUE);
-					}
 					//设置头像
 					account.setLogo(user.getLogo());
 					request.getSession().setAttribute("account", account);
@@ -179,10 +179,6 @@ public class CommonController extends BaseController{
 					{
 						this.addCookie(response, Constant.LOGIN_MAIL, user.getMail(), Integer.MAX_VALUE);
 						this.addCookie(response, Constant.REMEMBER_ME, "1", Integer.MAX_VALUE);
-					}
-					else
-					{
-						this.addCookie(response, Constant.REMEMBER_ME, "0", Integer.MAX_VALUE);
 					}
 					//设置头像
 					account.setLogo(user.getLogo());

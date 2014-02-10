@@ -28,6 +28,8 @@ public class CookieUtil {
         if (cookies != null) {  
             for (Cookie cookie : cookies) {  
                 if (key.equals(cookie.getName())) {  
+                	cookie.setValue("");
+                	cookie.setPath("/");
                 	cookie.setMaxAge(0);
                 	response.addCookie(cookie);
                 }  

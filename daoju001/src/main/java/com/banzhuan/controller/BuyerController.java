@@ -83,8 +83,16 @@ public class BuyerController extends BaseController{
 			
 			if(!result.hasErrors())
 			{
+				BuyerEntity user = (BuyerEntity)re.get("buyer");
+				Account account = new Account();
+				account.setLogin(true); // 登录成功标识
+				account.setUserName(user.getUsername()); // 用户登录名
+				account.setUserId(user.getId()); // 用户ID
+				account.setBuyer(true);
+				account.setAgent(false);
+				request.getSession().setAttribute("account", account);
 				// 注册成功， 跳转到登陆页面
-				return new ModelAndView(new RedirectView("/buyer/log")); 
+				return new ModelAndView(new RedirectView("/buyer/main")); 
 			}
 			else
 			{
@@ -178,9 +186,9 @@ public class BuyerController extends BaseController{
 	 */
 	@RequestMapping(value = "/logoff")
 	public ModelAndView logoff(final HttpServletRequest request,final HttpServletResponse response, Model model) {
+		CookieUtil.removeCookie(request, response, Constant.REMEMBER_ME);
 		request.getSession().invalidate();
 		model.asMap().remove("account");
-		CookieUtil.removeCookie(request, response, Constant.REMEMBER_ME);
 		return new ModelAndView(new RedirectView("/index"));
 		
 	}
@@ -369,7 +377,15 @@ public class BuyerController extends BaseController{
 			{
 				return mv;
 			}
-			JsonUtil.showAlert(response, "编辑问题", "问题内容更新成功~~", "确定", "", "");
+			if(form.getState() == 1)
+			{
+				account.setQuestionCnt(buyerService.getUserQuestionCount(account.getUserId()));
+				JsonUtil.showAlert(response, "编辑问题", "问题内容更新成功~~", "确定", "", "");
+			}
+			else
+			{
+				JsonUtil.showAlert(response, "编辑问题", "更新内容已保存到草稿~~", "确定", "", "");
+			}
 		}
 		else
 		{
@@ -378,7 +394,15 @@ public class BuyerController extends BaseController{
 			{
 				return mv;
 			}
-			JsonUtil.showAlert(response, "新建问题", "问题新建成功~~", "确定", "", "");
+			if(form.getState() == 0)
+			{
+				JsonUtil.showAlert(response, "新建草稿", "问题已保存到草稿~~", "确定", "", "");
+			}
+			else
+			{
+				account.setQuestionCnt(buyerService.getUserQuestionCount(account.getUserId()));
+				JsonUtil.showAlert(response, "新建问题", "问题新建成功~~", "确定", "", "");
+			}
 		}
 		return mv;
 	}

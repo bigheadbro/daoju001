@@ -187,6 +187,13 @@
                 				    <li class="answer-cont">
                 					    <p>$!{answer.content}</p>
                 					</li>
+									#if(${account.userId} == ${question.buyerId} || ${account.userId} == ${answer.agentId})
+									<li class="price-cont">
+										<p class="price">
+                					    详细报价：$!{answer.Price}
+										</p>
+                					</li>
+									#end
                 					<li class="info clearfix">
                 						<p> <span class="answer"><a class="comments">评论(<span id="answer-comments">$!{answer.cntComment}</span>)</a></span></p>
                 					</li>
@@ -196,7 +203,7 @@
             							    <em class="S_bg1_c">◆</em>
             							</div>
             							#foreach($comment in ${answer.comments})
-            						  	<ul class="comment-item clearfix">
+           						  	<ul class="comment-item clearfix">
             								<li class="agent-info clearfix">
             									<div class="logo">
                             						<a>
@@ -227,13 +234,15 @@
             								  </p>
             							  </li>
             							  <li class="info">
-            								<p class="clearfix"><span class="time">$stringUtil.formatDate($!{comment.gmtCreate})</span><a class="reply-comment">回复</a></p>
+            								<p class="clearfix"><span class="time">$stringUtil.formatDate($!{comment.gmtCreate})</span><a class="reply-comment-anser" commentid="$!{comment.id}">回复</a></p>
             							  </li>
             							</ul>
             							#end
             							<form id="form_comment_answer" method="post" action="/addcomment">
             								<!-- 隐藏字段，用于标示是表单提交 -->
             								<input type="hidden" name="do_submit" value="true"/>
+											#springBind("form.commentId")
+											<input type="hidden" name="${status.expression}" id="answerCommentId" value="0" />
 											#springBind("form.type")
             								<input type="hidden" name="${status.expression}" value="1" />
             								#springBind("form.parentId")
@@ -256,7 +265,7 @@
             								#end
             								<div class="reply-cont clearfix">
             									#springBind("form.content")
-                                    			<input type="text" name="${status.expression}" class="dsf-form-text-input bargin" />
+                                    			<input type="text" name="${status.expression}"  id="answerCommentContent" class="dsf-form-text-input bargin" />
             									<a id="submit_comment_answer" class="reply">回   复</a>
                                 			</div>
             								<script>

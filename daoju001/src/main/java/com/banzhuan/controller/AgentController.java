@@ -75,7 +75,7 @@ public class AgentController extends BaseController{
 	@RequestMapping(value = "/*")
 	public ModelAndView common()
 	{
-		return new ModelAndView(new RedirectView("agent/mainpage")); 
+		return new ModelAndView(new RedirectView("agent/main")); 
 	}
 	
 	@RequestMapping(value="/reg")
@@ -88,8 +88,16 @@ public class AgentController extends BaseController{
 			
 			if(!result.hasErrors())
 			{
+				AgentEntity user = (AgentEntity)re.get("agent");
+				Account account = new Account();
+				account.setLogin(true); // 登录成功标识
+				account.setUserName(user.getCompanyName()); // 用户登录名
+				account.setUserId(user.getId()); // 用户ID
+				account.setBuyer(false);
+				account.setAgent(true);
+				request.getSession().setAttribute("account", account);
 				// 注册成功， 跳转到登陆页面
-				return new ModelAndView(new RedirectView("/agent/log")); 
+				return new ModelAndView(new RedirectView("/agent/main")); 
 			}
 			else
 			{
@@ -112,9 +120,9 @@ public class AgentController extends BaseController{
 	
 	@RequestMapping(value = "/logoff")
 	public ModelAndView logoff(final HttpServletRequest request,final HttpServletResponse response, Model model) {
+		CookieUtil.removeCookie(request, response, Constant.REMEMBER_ME);
 		request.getSession().invalidate();
 		model.asMap().remove("account");
-		CookieUtil.removeCookie(request, response, Constant.REMEMBER_ME);
 		return new ModelAndView(new RedirectView("/index"));
 		
 	}
@@ -560,16 +568,16 @@ public class AgentController extends BaseController{
 		String link = "../sample/" + String.valueOf(account.getUserId()) + "/" + StringUtil.getTodayString() + "/" + f.getOriginalFilename();
 		path += "/" + String.valueOf(account.getUserId()) + "/" + StringUtil.getTodayString() + "/";
 		File file = new File(path + f.getOriginalFilename());
-		
+		logger.info("before mkdir");
 		file.getParentFile().mkdirs();  
-
+		logger.info("after mkdir");
 		try 
 		{
 			FileCopyUtils.copy(f.getBytes(), file);
 			responseStr = link;
 
 		} catch (IOException e) {
-
+			logger.error(e.getMessage());
 		}
 		return responseStr;
 	}

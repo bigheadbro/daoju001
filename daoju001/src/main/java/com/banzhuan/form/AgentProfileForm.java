@@ -36,7 +36,7 @@ public class AgentProfileForm implements Serializable {
 	 * @return the companyName
 	 */
 	public String getCompanyName() {
-		return companyName;
+		return companyName.trim();
 	}
 	/**
 	 * @param companyName the companyName to set

@@ -101,7 +101,7 @@
             #springBind("form.name")
             <ul class="user-info clearfix">
                 <li class="key">
-                    案例名称
+                    样本名称
                 </li>
                 <li class="value">
                     <input class="dsf-form-text-input" type="text" name="${status.expression}"  value="$!{status.value}" />

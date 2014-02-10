@@ -13,6 +13,12 @@ $(function() {
 		$("#commentContent").val("回复" + name + "：");
 		$("#commentContent").focus();
 	});
+	$(".reply-comment-anser").click(function(){
+		$("#answerCommentId").val($(this).attr("commentid"));
+		var name = $(this).parent().parent().parent().children(".agent-info").children(".agent-detail").children("h2").children(".agent-name").text();
+		$("#answerCommentContent").val("回复" + name + "：");
+		$("#answerCommentContent").focus();
+	});
 });
 
 function processComment(data) { 

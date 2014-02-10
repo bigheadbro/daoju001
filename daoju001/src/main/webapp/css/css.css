@@ -6,7 +6,7 @@ body,h1,h2,h3,h4,h5,h6,hr,p,blockquote,dl,dt,dd,ul,ol,li,pre,form,fieldset,legen
 }
 body{position: relative;height: 100%;}
 img{border:none;}
-html{flow-y:scroll;height:100%;background: url(../img/bk.jpg) repeat 0 0;}  
+html{flow-y:scroll;height:100%;background: url(../img/bk.jpg) repeat-x 0 0;background-color:#e6e6e6}  
 table{border-collapse: collapse;border-spacing: 0;}
 em{font-style:normal}
 ul, li, ol {
@@ -144,6 +144,8 @@ div[contentEditable]{outline:0}
 .answer-price{float: left;margin-left: 12px;margin-top: 20px;font-size:12px;}
 .answer-price span{color:white;background-color:#FFA35A;display:inline-block;padding:2px 5px;border-radius:4px;}
 .hot-question-listitem .content li.answer li.answer-cont{margin-top:10px;color:#676767;font-size:13px;line-height: 20px;}
+.hot-question-listitem .content li.answer li.price-cont{color:#ff7200;font-size:13px;margin-top: 10px;}
+.hot-question-listitem .content li.answer li.price-cont .price{background-color:#ffdfc5;border:1px solid #ff7200;border-radius:8px;padding:10px 20px;}
 .hot-question-listitem .content li.answer li.comment-cont{margin-top:5px;font-size:11px;color:#999;}
 .hot-question-listitem .content li.answer li.comment-cont a{float:right;margin-right:10px;}
 .hot-question-listitem .content li.answer .comment-list{border:1px solid #bebebe;background-color:#f0f0f0;padding: 15px 15px 15px 27px;border-radius: 2px;margin-top: 10px;}
@@ -452,9 +454,9 @@ opacity: .3;
 .agent-logo a{display:table-cell;vertical-align:middle;}
 .agent-logo a img{margin:0 auto;max-width:50px;max-height:50px;}
 .gc-name{color:#383838;font-size:18px;padding-bottom: 5px;}
-.agent-detail{float:left;width: 88px;margin-left:12px;margin-top: 0px;}
+.agent-detail{float:left;width: 94px;margin-left:12px;margin-top: 0px;}
 .agent-detail h2{color:#606060;font-size:14px;padding: 5px 5px 3px 0;}
-.agent-detail h2 a.agent-name{overflow:hidden;white-space:nowrap;text-overflow:ellipsis;display:inline-block;max-width:80px;float:left;}
+.agent-detail h2 a.agent-name{overflow:hidden;white-space:nowrap;text-overflow:ellipsis;display:inline-block;max-width:71px;float:left;}
 .agent-detail h4{color:#606060;font-size:12px;font-weight:600;overflow:hidden;white-space:nowrap;}
 .agent-detail h2 a.fancybox-v{padding: 4px 0 0 2px;float:left;}
 .agent-detail h2 a.fancybox-v img{width:12px}

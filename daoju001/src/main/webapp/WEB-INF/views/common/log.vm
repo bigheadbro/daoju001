@@ -104,7 +104,7 @@
 				  &nbsp;
 				</li>
 			  <li class="value">
-					<a class="reg" id="submit_log" href="#">登录刀师傅</a>
+					<a class="reg" id="submit_log" >登录刀师傅</a>
 				</li>
 			</ul>
 			<script>

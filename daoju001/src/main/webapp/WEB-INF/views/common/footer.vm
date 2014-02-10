@@ -1,12 +1,12 @@
 <div class="clear-footer"></div>
 <div class="footer-container">
   <div class="footer-content">
-	  <p class="top">© 2013 <a href="#">搬刀网</a> <span>|</span> <a href="#">关于搬刀网</a> <span>|</span> <a href="#">用户协议</a> <span>|</span> <a href="#">联系我们</a> <span>|</span> <a href="#">意见反馈</a></p>
-		<p class="bottom">增值电信业务经营许可证：沪123456789号   沪ICP备123654789　京公网安备158624785247</p>
+	  <p class="top">© 2013 <a href="#">搬刀网</a> <span>|</span> <a href="#">关于刀师傅</a> <span>|</span> <a href="#">用户协议</a> <span>|</span> <a href="#">联系我们</a> <span>|</span> <a href="#">意见反馈</a></p>
+		<p class="bottom">增值电信业务经营许可证：沪123456789号   沪ICP备123654789　</p>
 	</div>
 </div>
 <!-- daoshifu.com Baidu tongji analytics -->
 <script type="text/javascript">
 var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
-document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F5c41c12d87c4acfa34f26d10ebc1786a' type='text/javascript'%3E%3C/script%3E"));
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3Ffdd0d4853bd81366542daabbd8e3fcb8' type='text/javascript'%3E%3C/script%3E"));
 </script>

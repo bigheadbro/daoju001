@@ -39,14 +39,15 @@
             $("#submit_uploadsample").click(function(){
             	$(this).submit();
             });
+			
             $("#file_upload").uploadify({  
                 'height'        : 30,   
                 'width'         : 120,    
 				'buttonText'    : '选择样本',
 				'fileSizeLimit' : '50MB',
                 'fileObjName'   : 'sampleLink',
-                'swf'           : '/js/uploadify.swf',  
-                'uploader'      : '/agent/uploadfile_sample',  
+                'swf'           : '/js/uploadify.swf', 
+                'uploader'      : '/agent/uploadfile_sample',
                 'auto'          : true,  
 				'fileTypeExts'  : '*.rar;*.pdf;*.doc;*.xls',  
                 'uploadLimit'   : 1, 
@@ -83,7 +84,7 @@
         	showAlert(data.title,data.content,data.info,data.btn,data.link);
         }  
     </script>
-    <form id="form_uploadsample" method="post">
+    <form id="form_uploadsample" method="post" userid="$!{account.userId}">
         <!-- 隐藏字段，用于标示是表单提交 -->
         <input type="hidden" name="do_submit" value="true"/>
         #springBind("form.sid")

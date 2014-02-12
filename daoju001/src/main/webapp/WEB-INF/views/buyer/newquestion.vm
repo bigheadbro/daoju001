@@ -16,20 +16,42 @@
 						rules:{
 							type:{
 								required:true
-							},
-							password:{
-								required:true
 							}
 						},
 						messages:{
 							type:{
 								required:"请选择问题类型"
-							},
-							password:{
-								required:"请输入密码"
 							}
 						},
-						errorElement: "em",
+						errorPlacement: function(error, element) {   
+							$(".error-msg").show();
+							var hasError = true;
+							$(".error-msg label").each(function(){
+								if($(this).attr("for") == error.attr("for")){
+									hasError = false;
+								}
+							});
+							if(hasError)
+							{
+                            	error.appendTo($(".error-msg"));     
+							}
+							else
+							{
+								$(".error-msg label").each(function(){
+									if($(this).attr("for") == error.attr("for")){
+										$(this).text(error.text());
+									}
+								});
+							}
+                        },
+						success:function(label){
+							$(".error-msg").hide();
+							$(".error-msg label").each(function(){
+								if($(this).attr("for") == $(label).attr("for")){
+									$(this).text("");
+								}
+							}); 
+						},
     					submitHandler: function(form) {
                   			$(form).ajaxSubmit({
         						dataType:'json',
@@ -40,6 +62,21 @@
 					});
 				});
 		</script>
+	<div class="error-msg">
+		#springBind("questionForm")
+        #if($status.errors.hasErrors())
+			<script>
+			$(".error-msg").show();
+			</script>
+            ## Field error messages
+            #foreach($f in $status.errors.fieldErrors)
+                #springBind("questionForm.${f.field}")
+                #foreach($e in $status.errorMessages)
+                    <label for="$!{status.expression}" generated="true" class="error">${e}</label>
+                #end
+            #end
+        #end
+	</div>
     <form id="form_newquestion" method="post">
         <!-- 隐藏字段，用于标示是表单提交 -->
         <input type="hidden" name="do_submit" value="true"/>
@@ -69,7 +106,7 @@
                     <p>需要开发新的产品，不知道应该使用何种刀具？</p>
                 </div>
             </div>
-						<em for="$!{status.expression}" generated="true" class="error">$!{status.errorMessage}</em>
+						
         </div>
         <script>
             $(function() {
@@ -252,7 +289,7 @@
             #springBind("questionForm.content")
             <input type="hidden" name="${status.expression}"  value="$!{status.value}" />
             <h5 class="clearfix">
-                <a id="addimg" class="addimg" href="#">点击插入图片</a>
+                <a id="addimg" class="addimg" >点击插入图片</a>
                 填写问题详情 </h5>
                 <div class="add-question-wrap">
                     <div id="ques-cont-editor" class="add-question-editor" contenteditable="true" placeholder="请输入问题详情">
@@ -260,8 +297,8 @@
                 </div>
         </div>	
         <div class="question-op clearfix">
-            <a class="publish" id="submit_public" href="#">发  布</a>
-            <a class="savedraft" id="submit_draft" href="#">保存草稿</a>
+            <a class="publish" id="submit_public" >发布</a>
+            <a class="savedraft" id="submit_draft" >保存草稿</a>
         </div>
         <script>
 				function processQuestion(data) { 

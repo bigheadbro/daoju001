@@ -1,8 +1,8 @@
-<div id="pagemask"></div>
+<div id="pagemask-answer"></div>
 <div class="answer-win">
     <div class="answer-win-content">
         <h2>
-            <a class="close-answer" href="#">x</a>
+            <a class="close-answer">x</a>
 				填写专业方案
 		</h2>
 		<form id="form_answer" action="/agent/answer" method="post">
@@ -25,7 +25,7 @@
 					#springBind("answerForm.answer.content")
                     <input type="hidden" name="${status.expression}"   />
                     <h5 class="clearfix">
-                        <a id="addimg" class="addimg-s" href="#"></a>
+                        <a id="addimg" class="addimg-s"></a>
 							请输入方案详情
 					</h5>
                     <div class="answer-wrap">
@@ -46,8 +46,8 @@
                     </label>
                 </div>
 				<div class="answer-op clearfix">
-                    <a class="publish" id="submit_public" href="#">发  布</a>
-                    <a class="savedraft" id="submit_draft" href="#">保存草稿</a>
+                    <a class="publish" id="submit_public" >发  布</a>
+                    <a class="savedraft" id="submit_draft" >保存草稿</a>
                 </div>
             </div>
 			<script>
@@ -58,12 +58,14 @@
                     $("#form_answer").ajaxSubmit({
                         dataType:'json',
                         success:function(data) { 
-                        	showAlert(data.title,data.content,data.info,data.btn,data.link);
 							$("#form_answer")[0].reset();
+							hideanswer();
+							window.location.reload();
                         }
                     });
-					hideanswer();
-					window.location.reload();
+					
+					//hideanswer();
+					//window.location.reload();
             	});
 				$("#submit_draft").click(function () {
                     $("#state").val(0);
@@ -71,12 +73,12 @@
                     $("#form_answer").ajaxSubmit({
                         dataType:'json',
                         success:function(data) { 
-                        	showAlert(data.title,data.content,data.info,data.btn,data.link);
 							$("#form_answer")[0].reset();
+							hideanswer();
+							window.location.href='/agent/draft';
                         }
                     });
-					hideanswer();
-					window.location.href='/agent/draft';
+				
                 });
 				
 

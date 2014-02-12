@@ -32,39 +32,39 @@ public class MsgDAOImple extends SqlSessionDaoSupport implements MsgDAO {
 	}
 	
 	@Override
-	public int getUnreadMsgCount(int userid)
+	public int getUnreadMsgCount(MessageEntity msg)
 	{
-		Object obj = this.getSqlSession().selectOne("getUnreadMsgCount", userid);
+		Object obj = this.getSqlSession().selectOne("getUnreadMsgCount", msg);
 		if(obj != null)
 			return (Integer)obj;
 		return 0;
 	}
 	
 	@Override
-	public int getMsgCount(int userid)
+	public int getMsgCount(MessageEntity msg)
 	{
-		Object obj = this.getSqlSession().selectOne("getMsgCount", userid);
+		Object obj = this.getSqlSession().selectOne("getMsgCount", msg);
 		if(obj != null)
 			return (Integer)obj;
 		return 0;
 	}
 	
 	@Override
-	public List<MessageEntity> getMsgsByUserid(int userid)
+	public List<MessageEntity> getMsgsByUserid(MessageEntity msg)
 	{
-		return this.getSqlSession().selectList("getMsgsByUserid", userid);
+		return this.getSqlSession().selectList("getMsgsByUserid", msg);
 	}
 	
 	@Override
-	public List<MessageEntity> getMsgsByUserid(int userid, RowBounds bound)
+	public List<MessageEntity> getMsgsByUserid(MessageEntity msg, RowBounds bound)
 	{
-		return this.getSqlSession().selectList("getMsgsByUserid", userid, bound);
+		return this.getSqlSession().selectList("getMsgsByUserid", msg, bound);
 	}
 	
 	@Override
-	public int getMsgsCountByUserid(int userid)
+	public int getMsgsCountByUserid(MessageEntity msg)
 	{
-		return this.getSqlSession().selectOne("getMsgsCountByUserid", userid);
+		return this.getSqlSession().selectOne("getMsgsCountByUserid", msg);
 	}
 	
 	@Override

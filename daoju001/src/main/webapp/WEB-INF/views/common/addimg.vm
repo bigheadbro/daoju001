@@ -2,7 +2,7 @@
 <div id="pagemask-img"></div>
 <div class="addimg-win">
 	<div class="addimg-cont">
-		<h2><a href="#" class="close">x</a>选择图片</h2>
+		<h2><a  class="close">x</a>选择图片</h2>
 		<h3>上传图片</h3>
 		<form id="form_addimg" method="post" action="/buyer/addimg" enctype="multipart/form-data">
 			<div class="choose-wrap">
@@ -11,7 +11,7 @@
 			</div>
 			<p>请不要上传与问题无关的图片！</p>
 			<div class="operation clearfix">
-			<a class="cancel">取消</a><a id="submit_addimg" href="#">上传</a>
+			<a class="cancel">取消</a><a id="submit_addimg" >上传</a>
 			</div>
 		</form>
 		<script>

@@ -36,7 +36,8 @@
 								equalTo: "两次输入密码不一致"  
 							}
 						},
-						errorPlacement: function(error, element) {    
+						errorPlacement: function(error, element) {   
+							$(".error-msg").show();
 							var hasError = true;
 							$(".error-msg label").each(function(){
 								if($(this).attr("for") == error.attr("for")){
@@ -50,13 +51,14 @@
 							else
 							{
 								$(".error-msg label").each(function(){
-								if($(this).attr("for") == error.attr("for")){
-									$(this).text(error.text());
-								}
-							});
+									if($(this).attr("for") == error.attr("for")){
+										$(this).text(error.text());
+									}
+								});
 							}
                         },
 						success:function(label){
+							$(".error-msg").hide();
 							$(".error-msg label").each(function(){
 								if($(this).attr("for") == $(label).attr("for")){
 									$(this).text("");
@@ -72,6 +74,21 @@
 					});
 				});
 			</script>
+		<div class="error-msg">
+			#springBind("form")
+            #if($status.errors.hasErrors())
+				<script>
+    			$(".error-msg").show();
+    			</script>
+                ## Field error messages
+                #foreach($f in $status.errors.fieldErrors)
+                    #springBind("form.${f.field}")
+                    #foreach($e in $status.errorMessages)
+                        <label for="$!{status.expression}" generated="true" class="error">${e}</label>
+                    #end
+                #end
+            #end
+		</div>
 		<form id="form_changepwd" method="post" action="/buyer/changepwd">
 			<!-- 隐藏字段，用于标示是表单提交 -->
 		    <input type="hidden" name="do_submit" value="true"/>
@@ -114,7 +131,7 @@
             </div>
             <div class="seperation10">&nbsp;</div>
             <div class="listitem clearfix">
-                <a id="submit_changepwd" class="save" href="#">保 存</a>
+                <a id="submit_changepwd" class="save" >保 存</a>
             </div>
     		<script>
 				  function processJson(data) { 

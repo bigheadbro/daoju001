@@ -2,7 +2,7 @@
 <div id="pagemask"></div>
 <div class="uploadlogo-win">
     <div class="uploadlog-win-content">
-        <h2><a class="close" href="#">x</a>修改头像</h2>
+        <h2><a class="close" >x</a>修改头像</h2>
         <div class="content clearfix">
 			 #if($!{account.isBuyer()})
                 <form id="form_uploadlogo" action="/buyer/uploadlogo" method="post" enctype="multipart/form-data">
@@ -29,8 +29,8 @@
                         </div>
                     </div>
                 </div>
-                <a id="submit_uploadlogo" class="save" href="#">保   存</a>
-                <input name="crop" type="hidden">
+                <a id="submit_uploadlogo" class="save">保   存</a>
+                <input name="crop" type="hidden" value="">
 			</div>
 			</form>
         </div>
@@ -41,17 +41,17 @@
 <script type="text/javascript" src="../js/uploadlogo.js"></script>
 <script>
     imagepreview(document.getElementById("file"), document.getElementById("preview"), function(info){
-    //这里若return false则不预览图片
-    $("#preview").css({
-    background: "none"
-    });
-    $("#preview").crop( function(e){
-    $("input[type='hidden']").val([e.left, e.top, e.width,  e.height].toString());
-    }, ".thumb");
-    });
-    $(function() {
-    $("#submit_uploadlogo").click(function () {
-    $("#form_uploadlogo").submit();//提交
-    });
+        //这里若return false则不预览图片
+        $("#preview").css({
+        	background: "none"
+        });
+        $("#preview").crop( function(e){
+            $("input[type='hidden']").val([e.left, e.top, e.width,  e.height].toString());
+            }, ".thumb");
+        });
+        $(function() {
+            $("#submit_uploadlogo").click(function () {
+            $("#form_uploadlogo").submit();//提交
+        });
     });
 </script>

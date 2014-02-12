@@ -112,7 +112,7 @@
                 </ul>
             </div>
             <div class="listitem mt20 clearfix">
-                <a id="submit_profile" class="save" href="#">保 存</a>
+                <a id="submit_profile" class="save" >保 存</a>
             </div>
 			<script>
 			  function processJson(data) { 

@@ -31,6 +31,7 @@ import com.banzhuan.entity.ProfessionalAnswerEntity;
 import com.banzhuan.entity.QuestionEntity;
 import com.banzhuan.entity.SampleEntity;
 import com.banzhuan.common.Account;
+import com.banzhuan.common.Constant;
 import com.banzhuan.common.Result;
 import com.banzhuan.form.AgentProfileForm;
 import com.banzhuan.form.GoodcaseForm;
@@ -646,20 +647,32 @@ public class AgentService {
     
     public int getUnreadMsgCount(int userid)
 	{
-		return msgDAO.getUnreadMsgCount(userid);
+    	MessageEntity msg = new MessageEntity();
+    	msg.setReceiverId(userid);
+    	msg.setStart(Constant.MSG_AGENT_START);
+    	msg.setEnd(Constant.MSG_AGENT_END);
+		return msgDAO.getUnreadMsgCount(msg);
 	}
     
     public Result getAllMsgs(int userid, RowBounds bound)
 	{
 		Result result = new Result();
-		List<MessageEntity> msgs = msgDAO.getMsgsByUserid(userid,bound);
+		MessageEntity msg = new MessageEntity();
+    	msg.setReceiverId(userid);
+    	msg.setStart(Constant.MSG_AGENT_START);
+    	msg.setEnd(Constant.MSG_AGENT_END);
+		List<MessageEntity> msgs = msgDAO.getMsgsByUserid(msg,bound);
 		result.add("msgs", msgs);
 		return result;
 	}
     
     public int getMsgCount(int userid)
 	{
-		return msgDAO.getMsgCount(userid);
+    	MessageEntity msg = new MessageEntity();
+    	msg.setReceiverId(userid);
+    	msg.setStart(Constant.MSG_AGENT_START);
+    	msg.setEnd(Constant.MSG_AGENT_END);
+		return msgDAO.getMsgCount(msg);
 	}
     
     public int getAllquestionsCount()

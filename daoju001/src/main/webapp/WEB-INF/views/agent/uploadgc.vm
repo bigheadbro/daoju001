@@ -35,25 +35,6 @@
 					});
 				}
 			});
-		  $("#file_upload").uploadify({  
-            'height'        : 30,   
-            'width'         : 120,    
-        				'fileObjName'   : 'sampleLink',
-            'swf'           : '/js/uploadify.swf',  
-            'uploader'      : '/agent/uploadfile_gc',  
-            'auto'          : true,  
-            'fileTypeExts'  : '*.*',  
-        				'uploadLimit'   : 1, 
-            'onUploadStart' : function(file) {  
-                
-            },  
-            'onUploadSuccess':function(file, data, response){    
-			alert(data);
-        						$("#link").val(data);
-            },  
-            'onUploadComplete':function(){  
-            }
-        });  
 		$("#file_upload").uploadify({  
                 'height'        : 30,   
                 'width'         : 120,    
@@ -307,7 +288,7 @@
     	</div>
 		
     	<div class="listitem mt20 pt20 btg clearfix">
-    		<a id="submit_uploadgc" class="save" href="#">上传案例</a>
+    		<a id="submit_uploadgc" class="save" >上传案例</a>
     	</div>
 		<script>
 		  function processJson(data) { 

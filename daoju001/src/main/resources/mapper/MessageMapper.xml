@@ -8,7 +8,7 @@
 		<id property="title" column="title" />
 		<!--消息内容 -->
 		<id property="questionId" column="question_id" />
-		<!--消息type,1是代理商专业回答了你，2是代理商回复了你，3是买家回复了你，4是系统消息 -->
+		<!--消息type,1是代理商专业回答了你，2是代理商回复了你，3是买家回复了你，(1,2,3,receiver_id均为，买家)4是代理商回复了你，5是买家回复了你,(4,5，receiver_id为卖家),6是系统消息 -->
 		<id property="type" column="type" />
 		<!--消息内容 -->
 		<id property="hasRead" column="is_read" />
@@ -29,16 +29,20 @@
 	]]>
 	</select>
 	
-	<select id="getUnreadMsgCount" parameterType="int"
+	<select id="getUnreadMsgCount" parameterType="MessageEntity"
 		resultType="int">
+	<![CDATA[
 		SELECT count(1) from 
-		t_message a where receiver_id=#{userid} and is_read = 0
+		t_message a where receiver_id=#{receiverId} and type >=#{start} and type <=#{end} and is_read = 0
+	]]>
 	</select>
 	
-	<select id="getMsgCount" parameterType="int"
+	<select id="getMsgCount" parameterType="MessageEntity"
 		resultType="int">
+	<![CDATA[
 		SELECT count(1) from 
-		t_message a where receiver_id=#{userid} 
+		t_message a where receiver_id=#{receiverId} and type >=#{start} and type <=#{end} 
+	]]>
 	</select>
 
 	<insert id="insertMessageEntity" parameterType="MessageEntity">
@@ -68,14 +72,18 @@
 
 	</insert>
 	
-	<select id="getMsgsByUserid" parameterType="int"
+	<select id="getMsgsByUserid" parameterType="MessageEntity"
 			resultMap="MsgResultMap">
-		SELECT * from t_message t where receiver_id=#{userid} order by gmt_create desc
+	<![CDATA[
+		SELECT * from t_message t where receiver_id=#{receiverId} and type >=#{start} and type <=#{end} order by gmt_create desc
+	]]>
 	</select>
 	
-	<select id="getMsgsCountByUserid" parameterType="int"
+	<select id="getMsgsCountByUserid" parameterType="MessageEntity"
 			resultMap="MsgResultMap">
-		SELECT count(1) from t_message t where receiver_id=#{userid} order by gmt_create desc
+	<![CDATA[
+		SELECT count(1) from t_message t where receiver_id=#{receiverId} and type >=#{start} and type <=#{end} order by gmt_create desc
+	]]>
 	</select>
 	
 	<update id="setMsgAsRead" parameterType="int">

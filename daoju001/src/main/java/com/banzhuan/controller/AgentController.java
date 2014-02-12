@@ -7,6 +7,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import net.sf.json.JSON;
 import net.sf.json.JSONObject;
@@ -49,7 +50,6 @@ import com.banzhuan.form.RegForm;
 import com.banzhuan.form.LoginForm;
 import com.banzhuan.form.SampleForm;
 import com.banzhuan.service.AgentService;
-import com.banzhuan.service.BuyerService;
 import com.banzhuan.util.CookieUtil;
 import com.banzhuan.util.JsonUtil;
 import com.banzhuan.util.StringUtil;
@@ -65,9 +65,6 @@ public class AgentController extends BaseController{
 	@Autowired
 	@Qualifier("agentService")
 	private AgentService agentService;
-	@Autowired
-	@Qualifier("buyerService")
-	private BuyerService buyerService;
 	/**
 	 * 通用URL跳转， 统一将  /agent/*** 等未映射的URL重定向到login页面
 	 * @return
@@ -169,9 +166,7 @@ public class AgentController extends BaseController{
 					{
 						FileCopyUtils.copy(f.getBytes(), file);
 				
-						Util.cropImage(f.getContentType().split("/")[1], file.getPath(), Integer.parseInt(size.split(",")[0]),
-								Integer.parseInt(size.split(",")[1]), Integer.parseInt(size.split(",")[2]),
-								Integer.parseInt(size.split(",")[3]), path + "/" + account.getLogo());
+						Util.cropImage(f.getContentType().split("/")[1], file.getPath(), size, path + "/" + account.getLogo());
 
 					} catch (IOException e) {
 						logger.error("upload company logo error:"
@@ -257,7 +252,7 @@ public class AgentController extends BaseController{
 		mv.addObject("total", total);
 		mv.addObject("totalPage", totalPage);
 
-		result = buyerService.getAllMsgs(userId, new RowBounds((page-1)*Constant.LIST_PAGE_SIZE, Constant.LIST_PAGE_SIZE));
+		result = agentService.getAllMsgs(userId, new RowBounds((page-1)*Constant.LIST_PAGE_SIZE, Constant.LIST_PAGE_SIZE));
 		
 		mv.addObject("msgs", result.get("msgs"));
 		return mv;
@@ -332,6 +327,7 @@ public class AgentController extends BaseController{
 		{
 			agentService.insertAnswer(answerForm, account);
 		}
+		JsonUtil.sendImg(response, "");
 	}
 	
 	@RequestMapping(value="/editanswer")
@@ -444,15 +440,16 @@ public class AgentController extends BaseController{
 	
 	@RequestMapping(value = "uploadfile_gc", produces="text/plain;charset=UTF-8")  
 	@ResponseBody
-	public String uploadfile_gc(HttpServletRequest request, HttpServletResponse response, @ModelAttribute("account")Account account)
+	public String uploadfile_gc(HttpServletRequest request, HttpServletResponse response)
 	{
+		Account account = (Account) WebUtils.getSessionAttribute(request, "account");
 		String responseStr="";  
 		MultipartHttpServletRequest r = (MultipartHttpServletRequest) request;
 		  
         MultipartFile f = r.getFile("gcLink");    
         String path = request.getSession().getServletContext().getRealPath("/goodcase");
-		String link = "../goodcase/" + String.valueOf(account.getUserId()) + "/" + StringUtil.getTodayString() + "/" + f.getOriginalFilename();
-		path += "/" + String.valueOf(account.getUserId()) + "/" + StringUtil.getTodayString() + "/";
+		String link = "../goodcase/"  + "/" + StringUtil.getTodayString() + "/" + f.getOriginalFilename();
+		path += "/"  + "/" + StringUtil.getTodayString() + "/";
 		File file = new File(path + f.getOriginalFilename());
 		file.getParentFile().mkdirs();  
 		file.getParentFile().mkdirs();  
@@ -507,7 +504,8 @@ public class AgentController extends BaseController{
 					return mv;
 				}
 
-
+				int gcCnt = agentService.getGoodcaseCount(account.getUserId());
+				account.setGcCnt(gcCnt);
 				JsonUtil.showAlert(response, "上传案例", "上传案例成功~~", "确定", "", "");
 			}
 			return mv;
@@ -558,15 +556,16 @@ public class AgentController extends BaseController{
 	
 	@RequestMapping(value = "uploadfile_sample", produces="text/plain;charset=UTF-8")  
 	@ResponseBody
-	public String uploadfile_sample(HttpServletRequest request, HttpServletResponse response, @ModelAttribute("account")Account account)
+	public String uploadfile_sample(HttpServletRequest request, HttpServletResponse response)
 	{
 		String responseStr = "";
 		MultipartHttpServletRequest r = (MultipartHttpServletRequest) request;
 		  
         MultipartFile f = r.getFile("sampleLink");    
         String path = request.getSession().getServletContext().getRealPath("/sample");
-		String link = "../sample/" + String.valueOf(account.getUserId()) + "/" + StringUtil.getTodayString() + "/" + f.getOriginalFilename();
-		path += "/" + String.valueOf(account.getUserId()) + "/" + StringUtil.getTodayString() + "/";
+
+		String link = "../sample/"  + StringUtil.getTodayString() + "/" + f.getOriginalFilename();
+		path += "/"  + StringUtil.getTodayString() + "/";
 		File file = new File(path + f.getOriginalFilename());
 		logger.info("before mkdir");
 		file.getParentFile().mkdirs();  
@@ -621,6 +620,8 @@ public class AgentController extends BaseController{
 					return mv;
 				}
 				
+				int sampleCnt = agentService.getSampleCount(account.getUserId());
+				account.setSampleCnt(sampleCnt);
 				JsonUtil.showAlert(response, "上传样本", "上传样本成功~~", "确定", "", "");
 			}
 			

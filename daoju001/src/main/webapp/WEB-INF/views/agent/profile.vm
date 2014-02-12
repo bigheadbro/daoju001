@@ -159,7 +159,7 @@
             </ul>
         </div>
         <div class="listitem mt15 clearfix">
-            <a id="submit_profile" class="save" href="#">保 存</a>
+            <a id="submit_profile" class="save" >保 存</a>
         </div>
 		<script>
 

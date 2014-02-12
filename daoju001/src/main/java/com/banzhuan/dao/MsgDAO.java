@@ -13,15 +13,15 @@ public interface MsgDAO {
 	
 	public int updateMessageById(MessageEntity buyer);
 	
-	public int getUnreadMsgCount(int userid);
+	public int getUnreadMsgCount(MessageEntity msg);
 	
-	int getMsgCount(int userid);
+	int getMsgCount(MessageEntity msg);
 	
-	public List<MessageEntity> getMsgsByUserid(int userid);
+	public List<MessageEntity> getMsgsByUserid(MessageEntity msg);
 	
-	public List<MessageEntity> getMsgsByUserid(int userid, RowBounds bound);
+	public List<MessageEntity> getMsgsByUserid(MessageEntity msg, RowBounds bound);
 	
-	int getMsgsCountByUserid(int userid);
+	int getMsgsCountByUserid(MessageEntity msg);
 	
 	int setMsgAsRead(int id);
 	

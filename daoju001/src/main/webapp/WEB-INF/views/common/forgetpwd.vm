@@ -18,7 +18,8 @@
 									email:"邮箱格式不正确"
 								}
 							},
-    						errorPlacement: function(error, element) {    
+    						errorPlacement: function(error, element) {   
+    							$(".error-msg").show();
     							var hasError = true;
     							$(".error-msg label").each(function(){
     								if($(this).attr("for") == error.attr("for")){
@@ -29,21 +30,22 @@
     							{
                                 	error.appendTo($(".error-msg"));     
     							}
-								else
-								{
-									$(".error-msg label").each(function(){
-									if($(this).attr("for") == error.attr("for")){
-										$(this).text(error.text());
-									}
-								});
-								}
+    							else
+    							{
+    								$(".error-msg label").each(function(){
+    									if($(this).attr("for") == error.attr("for")){
+    										$(this).text(error.text());
+    									}
+    								});
+    							}
                             },
     						success:function(label){
-								$(".error-msg label").each(function(){
-									if($(this).attr("for") == $(label).attr("for")){
-										$(this).text("");
-									}
-								}); 
+    							$(".error-msg").hide();
+    							$(".error-msg label").each(function(){
+    								if($(this).attr("for") == $(label).attr("for")){
+    									$(this).text("");
+    								}
+    							}); 
     						}
 						});
 					});
@@ -52,6 +54,9 @@
 				#springBind("form")
                 #if($status.errors.hasErrors())
                     ## Field error messages
+					<script>
+        			$(".error-msg").show();
+        			</script>
                     #foreach($f in $status.errors.fieldErrors)
                         #springBind("form.${f.field}")
                         #foreach($e in $status.errorMessages)

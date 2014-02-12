@@ -3,7 +3,7 @@
 <ul class="right-tab clearfix">
   <li><a href="newquestion">新建问题</a></li>
   <li><a href="oldquestion">我提的问题</a></li>
-  <li class="current"><a href="#">草稿箱</a></li>
+  <li class="current"><span>草稿箱</span></li>
 </ul>
 <div class="rigth-content">
   <div class="buyer-list">

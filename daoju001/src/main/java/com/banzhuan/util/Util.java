@@ -31,9 +31,8 @@ import javax.mail.internet.MimeUtility;
 
 public class Util {
 
-	private static int size = 300;
-	public static void cropImage(String lastdir, String srcpath, int x, int y, int width,
-            int height, String subpath) throws IOException 
+	
+	public static void cropImage(String lastdir, String srcpath, String aa, String subpath) throws IOException 
 	{
 		FileInputStream is = null;
         ImageInputStream iis = null;
@@ -67,8 +66,23 @@ public class Util {
              * 的左上顶点的坐标（x，y）、宽度和高度可以定义这个区域。
              */
             BufferedImage sourceImg =ImageIO.read(new FileInputStream(srcpath)); 
-            
+            int x,y,width,height,size;
+            if(StringUtil.isEmpty(aa))
+            {
+            	x = sourceImg.getWidth()/4;
+	    		y = sourceImg.getHeight()/4;
+	    		width = sourceImg.getWidth()/2;
+	            height = sourceImg.getHeight()/2;
+            }
+            else
+            {
+	            x = Integer.parseInt(aa.split(",")[0]);
+	    		y = Integer.parseInt(aa.split(",")[1]);
+	    		width = Integer.parseInt(aa.split(",")[2]);
+	            height = Integer.parseInt(aa.split(",")[3]);
+            }
             Rectangle rect;
+            size = sourceImg.getWidth() > sourceImg.getHeight()?sourceImg.getWidth() : sourceImg.getHeight();
             if(sourceImg.getWidth() > sourceImg.getHeight())
             {
             	rect = new Rectangle(x * sourceImg.getWidth() / size, y * sourceImg.getWidth() / size, 
@@ -178,9 +192,9 @@ public class Util {
 	    return fileName;
 	}
 	
-	public static void main(String[] args) {  
+/*	public static void main(String[] args) {  
 		String rec[] = {"346938819@qq.com", "123576884@qq.com", "410526674@qq.com"};
     	sendEmail("noreply@daoshifu.com","cisco123",rec,
     			"找回密码", "买了一个企业邮箱，测试一下自动发邮件功能，木哈哈", null, "", "UTF-8");
-    }
+    }*/
 }

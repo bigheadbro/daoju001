@@ -7,7 +7,7 @@
 		<div class="company-detail clearfix">
 			<div class="left">
 				<div class="logo">
-					<a href="#">
+					<a>
 						#if($!{agent.logo})
 							<img src="../logo/$!{agent.logo}" />
 						#else

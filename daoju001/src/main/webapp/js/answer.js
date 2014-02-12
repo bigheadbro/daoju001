@@ -36,13 +36,13 @@ $(function() {
 
 function hideanswer(){
 	$(".answer-win").hide();
-	$("#pagemask").hide();
+	$("#pagemask-answer").hide();
 	answershow = false;
 }
 function showanswer() {
-	$("#pagemask").css("width", $(document).width());
-	$("#pagemask").css("height", $(document).height());
-	$("#pagemask").show();
+	$("#pagemask-answer").css("width", $(document).width());
+	$("#pagemask-answer").css("height", $(document).height());
+	$("#pagemask-answer").show();
 	$(".answer-win").css("top",
 			$(window).height() / 2 + $(document).scrollTop() - 220);
 	$(".answer-win").css("left", $(document).width() / 2 - 300);

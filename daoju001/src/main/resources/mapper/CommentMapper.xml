@@ -4,7 +4,7 @@
 	<resultMap type="CommentEntity" id="CommentResultMap">
 	  <!---->
 		<id property="id" column="id" />
-
+		<!--0是问题中的评论，1是问答里的评论 -->
 		<id property="type" column="type" />
 		<!--评论内容 -->
 		<id property="content" column="content" />

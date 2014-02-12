@@ -24,7 +24,8 @@
 									required:"请输入密码"
 								}
 							},
-    						errorPlacement: function(error, element) {    
+    						errorPlacement: function(error, element) {   
+								$(".error-msg").show();
     							var hasError = true;
     							$(".error-msg label").each(function(){
     								if($(this).attr("for") == error.attr("for")){
@@ -38,13 +39,14 @@
 								else
 								{
 									$(".error-msg label").each(function(){
-									if($(this).attr("for") == error.attr("for")){
-										$(this).text(error.text());
-									}
-								});
+    									if($(this).attr("for") == error.attr("for")){
+    										$(this).text(error.text());
+    									}
+    								});
 								}
                             },
     						success:function(label){
+								$(".error-msg").hide();
 								$(".error-msg label").each(function(){
 									if($(this).attr("for") == $(label).attr("for")){
 										$(this).text("");
@@ -57,6 +59,9 @@
 			<div class="error-msg">
     			#springBind("form")
                 #if($status.errors.hasErrors())
+					<script>
+        			$(".error-msg").show();
+        			</script>
                     ## Field error messages
                     #foreach($f in $status.errors.fieldErrors)
                         #springBind("form.${f.field}")

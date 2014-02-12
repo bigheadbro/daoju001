@@ -1,14 +1,16 @@
 function imagepreview(file, view, call) {
 
-	var doc = document;
+	var maxHeight = 200,
+		maxWidth = 310,
+		doc = document;
 		
 	function setsize(info, img){
 		var iwidth, iheight;
-		if((info.width / view.clientWidth) > (info.height / view.clientHeight)){
-			iwidth =  view.clientWidth;
+		if((info.width / maxWidth) > (info.height / maxHeight)){
+			iwidth =  maxWidth;
 			iheight = Math.round(iwidth * info.height / info.width);
 		} else {
-			iheight = view.clientHeight;
+			iheight = maxHeight;
 			iwidth = Math.round(iheight * info.width / info.height);
 		}
 		with(view.style){
@@ -47,8 +49,8 @@ function imagepreview(file, view, call) {
 			reader.onerror = img.onerror = fireError;
 			img.onload = function(){
 				var info = {
-					height: img.height,//img.height<img.width?img.height:img.width,
-					width: img.width,//img.height<img.width?img.height:img.width,
+					height: img.height,
+					width: img.width,
 					name: image.name,
 					size: image.size
 				};

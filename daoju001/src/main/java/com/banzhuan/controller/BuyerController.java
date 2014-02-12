@@ -37,7 +37,6 @@ import com.banzhuan.form.BuyerProfileForm;
 import com.banzhuan.form.RegForm;
 import com.banzhuan.form.LoginForm;
 import com.banzhuan.form.QuestionForm;
-import com.banzhuan.service.AgentService;
 import com.banzhuan.service.BuyerService;
 import com.banzhuan.util.CookieUtil;
 import com.banzhuan.util.JsonUtil;
@@ -59,9 +58,7 @@ public class BuyerController extends BaseController{
 	@Autowired
 	@Qualifier("buyerService")
 	private BuyerService buyerService;
-	@Autowired
-	@Qualifier("agentService")
-	private AgentService agentService;
+
 	/**
 	 * 通用URL跳转， 统一将  /buyer/*** 等未映射的URL重定向到login页面
 	 * @return
@@ -264,9 +261,7 @@ public class BuyerController extends BaseController{
 					{
 						FileCopyUtils.copy(f.getBytes(), file);
 				
-						Util.cropImage(f.getContentType().split("/")[1], file.getPath(), Integer.parseInt(size.split(",")[0]),
-								Integer.parseInt(size.split(",")[1]), Integer.parseInt(size.split(",")[2]),
-								Integer.parseInt(size.split(",")[3]), path + "/" + account.getLogo());
+						Util.cropImage(f.getContentType().split("/")[1], file.getPath(), size, path + "/" + account.getLogo());
 
 					} catch (IOException e) {
 						logger.error("upload company logo error:"

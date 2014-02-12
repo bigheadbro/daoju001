@@ -71,16 +71,18 @@ var ratio = 120;
 
 		function setThumb(){
 			var cropSize = getSize();
-			if(cropSize.width > cropSize.height){
-				$(thumb).css("width",ratio);
-				$(thumb).css("height",ratio*cropSize.height/cropSize.width);
-			}else{
-				$(thumb).css("width",ratio*cropSize.width/cropSize.height);
-				$(thumb).css("height",ratio);
-			}
-			
-			var rx = cropSize.aeraWidth / cropSize.width * thumb.width();
-			var ry = cropSize.aeraHeight / cropSize.height * thumb.height();
+				//rx = cropSize.aeraWidth / cropSize.width * thumb.width(),
+				//ry = cropSize.aeraHeight / cropSize.height * thumb.height();
+				if(cropSize.width > cropSize.height){
+					$(thumb).css("width",ratio);
+					$(thumb).css("height",ratio*cropSize.height/cropSize.width);
+				}else{
+					$(thumb).css("width",ratio*cropSize.width/cropSize.height);
+					$(thumb).css("height",ratio);
+				}
+				
+				var rx = cropSize.aeraWidth / cropSize.width * thumb.width();
+				var ry = cropSize.aeraHeight / cropSize.height * thumb.height();
 			$(thumb.children()).css({
 				width: rx,
 				height: ry,
@@ -104,7 +106,7 @@ var ratio = 120;
 			}
 		};
 
-		onChange(getSize());
+		
 		aera.mousedown(function(e) {
 			var cursor = $(e.target).css("cursor");
 			drag = {

@@ -1,7 +1,7 @@
 #set($layout = "/layout/agent_detail_layout.vm")
 <ul class="right-tab clearfix">
   <li><a href="uploadgc">上传案例</a></li>
-  <li class="current"><a href="#">案例管理</a></li>
+  <li class="current"><span>案例管理</span></li>
 </ul>
 <div class="rigth-content">
 	<div class="buyer-list">

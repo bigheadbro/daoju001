@@ -1,7 +1,7 @@
 #set($layout = "/layout/agent_detail_layout.vm")
 <script type="text/javascript" src="../js/mixed-handle.js"></script>
 <ul class="right-tab clearfix">
-  <li class="current"><a href="#">最新问题</a></li>
+  <li class="current"><span>最新问题</span></li>
   <li><a href="oldquestion">已回答的问题</a></li>
   <li><a href="draft">草稿箱</a></li>
 </ul>
@@ -10,7 +10,7 @@
 	#foreach($question in $questions)
 		<div class="listitem">
 			<div class="clearfix">
-    			<a class="mixed" href="/question/$!{question.id}">$!{question.content}</a>
+    			<a class="mixed" href="/questions/$!{question.id}">$!{question.content}</a>
     			<span class="time">$stringUtil.formatDate($!{question.gmtCreate})</span>
 			</div>
 		</div>

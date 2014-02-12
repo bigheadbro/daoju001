@@ -16,6 +16,7 @@ import com.banzhuan.entity.BuyerEntity;
 import com.banzhuan.entity.MessageEntity;
 import com.banzhuan.entity.QuestionEntity;
 import com.banzhuan.common.Account;
+import com.banzhuan.common.Constant;
 import com.banzhuan.common.Result;
 import com.banzhuan.form.BuyerProfileForm;
 import com.banzhuan.form.RegForm;
@@ -358,12 +359,20 @@ public class BuyerService {
 	
 	public int getUnreadMsgCount(int userid)
 	{
-		return msgDAO.getUnreadMsgCount(userid);
+		MessageEntity msg = new MessageEntity();
+    	msg.setReceiverId(userid);
+    	msg.setStart(Constant.MSG_BUYER_START);
+    	msg.setEnd(Constant.MSG_BUYER_END);
+		return msgDAO.getUnreadMsgCount(msg);
 	}
 	
 	public int getMsgCount(int userid)
 	{
-		return msgDAO.getMsgCount(userid);
+		MessageEntity msg = new MessageEntity();
+    	msg.setReceiverId(userid);
+    	msg.setStart(Constant.MSG_BUYER_START);
+    	msg.setEnd(Constant.MSG_BUYER_END);
+		return msgDAO.getMsgCount(msg);
 	}
 	
 	public int getUserQuestionCount(int userid)
@@ -378,7 +387,11 @@ public class BuyerService {
 	public Result getAllMsgs(int userid, RowBounds bound)
 	{
 		Result result = new Result();
-		List<MessageEntity> msgs = msgDAO.getMsgsByUserid(userid,bound);
+		MessageEntity msg = new MessageEntity();
+    	msg.setReceiverId(userid);
+    	msg.setStart(Constant.MSG_BUYER_START);
+    	msg.setEnd(Constant.MSG_BUYER_END);
+		List<MessageEntity> msgs = msgDAO.getMsgsByUserid(msg,bound);
 		result.add("msgs", msgs);
 		return result;
 	}

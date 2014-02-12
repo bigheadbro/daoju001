@@ -331,7 +331,7 @@ ul.pa-answer{margin-top:10px;}
 .reg-right .goodservice h2{font-size:24px;color:#707070;}
 .reg-right .goodservice p{font-size:13px;color:#707070;line-height:20px;}
 
-.error-msg{border-radius:8px;background-color:#ffc8c8;border:1px solid #cc3333;text-align:center;color:#cc3333;font-size:14px;line-height: 40px;}
+.error-msg{display:none;border-radius:8px;background-color:#ffc8c8;border:1px solid #cc3333;text-align:center;color:#cc3333;font-size:14px;line-height: 40px;margin-bottom: 10px;}
 .error-msg label{display:block;}
 em.error{} 
 
@@ -405,8 +405,8 @@ opacity: .3;
 .uploadlogo-win .content .right{float:left;margin-top:100px;}
 .uploadlogo-win .content .right .save{display:block;background-color:#63a200;color:white;border-radius:4px;text-align:center;padding:10px 20px;margin-top:20px;font-size:16px}
 .uploadlogo-win .content .thumb-container{background-color: #E0E0E0;border-radius: 8px;}
-.uploadlogo-win .content .preview-wrap{height: 200px;width: 310px;background-color: #E0E0E0;border-radius: 8px;overflow:hidden;text-align:center;display:table;}
-.uploadlogo-win .content .preview-out{display:table-cell;vertical-align:middle;}
+.uploadlogo-win .content .preview-wrap{min-height: 200px;width: 310px;background-color: #E0E0E0;border-radius: 8px;overflow:hidden;text-align:center;display:table;}
+.uploadlogo-win .content .preview-out{display:table-cell;vertical-align:middle;} 
 .uploadlogo-win .content .preview{height:200px;width:310px;}
 .thumb-wrap{border-radius: 5px;width:120px;height:120px;overflow:hidden;text-align:center;display:table;float:left;}
 .uploadlogo-win .content .thumb{margin:0 auto;max-width:120px;max-height:120px;}

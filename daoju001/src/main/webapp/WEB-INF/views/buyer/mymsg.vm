@@ -12,18 +12,18 @@
                 
 				#if($!{msg.type} == 1)	
 					<a href="/agents/$!{msg.senderId}">$!{msg.senderName}</a>
-				#elseif($!{msg.type} == 2)
+				#elseif($!{msg.type} == 2  || $!{msg.type} == 4)
 					<a href="/agents/$!{msg.senderId}">$!{msg.senderName}</a>
-				#elseif($!{msg.type} == 3)
+				#elseif($!{msg.type} == 3 || $!{msg.type} == 5)
 					<a href="/buyer/$!{msg.senderId}">$!{msg.senderName}</a>
 				#else
 					系统信息,
 				#end
 				#if($!{msg.type} == 1)	
 					提供了解决方案,
-				#elseif($!{msg.type} == 2)
+				#elseif($!{msg.type} == 2 || $!{msg.type} == 4)
 					回复了你,
-				#elseif($!{msg.type} == 3)
+				#elseif($!{msg.type} == 3 || $!{msg.type} == 5)
 					回复了你,
 				#else
 					系统信息,

@@ -189,7 +189,7 @@
 			<div class="hot-question-listitem first clearfix">
 				<div class="hidden">$!{question.content}</div>
 				<div class="logo">
-					<a>
+					<a href="/users/$!{question.buyerId}">
 						#if($!{question.userLogo})
 							<img src="../logo/$!{question.userLogo}" />
 						#else
@@ -199,7 +199,7 @@
 				</div>
 				<div class="content">
 					<ul>
-						<li class="name"><p>$!{question.userName}</p></li>
+						<li class="name"><a href="/users/$!{question.buyerId}">$!{question.userName}</a></li>
 						<li class="title clearfix">
 							<div class="questions-param">
     							#if($!{question.industry} > 0)
@@ -249,7 +249,7 @@
 		<div class="goodcase-listitem clearfix">
 		  <div class="agent clearfix">
 				<div class="logo">
-					<a>
+					<a href="/agents/$!{gc.agentId}">
 						#if($!{gc.agentLogo})
 							<img src="../logo/$!{gc.agentLogo}" />
 						#else
@@ -260,7 +260,7 @@
 				<div class="content">
 					<ul>
 						<li class="name clearfix">
-							<a href="/agent/$!{gc.agentId}">$!{gc.agentName}</a>
+							<a href="/agents/$!{gc.agentId}">$!{gc.agentName}</a>
 							#if($gc.isVerified())
 								<a  class="fancybox-v" title="$!{gc.agentName}的代理证书" href="$!{gc.verifiedLink}"><img src="../img/v.png" /></a>
 							#end

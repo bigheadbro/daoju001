@@ -15,7 +15,7 @@
 				#elseif($!{msg.type} == 2 || $!{msg.type} == 4)
 					<a href="/agents/$!{msg.senderId}">$!{msg.senderName}</a>
 				#elseif($!{msg.type} == 3 || $!{msg.type} == 5)
-					<a href="/buyer/$!{msg.senderId}">$!{msg.senderName}</a>
+					<a href="/users/$!{msg.senderId}">$!{msg.senderName}</a>
 				#else
 					刀师傅,
 				#end

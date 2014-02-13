@@ -19,7 +19,7 @@
                         #foreach($agent in $agentList)
                             <div class="agent-info clearfix">
                                 <div class="agent-logo">
-                                    <a>
+                                    <a href="/agents/$!{gc.agentId}">
 										#if($!{agent.logo})
 											<img src="../logo/$!{agent.logo}" />
 										#else

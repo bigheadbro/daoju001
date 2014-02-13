@@ -12,7 +12,7 @@
 			<div class="hot-question-listitem first clearfix">
 				<div class="hidden">$!{question.content}</div>
 				<div class="logo">
-					<a>
+					<a href="/users/$!{question.buyerId}">
 						#if($!{question.userLogo})
 							<img src="../logo/$!{question.userLogo}" />
 						#else
@@ -22,7 +22,7 @@
 				</div>
 				<div class="content">
 					<ul>
-						<li class="name"><p>$!{question.userName}</p></li>
+						<li class="name"><a href="/users/$!{question.buyerId}">$!{question.userName}</a></li>
 						<li class="title clearfix">
 							<div class="questions-param">
     							#if($!{question.industry} > 0)
@@ -32,10 +32,10 @@
     								<span>$stringUtil.getMethod($!{question.processMethod})</span>
     							#end
     							#if($!{question.wpHardness} > 0)
-    								<span>$stringUtil.getMaterial($!{question.wpHardness})</span>
-    							#end
+    								<span>$stringUtil.getHardness($!{question.wpHardness})</span>
+								#end
     							#if($!{question.wpMaterial} > 0)
-    								<span>$stringUtil.getHardness($!{question.wpMaterial})</span>
+    								<span>$stringUtil.getMaterial($!{question.wpMaterial})</span>
     							#end
     						</div>
 							<div class="questions-type">
@@ -74,10 +74,10 @@
                 					</div>
             						<div class="agent-detail">
             							<h2 class="clearfix">
-											#if($!{comment.agentId})
+											#if($!{comment.agentId} != 0)
 												<a class="agent-name" href="/agents/$!{comment.agentId}">$!{comment.userName}</a>
 											#else
-												<a class="agent-name" href="">$!{comment.userName}</a>
+												<a class="agent-name" href="/users/$!{comment.buyerId}">$!{comment.userName}</a>
 											#end
 											#if($!{comment.link})
 												<a class="fancybox-v" title="$!{comment.userName}的代理证书" href="$!{comment.link}"><img src="../img/v.png" /></a>
@@ -195,7 +195,7 @@
                 					</li>
 									#end
                 					<li class="info clearfix">
-                						<p> <span class="answer"><a class="comments">评论(<span id="answer-comments">$!{answer.cntComment}</span>)</a></span></p>
+                						<p> <span class="answer"><a class="comments">评论(<span class="answer-comments">$!{answer.cntComment}</span>)</a></span></p>
                 					</li>
                 					<li class="comment">
             						    <div class="answer-arrow">
@@ -203,7 +203,7 @@
             							    <em class="S_bg1_c">◆</em>
             							</div>
             							#foreach($comment in ${answer.comments})
-           						  	<ul class="comment-item clearfix">
+           						  		<ul class="comment-item clearfix">
             								<li class="agent-info clearfix">
             									<div class="logo">
                             						<a>
@@ -216,10 +216,10 @@
                             					</div>
                         						<div class="agent-detail">
                         							<h2 class="clearfix">
-            											#if($!{comment.agentId})
+            											#if($!{comment.agentId} != 0)
             												<a class="agent-name" href="/agents/$!{comment.agentId}">$!{comment.userName}</a>
             											#else
-            												<a class="agent-name" href="">$!{comment.userName}</a>
+            												<a class="agent-name" href="/users/$!{comment.buyerId}">$!{comment.userName}</a>
             											#end
             											#if($!{comment.link})
             												<a class="fancybox-v" title="$!{comment.userName}的代理证书" href="$!{comment.link}"><img src="../img/v.png" /></a>
@@ -227,22 +227,22 @@
                         							</h2>
                         							<h4>$!{comment.brandName}</h4>
                         						</div>
-            							  </li>
-            							  <li class="comment-cont">
+											</li>
+            							    <li class="comment-cont">
             								  <p>
             									 $!{comment.content}
             								  </p>
-            							  </li>
-            							  <li class="info">
-            								<p class="clearfix"><span class="time">$stringUtil.formatDate($!{comment.gmtCreate})</span><a class="reply-comment-anser" commentid="$!{comment.id}">回复</a></p>
-            							  </li>
+            							    </li>
+            							    <li class="info">
+												<p class="clearfix"><span class="time">$stringUtil.formatDate($!{comment.gmtCreate})</span><a class="reply-comment-answer" commentid="$!{comment.id}">回复</a></p>
+            							    </li>
             							</ul>
             							#end
-            							<form id="form_comment_answer" method="post" action="/addcomment">
+            							<form class="form_comment_answer" method="post" action="/addcomment">
             								<!-- 隐藏字段，用于标示是表单提交 -->
             								<input type="hidden" name="do_submit" value="true"/>
 											#springBind("form.commentId")
-											<input type="hidden" name="${status.expression}" id="answerCommentId" value="0" />
+											<input type="hidden" name="${status.expression}" class="answerCommentId" value="0" />
 											#springBind("form.type")
             								<input type="hidden" name="${status.expression}" value="1" />
             								#springBind("form.parentId")
@@ -265,41 +265,49 @@
             								#end
             								<div class="reply-cont clearfix">
             									#springBind("form.content")
-                                    			<input type="text" name="${status.expression}"  id="answerCommentContent" class="dsf-form-text-input bargin" />
-            									<a id="submit_comment_answer" class="reply">回   复</a>
+                                    			<input type="text" name="${status.expression}"  class="answerCommentContent" class="dsf-form-text-input bargin" />
+            									<a class="submit_comment_answer reply">回   复</a>
                                 			</div>
-            								<script>
-                                				$(function() {	
-                                					$("#form_comment_answer").validate({
-                                						rules:{
-                                							content:{
-                                								required:true
-                                							}
-                                						},
-                                						messages:{
-                                							content:{
-                                								required:"请输入评论内容"
-                                							}
-                                						},
-                                						errorElement:"em",
-														submitHandler: function(form) {
-                                                 		 	$(form).ajaxSubmit({
-                                        						dataType:'json',
-                                        						success:processAnswerComment
-                                        					});
-															$(form)[0].reset();
-                                        				}
-                                					});
-            										$("#submit_comment_answer").click(function () {
-                                    					$(this).submit();
-                                    				});
-                                				});
-            									
-                                			</script>
+            								
             							</form>
             						</li>
                 				</ul>
-                			#end
+							#end
+							<script>
+                				$(function() {	
+                					$(".form_comment_answer").each(function(){
+										var form = $(this);
+    									form.validate({
+                    						rules:{
+                    							content:{
+                    								required:true
+                    							}
+                    						},
+                    						messages:{
+                    							content:{
+                    								required:"请输入评论内容"
+                    							}
+                    						},
+                    						errorElement:"em",
+    										submitHandler: function(form) {
+                                     		 	$(form).ajaxSubmit({
+                            						dataType:'json',
+                            						success:processAnswerComment
+                            					});
+    											$(form)[0].reset();
+                            				}
+                						});
+									});
+									$(".submit_comment_answer").each(function(){
+										var submit = $(this);
+										submit.click(function () {
+											$(this).parent().parent(".form_comment_answer").attr("current-answer","1");
+                        					$(this).parent().parent(".form_comment_answer").submit();
+                        				});
+									});
+                				});
+								
+                			</script>
 						</li>
 					</ul>
 				</div>

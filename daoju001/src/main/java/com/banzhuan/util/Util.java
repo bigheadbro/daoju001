@@ -66,7 +66,8 @@ public class Util {
              * 的左上顶点的坐标（x，y）、宽度和高度可以定义这个区域。
              */
             BufferedImage sourceImg =ImageIO.read(new FileInputStream(srcpath)); 
-            int x,y,width,height,size;
+            int x,y,width,height;
+            
             if(StringUtil.isEmpty(aa))
             {
             	x = sourceImg.getWidth()/4;
@@ -82,17 +83,17 @@ public class Util {
 	            height = Integer.parseInt(aa.split(",")[3]);
             }
             Rectangle rect;
-            size = sourceImg.getWidth() > sourceImg.getHeight()?sourceImg.getWidth() : sourceImg.getHeight();
-            if(sourceImg.getWidth() > sourceImg.getHeight())
+            if(sourceImg.getHeight()/200 < sourceImg.getWidth()/310)
             {
-            	rect = new Rectangle(x * sourceImg.getWidth() / size, y * sourceImg.getWidth() / size, 
-            			width * sourceImg.getWidth() / size, height * sourceImg.getWidth() / size);
+            	rect = new Rectangle(x  * sourceImg.getWidth()/310, y  * sourceImg.getWidth()/310, 
+            			width  * sourceImg.getWidth()/310, height  * sourceImg.getWidth()/310);
             }
             else
             {
-            	rect = new Rectangle(x * sourceImg.getHeight() / size, y * sourceImg.getHeight() / size, 
-            			width * sourceImg.getHeight() / size, height * sourceImg.getHeight() / size);
+            	rect = new Rectangle(x  * sourceImg.getHeight()/200, y  * sourceImg.getHeight()/200, 
+            			width  * sourceImg.getHeight()/200, height  * sourceImg.getHeight()/200);
             }
+  
             // 提供一个 BufferedImage，将其用作解码像素数据的目标。
             param.setSourceRegion(rect);
             /*

@@ -1,0 +1,50 @@
+#set($layout = "/layout/index_layout.vm")
+<div class="main-content-container clearfix">
+	<div class="main-list-container width630">
+		<div class="gc-list-header">
+			<h1><span>普通用户 ></span><span class="regular">$!{buyer.username}</span></h1>
+		</div>
+		<div class="company-detail clearfix">
+			<div class="left">
+				<div class="logo">
+					<a>
+						#if($!{buyer.logo})
+							<img src="../logo/$!{buyer.logo}" />
+						#else
+							<img src="../img/avatar.png" />
+						#end
+					</a>
+				</div>
+			</div>
+			<div class="right">
+				<div class="company-base-info">
+					<h3 class="clearfix">
+						<span>$!{buyer.username}</span>
+					</h3>
+				</div>
+				<div class="company-contact-info">
+					<div class="item clearfix">
+						<div class="key">地址：</div>
+						<div class="value">$!{buyer.companyAddress}</div>
+					</div>
+					<div class="item clearfix">
+						<div class="key">电话：</div>
+						<div class="value">$!{buyer.companyPhone}</div>
+					</div>
+					<div class="item clearfix">
+						<div class="key">联系人姓名：</div>
+						<div class="value">$!{buyer.contactName}</div>
+					</div>
+					<div class="item clearfix">
+						<div class="key">手机：</div>
+						<div class="value">$!{buyer.contactPhone}</div>
+					</div>
+					<div class="item clearfix">
+						<div class="key">QQ：</div>
+						<div class="value">$!{buyer.contactQq}</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

@@ -286,7 +286,7 @@ public class CommonController extends BaseController{
 				Date now = new Date();
 				SimpleDateFormat time=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"); 
 				String aa = time.format(now);
-				JsonUtil.sendComment(response, form.getContent(), form.getUserName(), form.getUserLogo(), form.getBrandName(), form.getVerifiedLink(), StringUtil.formatDate(aa));
+				JsonUtil.sendComment(response, form.getContent(), form.getUserName(), form.getUserLogo(), form.getBrandName(), form.getVerifiedLink(), StringUtil.formatDate(aa),ret);
 			}
 		}
 		return; 
@@ -403,5 +403,48 @@ public class CommonController extends BaseController{
 		
 		return mv;
 		
+	}
+	
+	@RequestMapping(value = "users/{aid}")
+	public ModelAndView buyer(final HttpServletRequest request,final HttpServletResponse response, @PathVariable String aid)
+	{
+		ModelAndView mv = new ModelAndView("/common/buyer");
+		int userid = Integer.parseInt(aid);
+		//add agent
+		BuyerEntity buyer = buyerService.getBuyerEntity(userid);
+		if(buyer == null)
+		{
+			return new ModelAndView(new RedirectView("/index")); 
+		}
+		mv.addObject("buyer", buyer);
+
+		
+		return mv;
+		
+	}
+	
+	@RequestMapping(value="/ask")
+	public void ask(HttpServletRequest request, HttpServletResponse response) 
+	{
+		Account account = (Account) WebUtils.getSessionAttribute(request, "account");
+		if(account == null)
+		{
+			JsonUtil.checkAskStatus(response, 1);
+			return;
+		}
+		else
+		{
+			if(account.isLogin())
+			{
+				if(account.isBuyer())
+				{
+					JsonUtil.checkAskStatus(response, 2);
+				}
+				if(account.isAgent())
+				{
+					JsonUtil.checkAskStatus(response, 3);
+				}
+			}
+		}
 	}
 }

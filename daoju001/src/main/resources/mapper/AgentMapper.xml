@@ -73,7 +73,7 @@
 	
 	<select id="getMainagents" 
 			resultMap="AgentResultMap">
-		SELECT * from t_agent t order by gmt_create desc limit 4
+		SELECT * from t_agent t order by gmt_create desc limit 7
 	</select>
 	
 	<!-- 新代理商信息 -->

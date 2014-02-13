@@ -168,7 +168,7 @@ $(function() {
 		<div class="goodcase-listitem clearfix">
 		  <div class="agent clearfix">
 				<div class="logo">
-					<a>
+					<a href="/agents/$!{gc.agentId}">
 						#if($!{gc.agentLogo})
 							<img src="../logo/$!{gc.agentLogo}" />
 						#else
@@ -179,7 +179,7 @@ $(function() {
 				<div class="content">
 					<ul>
 						<li class="name clearfix">
-							<a href="/agent/$!{gc.agentId}">$!{gc.agentName}</a>
+							<a href="/agents/$!{gc.agentId}">$!{gc.agentName}</a>
 							#if($gc.isVerified())
 								<a href="$!{gc.verifiedLink}"><img src="../img/v.png" /></a>
 							#end

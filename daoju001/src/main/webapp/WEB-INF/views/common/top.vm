@@ -1,6 +1,34 @@
 <script type="text/javascript" src="../js/jquery.cookie.js"></script>
 <script type="text/javascript" src="../js/top-nav.js"></script>
+
 <div class="main-head-container">
+	<script>
+    $(function() {
+    	$(".ask").click(function() {
+    		$.ajax( {   
+    		    type : "POST",   
+				url : "/ask", 
+    		    dataType: "json",   
+    		    success : function(data) {   
+    		    	switch(data.status)
+    		    	{
+    		    	case 1:
+    		    		window.location.href='/log';
+    		    	  break;
+    				case 2:
+    		    		window.location.href='/buyer/newquestion';
+    		    	  break;
+    				case 3:
+    		    		showAlert("",data.code,"","确定","");
+    		    	  break;
+    		    	}  
+    		    }
+    		});   
+    	});
+    
+    });
+    
+    </script>
     <div class="main-head-content clearfix">
         <div class="main-logo">
             <a href="http://www.daoshifu.com"><img src="../img/logo.png" /></a>
@@ -55,7 +83,7 @@
             </ul>
         </div>
         <div class="ask">
-            <a href="/buyer/newquestion">提问</a>
+            <a>提问</a>
         </div>
         <div class="login">
             #if(!$!session.getAttribute("account"))  

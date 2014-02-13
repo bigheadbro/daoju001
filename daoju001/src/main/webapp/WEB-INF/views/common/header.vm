@@ -14,7 +14,12 @@
     	$(document).ready(function() {
     		$('.fancybox-v').fancybox({
     			openEffect : 'elastic',
-    			closeEffect : 'elastic'
+    			closeEffect : 'elastic',
+				helpers: {
+                    overlay: {
+                      locked: false
+                    }
+                  }
     		});
     	});
     </script>

@@ -268,6 +268,25 @@ public class JsonUtil {
         }  
 	}
 	
+	public static void sendMsgCount(HttpServletResponse response, int msgCount)
+	{
+		JSONObject object = new JSONObject();  
+        response.setContentType("text/Xml;charset=gbk");  
+	
+        object.element("msgCount", msgCount);
+        PrintWriter out = null;  
+        try {  
+            out = response.getWriter();  
+            out.println(object.toString());  
+        }  
+        catch (IOException ex1) {  
+            ex1.printStackTrace();  
+        }  
+        finally {  
+            out.close();  
+        }  
+	}
+	
 	public static void showErrorMsg(HttpServletResponse response)
 	{
 		PrintWriter out = null;  

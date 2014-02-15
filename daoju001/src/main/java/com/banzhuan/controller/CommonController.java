@@ -447,4 +447,31 @@ public class CommonController extends BaseController{
 			}
 		}
 	}
+	
+	@RequestMapping(value="/getMsgCount")
+	public void getMsgCount(HttpServletRequest request, HttpServletResponse response) 
+	{
+		Account account = (Account) WebUtils.getSessionAttribute(request, "account");
+		if(account == null)
+		{
+			JsonUtil.sendMsgCount(response, 0);
+			return;
+		}
+		else
+		{
+			if(account.isLogin())
+			{
+				if(account.isBuyer())
+				{
+					account.setUnreadMsgCount(buyerService.getUnreadMsgCount(account.getUserId()));
+					JsonUtil.sendMsgCount(response, account.getUnreadMsgCount());
+				}
+				if(account.isAgent())
+				{
+					account.setUnreadMsgCount(agentService.getUnreadMsgCount(account.getUserId()));
+					JsonUtil.sendMsgCount(response, account.getUnreadMsgCount());
+				}
+			}
+		}
+	}
 }

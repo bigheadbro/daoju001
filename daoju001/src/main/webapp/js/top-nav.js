@@ -14,5 +14,48 @@ $(function() {
 		$(".top-dropdown-reg").hide();
 		$(this).children(".auth-reg").css("background-color","#0099cb");
 	});
+	$(".ask").click(function() {
+		$.ajax( {   
+		    type : "POST",   
+			url : "/ask", 
+		    dataType: "json",   
+		    success : function(data) {   
+		    	switch(data.status)
+		    	{
+		    	case 1:
+		    		window.location.href='/log';
+		    	  break;
+				case 2:
+		    		window.location.href='/buyer/newquestion';
+		    	  break;
+				case 3:
+		    		showAlert("",data.code,"","确定","");
+		    	  break;
+		    	}  
+		    }
+		});   
+	});
+	(function poll(){
+		setTimeout(function() {
+		    $.ajax({ 
+		    	type : "POST",   
+		    	url: "/getMsgCount", 
+		    	success: function(data){
+			        if(data.msgCount>0){
+			        	$(".zg-top").show();
+			        	$(".zg-noti-number").each(function(){
+			        		$(this).text(data.msgCount);
+			        	});
+			        }
+			        else{
+			        	$(".zg-top").hide();
+			        }
+			    }, 
+			    dataType: "json", 
+			    complete: poll,
+			    timeout: 30000 
+		    });
+		}, 30000);
+	})();
 
 });

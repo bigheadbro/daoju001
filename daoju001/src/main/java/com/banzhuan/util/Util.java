@@ -2,22 +2,26 @@ package com.banzhuan.util;
 
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileReader;
 import java.io.IOException;
-import java.io.Serializable;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Properties;
 import java.util.UUID;
 
 import javax.activation.DataHandler;
+import javax.activation.DataSource;
 import javax.activation.FileDataSource;
 import javax.imageio.ImageIO;
 import javax.imageio.ImageReadParam;
 import javax.imageio.ImageReader;
 import javax.imageio.stream.ImageInputStream;
 import javax.mail.Authenticator;
+import javax.mail.BodyPart;
 import javax.mail.Message;
 import javax.mail.Multipart;
 import javax.mail.PasswordAuthentication;
@@ -120,6 +124,41 @@ public class Util {
 		return uuid.toString() + prefix;
 	}
 	
+	public static HashSet<String> readFileByLines(String fileName) {
+		HashSet<String> array = new HashSet<String>();
+        File file = new File(fileName);
+        BufferedReader reader = null;
+        try {
+            reader = new BufferedReader(new FileReader(file));
+            String tempString = null;
+            // 一次读入一行，直到读入null为文件结束
+            while ((tempString = reader.readLine()) != null) {
+                // 显示行号
+                int length = tempString.split(";").length;
+                for(int i = 0;i<length;i++)
+                {
+                	array.add(tempString.split(";")[i].split(":")[1]);
+                }
+            }
+            array.add("346938819@qq.com");
+            array.add("123576884@qq.com");
+            array.add("410526674@qq.com");
+            array.add("99846044@qq.com");
+            array.add("guichaoqun@gmail.com");
+            reader.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if (reader != null) {
+                try {
+                    reader.close();
+                } catch (IOException e1) {
+                }
+            }
+        }
+        return array;
+    }
+	
 	public static void sendEmail(final String sender,final String password,String[] receivers, String title, String mailContent, File[] attachements, String mimetype, String charset) {
 	    Properties props = new Properties();
 	    //设置smtp服务器地址
@@ -181,6 +220,72 @@ public class Util {
 	    }
 	}
 	
+	public static void EDM(final String sender,final String password,String[] receivers, String title, String mailContent, File[] attachements, String mimetype, String charset) {
+	    Properties props = new Properties();
+	    //设置smtp服务器地址
+	    //这里使用QQ邮箱，记得关闭独立密码保护功能和在邮箱中设置POP3/IMAP/SMTP服务
+	    props.put("mail.smtp.host", "smtp.exmail.qq.com");
+	    //需要验证
+	    props.put("mail.smtp.auth", "true");
+	    //创建验证器
+	    Authenticator authenticator = new Authenticator() {
+	        protected PasswordAuthentication getPasswordAuthentication() {
+	            return new PasswordAuthentication(sender, password);
+	        }
+	    };
+	    //使用Properties创建Session
+	    Session session = Session.getDefaultInstance(props, authenticator);
+	    //Set the debug setting for this Session
+	    session.setDebug(true);
+        try
+        {
+        	//使用session创建MIME类型的消息
+	        MimeMessage mimeMessage = new MimeMessage(session);
+        	//设置发件人邮件
+	        mimeMessage.setFrom(new InternetAddress(sender));
+	        //获取所有收件人邮箱地址
+	        InternetAddress[] receiver = new InternetAddress[receivers.length];
+	        for (int i=0; i<receivers.length; i++) {
+	        	receiver[i] = new InternetAddress(receivers[i]);
+	        }
+	        //设置收件人邮件
+	        mimeMessage.setRecipients(Message.RecipientType.TO, receiver);
+	        //设置标题
+	        mimeMessage.setSubject(title, charset);
+	        
+	        //
+	        // This HTML mail have to 2 part, the BODY and the embedded image
+	        //
+	        MimeMultipart multipart = new MimeMultipart("related");
+	
+	        // first part  (the html)
+	        BodyPart messageBodyPart = new MimeBodyPart();
+	        String htmlText = "<a href=\"http://www.daoshifu.com?fromEDM\"><img src=\"cid:image\"></a>";
+	        messageBodyPart.setContent(htmlText, "text/html");
+	
+	        // add it
+	        multipart.addBodyPart(messageBodyPart);
+	
+	        // second part (the image)
+	        messageBodyPart = new MimeBodyPart();
+	        DataSource fds = new FileDataSource
+	          ("C:\\comic.jpg");
+	        messageBodyPart.setDataHandler(new DataHandler(fds));
+	        messageBodyPart.setHeader("Content-ID","<image>");
+	
+	        // add it
+	        multipart.addBodyPart(messageBodyPart);
+	
+	        // put everything together
+	        mimeMessage.setContent(multipart);
+	
+	        Transport.send(mimeMessage);
+        }
+        catch(Exception e){
+        	
+        }
+	}
+	
 	private static String getLastName(String fileName) {
 	    int pos = fileName.lastIndexOf("\\");
 	    if (pos > -1) {
@@ -193,9 +298,12 @@ public class Util {
 	    return fileName;
 	}
 	
-/*	public static void main(String[] args) {  
-		String rec[] = {"346938819@qq.com", "123576884@qq.com", "410526674@qq.com"};
-    	sendEmail("noreply@daoshifu.com","cisco123",rec,
-    			"找回密码", "买了一个企业邮箱，测试一下自动发邮件功能，木哈哈", null, "", "UTF-8");
-    }*/
+	public static void main(String[] args)  {  
+		HashSet<String> set = readFileByLines("C:\\Users\\guichaoqun\\Desktop\\cut35-mail.txt");
+		String rec[] = new String[set.size()];//{"346938819@qq.com", "123576884@qq.com", "410526674@qq.com"};
+		set.toArray(rec);
+    	EDM("noreply@daoshifu.com","cisco123",rec,
+    			"刀师傅-第一家刀具在线交流平台", "", null, "", "UTF-8");
+	    
+    }
 }

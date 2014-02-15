@@ -46,14 +46,13 @@
 								#else
 									<span class="type3">求新</span>
 								#end
-								<span class="time">$stringUtil.formatDate($!{question.gmtModify})</span>
 							</div>
 						</li>
 						<li class="text clearfix">
 							<p>$!{question.content}</p>
 						</li>
 						<li class="info">
-							<p class="clearfix"><span class="answer"> <a class="comments">评论(<span id="question-comments">$!{commentsCnt}</span>)</a></span></p>
+							<p class="clearfix"><span class="time">$stringUtil.formatDate($!{question.gmtModify})</span> <span class="answer"> <a class="comments">评论(<span id="question-comments">$!{commentsCnt}</span>)</a></span></p>
 						</li>
 						<li class="comment">
 						    <div class="answer-arrow">
@@ -195,7 +194,7 @@
                 					</li>
 									#end
                 					<li class="info clearfix">
-                						<p> <span class="answer"><a class="comments">评论(<span class="answer-comments">$!{answer.cntComment}</span>)</a></span></p>
+                						<p>$stringUtil.formatDate($!{answer.gmtModify}) <span class="answer"><a class="comments">评论(<span class="answer-comments">$!{answer.cntComment}</span>)</a></span></p>
                 					</li>
                 					<li class="comment">
             						    <div class="answer-arrow">
@@ -265,7 +264,7 @@
             								#end
             								<div class="reply-cont clearfix">
             									#springBind("form.content")
-                                    			<input type="text" name="${status.expression}"  class="answerCommentContent" class="dsf-form-text-input bargin" />
+                                    			<input type="text" name="${status.expression}"  class="answerCommentContent dsf-form-text-input bargin" />
             									<a class="submit_comment_answer reply">回   复</a>
                                 			</div>
             								
@@ -335,7 +334,7 @@
 				<div class="content">
 					<ul>
 						<li class="name clearfix">
-							<a href="/agent/$!{gc.agentId}">$!{gc.agentName}</a>
+							<a href="/agents/$!{gc.agentId}">$!{gc.agentName}</a>
 							#if($gc.isVerified())
 								<a  class="fancybox-v" title="$!{gc.agentName}的代理证书" href="$!{gc.verifiedLink}"><img src="../img/v.png" /></a>
 							#end

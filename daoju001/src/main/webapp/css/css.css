@@ -41,6 +41,7 @@ top: 12px;
 margin-left: 15px;
 border: 2px solid #B1B1B1;
 }
+.zg-top{top:7px;left: 13px;}
 .company-info{width:400px;height:65px;resize:none;}
 div[contentEditable]{outline:0}
 .body-wrapper {position: relative;min-height: 100%;}
@@ -65,7 +66,7 @@ div[contentEditable]{outline:0}
 .main-head-container .main-head-content .nav ul li.current {background:#006e9c}
 .main-head-container .main-head-content .nav ul li a{display: block;padding: 17px 0 21px 0;width:110px;text-align:center}
 .main-head-container .main-head-content .nav ul li a:hover{color:white;background-color:#0086b2}
-.main-head-container .main-head-content .login{float:right;width:140px;font-size:14px;color:white;text-align: center;height: 59px;}
+.main-head-container .main-head-content .login{position: relative;float:right;width:140px;font-size:14px;color:white;text-align: center;height: 59px;}
 .main-head-container .main-head-content .login .auth-reg{display:block;padding:19px;text-align:center;}
 .main-head-container .main-head-content .login .top-dropdown-reg{position:absolute;display:none;background-color: #007298;z-index: 100;min-width: 140px;}
 .main-head-container .main-head-content .login .top-dropdown-reg li a{display:block;padding: 19px;text-align: center;}
@@ -104,7 +105,7 @@ div[contentEditable]{outline:0}
 .ques-type{border-bottom: 2px solid #00b4ff;margin-top: 5px;position:relative;}
 
 .hot-question-listitem .content li.index-answer{position: relative;border:1px solid #bebebe;background-color:#f0f0f0;padding:15px;border-radius: 2px;margin-top: 10px;}
-.hot-question-listitem .content li.index-answer .answer-arrow{position: absolute;left: 30px;z-index: 0;width: 22px;cursor: default;font-size: 23px;margin-top:-31px}
+.hot-question-listitem .content li.index-answer .answer-arrow{position: absolute;left: 100px;z-index: 0;width: 22px;cursor: default;font-size: 23px;margin-top:-31px}
 .hot-question-listitem .content li.index-answer .answer-arrow *{position: absolute;}
 .hot-question-listitem .content li.index-answer .answer-arrow .S_line1_c{color: #bebebe;}
 .hot-question-listitem .content li.index-answer .answer-arrow .S_bg1_c{margin-top:1px;color:#f0f0f0}
@@ -117,7 +118,7 @@ div[contentEditable]{outline:0}
 .hot-question-listitem .logo{float:left;border-radius: 5px;width:44px;height:44px;overflow:hidden;text-align:center;display:table;background-color:white;}
 .hot-question-listitem .logo a{display:table-cell;vertical-align:middle;}
 .hot-question-listitem .logo img{margin:0 auto;max-width:44px;max-height:44px;}
-.hot-question-listitem .content{float:left;width:504px;margin-left:10px;}
+.hot-question-listitem .content{float:left;width:525px;margin-left:10px;}
 .hot-question-listitem.first .content{background:none}
 .hot-question-listitem .content li.name{font-size:14px;font-weight: 700;color:#606060;margin-top:7px}
 .hot-question-listitem .content li.name p{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
@@ -125,19 +126,19 @@ div[contentEditable]{outline:0}
 .hot-question-listitem .content li.title .questions-param{margin-top:8px;float:left;}
 .hot-question-listitem .content li.title .questions-param span{display:inline-block;background-color:#dddddd;padding:2px 12px;border-radius:20px;color: black;}
 .hot-question-listitem .content li.title .questions-type{float:right;margin-top:8px;}
-.hot-question-listitem .content li.title .type1{background-color:#ff4444;border-radius:7px;text-align:center;color:white;display: inline-block;padding: 2px 8px;margin-right: 12px;}
-.hot-question-listitem .content li.title .type2{background-color:#ff9c00;border-radius:7px;text-align:center;color:white;display: inline-block;padding: 2px 8px;margin-right: 12px;}
-.hot-question-listitem .content li.title .type3{background-color:#1aa885;border-radius:7px;text-align:center;color:white;display: inline-block;padding: 2px 8px;margin-right: 12px;}
+.hot-question-listitem .content li.title .type1{background-color:#ff4444;border-radius:7px;text-align:center;color:white;display: inline-block;padding: 2px 8px;margin-right: 0px;}
+.hot-question-listitem .content li.title .type2{background-color:#ff9c00;border-radius:7px;text-align:center;color:white;display: inline-block;padding: 2px 8px;margin-right: 0px;}
+.hot-question-listitem .content li.title .type3{background-color:#1aa885;border-radius:7px;text-align:center;color:white;display: inline-block;padding: 2px 8px;margin-right: 0px;}
 .hot-question-listitem .content li.title .time{color:#999;display: inline-block;}
 .hidden{display:none}
 .hot-question-listitem .content li.text{font-size:13px;line-height: 20px;text-overflow:ellipsis;color:black;margin-top:10px}
 .hot-question-listitem .content li.text img{display:block;width: 106px;margin-right: 15px;}
-.hot-question-listitem .content li.info{font-size:12px;line-height: 20px;color:#999999;margin: 4px 0 0 0;}
+.hot-question-listitem .content li.info{font-size:12px;line-height: 20px;color:#999999;margin: 6px 0 0 0;}
 .hot-question-listitem .content li.info span.answer{float:right;}
 .hot-question-listitem .content li.info a:hover{text-decoration:underline;color:#00c0ff}
 
 /*专业方案*/
-.hot-question-listitem .content li.answer{margin-top: 10px;}
+.hot-question-listitem .content li.answer{margin-top: 3px;}
 .hot-question-listitem .content li.answer h2.header{font-size:14px;color:#3a3a3a;border:1px solid #d2d2d2;border-right:none;border-left:none;padding:10px 0}
 .hot-question-listitem .content li.answer h2 a.solution{float:right;color:#999999;font-size:12px;}
 .hot-question-listitem .content li.answer h2 a.solution:hover{text-decoration:underline;color:#00c0ff}

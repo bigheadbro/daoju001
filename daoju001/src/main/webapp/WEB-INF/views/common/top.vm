@@ -2,33 +2,6 @@
 <script type="text/javascript" src="../js/top-nav.js"></script>
 
 <div class="main-head-container">
-	<script>
-    $(function() {
-    	$(".ask").click(function() {
-    		$.ajax( {   
-    		    type : "POST",   
-				url : "/ask", 
-    		    dataType: "json",   
-    		    success : function(data) {   
-    		    	switch(data.status)
-    		    	{
-    		    	case 1:
-    		    		window.location.href='/log';
-    		    	  break;
-    				case 2:
-    		    		window.location.href='/buyer/newquestion';
-    		    	  break;
-    				case 3:
-    		    		showAlert("",data.code,"","确定","");
-    		    	  break;
-    		    	}  
-    		    }
-    		});   
-    	});
-    
-    });
-    
-    </script>
     <div class="main-head-content clearfix">
         <div class="main-logo">
             <a href="http://www.daoshifu.com"><img src="../img/logo.png" /></a>
@@ -99,17 +72,19 @@
                 　                      #else
                     #if($account.isBuyer())
                         <div class="top-user" href="/buyer/main">
-                            <span class="name">${account.userName}</span>
                             <div class="logo">
                                 <a href="#">
                                     #if($!{account.logo})
                                         <img src="../logo/$!{account.logo}"  />
-                                        #else
-                                            <img src="../img/avatar.png"  />
+                                    #else
+                                        <img src="../img/avatar.png"  />
                                     #end
                                 </a>
+								
                             </div>
+							<span class="name">${account.userName}</span>
                         </div>
+						<a class="zg-top zg-noti-number" href="/buyer/mymsg">$!{account.unreadMsgCount}</a>
                         <ul class="top-dropdown">
                             <li>
                                 <a href="/buyer/main">我的刀师傅</a>
@@ -134,17 +109,19 @@
                         </ul>
                   	#else
                             <div class="top-user" href="/agent/main">
-                                <span class="name">${account.userName}</span>
                                 <div class="logo">
                                     <a href="#">
                                         #if($!{account.logo})
                                             <img src="../logo/$!{account.logo}"  />
-                                            #else
-                                                <img src="../img/avatar.png"  />
+                                        #else
+                                            <img src="../img/avatar.png"  />
                                         #end
                                     </a>
+									
                                 </div>
+								<span class="name">${account.userName}</span>
                             </div>
+							<a class="zg-noti-number zg-top" href="/agent/mymsg">$!{account.unreadMsgCount}</a>
                             <ul class="top-dropdown">
                                 <li>
                                     <a href="/agent/main">我的刀师傅</a>

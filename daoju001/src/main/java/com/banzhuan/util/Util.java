@@ -259,8 +259,10 @@ public class Util {
 	
 	        // first part  (the html)
 	        BodyPart messageBodyPart = new MimeBodyPart();
-	        String htmlText = "<a href=\"http://www.daoshifu.com?fromEDM\"><img src=\"cid:image\"></a>";
-	        messageBodyPart.setContent(htmlText, "text/html");
+	        
+	        String htmlText = "<a href=\"http://www.daoshifu.com?fromEDM\"><img style=\"width:1024px\" src=\"cid:image\"></a><p>抢先关注刀师傅，2014颠覆刀具旧世界！更多内容尽在<a href=\"http://www.daoshifu.com?fromlink\">www.daoshifu.com</a></p>";
+	        messageBodyPart.setContent(htmlText, "text/html; charset=utf-8");
+	        
 	
 	        // add it
 	        multipart.addBodyPart(messageBodyPart);
@@ -299,14 +301,17 @@ public class Util {
 	
 	public static void main(String[] args)  {  
 		HashSet<String> set = readFileByLines("C:\\Users\\guichaoqun\\Desktop\\cut35-mail.txt");
-		String rec[] = new String[set.size()];//{"346938819@qq.com", "123576884@qq.com", "410526674@qq.com"};
+		String rec[] = {"346938819@qq.com","123576884@qq.com","410526674@qq.com"};
+		EDM("noreply@daoshifu.com","cisco123","123576884@qq.com",
+				"刀师傅-第一家刀具在线交流平台", "", null, "", "UTF-8");
+		/*String rec[] = new String[set.size()];//{"346938819@qq.com", "123576884@qq.com", "410526674@qq.com"};
 		set.toArray(rec);
 		for(int i = 0;i<rec.length;i++)
 		{
-			/*EDM("noreply@daoshifu.com","cisco123",rec[i],
-					"刀师傅-第一家刀具在线交流平台", "", null, "", "UTF-8");*/
+			EDM("noreply@daoshifu.com","cisco123",rec[i],
+					"刀师傅-第一家刀具在线交流平台", "", null, "", "UTF-8");
 			System.out.println(rec[i]);
-		}
+		}*/
 	    
     }
 }

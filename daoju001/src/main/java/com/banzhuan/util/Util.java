@@ -3,6 +3,7 @@ package com.banzhuan.util;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
+import java.io.Console;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileReader;
@@ -220,7 +221,7 @@ public class Util {
 	    }
 	}
 	
-	public static void EDM(final String sender,final String password,String[] receivers, String title, String mailContent, File[] attachements, String mimetype, String charset) {
+	public static void EDM(final String sender,final String password,String receivers, String title, String mailContent, File[] attachements, String mimetype, String charset) {
 	    Properties props = new Properties();
 	    //设置smtp服务器地址
 	    //这里使用QQ邮箱，记得关闭独立密码保护功能和在邮箱中设置POP3/IMAP/SMTP服务
@@ -244,12 +245,10 @@ public class Util {
         	//设置发件人邮件
 	        mimeMessage.setFrom(new InternetAddress(sender));
 	        //获取所有收件人邮箱地址
-	        InternetAddress[] receiver = new InternetAddress[receivers.length];
-	        for (int i=0; i<receivers.length; i++) {
-	        	receiver[i] = new InternetAddress(receivers[i]);
-	        }
+	        InternetAddress receiver = new InternetAddress();
+	        receiver = new InternetAddress(receivers);
 	        //设置收件人邮件
-	        mimeMessage.setRecipients(Message.RecipientType.TO, receiver);
+	        mimeMessage.setRecipient(Message.RecipientType.TO, receiver);
 	        //设置标题
 	        mimeMessage.setSubject(title, charset);
 	        
@@ -302,8 +301,12 @@ public class Util {
 		HashSet<String> set = readFileByLines("C:\\Users\\guichaoqun\\Desktop\\cut35-mail.txt");
 		String rec[] = new String[set.size()];//{"346938819@qq.com", "123576884@qq.com", "410526674@qq.com"};
 		set.toArray(rec);
-    	EDM("noreply@daoshifu.com","cisco123",rec,
-    			"刀师傅-第一家刀具在线交流平台", "", null, "", "UTF-8");
+		for(int i = 0;i<rec.length;i++)
+		{
+			/*EDM("noreply@daoshifu.com","cisco123",rec[i],
+					"刀师傅-第一家刀具在线交流平台", "", null, "", "UTF-8");*/
+			System.out.println(rec[i]);
+		}
 	    
     }
 }

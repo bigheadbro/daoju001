@@ -260,7 +260,10 @@ public class Util {
 	        // first part  (the html)
 	        BodyPart messageBodyPart = new MimeBodyPart();
 	        
-	        String htmlText = "<a href=\"http://www.daoshifu.com?fromEDM\"><img style=\"width:1024px\" src=\"cid:image\"></a><p>抢先关注刀师傅，2014颠覆刀具旧世界！更多内容尽在<a href=\"http://www.daoshifu.com?fromlink\">www.daoshifu.com</a></p>";
+	        String htmlText = "<h1 style=\"font-size:24px;font-family:'微软雅黑';color:#0099cb;border-bottom:1px solid #0099cb;padding-bottom:10px;\">刀师傅</h1>" +
+	        		"<a style=\"display: block;\" href=\"http://www.daoshifu.com?fromEDM\"><img style=\"width:1024px\" src=\"cid:image\"></a>" +
+	        		"<p style=\"font-size:14px;font-family:'微软雅黑';margin-left:65px\">抢先关注刀师傅，2014颠覆刀具旧世界！更多内容尽在<a href=\"http://www.daoshifu.com?fromlink\">www.daoshifu.com</a></p>" +
+	        		"<p style=\"border-top:1px solid #e0e0e0;font-family:'微软雅黑';color:#aaa;text-align:center;padding-top:10px;font-size:13px;\">© 2013 刀师傅 | 沪ICP备13047239号-1</p>";
 	        messageBodyPart.setContent(htmlText, "text/html; charset=utf-8");
 	        
 	
@@ -301,8 +304,8 @@ public class Util {
 	
 	public static void main(String[] args)  {  
 		HashSet<String> set = readFileByLines("EDM/cut35-mail.txt");
-		/*String rec[] = {"346938819@qq.com","123576884@qq.com","410526674@qq.com"};
-		EDM("noreply@daoshifu.com","cisco123","346938819@qq.com",
+		//String rec[] = {"346938819@qq.com","123576884@qq.com","410526674@qq.com"};
+		/*EDM("noreply@daoshifu.com","cisco123","346938819@qq.com",
 				"刀师傅-第一家刀具在线交流平台", "", null, "", "UTF-8");*/
 		String rec[] = new String[set.size()];
 		set.toArray(rec);

@@ -1,0 +1,19 @@
+#set($layout = "/layout/index_layout.vm")
+#foreach ($agent in $agents)
+<p class="admin">
+	<span>$!{agent.companyName}</span> 
+	<span>$!{agent.brandName}</span>
+	<span>
+	#if($agent.isVerified())
+		<a href="${agent.verifiedLink}" />代理证书连接</a>
+	#else
+		未认证
+	#end
+	</span>
+	#if($agent.isVerified())
+		<a>添加认证</a>
+	#else
+		<a>取消认证</a>
+	#end
+</p>
+#end

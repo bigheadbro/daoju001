@@ -22,7 +22,9 @@ a{text-decoration: none;color: inherit;cursor:pointer;}
 /* End hide from IE Mac */ 
 /* end of clearfix */
 
-
+/*管理员页面*/
+p.admin{margin-bottom:5px;border:2px solid black}
+p.admin span{width:300px;display: inline-block;}
 .dsf-form-text-input {padding: 4px 10px;font-size: 13px;line-height: 15px;box-shadow: 0 1px 1px rgba(0,0,0,.1) inset;border-radius: 3px;background: #fff;border: 1px solid #ccc;color: #222;}
 .zg-noti-number {background: #BF1031;border: 1px solid #B11331;box-shadow: 0 1px 2px rgba(0,0,0,.1),inset 0 1px 0 rgba(255,255,255,.15);
 color: #fff;

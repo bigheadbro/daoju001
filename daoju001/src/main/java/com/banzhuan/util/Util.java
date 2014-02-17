@@ -221,7 +221,7 @@ public class Util {
 	    }
 	}
 	
-	public static void EDM(final String sender,final String password,String receivers, String title, String mailContent, File[] attachements, String mimetype, String charset) {
+	public static void EDM(final String sender,final String password,String[] receivers, String title, String mailContent, File[] attachements, String mimetype, String charset) {
 	    Properties props = new Properties();
 	    //设置smtp服务器地址
 	    //这里使用QQ邮箱，记得关闭独立密码保护功能和在邮箱中设置POP3/IMAP/SMTP服务
@@ -245,10 +245,12 @@ public class Util {
         	//设置发件人邮件
 	        mimeMessage.setFrom(new InternetAddress(sender));
 	        //获取所有收件人邮箱地址
-	        InternetAddress receiver = new InternetAddress();
-	        receiver = new InternetAddress(receivers);
+	        InternetAddress[] receiver = new InternetAddress[receivers.length];
+	        for (int i=0; i<receivers.length; i++) {
+	        	receiver[i] = new InternetAddress(receivers[i]);
+	        }
 	        //设置收件人邮件
-	        mimeMessage.setRecipient(Message.RecipientType.TO, receiver);
+	        mimeMessage.setRecipients(Message.RecipientType.TO, receiver);
 	        //设置标题
 	        mimeMessage.setSubject(title, charset);
 	        
@@ -309,11 +311,18 @@ public class Util {
 				"刀师傅-第一家刀具在线交流平台", "", null, "", "UTF-8");*/
 		String rec[] = new String[set.size()];
 		set.toArray(rec);
-		for(int i = 0;i<rec.length;i++)
+		String tmp[] = new String[10];
+		for(int i = 1;i<rec.length;i++)
 		{
-			EDM("noreply@daoshifu.com","cisco123",rec[i],
-					"刀师傅-第一家刀具在线交流平台", "", null, "", "UTF-8");
-			System.out.println(rec[i]);
+			tmp[i%10] = rec[i];
+			if(i%10 == 0)
+			{
+				for(int j=0;j<10;j++)
+				{
+					EDM("noreply@daoshifu.com","cisco123",tmp,
+							"刀师傅-第一家刀具在线交流平台", "", null, "", "UTF-8");
+				}
+			}
 		}
 	    
     }

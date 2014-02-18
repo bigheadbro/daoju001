@@ -570,7 +570,7 @@ opacity: .3;
 .auth-content div{display:block;color:#707070;}
 .auth-content .client{padding-bottom:20px;border-bottom:1px solid #dfdfdf}
 .auth-content .master{margin-top:20px;}
-.auth-content div a{float:left;display:block;border-radius:8px;background-color:#dfdfdf;padding:15px 20px;}
+.auth-content div a{float:left;display:block;border-radius:8px;background-color:#dfdfdf;padding:15px 20px;width: 80px;}
 .auth-content div p{font-size:12px;float:left;margin-left:20px;line-height:20px;padding-top:5px;}
 .reg-right .erweima-reg{width:400px;margin-top: 50px;text-align: center;}
 .reg-right .erweima-bottom{color:#707070}

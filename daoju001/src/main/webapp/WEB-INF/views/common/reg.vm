@@ -37,11 +37,11 @@
 			<h2>账户类型</h2>
 			<div class="client clearfix">
 				<a href="/buyer/reg">我是客户</a>
-				<p>我是客户，<br>我希望找到适合我的刀具方案</p>
+				<p>我是客户/分销商，<br>我希望找到适合我的刀具方案</p>
 			</div>
 			<div class="master clearfix">
-				<a href="/agent/reg">我是师傅</a>
-				<p>我是刀具代理商，<br>我来为客户提供专业刀具方案</p>
+				<a href="/agent/reg">我是代理商</a>
+				<p>我是刀具一级代理商，<br>我来为客户提供专业刀具方案</p>
 			</div>
 		  </div>
       </div>

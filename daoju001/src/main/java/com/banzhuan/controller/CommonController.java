@@ -191,8 +191,16 @@ public class CommonController extends BaseController{
 		return mv;
 	}
 	
+	@RequestMapping(value="/browser")
+	public ModelAndView browser(final HttpServletResponse response)
+	{
+		ModelAndView mv = new ModelAndView("/common/browser");
+		
+		return mv;
+	}
+	
 	@RequestMapping(value="/index")
-	public ModelAndView index(final HttpServletResponse response)
+	public ModelAndView index(final HttpServletRequest request,final HttpServletResponse response)
 	{
 		ModelAndView mv = new ModelAndView("/common/index");
 		

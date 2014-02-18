@@ -9,6 +9,7 @@ $(function() {
 		controlNav: false
     });
 });
+
 </script>
 <div class="flexslider">
   <ul class="slides">

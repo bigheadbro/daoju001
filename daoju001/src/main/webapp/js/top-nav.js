@@ -1,8 +1,4 @@
 $(function() {
-	$(".login").hover(function() {
-		$(".top-user").css("background-color","#007298");
-		$(".top-dropdown").show();
-	});
 	$(".login").mouseleave(function() {
 		$(".top-user").css("background-color","#0099cb");
 		$(".top-dropdown").hide();
@@ -14,6 +10,8 @@ $(function() {
 		$(".top-dropdown-reg").hide();
 		$(this).children(".auth-reg").css("background-color","#0099cb");
 	});
+
+	
 	$(".ask").click(function() {
 		$.ajax( {   
 		    type : "POST",   
@@ -59,3 +57,4 @@ $(function() {
 	})();
 
 });
+

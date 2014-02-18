@@ -1,6 +1,9 @@
 ﻿var alertshow=false;
 var alertfirst=true;
 $(function(){
+	if (document.all){  
+		window.location.href="/browser";
+	}  
   $("#alert").click(function(){
     showAlert("您的余额不足","不能使用该服务，请去充值！现在要说的话有一点点长，来测试格式是否合理","充值请至：企业中心>>消费记录","充 值","");
   });

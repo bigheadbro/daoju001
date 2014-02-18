@@ -14,9 +14,7 @@ import com.banzhuan.common.Account;
 public class UserLoginInterceptor extends HandlerInterceptorAdapter {
 
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
-			throws Exception {
-		
-		
+			throws Exception {	
 		Account account = (Account) WebUtils.getSessionAttribute(request, "account");
 		if (account == null) {
 			ModelAndView modelAndView = new ModelAndView(new RedirectView("/log"));
@@ -32,9 +30,6 @@ public class UserLoginInterceptor extends HandlerInterceptorAdapter {
 				modelAndView.addObject("redirect", "http://"+host+":"+port+contextPath+url);
 			}
 			throw new ModelAndViewDefiningException(modelAndView);
-			// 临时不走QQ CONNECT 
-			//ModelAndView modelAndView = new ModelAndView(new RedirectView("mylogin"));
-			//throw new ModelAndViewDefiningException(modelAndView);
 		}
 		else {
 			return true;

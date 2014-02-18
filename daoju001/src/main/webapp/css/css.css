@@ -22,6 +22,28 @@ a{text-decoration: none;color: inherit;cursor:pointer;}
 /* End hide from IE Mac */ 
 /* end of clearfix */
 
+/*browser*/
+.page#page-compatable{width:660px;margin:0 auto}
+.page#page-compatable .topbar{width:660px;margin:0 auto;padding:40px 0;*zoom:1}
+.page#page-compatable .topbar:before,.page#page-compatable .topbar:after{display:table;content:""}
+.page#page-compatable .topbar:after{clear:both;height:0;visibility:hidden}
+.page#page-compatable .topbar .logo{float:left}
+.page#page-compatable .topbar .logo a{background:url(../img/logo.png) no-repeat 0 0;display:block;width:139px;height:46px;overflow:hidden;text-indent:-9999px}
+.page#page-compatable .content{text-align:center;-webkit-text-shadow:0 1px 0px #fff;-moz-text-shadow:0 1px 0px #fff;text-shadow:0 1px 0px #fff}
+.page#page-compatable .content h2{font-size:28px;color:#333;font-family:"Microsoft Yahei","SimHei",Helvetica,Arial;letter-spacing:1px;padding:20px 0;text-align:left}
+.page#page-compatable .content h2 em{margin:0 3px;letter-spacing:0;font-family:"Microsoft Yahei","SimHei",Helvetica,Arial}
+.page#page-compatable .content .upgrade_desc{text-align:left;margin-top:10px}
+.page#page-compatable .content .browser-list{width:380px;margin:0 auto;*zoom:1}
+.page#page-compatable .content .browser-list:before,.page#page-compatable .content .browser-list:after{display:table;content:""}
+.page#page-compatable .content .browser-list:after{clear:both;height:0;visibility:hidden}
+.page#page-compatable .content .browser-list li{float:left;padding:40px 25px 80px}
+.page#page-compatable .content .browser-list a{display:block;width:140px;padding-top:130px;height:30px;color:#7d9c95;font-size:16px}
+.page#page-compatable .content .browser-list a:hover{opacity:0.9}
+.page#page-compatable .content .browser-list .chrome{background:url(../img/logo-chrome.png) center 8px no-repeat}
+.page#page-compatable .content .browser-list .flash-360{background:url(../img/logo-360.png) center 10px no-repeat}
+.page#page-compatable .content .supported{font-size:14px;color:#666}
+.page#page-compatable .content .supported a{margin:0 4px}
+
 /*管理员页面*/
 p.admin{margin-bottom:5px;border:2px solid black}
 p.admin span{width:300px;display: inline-block;}

@@ -48,7 +48,7 @@
 											<h2>$!{sample.name}</h2>
 											<h4>$stringUtil.fileType($!{sample.type}) 文件  $stringUtil.fileSize($!{sample.size}) MB</h4>
 										</div>
-										<a href="$!{sample.link}">点击下载</a>
+										<a target="_blank"  href="$!{sample.link}">点击下载</a>
 									</div>
 								#if($velocityCount == $sampleList.size())
 									</div>

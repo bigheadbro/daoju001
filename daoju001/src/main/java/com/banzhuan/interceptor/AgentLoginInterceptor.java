@@ -1,4 +1,5 @@
 package com.banzhuan.interceptor;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -14,8 +15,6 @@ public class AgentLoginInterceptor extends HandlerInterceptorAdapter {
 
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
-		
-		
 		Account account = (Account) WebUtils.getSessionAttribute(request, "account");
 		if (account == null || !account.isLogin() || !account.isAgent()) {
 			ModelAndView modelAndView = new ModelAndView(new RedirectView("/log"));
@@ -31,9 +30,6 @@ public class AgentLoginInterceptor extends HandlerInterceptorAdapter {
 				modelAndView.addObject("redirect", "http://"+host+":"+port+contextPath+url);
 			}
 			throw new ModelAndViewDefiningException(modelAndView);
-			// 临时不走QQ CONNECT 
-			//ModelAndView modelAndView = new ModelAndView(new RedirectView("mylogin"));
-			//throw new ModelAndViewDefiningException(modelAndView);
 		}
 		else {
 			return true;

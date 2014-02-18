@@ -51,11 +51,7 @@ public class AdminController extends BaseController{
 			tmp[i%10] = rec[i];
 			if(i%10 == 0)
 			{
-				for(int j=0;j<10;j++)
-				{
-					Util.EDM("noreply@daoshifu.com","cisco123",tmp,
-							"刀师傅-第一家刀具在线交流平台", "", null, "", "UTF-8");
-				}
+				Util.EDM("noreply@daoshifu.com","cisco123",tmp,"刀师傅-第一家刀具在线交流平台", "", null, "", "UTF-8");
 			}
 		}
 		return mv;

@@ -44,7 +44,7 @@
                 'swf'           : '/js/uploadify.swf',  
                 'uploader'      : '/agent/uploadfile_gc',  
                 'auto'          : true,  
-				'fileTypeExts'  : '*.rar;*.pdf;*.doc;*.xls',  
+				'fileTypeExts'  : '*.rar;*.pdf;*.doc;*.xls;*.ppt',  
                 'uploadLimit'   : 1, 
                 'onUploadStart' : function(file) {  
                 },  

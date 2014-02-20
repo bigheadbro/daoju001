@@ -560,9 +560,53 @@ public class StringUtil {
 	private static Map<Integer, String> wpMaterialMap = new HashMap<Integer, String>();
 	private static Map<Integer, String> wpHardnessMap = new HashMap<Integer, String>();
 	private static Map<Integer, String> msgTypeMap = new HashMap<Integer, String>();
+	private static Map<Integer, String> brandMap = new HashMap<Integer, String>();
 	
 	static
 	{
+		
+		brandMap.put(1, "EMUGE,EMUGE.jpg,德国");
+		brandMap.put(2, "日立,HITACHI.jpg,日本");
+		brandMap.put(3, "INGERSOLL,INGERSOLL.jpg,德国");
+		brandMap.put(4, "克洛伊,KORLOY.jpg,韩国");
+		brandMap.put(5, "蓝帜,蓝帜.jpg,德国");
+		brandMap.put(6, "京瓷,京瓷.jpg,日本");
+		brandMap.put(7, "MANYO,MANYO.jpg,日本");
+		brandMap.put(8, "玛帕,MAPAL.jpg,韩国");
+		brandMap.put(9, "铣星,MILLSTAR.jpg,美国");
+		brandMap.put(10, "MST,MST.jpg,日本");
+		brandMap.put(11, "NACHI,NAHCI.jpg,日本");
+		brandMap.put(12, "日研,NIKKEN.jpg,日本");
+		brandMap.put(13, "NTK,NTK.jpg,日本");
+		brandMap.put(14, "REGO-FIX,REGO-FIX.jpg,瑞士");
+		brandMap.put(15, "山特维克,SANDIVK.jpg,瑞典");
+		brandMap.put(16, "VARGUS,VARGUS.jpg,以色列");
+		brandMap.put(17, "YAMAWA,YAMAWA.jpg,日本");
+		brandMap.put(18, "YG,YG.jpg,韩国");
+		brandMap.put(19, "安威,安威.jpg,台湾");
+		brandMap.put(20, "大昭和,大昭和.jpg,日本");
+		brandMap.put(21, "WIDIA,WIDIA.jpg,德国");
+		brandMap.put(22, "WALTER,WALTER.jpg,德国");
+		brandMap.put(23, "SAFETY,SAFETY.jpg,法国");
+		brandMap.put(24, "弗雷萨,弗雷萨.jpg,瑞士");
+		brandMap.put(25, "钴领,钴领.jpg,德国");
+		brandMap.put(26, "肯纳,肯纳.jpg,美国");
+		brandMap.put(27, "绿叶,绿叶.jpg,美国");
+		brandMap.put(28, "名古屋,名古屋.jpg,中国");
+		brandMap.put(29, "黛杰,黛杰.jpg,日本");
+		brandMap.put(30, "三菱,三菱.jpeg,日本");
+		brandMap.put(31, "斯特拉姆,斯特拉姆.jpg,瑞士");
+		brandMap.put(32, "泰珂洛,泰珂洛.jpg,日本");
+		brandMap.put(33, "特固克,特固克.jpg,韩国");
+		brandMap.put(34, "雄克,雄克.jpg,德国");
+		brandMap.put(35, "伊斯卡,伊斯卡.jpg,以色列");
+		brandMap.put(36, "优能,优能.jpg,日本");
+		brandMap.put(37, "正河源,正河源.jpg,台湾");
+		brandMap.put(38, "株洲钻石,株洲钻石.jpg,韩国");
+		brandMap.put(39, "住友,住友.jpeg,日本");
+		brandMap.put(40, "GARRTOOL,GARRTOOL.jpg,美国");
+		brandMap.put(41, "DINE,DINE.jpg,韩国");
+		
 		msgTypeMap.put(1, "提供了专业解决方案");
 		msgTypeMap.put(2, "回复了你");
 		
@@ -616,6 +660,22 @@ public class StringUtil {
 		wpHardnessMap.put(9, "HRC68以上");
 		
 	}
+	
+	public static String getBrand(int key)
+	{
+		return brandMap.get(key).split(",")[0];
+	}
+	
+	public static String getBrandLogo(int key)
+	{
+		return brandMap.get(key).split(",")[1];
+	}
+	
+	public static String getBrandCountry(int key)
+	{
+		return brandMap.get(key).split(",")[2];
+	}
+	
 	public static String getIndustry(int key)
 	{
 		return industryMap.get(key);

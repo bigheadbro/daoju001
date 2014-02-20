@@ -15,6 +15,8 @@
 		<!--公司名称 -->
 		<id property="companyName" column="company_name" />
 		<!--代理品牌名称 -->
+		<id property="brand" column="brand" />
+		<!--代理品牌名称 -->
 		<id property="brandName" column="brand_name" />
 		<!--品牌logo -->
 		<id property="logo" column="logo" />
@@ -44,6 +46,9 @@
 		<id property="gmtCreate" column="gmt_create" />
 		<!--记录修改时间(最近登录时间) -->
 		<id property="gmtModified" column="gmt_modified" />
+		<id property="cntAnswer" column="cnt_answer" />
+		<id property="cntGc" column="cnt_gc" />
+		<id property="cntSample" column="cnt_sample" />
 	</resultMap>
 	
 	<!-- 根据ID获取代理商信息 -->
@@ -88,6 +93,7 @@
    	  ,password
    	  ,email
    	  ,company_name
+   	  ,brand
    	  ,brand_name
    	  ,logo
    	  ,address
@@ -109,6 +115,7 @@
    	  ,#{password}
    	  ,#{mail}
    	  ,#{companyName}
+   	  ,#{brand}
    	  ,#{brandName}
    	  ,#{logo}
    	  ,#{address}

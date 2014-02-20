@@ -18,6 +18,8 @@ public class AgentEntity implements Serializable {
 	private String mail;
 	// 公司名称
 	private String companyName;
+	//
+	private int brand;
 	// 代理品牌名称
 	private String brandName;
 	// 品牌logo
@@ -48,6 +50,10 @@ public class AgentEntity implements Serializable {
 	private String gmtCreate;
 	// 记录修改时间(最近登录时间)
 	private String gmtModified;
+	
+	private int cntAnswer;
+	private int cntSample;
+	private int cntGc;
 	
 
 	/**
@@ -343,6 +349,62 @@ public class AgentEntity implements Serializable {
 	 */
 	public void setVerified(boolean isVerified) {
 		this.isVerified = isVerified;
+	}
+
+	/**
+	 * @return the brand
+	 */
+	public int getBrand() {
+		return brand;
+	}
+
+	/**
+	 * @param brand the brand to set
+	 */
+	public void setBrand(int brand) {
+		this.brand = brand;
+	}
+
+	/**
+	 * @return the cntAnswer
+	 */
+	public int getCntAnswer() {
+		return cntAnswer;
+	}
+
+	/**
+	 * @param cntAnswer the cntAnswer to set
+	 */
+	public void setCntAnswer(int cntAnswer) {
+		this.cntAnswer = cntAnswer;
+	}
+
+	/**
+	 * @return the cntSample
+	 */
+	public int getCntSample() {
+		return cntSample;
+	}
+
+	/**
+	 * @param cntSample the cntSample to set
+	 */
+	public void setCntSample(int cntSample) {
+		this.cntSample = cntSample;
+	}
+
+	/**
+	 * @return the cntGc
+	 */
+	public int getCntGc() {
+		return cntGc;
+	}
+
+	/**
+	 * @param cntGc the cntGc to set
+	 */
+	public void setCntGc(int cntGc) {
+		this.cntGc = cntGc;
 	}
 
 	

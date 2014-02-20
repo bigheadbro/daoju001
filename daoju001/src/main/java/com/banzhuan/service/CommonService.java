@@ -245,11 +245,12 @@ public class CommonService {
 		return result;
 	}
 	
-	public Map<Integer,List<AgentEntity>> getAllAgents()
+	public Map<Integer,Map<Integer,List<AgentEntity>>> getAllAgents()
 	{
 		List<AgentEntity> agents = agentDAO.getAllagents();
 		
-		Map<Integer,List<AgentEntity>> agentMap = new HashMap<Integer,List<AgentEntity>>();
+		//按代理商首字母
+		/*Map<Integer,List<AgentEntity>> agentMap = new HashMap<Integer,List<AgentEntity>>();
 
 		for(int i = 0;i < agents.size(); i++)
 		{
@@ -260,8 +261,62 @@ public class CommonService {
 			}
 			tmp.add((AgentEntity)agents.get(i));
 			agentMap.put(ChineseSpelling.letterToNum(ChineseSpelling.getFirstLetter(((AgentEntity)agents.get(i)).getCompanyName())), tmp);
-		}
+		}*/
 
+		
+		Map<Integer,Map<Integer,List<AgentEntity>>> agentMap = new HashMap<Integer, Map<Integer,List<AgentEntity>>>();
+		
+		for(int i = 0;i < agents.size(); i++)
+		{
+			if(agents.get(i).getBrand() == 0)
+			{
+				continue;
+			}
+			String aa = StringUtil.getBrand(((AgentEntity)agents.get(i)).getBrand());
+			String bb = ChineseSpelling.getFirstLetter(aa);
+			int alpha = ChineseSpelling.letterToNum(bb);
+			Map<Integer,List<AgentEntity>> tmpMap = agentMap.get(alpha);
+			//是否存在该字母的代理商
+			if(tmpMap == null)
+			{
+				tmpMap = new HashMap<Integer,List<AgentEntity>>();
+				List<AgentEntity> tmp = new ArrayList<AgentEntity>();
+				tmp.add((AgentEntity)agents.get(i));
+				tmpMap.put(agents.get(i).getBrand(), tmp);
+			}
+			else
+			{
+				//是否包含样本的品牌
+				if(tmpMap.containsKey(agents.get(i).getBrand()))
+				{
+					Iterator<Integer> iter = tmpMap.keySet().iterator(); 
+					while (iter.hasNext()) 
+					{ 
+					    int key = Integer.valueOf(iter.next().toString()); 
+					    List<AgentEntity> val = tmpMap.get(key); 
+					    if(val == null)
+						{
+					    	val = new ArrayList<AgentEntity>();
+						}
+					    //如果是同一个品牌
+					    if(key == agents.get(i).getBrand())
+					    {
+						    val.add((AgentEntity)agents.get(i));
+						    tmpMap.put(key, val);
+						    break;
+					    }
+					} 
+				}
+				else
+				{
+					List<AgentEntity> tmp = new ArrayList<AgentEntity>();
+					tmp.add((AgentEntity)agents.get(i));
+					tmpMap.put(agents.get(i).getBrand(), tmp);
+				}
+			}
+			
+			agentMap.put(alpha, tmpMap);
+		}
 		return agentMap;
 	}
 	

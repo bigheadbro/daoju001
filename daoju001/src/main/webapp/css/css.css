@@ -4,6 +4,7 @@ body,h1,h2,h3,h4,h5,h6,hr,p,blockquote,dl,dt,dd,ul,ol,li,pre,form,fieldset,legen
 	font-family: "微软雅黑";
 	font-size:12px/1.5;
 }
+i{font-style: normal;}
 body{position: relative;height: 100%;}
 img{border:none;}
 html{flow-y:scroll;height:100%;background: url(../img/bk.jpg) repeat-x 0 0;background-color:#e6e6e6}  
@@ -521,7 +522,26 @@ opacity: .3;
 
 
 .question-param-wrap{border-bottom:1px solid #0088b5;height: 32px;margin-top: 5px;}
-
+/*代理商列表*/
+.brand-list{padding-bottom:30px;border-bottom:1px solid #eee;margin-top:30px;}
+.brand-list .agent-list{float:left;}
+.brand-logo{float:left;}
+.brand-logo p{color:#828282;text-align:center;margin-top:10px;}
+.brand-logo img{width:140px;}
+.brand-list .agent-logo{border-radius: 5px;width:120px;height:120px;overflow:hidden;text-align:center;display:table;float:left;background-color:white;}
+.brand-list .agent-logo a{display:table-cell;vertical-align:middle;}
+.brand-list .agent-logo a img{margin:0 auto;max-width:120px;max-height:120px;}
+.brand-list .arrow{float:left;font-size: 12px;margin: 20px 40px}
+.brand-list .arrow .agent{color: #828282;background:url(../img/agent-arrow.png) no-repeat 0 0;width: 56px;height: 21px;margin: 0 0 5px 15px;line-height: 21px;padding-left: 4px; }
+.brand-list .arrow .detail{}
+.brand-list .arrow .detail a{display: inline-block;background-color:#63a200;border:1px solid #4a7900;border-radius:4px;padding:5px 10px;color:white;}
+.brand-list .agent-detail{width:145px}
+.brand-list .agent-detail h5{font-weight:600;margin: 2px 0 2px 0;}
+.brand-list .agent-detail h5 em{color:#0099cb;margin-right:3px;}
+.brand-list .agent-detail h5 i{margin-left:2px;margin-right:2px;color:#828282;}
+.brand-list .agent-detail h5 span.mobile{display: inline-block;width:25px;text-align:center;background-color:#ff9000;color:white;padding:1px 5px;border-radius:4px;font-size:12px}
+.brand-list .agent-detail h5 span.qq{display: inline-block;width:25px;text-align:center;background-color:#00759c;color:white;padding:1px 5px;border-radius:4px;font-size:12px}
+.agent-list-content .gc-item .brand-list .agent-info{margin:0}
 /*代理商详细页面*/
 .regular{font-weight:600;}
 .company-detail{margin-top:20px;}

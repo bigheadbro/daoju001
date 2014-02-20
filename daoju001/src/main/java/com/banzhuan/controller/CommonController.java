@@ -352,12 +352,18 @@ public class CommonController extends BaseController{
 	{
 		ModelAndView mv = new ModelAndView("/common/agents");
 		
-		Map<Integer,List<AgentEntity>> agentMap = commonService.getAllAgents();
+		Map<Integer,Map<Integer,List<AgentEntity>>> agentMap = commonService.getAllAgents();
 
 		//对key进行排序--字母
-		List<Map.Entry<Integer,List<AgentEntity>>> infoIds = new ArrayList<Map.Entry<Integer,List<AgentEntity>>>(agentMap.entrySet());
+		/*List<Map.Entry<Integer,List<AgentEntity>>> infoIds = new ArrayList<Map.Entry<Integer,List<AgentEntity>>>(agentMap.entrySet());
 		Collections.sort(infoIds, new Comparator<Map.Entry<Integer,List<AgentEntity>>>() {   
 		    public int compare(Map.Entry<Integer,List<AgentEntity>> o1, Map.Entry<Integer,List<AgentEntity>> o2) {      
+		        return (o1.getKey()-o2.getKey());
+		    }
+		}); */
+		List<Map.Entry<Integer,Map<Integer,List<AgentEntity>>>> infoIds = new ArrayList<Map.Entry<Integer,Map<Integer,List<AgentEntity>>>>(agentMap.entrySet());
+		Collections.sort(infoIds, new Comparator<Map.Entry<Integer,Map<Integer,List<AgentEntity>>>>() {   
+		    public int compare(Map.Entry<Integer,Map<Integer,List<AgentEntity>>> o1, Map.Entry<Integer,Map<Integer,List<AgentEntity>>> o2) {      
 		        return (o1.getKey()-o2.getKey());
 		    }
 		}); 

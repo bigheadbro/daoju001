@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Complain">
+	<resultMap type="ComplainEntity" id="ComplainResultMap">
+	  <id property="id" column="id"/>
+   	  <!---->
+	  <id property="userType" column="user_type"/>
+   	  <!---->
+	  <id property="userId" column="user_id"/>
+   	  <!---->
+	  <id property="content" column="content"/>
+   	  <!---->
+	  <id property="gmtCreate" column="gmt_create"/>
+	</resultMap>
+	
+	
+	<insert id="insertComplainEntity" parameterType="ComplainEntity">
+		<selectKey resultType="int" order="AFTER" keyProperty="id">
+			SELECT LAST_INSERT_ID() AS id
+		</selectKey>
+		insert into t_complain
+		(
+      id
+   	  ,user_type
+   	  ,user_id
+   	  ,content
+   	  ,gmt_create)
+      values
+   (
+   
+   	  #{id}
+   	  ,#{userType}
+   	  ,#{userId}
+   	  ,#{content}
+   	  ,#{gmtCreate}
+      
+   )
+	</insert>
+	
+</mapper>

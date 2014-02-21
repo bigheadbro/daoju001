@@ -75,6 +75,11 @@ public class BuyerService {
 			errors.rejectValue("name", "USER_NAME_IS_NOT_NULL");
 			return result;
 		}
+		else if(buyerDAO.queryBuyerEntityByName(form.getName().trim()) != null) 
+		{
+			errors.rejectValue("mail", "USER_NAME_IS_EXISTS");
+			return result;
+		}
 		else if(buyerDAO.queryBuyerEntityByMail(form.getMail()) != null || agentDAO.queryAgentEntityByMail(form.getMail()) != null) // 第二步，判断注册用户名是否存在
 		{
 			errors.rejectValue("mail", "MAIL_IS_EXISTS");

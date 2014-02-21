@@ -16,6 +16,7 @@ import org.springframework.validation.Errors;
 import com.banzhuan.dao.AgentDAO;
 import com.banzhuan.dao.BuyerDAO;
 import com.banzhuan.dao.CommentDAO;
+import com.banzhuan.dao.ComplainDAO;
 import com.banzhuan.dao.GoodcaseDAO;
 import com.banzhuan.dao.MsgDAO;
 import com.banzhuan.dao.ProfessionalAnswerDAO;
@@ -24,6 +25,7 @@ import com.banzhuan.dao.SampleDAO;
 import com.banzhuan.entity.AgentEntity;
 import com.banzhuan.entity.BuyerEntity;
 import com.banzhuan.entity.CommentEntity;
+import com.banzhuan.entity.ComplainEntity;
 import com.banzhuan.entity.GoodcaseEntity;
 import com.banzhuan.entity.ProfessionalAnswerEntity;
 import com.banzhuan.entity.QuestionEntity;
@@ -73,6 +75,10 @@ public class CommonService {
 	@Autowired
 	@Qualifier("paDAO")
 	private ProfessionalAnswerDAO paDAO;
+	
+	@Autowired
+	@Qualifier("complainDAO")
+	private ComplainDAO complainDAO;
 	
 	public Result checkLogin(LoginForm form, Errors errors)
 	{
@@ -473,5 +479,11 @@ public class CommonService {
 	public void setMsgAsRead(int id)
 	{
 		msgDAO.setMsgAsRead(id);
+	}
+	
+	public int insertComplain(ComplainEntity en)
+	{
+		int result = complainDAO.insertComplainEntity(en);
+		return result;
 	}
 }

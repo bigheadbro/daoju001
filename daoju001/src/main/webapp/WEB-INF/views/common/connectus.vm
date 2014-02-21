@@ -1,19 +1,37 @@
 <link rel="stylesheet" type="text/css" href="../css/sidebar.css"/>
 <script language="javascript" src="../js/sidebar.js"></script>
 <div class="scrollsidebar clearfix" >
-	<div class="side_content">
-		<div class="qq">
-			<a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=1046384928&site=qq&menu=yes"><img border="0" src="http://wpa.qq.com/pa?p=2:1046384928:52" alt="点击这里给我发消息" title="点击这里给我发消息"/></a>
-		</div>
-		<div class="phone">
-			+86,21,58694613
-		</div>
-	</div>
-	<div class="show_btn">
-		<img src="../img/side1.png" />
-	</div>
 	<div class="erweima">
     	<img src="../img/2.png">
 		<p>马上扫描二维码<br/>关注刀师傅微信公众账号</p>
     </div>
 </div>
+<div class="goTab">
+    <ul>
+    	<li class="gTop">
+    		<a href="javascript:;" >
+    			<span>回到顶部</span>
+    			<b></b>
+    		</a>
+    	</li>
+    	<li class="qq">
+    		<a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=1046384928&site=qq&menu=yes">
+    			<span>点击联系我们</span>
+    			<b></b>
+    		</a>
+    	</li>
+		<li class="phone">
+    		<a>
+    			<span>021-58694613</span>
+    			<b></b>
+    		</a>
+    	</li>
+    	<li class="complain">
+    		<a>
+    			<span>投诉建议</span>
+    			<b></b>
+    		</a>
+    	</li>
+    </ul>
+</div>
+

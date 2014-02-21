@@ -111,6 +111,7 @@
                 </div>
             </div>
             #parse("/common/uploadlogo.vm")
+			#parse("/common/complain.vm")
             #parse("/common/footer.vm")
         </div>
     </body>

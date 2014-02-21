@@ -1,0 +1,28 @@
+<div id="pagemask-complain"></div>
+<div class="complain-win">
+    <div class="complain-win-content">
+        <h2>
+            <a class="close-complain">x</a>
+				投诉建议
+		</h2>
+		<form id="form_complain" action="/complaint" method="post">
+            <div class="content">
+                <div class="complain-container">
+					<textarea id="bargin" class="dsf-form-text-input bargin"  name="content" placeholder="请填写您对于刀师傅的意见，我们针对您的意见进行改进" ></textarea></li>	
+                </div>
+				<div class="complain-op clearfix">
+                    <a class="publish" id="submit_complain">提 交</a>
+                </div>
+            </div>
+			<script>
+			$(function() {
+                $("#submit_complain").click(function () {
+                    $("#form_complain").ajaxSubmit();
+					$("#form_complain")[0].reset();
+					hidecomplain();
+            	});
+            });
+			</script>
+		</form>
+    </div>
+</div>

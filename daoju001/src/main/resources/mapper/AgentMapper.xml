@@ -65,6 +65,13 @@
 	]]>
 	</select>
 	
+	<select id="queryAgentEntityByName" parameterType="String" resultMap="AgentResultMap">
+	<![CDATA[
+		SELECT * from t_agent t WHERE t.company_name = #{name}
+	]]>
+	</select>
+	
+	
 	<select id="getAgentsCount" resultType="int">
 	<![CDATA[
 		SELECT count(1) from t_agent t 

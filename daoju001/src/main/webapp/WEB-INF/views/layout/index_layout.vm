@@ -6,6 +6,7 @@
       	#parse("/common/top.vm")
 		<div class="main-bk-wrapper pt0">$screen_content</div>
 		#parse("/common/connectus.vm")
+		#parse("/common/complain.vm")
         #parse("/common/footer.vm")
 	</div>
   </body>

@@ -40,6 +40,7 @@ import com.banzhuan.common.Constant;
 import com.banzhuan.common.Result;
 import com.banzhuan.entity.AgentEntity;
 import com.banzhuan.entity.BuyerEntity;
+import com.banzhuan.entity.ComplainEntity;
 import com.banzhuan.entity.ProfessionalAnswerEntity;
 import com.banzhuan.entity.SampleEntity;
 import com.banzhuan.form.CommentForm;
@@ -281,6 +282,12 @@ public class CommonController extends BaseController{
 	@RequestMapping(value="/addcomment")
 	public void addcomment(HttpServletRequest request, HttpServletResponse response, @ModelAttribute("form")CommentForm form, BindingResult result) 
 	{
+/*		Account account = (Account) WebUtils.getSessionAttribute(request, "account");
+		if (account == null) 
+		{
+			JsonUtil.showAlert(response, "登录后才可以回复", "", "确定", "", "");
+			return;
+		}*/
 		if(isDoSubmit(request))
 		{
 			if(form.getContent() == "")
@@ -484,6 +491,40 @@ public class CommonController extends BaseController{
 				{
 					account.setUnreadMsgCount(agentService.getUnreadMsgCount(account.getUserId()));
 					JsonUtil.sendMsgCount(response, account.getUnreadMsgCount());
+				}
+			}
+		}
+	}
+	
+	@RequestMapping(value="/complaint")
+	public void complaint(HttpServletRequest request, HttpServletResponse response) 
+	{
+		Account account = (Account) WebUtils.getSessionAttribute(request, "account");
+		String content = request.getParameter("content").toString();
+		ComplainEntity en = new ComplainEntity();
+		en.setContent(content);
+		if(account == null)
+		{
+			commonService.insertComplain(en);
+			return;
+		}
+		else
+		{
+			if(account.isLogin())
+			{
+				if(account.isBuyer())
+				{
+					en.setUserType(0);
+					en.setUserid(account.getUserId());
+					commonService.insertComplain(en);
+					return;
+				}
+				if(account.isAgent())
+				{
+					en.setUserType(1);
+					en.setUserid(account.getUserId());
+					commonService.insertComplain(en);
+					return;
 				}
 			}
 		}

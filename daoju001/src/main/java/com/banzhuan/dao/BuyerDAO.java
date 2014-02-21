@@ -15,6 +15,8 @@ public interface BuyerDAO {
 	 */
 	BuyerEntity queryBuyerEntityByMail(String mail);
 	
+	BuyerEntity queryBuyerEntityByName(String mail);
+	
 	/**
 	 * 插入买家信息
 	 * @param companyUser

@@ -363,7 +363,7 @@ em.error{}
 
 #uploadsample{color:white;background-color:#ff9000;border-radius:5px;padding:3px;display: inline-block;}
 .uploadv{width:62px;height:26px;opacity:0;position:absolute;left: 0;top: 10px;}
-#pagemask{
+#pagemask, #pagemask-complain, #pagemask-answer{
 position: absolute;
 display: none;
 top: 0;
@@ -471,6 +471,22 @@ opacity: .3;
 .answer-op .publish{background-color:#d73434;color:white;border-radius:4px;display: block;float: left;width: 100px;text-align: center;padding: 10px;margin-right:10px;}
 .answer-op .savedraft{background-color:#dd5a5a;color:white;border-radius:4px;display: block;float: left;width: 100px;text-align: center;padding: 10px;}
 
+/*投诉*/
+.complain-win{display:none;position:absolute;top:50px;right:400px;z-index:10002;width:600px;padding: 5px;border-radius: 5px;background:url(../img/transGray.png);font-size:13px;}
+.complain-win-content{background-color:white;padding-bottom:5px;}
+.complain-win h2{background-color:#0099cb;color:white;font-size:14px;padding:3px 10px;}
+.complain-win h2 a{float:right;}
+.complain-win .content{margin: 10px 30px;}
+.complain-win .content .answer-container h5{position:relative;font-size:14px;color:#707070}
+.addimg-s{position:absolute;right:0;background: url(../img/addimg-s.png) no-repeat 0 0;float: right;height: 20px;width: 20px;display: block;}
+.answer-wrap{overflow-y: auto;margin-top: 5px;margin-bottom:15px;max-height: 250px;padding: 8px 10px;border: 1px solid #ccc;border-radius: 3px;box-shadow: 0 0 4px 0 rgba(0,0,0,.1) inset;-webkit-transition: min-height .25s ease-out;background: #fff;}
+.complain-container h4{font-size:14px;color:#707070;}
+.complain-container h4 span{margin-left: 10px;font-size:10px;color:#0088b5;}
+.complain-container .bargin{width: 520px;height: 165px;resize: none;}
+.complain-container label{margin-top:15px;font-size:14px;color:#707070;}
+.complain-op{margin:20px 0 20px 0;font-size:16px;}
+.complain-op .publish{background-color:#d73434;color:white;border-radius:4px;display: block;float: left;width: 100px;text-align: center;padding: 10px;margin-right:10px;}
+.complain-op .savedraft{background-color:#dd5a5a;color:white;border-radius:4px;display: block;float: left;width: 100px;text-align: center;padding: 10px;}
 
 /*图文混合文字*/
 .mixed{float:left;text-overflow: ellipsis;white-space: nowrap;width:460px;overflow:hidden;color:#0088b5;}
@@ -542,6 +558,7 @@ opacity: .3;
 .brand-list .agent-detail h5 span.mobile{display: inline-block;width:25px;text-align:center;background-color:#ff9000;color:white;padding:1px 5px;border-radius:4px;font-size:12px}
 .brand-list .agent-detail h5 span.qq{display: inline-block;width:25px;text-align:center;background-color:#00759c;color:white;padding:1px 5px;border-radius:4px;font-size:12px}
 .agent-list-content .gc-item .brand-list .agent-info{margin:0}
+.brand-list .agent-detail h2 a.agent-name{max-width:100px;}
 /*代理商详细页面*/
 .regular{font-weight:600;}
 .company-detail{margin-top:20px;}

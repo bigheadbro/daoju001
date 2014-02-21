@@ -90,6 +90,11 @@ public class AgentService {
 			errors.rejectValue("name", "USER_NAME_IS_NOT_NULL");
 			return result;
 		}
+		else if(agentDAO.queryAgentEntityByName(form.getName().trim()) != null)
+		{
+			errors.rejectValue("name", "USER_NAME_IS_EXISTS");
+			return result;
+		}
 		else if(agentDAO.queryAgentEntityByMail(form.getMail()) != null || buyerDAO.queryBuyerEntityByMail(form.getMail()) != null) // 第二步，判断注册用户名是否存在
 		{
 			errors.rejectValue("mail", "MAIL_IS_EXISTS");

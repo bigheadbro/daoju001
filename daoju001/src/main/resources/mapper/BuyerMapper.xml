@@ -54,6 +54,12 @@
 	]]>
 	</select>
 
+	<select id="queryBuyerEntityByName" parameterType="String" resultMap="BuyerResultMap">
+	<![CDATA[
+		SELECT * from t_buyer t WHERE t.username = #{name}
+	]]>
+	</select>
+
 	<insert id="insertBuyerEntity" parameterType="BuyerEntity">
 		<selectKey resultType="int" order="AFTER" keyProperty="id">
 			SELECT LAST_INSERT_ID() AS id

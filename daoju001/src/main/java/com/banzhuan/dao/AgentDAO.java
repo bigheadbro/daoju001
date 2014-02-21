@@ -17,6 +17,8 @@ public interface AgentDAO {
 	
 	AgentEntity queryAgentEntityByMail(String mail);
 	
+	AgentEntity queryAgentEntityByName(String name);
+	
 	/**
 	 * 插入代理商信息
 	 * @param companyUser

@@ -72,6 +72,12 @@ public class QuestionDAOImpl extends SqlSessionDaoSupport implements QuestionDAO
 	}
 	
 	@Override
+	public int getUserTodayQuestionCount(int userid)
+	{
+		return this.getSqlSession().selectOne("getUserTodayQuestionCount", userid);
+	}
+	
+	@Override
 	public int getUserQuestionCount(int userid)
 	{
 		return this.getSqlSession().selectOne("getUserQuestionCount", userid);
@@ -86,6 +92,12 @@ public class QuestionDAOImpl extends SqlSessionDaoSupport implements QuestionDAO
 	@Override
 	public List<QuestionEntity> getAllquestions(QuestionEntity question, RowBounds bound) {
 		return this.getSqlSession().selectList("getAllquestions", question, bound);
+	}
+	
+	@Override
+	public void delQuestion(int qid)
+	{
+		this.getSqlSession().delete("delQuestion", qid);
 	}
 
 }

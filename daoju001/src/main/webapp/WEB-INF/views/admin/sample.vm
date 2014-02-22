@@ -1,0 +1,24 @@
+#set($layout = "/layout/admin_layout.vm")
+<script>
+$(function() {
+	$(".del").click(function()
+    {
+		var str = "/admin/delsample/" + $(this).attr("sid");
+    	if(confirm("确定要删除吗？想清楚了？")){
+			$.ajax( {   
+    		    type : "POST",   
+    		    url : str
+    		});   
+        }
+    });
+});
+</script>
+#foreach ($sample in $samples)
+<p class="admin">
+	<span>$!{sample.name}</span> 
+	<span>$!{sample.agentName}</span> 
+	<a href="$!{sample.link}">下载链接</a>
+	<a class="del" sid=$!{sample.id}>删除</a>
+	<span>$stringUtil.formatDate($!{sample.gmtCreate})</span> 
+</p>
+#end

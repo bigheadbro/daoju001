@@ -2,6 +2,7 @@ package com.banzhuan.controller;
 
 
 
+import java.io.IOException;
 import java.util.HashSet;
 import java.util.List;
 
@@ -11,13 +12,20 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import org.springframework.web.servlet.ModelAndView;
 
+import com.banzhuan.common.Account;
 import com.banzhuan.dao.AgentDAO;
+import com.banzhuan.dao.QuestionDAO;
+import com.banzhuan.dao.SampleDAO;
 import com.banzhuan.entity.AgentEntity;
+import com.banzhuan.entity.QuestionEntity;
+import com.banzhuan.entity.SampleEntity;
 import com.banzhuan.util.Util;
 
 @Controller
@@ -28,15 +36,49 @@ public class AdminController extends BaseController{
 	@Autowired
 	@Qualifier("agentDAO")
 	private AgentDAO agentDAO;
+	
+	@Autowired
+	@Qualifier("sampleDAO")
+	private SampleDAO sampleDAO;
 
-	@RequestMapping(value="/lghlmclyhblsqt")
-	public ModelAndView otherEnter(final HttpServletResponse response)
+	@Autowired
+	@Qualifier("questionDAO")
+	private QuestionDAO questionDAO;
+	
+	@RequestMapping(value="/lghlmclyhblsqtsample")
+	public ModelAndView sample(final HttpServletResponse response)
 	{
-		ModelAndView mv = new ModelAndView("/admin/admin");
-		List<AgentEntity> agents = agentDAO.getAllagents();
-		mv.addObject("agents", agents);
+		ModelAndView mv = new ModelAndView("/admin/sample");
+		List<SampleEntity> samples = sampleDAO.getAllsamples();
+		mv.addObject("samples", samples);
 		return mv;
 	}
+	
+	@RequestMapping(value="/delsample/{id}")
+	public void delsample(HttpServletRequest request, HttpServletResponse response, @PathVariable String id) throws IOException 
+	{
+		int sid = Integer.parseInt(id);
+		sampleDAO.delSample(sid);
+	}
+	
+	
+	@RequestMapping(value="/lghlmclyhblsqtquestion")
+	public ModelAndView question(final HttpServletResponse response)
+	{
+		ModelAndView mv = new ModelAndView("/admin/questions");
+		QuestionEntity question = new QuestionEntity();
+		List<QuestionEntity> questions = questionDAO.getAllquestions(question);
+		mv.addObject("questions", questions);
+		return mv;
+	}
+	
+	@RequestMapping(value="/delquestion/{id}")
+	public void delquestion(HttpServletRequest request, HttpServletResponse response, @PathVariable String id) throws IOException 
+	{
+		int sid = Integer.parseInt(id);
+		questionDAO.delQuestion(sid);
+	}
+	
 	
 	@RequestMapping(value="/brysjhhrhl")
 	public ModelAndView edm(final HttpServletResponse response)

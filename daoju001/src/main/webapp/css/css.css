@@ -46,8 +46,14 @@ a{text-decoration: none;color: inherit;cursor:pointer;}
 .page#page-compatable .content .supported a{margin:0 4px}
 
 /*管理员页面*/
-p.admin{margin-bottom:5px;border:2px solid black}
-p.admin span{width:300px;display: inline-block;}
+p.admin{margin-bottom:5px;border-bottom:2px solid black;padding-bottom:10px;}
+p.admin span{width:200px;display: inline-block;}
+p.admin a{width:200px;display: inline-block;}
+p.admin:hover{background-color:green}
+div.admin{margin-bottom:5px;border-bottom:2px solid black;padding-bottom:10px;}
+div.admin:hover{background-color:green}
+div.admin span{width:200px;display: inline-block;text-align:center;}
+div.admin .question{width:400px;float:left;}
 .dsf-form-text-input {padding: 4px 10px;font-size: 13px;line-height: 15px;box-shadow: 0 1px 1px rgba(0,0,0,.1) inset;border-radius: 3px;background: #fff;border: 1px solid #ccc;color: #222;}
 .zg-noti-number {background: #BF1031;border: 1px solid #B11331;box-shadow: 0 1px 2px rgba(0,0,0,.1),inset 0 1px 0 rgba(255,255,255,.15);
 color: #fff;
@@ -66,7 +72,7 @@ top: 12px;
 margin-left: 15px;
 border: 2px solid #B1B1B1;
 }
-.zg-top{top:7px;left: 13px;}
+.zg-top{top:7px;left: 13px;display:none}
 .company-info{width:400px;height:65px;resize:none;}
 div[contentEditable]{outline:0}
 .body-wrapper {position: relative;min-height: 100%;}
@@ -544,9 +550,9 @@ opacity: .3;
 .brand-logo{float:left;}
 .brand-logo p{color:#828282;text-align:center;margin-top:10px;}
 .brand-logo img{width:140px;}
-.brand-list .agent-logo{border-radius: 5px;width:120px;height:120px;overflow:hidden;text-align:center;display:table;float:left;background-color:white;}
+.brand-list .agent-logo{border-radius: 5px;width:66px;height:66px;overflow:hidden;text-align:center;display:table;float:left;background-color:white;}
 .brand-list .agent-logo a{display:table-cell;vertical-align:middle;}
-.brand-list .agent-logo a img{margin:0 auto;max-width:120px;max-height:120px;}
+.brand-list .agent-logo a img{margin:0 auto;max-width:66px;max-height:66px;}
 .brand-list .arrow{float:left;font-size: 12px;margin: 20px 40px}
 .brand-list .arrow .agent{color: #828282;background:url(../img/agent-arrow.png) no-repeat 0 0;width: 56px;height: 21px;margin: 0 0 5px 15px;line-height: 21px;padding-left: 4px; }
 .brand-list .arrow .detail{}

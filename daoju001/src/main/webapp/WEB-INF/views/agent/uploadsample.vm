@@ -44,7 +44,7 @@
                 'height'        : 30,   
                 'width'         : 120,    
 				'buttonText'    : '选择样本',
-				'fileSizeLimit' : '50MB',
+				'fileSizeLimit' : '80MB',
                 'fileObjName'   : 'sampleLink',
                 'swf'           : '/js/uploadify.swf', 
                 'uploader'      : '/agent/uploadfile_sample',

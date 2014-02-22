@@ -31,5 +31,9 @@ public interface QuestionDAO {
 	
 	int getUserQuestionCount(int userid);
 	
+	int getUserTodayQuestionCount(int userid);
+	
 	int getAllQuestionCount(QuestionEntity question);
+	
+	void delQuestion(int qid);
 }

@@ -24,7 +24,7 @@ $(function() {
 		$(this).parent().parent().css("background","#0088b5");
 		$(this).parent().parent().children(".sel").css("color","#fff");
 		$(this).parent().parent().children(".sel").css("background","none");
-		$(this).parent().parent().children(".sel").text(this.innerText);
+		$(this).parent().parent().children(".sel").text($(this).children("a").text());
 		$(this).parent().parent().children("input").val(value).trigger('change');
 	}).mouseenter(function(){
 		$(this).css('background', '#7a7a7a');

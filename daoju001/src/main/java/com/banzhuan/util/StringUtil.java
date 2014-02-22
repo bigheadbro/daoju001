@@ -602,7 +602,7 @@ public class StringUtil {
 		brandMap.put(35, "伊斯卡,伊斯卡.jpg,以色列");
 		brandMap.put(36, "优能,优能.jpg,日本");
 		brandMap.put(37, "正河源,正河源.jpg,台湾");
-		brandMap.put(38, "株洲钻石,株洲钻石.jpg,韩国");
+		brandMap.put(38, "株洲钻石,株洲钻石.jpg,中国");
 		brandMap.put(39, "住友,住友.jpeg,日本");
 		brandMap.put(40, "GARRTOOL,GARRTOOL.jpg,美国");
 		brandMap.put(41, "DINE,DINE.jpg,韩国");

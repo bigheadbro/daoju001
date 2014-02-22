@@ -347,6 +347,7 @@ public class BuyerController extends BaseController{
 			@ModelAttribute("questionForm")QuestionForm form, BindingResult result, @ModelAttribute("questionid") final Object questionid) 
 	{
 		ModelAndView mv = new ModelAndView("buyer/newquestion");
+		
 		if(!isDoSubmit(request))
 		{
 			Map<String,?> map = RequestContextUtils.getInputFlashMap(request);
@@ -363,6 +364,12 @@ public class BuyerController extends BaseController{
 			return mv;
 		}
 
+		if(buyerService.getTodayQuestionCount(account.getUserId()) >= 3)
+		{
+			JsonUtil.showAlert(response, "无法提问", "每位用户每天最多提问3次", "确定", "", "");
+			return mv;
+		}
+		
 		form.setUserid(account.getUserId());
 		form.setContent(form.getContent().replace('"', '\''));
 		if(form.getIsEdit() > 0)

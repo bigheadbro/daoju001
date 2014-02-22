@@ -401,5 +401,11 @@ public class BuyerService {
 		return result;
 	}
 	
+	public int getTodayQuestionCount(int userid)
+	{
+		int a =  questionDAO.getUserTodayQuestionCount(userid);
+		return a;
+	}
+	
 
 }

@@ -43,10 +43,20 @@
 	]]>
 	</select>
 
+	<delete id="delQuestion"  parameterType="int">
+	delete from t_question where id =#{id};
+	</delete>
 	<select id="getUserQuestionCount" parameterType="int"
 			resultType="int">
 		<![CDATA[
 			SELECT count(1) from t_question t WHERE t.buyer_id = #{buyerId} and state = 1;
+		]]>
+	</select>
+	
+	<select id="getUserTodayQuestionCount" parameterType="int"
+			resultType="int">
+		<![CDATA[
+			SELECT count(1) from t_question t WHERE t.buyer_id = #{buyerId} and state = 1 and DATEDIFF(t.gmt_create,NOW()) =0;
 		]]>
 	</select>
 	

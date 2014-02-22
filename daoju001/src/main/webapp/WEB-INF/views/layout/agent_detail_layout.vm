@@ -67,11 +67,11 @@
                                     #end
                                     #if($!stringUtil.isContains($request.getServletPath(),"/newquestion") || $!stringUtil.isContains($request.getServletPath(),"/oldquestion") ||$!stringUtil.isContains($request.getServletPath(),"/draft"))
                                         <li class="current">
-                                            <a href="newquestion">我的回答</a>
+                                            <a href="oldquestion">我的回答</a>
                                         </li>
                                     #else
                                         <li>
-                                            <a href="newquestion">我的回答</a>
+                                            <a href="oldquestion">我的回答</a>
                                         </li>
                                     #end
                                     #if($!stringUtil.isContains($request.getServletPath(),"/goodcase") || $!stringUtil.isContains($request.getServletPath(),"/uploadgc"))

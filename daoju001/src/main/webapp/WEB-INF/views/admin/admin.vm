@@ -1,19 +1,42 @@
 #set($layout = "/layout/admin_layout.vm")
+<script>
+$(function() {
+	$(".cancel").click(function()
+    {
+		var str = "/admin/cancel/" + $(this).attr("aid");
+    	if(confirm("确定取消认证吗？想清楚了？")){
+			$.ajax( {   
+    		    type : "POST",   
+    		    url : str
+    		});   
+        }
+    });
+	$(".add").click(function()
+    {
+		var str = "/admin/add/" + $(this).attr("aid");
+    	if(confirm("确定认证吗？想清楚了？")){
+			$.ajax( {   
+    		    type : "POST",   
+    		    url : str
+    		});   
+        }
+    });
+});
+</script>
 #foreach ($agent in $agents)
 <p class="admin">
 	<span>$!{agent.companyName}</span> 
 	<span>$!{agent.brandName}</span>
-	<span>
 	#if($agent.isVerified())
-		<a href="${agent.verifiedLink}" />代理证书连接</a>
+		<a target="_blank" href="${agent.verifiedLink}" />代理证书连接</a>
 	#else
-		未认证
+		<span>未认证</span>
 	#end
-	</span>
+	
 	#if($agent.isVerified())
-		<a>添加认证</a>
+		<a class="cancel" aid="${agent.id}">取消认证</a>
 	#else
-		<a>取消认证</a>
+		<a class="add" aid="${agent.id}">添加认证</a>
 	#end
 </p>
 #end

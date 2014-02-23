@@ -202,9 +202,9 @@
 									<a class="fancybox-v" title="$!{gc.agentName}的代理证书" href="$!{gc.verifiedLink}"><img src="../img/v.png" /></a>
 								#end
 							</h2>
-							<h4>$!{gc.brandName}</h4>
+							<h4>$stringUtil.getBrand($!{gc.brandName})</h4>
 						</div>
-						<div class="download"><a href="$!{gc.link}">点击下载</a></div>
+						<div class="download"><a target="_blank" href="/downloadgc?file=$!{gc.link}">点击下载</a></div>
 					</div>
 					<div class="gc-param">
 						#if($!{gc.industry} > 0)

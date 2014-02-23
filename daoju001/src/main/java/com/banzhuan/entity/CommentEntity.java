@@ -22,7 +22,7 @@ public class CommentEntity implements Serializable {
 	// 用户名称
 	private String userName;
 	
-	private String brandName;
+	private int brandName;
 	// 用户头像
 	private String userAvatar;
 	//
@@ -153,14 +153,14 @@ public class CommentEntity implements Serializable {
 	/**
 	 * @return the brandName
 	 */
-	public String getBrandName() {
+	public int getBrandName() {
 		return brandName;
 	}
 
 	/**
 	 * @param brandName the brandName to set
 	 */
-	public void setBrandName(String brandName) {
+	public void setBrandName(int brandName) {
 		this.brandName = brandName;
 	}
 

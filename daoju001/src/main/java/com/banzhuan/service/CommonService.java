@@ -30,6 +30,7 @@ import com.banzhuan.entity.GoodcaseEntity;
 import com.banzhuan.entity.ProfessionalAnswerEntity;
 import com.banzhuan.entity.QuestionEntity;
 import com.banzhuan.entity.SampleEntity;
+import com.banzhuan.common.Account;
 import com.banzhuan.common.Result;
 import com.banzhuan.form.CommentForm;
 import com.banzhuan.form.GoodcaseForm;
@@ -253,7 +254,7 @@ public class CommonService {
 	
 	public Map<Integer,Map<Integer,List<AgentEntity>>> getAllAgents()
 	{
-		List<AgentEntity> agents = agentDAO.getAllagents();
+		List<AgentEntity> agents = agentDAO.getAllagents(1);
 		
 		//按代理商首字母
 		/*Map<Integer,List<AgentEntity>> agentMap = new HashMap<Integer,List<AgentEntity>>();
@@ -448,20 +449,20 @@ public class CommonService {
 		{
 			comment.setAgentId(form.getAgentId());
 		}
-		if(form.getBrandName() != "")
+		if(form.getBrandName() > 0)
 		{
 			comment.setBrandName(form.getBrandName());
 		}
-		if(form.getVerifiedLink() != "")
+		if(StringUtil.isNotEmpty(form.getVerifiedLink()))
 		{
 			comment.setLink(form.getVerifiedLink());
 		}
 		
-		if(form.getUserLogo() != "")
+		if(StringUtil.isNotEmpty(form.getUserLogo()))
 		{
 			comment.setUserAvatar(form.getUserLogo());
 		}
-		if(form.getUserName() != "")
+		if(StringUtil.isNotEmpty(form.getUserName()))
 		{
 			comment.setUserName(form.getUserName());
 		}

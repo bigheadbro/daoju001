@@ -15,7 +15,7 @@ public class Account implements Serializable{
 	private boolean isAgent;
 	private String logo;
 	private String mail;
-	private String brandName;
+	private int brandName;
 	private String companyName;
 	private boolean isVerified;
 	private String verifiedLink;
@@ -99,13 +99,13 @@ public class Account implements Serializable{
 	/**
 	 * @return the brandName
 	 */
-	public String getBrandName() {
+	public int getBrandName() {
 		return brandName;
 	}
 	/**
 	 * @param brandName the brandName to set
 	 */
-	public void setBrandName(String brandName) {
+	public void setBrandName(int brandName) {
 		this.brandName = brandName;
 	}
 	/**

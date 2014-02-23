@@ -8,6 +8,5 @@ $(function() {
 		     },  
 		    dataType: "json"
 		});  
-		showanswer(); 
 	});
 });

@@ -28,7 +28,7 @@ public class GoodcaseEntity implements Serializable {
 	// 代理商logo
 	private String agentLogo;
 	// 代理品牌
-	private String brandName;
+	private int brandName;
 	// 是否认证
 	private boolean isVerified;
 	//
@@ -261,14 +261,14 @@ public class GoodcaseEntity implements Serializable {
 	/**
 	 * @return the brandName
 	 */
-	public String getBrandName() {
+	public int getBrandName() {
 		return brandName;
 	}
 
 	/**
 	 * @param brandName the brandName to set
 	 */
-	public void setBrandName(String brandName) {
+	public void setBrandName(int brandName) {
 		this.brandName = brandName;
 	}
 

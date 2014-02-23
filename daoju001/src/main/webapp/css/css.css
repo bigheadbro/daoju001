@@ -15,6 +15,8 @@ list-style: none;
 }
 ul{display:block;}
 a{text-decoration: none;color: inherit;cursor:pointer;}
+a.common{color:#606060}
+a.common:hover{text-decoration:underline;color:#00c0ff}
 /* Clear Fix */ 
 .clearfix:after { content:"."; display:block; height:0; clear:both; visibility:hidden; } 
 .clearfix { display:inline-block; } 
@@ -215,6 +217,7 @@ ul.pa-answer{margin-top:10px;}
 .hot-question-listitem .content li.comment .comment-list .comment-arrow .S_bg1_c{margin-top:1px;color:#f0f0f0}
 .hot-question-listitem .content li.comment .comment-list .comment-listitem{border-bottom:1px solid #ccc;padding-bottom:5px;}
 .hot-question-listitem .content li.comment li.comment-cont{margin-top:10px;color:#4f4f4f;font-size:13px;line-height: 20px;}
+.hot-question-listitem .content li.comment li.comment-cont p{word-wrap: break-word;}
 .hot-question-listitem .content li.comment ul.comment-item{border-bottom:1px solid #d2d2d2;padding-bottom:5px;margin-top: 10px;}
 .hot-question-listitem .content li.comment .reply-cont{margin-top:15px;}
 .hot-question-listitem .content li.comment li.info span.time{margin-right:10px;}
@@ -275,11 +278,11 @@ ul.pa-answer{margin-top:10px;}
 .mainpage-container .main-left .person-info h6{font-size: 12px;color: #767676;}
 .mainpage-container .main-left .other-info{border-top:1px solid #c7c7c7;border-bottom:1px solid #c7c7c7;margin: 15px 60px 0;padding: 10px 0;}
 .mainpage-container .main-left .other-info h2{font-size:18px;color:#0088b5;}
-.mainpage-container .main-left .other-info p{font-size:11px;color:#606060;}
+.mainpage-container .main-left .other-info span{font-size:11px;color:#606060;}
 .mainpage-container .main-left .agent-other-info{margin-top:15px}
 .mainpage-container .main-left .agent-other-info li{width:20px;float:left;width:45px;}
 .mainpage-container .main-left .agent-other-info h2{font-size:18px;color:#0088b5;}
-.mainpage-container .main-left .agent-other-info p{font-size:11px;color:#606060;}
+.mainpage-container .main-left .agent-other-info span{font-size:11px;color:#606060;}
 
 .mainpage-container .main-left .function{margin:20px auto;}
 .mainpage-container .main-left .function ul li{padding:15px;color:#9b9b9b;font-size:14px;position: relative;}
@@ -365,11 +368,12 @@ ul.pa-answer{margin-top:10px;}
 
 .error-msg{display:none;border-radius:8px;background-color:#ffc8c8;border:1px solid #cc3333;text-align:center;color:#cc3333;font-size:14px;line-height: 40px;margin-bottom: 10px;}
 .error-msg label{display:block;}
-em.error{} 
-
+em.error{}
+#selbrand{color:#7E7E7E;}
+#selbrand:hover{text-decoration:underline;color:#00c0ff}
 #uploadsample{color:white;background-color:#ff9000;border-radius:5px;padding:3px;display: inline-block;}
 .uploadv{width:62px;height:26px;opacity:0;position:absolute;left: 0;top: 10px;}
-#pagemask, #pagemask-complain, #pagemask-answer{
+#pagemask, #pagemask-complain,#pagemask-brand, #pagemask-answer{
 position: absolute;
 display: none;
 top: 0;
@@ -494,6 +498,18 @@ opacity: .3;
 .complain-op .publish{background-color:#d73434;color:white;border-radius:4px;display: block;float: left;width: 100px;text-align: center;padding: 10px;margin-right:10px;}
 .complain-op .savedraft{background-color:#dd5a5a;color:white;border-radius:4px;display: block;float: left;width: 100px;text-align: center;padding: 10px;}
 
+/*品牌*/
+.brand-win{display:none;position:absolute;top:50px;right:400px;z-index:10002;width:784px;padding: 5px;border-radius: 5px;background:url(../img/transGray.png);font-size:13px;}
+.brand-win-content{background-color:white;}
+.mainpage-container .main-right .brand-win h2{background-color:#0099cb;color:white;font-size:14px;padding:3px 10px;}
+.brand-win h2 a{float:right;}
+.brand-win .content{}
+.brand-item{display: block;float: left;width:100px;height:100px;border:1px solid #eee;text-align:center;padding: 5px;}
+.brand-item .brand-logo{max-width:100px;height:77px;overflow:hidden;text-align:center;display:table;float:left;}
+.brand-item .brand-logo span{display:table-cell;vertical-align:middle;}
+.brand-item .brand-logo span img{margin:0 auto;max-width:100px;max-height:77px;}
+.brand-item span{display:block;}
+.brand-item:hover{background-color:#99cfe1;}
 /*图文混合文字*/
 .mixed{float:left;text-overflow: ellipsis;white-space: nowrap;width:460px;overflow:hidden;color:#0088b5;}
 
@@ -534,7 +550,7 @@ opacity: .3;
 .sample-item .sample-list{float:left;border-left: 1px solid #e4e4e4;padding-left: 60px;}
 .sample-item .sample-list > div:first-of-type{padding-top:0px;border:none;}
 .sample-item .sample-list .sample-wrap{margin-top:5px;margin-bottom:15px;width: 289px;padding-top:15px;border-top:1px solid #ececec;}
-.sample-item .sample-list .sample-wrap .detail{float:left;background: url(../img/sample.png) no-repeat 0 0;padding-left: 35px;margin-top:5px}
+.sample-item .sample-list .sample-wrap .detail{float:left;background: url(../img/sample.png) no-repeat 0 0;padding-left: 35px;margin-top:5px;max-width: 130px;}
 .sample-item .sample-list .sample-wrap .detail h2{color:#424242;font-size:12px;font-weight:600px}
 .sample-item .sample-list .sample-wrap .detail h4{color:#999999;font-size:12px;font-weight:600px}
 .sample-item .sample-list .sample-wrap a{display:block;float: right;padding:10px 20px;color:white;background-color:#63a200;border-radius:8px;}
@@ -562,7 +578,7 @@ opacity: .3;
 .brand-list .agent-detail h5 em{color:#0099cb;margin-right:3px;}
 .brand-list .agent-detail h5 i{margin-left:2px;margin-right:2px;color:#828282;}
 .brand-list .agent-detail h5 span.mobile{display: inline-block;width:25px;text-align:center;background-color:#ff9000;color:white;padding:1px 5px;border-radius:4px;font-size:12px}
-.brand-list .agent-detail h5 span.qq{display: inline-block;width:25px;text-align:center;background-color:#00759c;color:white;padding:1px 5px;border-radius:4px;font-size:12px}
+.brand-list .agent-detail h5 span.qq{display: inline-block;width:25px;text-align:center;background-color:#00759c;color:white;padding:1px 5px;border-radius:4px;font-size:12px;margin-right: 4px;}
 .agent-list-content .gc-item .brand-list .agent-info{margin:0}
 .brand-list .agent-detail h2 a.agent-name{max-width:100px;}
 /*代理商详细页面*/

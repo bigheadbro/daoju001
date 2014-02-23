@@ -2,6 +2,7 @@ package com.banzhuan.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -40,6 +41,7 @@ import com.banzhuan.common.Account;
 import com.banzhuan.common.Constant;
 import com.banzhuan.common.Result;
 import com.banzhuan.entity.AgentEntity;
+import com.banzhuan.entity.BrandEntity;
 import com.banzhuan.entity.GoodcaseEntity;
 import com.banzhuan.entity.ProfessionalAnswerEntity;
 import com.banzhuan.entity.SampleEntity;
@@ -89,6 +91,8 @@ public class AgentController extends BaseController{
 				Account account = new Account();
 				account.setLogin(true); // 登录成功标识
 				account.setUserName(user.getCompanyName()); // 用户登录名
+				account.setMail(user.getMail());
+				account.setBrandName(user.getBrand());
 				account.setUserId(user.getId()); // 用户ID
 				account.setBuyer(false);
 				account.setAgent(true);
@@ -203,7 +207,17 @@ public class AgentController extends BaseController{
 			@ModelAttribute("form")AgentProfileForm form, BindingResult result)
 	{
 		ModelAndView mv = new ModelAndView("agent/profile");
-		
+		List<BrandEntity> brands = new ArrayList<BrandEntity>();
+		for(int i = 1;i<=42;i++)
+		{
+			BrandEntity brand = new BrandEntity();
+			brand.setKey(i);
+			brand.setName(StringUtil.getBrand(i));
+			brand.setLink(StringUtil.getBrandLogo(i));
+			brand.setCountry(StringUtil.getBrandCountry(i));
+			brands.add(brand);
+		}
+		mv.addObject("brands", brands);
 		AgentEntity agent = (AgentEntity)agentService.getAgentEntity(account.getUserId()).get("agent");
 		if(!isDoSubmit(request))
 		{
@@ -448,8 +462,8 @@ public class AgentController extends BaseController{
 		  
         MultipartFile f = r.getFile("gcLink");    
         String path = request.getSession().getServletContext().getRealPath("/goodcase");
-		String link = "../goodcase/"  + "/" + StringUtil.getTodayString() + "/" + f.getOriginalFilename();
-		path += "/"  + "/" + StringUtil.getTodayString() + "/";
+		String link = "../goodcase/" + StringUtil.getTodayString() + "/" + f.getOriginalFilename();
+		path += "/" + StringUtil.getTodayString() + "/";
 		File file = new File(path + f.getOriginalFilename());
 		file.getParentFile().mkdirs();  
 		file.getParentFile().mkdirs();  
@@ -481,7 +495,7 @@ public class AgentController extends BaseController{
 			gc.setVerified(account.isVerified());
 			gc.setVerifiedLink(account.getVerifiedLink());
 			
-			if(form.getIsEdit() > 0)
+			if(form.getEdit() > 0)
 			{
 				agentService.updateGoodcaseById(form, gc, result);
 				
@@ -574,6 +588,7 @@ public class AgentController extends BaseController{
 		{
 			FileCopyUtils.copy(f.getBytes(), file);
 			responseStr = link;
+			
 
 		} catch (IOException e) {
 			logger.error(e.getMessage());
@@ -650,6 +665,7 @@ public class AgentController extends BaseController{
 		String url = request.getHeader("Referer");
 		int sid = Integer.parseInt(id);
 		agentService.delSample(sid);
+		account.setSampleCnt(agentService.getSampleCount(account.getUserId()));
 		response.sendRedirect(url);
 	}
 	
@@ -659,6 +675,7 @@ public class AgentController extends BaseController{
 		String url = request.getHeader("Referer");
 		int gid = Integer.parseInt(id);
 		agentService.delGoodcase(gid);
+		account.setGcCnt(agentService.getGoodcaseCount(account.getUserId()));
 		response.sendRedirect(url);
 	}
 	

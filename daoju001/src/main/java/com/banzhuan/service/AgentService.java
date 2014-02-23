@@ -188,9 +188,9 @@ public class AgentService {
 			{
 				agent.setCompanyName(form.getCompanyName());
 			}
-			if(StringUtil.isNotEmpty(form.getBrandName()))
+			if(form.getBrand() > 0)
 			{
-				agent.setBrandName(form.getBrandName());
+				agent.setBrand(form.getBrand());
 			}
 			if(StringUtil.isNotEmpty(form.getAddress()))
 			{
@@ -263,9 +263,10 @@ public class AgentService {
 			{
 				form.setAddress(agent.getAddress());
 			}
-			if(StringUtil.isNotEmpty(agent.getBrandName()))
+			if(agent.getBrand() > 0)
 			{
-				form.setBrandName(agent.getBrandName());
+				form.setBrand(agent.getBrand());
+				form.setBrandName(StringUtil.getBrand(agent.getBrand()));
 			}
 			if(StringUtil.isNotEmpty(agent.getPhone()))
 			{
@@ -480,7 +481,7 @@ public class AgentService {
     	}
     	if(form.getSize() != 0)
     	{
-    		sample.setSize(form.getSize());
+    		sample.setSize(form.getSize()/1024/1024);
     	}
     	sampleDAO.insertSampleEntity(sample);
     	return result;
@@ -528,7 +529,7 @@ public class AgentService {
     	}
     	if(form.getSize() != 0)
     	{
-    		sample.setSize(form.getSize());
+    		sample.setSize(form.getSize()/1024/1024);
     	}
     	sampleDAO.updateSampleById(sample);
     	return result;

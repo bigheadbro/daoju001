@@ -18,7 +18,7 @@ public class CommentForm implements Serializable {
 	private int parentId;
 	private String userName;
 	private String userLogo;
-	private String brandName;
+	private int brandName;
 	private String verifiedLink;
 	
 	/**
@@ -108,13 +108,13 @@ public class CommentForm implements Serializable {
 	/**
 	 * @return the brandName
 	 */
-	public String getBrandName() {
+	public int getBrandName() {
 		return brandName;
 	}
 	/**
 	 * @param brandName the brandName to set
 	 */
-	public void setBrandName(String brandName) {
+	public void setBrandName(int brandName) {
 		this.brandName = brandName;
 	}
 	/**

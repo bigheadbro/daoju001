@@ -21,8 +21,10 @@
                                 <h5>$!{account.userName}</h5>
                             </div>
                             <div class="other-info">
+								<a href="oldquestion">
                                 <h2>$!{account.questionCnt}</h2>
-                                <p>已提问题</p>
+                                <span>已提问题</span>
+								</a>
                             </div>
                             <div class="function">
                                 <ul>

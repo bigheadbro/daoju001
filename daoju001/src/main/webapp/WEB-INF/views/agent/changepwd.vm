@@ -66,11 +66,11 @@
 							}); 
 						},
         				submitHandler: function(form) {
-                  		$(form).ajaxSubmit({
-    						dataType:'json',
-    						success:processJson
-    					});
-    				}
+                      		$(form).ajaxSubmit({
+        						dataType:'json',
+        						success:processJson
+        					});
+        				}
 					});
 				});
 			</script>

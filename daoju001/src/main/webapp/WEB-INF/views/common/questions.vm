@@ -264,7 +264,7 @@
 								<a  class="fancybox-v" title="$!{gc.agentName}的代理证书" href="$!{gc.verifiedLink}"><img src="../img/v.png" /></a>
 							#end
 						</li>
-						<li class="title">$!{gc.brandName}</li>
+						<li class="title">$stringUtil.getBrand($!{gc.brandName})</li>
 					</ul>
 				</div>
 			</div>

@@ -63,7 +63,7 @@ public class AutoLoginInterceptor extends HandlerInterceptorAdapter
 						account.setUserId(agent.getId()); // 用户ID
 						account.setMail(agent.getMail()); // 邮箱
 						account.setLogo(agent.getLogo()); // logo
-						account.setBrandName(agent.getBrandName());
+						account.setBrandName(agent.getBrand());
 						account.setBuyer(false);
 						account.setAgent(true);
 						account.setVerified(agent.isVerified());

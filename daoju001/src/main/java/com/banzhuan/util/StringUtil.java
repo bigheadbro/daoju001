@@ -575,7 +575,7 @@ public class StringUtil {
 		brandMap.put(8, "玛帕,MAPAL.jpg,韩国");
 		brandMap.put(9, "铣星,MILLSTAR.jpg,美国");
 		brandMap.put(10, "MST,MST.jpg,日本");
-		brandMap.put(11, "NACHI,NAHCI.jpg,日本");
+		brandMap.put(11, "NACHI,NACHI.jpg,日本");
 		brandMap.put(12, "日研,NIKKEN.jpg,日本");
 		brandMap.put(13, "NTK,NTK.jpg,日本");
 		brandMap.put(14, "REGO-FIX,REGO-FIX.jpg,瑞士");
@@ -586,7 +586,7 @@ public class StringUtil {
 		brandMap.put(19, "安威,安威.jpg,台湾");
 		brandMap.put(20, "大昭和,大昭和.jpg,日本");
 		brandMap.put(21, "WIDIA,WIDIA.jpg,德国");
-		brandMap.put(22, "WALTER,WALTER.jpg,德国");
+		brandMap.put(22, "WALTER,瓦尔特.jpg,德国");
 		brandMap.put(23, "SAFETY,SAFETY.jpg,法国");
 		brandMap.put(24, "弗雷萨,弗雷萨.jpg,瑞士");
 		brandMap.put(25, "钴领,钴领.jpg,德国");
@@ -606,6 +606,7 @@ public class StringUtil {
 		brandMap.put(39, "住友,住友.jpeg,日本");
 		brandMap.put(40, "GARRTOOL,GARRTOOL.jpg,美国");
 		brandMap.put(41, "DINE,DINE.jpg,韩国");
+		brandMap.put(42, "DORMER,DORMER.jpg,英国");
 		
 		msgTypeMap.put(1, "提供了专业解决方案");
 		msgTypeMap.put(2, "回复了你");
@@ -663,16 +664,22 @@ public class StringUtil {
 	
 	public static String getBrand(int key)
 	{
+		if(key == 0)
+			return "";
 		return brandMap.get(key).split(",")[0];
 	}
 	
 	public static String getBrandLogo(int key)
 	{
+		if(key == 0)
+			return "";
 		return brandMap.get(key).split(",")[1];
 	}
 	
 	public static String getBrandCountry(int key)
 	{
+		if(key == 0)
+			return "";
 		return brandMap.get(key).split(",")[2];
 	}
 	

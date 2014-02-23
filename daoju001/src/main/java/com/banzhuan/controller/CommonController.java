@@ -2,7 +2,12 @@ package com.banzhuan.controller;
 
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.io.UnsupportedEncodingException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -69,6 +74,54 @@ public class CommonController extends BaseController{
 	@Autowired
 	@Qualifier("buyerService")
 	private BuyerService buyerService;
+	
+	@RequestMapping(value="/downloadsample")
+	public void downloadFile(HttpServletRequest request,HttpServletResponse response) throws UnsupportedEncodingException{  
+        response.setCharacterEncoding("utf-8");  
+        response.setContentType("multipart/form-data");  
+        String fileName = request.getParameter("file");
+        response.setHeader("Content-Disposition", "attachment;fileName="+java.net.URLEncoder.encode(fileName.split("/")[3], "UTF-8"));  
+        String path = request.getSession().getServletContext().getRealPath("/sample")+ fileName.substring(9);
+        try {  
+            File file=new File(path);  
+            InputStream inputStream=new FileInputStream(file);  
+            OutputStream os=response.getOutputStream();  
+            byte[] b=new byte[1024];  
+            int length;  
+            while((length=inputStream.read(b))>0){  
+                os.write(b,0,length);  
+            }  
+            inputStream.close();  
+        } catch (FileNotFoundException e) {  
+            e.printStackTrace();  
+        } catch (IOException e) {  
+            e.printStackTrace();  
+        }  
+    }  
+	
+	@RequestMapping(value="/downloadgc")
+	public void downloadgc(HttpServletRequest request,HttpServletResponse response) throws UnsupportedEncodingException{  
+        response.setCharacterEncoding("utf-8");  
+        response.setContentType("multipart/form-data");  
+        String fileName = request.getParameter("file");
+        response.setHeader("Content-Disposition", "attachment;fileName="+java.net.URLEncoder.encode(fileName.split("/")[3], "UTF-8"));  
+        String path = request.getSession().getServletContext().getRealPath("/goodcase")+ fileName.substring(11);
+        try {  
+            File file=new File(path);  
+            InputStream inputStream=new FileInputStream(file);  
+            OutputStream os=response.getOutputStream();  
+            byte[] b=new byte[1024];  
+            int length;  
+            while((length=inputStream.read(b))>0){  
+                os.write(b,0,length);  
+            }  
+            inputStream.close();  
+        } catch (FileNotFoundException e) {  
+            e.printStackTrace();  
+        } catch (IOException e) {  
+            e.printStackTrace();  
+        }  
+    }  
 	/**
 	 * 其他未识别的URL都统一到
 	 * @return
@@ -166,7 +219,7 @@ public class CommonController extends BaseController{
 					account.setUserId(user.getId()); // 用户ID
 					account.setMail(user.getMail()); // 邮箱
 					account.setLogo(user.getLogo()); // logo
-					account.setBrandName(user.getBrandName());
+					account.setBrandName(user.getBrand());
 					account.setBuyer(false);
 					account.setAgent(true);
 					account.setVerified(user.isVerified());
@@ -282,12 +335,6 @@ public class CommonController extends BaseController{
 	@RequestMapping(value="/addcomment")
 	public void addcomment(HttpServletRequest request, HttpServletResponse response, @ModelAttribute("form")CommentForm form, BindingResult result) 
 	{
-/*		Account account = (Account) WebUtils.getSessionAttribute(request, "account");
-		if (account == null) 
-		{
-			JsonUtil.showAlert(response, "登录后才可以回复", "", "确定", "", "");
-			return;
-		}*/
 		if(isDoSubmit(request))
 		{
 			if(form.getContent() == "")
@@ -295,13 +342,18 @@ public class CommonController extends BaseController{
 				JsonUtil.showAlert(response, "回复内容不能为空", "", "确定", "", "");
 				return;
 			}
+			Account account = (Account) WebUtils.getSessionAttribute(request, "account");
+			if(!account.isVerified())
+			{
+				form.setVerifiedLink(null);
+			}
 			int ret = commonService.insertComment(form);
 			if(ret >= 0)
 			{
 				Date now = new Date();
 				SimpleDateFormat time=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"); 
 				String aa = time.format(now);
-				JsonUtil.sendComment(response, form.getContent(), form.getUserName(), form.getUserLogo(), form.getBrandName(), form.getVerifiedLink(), StringUtil.formatDate(aa),ret);
+				JsonUtil.sendComment(response, form.getContent(), form.getUserName(), form.getUserLogo(), StringUtil.getBrand(form.getBrandName()), form.getVerifiedLink(), StringUtil.formatDate(aa),ret);
 			}
 		}
 		return; 

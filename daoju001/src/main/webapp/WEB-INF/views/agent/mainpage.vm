@@ -13,7 +13,7 @@
 	</div>
     <div class="listitem">
 		<div class="content">
-			<span>品牌</span>$!{brand}
+			<span>品牌</span>$!stringUtil.getBrand($!{brand})
 		</div>
 	</div>
 </div>

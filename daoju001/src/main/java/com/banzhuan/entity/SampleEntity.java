@@ -19,7 +19,7 @@ public class SampleEntity implements Serializable {
 	private String agentName;
 	// 代理商logo
 	private String agentLogo;
-	private String brandName;
+	private int brandName;
 	// 是否认证
 	private boolean isVerified;
 	//
@@ -175,11 +175,11 @@ public class SampleEntity implements Serializable {
 		return serialVersionUID;
 	}
 
-	public String getBrandName() {
+	public int getBrandName() {
 		return brandName;
 	}
 
-	public void setBrandName(String brandName) {
+	public void setBrandName(int brandName) {
 		this.brandName = brandName;
 	}
 
@@ -230,7 +230,7 @@ public class SampleEntity implements Serializable {
 	 * @param size the size to set
 	 */
 	public void setSize(double size) {
-		this.size = size/1024/1024;
+		this.size = size;
 	}
 
 	

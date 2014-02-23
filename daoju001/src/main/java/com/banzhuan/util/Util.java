@@ -1,7 +1,9 @@
 package com.banzhuan.util;
 
 import java.awt.Rectangle;
+import java.awt.color.ColorSpace;
 import java.awt.image.BufferedImage;
+import java.awt.image.ColorConvertOp;
 import java.io.BufferedReader;
 import java.io.Console;
 import java.io.File;
@@ -74,6 +76,14 @@ public class Util {
 			 */
 			BufferedImage sourceImg = ImageIO
 					.read(new FileInputStream(srcpath));
+			if(sourceImg.getColorModel().getColorSpace().getType() == ColorSpace.TYPE_CMYK)
+			{
+				 BufferedImage rgbImage = 
+		                    new BufferedImage( 
+		                    		sourceImg.getWidth(), sourceImg.getHeight(), BufferedImage.TYPE_3BYTE_BGR); 
+		                ColorConvertOp op = new ColorConvertOp(null); 
+		                op.filter(sourceImg, rgbImage); 
+			}
 			int x, y, width, height;
 
 			if (StringUtil.isEmpty(aa)) {

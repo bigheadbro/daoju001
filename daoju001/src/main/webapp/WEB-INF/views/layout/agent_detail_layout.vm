@@ -19,21 +19,27 @@
                                     </a>
                                 </div>
                                 <h5>$!{account.userName}</h5>
-                                <h6>$!{account.brandName}</h6>
+                                <h6>$stringUtil.getBrand($!{account.brandName})</h6>
                             </div>
                             <div class="agent-other-info">
                                 <ul class="clearfix">
                                     <li class="ml30">
+										<a href="oldquestion">
                                         <h2>$!{account.questionCnt}</h2>
-                                        <p>回答</p>
+                                        <span>回答</span>
+										</a>
                                     </li>
                                     <li class="blrg">
+										<a href="mysample">
                                         <h2>$!{account.sampleCnt}</h2>
-                                        <p>样本</p>
+                                        <span>样本</span>
+										</a>
                                     </li>
                                     <li>
+										<a href="goodcase">
                                         <h2>$!{account.gcCnt}</h2>
-                                        <p>案例</p>
+                                        <span>案例</span>
+										</a>
                                     </li>
                                 </ul>
                             </div>

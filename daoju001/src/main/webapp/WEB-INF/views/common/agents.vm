@@ -54,7 +54,7 @@
 										</h2>
                                         <h4>$!{agent.brandName}</h4>
 										<h5>
-											<em>样本</em>${agent.cntSample}
+											<a class="common" href="/samples"><em>样本</em>${agent.cntSample}</a>
 										</h5>
 										<h5>
 											<span class="mobile">手机</span>
@@ -65,11 +65,10 @@
 											#end
 										</h5>
 										<h5>
-											<span class="qq">QQ</span>
 											#if(${agent.contactQq})
-												$!{agent.contactQq}
+												<a class="common" target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=1046384928&site=qq&menu=yes"><span class="qq">QQ</span>$!{agent.contactQq}</a>
 											#else
-												无
+												<span class="qq">QQ</span>无
 											#end
 										</h5>
                                     </div>

@@ -1,4 +1,21 @@
 #set($layout = "/layout/agent_detail_layout.vm")
+<script>
+$(function() {
+	$(".del").click(function()
+    {
+		var str = "/agent/delsample/" + $(this).attr("sid");
+    	if(confirm("确定要删除吗？")){
+			$.ajax({   
+    		    type : "POST",   
+    		    url : str,
+				success: function(){
+					window.location.href='/agent/mysample';
+					}
+    		});   
+        }
+    });
+});
+</script>
 <ul class="right-tab clearfix">
   <li><a href="uploadsample">上传样本</a></li>
   <li class="current"><span>样本管理</span></li>
@@ -10,7 +27,7 @@
 			<p>$!{sample.name}<span>$stringUtil.formatDate($!{sample.gmtCreate})</span></p>
 			<div class="operation clearfix">
 				<a href="/agent/sample/$!{sample.id}">编辑</a><span>|</span>
-				<a id="del-sample" href="/agent/delsample/$!{sample.id}">删除</a>
+				<a id="del-sample" class="del" sid="$!{sample.id}">删除</a>
 			</div>
 		</div>
 		#end

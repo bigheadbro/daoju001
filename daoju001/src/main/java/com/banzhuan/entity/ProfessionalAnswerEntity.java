@@ -28,7 +28,7 @@ public class ProfessionalAnswerEntity implements Serializable {
 	private int agentId;
 	// 代理商名字
 	private String agentName;
-	private String brandName;
+	private int brandName;
 	// 代理商logo
 	private String agentLogo;
 	
@@ -260,14 +260,14 @@ public class ProfessionalAnswerEntity implements Serializable {
 	/**
 	 * @return the brandName
 	 */
-	public String getBrandName() {
+	public int getBrandName() {
 		return brandName;
 	}
 
 	/**
 	 * @param brandName the brandName to set
 	 */
-	public void setBrandName(String brandName) {
+	public void setBrandName(int brandName) {
 		this.brandName = brandName;
 	}
 

@@ -11,6 +11,7 @@ public class AgentProfileForm implements Serializable {
 	
 	private String email;
 	private String companyName;
+	private int brand;
 	private String brandName;
 	private String address;
 	private String companyPhone;
@@ -145,6 +146,18 @@ public class AgentProfileForm implements Serializable {
 	 */
 	public void setDescription(String description) {
 		this.description = description;
+	}
+	/**
+	 * @return the brand
+	 */
+	public int getBrand() {
+		return brand;
+	}
+	/**
+	 * @param brand the brand to set
+	 */
+	public void setBrand(int brand) {
+		this.brand = brand;
 	}
 
 }

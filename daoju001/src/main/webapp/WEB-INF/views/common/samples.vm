@@ -38,7 +38,7 @@
     												<a class="fancybox-v" title="$!{sample.agentName}的代理证书" href="$!{sample.verifiedLink}"><img src="../img/v.png" /></a>
     											#end
     										</h2>
-                                            <h4>$!{sample.brandName}</h4>
+                                            <h4>$stringUtil.getBrand($!{sample.brandName})</h4>
                                         </div>
                                     </div>
 								<div class="sample-list">
@@ -48,7 +48,7 @@
 											<h2>$!{sample.name}</h2>
 											<h4>$stringUtil.fileType($!{sample.type}) 文件  $stringUtil.fileSize($!{sample.size}) MB</h4>
 										</div>
-										<a target="_blank"  href="$!{sample.link}">点击下载</a>
+										<a target="_blank" href="/downloadsample?file=$!{sample.link}">点击下载</a>
 									</div>
 								#if($velocityCount == $sampleList.size())
 									</div>

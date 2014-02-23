@@ -44,16 +44,17 @@
                 'height'        : 30,   
                 'width'         : 120,    
 				'buttonText'    : '选择样本',
-				'fileSizeLimit' : '80MB',
+				'fileSizeLimit' : '100MB',
                 'fileObjName'   : 'sampleLink',
                 'swf'           : '/js/uploadify.swf', 
                 'uploader'      : '/agent/uploadfile_sample',
                 'auto'          : true,  
-				'fileTypeExts'  : '*.rar;*.pdf;*.doc;*.xls',  
+				'removeCompleted': false,
+				'fileTypeExts'  : '*.rar;*.pdf;*.doc;*.xls;*.docx;*.zip;*.pptx;*.xlsx;',  
                 'uploadLimit'   : 1, 
-                'onUploadStart' : function(file) {  
+                'onUploadStart' : function(file) { 
                 },  
-                'onUploadSuccess':function(file, data, response){    
+                'onUploadSuccess':function(file, data, response){  
                 	$("#link").val(data);
 					$("#type").val(file.type);
 					$("#size").val(file.size);
@@ -75,9 +76,7 @@
 					if(errorCode == SWFUpload.QUEUE_ERROR.INVALID_FILETYPE){
                 		this.queueData.errorMsg = "不支持该文件类型!!";
                 	}
-        		},
-                'onUploadComplete':function(){  
-                }  
+        		}
             });  
         });
         function processJson(data) { 
@@ -117,7 +116,7 @@
                 <li class="value">
                     <div class="upload-gc">
                         <input type="file" name="sampleLink" id="file_upload" />
-                        <p>仅支持DOC、PDF，XLS，RAR格式，文件小于50M</p>
+                        <p>支持DOC、PDF、XLS、PPT、ZIP、RAR格式，文件小于100M</p>
                     </div>
                 </li>
             </ul>

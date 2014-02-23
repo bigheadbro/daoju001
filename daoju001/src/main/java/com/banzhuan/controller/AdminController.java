@@ -45,6 +45,36 @@ public class AdminController extends BaseController{
 	@Qualifier("questionDAO")
 	private QuestionDAO questionDAO;
 	
+	@RequestMapping(value="/lghlmclyhblsqtagent")
+	public ModelAndView agent(final HttpServletResponse response)
+	{
+		ModelAndView mv = new ModelAndView("/admin/admin");
+		List<AgentEntity> agents = agentDAO.getAllagents(0);
+		mv.addObject("agents", agents);
+		return mv;
+	}
+	
+	@RequestMapping(value="/cancel/{id}")
+	public void cancelauth(HttpServletRequest request, HttpServletResponse response, @PathVariable String id) throws IOException 
+	{
+		int sid = Integer.parseInt(id);
+		AgentEntity agent = new AgentEntity();
+		agent.setId(sid);
+		agent.setVerified(false);
+		agentDAO.updateAgentEntityById(agent);
+	}
+	
+	@RequestMapping(value="/add/{id}")
+	public void addauth(HttpServletRequest request, HttpServletResponse response, @PathVariable String id) throws IOException 
+	{
+		int sid = Integer.parseInt(id);
+		AgentEntity agent = new AgentEntity();
+		agent.setId(sid);
+		agent.setVerified(true);
+		agentDAO.updateAgentEntityById(agent);
+	}
+	
+	
 	@RequestMapping(value="/lghlmclyhblsqtsample")
 	public ModelAndView sample(final HttpServletResponse response)
 	{

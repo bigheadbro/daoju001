@@ -39,12 +39,13 @@
                 'height'        : 30,   
                 'width'         : 120,    
 				'buttonText'    : '选择案例',
-				'fileSizeLimit' : '5MB',
+				'fileSizeLimit' : '15MB',
                 'fileObjName'   : 'gcLink',
                 'swf'           : '/js/uploadify.swf',  
                 'uploader'      : '/agent/uploadfile_gc',  
                 'auto'          : true,  
-				'fileTypeExts'  : '*.rar;*.pdf;*.doc;*.xls;*.ppt',  
+				'removeCompleted': false,
+				'fileTypeExts'  : '*.rar;*.pdf;*.doc;*.xls;*.ppt;*.docx;*.zip;*.pptx;*.xlsx;',  
                 'uploadLimit'   : 1, 
                 'onUploadStart' : function(file) {  
                 },  
@@ -63,14 +64,12 @@
                 		this.queueData.errorMsg = "只能上传一个文件!!";
                 	}
 					if(errorCode == SWFUpload.QUEUE_ERROR.FILE_EXCEEDS_SIZE_LIMIT){
-                		this.queueData.errorMsg = "文件大小不能超过5MB!!";
+                		this.queueData.errorMsg = "文件大小不能超过15MB!!";
                 	}
 					if(errorCode == SWFUpload.QUEUE_ERROR.INVALID_FILETYPE){
                 		this.queueData.errorMsg = "不支持该文件类型!!";
                 	}
-        		},
-                'onUploadComplete':function(){  
-                }  
+        		}
             });  
 		});
 	</script>
@@ -79,7 +78,7 @@
 		<input type="hidden" name="do_submit" value="true"/>
 		#springBind("form.gcid")
 	    <input type="hidden" name="${status.expression}" value="$!{status.value}" id="gcid" />
-		#springBind("form.isEdit")
+		#springBind("form.edit")
 	    <input type="hidden" name="${status.expression}" value="$!{status.value}" id="isEdit" />
 		#springBind("form.link")
 	    <input type="hidden" name="${status.expression}" value="$!{status.value}" id="link" />
@@ -280,7 +279,7 @@
     			<li class="value">
     				<div class="upload-gc">
     					<input type="file" name="gcLink" id="file_upload"/>
-    					<p>仅支持DOC、PDF、XLS格式，文件小于5M</p>
+    					<p>支持DOC、PDF、XLS、PPT、ZIP、RAR格式，文件小于15M</p>
 							<em for="link" generated="true" class="error">$!{status.errorMessage}</em>
     				</div>
     			</li>

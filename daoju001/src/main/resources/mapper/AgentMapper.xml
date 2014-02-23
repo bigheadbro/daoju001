@@ -78,14 +78,14 @@
 	]]>
 	</select>
 	
-	<select id="getAllagents" 
+	<select id="getAllagents" parameterType="int"
 			resultMap="AgentResultMap">
-		SELECT * from t_agent t order by gmt_create desc
+		SELECT * from t_agent t <if test="_parameter == 1"> where is_verified=1</if> order by gmt_create desc
 	</select>
 	
 	<select id="getMainagents" 
 			resultMap="AgentResultMap">
-		SELECT * from t_agent t order by gmt_create desc limit 7
+		SELECT * from t_agent t  where is_verified=1 order by gmt_create desc limit 7
 	</select>
 	
 	<!-- 新代理商信息 -->
@@ -151,7 +151,9 @@
 		<set> 
 		      <if test="mail != null">email=#{mail},</if>
 		      <if test="companyName != null">company_name=#{companyName},</if>
+		      <if test="brand != 0">brand=#{brand},</if>
 		      <if test="brandName != null">brand_name=#{brandName},</if>
+		       <if test="isVerified != null">is_verified=#{isVerified},</if>
 		      <if test="address != null">address=#{address},</if>
 		      <if test="phone != null">phone=#{phone},</if>
 		      <if test="fax != null">fax=#{fax},</if>

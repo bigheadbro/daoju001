@@ -15,7 +15,7 @@ public class GoodcaseForm implements Serializable {
 	private int wpHardness;
 	private String name;
 	private String link;
-	private int isEdit;
+	private int edit;
 	private int gcid;
 	
 	/**
@@ -99,14 +99,14 @@ public class GoodcaseForm implements Serializable {
 	/**
 	 * @return the isEdit
 	 */
-	public int getIsEdit() {
-		return isEdit;
+	public int getEdit() {
+		return edit;
 	}
 	/**
 	 * @param isEdit the isEdit to set
 	 */
 	public void setEdit(int isEdit) {
-		this.isEdit = isEdit;
+		this.edit = isEdit;
 	}
 	/**
 	 * @return the gcid

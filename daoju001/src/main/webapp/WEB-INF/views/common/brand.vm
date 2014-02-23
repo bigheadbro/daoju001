@@ -1,0 +1,21 @@
+<div id="pagemask-brand"></div>
+<div class="brand-win">
+    <div class="brand-win-content">
+        <h2>
+            <a class="close-brand">x</a>
+				选择品牌
+		</h2>
+        <div class="content clearfix">
+			#foreach($brand in $brands)
+				<a class="brand-item" key="${brand.key}">
+					<div class="brand-logo">
+						<span>
+							<img src="../img/logo/${brand.link}" />
+						</span>
+					</div>
+					<span class="name">${brand.name}</span>
+				</a>
+			#end
+        </div>
+    </div>
+</div>

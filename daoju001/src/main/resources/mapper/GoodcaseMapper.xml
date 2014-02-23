@@ -107,7 +107,7 @@
 		      <if test="industry != null">industry=#{industry},</if>
 		      <if test="processMethod != null">work_type=#{processMethod},</if>
 		      <if test="workSolidity != null">work_solidity=#{workSolidity},</if>
-		      <if test="wpMaterial != null">wp_material=#{wpMaterial},</if>
+		      <if test="workMaterial != null">work_material=#{workMaterial},</if>
 		      <if test="link != null">link=#{link},</if>
 		   	  gmt_modified=now()
 		</set>

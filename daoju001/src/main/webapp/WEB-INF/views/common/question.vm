@@ -82,7 +82,7 @@
 												<a class="fancybox-v" title="$!{comment.userName}的代理证书" href="$!{comment.link}"><img src="../img/v.png" /></a>
 											#end
             							</h2>
-            							<h4>$!{comment.brandName}</h4>
+            							<h4>$stringUtil.getBrand($!{comment.brandName})</h4>
             						</div>
 							  </li>
 							  <li class="comment-cont">
@@ -172,7 +172,7 @@
 												<a class="agent-name" href="/agents/$!{answer.agentId}">$!{answer.agentName}</a>
                     							<a class="fancybox-v" title="$!{answer.agentName}的代理证书" href="$!{answer.verifiedLink}"><img src="../img/v.png" /></a>
                 							</h2>
-                							<h4>$!{answer.brandName}</h4>
+                							<h4>$stringUtil.getBrand($!{answer.brandName})</h4>
                 						</div>
                 						<div class="answer-price">
                 							#if($!{answer.price})
@@ -224,7 +224,7 @@
             												<a class="fancybox-v" title="$!{comment.userName}的代理证书" href="$!{comment.link}"><img src="../img/v.png" /></a>
             											#end
                         							</h2>
-                        							<h4>$!{comment.brandName}</h4>
+                        							<h4>$stringUtil.getBrand($!{comment.brandName})</h4>
                         						</div>
 											</li>
             							    <li class="comment-cont">
@@ -339,7 +339,7 @@
 								<a  class="fancybox-v" title="$!{gc.agentName}的代理证书" href="$!{gc.verifiedLink}"><img src="../img/v.png" /></a>
 							#end
 						</li>
-						<li class="title">$!{gc.brandName}</li>
+						<li class="title">$stringUtil.getBrand($!{gc.brandName})</li>
 					</ul>
 				</div>
 			</div>

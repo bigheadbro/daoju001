@@ -135,7 +135,7 @@
 						/> 
 						同意
 					</label>
-					<a class="protocol">刀师傅协议</a>
+					<a class="protocol fancybox-v" title="刀师傅协议" href="../img/proto.jpg">刀师傅协议</a>
 				</li>
 			</ul>
 			<ul class="reg-listitem clearfix">

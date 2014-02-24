@@ -71,7 +71,7 @@
         </div>
 		<div class="listitem clearfix">
 			#springBind("form.brand")
-			<input type="hidden" id="brand" name="${status.expression}" value=0/>
+			<input type="hidden" id="brand" name="${status.expression}" value="${status.value}"/>
             <ul class="user-info clearfix">
                 <li class="key">
                     代理刀具品牌

@@ -165,7 +165,7 @@ public class AgentController extends BaseController{
 					AgentEntity agent = new AgentEntity();
 					agent.setId(account.getUserId());
 					agent.setLogo(account.getLogo());
-					agentService.updateAgentAccnt(null, null, agent, result);
+					agentService.updateAgentAccnt(null, null, agent, null, result);
 					try 
 					{
 						FileCopyUtils.copy(f.getBytes(), file);
@@ -196,6 +196,7 @@ public class AgentController extends BaseController{
 		agentService.changePwd(form, result);
 		if(result.hasErrors())
 		{
+			JsonUtil.showAlert(response, "旧密码错误", "旧密码输入错误，请重新输入", "确定", "", "");
 			return view;
 		}
 		JsonUtil.showAlert(response, "修改密码", "修改密码成功~~", "确定", "", "");
@@ -204,7 +205,7 @@ public class AgentController extends BaseController{
 	
 	@RequestMapping(value="/profile")
 	public ModelAndView profile(HttpServletRequest request, HttpServletResponse response, @ModelAttribute("account")Account account, 
-			@ModelAttribute("form")AgentProfileForm form, BindingResult result)
+			 @ModelAttribute("form")AgentProfileForm form, BindingResult result)
 	{
 		ModelAndView mv = new ModelAndView("agent/profile");
 		List<BrandEntity> brands = new ArrayList<BrandEntity>();
@@ -225,14 +226,10 @@ public class AgentController extends BaseController{
 		}
 		else
 		{
-			agentService.updateAgentAccnt(request, form, agent, result);
+			agentService.updateAgentAccnt(request, form, agent, account, result);
 			if(result.hasErrors())
 			{
 				return mv;
-			}
-			if(form.getBrand() > 0)
-			{
-				account.setBrandName(form.getBrand());
 			}
 			JsonUtil.showAlert(response, "更新资料", "公司资料更新成功~~", "确定", "", "");
 		}
@@ -499,6 +496,12 @@ public class AgentController extends BaseController{
 			gc.setVerified(account.isVerified());
 			gc.setVerifiedLink(account.getVerifiedLink());
 			
+			if(form.getLink().substring(5).split("/")[2].length() > 15)
+			{
+				JsonUtil.showAlert(response, "上传失败", "文件名称过长，请重命名该文件", "确定", "", "");
+				return mv;
+			}
+			
 			if(form.getEdit() > 0)
 			{
 				agentService.updateGoodcaseById(form, gc, result);
@@ -616,6 +619,11 @@ public class AgentController extends BaseController{
 			sample.setVerified(account.isVerified());
 			sample.setVerifiedLink(account.getVerifiedLink());
 			
+			if(form.getLink().substring(5).split("/")[2].length() > 15)
+			{
+				JsonUtil.showAlert(response, "上传失败", "文件名称过长，请重命名该文件", "确定", "", "");
+				return mv;
+			}
 			if(form.getIsEdit() > 0)
 			{
 				agentService.updateSampleById(form, sample, result);

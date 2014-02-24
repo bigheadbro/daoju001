@@ -1,7 +1,12 @@
 #set($layout = "/layout/index_layout.vm")
-<script type="text/javascript" src="../js/ques-handler.js"></script>
 <script type="text/javascript" src="../js/answer.js"></script>
 <script type="text/javascript" src="../js/showa.js"></script>
+<script>
+$(function() {
+	var link = $(".img-in-question").attr("src");
+	$(".img-in-question").replaceWith("<a class=\"fancybox-v\" href=\"" + link + "\"><img class=\"img-in-question\" src=\"" + link + "\" /></a>");
+});
+</script>
 <div class="main-content-container clearfix">
 	<!-- 问题 -->
 	<div class="main-list-container width630">
@@ -49,7 +54,7 @@
 							</div>
 						</li>
 						<li class="text clearfix">
-							<p>$!{question.content}</p>
+							<p class="quesdetail">$!{question.content}</p>
 						</li>
 						<li class="info">
 							<p class="clearfix"><span class="time">$stringUtil.formatDate($!{question.gmtModify})</span> <span class="answer"> <a class="comments">评论(<span id="question-comments">$!{commentsCnt}</span>)</a></span></p>
@@ -175,7 +180,7 @@
                 							<h4>$stringUtil.getBrand($!{answer.brandName})</h4>
                 						</div>
                 						<div class="answer-price">
-                							#if($!{answer.price})
+                							#if($stringUtil.isNotEmpty($!{answer.price}))
                 								<span>已报价</span>
                 							#end
                 							#if($!{answer.FreeUse})
@@ -187,11 +192,13 @@
                 					    <p>$!{answer.content}</p>
                 					</li>
 									#if(${account.userId} == ${question.buyerId} || ${account.userId} == ${answer.agentId})
-									<li class="price-cont">
-										<p class="price">
-                					    详细报价：$!{answer.Price}
-										</p>
-                					</li>
+										#if($stringUtil.isNotEmpty($!{answer.price}))
+        									<li class="price-cont">
+        										<p class="price">
+                        					    详细报价：$!{answer.Price}
+        										</p>
+                        					</li>
+										#end
 									#end
                 					<li class="info clearfix">
                 						<p>$stringUtil.formatDate($!{answer.gmtModify}) <span class="answer"><a class="comments">评论(<span class="answer-comments">$!{answer.cntComment}</span>)</a></span></p>
@@ -321,27 +328,8 @@
 		</div>
 		#foreach($gc in $goodcases)
 		<div class="goodcase-listitem clearfix">
-		  <div class="agent clearfix">
-				<div class="logo">
-					<a>
-						#if($!{gc.agentLogo})
-							<img src="../logo/$!{gc.agentLogo}" />
-						#else
-							<img src="../img/avatar.png" />
-						#end
-					</a>
-				</div>
-				<div class="content">
-					<ul>
-						<li class="name clearfix">
-							<a href="/agents/$!{gc.agentId}">$!{gc.agentName}</a>
-							#if($gc.isVerified())
-								<a  class="fancybox-v" title="$!{gc.agentName}的代理证书" href="$!{gc.verifiedLink}"><img src="../img/v.png" /></a>
-							#end
-						</li>
-						<li class="title">$stringUtil.getBrand($!{gc.brandName})</li>
-					</ul>
-				</div>
+    		<div class="name">
+				<a target="_blank" href="/downloadgc?file=$!{gc.link}">$!{gc.name}</a>
 			</div>
 			<div class="property">
 				#if($!{gc.industry} > 0)

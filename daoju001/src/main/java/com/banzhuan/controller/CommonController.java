@@ -84,6 +84,7 @@ public class CommonController extends BaseController{
         String path = request.getSession().getServletContext().getRealPath("/sample")+ fileName.substring(9);
         try {  
             File file=new File(path);  
+            response.setContentLength((int)(long)file.length());
             InputStream inputStream=new FileInputStream(file);  
             OutputStream os=response.getOutputStream();  
             byte[] b=new byte[1024];  
@@ -108,6 +109,7 @@ public class CommonController extends BaseController{
         String path = request.getSession().getServletContext().getRealPath("/goodcase")+ fileName.substring(11);
         try {  
             File file=new File(path);  
+            response.setContentLength((int)(long)file.length());
             InputStream inputStream=new FileInputStream(file);  
             OutputStream os=response.getOutputStream();  
             byte[] b=new byte[1024];  
@@ -324,7 +326,7 @@ public class CommonController extends BaseController{
 		result = commonService.getMaingoodcases();
 		mv.addObject("goodcases", result.get("goodcases"));
 		
-		result = commonService.getCommentsByPid(questionid);
+		result = commonService.getCommentsInQuesByPid(questionid);
 		mv.addObject("commentsCnt", result.get("commentsCnt"));
 		mv.addObject("comments", result.get("comments"));
 		

@@ -1,8 +1,8 @@
 ﻿html {overflow-x:hidden;}
 
 .qqserver p img {display: inline; margin-top:-5px; vertical-align:middle;}
-.scrollsidebar{position:absolute; top:220px;right: 10px;z-index:999;}
-.erweima{margin-top: 130px;}
+.scrollsidebar{position: fixed;bottom: 256px;right: 10px;z-index:999;}
+.erweima{}
 .erweima p{background-color:#0099cb;color:white;font-size:12px;margin-top: 5px;text-align: center;line-height: 18px;padding: 5px;}
 
 .goTab {position: fixed;bottom: 56px;right: 10px;_position: absolute;z-index: 9999;}

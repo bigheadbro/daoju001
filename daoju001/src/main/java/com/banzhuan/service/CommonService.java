@@ -414,10 +414,10 @@ public class CommonService {
 		return result;
 	}
 	
-	public Result getCommentsByPid(int qid)
+	public Result getCommentsInQuesByPid(int qid)
 	{
 		Result result = new Result();
-		List<CommentEntity> comments = commentDAO.getCommentsByParentid(qid);
+		List<CommentEntity> comments = commentDAO.getCommentsInQuesByParentid(qid);
 		result.add("commentsCnt", comments.size());
 		result.add("comments", comments);
 		return result;

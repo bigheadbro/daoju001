@@ -99,7 +99,7 @@ div[contentEditable]{outline:0}
 .main-head-container .main-head-content .nav ul li.current {background:#006e9c}
 .main-head-container .main-head-content .nav ul li a{display: block;padding: 17px 0 21px 0;width:110px;text-align:center}
 .main-head-container .main-head-content .nav ul li a:hover{color:white;background-color:#0086b2}
-.main-head-container .main-head-content .login{position: relative;float:right;width:140px;font-size:14px;color:white;text-align: center;height: 59px;}
+.main-head-container .main-head-content .login{position: relative;float:right;width:140px;font-size:14px;color:white;height: 59px;}
 .main-head-container .main-head-content .login .auth-reg{display:block;padding:19px;text-align:center;}
 .main-head-container .main-head-content .login .top-dropdown-reg{position:absolute;display:none;background-color: #007298;z-index: 100;min-width: 140px;}
 .main-head-container .main-head-content .login .top-dropdown-reg li a{display:block;padding: 19px;text-align: center;}
@@ -108,7 +108,7 @@ div[contentEditable]{outline:0}
 .main-head-container .main-head-content .ask a{display:block;text-align: center;padding: 0px 10px 3px;border-radius:3px;font-size:14px;background-color:#ff6600;}
 
 .main-head-container .main-head-content .login .top-user{display: block;position:relative;height:59px;overflow: hidden;}
-.main-head-container .main-head-content .login .top-user .name{line-height:57px;font-size: 18px;padding-left: 35px;}
+.main-head-container .main-head-content .login .top-user .name{line-height:57px;font-size: 16px;padding-left: 45px;}
 .main-head-container .main-head-content .login .top-user .logo{position:absolute;top: 15px;left: 10px;border-radius: 5px;width:30px;height:30px;overflow:hidden;text-align:center;display:table;background-color:white;}
 .main-head-container .main-head-content .login .top-user .logo a{display:table-cell;vertical-align:middle;}
 .main-head-container .main-head-content .login .top-user .logo img{margin:0 auto;max-width:30px;max-height:30px;}
@@ -166,6 +166,7 @@ div[contentEditable]{outline:0}
 .hidden{display:none}
 .hot-question-listitem .content li.text{font-size:13px;line-height: 20px;text-overflow:ellipsis;color:black;margin-top:10px}
 .hot-question-listitem .content li.text img{display:block;width: 106px;margin-right: 15px;}
+.hot-question-listitem .content li.text .quesdetail img{display:block;width:100%}
 .hot-question-listitem .content li.info{font-size:12px;line-height: 20px;color:#999999;margin: 6px 0 0 0;}
 .hot-question-listitem .content li.info span.answer{float:right;}
 .hot-question-listitem .content li.info a:hover{text-decoration:underline;color:#00c0ff}
@@ -191,7 +192,7 @@ div[contentEditable]{outline:0}
 .quesiton-img{max-width:100px;margin-right: 15px;margin-top: 5px;}
 .answer-cont{margin-top:10px}
 .answer-cont p{line-height:20px;color:black;font-size:13px}
-ul.pa-answer{margin-top:10px;}
+ul.pa-answer{margin-top:10px;border-bottom: 1px solid #D3D3D3;padding-bottom: 10px;}
 /*追问追答*/
 .hot-question-listitem .content li.comment .comment-arrow{position: absolute;z-index: 0;width: 22px;cursor: default;font-size: 23px;margin-top:-31px}
 .hot-question-listitem .content li.comment .comment-arrow *{position: absolute;}
@@ -262,7 +263,9 @@ ul.pa-answer{margin-top:10px;}
 .goodcase-listitem .content li.name a.fancybox-v{padding: 4px 0 0 3px;}
 .goodcase-listitem .content li.name a.fancybox-v img{width:12px}
 .goodcase-listitem .content li.title{font-size:13px;color:#606060;text-overflow:ellipsis;margin-top:3px;overflow: hidden;white-space: nowrap;padding-left:2px;}
-.goodcase-listitem  .property{font-size:12px;color:black;text-overflow:ellipsis;margin-top:3px}
+.goodcase-listitem .name{overflow: hidden;text-overflow: ellipsis;}
+.goodcase-listitem .name a:hover{text-decoration:underline;color:#00c0ff}
+.goodcase-listitem  .property{font-size:12px;color:black;text-overflow:ellipsis;margin-top:5px}
 .goodcase-listitem  .property span{display: block;float: left;margin: 0 5px 5px 0;background-color: #dddddd;padding: 2px 12px;border-radius: 20px;text-align: center;}
 
 /*买家--我的搬刀*/
@@ -274,7 +277,7 @@ ul.pa-answer{margin-top:10px;}
 .mainpage-container .main-left .person-info .logo{margin-left:56px;border-radius: 5px;width:88px;height:88px;overflow:hidden;text-align:center;display:table;background-color:white;}
 .mainpage-container .main-left .person-info .logo a{display:table-cell;vertical-align:middle;}
 .mainpage-container .main-left .person-info .logo img{margin:0 auto;max-width:88px;max-height:88px;}
-.mainpage-container .main-left .person-info h5{font-size:18px;padding:15px 15px 0 15px;color:#606060;}
+.mainpage-container .main-left .person-info h5{font-size:18px;padding:15px 15px 0 15px;color:#606060;overflow: hidden;text-overflow: ellipsis;}
 .mainpage-container .main-left .person-info h6{font-size: 12px;color: #767676;}
 .mainpage-container .main-left .other-info{border-top:1px solid #c7c7c7;border-bottom:1px solid #c7c7c7;margin: 15px 60px 0;padding: 10px 0;}
 .mainpage-container .main-left .other-info h2{font-size:18px;color:#0088b5;}
@@ -367,8 +370,8 @@ ul.pa-answer{margin-top:10px;}
 .reg-right .goodservice p{font-size:13px;color:#707070;line-height:20px;}
 
 .error-msg{display:none;border-radius:8px;background-color:#ffc8c8;border:1px solid #cc3333;text-align:center;color:#cc3333;font-size:14px;line-height: 40px;margin-bottom: 10px;}
+em.error{color:#cc3333;font-size:14px;line-height: 40px;margin: 10px;}
 .error-msg label{display:block;}
-em.error{}
 #selbrand{color:#7E7E7E;}
 #selbrand:hover{text-decoration:underline;color:#00c0ff}
 #uploadsample{color:white;background-color:#ff9000;border-radius:5px;padding:3px;display: inline-block;}
@@ -574,7 +577,7 @@ opacity: .3;
 .brand-list .arrow .detail{}
 .brand-list .arrow .detail a{display: inline-block;background-color:#63a200;border:1px solid #4a7900;border-radius:4px;padding:5px 10px;color:white;}
 .brand-list .agent-detail{width:145px}
-.brand-list .agent-detail h5{font-weight:600;margin: 2px 0 2px 0;}
+.brand-list .agent-detail h5{font-weight:600;margin: 2px 0 2px 0;white-space: nowrap;}
 .brand-list .agent-detail h5 em{color:#0099cb;margin-right:3px;}
 .brand-list .agent-detail h5 i{margin-left:2px;margin-right:2px;color:#828282;}
 .brand-list .agent-detail h5 span.mobile{display: inline-block;width:25px;text-align:center;background-color:#ff9000;color:white;padding:1px 5px;border-radius:4px;font-size:12px}
@@ -601,7 +604,7 @@ opacity: .3;
 .company-contact-info .item{margin-bottom:5px;}
 .company-description{margin-top:10px;padding-bottom:10px;border-bottom:1px solid #ececec}
 .company-description h2{color:#555;font-size:14px;margin-bottom: 5px;}
-.company-description p{font-size:12px;color:black;text-indent: 24px;line-height: 22px;}
+.company-description p{font-size:12px;color:black;text-indent: 24px;line-height: 22px;word-wrap: break-word;}
 .company-sample{margin-top:10px;padding-bottom:10px;border-bottom:1px solid #ececec}
 .company-sample h2{color:#555;font-size:14px;margin-bottom: 5px;}
 .company-sample a.sample{color:#0099cb;font-size:12px;margin-right:10px;}

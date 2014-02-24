@@ -9,86 +9,43 @@
 </ul>
 <div class="rigth-content">
     <div>
-			<script>
-				$(function() {	
-					$("#form_changepwd").validate({
-						rules:{
-							pwd:{
-								required:true
-							},
-							pwd1:{
-								required:true
-							},
-							pwd2:{
-								required:true,
-								equalTo: "#pwd1" 
-							}
+		<script>
+			$(function() {	
+				$("#form_changepwd").validate({
+					rules:{
+						pwd:{
+							required:true
 						},
-						messages:{
-							pwd:{
-								required:"请输入旧密码"
-							},
-							pwd1:{
-								required:"请输入新密码"
-							},
-							pwd2:{
-								required:"请输入确认密码",
-								equalTo: "两次输入密码不一致"  
-							}
+						pwd1:{
+							required:true
 						},
-						errorPlacement: function(error, element) {   
-							$(".error-msg").show();
-							var hasError = true;
-							$(".error-msg label").each(function(){
-								if($(this).attr("for") == error.attr("for")){
-									hasError = false;
-								}
-							});
-							if(hasError)
-							{
-                            	error.appendTo($(".error-msg"));     
-							}
-							else
-							{
-								$(".error-msg label").each(function(){
-									if($(this).attr("for") == error.attr("for")){
-										$(this).text(error.text());
-									}
-								});
-							}
-                        },
-						success:function(label){
-							$(".error-msg").hide();
-							$(".error-msg label").each(function(){
-								if($(this).attr("for") == $(label).attr("for")){
-									$(this).text("");
-								}
-							}); 
+						pwd2:{
+							required:true,
+							equalTo: "#pwd1" 
+						}
+					},
+					messages:{
+						pwd:{
+							required:"请输入旧密码"
 						},
-        				submitHandler: function(form) {
-                      		$(form).ajaxSubmit({
-        						dataType:'json',
-        						success:processJson
-        					});
-        				}
-					});
+						pwd1:{
+							required:"请输入新密码"
+						},
+						pwd2:{
+							required:"请输入确认密码",
+							equalTo: "两次输入密码不一致"  
+						}
+					},
+					errorElement:"em",
+					submitHandler: function(form) {
+              			$(form).ajaxSubmit({
+    						dataType:'json',
+    						success:processJson
+    					});
+    				}
 				});
-			</script>
-		<div class="error-msg">
-			#springBind("form")
-            #if($status.errors.hasErrors())
-				<script>
-    			$(".error-msg").show();
-    			</script>
-                ## Field error messages
-                #foreach($f in $status.errors.fieldErrors)
-                    #springBind("form.${f.field}")
-                    #foreach($e in $status.errorMessages)
-                        <label for="$!{status.expression}" generated="true" class="error">${e}</label>
-                    #end
-                #end
-            #end
-		</div>
+			});
+		</script>
 		<form id="form_changepwd" method="post" action="/agent/changepwd">
 			<!-- 隐藏字段，用于标示是表单提交 -->
 		    <input type="hidden" name="do_submit" value="true"/>
@@ -99,7 +56,7 @@
                         旧密码
                     </li>
                     <li class="value">
-                        <input type="password" name="${status.expression}" class="dsf-form-text-input" />
+                        <input type="password" name="${status.expression}" class="dsf-form-text-input" /><em for="$!{status.expression}" generated="true" class="error">$!{status.errorMessage}</em>
                     </li>
                 </ul>
             </div>
@@ -110,7 +67,7 @@
                         新密码
                     </li>
                     <li class="value">
-                        <input type="password" name="${status.expression}" id="pwd1" class="dsf-form-text-input" />
+                        <input type="password" name="${status.expression}" id="pwd1" class="dsf-form-text-input" /><em for="$!{status.expression}" generated="true" class="error">$!{status.errorMessage}</em>
                     </li>
                 </ul>
             </div>
@@ -121,7 +78,7 @@
                         确认密码
                     </li>
                     <li class="value">
-                        <input type="password" name="${status.expression}" class="dsf-form-text-input" />
+                        <input type="password" name="${status.expression}" class="dsf-form-text-input" /><em for="$!{status.expression}" generated="true" class="error">$!{status.errorMessage}</em>
                     </li>
                 </ul>
             </div>

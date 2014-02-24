@@ -202,6 +202,7 @@ public class BuyerController extends BaseController{
 		buyerService.changePwd(form, result);
 		if(result.hasErrors())
 		{
+			JsonUtil.showAlert(response, "旧密码错误", "旧密码输入错误，请重新输入", "确定", "", "");
 			return view;
 		}
 		JsonUtil.showAlert(response, "修改密码", "修改密码成功~~", "确定", "", "");
@@ -261,7 +262,7 @@ public class BuyerController extends BaseController{
 					{
 						FileCopyUtils.copy(f.getBytes(), file);
 				
-						Util.cropImage(f.getContentType().split("/")[1], file.getPath(), size, path + "/" + account.getLogo());
+						Util.cropImage(f.getContentType().split("/")[1], file, size, path + "/" + account.getLogo());
 
 					} catch (IOException e) {
 						logger.error("upload company logo error:"

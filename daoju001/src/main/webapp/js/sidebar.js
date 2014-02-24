@@ -1,9 +1,5 @@
 var side_show = false;
 $(document).ready(function() {
-	$(window).scroll(function (){
-		var offsetTop = $(window).scrollTop() + 220 +"px";
-		$(".scrollsidebar").animate({top : offsetTop },{ duration:500 , queue:false });
-	}); 
 	$(".goTab ul li").mouseenter(function(){
 		$(this).children("a").animate({width:"145px"});
 		$(this).children("a").css("background-color","#0099cb");

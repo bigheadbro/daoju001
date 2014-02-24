@@ -37,12 +37,20 @@
 	]]>
 	</select>
 	
-	<select id="getCommentsByParentid" parameterType="int"
+	<select id="getCommentsInQuesByParentid" parameterType="int"
 		resultMap="CommentResultMap">
 	<![CDATA[
-		SELECT * from t_comment t WHERE t.parent = #{parent} order by gmt_create
+		SELECT * from t_comment t WHERE t.parent = #{parent} and t.type = 0 order by gmt_create
 	]]>
 	</select>
+	
+	<select id="getCommentsInAnswerByParentid" parameterType="int"
+		resultMap="CommentResultMap">
+	<![CDATA[
+		SELECT * from t_comment t WHERE t.parent = #{parent} and t.type = 1 order by gmt_create
+	]]>
+	</select>
+	
 
 	<insert id="insertCommentEntity" parameterType="CommentEntity">
 		<selectKey resultType="int" order="AFTER" keyProperty="id">

@@ -180,17 +180,20 @@ public class AgentService {
 		return result;
 	}
 	
-	public void updateAgentAccnt(HttpServletRequest request, AgentProfileForm form, AgentEntity agent, Errors errors)
+	public void updateAgentAccnt(HttpServletRequest request, AgentProfileForm form, AgentEntity agent, Account account, Errors errors)
 	{
 		if(form != null)
 		{
 			if(StringUtil.isNotEmpty(form.getCompanyName()))
 			{
 				agent.setCompanyName(form.getCompanyName());
+				account.setUserName(form.getCompanyName());
+				account.setCompanyName(form.getCompanyName());
 			}
 			if(form.getBrand() > 0)
 			{
 				agent.setBrand(form.getBrand());
+				account.setBrandName(form.getBrand());
 			}
 			if(StringUtil.isNotEmpty(form.getAddress()))
 			{
@@ -564,7 +567,7 @@ public class AgentService {
 		List<ProfessionalAnswerEntity> answers = paDAO.queryAnswersByQid(qid);
 		for(int i=0;i<answers.size();i++)
 		{
-			List<CommentEntity> comments = commentDAO.getCommentsByParentid(answers.get(i).getId());
+			List<CommentEntity> comments = commentDAO.getCommentsInAnswerByParentid(answers.get(i).getId());
 			answers.get(i).setComments(comments);
 			answers.get(i).setCntComment(comments.size());
 		}

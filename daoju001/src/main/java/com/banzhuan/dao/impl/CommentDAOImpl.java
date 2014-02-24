@@ -30,8 +30,14 @@ public class CommentDAOImpl extends SqlSessionDaoSupport implements CommentDAO {
 	}
 
 	@Override
-	public List<CommentEntity> getCommentsByParentid(int pid)
+	public List<CommentEntity> getCommentsInQuesByParentid(int pid)
 	{
-		return this.getSqlSession().selectList("getCommentsByParentid",pid);
+		return this.getSqlSession().selectList("getCommentsInQuesByParentid",pid);
+	}
+	
+	@Override
+	public List<CommentEntity> getCommentsInAnswerByParentid(int pid)
+	{
+		return this.getSqlSession().selectList("getCommentsInAnswerByParentid",pid);
 	}
 }

@@ -27,10 +27,10 @@ $(function() {
 <p class="admin">
 	<span>$!{agent.companyName}</span> 
 	<span>$!{agent.brandName}</span>
-	#if($agent.isVerified())
+	#if($agent.verifiedLink)
 		<a target="_blank" href="${agent.verifiedLink}" />代理证书连接</a>
 	#else
-		<span>未认证</span>
+		<span>为上传证书</span>
 	#end
 	
 	#if($agent.isVerified())

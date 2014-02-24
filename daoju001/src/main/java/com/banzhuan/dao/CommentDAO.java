@@ -11,5 +11,7 @@ public interface CommentDAO {
 	
 	public int updateCommentById(CommentEntity comment);
 	
-	public List<CommentEntity> getCommentsByParentid(int pid);
+	public List<CommentEntity> getCommentsInQuesByParentid(int pid);
+	
+	public List<CommentEntity> getCommentsInAnswerByParentid(int pid);
 }

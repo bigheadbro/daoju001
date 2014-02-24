@@ -1,4 +1,4 @@
-/*package com.banzhuan.util;
+package com.banzhuan.util;
 
 import java.awt.color.ColorSpace;
 import java.awt.color.ICC_ColorSpace;
@@ -7,6 +7,7 @@ import java.awt.image.BufferedImage;
 import java.awt.image.ColorConvertOp;
 import java.awt.image.Raster;
 import java.awt.image.WritableRaster;
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -16,16 +17,23 @@ import javax.imageio.ImageIO;
 import javax.imageio.ImageReader;
 import javax.imageio.stream.ImageInputStream;
 
+import org.apache.sanselan.ImageReadException;
+import org.apache.sanselan.Sanselan;
+import org.apache.sanselan.common.byteSources.ByteSource;
+import org.apache.sanselan.common.byteSources.ByteSourceFile;
+import org.apache.sanselan.formats.jpeg.JpegImageParser;
+import org.apache.sanselan.formats.jpeg.segments.UnknownSegment;
+
 public class JpegReader {
 
     public static final int COLOR_TYPE_RGB = 1;
     public static final int COLOR_TYPE_CMYK = 2;
     public static final int COLOR_TYPE_YCCK = 3;
 
-    private int colorType = COLOR_TYPE_RGB;
-    private boolean hasAdobeMarker = false;
+    private static int colorType = COLOR_TYPE_RGB;
+    private static boolean hasAdobeMarker = false;
 
-    public BufferedImage readImage(File file) throws IOException, ImageReadException {
+    public static BufferedImage readImage(File file) throws IOException, ImageReadException {
         colorType = COLOR_TYPE_RGB;
         hasAdobeMarker = false;
 
@@ -57,7 +65,7 @@ public class JpegReader {
         return null;
     }
 
-    public void checkAdobeMarker(File file) throws IOException, ImageReadException {
+    public static void checkAdobeMarker(File file) throws IOException, ImageReadException {
         JpegImageParser parser = new JpegImageParser();
         ByteSource byteSource = new ByteSourceFile(file);
         @SuppressWarnings("rawtypes")
@@ -140,12 +148,22 @@ public class JpegReader {
         cmykToRgb.filter(cmykRaster, rgbRaster);
         return rgbImage;
     }
+    
+    static void intToBigEndian(int value, byte[] array, int index) {
+        array[index]   = (byte) (value >> 24);
+        array[index+1] = (byte) (value >> 16);
+        array[index+2] = (byte) (value >>  8);
+        array[index+3] = (byte) (value);
+    }
+    
+    public static void main(String[] args) throws ImageReadException, IOException {
+    	File file = new File("EDM/cmyk.jpg");
+    	BufferedImage sourceImg = readImage(file);
+    	int tmp = sourceImg.getHeight();
+    	tmp = sourceImg.getWidth();
+    	
+	}
+    
 }
 
 
-static void intToBigEndian(int value, byte[] array, int index) {
-    array[index]   = (byte) (value >> 24);
-    array[index+1] = (byte) (value >> 16);
-    array[index+2] = (byte) (value >>  8);
-    array[index+3] = (byte) (value);
-}*/

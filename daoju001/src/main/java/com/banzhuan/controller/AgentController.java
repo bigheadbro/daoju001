@@ -170,7 +170,7 @@ public class AgentController extends BaseController{
 					{
 						FileCopyUtils.copy(f.getBytes(), file);
 				
-						Util.cropImage(f.getContentType().split("/")[1], file.getPath(), size, path + "/" + account.getLogo());
+						Util.cropImage(f.getContentType().split("/")[1], file, size, path + "/" + account.getLogo());
 
 					} catch (IOException e) {
 						logger.error("upload company logo error:"
@@ -229,6 +229,10 @@ public class AgentController extends BaseController{
 			if(result.hasErrors())
 			{
 				return mv;
+			}
+			if(form.getBrand() > 0)
+			{
+				account.setBrandName(form.getBrand());
 			}
 			JsonUtil.showAlert(response, "更新资料", "公司资料更新成功~~", "确定", "", "");
 		}

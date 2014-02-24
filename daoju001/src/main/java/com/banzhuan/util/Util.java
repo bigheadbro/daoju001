@@ -39,16 +39,18 @@ import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 import javax.mail.internet.MimeUtility;
 
+import org.apache.sanselan.ImageReadException;
+
 public class Util {
 
-	public static void cropImage(String lastdir, String srcpath, String aa,
+	public static void cropImage(String lastdir, File file, String aa,
 			String subpath) throws IOException {
 		FileInputStream is = null;
 		ImageInputStream iis = null;
 
 		try {
 			// 读取图片文件
-			is = new FileInputStream(srcpath);
+			is = new FileInputStream(file.getPath());
 			/*
 			 * 返回包含所有当前已注册 ImageReader 的 Iterator，这些 ImageReader 声称能够解码指定格式。
 			 * 参数：formatName - 包含非正式格式名称 .（例如 "jpeg" 或 "tiff"）等 。
@@ -74,16 +76,10 @@ public class Util {
 			 * 图片裁剪区域。Rectangle 指定了坐标空间中的一个区域，通过 Rectangle 对象
 			 * 的左上顶点的坐标（x，y）、宽度和高度可以定义这个区域。
 			 */
-			BufferedImage sourceImg = ImageIO
-					.read(new FileInputStream(srcpath));
-			if(sourceImg.getColorModel().getColorSpace().getType() == ColorSpace.TYPE_CMYK)
-			{
-				 BufferedImage rgbImage = 
-		                    new BufferedImage( 
-		                    		sourceImg.getWidth(), sourceImg.getHeight(), BufferedImage.TYPE_3BYTE_BGR); 
-		                ColorConvertOp op = new ColorConvertOp(null); 
-		                op.filter(sourceImg, rgbImage); 
-			}
+			/*BufferedImage sourceImg = ImageIO
+					.read(new FileInputStream(srcpath));*/
+			BufferedImage sourceImg = JpegReader.readImage(file);
+
 			int x, y, width, height;
 
 			if (StringUtil.isEmpty(aa)) {
@@ -138,6 +134,9 @@ public class Util {
 
 			// 保存新图片
 			ImageIO.write(bi, lastdir, new File(subpath));
+		} catch (ImageReadException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		} finally {
 			if (is != null)
 				is.close();

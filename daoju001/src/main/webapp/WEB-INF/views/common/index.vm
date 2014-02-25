@@ -167,27 +167,8 @@ $(function() {
 		</div>
 		#foreach($gc in $goodcases)
 		<div class="goodcase-listitem clearfix">
-		  <div class="agent clearfix">
-				<div class="logo">
-					<a href="/agents/$!{gc.agentId}">
-						#if($!{gc.agentLogo})
-							<img src="../logo/$!{gc.agentLogo}" />
-						#else
-							<img src="../img/avatar.png" />
-						#end
-					</a>
-				</div>
-				<div class="content">
-					<ul>
-						<li class="name clearfix">
-							<a href="/agents/$!{gc.agentId}">$!{gc.agentName}</a>
-							#if($gc.isVerified())
-								<a href="$!{gc.verifiedLink}"><img src="../img/v.png" /></a>
-							#end
-						</li>
-						<li class="title">$stringUtil.getBrand($!{gc.brandName})</li>
-					</ul>
-				</div>
+			<div class="name">
+				<a target="_blank" href="/downloadgc?file=$!{gc.link}">$!{gc.name}</a>
 			</div>
 			<div class="property">
 				#if($!{gc.industry} > 0)

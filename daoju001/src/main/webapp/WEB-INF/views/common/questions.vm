@@ -177,6 +177,7 @@
 						$(function(){
 							$(".question-param-li input").change(function(){
 								$("#form_questions").submit();//提交
+								$("#form_questions")[0].reset();
 							});
 						});
 					</script>

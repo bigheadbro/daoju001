@@ -55,14 +55,14 @@
 				<div class="company-sample">
 					<h2>样本下载</h2>
 					#foreach($sample in $samples)
-						<a class="sample" target="_blank" href="$!{sample.link}">$!{sample.name}</a>
+						<a class="sample" target="_blank" href="/downloadsample?file=$!{sample.link}">$!{sample.name}</a>
 					#end
 				</div>
 				<div class="company-goodcase">
 					<h2>成功案例</h2>
 					#foreach($gc in $goodcases)
         		<div class="listitem gc-li">
-  						<div class="gc-name"><a target="_blank" href="$!{gc.link}">$!{gc.name}</a></div>
+  						<div class="gc-name"><a target="_blank" href="/downloadgc?file=$!{gc.link}">$!{gc.name}</a></div>
   						<div class="gc-param">
   							#if($!{gc.industry} > 0)
   								<span>$stringUtil.getIndustry($!{gc.industry})</span>

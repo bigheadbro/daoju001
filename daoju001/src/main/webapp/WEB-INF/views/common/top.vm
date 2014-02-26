@@ -84,7 +84,9 @@
                             </div>
 							<span class="name">${account.userName}</span>
                         </div>
-						<a class="zg-top zg-noti-number" href="/buyer/mymsg">$!{account.unreadMsgCount}</a>
+						#if($!{account.unreadMsgCount} > 0)
+							<a class="zg-top zg-noti-number" href="/buyer/mymsg">$!{account.unreadMsgCount}</a>
+						#end
                         <ul class="top-dropdown">
                             <li>
                                 <a href="/buyer/main">我的刀师傅</a>
@@ -121,7 +123,9 @@
                                 </div>
 								<span class="name">${account.userName}</span>
                             </div>
-							<a class="zg-noti-number zg-top" href="/agent/mymsg">$!{account.unreadMsgCount}</a>
+							#if($!{account.unreadMsgCount} > 0)
+								<a class="zg-noti-number zg-top" href="/agent/mymsg">$!{account.unreadMsgCount}</a>
+							#end
                             <ul class="top-dropdown">
                                 <li>
                                     <a href="/agent/main">我的刀师傅</a>

@@ -379,7 +379,7 @@ public class CommonController extends BaseController{
 			account.setUnreadMsgCount(unreadMsgCount);
 		}
 		
-
+		JsonUtil.sendImg(response, "");
 	}
 	
 	@RequestMapping(value = "goodcases")

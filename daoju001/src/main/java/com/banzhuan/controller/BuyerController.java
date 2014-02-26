@@ -84,6 +84,7 @@ public class BuyerController extends BaseController{
 				Account account = new Account();
 				account.setLogin(true); // 登录成功标识
 				account.setUserName(user.getUsername()); // 用户登录名
+				account.setMail(user.getEmail());
 				account.setUserId(user.getId()); // 用户ID
 				account.setBuyer(true);
 				account.setAgent(false);
@@ -226,6 +227,10 @@ public class BuyerController extends BaseController{
 			if(buyer.getUsername() != null)
 			{
 				account.setUserName(buyer.getUsername());
+			}
+			if(buyer.getCompanyName() != null)
+			{
+				account.setCompanyName(buyer.getCompanyName());
 			}
 
 			if(result.hasErrors())

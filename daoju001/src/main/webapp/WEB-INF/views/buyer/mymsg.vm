@@ -28,7 +28,11 @@
 				#else
 					系统信息,
 				#end
-				<a msgid="$!{msg.id}" class="setread" href="/questions/$!{msg.questionId}">查看详情</a>
+				#if($!{msg.type} == 2 || $!{msg.type} == 4 || $!{msg.type} == 3 || $!{msg.type} == 5)
+					#set($type = "true")
+				#end
+				
+				<a msgid="$!{msg.id}" class="setread" link="/questions/$!{msg.questionId}?aid=$!{msg.answerId}&comment=$type">查看详情</a>
                 <span class="time">$stringUtil.formatDate($!{msg.gmtCreate})</span>
             </div>
         #end

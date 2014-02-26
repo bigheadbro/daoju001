@@ -8,6 +8,7 @@
 		<id property="title" column="title" />
 		<!--消息内容 -->
 		<id property="questionId" column="question_id" />
+		<id property="answerId" column="answer_id" />
 		<!--消息type,1是代理商专业回答了你，2是代理商回复了你，3是买家回复了你，(1,2,3,receiver_id均为，买家)4是代理商回复了你，5是买家回复了你,(4,5，receiver_id为卖家),6是系统消息 -->
 		<id property="type" column="type" />
 		<!--消息内容 -->

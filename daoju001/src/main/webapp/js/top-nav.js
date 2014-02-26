@@ -35,6 +35,9 @@ $(function() {
 		    }
 		});   
 	});
+	$(".complainus").click(function(){
+		showcomplain();
+	});
 	(function poll(){
 		setTimeout(function() {
 		    $.ajax({ 

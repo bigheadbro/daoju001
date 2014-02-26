@@ -74,7 +74,7 @@ top: 12px;
 margin-left: 15px;
 border: 2px solid #B1B1B1;
 }
-.zg-top{top:7px;left: 13px;display:none}
+.zg-top{top:7px;left: 13px;}
 .company-info{width:400px;height:65px;resize:none;}
 div[contentEditable]{outline:0}
 .body-wrapper {position: relative;min-height: 100%;}

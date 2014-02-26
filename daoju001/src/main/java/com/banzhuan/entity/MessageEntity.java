@@ -11,6 +11,7 @@ public class MessageEntity implements Serializable {
 	private int id;
 	// 消息名称
 	private String title;
+	private int answerId;
 	private int questionId;
 	//
 	private int type;
@@ -190,5 +191,19 @@ public class MessageEntity implements Serializable {
 	 */
 	public void setEnd(int end) {
 		this.end = end;
+	}
+
+	/**
+	 * @return the answerId
+	 */
+	public int getAnswerId() {
+		return answerId;
+	}
+
+	/**
+	 * @param answerId the answerId to set
+	 */
+	public void setAnswerId(int answerId) {
+		this.answerId = answerId;
 	}
 }

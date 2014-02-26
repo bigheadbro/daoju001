@@ -231,8 +231,9 @@ public class AgentService {
 					if (StringUtil.isNotEmpty(f.getOriginalFilename()))
 					{
 						String path = request.getSession().getServletContext().getRealPath("/verified");
-						File file = new File(path + "/" + f.getOriginalFilename());
-						agent.setVerifiedLink("../verified/" + f.getOriginalFilename());
+						String name = Util.genRandomName(f.getOriginalFilename().substring(f.getOriginalFilename().lastIndexOf(".")));
+						File file = new File(path + "/" + name);
+						agent.setVerifiedLink("../verified/" + name);
 						try 
 						{
 							FileCopyUtils.copy(f.getBytes(), file);

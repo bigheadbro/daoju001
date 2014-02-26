@@ -11,8 +11,10 @@ function getUrlParam(name)
 	if (r!=null) return unescape(r[2]); return null; //返回参数值
 } 
 $(function() {
-	var link = $(".img-in-question").attr("src");
-	$(".img-in-question").replaceWith("<a class=\"fancybox-v\" href=\"" + link + "\"><img class=\"img-in-question\" src=\"" + link + "\" /></a>");
+	$(".img-in-question").each(function(){
+		var link = $(this).attr("src");
+		$(this).replaceWith("<a class=\"fancybox-v\" href=\"" + link + "\"><img class=\"img-in-question\" src=\"" + link + "\" /></a>");
+	});
 	
     if(getUrlParam("aid") > 0){
 		if(getUrlParam("comment")=="true"){

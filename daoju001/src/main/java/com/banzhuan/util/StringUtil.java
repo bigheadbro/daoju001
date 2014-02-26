@@ -553,6 +553,8 @@ public class StringUtil {
 	
 	public static String fileSize(double size)
 	{
+		if(String.valueOf(size).length()>=5)
+			return String.valueOf(size).substring(0,4);
 		return String.valueOf(size);
 	}
 	private static Map<Integer, String> industryMap = new HashMap<Integer, String>();

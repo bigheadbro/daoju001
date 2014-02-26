@@ -30,9 +30,9 @@ $(function() {
 	}
 	else{
     	if(getUrlParam("comment")=="true"){
-    		$(".hot-question-listitem .content li.comment").show();
+    		$(".hot-question-listitem .content").children().children("li.comment").show();
     		$('html, body').animate({
-    			scrollTop: $(".hot-question-listitem .content li.comment").offset().top
+    			scrollTop: $(".hot-question-listitem .content").children().children("li.comment").offset().top
     		},1000);
 		}
 	}

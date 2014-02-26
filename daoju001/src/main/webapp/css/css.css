@@ -345,7 +345,7 @@ ul.pa-answer{margin-top:10px;border-bottom: 1px solid #D3D3D3;padding-bottom: 10
 .reg-left h2 span{float:right;color:#bababa;font-size:14px;line-height: 26px;}
 .reg-left h2 span a{color:#0099cb;margin-left:3px;}
 .reg-left ul{margin:30px 0}
-.reg-left ul li{float:left;}
+.reg-left ul li{float:left;width:250px;}
 .reg-left ul li.key{font-size:14px;color:#9b9b9b;width:90px;}
 .reg-left ul li.value .type{font-size:14px;background-color:#e9e9e9;padding:18px 28px;color:#707070;border-radius: 8px;}
 .reg-left ul li.value .current{background-color:#0081b7;color:white;}
@@ -370,7 +370,9 @@ ul.pa-answer{margin-top:10px;border-bottom: 1px solid #D3D3D3;padding-bottom: 10
 .reg-right .goodservice p{font-size:13px;color:#707070;line-height:20px;}
 
 .error-msg{display:none;border-radius:8px;background-color:#ffc8c8;border:1px solid #cc3333;text-align:center;color:#cc3333;font-size:14px;line-height: 40px;margin-bottom: 10px;}
-em.error{color:#cc3333;font-size:14px;line-height: 40px;margin: 10px;}
+em.reg-error{color:#cc3333;font-size:14px;line-height: 40px;display: block;margin: 5px;}
+em.error{color:#cc3333;font-size:14px;}
+label em.error{float:right}
 .error-msg label{display:block;}
 #selbrand{color:#7E7E7E;}
 #selbrand:hover{text-decoration:underline;color:#00c0ff}

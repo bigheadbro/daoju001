@@ -12,7 +12,7 @@ public class SampleForm implements Serializable {
 	private String name;
 	private String link;
 	private String type;
-	private double size;
+	private int size;
 	private int isEdit;
 	private int sid;
 	
@@ -58,13 +58,13 @@ public class SampleForm implements Serializable {
 	/**
 	 * @return the size
 	 */
-	public double getSize() {
+	public int getSize() {
 		return size;
 	}
 	/**
 	 * @param size the size to set
 	 */
-	public void setSize(double size) {
+	public void setSize(int size) {
 		this.size = size;
 	}
 	

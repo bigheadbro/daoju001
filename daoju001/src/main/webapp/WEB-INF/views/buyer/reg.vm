@@ -36,53 +36,10 @@
 								required:"必须遵守刀师傅协议"
 							}
 						},
-						errorPlacement: function(error, element) {   
-							$(".error-msg").show();
-							var hasError = true;
-							$(".error-msg label").each(function(){
-								if($(this).attr("for") == error.attr("for")){
-									hasError = false;
-								}
-							});
-							if(hasError)
-							{
-                            	error.appendTo($(".error-msg"));     
-							}
-							else
-							{
-								$(".error-msg label").each(function(){
-									if($(this).attr("for") == error.attr("for")){
-										$(this).text(error.text());
-									}
-								});
-							}
-                        },
-						success:function(label){
-							$(".error-msg").hide();
-							$(".error-msg label").each(function(){
-								if($(this).attr("for") == $(label).attr("for")){
-									$(this).text("");
-								}
-							}); 
-						}
+						errorElement:"em"
 					});
 				});
 			</script>
-			<div class="error-msg">
-    			#springBind("form")
-                #if($status.errors.hasErrors())
-					<script>
-        			$(".error-msg").show();
-        			</script>
-                    ## Field error messages
-                    #foreach($f in $status.errors.fieldErrors)
-                        #springBind("form.${f.field}")
-                        #foreach($e in $status.errorMessages)
-                            <label for="$!{status.expression}" generated="true" class="error">${e}</label>
-                        #end
-                    #end
-                #end
-    		</div>
 			<div class="auth-header clearfix">
 				<div class="first">
 					<a href="/reg">1.选择账户类型</a>
@@ -101,6 +58,7 @@
 				</li>
 			  <li class="value">
 				  <input type="text"  name="$!{status.expression}"  class="dsf-form-text-input" />
+				  <em for="$!{status.expression}" generated="true" class="error">$!{status.errorMessage}</em>
 				</li>
 			</ul>
 			#springBind("form.mail")
@@ -110,6 +68,7 @@
 				</li>
 			  <li class="value">
 				  <input type="text"  name="$!{status.expression}"  class="dsf-form-text-input" />
+				  <em for="$!{status.expression}" generated="true" class="error">$!{status.errorMessage}</em>
 				</li>
 			</ul>
 			#springBind("form.pwd")
@@ -119,6 +78,7 @@
 				</li>
 			  <li class="value">
 				  <input type="password"  name="$!{status.expression}"  class="dsf-form-text-input" />
+				  <em for="$!{status.expression}" generated="true" class="error">$!{status.errorMessage}</em>
 				</li>
 			</ul>
 			<ul class="reg-listitem clearfix">
@@ -134,8 +94,10 @@
                         #end
 						/> 
 						同意
+						<a class="protocol fancybox-v" title="刀师傅协议" href="../img/proto.jpg">刀师傅协议</a>
 					</label>
-					<a class="protocol fancybox-v" title="刀师傅协议" href="../img/proto.jpg">刀师傅协议</a>
+					
+					<em for="$!{status.expression}" generated="true" class="error">$!{status.errorMessage}</em>
 				</li>
 			</ul>
 			<ul class="reg-listitem clearfix">

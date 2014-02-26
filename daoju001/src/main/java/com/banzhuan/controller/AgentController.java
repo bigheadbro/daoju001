@@ -496,7 +496,7 @@ public class AgentController extends BaseController{
 			gc.setVerified(account.isVerified());
 			gc.setVerifiedLink(account.getVerifiedLink());
 			
-			if(form.getLink().substring(5).split("/")[2].length() > 15)
+			if(form.getLink().substring(5).split("/")[2].length() > 100)
 			{
 				JsonUtil.showAlert(response, "上传失败", "文件名称过长，请重命名该文件", "确定", "", "");
 				return mv;
@@ -619,7 +619,7 @@ public class AgentController extends BaseController{
 			sample.setVerified(account.isVerified());
 			sample.setVerifiedLink(account.getVerifiedLink());
 			
-			if(form.getLink().substring(5).split("/")[2].length() > 15)
+			if(form.getLink().substring(5).split("/")[2].length() > 100)
 			{
 				JsonUtil.showAlert(response, "上传失败", "文件名称过长，请重命名该文件", "确定", "", "");
 				return mv;

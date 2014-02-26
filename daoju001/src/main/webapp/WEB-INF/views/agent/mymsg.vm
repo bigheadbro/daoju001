@@ -30,6 +30,8 @@
 				#end
 				#if($!{msg.type} == 2 || $!{msg.type} == 4 || $!{msg.type} == 3 || $!{msg.type} == 5)
 					#set($type = "true")
+				#else
+					#set($type = "false")
 				#end
 				
 				<a msgid="$!{msg.id}" class="setread" link="/questions/$!{msg.questionId}?aid=$!{msg.answerId}&comment=$type">查看详情</a>

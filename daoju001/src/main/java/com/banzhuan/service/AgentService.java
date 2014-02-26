@@ -484,7 +484,7 @@ public class AgentService {
     	}
     	if(form.getSize() != 0)
     	{
-    		sample.setSize(form.getSize()/1024/1024);
+    		sample.setSize(form.getSize()/1024.00/1024.00);
     	}
     	sampleDAO.insertSampleEntity(sample);
     	return result;

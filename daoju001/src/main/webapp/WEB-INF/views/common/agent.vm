@@ -24,7 +24,7 @@
 							<a class="fancybox-v" title="$!{agent.companyName}的代理证书" href="$!{agent.verifiedLink}"><img src="../img/v.png" /></a>
 						#end
 					</h3>
-					<h4>代理刀具品牌：$!{agent.brandName}</h4>
+					<h4>代理刀具品牌：$stringUtil.getBrand($agent.brand)</h4>
 				</div>
 				<div class="company-contact-info">
 					<div class="item clearfix">

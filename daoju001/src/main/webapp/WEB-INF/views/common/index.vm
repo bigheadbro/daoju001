@@ -14,7 +14,13 @@ $(function() {
 <div class="flexslider">
   <ul class="slides">
     <li>
-	    <a href="#"><img src="../img/banner/banner1.jpg" /></a>
+	    <a href="/agents/63"><img src="../img/banner/banner5.jpg" /></a>
+	</li>
+	<li>
+	    <a href="/agents/62"><img src="../img/banner/banner6.jpg" /></a>
+	</li>
+	<li>
+	    <a href="/agents/52"><img src="../img/banner/banner4.jpg" /></a>
 	</li>
 	<li>
 	    <a href="/reg"><img src="../img/banner/banner2.jpg" /></a>

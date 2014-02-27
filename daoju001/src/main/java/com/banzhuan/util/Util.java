@@ -369,10 +369,21 @@ public class Util {
 			// first part (the html)
 			BodyPart messageBodyPart = new MimeBodyPart();
 
-			String htmlText = "<h1 style=\"font-size:24px;font-family:'微软雅黑';color:#0099cb;border-bottom:1px solid #0099cb;padding-bottom:10px;\">刀师傅</h1>"
+			/*String htmlText = "<h1 style=\"font-size:24px;font-family:'微软雅黑';color:#0099cb;border-bottom:1px solid #0099cb;padding-bottom:10px;\">刀师傅</h1>"
 					+ "<img style=\"width:1024px\" src=\"cid:image\">"
 					+ "<p style=\"font-size:14px;font-family:'微软雅黑';margin-left:65px\">抢先关注刀师傅，2014颠覆刀具旧世界！更多内容尽在<a href=\"http://www.daoshifu.com?fromlink\">www.daoshifu.com</a></p>"
-					+ "<p style=\"border-top:1px solid #e0e0e0;font-family:'微软雅黑';color:#aaa;text-align:center;padding-top:10px;font-size:13px;\">© 2013 刀师傅 | 沪ICP备13047239号-1</p>";
+					+ "<p style=\"border-top:1px solid #e0e0e0;font-family:'微软雅黑';color:#aaa;text-align:center;padding-top:10px;font-size:13px;\">© 2013 刀师傅 | 沪ICP备13047239号-1</p>";*/
+			String htmlText = "<div style=\"text-align: center;width: 700px;background-color:#e6e6e6;padding: 20px;\">"
+					+"<div style=\"text-align:center;border-radius: 10px;background-color:white;\">"
+					+"<h1 style=\"color:#0099cb;font-size:30px;padding-top: 30px;font-family:'微软雅黑';font-weight: 100;\">还在QQ群里找刀具？</h1>"
+					+"<p style=\"font-size:14px;font-family:'hei';font-weight: 100;line-height: 25px;letter-spacing: 2px;\">30多个知名刀具品牌一级代理商入驻,百分百安全认证，安全可靠;<br/>"
+				+"有问必答，当天获得各品牌代理商提供方案、报价以及免费试用;<br/>"
+				+"代理商联系方式公开透明，线上交流，线下交易，防止恶性竞争;<br/>"
+				+"提供各品牌样本下载，具体细致了解产品性能与特点。</p>"
+					+"<a style=\"font-size:16px;font-family:'微软雅黑';display: inline-block;text-decoration: none;margin-top: 30px;color:white;background-color:#0099cb;padding:10px 30px;border-radius:5px\" href=\"http://www.daoshifu.com\">马上加入</a>"
+					+"<div style=\"text-align:center;margin-top: 80px;margin-bottom: 15px;\"><img style=\"\" src=\"cid:image\"></img></div>"
+					+"</div>"
+				+"</div>";
 			messageBodyPart.setContent(htmlText, "text/html; charset=utf-8");
 
 			// add it
@@ -380,7 +391,7 @@ public class Util {
 
 			// second part (the image)
 			messageBodyPart = new MimeBodyPart();
-			DataSource fds = new FileDataSource("EDM/comic1.jpg");
+			DataSource fds = new FileDataSource("EDM/edm228.png");
 			messageBodyPart.setDataHandler(new DataHandler(fds));
 			messageBodyPart.setHeader("Content-ID", "<image>");
 
@@ -425,11 +436,9 @@ public class Util {
 
 	public static void main(String[] args) {
 		HashSet<String> set = readEdmFileByLines("EDM/edm.txt");
-		// String rec[] =
-		// {"346938819@qq.com","123576884@qq.com","410526674@qq.com"};
-		// EDM("noreply@daoshifu.com","cisco123","346938819@qq.com","刀师傅-第一家刀具在线交流平台",
-		// "", null, "", "UTF-8");
-		int SIZE = 50;
+		String rec[] = {"346938819@qq.com","123576884@qq.com","410526674@qq.com"};
+		EDM("noreply@daoshifu.com","cisco123",rec,"还在qq群找刀具？快来刀师傅吧", "", null, "", "UTF-8");
+		/*int SIZE = 50;
 		String rec[] = new String[set.size()];
 		set.toArray(rec);
 		String tmp[] = new String[SIZE];
@@ -443,7 +452,7 @@ public class Util {
 					System.out.print(tmp[j] + ";");
 				}
 			}
-		}
+		}*/
 
 		// addmailToEDM("EDM/cut35mail.txt");
 		// readFileByLines("EDM/cut35-mail.txt");

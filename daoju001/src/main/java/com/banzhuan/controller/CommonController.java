@@ -275,6 +275,13 @@ public class CommonController extends BaseController{
 		return mv;
 	}
 
+	@RequestMapping(value="/about")
+	public ModelAndView us(final HttpServletRequest request,final HttpServletResponse response)
+	{
+		ModelAndView mv = new ModelAndView("/common/about");
+		return mv;
+	}
+	
 	@RequestMapping(value = "/questions")
 	public ModelAndView allquestion(final HttpServletRequest request,final HttpServletResponse response, @ModelAttribute("form")QuestionForm form, 
 			@ModelAttribute("answerForm")ProfessionalAnswerForm answerForm) 

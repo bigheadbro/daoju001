@@ -44,7 +44,7 @@
                 'height'        : 30,   
                 'width'         : 120,    
 				'buttonText'    : '选择样本',
-				'fileSizeLimit' : '100MB',
+				'fileSizeLimit' : '1000MB',
                 'fileObjName'   : 'sampleLink',
                 'swf'           : '/js/uploadify.swf', 
                 'uploader'      : '/agent/uploadfile_sample',
@@ -71,7 +71,7 @@
                 		this.queueData.errorMsg = "只能上传一个文件!!";
                 	}
 					if(errorCode == SWFUpload.QUEUE_ERROR.FILE_EXCEEDS_SIZE_LIMIT){
-                		this.queueData.errorMsg = "文件大小不能超过100MB!!";
+                		this.queueData.errorMsg = "文件大小不能超过1000MB!!";
                 	}
 					if(errorCode == SWFUpload.QUEUE_ERROR.INVALID_FILETYPE){
                 		this.queueData.errorMsg = "不支持该文件类型!!";
@@ -116,7 +116,7 @@
                 <li class="value">
                     <div class="upload-gc">
                         <input type="file" name="sampleLink" id="file_upload" />
-                        <p>支持DOC、PDF、XLS、PPT、ZIP、RAR格式，文件小于100M</p>
+                        <p>支持DOC、PDF、XLS、PPT、ZIP、RAR格式，文件小于1000M</p>
                     </div>
                 </li>
             </ul>

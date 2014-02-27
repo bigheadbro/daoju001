@@ -609,6 +609,7 @@ public class StringUtil {
 		brandMap.put(40, "GARRTOOL,GARRTOOL.jpg,美国");
 		brandMap.put(41, "DINE,DINE.jpg,韩国");
 		brandMap.put(42, "DORMER,DORMER.jpg,英国");
+		brandMap.put(43, "VERGNANO,VERGNANO.jpg,意大利");
 		
 		msgTypeMap.put(1, "提供了专业解决方案");
 		msgTypeMap.put(2, "回复了你");

@@ -178,9 +178,34 @@ public class Util {
 		return array;
 	}
 
+	public static HashSet<String> readEdmFileByLines(String fileName) {
+		HashSet<String> array = new HashSet<String>();
+		File file = new File(fileName);
+		BufferedReader reader = null;
+		try {
+			reader = new BufferedReader(new FileReader(file));
+			String tempString = null;
+			// 一次读入一行，直到读入null为文件结束
+			while ((tempString = reader.readLine()) != null) {
+				array.add(tempString);
+			}
+			reader.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} finally {
+			if (reader != null) {
+				try {
+					reader.close();
+				} catch (IOException e1) {
+				}
+			}
+		}
+		return array;
+	}
+
 	public static void addmailToEDM(String fileName) {
 		HashSet<String> array = new HashSet<String>();
-		//先读取edm邮箱
+		// 先读取edm邮箱
 		File file = new File("EDM/edm.txt");
 		BufferedReader reader = null;
 		try {
@@ -201,8 +226,8 @@ public class Util {
 				}
 			}
 		}
-		
-		//添加新邮箱
+
+		// 添加新邮箱
 		file = new File(fileName);
 		reader = null;
 		try {
@@ -226,9 +251,8 @@ public class Util {
 		try {
 			FileWriter writer = new FileWriter("EDM/edm.txt");
 			Iterator it = array.iterator();
-			while(it.hasNext())
-			{
-				writer.write(it.next()+"\n");
+			while (it.hasNext()) {
+				writer.write(it.next() + "\n");
 			}
 			writer.close();
 		} catch (IOException e) {
@@ -384,11 +408,11 @@ public class Util {
 		return fileName;
 	}
 
-	public static void ReadAllFile(List<File> list,String filePath) {
+	public static void ReadAllFile(List<File> list, String filePath) {
 		File f = null;
 		f = new File(filePath);
 		File[] files = f.listFiles(); // 得到f文件夹下面的所有文件。
-		
+
 		for (File file : files) {
 			if (file.isDirectory()) {
 				// 如何当前路劲是文件夹，则循环读取这个文件夹下的所有文件
@@ -400,19 +424,28 @@ public class Util {
 	}
 
 	public static void main(String[] args) {
-		//HashSet<String> set = readFileByLines("EDM/cut35-mail.txt");
+		HashSet<String> set = readEdmFileByLines("EDM/edm.txt");
 		// String rec[] =
 		// {"346938819@qq.com","123576884@qq.com","410526674@qq.com"};
 		// EDM("noreply@daoshifu.com","cisco123","346938819@qq.com","刀师傅-第一家刀具在线交流平台",
 		// "", null, "", "UTF-8");
-		/*
-		 * String rec[] = new String[set.size()]; set.toArray(rec); String tmp[]
-		 * = new String[10]; for(int i = 1;i<rec.length;i++) { tmp[i%10] =
-		 * rec[i]; if(i%10 == 0) { for(int j=0;j<10;j++) {
-		 * //EDM("noreply@daoshifu.com","cisco123",tmp,"刀师傅-第一家刀具在线交流平台", "",
-		 * null, "", "UTF-8"); } } }
-		 */
-		//addmailToEDM("EDM/cut35mail.txt");
-		//readFileByLines("EDM/cut35-mail.txt");
+		int SIZE = 50;
+		String rec[] = new String[set.size()];
+		set.toArray(rec);
+		String tmp[] = new String[SIZE];
+		for (int i = 1; i < rec.length; i++) {
+			tmp[i % SIZE] = rec[i];
+			if (i % SIZE == 0) {
+				System.out.println();
+				for (int j = 0; j < SIZE; j++) {
+					// EDM("noreply@daoshifu.com","cisco123",tmp,"刀师傅-第一家刀具在线交流平台",
+					// "", null, "", "UTF-8");
+					System.out.print(tmp[j] + ";");
+				}
+			}
+		}
+
+		// addmailToEDM("EDM/cut35mail.txt");
+		// readFileByLines("EDM/cut35-mail.txt");
 	}
 }

@@ -551,7 +551,7 @@ opacity: .3;
 
 .sample-item{margin-top:25px;}
 .sample-item h1{font-size:24px;color:#0088b5;border-bottom:1px solid #0088b5;padding-bottom:5px;margin-bottom: 20px;}
-.sample-item .agent-sample{border-bottom:1px solid #ececec;padding-bottom:25px;}
+.sample-item .agent-sample{border-bottom:1px solid #ececec;padding-bottom:25px;margin-top: 15px;}
 .sample-item .sample-list{float:left;border-left: 1px solid #e4e4e4;padding-left: 60px;}
 .sample-item .sample-list > div:first-of-type{padding-top:0px;border:none;}
 .sample-item .sample-list .sample-wrap{margin-top:5px;margin-bottom:15px;width: 289px;padding-top:15px;border-top:1px solid #ececec;}

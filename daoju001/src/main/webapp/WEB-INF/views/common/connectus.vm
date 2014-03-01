@@ -1,11 +1,11 @@
 <link rel="stylesheet" type="text/css" href="../css/sidebar.css"/>
 <script language="javascript" src="../js/sidebar.js"></script>
-<div class="scrollsidebar clearfix" >
+<!--<div class="scrollsidebar clearfix" >
 	<div class="erweima">
     	<img src="../img/2.png">
 		<p>马上扫描二维码<br/>关注刀师傅微信公众账号</p>
     </div>
-</div>
+	</div>-->
 <div class="goTab">
     <ul>
     	<li class="gTop">

@@ -1,6 +1,9 @@
 var addimgshow = false;
 $(function() {
-	$("#addimg").click(function() {
+	$(".answer-win #addimg").click(function() {
+		showimg();
+	});
+	$(".add-question-container #addimg").click(function() {
 		showimg();
 	});
 	$(".close").on("click", function() {

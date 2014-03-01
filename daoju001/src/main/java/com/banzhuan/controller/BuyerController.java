@@ -42,12 +42,6 @@ import com.banzhuan.util.CookieUtil;
 import com.banzhuan.util.JsonUtil;
 import com.banzhuan.util.StringUtil;
 import com.banzhuan.util.Util;
-import com.qq.connect.QQConnectException;
-import com.qq.connect.api.OpenID;
-import com.qq.connect.api.qzone.UserInfo;
-import com.qq.connect.javabeans.AccessToken;
-import com.qq.connect.javabeans.qzone.UserInfoBean;
-import com.qq.connect.oauth.Oauth;
 import com.banzhuan.common.Account;
 
 @Controller
@@ -113,72 +107,7 @@ public class BuyerController extends BaseController{
 		return new ModelAndView(new RedirectView("/log"));
 		
 	}
-	
-	/**
-	 * @return
-	 */
-	@RequestMapping(value = "/qqlogin")
-	public void qqLogin(final HttpServletRequest request,final HttpServletResponse response) {
-	 	try
-	 	{
-			response.sendRedirect(new Oauth().getAuthorizeURL(request));
-		} catch (QQConnectException e) {
-			logger.error("QQConnectException:"+e.getMessage());
-		} catch (IOException e) {
-			logger.error("qqLoginException:"+e.getMessage());
-		}
-			
-	}
-	
-	/**
-	 * qq connect 回调接口
-	 * 
-	 * @return
-	 */
-	@RequestMapping(value = "/qq_connect")
-	public ModelAndView qqConnect(final HttpServletRequest request, final HttpServletResponse response, final ModelMap modelMap) {
-		try {
-			AccessToken accessTokenObj = (new Oauth())
-					.getAccessTokenByRequest(request);
-			String accessToken = null, openID = null;
-			long tokenExpireIn = 0L;
 
-			if (accessTokenObj.getAccessToken().equals("")) {
-				return new ModelAndView(new RedirectView("error")); // 定向到统一的错误页面
-			} else {
-				accessToken = accessTokenObj.getAccessToken();
-				tokenExpireIn = accessTokenObj.getExpireIn();
-				//this.addCookie(response, Constant.TKF_QQ_ACCESS_TOKET, accessToken, (int)tokenExpireIn);
-				// 利用获取到的accessToken 去获取当前用的openid -------- start
-				OpenID openIDObj = new OpenID(accessToken);
-				openID = openIDObj.getUserOpenID();
-				UserInfo qzoneUserInfo = new UserInfo(accessToken, openID);
-                UserInfoBean userInfo = qzoneUserInfo.getUserInfo();
-                String nick = userInfo.getNickname();
-                
-                BuyerEntity user = buyerService.doQqConnectEnter(openID, nick);
-				Account account = new Account();
-				account.setQqConnectId(openID);
-				account.setAccessToken(accessToken);
-				account.setUserName(nick);
-				if(user.getUsername() != null)
-				{
-					account.setUserName(user.getUsername());
-				}
-				account.setUserId(user.getId());
-				account.setLogin(true);
-				account.setBuyer(true);
-
-				//account.setLogo(resume.getHeadUrl());
-				request.getSession().setAttribute("account", account);
-				return new ModelAndView(new RedirectView("profile"));
-			}
-		} catch (Exception e) {
-			logger.error("qqConnect:"+e.getMessage());
-			return new ModelAndView(new RedirectView("error")); // 定向到统一的错误页面
-		}
-	}
-	
 	/**
 	 * @return
 	 */

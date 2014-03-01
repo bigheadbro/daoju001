@@ -178,8 +178,8 @@ public class Util {
 		return array;
 	}
 
-	public static HashSet<String> readEdmFileByLines(String fileName) {
-		HashSet<String> array = new HashSet<String>();
+	public static ArrayList<String> readEdmFileByLines(String fileName) {
+		ArrayList<String> array = new ArrayList<String>();
 		File file = new File(fileName);
 		BufferedReader reader = null;
 		try {
@@ -381,7 +381,7 @@ public class Util {
 				+"代理商联系方式公开透明，线上交流，线下交易，防止恶性竞争;<br/>"
 				+"提供各品牌样本下载，具体细致了解产品性能与特点。</p>"
 					+"<a style=\"font-size:16px;font-family:'微软雅黑';display: inline-block;text-decoration: none;margin-top: 30px;color:white;background-color:#0099cb;padding:10px 30px;border-radius:5px\" href=\"http://www.daoshifu.com\">马上加入</a>"
-					+"<div style=\"text-align:center;margin-top: 80px;margin-bottom: 15px;\"><img style=\"\" src=\"cid:image\"></img></div>"
+					+"<div style=\"text-align:center;margin-top: 80px;margin-bottom: 15px;\"><img style=\"\" src=\"http://daoshifu.com/uploadfile/edm228.png\"></img></div>"
 					+"</div>"
 				+"</div>";
 			messageBodyPart.setContent(htmlText, "text/html; charset=utf-8");
@@ -390,13 +390,13 @@ public class Util {
 			multipart.addBodyPart(messageBodyPart);
 
 			// second part (the image)
-			messageBodyPart = new MimeBodyPart();
-			DataSource fds = new FileDataSource("EDM/edm228.png");
+			/*messageBodyPart = new MimeBodyPart();
+			DataSource fds = new FileDataSource("EDM/EDM001.png");
 			messageBodyPart.setDataHandler(new DataHandler(fds));
-			messageBodyPart.setHeader("Content-ID", "<image>");
+			messageBodyPart.setHeader("Content-ID", "<image>");*/
 
 			// add it
-			multipart.addBodyPart(messageBodyPart);
+			//multipart.addBodyPart(messageBodyPart);
 
 			// put everything together
 			mimeMessage.setContent(multipart);
@@ -435,24 +435,13 @@ public class Util {
 	}
 
 	public static void main(String[] args) {
-		HashSet<String> set = readEdmFileByLines("EDM/edm.txt");
-		String rec[] = {"346938819@qq.com","123576884@qq.com","410526674@qq.com"};
-		EDM("noreply@daoshifu.com","cisco123",rec,"还在qq群找刀具？快来刀师傅吧", "", null, "", "UTF-8");
-		/*int SIZE = 50;
-		String rec[] = new String[set.size()];
-		set.toArray(rec);
-		String tmp[] = new String[SIZE];
-		for (int i = 1; i < rec.length; i++) {
-			tmp[i % SIZE] = rec[i];
-			if (i % SIZE == 0) {
-				System.out.println();
-				for (int j = 0; j < SIZE; j++) {
-					// EDM("noreply@daoshifu.com","cisco123",tmp,"刀师傅-第一家刀具在线交流平台",
-					// "", null, "", "UTF-8");
-					System.out.print(tmp[j] + ";");
-				}
-			}
-		}*/
+		ArrayList<String> set = readEdmFileByLines("EDM/edm.txt");
+		//String rec[] = {"346938819@qq.com","123576884@qq.com","410526674@qq.com","1046384928@qq.com","154726915@qq.com","26539000@qq.com"};
+		//EDM("noreply@daoshifu.com","cisco123",rec,"还在qq群找刀具？快来刀师傅吧", "", null, "", "UTF-8");
+		for (int i = 238; i < 600; i++) {
+			String tmp[] = {set.get(i)};
+			EDM("client@daoshifu.com","cisco123!@#",tmp,"刀师傅-第一家刀具在线交流平台", "", null, "", "UTF-8");
+		}
 
 		// addmailToEDM("EDM/cut35mail.txt");
 		// readFileByLines("EDM/cut35-mail.txt");

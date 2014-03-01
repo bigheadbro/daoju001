@@ -6,9 +6,11 @@
 	<script type="text/javascript" src="../js/jquery-1.10.2.min.js"></script>
 	<script>
 	$(function(){
-		var url = window.location.href;
-		if(url.indexOf("browser") >= 0){
-			window.location.href = "http://www.daoshifu.com";
+		if (!document.all){  
+    		var url = window.location.href;
+    		if(url.indexOf("browser") >= 0){
+    			window.location.href = "http://www.daoshifu.com";
+    		}
 		}
 	});
 	</script>

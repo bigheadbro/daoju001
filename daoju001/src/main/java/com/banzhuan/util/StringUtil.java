@@ -566,7 +566,6 @@ public class StringUtil {
 	
 	static
 	{
-		
 		brandMap.put(1, "EMUGE,EMUGE.jpg,德国");
 		brandMap.put(2, "日立,HITACHI.jpg,日本");
 		brandMap.put(3, "INGERSOLL,INGERSOLL.jpg,德国");
@@ -574,7 +573,7 @@ public class StringUtil {
 		brandMap.put(5, "蓝帜,蓝帜.jpg,德国");
 		brandMap.put(6, "京瓷,京瓷.jpg,日本");
 		brandMap.put(7, "MANYO,MANYO.jpg,日本");
-		brandMap.put(8, "玛帕,MAPAL.jpg,韩国");
+		brandMap.put(8, "玛帕,MAPAL.jpg,德国");
 		brandMap.put(9, "铣星,MILLSTAR.jpg,美国");
 		brandMap.put(10, "MST,MST.jpg,日本");
 		brandMap.put(11, "NACHI,NACHI.jpg,日本");

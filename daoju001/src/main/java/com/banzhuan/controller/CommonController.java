@@ -131,7 +131,19 @@ public class CommonController extends BaseController{
 	@RequestMapping(value="*")
 	public ModelAndView otherEnter(final HttpServletResponse response,@ModelAttribute("form")LoginForm form)
 	{
-		ModelAndView mv = new ModelAndView("/common/index2");
+		ModelAndView mv = new ModelAndView("/common/index");
+		
+		Result result = new Result();
+		
+		result = commonService.getMainagents();
+		mv.addObject("agents", result.get("agents"));
+		
+		result = commonService.getMaingoodcases();
+		mv.addObject("goodcases", result.get("goodcases"));
+		
+		result = commonService.getMainquestions();
+		mv.addObject("questions", result.get("questions"));
+		mv.addObject("answers", result.get("answers"));
 		
 		return mv;
 	}

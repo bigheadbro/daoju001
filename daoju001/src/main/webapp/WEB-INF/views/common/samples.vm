@@ -23,7 +23,7 @@
 									<div class="agent-sample clearfix">
                                     <div class="agent-info clearfix">
                                         <div class="agent-logo">
-                                            <a>
+                                            <a href="/agents/$!{sample.agentId}">
     											#if($!{sample.agentLogo})
     												<img src="../logo/$!{sample.agentLogo}" />
     											#else

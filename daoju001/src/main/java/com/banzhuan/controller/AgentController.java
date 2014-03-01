@@ -56,8 +56,6 @@ import com.banzhuan.util.CookieUtil;
 import com.banzhuan.util.JsonUtil;
 import com.banzhuan.util.StringUtil;
 import com.banzhuan.util.Util;
-import com.qq.connect.QQConnectException;
-import com.qq.connect.oauth.Oauth;
 
 @Controller
 @RequestMapping("/agent")
@@ -126,22 +124,6 @@ public class AgentController extends BaseController{
 		model.asMap().remove("account");
 		return new ModelAndView(new RedirectView("/index"));
 		
-	}
-	
-	/**
-	 * @return
-	 */
-	@RequestMapping(value = "/qqlogin")
-	public void qqLogin(final HttpServletRequest request,final HttpServletResponse response) {
-	 	try
-	 	{
-			response.sendRedirect(new Oauth().getAuthorizeURL(request));
-		} catch (QQConnectException e) {
-			logger.error("QQConnectException:"+e.getMessage());
-		} catch (IOException e) {
-			logger.error("qqLoginException:"+e.getMessage());
-		}
-			
 	}
 	
 	@RequestMapping(value="/uploadlogo")

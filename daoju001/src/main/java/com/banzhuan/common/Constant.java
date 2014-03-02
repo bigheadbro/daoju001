@@ -33,5 +33,7 @@ public class Constant {
 	public static final int MSG_AGENT_START=4;
 	
 	public static final int MSG_AGENT_END=5;
+	
+	public static final int BRAND_CNT=46;
 
 }

@@ -1,6 +1,6 @@
 $(function() {
 	$(".hot-question-listitem").each(function(){
-		var img = $(this).children(".hidden").children("img");
+		var img = $(this).children(".hidden").find("img");
 		var src;
 		if(img.length > 0){
 			src = img.attr("src");

@@ -266,7 +266,8 @@ public class Util {
 		Properties props = new Properties();
 		// 设置smtp服务器地址
 		// 这里使用QQ邮箱，记得关闭独立密码保护功能和在邮箱中设置POP3/IMAP/SMTP服务
-		props.put("mail.smtp.host", "smtp.exmail.qq.com");
+		props.put("mail.smtp.host", "smtpcloud.sohu.com");
+		
 		// 需要验证
 		props.put("mail.smtp.auth", "true");
 		// 创建验证器
@@ -333,7 +334,8 @@ public class Util {
 		Properties props = new Properties();
 		// 设置smtp服务器地址
 		// 这里使用QQ邮箱，记得关闭独立密码保护功能和在邮箱中设置POP3/IMAP/SMTP服务
-		props.put("mail.smtp.host", "smtp.exmail.qq.com");
+		//props.put("mail.smtp.host", "smtp.exmail.qq.com");
+		props.put("mail.smtp.host", "smtp.gmail.com");
 		// 需要验证
 		props.put("mail.smtp.auth", "true");
 		// 创建验证器
@@ -436,12 +438,15 @@ public class Util {
 
 	public static void main(String[] args) {
 		ArrayList<String> set = readEdmFileByLines("EDM/edm.txt");
-		//String rec[] = {"346938819@qq.com","123576884@qq.com","410526674@qq.com","1046384928@qq.com","154726915@qq.com","26539000@qq.com"};
-		//EDM("noreply@daoshifu.com","cisco123",rec,"还在qq群找刀具？快来刀师傅吧", "", null, "", "UTF-8");
-		for (int i = 238; i < 600; i++) {
+		String rec[] = {"346938819@qq.com","123576884@qq.com","410526674@qq.com","1046384928@qq.com","154726915@qq.com","26539000@qq.com"};
+		sendEmail("postmaster@daoshifu.sendcloud.org", "2nxNPv0q",
+				rec, "sendcloud测试", "just a test",
+				null, "", "UTF-8");
+		//EDM("guichaoqun@gmail.com","19860727",rec,"还在qq群找刀具？快来刀师傅吧", "", null, "", "UTF-8");
+		/*for (int i = 323; i < 1000; i++) {
 			String tmp[] = {set.get(i)};
-			EDM("client@daoshifu.com","cisco123!@#",tmp,"刀师傅-第一家刀具在线交流平台", "", null, "", "UTF-8");
-		}
+			EDM("346938819@qq.com","cisco123!@#",tmp,"刀师傅-第一家刀具在线交流平台", "", null, "", "UTF-8");
+		}*/
 
 		// addmailToEDM("EDM/cut35mail.txt");
 		// readFileByLines("EDM/cut35-mail.txt");

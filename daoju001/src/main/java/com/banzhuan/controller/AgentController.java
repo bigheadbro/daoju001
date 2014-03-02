@@ -191,7 +191,7 @@ public class AgentController extends BaseController{
 	{
 		ModelAndView mv = new ModelAndView("agent/profile");
 		List<BrandEntity> brands = new ArrayList<BrandEntity>();
-		for(int i = 1;i<=45;i++)
+		for(int i = 1;i<=Constant.BRAND_CNT;i++)
 		{
 			BrandEntity brand = new BrandEntity();
 			brand.setKey(i);
@@ -570,9 +570,9 @@ public class AgentController extends BaseController{
 		String link = "../sample/"  + StringUtil.getTodayString() + "/" + f.getOriginalFilename();
 		path += "/"  + StringUtil.getTodayString() + "/";
 		File file = new File(path + f.getOriginalFilename());
-		logger.info("before mkdir");
+		
 		file.getParentFile().mkdirs();  
-		logger.info("after mkdir");
+		
 		try 
 		{
 			FileCopyUtils.copy(f.getBytes(), file);
@@ -621,17 +621,23 @@ public class AgentController extends BaseController{
 			}
 			else
 			{
-				agentService.insertSample(form, sample, result);
-
-				if(result.hasErrors())
+				try
 				{
-					mv = new ModelAndView("agent/uploadsample");
-					return mv;
+					agentService.insertSample(form, sample, result);
+	
+					if(result.hasErrors())
+					{
+						mv = new ModelAndView("agent/uploadsample");
+						return mv;
+					}
+					
+					int sampleCnt = agentService.getSampleCount(account.getUserId());
+					account.setSampleCnt(sampleCnt);
+					JsonUtil.showAlert(response, "上传样本", "上传样本成功~~", "确定", "", "");
 				}
-				
-				int sampleCnt = agentService.getSampleCount(account.getUserId());
-				account.setSampleCnt(sampleCnt);
-				JsonUtil.showAlert(response, "上传样本", "上传样本成功~~", "确定", "", "");
+				catch(Exception e){
+					logger.info("sampleissue:"+String.valueOf(result.getErrorCount())+";ex:"+e.toString());
+				}
 			}
 			
 			return mv;

@@ -14,6 +14,9 @@
 			function processJson(data) { 
       			showAlert(data.title,data.content,data.info,data.btn,data.link);
       		}
+			function processComplete(data){
+				$('#submit_profile').removeAttr("disabled"); 
+			}
 			$(function() {	
 				$("#form_profile").validate({
 					rules:{
@@ -36,7 +39,8 @@
 					submitHandler: function(form) {
                         $(form).ajaxSubmit({
     						dataType:'json',
-    						success:processJson
+    						success:processJson,
+							complete:processComplete
     					});
                       }
 
@@ -173,7 +177,10 @@
 
 			$(function() {
 				$("#submit_profile").click(function () {
-                    $(this).submit();
+					if($('#submit_profile').attr("disabled") != "disabled"){
+                        $(this).submit();
+    					$('#submit_profile').attr("disabled","disabled");
+					}
 				});
 			});
 		</script>

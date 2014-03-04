@@ -2,26 +2,10 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <link rel="stylesheet" href="../css/css.css">
     <title>刀师傅-最专业的刀具咨询交流平台</title>
-	<meta property="qc:admins" content="30211776676417301656375" />
     <script type="text/javascript" src="../js/jquery-1.10.2.min.js"></script>
 	<script type="text/javascript" src="../js/jquery.form.js"></script>
 	<script type="text/javascript" src="../js/jquery.validate.min.js"></script>
 	<script type="text/javascript" src="../js/alert.js"></script>
 	<script type="text/javascript" src="../js/complain.js"></script>
-	<link rel="stylesheet" href="../css/jquery.fancybox.css">
-	<link rel="stylesheet" href="../css/pagination.css">
     <script type="text/javascript" src="../js/jquery.fancybox.pack.js"></script>
-    <script type="text/javascript">
-    	$(document).ready(function() {
-    		$('.fancybox-v').fancybox({
-    			openEffect : 'elastic',
-    			closeEffect : 'elastic',
-				helpers: {
-                    overlay: {
-                      locked: false
-                    }
-                  }
-    		});
-		});
-    </script>
 </head>

@@ -42,16 +42,17 @@ public class SendCloudTest {
 	
 	public static void main(String[] args) throws Exception {
 		ArrayList<String> set = readEdmFileByLines("EDM/part2.txt");
-		while(true)
-		{
-			Calendar time = Calendar.getInstance();
-			if(time.get(Calendar.HOUR_OF_DAY) == 16)
-			{
-				break;
-			}
-		}
+		
 		for(int i=681;i<4100;i++)
 		{
+			while(true)
+			{
+				Calendar time = Calendar.getInstance();
+				if(time.get(Calendar.HOUR_OF_DAY) == 13 || time.get(Calendar.HOUR_OF_DAY) == 9)
+				{
+					break;
+				}
+			}
 			Message message = new Message("client@daoshifu.com", "刀师傅");
 			// 正文， 使用html形式，或者纯文本形式
 			message.setBody("<div style=\"text-align: center;width: 700px;background-color:#e6e6e6;padding: 20px;\">"

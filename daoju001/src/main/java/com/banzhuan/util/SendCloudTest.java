@@ -1,10 +1,11 @@
-/*package com.banzhuan.util;
+package com.banzhuan.util;
 
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import com.sohu.sendcloud.Message;
@@ -41,6 +42,14 @@ public class SendCloudTest {
 	
 	public static void main(String[] args) throws Exception {
 		ArrayList<String> set = readEdmFileByLines("EDM/part2.txt");
+		while(true)
+		{
+			Calendar time = Calendar.getInstance();
+			if(time.get(Calendar.HOUR_OF_DAY) == 16)
+			{
+				break;
+			}
+		}
 		for(int i=681;i<4100;i++)
 		{
 			Message message = new Message("client@daoshifu.com", "刀师傅");
@@ -78,4 +87,3 @@ public class SendCloudTest {
 		}
 	}
 }
-*/

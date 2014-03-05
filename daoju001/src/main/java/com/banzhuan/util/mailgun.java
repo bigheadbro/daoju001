@@ -1,4 +1,4 @@
-package com.banzhuan.util;
+/*package com.banzhuan.util;
 
 import javax.ws.rs.core.MediaType;
 
@@ -30,3 +30,4 @@ public class mailgun {
 		SendSimpleMessage();
 	}
 }
+*/

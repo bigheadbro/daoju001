@@ -50,7 +50,10 @@ public class SendCloudTest {
 				Calendar time = Calendar.getInstance();
 				if(time.get(Calendar.HOUR_OF_DAY) == 13 || time.get(Calendar.HOUR_OF_DAY) == 9)
 				{
-					break;
+					if(time.get(Calendar.MINUTE) <= 40)
+					{
+						break;
+					}
 				}
 			}
 			Message message = new Message("client@daoshifu.com", "刀师傅");

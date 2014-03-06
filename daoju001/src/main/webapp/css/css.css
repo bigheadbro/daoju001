@@ -178,7 +178,7 @@ div[contentEditable]{outline:0}
 .hot-question-listitem .content li.answer h2 a.solution:hover{text-decoration:underline;color:#00c0ff}
 .answer-price{float: left;margin-left: 12px;margin-top: 20px;font-size:12px;}
 .answer-price span{color:white;background-color:#FFA35A;display:inline-block;padding:2px 5px;border-radius:4px;}
-.hot-question-listitem .content li.answer li.answer-cont{margin-top:10px;color:#676767;font-size:13px;line-height: 20px;}
+.hot-question-listitem .content li.answer li.answer-cont{margin-top:10px;color:black;font-size:13px;line-height: 20px;}
 .hot-question-listitem .content li.answer li.price-cont{color:#ff7200;font-size:13px;margin-top: 10px;}
 .hot-question-listitem .content li.answer li.price-cont .price{background-color:#ffdfc5;border:1px solid #ff7200;border-radius:8px;padding:10px 20px;}
 .hot-question-listitem .content li.answer li.comment-cont{margin-top:5px;font-size:11px;color:#999;}
@@ -358,6 +358,10 @@ ul.pa-answer{margin-top:10px;border-bottom: 1px solid #D3D3D3;padding-bottom: 10
 .reg-left ul li.value .protocol{font-size:14px;color:#00b4ff}
 .reg-left ul li.value .reg{font-size:18px;background-color:#63a200;color:white;border-radius: 5px;padding: 10px 70px;}
 .reg-left ul li.value .qqlogin{font-size:18px;color:white;background-color:#0081b7;border-radius: 5px;padding: 10px 22px 10px 70px;background-image: url(../img/reg3.png);background-repeat:no-repeat;background-position: 40px 12px;}
+.reg-left p.info{margin-top:20px;line-height: 30px;}
+.reg-left .bottom{border-top: 1px solid grey;padding-top: 10px;}
+.reg-left .bottom a{float: right;font-size: 14px;}
+.reg-left .bottom a:hover{text-decoration:underline;color:#00c0ff}
 .reg-right{float:left;}
 .reg-right .header{margin-bottom:20px;}
 .reg-right h1{color:#0099cb;font-size:48px;margin-top: 30px;margin-bottom: 20px;}
@@ -529,7 +533,7 @@ opacity: .3;
 .agent-detail h4{color:#606060;font-size:12px;font-weight:600;overflow:hidden;white-space:nowrap;}
 .agent-detail h2 a.fancybox-v{padding: 4px 0 0 2px;float:left;}
 .agent-detail h2 a.fancybox-v img{width:12px}
-.download{float:left;margin:17px;}
+.download{float:right;margin:17px;}
 .download a{background-color: #0088b5;color: white;padding: 10px 30px;border-radius: 5px;}
 .gc-param{margin-top:10px;}
 .gc-param span{display:inline-block;background-color:#dddddd;background-color: #dddddd;padding: 2px 12px;border-radius: 20px;text-align: center;font-size:12px;}

@@ -37,7 +37,7 @@
 								#end
                                 <div class="agent-info clearfix">
                                     <div class="agent-logo">
-                                        <a>
+                                        <a href="/agents/$!{agent.id}">
 											#if($!{agent.logo})
 												<img src="../logo/$!{agent.logo}" />
 											#else

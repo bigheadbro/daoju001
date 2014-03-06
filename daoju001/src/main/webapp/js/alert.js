@@ -20,9 +20,9 @@ function showcomplain() {
 	}
 }
 $(function() {
-	if (document.all) {
+	/*if (document.all) {
 		window.location.href = "/browser";
-	}
+	}*/
 	$('.fancybox-v').fancybox({
 		openEffect : 'elastic',
 		closeEffect : 'elastic',

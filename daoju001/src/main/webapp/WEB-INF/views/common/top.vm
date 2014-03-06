@@ -65,7 +65,7 @@
                         <a href="/log">登录</a>
                     </li>
                     <li>
-                        <a href="/reg">注册</a>
+                        <a href="/buyer/reg">注册</a>
                     </li>
                 </ul>
                 　                      #else

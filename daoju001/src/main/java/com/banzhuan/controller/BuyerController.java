@@ -152,7 +152,15 @@ public class BuyerController extends BaseController{
 		}
 		else
 		{
-			buyerService.updateBuyerAccnt(form, buyer);
+			if(result.hasErrors())
+			{
+				return mv;
+			}
+			
+			if(buyerService.updateBuyerAccnt(form, buyer, result) == 0)
+			{
+				JsonUtil.showAlert(response, "更新资料失败", "用户名已存在，请重新输入！", "确定", "", "");
+			}
 			if(buyer.getUsername() != null)
 			{
 				account.setUserName(buyer.getUsername());
@@ -161,12 +169,7 @@ public class BuyerController extends BaseController{
 			{
 				account.setCompanyName(buyer.getCompanyName());
 			}
-
-			if(result.hasErrors())
-			{
-				return mv;
-			}
-			JsonUtil.showAlert(response, "更新资料", "个人资料更新成功~~", "确定", "", "");
+			JsonUtil.showAlert(response, "更新资料失败", "用户名已存在，请重新输入！", "确定", "", "");
 		}
 		return mv;
 	}
@@ -191,7 +194,7 @@ public class BuyerController extends BaseController{
 					BuyerEntity buyer = new BuyerEntity();
 					buyer.setId(account.getUserId());
 					buyer.setLogo(account.getLogo());
-					buyerService.updateBuyerAccnt(null, buyer);
+					buyerService.updateBuyerAccnt(null, buyer, null);
 					try 
 					{
 						FileCopyUtils.copy(f.getBytes(), file);

@@ -41,9 +41,9 @@ public class SendCloudTest {
 	}
 	
 	public static void main(String[] args) throws Exception {
-		ArrayList<String> set = readEdmFileByLines("EDM/part2.txt");
+		ArrayList<String> set = readEdmFileByLines("EDM/part3.txt");
 		
-		for(int i=681;i<4100;i++)
+		for(int i=0;i<set.size();i++)
 		{
 			while(true)
 			{
@@ -84,7 +84,7 @@ public class SendCloudTest {
 			// 获取emailId列表
 			System.out.println(sendCloud.getEmailIdList());
 			
-			Thread.sleep(6000);
+			Thread.sleep(5000);
 		}
 	}
 }

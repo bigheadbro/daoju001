@@ -75,9 +75,14 @@ public class BuyerService {
 			errors.rejectValue("name", "USER_NAME_IS_NOT_NULL");
 			return result;
 		}
+		else if(StringUtil.isIlegal(form.getName()))
+		{
+			errors.rejectValue("name", "USER_NAME_IS_ILLEGAL");
+			return result;
+		}
 		else if(buyerDAO.queryBuyerEntityByName(form.getName().trim()) != null) 
 		{
-			errors.rejectValue("mail", "USER_NAME_IS_EXISTS");
+			errors.rejectValue("name", "USER_NAME_IS_EXISTS");
 			return result;
 		}
 		else if(buyerDAO.queryBuyerEntityByMail(form.getMail()) != null || agentDAO.queryAgentEntityByMail(form.getMail()) != null) // 第二步，判断注册用户名是否存在
@@ -168,12 +173,17 @@ public class BuyerService {
 		buyerDAO.updateBuyerPwdById(buyer);
 	}
 	
-	public void updateBuyerAccnt(BuyerProfileForm form, BuyerEntity buyer)
+	public int updateBuyerAccnt(BuyerProfileForm form, BuyerEntity buyer, Errors errors)
 	{
+		Result result = new Result();
 		if(form != null)
 		{
 			if(form.getUserName() != "")
 			{
+				if(buyerDAO.queryBuyerEntityByName(form.getUserName().trim()) != null) 
+				{
+					return 0;
+				}
 				buyer.setUsername(form.getUserName());
 			}
 			if(form.getCompanyName() != "")
@@ -202,7 +212,7 @@ public class BuyerService {
 			}
 		}
 		buyerDAO.updateBuyerEntityById(buyer);
-		return;
+		return 1;
 	}
 	
 	public BuyerEntity getBuyerEntity(int userId)

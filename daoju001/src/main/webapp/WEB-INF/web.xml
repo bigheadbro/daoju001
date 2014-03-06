@@ -45,6 +45,14 @@
   </servlet>
   <servlet-mapping>
     <servlet-name>default</servlet-name>
+    <url-pattern>*.tif</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>default</servlet-name>
+    <url-pattern>*.TIF</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>default</servlet-name>
     <url-pattern>*.doc</url-pattern>
   </servlet-mapping>
   <servlet-mapping>

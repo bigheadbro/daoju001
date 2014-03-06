@@ -90,6 +90,11 @@ public class AgentService {
 			errors.rejectValue("name", "USER_NAME_IS_NOT_NULL");
 			return result;
 		}
+		else if(StringUtil.isIlegal(form.getName()))
+		{
+			errors.rejectValue("name", "USER_NAME_IS_ILLEGAL");
+			return result;
+		}
 		else if(agentDAO.queryAgentEntityByName(form.getName().trim()) != null)
 		{
 			errors.rejectValue("name", "USER_NAME_IS_EXISTS");
@@ -180,12 +185,18 @@ public class AgentService {
 		return result;
 	}
 	
-	public void updateAgentAccnt(HttpServletRequest request, AgentProfileForm form, AgentEntity agent, Account account, Errors errors)
+	public int updateAgentAccnt(HttpServletRequest request, AgentProfileForm form, AgentEntity agent, Account account, Errors errors)
 	{
+		Result result = new Result();
+		
 		if(form != null)
 		{
 			if(StringUtil.isNotEmpty(form.getCompanyName()))
 			{
+				if(StringUtil.isNotEqual(form.getCompanyName(), account.getCompanyName()) && agentDAO.queryAgentEntityByName(form.getCompanyName().trim()) != null)
+				{
+					return 0;
+				}
 				agent.setCompanyName(form.getCompanyName());
 				account.setUserName(form.getCompanyName());
 				account.setCompanyName(form.getCompanyName());
@@ -202,7 +213,7 @@ public class AgentService {
 			
 			if(StringUtil.isNotEmpty(form.getCompanyPhone()))
 			{
-				agent.setPhone(form.getCompanyName());
+				agent.setPhone(form.getCompanyPhone());
 			}
 			if(StringUtil.isNotEmpty(form.getContactName()))
 			{
@@ -248,7 +259,7 @@ public class AgentService {
 		
 		
 		agentDAO.updateAgentEntityById(agent);
-		return;
+		return 1;
 	}
 	
 	public void setAgentProfileFormWithBuyerEntity(AgentProfileForm form, AgentEntity agent)

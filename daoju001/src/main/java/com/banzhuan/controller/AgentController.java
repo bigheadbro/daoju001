@@ -101,13 +101,13 @@ public class AgentController extends BaseController{
 			else
 			{
 				// 注册失败， 返回注册页面，并显示出错提示信息
-				ModelAndView model = new ModelAndView("/agent/reg");
+				ModelAndView model = new ModelAndView("/agent/reg1");
 				return model;
 			}
 		}
 		else
 		{
-			ModelAndView model = new ModelAndView("/agent/reg");
+			ModelAndView model = new ModelAndView("/agent/reg1");
 			return model;
 		}
 	}
@@ -208,9 +208,14 @@ public class AgentController extends BaseController{
 		}
 		else
 		{
-			agentService.updateAgentAccnt(request, form, agent, account, result);
+			
 			if(result.hasErrors())
 			{
+				return mv;
+			}
+			if(agentService.updateAgentAccnt(request, form, agent, account, result) == 0)
+			{
+				JsonUtil.showAlert(response, "更新资料失败", "公司名已存在，请重新输入！", "确定", "", "");
 				return mv;
 			}
 			JsonUtil.showAlert(response, "更新资料", "公司资料更新成功~~", "确定", "", "");

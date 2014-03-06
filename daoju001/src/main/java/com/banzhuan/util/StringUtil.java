@@ -149,6 +149,11 @@ public class StringUtil {
 		return str1.contains(str2);
 	}
 	
+	public static boolean isIlegal(String str)
+	{
+		return isContains("刀师傅") && isContains("daoshifu");
+	}
+	
 	/**
 	 * 判断字符串str1是否包含字符串数组strs中的每一个字符串
 	 * @param str1
@@ -612,7 +617,10 @@ public class StringUtil {
 		brandMap.put(44, "ARNO,ARNO.jpg,德国");
 		brandMap.put(45, "華菱超硬,HUALING.jpg,中国");
 		brandMap.put(46, "ZEUS,ZEUS.jpg,德国");
-		brandMap.put(46, "OSG,osg.jpg,日本");
+		brandMap.put(47, "OSG,osg.jpg,日本");
+		brandMap.put(48, "瑞德卡特,瑞德卡特.jpg,瑞士");
+		brandMap.put(10000, "刀师傅,刀师傅.jpg,中国");
+		
 		
 		msgTypeMap.put(1, "提供了专业解决方案");
 		msgTypeMap.put(2, "回复了你");

@@ -526,7 +526,7 @@ opacity: .3;
 .agent-logo{border-radius: 5px;width:50px;height:50px;overflow:hidden;text-align:center;display:table;float:left;background-color:white;}
 .agent-logo a{display:table-cell;vertical-align:middle;}
 .agent-logo a img{margin:0 auto;max-width:50px;max-height:50px;}
-.gc-name{color:#383838;font-size:18px;padding-bottom: 5px;}
+.gc-name{color:#383838;font-size:15px;padding-bottom: 5px;}
 .agent-detail{float:left;width: 94px;margin-left:12px;margin-top: 0px;}
 .agent-detail h2{color:#606060;font-size:14px;padding: 5px 5px 3px 0;}
 .agent-detail h2 a.agent-name{overflow:hidden;white-space:nowrap;text-overflow:ellipsis;display:inline-block;max-width:71px;float:left;}

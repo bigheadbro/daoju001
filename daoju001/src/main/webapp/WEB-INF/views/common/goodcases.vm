@@ -187,7 +187,7 @@
 					<div class="gc-name">$!{gc.name}</div>
 					<div class="agent-info clearfix">
 						<div class="agent-logo">
-							<a>
+							<a href="/agents/$!{gc.agentId}">
 								#if($!{gc.agentLogo})
 									<img src="../logo/$!{gc.agentLogo}" />
 								#else

@@ -102,7 +102,7 @@ $(function() {
 						  	<ul class="comment-item clearfix">
 								<li class="agent-info clearfix">
 									<div class="logo">
-                						<a>
+                						<a  href="/agents/$!{comment.agentId}">
                     						#if($!{comment.userAvatar})
                     							<img src="../logo/$!{comment.userAvatar}" />
                     						#else
@@ -247,7 +247,7 @@ $(function() {
            						  		<ul class="comment-item clearfix">
             								<li class="agent-info clearfix">
             									<div class="logo">
-                            						<a>
+                            						<a href="/agents/$!{comment.agentId}">
                                 						#if($!{comment.userAvatar})
                                 							<img src="../logo/$!{comment.userAvatar}" />
                                 						#else

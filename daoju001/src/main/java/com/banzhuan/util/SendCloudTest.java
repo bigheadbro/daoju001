@@ -43,12 +43,12 @@ public class SendCloudTest {
 	public static void main(String[] args) throws Exception {
 		ArrayList<String> set = readEdmFileByLines("EDM/part3.txt");
 		
-		for(int i=0;i<set.size();i++)
+		for(int i=1241;i<set.size();i++)
 		{
 			while(true)
 			{
 				Calendar time = Calendar.getInstance();
-				if(time.get(Calendar.HOUR_OF_DAY) == 13 || time.get(Calendar.HOUR_OF_DAY) == 9)
+				if(time.get(Calendar.HOUR_OF_DAY) == 13 || time.get(Calendar.HOUR_OF_DAY) == 9 || time.get(Calendar.HOUR_OF_DAY) == 15)
 				{
 					if(time.get(Calendar.MINUTE) <= 40)
 					{

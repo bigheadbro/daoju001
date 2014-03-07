@@ -25,7 +25,7 @@ $(function() {
 </script>
 #foreach ($agent in $agents)
 <p class="admin">
-	<span>$!{agent.companyName}</span> 
+	<a href="/agents/${agent.id}">$!{agent.companyName}</a> 
 	<span>$!{agent.brandName}</span>
 	#if($agent.verifiedLink)
 		<a target="_blank" href="${agent.verifiedLink}" />代理证书连接</a>

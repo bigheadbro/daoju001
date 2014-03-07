@@ -151,7 +151,7 @@ public class StringUtil {
 	
 	public static boolean isIlegal(String str)
 	{
-		return isContains("刀师傅") && isContains("daoshifu");
+		return isContains(str,"刀师傅") || isContains(str,"daoshifu");
 	}
 	
 	/**
@@ -504,7 +504,7 @@ public class StringUtil {
 	
 	public static void main(String[] args)
 	{
-		System.out.println(diffTimeYear("1985-10-25 00:00:00"));
+		System.out.print(isIlegal("daoshifu"));
 	}
 	
 	public static boolean isProperImageFile(String type)
@@ -731,4 +731,5 @@ public class StringUtil {
 		boolean a = b;
 		String.valueOf(a);
 	}
+	
 }

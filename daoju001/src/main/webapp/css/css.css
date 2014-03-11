@@ -198,7 +198,7 @@ ul.pa-answer{margin-top:10px;border-bottom: 1px solid #D3D3D3;padding-bottom: 10
 .hot-question-listitem .content li.comment .comment-arrow *{position: absolute;}
 .hot-question-listitem .content li.comment .comment-arrow .S_line1_c{color: #bebebe;}
 .hot-question-listitem .content li.comment .comment-arrow .S_bg1_c{margin-top:1px;color:#f0f0f0}
-.hot-question-listitem .content li.comment input[type="text"]{width:450px;}
+.hot-question-listitem .content li.comment input[type="text"]{width:470px;}
 .hot-question-listitem .content li.comment a.reply{background-color:#63a200;color:white;padding:5px 25px;font-size: 13px;display: inline-block;margin-top: 10px;float: right;}
 /*普通回答*/
 .hot-question-listitem .content li.comment{position: relative;display:none;border:1px solid #bebebe;background-color:#f0f0f0;padding:15px;border-radius: 2px;margin-top: 10px;}
@@ -527,9 +527,9 @@ opacity: .3;
 .agent-logo a{display:table-cell;vertical-align:middle;}
 .agent-logo a img{margin:0 auto;max-width:50px;max-height:50px;}
 .gc-name{color:#383838;font-size:15px;padding-bottom: 5px;}
-.agent-detail{float:left;width: 94px;margin-left:12px;margin-top: 0px;}
+.agent-detail{float:left;width: 120px;margin-left:12px;margin-top: 0px;}
 .agent-detail h2{color:#606060;font-size:14px;padding: 5px 5px 3px 0;}
-.agent-detail h2 a.agent-name{overflow:hidden;white-space:nowrap;text-overflow:ellipsis;display:inline-block;max-width:71px;float:left;}
+.agent-detail h2 a.agent-name{overflow:hidden;white-space:nowrap;text-overflow:ellipsis;display:inline-block;max-width:100px;float:left;}
 .agent-detail h4{color:#606060;font-size:12px;font-weight:600;overflow:hidden;white-space:nowrap;}
 .agent-detail h2 a.fancybox-v{padding: 4px 0 0 2px;float:left;}
 .agent-detail h2 a.fancybox-v img{width:12px}

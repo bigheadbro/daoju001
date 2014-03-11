@@ -119,7 +119,7 @@ $(function() {
             							<h4>$stringUtil.getBrand($!{answers[$index].brandName})</h4>
             						</div>
             						<div class="answer-price">
-            							#if($!{answers[$index].price})
+            							#if($stringUtil.isNotEmpty($!{answers[$index].price}))
             								<span>已报价</span>
             							#end
             							#if($!{answers[$index].FreeUse})
@@ -141,7 +141,7 @@ $(function() {
 	<!-- 代理商 -->
 	<div class="main-list-container width300 ml50">
 		<div class="main-list-header ">
-                                                      最新代理商
+                                                      浏览最多的代理商
 			<a class="seemore" href="/agents">查看更多</a>
 		</div>
 		<div class="main-list-content">

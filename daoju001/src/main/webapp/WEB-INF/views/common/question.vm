@@ -226,7 +226,7 @@ $(function() {
                 				    <li class="answer-cont">
                 					    <p>$!{answer.content}</p>
                 					</li>
-									#if($stringUtil.isEqual(${account.userId},${question.buyerId}) || $stringUtil.isEqual(${account.userId} , ${answer.agentId}))
+									#if($stringUtil.isEqualex(${account.userId},${question.buyerId}) || $stringUtil.isEqualex(${account.userId} , ${answer.agentId}))
 										#if($stringUtil.isNotEmpty($!{answer.price}))
         									<li class="price-cont">
         										<p class="price">

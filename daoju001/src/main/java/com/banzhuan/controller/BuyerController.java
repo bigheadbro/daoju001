@@ -169,7 +169,7 @@ public class BuyerController extends BaseController{
 			{
 				account.setCompanyName(buyer.getCompanyName());
 			}
-			JsonUtil.showAlert(response, "更新资料失败", "用户名已存在，请重新输入！", "确定", "", "");
+			JsonUtil.showAlert(response, "更新资料", "资料更新成功~~", "确定", "", "");
 		}
 		return mv;
 	}

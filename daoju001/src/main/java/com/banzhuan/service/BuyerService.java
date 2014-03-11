@@ -180,9 +180,10 @@ public class BuyerService {
 		{
 			if(form.getUserName() != "")
 			{
-				if(buyerDAO.queryBuyerEntityByName(form.getUserName().trim()) != null) 
+				if(StringUtil.isNotEqual(form.getUserName(),buyer.getUsername()))
 				{
-					return 0;
+					if((buyerDAO.queryBuyerEntityByName(form.getUserName().trim()) != null) || StringUtil.isIlegal(form.getUserName()))
+						return 0;
 				}
 				buyer.setUsername(form.getUserName());
 			}

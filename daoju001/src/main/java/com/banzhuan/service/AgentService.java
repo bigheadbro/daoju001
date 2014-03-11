@@ -185,6 +185,11 @@ public class AgentService {
 		return result;
 	}
 	
+	public int updateAgentReadCountById(int agentid)
+	{
+		return agentDAO.updateAgentReadCountById(agentid);
+	}
+	
 	public int updateAgentAccnt(HttpServletRequest request, AgentProfileForm form, AgentEntity agent, Account account, Errors errors)
 	{
 		Result result = new Result();
@@ -193,9 +198,10 @@ public class AgentService {
 		{
 			if(StringUtil.isNotEmpty(form.getCompanyName()))
 			{
-				if(StringUtil.isNotEqual(form.getCompanyName(), account.getCompanyName()) && agentDAO.queryAgentEntityByName(form.getCompanyName().trim()) != null)
+				if(StringUtil.isNotEqual(form.getCompanyName(), account.getCompanyName()))
 				{
-					return 0;
+					if(agentDAO.queryAgentEntityByName(form.getCompanyName().trim()) != null ||  StringUtil.isIlegal(form.getCompanyName()))
+						return 0;
 				}
 				agent.setCompanyName(form.getCompanyName());
 				account.setUserName(form.getCompanyName());
@@ -231,6 +237,7 @@ public class AgentService {
 			{
 				agent.setDescription(form.getDescription());
 			}
+			
 
 			// /////////////////////////////////////////////////////////////获取上传的文件///////////////////////////////////
 			if (request instanceof DefaultMultipartHttpServletRequest) 

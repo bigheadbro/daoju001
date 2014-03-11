@@ -49,6 +49,8 @@
 		<id property="cntAnswer" column="cnt_answer" />
 		<id property="cntGc" column="cnt_gc" />
 		<id property="cntSample" column="cnt_sample" />
+		<id property="cntRead" column="cnt_read" />
+		
 	</resultMap>
 	
 	<!-- 根据ID获取代理商信息 -->
@@ -85,7 +87,7 @@
 	
 	<select id="getMainagents" 
 			resultMap="AgentResultMap">
-		SELECT * from t_agent t  where is_verified=1 order by gmt_create desc limit 7
+		SELECT * from t_agent t  where is_verified=1 order by cnt_read desc limit 7
 	</select>
 	
 	<!-- 新代理商信息 -->
@@ -146,6 +148,10 @@
 		update t_agent set password = #{password}, gmt_modified=now() where id=#{id}
 	</update>
 	
+	<update id="updateAgentReadCountById" parameterType="AgentEntity">
+		update t_agent set cnt_read = cnt_read + 1, gmt_modified=now() where id=#{id}
+	</update>
+	
 	<update id="updateAgentEntityById" parameterType="AgentEntity">
 		update t_agent
 		<set> 
@@ -153,7 +159,7 @@
 		      <if test="companyName != null">company_name=#{companyName},</if>
 		      <if test="brand != 0">brand=#{brand},</if>
 		      <if test="brandName != null">brand_name=#{brandName},</if>
-		       <if test="isVerified != null">is_verified=#{isVerified},</if>
+		      <if test="isVerified != null">is_verified=#{isVerified},</if>
 		      <if test="address != null">address=#{address},</if>
 		      <if test="phone != null">phone=#{phone},</if>
 		      <if test="fax != null">fax=#{fax},</if>

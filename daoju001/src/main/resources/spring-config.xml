@@ -62,6 +62,10 @@
    			<bean class="com.banzhuan.interceptor.AutoLoginInterceptor" />
 		</mvc:interceptor>
 		<mvc:interceptor>
+   			<mvc:mapping path="/agents/*" />
+   			<bean class="com.banzhuan.interceptor.AgentCounterInterceptor" />
+		</mvc:interceptor>
+		<mvc:interceptor>
    			<mvc:mapping path="/addcomment" />
    			<bean class="com.banzhuan.interceptor.UserLoginInterceptor" />
 		</mvc:interceptor>

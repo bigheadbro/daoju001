@@ -54,7 +54,7 @@
 			#springBind("form.name")
 			<ul class="reg-listitem clearfix">
 			  <li class="key">
-				  用户名
+				  注册昵称
 				</li>
 			  <li class="value">
 				  <input type="text"  name="$!{status.expression}"  class="dsf-form-text-input" />

@@ -1,4 +1,4 @@
-package com.banzhuan.util;
+/*package com.banzhuan.util;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -41,16 +41,17 @@ public class SendCloudTest {
 	}
 	
 	public static void main(String[] args) throws Exception {
-		ArrayList<String> set = readEdmFileByLines("EDM/part3.txt");
+		ArrayList<String> set = readEdmFileByLines("EDM/part4.txt");
 		
-		for(int i=1241;i<set.size();i++)
+		for(int i=1254;i<set.size();i++)
 		{
 			while(true)
 			{
 				Calendar time = Calendar.getInstance();
-				if(time.get(Calendar.HOUR_OF_DAY) == 13 || time.get(Calendar.HOUR_OF_DAY) == 9 || time.get(Calendar.HOUR_OF_DAY) == 15)
+				if(time.get(Calendar.HOUR_OF_DAY) == 13 || time.get(Calendar.HOUR_OF_DAY) == 9|| 
+						time.get(Calendar.HOUR_OF_DAY) == 16 || time.get(Calendar.HOUR_OF_DAY) == 19)
 				{
-					if(time.get(Calendar.MINUTE) <= 40)
+					if(time.get(Calendar.MINUTE) <= 30)
 					{
 						break;
 					}
@@ -87,7 +88,8 @@ public class SendCloudTest {
 			// 获取emailId列表
 			System.out.println(sendCloud.getEmailIdList());
 			
-			Thread.sleep(5000);
+			Thread.sleep(5500);
 		}
 	}
 }
+*/

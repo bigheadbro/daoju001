@@ -40,14 +40,14 @@
 					});
 				});
 			</script>
-			<div class="auth-header clearfix">
+			<!--<div class="auth-header clearfix">
 				<div class="first">
 					<a href="/reg">1.选择账户类型</a>
 				</div>
 				<div class="second current">
 					2.填写账户信息
 				</div>
-			</div>
+			</div>-->
 		    <form id="form_reg" method="post">
     			<!-- 隐藏字段，用于标示是表单提交 -->
     		    <input type="hidden" name="do_submit" value="true"/>

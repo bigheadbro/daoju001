@@ -89,6 +89,11 @@ public class StringUtil {
 		return str1.equals(str2);
 	}
 	
+	public static boolean isEqualex(int str1, int str2)
+	{
+		return str1 == str2;
+	}
+	
 	/**
 	 * 判断字符串str1 和 str2 是否相同
 	 * @param str1
@@ -619,6 +624,9 @@ public class StringUtil {
 		brandMap.put(46, "ZEUS,ZEUS.jpg,德国");
 		brandMap.put(47, "OSG,osg.jpg,日本");
 		brandMap.put(48, "瑞德卡特,瑞德卡特.jpg,瑞士");
+		brandMap.put(49, "圣和,圣和.jpg,日本");
+		brandMap.put(50, "拿海纳,拿海纳.jpg,德国");
+		
 		brandMap.put(10000, "刀师傅,刀师傅.jpg,中国");
 		
 		

@@ -54,6 +54,7 @@ public class AgentEntity implements Serializable {
 	private int cntAnswer;
 	private int cntSample;
 	private int cntGc;
+	private int cntRead;
 	
 
 	/**
@@ -405,6 +406,20 @@ public class AgentEntity implements Serializable {
 	 */
 	public void setCntGc(int cntGc) {
 		this.cntGc = cntGc;
+	}
+
+	/**
+	 * @return the cntRead
+	 */
+	public int getCntRead() {
+		return cntRead;
+	}
+
+	/**
+	 * @param cntRead the cntRead to set
+	 */
+	public void setCntRead(int cntRead) {
+		this.cntRead = cntRead;
 	}
 
 	

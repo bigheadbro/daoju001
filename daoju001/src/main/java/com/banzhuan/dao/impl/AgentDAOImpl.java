@@ -52,6 +52,12 @@ public class AgentDAOImpl extends SqlSessionDaoSupport implements AgentDAO {
 	}
 	
 	@Override
+	public int updateAgentReadCountById(int agentid)
+	{
+		return this.getSqlSession().update("updateAgentReadCountById", agentid);
+	}
+	
+	@Override
 	public List<AgentEntity> getAllagents(int isv)
 	{
 		return this.getSqlSession().selectList("getAllagents",isv);

@@ -75,8 +75,8 @@ public class AgentController extends BaseController{
 		return new ModelAndView(new RedirectView("agent/main")); 
 	}
 	
-	@RequestMapping(value="/reg")
-	public ModelAndView reg(final HttpServletRequest request,
+	@RequestMapping(value="/brysjhhrhlreg")
+	public ModelAndView reg2(final HttpServletRequest request,
 			final HttpServletResponse response, @ModelAttribute("form")RegForm form, BindingResult result) 
 	{
 		if(isDoSubmit(request))
@@ -101,15 +101,23 @@ public class AgentController extends BaseController{
 			else
 			{
 				// 注册失败， 返回注册页面，并显示出错提示信息
-				ModelAndView model = new ModelAndView("/agent/reg1");
+				ModelAndView model = new ModelAndView("/agent/reg");
 				return model;
 			}
 		}
 		else
 		{
-			ModelAndView model = new ModelAndView("/agent/reg1");
+			ModelAndView model = new ModelAndView("/agent/reg");
 			return model;
 		}
+	}
+	
+	@RequestMapping(value="/reg")
+	public ModelAndView reg(final HttpServletRequest request,
+			final HttpServletResponse response, @ModelAttribute("form")RegForm form, BindingResult result) 
+	{
+		ModelAndView model = new ModelAndView("/agent/reg1");
+		return model;
 	}
 	
 	@RequestMapping(value="/log")
@@ -628,8 +636,9 @@ public class AgentController extends BaseController{
 			{
 				try
 				{
+					logger.info("before");
 					agentService.insertSample(form, sample, result);
-	
+					logger.info("after");
 					if(result.hasErrors())
 					{
 						mv = new ModelAndView("agent/uploadsample");

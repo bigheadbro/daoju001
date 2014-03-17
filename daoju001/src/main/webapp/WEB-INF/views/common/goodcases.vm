@@ -186,7 +186,7 @@
         		<div class="listitem gc-li">
 					<div class="gc-name">$!{gc.name}</div>
 					<div class="agent-info clearfix">
-						<div class="agent-logo">
+						<div class="agent-logo logo" aid="$!{gc.agentId}">
 							<a href="/agents/$!{gc.agentId}">
 								#if($!{gc.agentLogo})
 									<img src="../logo/$!{gc.agentLogo}" />
@@ -226,3 +226,4 @@
 		#parse("/common/page.vm")
 	</div>
 </div>
+#parse("/common/card.vm")

@@ -23,7 +23,7 @@
 						},
 						messages:{
 							name:{
-								required:"请输入用户名"
+								required:"请输入用户昵称"
 							},
 							mail:{
 								required:"请输入邮箱地址",

@@ -164,6 +164,6 @@
 	
 	<select id="getMainquestions" parameterType="QuestionEntity"
 			resultMap="QuestionResultMap">
-		SELECT * from t_question t where state = 1 and cnt_PA > 0 order by gmt_create desc limit 3
+		SELECT * from t_question t where state = 1 and cnt_PA > 0 order by gmt_modify desc limit 3
 	</select>
 </mapper>

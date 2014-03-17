@@ -20,9 +20,77 @@ function showcomplain() {
 	}
 }
 $(function() {
-	/*if (document.all) {
+	if (document.all) {
 		window.location.href = "/browser";
-	}*/
+	}
+	$(".agent-info .logo").mouseenter(function(){
+		var aid = $(this).attr("aid");
+		var top2 = $(this).position().top;
+		var top = $(this).offset().top;
+		var height = $(this).height();
+		var left = $(this).offset().left - 10;
+		$.ajax({   
+		    type : "POST",   
+		    url : "/getangetinfo", 
+		    data : {
+		      'id' : aid,
+		     },  
+		    dataType: "json",   
+		    success : function(data) { 
+		    	if(data.name){
+		    		$(".card-win .agent-name").text(data.name);
+		    		$(".card-win .agent-name").attr("href","/agents/"+aid);
+		    		if(data.logo){
+		    			$(".card-win .card-logo").attr("src","../logo/"+data.logo);
+		    			$(".card-win .agent-logo a").attr("href","/agents/"+aid);
+		    		}
+		    		else{
+		    			$(".card-win .card-logo").attr("src","../img/avatar.png");
+		    		}
+		    		if(data.brandname){
+		    			$(".card-win .agent-detail h4").text(data.brandname);
+		    		}
+		    		if(data.brandlink){
+		    			$(".card-win .card-brand").attr("src","../img/logo/"+data.brandlink);
+		    		}
+		    		if(data.isverify){
+		    			$(".card-win .vip").show();
+		    		}
+		    		else{
+		    			$(".card-win .vip").hide();
+		    		}
+		    		if(data.phone){
+		    			$(".card-win .phone-value").text(data.phone);
+		    		}
+		    		if(data.qq){
+		    			$(".card-win .qq-value").text(data.qq);
+		    		}
+		    		if(data.cntAnswer){
+		    			$(".card-win .answer").text(data.cntAnswer);
+		    		}
+		    		if(data.cntSample){
+		    			$(".card-win .sample").text(data.cntSample);
+		    		}
+		    		else{
+		    			$(".card-win .sample").text("0");
+		    		}
+		    		if(top2 > 210){
+		    			var tmp = top - 210;
+		    			$(".card-win").css("top",tmp+"px");
+		    			$(".card-win").css("left",left+"px");
+		    		}else{
+		    			var tmp = top + height + 10;
+		    			$(".card-win").css("top",tmp+"px");
+		    			$(".card-win").css("left",left+"px");
+		    		}
+		    		$(".card-win").show();
+		    	}
+		    	//alert(data.name+data.logo+data.brandname+data.brandlink+data.isverify+data.cntAnswer+data.cntSample+data.phone+data.qq);
+		    }
+		}); 
+	}).mouseleave(function(){
+		$(".card-win").hide();
+	});
 	$('.fancybox-v').fancybox({
 		openEffect : 'elastic',
 		closeEffect : 'elastic',

@@ -156,7 +156,7 @@ public class StringUtil {
 	
 	public static boolean isIlegal(String str)
 	{
-		return isContains(str,"刀师傅") || isContains(str,"daoshifu");
+		return isContains(str,"刀师傅") || isContains(str.toLowerCase(),"daoshifu");
 	}
 	
 	/**

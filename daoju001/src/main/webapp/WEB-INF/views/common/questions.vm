@@ -218,11 +218,11 @@
     						</div>
 							<div class="questions-type">
 								#if($!{question.type} == 1)
-									<span class="type1">求精</span>
+									<span class="type1" title="正常生产，希望找到更好的刀具提升性价比">性价比</span>
 								#elseif($!{question.type} == 2)
-									<span class="type2">解难</span>
+									<span class="type2" title="现有刀具影响生产，想换新的刀具">难加工</span>
 								#else
-									<span class="type3">求新</span>
+									<span class="type3" title="单纯咨询刀具知识">刀知识</span>
 								#end
 							</div>
 						</li>

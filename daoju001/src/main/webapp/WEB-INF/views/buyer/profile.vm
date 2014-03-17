@@ -37,7 +37,7 @@
     		<div class="listitem clearfix">
                     <ul class="user-info clearfix">
                         <li class="key">
-                            账户名
+                            用户昵称
                         </li>
                         <li class="value">
                             <input type="text" class="dsf-form-text-input" name="${status.expression}" value="$!{status.value}" />

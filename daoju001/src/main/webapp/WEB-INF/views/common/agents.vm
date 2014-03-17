@@ -36,7 +36,7 @@
 								<div class="agent-list clearfix">
 								#end
                                 <div class="agent-info clearfix">
-                                    <div class="agent-logo">
+                                    <div class="agent-logo logo" aid="$!{agent.id}">
                                         <a href="/agents/$!{agent.id}">
 											#if($!{agent.logo})
 												<img src="../logo/$!{agent.logo}" />
@@ -85,3 +85,4 @@
         </div>
     </div>
 </div>
+#parse("/common/card.vm")

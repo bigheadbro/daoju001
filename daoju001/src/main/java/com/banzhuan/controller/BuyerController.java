@@ -84,7 +84,7 @@ public class BuyerController extends BaseController{
 				account.setAgent(false);
 				request.getSession().setAttribute("account", account);
 				// 注册成功， 跳转到登陆页面
-				return new ModelAndView(new RedirectView("/buyer/main")); 
+				return new ModelAndView(new RedirectView("/buyer/profile")); 
 			}
 			else
 			{

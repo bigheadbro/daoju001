@@ -94,16 +94,16 @@
             <input type="hidden" name="${status.expression}" value="$!{status.value}" id="type" />
             <div class="question-type-list clearfix">
                 <div class="question-type">
-                    <a value="1">求 精</a>
+                    <a value="1">性价比</a>
                     <p>正常生产，希望找到更好的刀具提升性价比</p>
                 </div>
                 <div class="question-type">
-                    <a value="2">解 难</a>
+                    <a value="2">难加工</a>
                     <p>现有刀具影响生产，想换新的刀具</p>
                 </div>
                 <div class="question-type">
-                    <a value="3">求 新</a>
-                    <p>需要开发新的产品，不知道应该使用何种刀具？</p>
+                    <a value="3">刀知识</a>
+                    <p>单纯咨询刀具知识</p>
                 </div>
             </div>
 						
@@ -283,6 +283,7 @@
                         </li>
                     </ul>
                 </div>
+				<a class="help" title='"四要素"是判断用刀情况的关键。提问清晰，方案会更明确哦'></a>
             </div>
         </div>
         <div class="add-question-container">

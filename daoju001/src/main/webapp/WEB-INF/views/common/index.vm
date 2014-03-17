@@ -77,11 +77,11 @@ $(function() {
     						</div>
 							<div class="questions-type">
 								#if($!{question.type} == 1)
-									<span class="type1">求精</span>
+									<span class="type1" title="正常生产，希望找到更好的刀具提升性价比">性价比</span>
 								#elseif($!{question.type} == 2)
-									<span class="type2">解难</span>
+									<span class="type2" title="现有刀具影响生产，想换新的刀具">难加工</span>
 								#else
-									<span class="type3">求新</span>
+									<span class="type3" title="单纯咨询刀具知识">刀知识</span>
 								#end
 								
 							</div>
@@ -102,7 +102,7 @@ $(function() {
 							</div>
 							<ul class="pa-answer clearfix">
             				    <li class="agent-info clearfix">
-            					    <div class="logo">
+            					    <div class="logo" aid="$!{answers[$index].agentId}">
                 						<a href="/agents/$!{answers[$index].agentId}">
                     						#if($!{answers[$index].agentLogo})
                     							<img src="../logo/$!{answers[$index].agentLogo}" />
@@ -146,8 +146,8 @@ $(function() {
 		</div>
 		<div class="main-list-content">
 			#foreach($agent in $agents)
-			<div class="new-agent-listitem clearfix">
-				<div class="logo">
+			<div class="new-agent-listitem agent-info clearfix">
+				<div class="logo" aid="${agent.id}">
 					<a href="/agents/${agent.id}">
 							#if($!{agent.logo})
 								<img src="../logo/$!{agent.logo}" />
@@ -201,3 +201,4 @@ $(function() {
 	</div>
 	
 </div>
+#parse("/common/card.vm")

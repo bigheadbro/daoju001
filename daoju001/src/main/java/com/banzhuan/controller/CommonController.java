@@ -542,6 +542,20 @@ public class CommonController extends BaseController{
 		}
 	}
 	
+	@RequestMapping(value="/getangetinfo")
+	public void getangetinfo(HttpServletRequest request, HttpServletResponse response) 
+	{
+		String aid = request.getParameter("id");
+		
+		if(aid != null && aid.length() > 0)
+		{
+			int id = Integer.parseInt(aid);
+			AgentEntity agent = (AgentEntity)agentService.getAgentEntity(id).get("agent");
+			JsonUtil.sendAgentInfo(response, agent.getCompanyName(), agent.getLogo(), StringUtil.getBrand(agent.getBrand()), StringUtil.getBrandLogo(agent.getBrand()), 
+					agent.isVerified(), agent.getCntAnswer(), agent.getCntSample(), agent.getContactPhone(), agent.getContactQq());
+		}
+	}
+	
 	@RequestMapping(value="/getMsgCount")
 	public void getMsgCount(HttpServletRequest request, HttpServletResponse response) 
 	{

@@ -1,4 +1,4 @@
-/*package com.banzhuan.util;
+package com.banzhuan.util;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -43,13 +43,13 @@ public class SendCloudTest {
 	public static void main(String[] args) throws Exception {
 		ArrayList<String> set = readEdmFileByLines("EDM/part4.txt");
 		
-		for(int i=1254;i<set.size();i++)
+		for(int i=3800;i<set.size();i++)
 		{
 			while(true)
 			{
 				Calendar time = Calendar.getInstance();
 				if(time.get(Calendar.HOUR_OF_DAY) == 13 || time.get(Calendar.HOUR_OF_DAY) == 9|| 
-						time.get(Calendar.HOUR_OF_DAY) == 16 || time.get(Calendar.HOUR_OF_DAY) == 19)
+						time.get(Calendar.HOUR_OF_DAY) == 17 || time.get(Calendar.HOUR_OF_DAY) == 20)
 				{
 					if(time.get(Calendar.MINUTE) <= 30)
 					{
@@ -92,4 +92,3 @@ public class SendCloudTest {
 		}
 	}
 }
-*/

@@ -22,7 +22,7 @@
 								#if($velocityCount == 1)
 									<div class="agent-sample clearfix">
                                     <div class="agent-info clearfix">
-                                        <div class="agent-logo">
+                                        <div class="agent-logo logo" aid="$!{sample.agentId}">
                                             <a href="/agents/$!{sample.agentId}">
     											#if($!{sample.agentLogo})
     												<img src="../logo/$!{sample.agentLogo}" />
@@ -62,3 +62,4 @@
         </div>
     </div>
 </div>
+#parse("/common/card.vm")

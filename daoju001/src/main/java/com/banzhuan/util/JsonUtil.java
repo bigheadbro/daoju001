@@ -114,6 +114,31 @@ public class JsonUtil {
         }  
 	}
 	
+	public static void sendAgentInfo(HttpServletResponse response, String name, String logo, String brandname, String brandlink, boolean isverify, int cntAnswer, int cntSample, String phone, String qq){
+		JSONObject object = new JSONObject();  
+        response.setContentType("text/Xml;charset=gbk");  
+        object.element("name", name);
+        object.element("logo", logo);
+        object.element("brandname", brandname);
+        object.element("brandlink", brandlink);
+        object.element("isverify", isverify);
+        object.element("cntAnswer", cntAnswer);
+        object.element("cntSample", cntSample);
+        object.element("phone", phone);
+        object.element("qq", qq);
+        PrintWriter out = null;  
+        try {  
+            out = response.getWriter();  
+            out.println(object.toString());  
+        }  
+        catch (IOException ex1) {  
+            ex1.printStackTrace();  
+        }  
+        finally {  
+            out.close();  
+        }  
+	}
+	
 	public static void sendImg(HttpServletResponse response, String addr)
 	{
 		JSONObject object = new JSONObject();  

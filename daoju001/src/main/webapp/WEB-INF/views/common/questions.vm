@@ -230,7 +230,7 @@
 							<p></p>
 						</li>
 						<li class="info">
-							<p>$stringUtil.formatDate($!{question.gmtCreate}) <span>|</span> <a href="/questions/$!{question.id}">$!{question.cntPA}个解决方案 <span>|</span> $!{question.cntCA}条评论 <span>|</span> 查看详情</a>  <span class="answer"><a class="solution" qid="$!{question.id}" bid="$!{question.buyerId}">提供专业方案</a></span></p>
+							<p>$stringUtil.formatDate($!{question.gmtCreate}) <span>|</span> <a href="/questions/$!{question.id}">$!{question.cntPA}个解决方案</a> <span>|</span> <a href="/questions/$!{question.id}">$!{question.cntCA}条评论</a> <span>|</span> <a href="/questions/$!{question.id}">查看详情</a>  <span class="answer"><a class="solution" qid="$!{question.id}" bid="$!{question.buyerId}">提供专业方案</a></span></p>
 						</li>
 					</ul>
 				</div>

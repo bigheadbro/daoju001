@@ -266,7 +266,7 @@ public class Util {
 		Properties props = new Properties();
 		// 设置smtp服务器地址
 		// 这里使用QQ邮箱，记得关闭独立密码保护功能和在邮箱中设置POP3/IMAP/SMTP服务
-		props.put("mail.smtp.host", "smtpcloud.sohu.com");
+		props.put("mail.smtp.host", "smtp.exmail.qq.com");
 		
 		// 需要验证
 		props.put("mail.smtp.auth", "true");

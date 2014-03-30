@@ -82,6 +82,7 @@ public class BuyerController extends BaseController{
 				account.setUserId(user.getId()); // 用户ID
 				account.setBuyer(true);
 				account.setAgent(false);
+				account.setLogo(user.getLogo());
 				request.getSession().setAttribute("account", account);
 				// 注册成功， 跳转到登陆页面
 				return new ModelAndView(new RedirectView("/buyer/profile")); 

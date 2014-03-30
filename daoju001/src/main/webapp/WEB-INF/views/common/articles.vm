@@ -1,0 +1,27 @@
+#set($layout = "/layout/index_layout.vm")
+<div class="main-content-container clearfix">
+    <div class="main-list-container width630">
+    	<div class="gc-list-header">
+    		<h1>刀具文选</h1>
+    	</div>
+    	<div class="main-list-content">
+    		<div class="article-item clearfix">
+    			<div class="left">
+    				<a target="_blank" href="http://c.blog.sina.com.cn/profile.php?blogid=12b5fa6e0890019y7&qq-pf-to=pcqq.c2c">
+    					<img src="../img/article/1.jpg" />
+    				</a>
+    			</div>
+    			<div class="right">
+    				<h2><a target="_blank" href="http://c.blog.sina.com.cn/profile.php?blogid=12b5fa6e0890019y7&qq-pf-to=pcqq.c2c">刀师傅网 机加工小技巧 第一期</a></h2>
+    				<p>正式开始给大家带来国外一些书籍中的机加工经验，或许其中说到的方式方法并不新颖，或许我因为不够专业，翻译存在很多纰漏（不太确定的部分我全部保留了原英文），只希望能在互联网上，发布一些对机械人有用的信息。</p>
+    			</div>
+    		</div>
+    	</div>
+    </div>
+	<div class="main-list-container width300 ml50">
+		<div class="article-right">
+			<h1>机械加工小技巧</h1>
+			<p>刀师傅会给大家带来一系列的机械加工方面的使用技巧，如果你也有一些使用的小技巧，欢迎给我们投稿，请将您的小绝招发送到client@daoshifu.com</p>
+		</div>
+	</div>
+</div>

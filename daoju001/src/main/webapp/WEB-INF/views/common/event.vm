@@ -1,0 +1,242 @@
+#set($layout = "/layout/index_layout.vm")
+<script type="text/javascript" src="../js/event.js"></script>
+<div class="event-header clearfix">
+	<div class="left">
+		<h1>疯狂放送</h1>
+		<h2>刀师傅感恩回馈<br/>邀您免费试用  黛杰最新 RPMT1204</h2>
+		<a href="#detail">立即预约</a>
+		<p>RPMT1204，全国使用量前三位的刀片,我们提供免费试用、顺丰包邮。</p>
+	</div>
+	<div class="right">
+		<img src="../img/event/event-mm.png" />
+	</div>
+</div>
+<div class="event-body clearfix">
+    <div class="event-intro clearfix">
+		<div class="tag clearfix">
+			<img src="../img/event/event-intro.png" />
+		</div>
+		<div class="intro-cont clearfix">
+    		<div class="left">
+    			<img src="../img/event/event-item.png" />
+        	</div>
+        	<div class="right">
+        		<h1>RPMT1204</h1>
+    			<p>日本黛杰公司推出的全新RPMT1204，采用复合涂层技术，大幅度优化耐磨耐崩性能。特别适合于叶片粗加工、模具粗加工等情况。将刀片的韧性与硬度完美结合，以最严谨的态度来制作最通用的产品。</p>
+        	</div>
+		</div>
+	</div>
+	<div class="event-detail clearfix" id="detail">
+		<div class="tag clearfix">
+			<img src="../img/event/event-detail.png" />
+		</div>
+		<div class="detail-cont clearfix">
+			<div class="info1">
+				<h4><em></em>只需一分钟填写您的邮寄地址与电子邮箱</h4>
+			</div>
+			<div class="info2">
+				<h4><em></em>四月刀具免费顺丰送到您留的地址</h4>
+			</div>
+			<div class="info3">
+				<p>只需1分钟简单填写收件信息，即可在四月底获得试用品。由本站特约代理商-上海时达，以顺丰包邮形式发给各位，另可按各位要求，发送样本等资料。特约代理商均有资质认证，后续若愿意采用也请放心联系。</p>
+			</div>
+			<div class="user-info">
+				<div class="title">
+					<h3><em></em>请填写信息</h3>
+				</div>
+				<script>
+        			$(function() {	
+        				$("#form_event").validate({
+        					rules:{
+        						company:{
+        							required:true
+        						},
+        						address:{
+        							required:true
+        						},
+        						phone:{
+        							required:true,
+        						},
+        						name:{
+        							required:true,
+        						}
+        					},
+        					messages:{
+        						company:{
+        							required:"请输入公司名称"
+        						},
+        						address:{
+        							required:"请输入公司地址"
+        						},
+        						phone:{
+        							required:"请输入您的手机"
+        						},
+        						name:{
+        							required:"请输入联系人姓名"
+        						}
+        					},
+        					errorElement:"span",
+        					submitHandler: function(form) {
+                      			$(form).ajaxSubmit({
+            						dataType:'json',
+            						success:processJson
+            					});
+            				}
+        				});
+        			});
+					function processJson(data) { 
+						showAlert(data.title,data.content,data.info,data.btn,data.link);
+					}
+        			$(function() {
+        				$("#event_submit").click(function () {
+        					$("#form_event").submit();
+        				});
+        			});
+        		</script>
+				<form id="form_event" method="post">
+        			<!-- 隐藏字段，用于标示是表单提交 -->
+        		    <input type="hidden" name="do_submit" value="true"/>
+        			
+        			<ul class="event-listitem clearfix">
+						<li class="key">
+        				  公司名称<em></em>
+        				</li>
+						<li class="value">
+        				  <input type="text"  name="company"  class="event-form-text-input" placeholder="上海超达机械加工有限公司" />
+        				</li>
+        			</ul>
+					<ul class="event-listitem clearfix">
+						<li class="key">
+        				 邮寄地址<em></em>
+        				</li>
+						<li class="value">
+        				  <input type="text"  name="address"  class="event-form-text-input" placeholder="上海市创智天地4号楼2楼"/>
+        				</li>
+        			</ul>
+					<ul class="event-listitem clearfix">
+						<li class="key">
+        				 联系人姓名<em></em>
+        				</li>
+						<li class="value">
+        				  <input type="text"  name="name"  class="event-form-text-input" placeholder="张勇"/>
+        				</li>
+        			</ul>
+					<ul class="event-listitem clearfix">
+						<li class="key">
+        				 联系电话<em></em>
+        				</li>
+						<li class="value">
+        				  <input type="text"  name="phone"  class="event-form-text-input" placeholder="13526485214" />
+        				</li>
+        			</ul>
+					<ul class="event-listitem clearfix">
+						<li class="key">
+        				 工件材质
+        				</li>
+						<li class="value">
+							<input type="hidden" name="material"  value="1" />
+                            <a class="sel" >材质</a>
+                            <ul class="param">
+        						<li>
+                                    <a>钢</a>
+                                </li>
+                                <li>
+                                    <a>铸铁</a>
+                                </li>
+                                <li>
+                                    <a>不锈钢</a>
+                                </li>
+								<li>
+                                    <a>其他</a>
+                                </li>
+                            </ul>
+        				</li>
+        			</ul>
+					<ul class="event-listitem clearfix">
+						<li class="key">
+        				 产品类型
+        				</li>
+						<li class="value">
+							<input type="hidden" name="type"  value="1" />
+							<a class="sel" >类型</a>
+                            <ul class="param">
+        						<li>
+                                    <a>叶片</a>
+                                </li>
+                                <li>
+                                    <a>磨具</a>
+                                </li>
+                                <li>
+                                    <a>普通平面</a>
+                                </li>
+                            </ul>
+        				</li>
+        			</ul>
+					<ul class="event-listitem clearfix">
+						<li class="key">
+        				需要数量
+        				</li>
+						<li class="value">
+							<input type="hidden" name="count"  value="1" />
+							<a class="sel" >数量</a>
+                            <ul class="param">
+        						<li>
+                                    <a>2</a>
+                                </li>
+                                <li>
+                                    <a>3</a>
+                                </li>
+                                <li>
+                                    <a>4</a>
+                                </li>
+								<li>
+                                    <a>5</a>
+                                </li>
+                                <li>
+                                    <a>6</a>
+                                </li>
+                                <li>
+                                    <a>7</a>
+                                </li>
+								<li>
+                                    <a>8</a>
+                                </li>
+                            </ul>
+        				</li>
+        			</ul>
+					<ul class="event-listitem clearfix">
+						<li class="key">
+        				备注
+        				</li>
+						<li class="value">
+        				  <textarea class="event-note dsf-form-text-input " name="note" placeholder="可以填写您的需求，包括是否需要安排专家陪同试用？刀具是否适合我的加工情况？可否给我一些其他样本等。"></textarea></li>		
+        				</li>
+        			</ul>
+					<ul class="event-listitem clearfix">
+        				带有<i></i>标记的为必填项
+        			</ul>
+					<ul class="event-listitem clearfix">
+        				<a id="event_submit">提 交</a>
+        			</ul>
+				</form>
+			</div>
+		</div>
+	</div>
+	<div class="event-tail">
+		<div class="tag clearfix">
+			<img src="../img/event/event-us.png" />
+		</div>
+		<div class="us-cont clearfix">
+			<div class="left">
+    			<a target="_blank" href="http://weibo.com/daoshifu"><img src="../img/event/wb.png" /></a>
+				<p>点击关注刀师傅新浪微博</p>
+        	</div>
+        	<div class="right">
+        		<img src="../img/2.png" />
+				<p>扫描二维码关注刀师傅微信账号</p>
+        	</div>
+		</div>
+	</div>
+</div>
+
+

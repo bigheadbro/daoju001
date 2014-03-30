@@ -17,6 +17,7 @@ import com.banzhuan.dao.AgentDAO;
 import com.banzhuan.dao.BuyerDAO;
 import com.banzhuan.dao.CommentDAO;
 import com.banzhuan.dao.ComplainDAO;
+import com.banzhuan.dao.EventDAO;
 import com.banzhuan.dao.GoodcaseDAO;
 import com.banzhuan.dao.MsgDAO;
 import com.banzhuan.dao.ProfessionalAnswerDAO;
@@ -26,6 +27,7 @@ import com.banzhuan.entity.AgentEntity;
 import com.banzhuan.entity.BuyerEntity;
 import com.banzhuan.entity.CommentEntity;
 import com.banzhuan.entity.ComplainEntity;
+import com.banzhuan.entity.EventEntity;
 import com.banzhuan.entity.GoodcaseEntity;
 import com.banzhuan.entity.ProfessionalAnswerEntity;
 import com.banzhuan.entity.QuestionEntity;
@@ -80,6 +82,10 @@ public class CommonService {
 	@Autowired
 	@Qualifier("complainDAO")
 	private ComplainDAO complainDAO;
+	
+	@Autowired
+	@Qualifier("eventDAO")
+	private EventDAO eventDAO;
 	
 	public Result checkLogin(LoginForm form, Errors errors)
 	{
@@ -423,6 +429,11 @@ public class CommonService {
 		return result;
 	}
 	
+	public int insertEvent(EventEntity e)
+	{
+		int result = eventDAO.insertEventEntity(e);
+		return result;
+	}
 	
 	public int insertComment(CommentForm form)
 	{

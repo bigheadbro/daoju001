@@ -71,6 +71,7 @@
 		,username
 		,password
 		,email
+		,logo
 		,company_name
 		,company_address
 		,company_phone
@@ -87,6 +88,7 @@
 		,#{username}
 		,#{password}
 		,#{email}
+		,#{logo}
 		,#{companyName}
 		,#{companyAddress}
 		,#{companyPhone}

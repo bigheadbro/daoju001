@@ -46,6 +46,7 @@ import com.banzhuan.common.Result;
 import com.banzhuan.entity.AgentEntity;
 import com.banzhuan.entity.BuyerEntity;
 import com.banzhuan.entity.ComplainEntity;
+import com.banzhuan.entity.EventEntity;
 import com.banzhuan.entity.ProfessionalAnswerEntity;
 import com.banzhuan.entity.SampleEntity;
 import com.banzhuan.form.CommentForm;
@@ -293,6 +294,41 @@ public class CommonController extends BaseController{
 		ModelAndView mv = new ModelAndView("/common/about");
 		return mv;
 	}
+	
+	@RequestMapping(value="/articles")
+	public ModelAndView articles(final HttpServletRequest request,final HttpServletResponse response)
+	{
+		ModelAndView mv = new ModelAndView("/common/articles");
+		return mv;
+	}
+	
+	@RequestMapping(value="/event")
+	public ModelAndView event(final HttpServletRequest request,final HttpServletResponse response)
+	{
+		ModelAndView view = new ModelAndView("/common/event");
+		if(!isDoSubmit(request))
+			return view;
+		
+		EventEntity event = new EventEntity();
+		event.setCompany(String.valueOf(request.getParameter("company")));
+		event.setAddress(String.valueOf(request.getParameter("address")));
+		event.setName(String.valueOf(request.getParameter("name")));
+		event.setPhone(String.valueOf(request.getParameter("phone")));
+		event.setMaterial(Integer.valueOf(request.getParameter("material")));
+		event.setType(Integer.valueOf(request.getParameter("type")));
+		event.setCount(Integer.valueOf(request.getParameter("count")));
+		event.setNote(String.valueOf(request.getParameter("note")));
+		if(commonService.insertEvent(event) > 0)
+		{
+			JsonUtil.showAlert(response, "申请成功", "我们的工作人员会尽快联系您。", "确定", "", "");
+		}
+		else
+		{
+			JsonUtil.showAlert(response, "申请失败", "如有任何问题，请联系我们。", "确定", "", "");
+		}
+		return view;
+	}
+	
 	
 	@RequestMapping(value = "/questions")
 	public ModelAndView allquestion(final HttpServletRequest request,final HttpServletResponse response, @ModelAttribute("form")QuestionForm form, 

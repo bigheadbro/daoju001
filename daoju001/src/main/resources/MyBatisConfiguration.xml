@@ -6,7 +6,7 @@
 		<typeAlias alias="AgentEntity" type="com.banzhuan.entity.AgentEntity" />
 		<typeAlias alias="BuyerEntity" type="com.banzhuan.entity.BuyerEntity" />
 		<typeAlias alias="CommentEntity" type="com.banzhuan.entity.CommentEntity" />
-		<typeAlias alias="CommonAnswerEntity" type="com.banzhuan.entity.CommonAnswerEntity" />
+		<typeAlias alias="EventEntity" type="com.banzhuan.entity.EventEntity" />
 		<typeAlias alias="GoodcaseEntity" type="com.banzhuan.entity.GoodcaseEntity" />
 		<typeAlias alias="MessageEntity" type="com.banzhuan.entity.MessageEntity" />
 		<typeAlias alias="ProfessionalAnswerEntity" type="com.banzhuan.entity.ProfessionalAnswerEntity" />

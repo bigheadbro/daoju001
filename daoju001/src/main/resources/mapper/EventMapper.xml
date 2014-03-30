@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="event">
+	<resultMap type="EventEntity" id="EventResultMap">
+	  <!---->
+		<id property="id" column="id" />
+
+		<id property="company" column="company" />
+
+		<id property="address" column="address" />
+
+		<id property="name" column="name" />
+
+		<id property="phone" column="phone" />
+
+		<id property="material" column="material" />
+		
+		<id property="type" column="type" />
+		
+		<id property="count" column="count" />
+		
+		<id property="note" column="note" />
+
+		<id property="gmtCreate" column="gmt_create" />
+
+	</resultMap>
+
+	<select id="queryEventEntityById" parameterType="int"
+		resultMap="EventResultMap">
+	<![CDATA[
+		SELECT * from t_event t WHERE t.id = #{id}
+	]]>
+	</select>
+
+	<insert id="insertEventEntity" parameterType="EventEntity">
+		<selectKey resultType="int" order="AFTER" keyProperty="id">
+			SELECT LAST_INSERT_ID() AS id
+		</selectKey>
+		insert into t_event
+		(
+		company
+		,address
+		,name
+		,phone
+		,material
+		,type
+		,count
+		,note
+		,gmt_create)
+		values
+		(
+		#{company}
+		,#{address}
+		,#{name}
+		,#{phone}
+		,#{material}
+		,#{type}
+		,#{count}
+		,#{note}
+		,#{gmtCreate}
+		)
+	</insert>
+
+</mapper>

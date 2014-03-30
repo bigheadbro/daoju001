@@ -2,27 +2,33 @@ package com.banzhuan.entity;
 
 import java.io.Serializable;
 
-public class CommonAnswerEntity implements Serializable {
+public class EventEntity implements Serializable {
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = -6626386017134491401L;
 	//
 	private int id;
-	// 回答内容
-	private String content;
-	// 问题id
-	private int questionId;
-	// 买家id
-	private int buyerId;
-	// 回答问题的买家名称
-	private String buyerName;
-	// 回答问题的买家头像
-	private String buyerAvatar;
-	// 记录创建时间
+
+	private String company;
+	
+	private String name;
+
+	private String address;
+	
+	private String phone;
+
+	private int material;
+
+	private int type;
+	
+	private int count;
+
+	private String note;
+	
 	private String gmtCreate;
-	// 记录修改时间
-	private String gmtModify;
+
+	
 		
 	/**
 	 * @return the id
@@ -42,76 +48,76 @@ public class CommonAnswerEntity implements Serializable {
 	/**
 	 * @return the content
 	 */
-	public String getContent() {
-		return content;
+	public String getCompany() {
+		return company;
 	}
 
 	/**
 	 * @param content
 	 *            the content to set
 	 */
-	public void setContent(String content) {
-		this.content = content;
+	public void setCompany(String content) {
+		this.company = content;
 	}
 
 	/**
 	 * @return the questionId
 	 */
-	public int getQuestionId() {
-		return questionId;
+	public int getMaterial() {
+		return material;
 	}
 
 	/**
 	 * @param questionId
 	 *            the questionId to set
 	 */
-	public void setQuestionId(int questionId) {
-		this.questionId = questionId;
+	public void setMaterial(int questionId) {
+		this.material = questionId;
 	}
 
 	/**
 	 * @return the buyerId
 	 */
-	public int getBuyerId() {
-		return buyerId;
+	public int getType() {
+		return type;
 	}
 
 	/**
 	 * @param buyerId
 	 *            the buyerId to set
 	 */
-	public void setBuyerId(int buyerId) {
-		this.buyerId = buyerId;
+	public void setType(int buyerId) {
+		this.type = buyerId;
 	}
 
 	/**
 	 * @return the buyerName
 	 */
-	public String getBuyerName() {
-		return buyerName;
+	public String getName() {
+		return name;
 	}
 
 	/**
 	 * @param buyerName
 	 *            the buyerName to set
 	 */
-	public void setBuyerName(String buyerName) {
-		this.buyerName = buyerName;
+	public void setName(String buyerName) {
+		this.name = buyerName;
 	}
 
 	/**
 	 * @return the buyerAvatar
 	 */
-	public String getBuyerAvatar() {
-		return buyerAvatar;
+	public String getAddress() {
+		return address;
 	}
 
 	/**
 	 * @param buyerAvatar
 	 *            the buyerAvatar to set
 	 */
-	public void setBuyerAvatar(String buyerAvatar) {
-		this.buyerAvatar = buyerAvatar;
+	public void setAddress(String buyerAvatar) {
+		this.address = buyerAvatar;
 	}
 
 	/**
@@ -132,16 +138,16 @@ public class CommonAnswerEntity implements Serializable {
 	/**
 	 * @return the gmtModify
 	 */
-	public String getGmtModify() {
-		return gmtModify;
+	public String getPhone() {
+		return phone;
 	}
 
 	/**
 	 * @param gmtModify
 	 *            the gmtModify to set
 	 */
-	public void setGmtModify(String gmtModify) {
-		this.gmtModify = gmtModify;
+	public void setPhone(String gmtModify) {
+		this.phone = gmtModify;
 	}
 
 	/**
@@ -149,6 +155,34 @@ public class CommonAnswerEntity implements Serializable {
 	 */
 	public static long getSerialversionuid() {
 		return serialVersionUID;
+	}
+
+	/**
+	 * @return the count
+	 */
+	public int getCount() {
+		return count;
+	}
+
+	/**
+	 * @param count the count to set
+	 */
+	public void setCount(int count) {
+		this.count = count;
+	}
+
+	/**
+	 * @return the note
+	 */
+	public String getNote() {
+		return note;
+	}
+
+	/**
+	 * @param note the note to set
+	 */
+	public void setNote(String note) {
+		this.note = note;
 	}
 
 	

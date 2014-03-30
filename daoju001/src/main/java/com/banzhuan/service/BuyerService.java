@@ -23,6 +23,7 @@ import com.banzhuan.form.RegForm;
 import com.banzhuan.form.LoginForm;
 import com.banzhuan.form.QuestionForm;
 import com.banzhuan.util.StringUtil;
+import com.banzhuan.util.Util;
 
 /**
  * @author guichaoqun
@@ -105,6 +106,7 @@ public class BuyerService {
 		buyer.setUsername(form.getName());
 		buyer.setPassword(StringUtil.encrypt(form.getPwd())); // 对密码加密
 		buyer.setEmail(form.getMail()); // 设置邮箱地址
+		buyer.setLogo(Util.GenAvatar());
 		buyerDAO.insertBuyerEntity(buyer);
 		result.add("buyer", buyer);
 		return result;

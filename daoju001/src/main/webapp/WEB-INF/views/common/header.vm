@@ -1,4 +1,5 @@
 <head>
+    <script id="allmobilize" charset="utf-8" src="http://a.yunshipei.com/6d1ca1d96d692f9297eaa36ff79e21e5/allmobilize.min.js"></script><meta http-equiv="Cache-Control" content="no-siteapp" /><link rel="alternate" media="handheld" href="#" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <link rel="stylesheet" href="../css/css.css">
     <title>刀师傅-最专业的刀具咨询交流平台</title>
@@ -8,4 +9,5 @@
 	<script type="text/javascript" src="../js/alert.js"></script>
 	<script type="text/javascript" src="../js/complain.js"></script>
     <script type="text/javascript" src="../js/jquery.fancybox.pack.js"></script>
+	<script type="text/javascript" src="../js/jQuery.mouseDelay.min.js"></script>
 </head>

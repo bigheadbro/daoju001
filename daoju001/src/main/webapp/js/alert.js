@@ -23,9 +23,9 @@ $(function() {
 	if (document.all) {
 		window.location.href = "/browser";
 	}
-	$(".agent-info .logo").mouseenter(function(){
+	$(".agent-info .logo").mouseDelay(150).hover(function(){
 		var aid = $(this).attr("aid");
-		var top2 = $(this).position().top;
+		var top2 = $(this).offset().top - $(window).scrollTop();
 		var top = $(this).offset().top;
 		var height = $(this).height();
 		var left = $(this).offset().left - 10;
@@ -88,7 +88,9 @@ $(function() {
 		    	//alert(data.name+data.logo+data.brandname+data.brandlink+data.isverify+data.cntAnswer+data.cntSample+data.phone+data.qq);
 		    }
 		}); 
-	}).mouseleave(function(){
+		$(this).stop().animate();
+	},function(){
+		$(this).stop().animate();
 		$(".card-win").hide();
 	});
 	$('.fancybox-v').fancybox({

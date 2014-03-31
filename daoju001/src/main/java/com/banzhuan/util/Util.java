@@ -263,6 +263,66 @@ public class Util {
 		}
 	}
 
+	public static void removeMailFromEDM() {
+		HashSet<String> array = new HashSet<String>();
+		// 先读取edm邮箱
+		File file = new File("EDM/edm.txt");
+		BufferedReader reader = null;
+		try {
+			reader = new BufferedReader(new FileReader(file));
+			String tempString = null;
+			// 一次读入一行，直到读入null为文件结束
+			while ((tempString = reader.readLine()) != null) {
+				array.add(tempString);
+			}
+			reader.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} finally {
+			if (reader != null) {
+				try {
+					reader.close();
+				} catch (IOException e1) {
+				}
+			}
+		}
+
+		// 去除重复邮箱
+		file = new File("EDM/failmail.txt");
+		reader = null;
+		try {
+			reader = new BufferedReader(new FileReader(file));
+			String tempString = null;
+			// 一次读入一行，直到读入null为文件结束
+			while ((tempString = reader.readLine()) != null) {
+				if(array.contains(tempString))
+				{
+					array.remove(tempString);
+				}
+			}
+			reader.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} finally {
+			if (reader != null) {
+				try {
+					reader.close();
+				} catch (IOException e1) {
+				}
+			}
+		}
+		try {
+			FileWriter writer = new FileWriter("EDM/edm1.txt");
+			Iterator it = array.iterator();
+			while (it.hasNext()) {
+				writer.write(it.next() + "\n");
+			}
+			writer.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
 	public static void sendEmail(final String sender, final String password,
 			String[] receivers, String title, String mailContent,
 			File[] attachements, String mimetype, String charset) {
@@ -452,7 +512,8 @@ public class Util {
 	}
 	
 	public static void main(String[] args) {
-		String rec[] ={"346938819@qq.com"};
-		sendEmail("noreply@daoshifu.com","cisco123",rec,"找回密码", "test", null, "", "UTF-8");
+		//String rec[] ={"346938819@qq.com"};
+		//sendEmail("noreply@daoshifu.com","cisco123",rec,"找回密码", "test", null, "", "UTF-8");
+		removeMailFromEDM();
 	}
 }

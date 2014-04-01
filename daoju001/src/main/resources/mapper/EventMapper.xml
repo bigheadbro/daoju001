@@ -25,6 +25,11 @@
 
 	</resultMap>
 
+	<select id="getAllevents"
+			resultMap="EventResultMap">
+		SELECT * from t_event t order by gmt_create desc
+	</select>
+	
 	<select id="queryEventEntityById" parameterType="int"
 		resultMap="EventResultMap">
 	<![CDATA[

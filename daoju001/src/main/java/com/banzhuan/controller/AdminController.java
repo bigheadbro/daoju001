@@ -21,9 +21,11 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.banzhuan.common.Account;
 import com.banzhuan.dao.AgentDAO;
+import com.banzhuan.dao.EventDAO;
 import com.banzhuan.dao.QuestionDAO;
 import com.banzhuan.dao.SampleDAO;
 import com.banzhuan.entity.AgentEntity;
+import com.banzhuan.entity.EventEntity;
 import com.banzhuan.entity.QuestionEntity;
 import com.banzhuan.entity.SampleEntity;
 import com.banzhuan.util.Util;
@@ -44,6 +46,10 @@ public class AdminController extends BaseController{
 	@Autowired
 	@Qualifier("questionDAO")
 	private QuestionDAO questionDAO;
+	
+	@Autowired
+	@Qualifier("eventDAO")
+	private EventDAO eventDAO;
 	
 	@RequestMapping(value="/lghlmclyhblsqtagent")
 	public ModelAndView agent(final HttpServletResponse response)
@@ -99,6 +105,15 @@ public class AdminController extends BaseController{
 		QuestionEntity question = new QuestionEntity();
 		List<QuestionEntity> questions = questionDAO.getAllquestions(question);
 		mv.addObject("questions", questions);
+		return mv;
+	}
+	
+	@RequestMapping(value="/lghlmclyhblsqtevent")
+	public ModelAndView event(final HttpServletResponse response)
+	{
+		ModelAndView mv = new ModelAndView("/admin/events");
+		List<EventEntity> events = eventDAO.getAllevents();
+		mv.addObject("events", events);
 		return mv;
 	}
 	

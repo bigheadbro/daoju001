@@ -1058,11 +1058,11 @@ p.forget{font-size: 12px;margin: 10px;color: #707070;}
 .event-intro{margin: 0 auto;width: 960px;margin-top:40px;padding-bottom: 120px;border-bottom: 1px solid #e1e1e1;}
 .event-intro .tag img{float:right;}
 .intro-cont {margin-top:30px}
-.intro-cont .right a{background-color:#ff6600;color:white;padding:10px 30px;border-radius:4px;display:inline-block;margin-top: 40px;}
+.intro-cont .right a{background-color:#ff6600;color:white;padding:10px 30px;border-radius:4px;display:inline-block;}
 .event-intro .left{float:left;}
 .event-intro .right{float:left;color:#414f53;margin-left:120px}
 .event-intro h1{font-size:48px;margin-top: 30px;font-weight:600;margin-bottom: 30px;}
-.event-intro p{font-size:14px;width:464px;line-height:25px;margin-top: 5px;}
+.event-intro p{font-size:14px;width:464px;line-height:25px}
 
 .event-detail{margin: 0 auto;width: 960px;padding-bottom: 40px;border-bottom: 1px solid #e1e1e1;}
 .event-detail .tag img{float:left;margin-left:20px}

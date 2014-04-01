@@ -1,0 +1,7 @@
+#set($layout = "/layout/admin_layout.vm")
+
+#foreach ($event in $events)
+<div class="admin clearfix">
+	
+</div>
+#end

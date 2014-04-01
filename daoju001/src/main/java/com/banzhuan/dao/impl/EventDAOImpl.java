@@ -1,5 +1,6 @@
 package com.banzhuan.dao.impl;
 
+import java.util.List;
 import org.mybatis.spring.support.SqlSessionDaoSupport;
 import org.springframework.stereotype.Repository;
 
@@ -18,6 +19,11 @@ public class EventDAOImpl extends SqlSessionDaoSupport implements EventDAO {
 	public int insertEventEntity(EventEntity e) {
 		this.getSqlSession().insert("insertEventEntity", e);
 		return e.getId();
+	}
+	
+	@Override
+	public List<EventEntity> getAllevents() {
+		return this.getSqlSession().selectList("getAllevents");
 	}
 
 }

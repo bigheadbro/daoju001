@@ -76,6 +76,31 @@ public class CommonController extends BaseController{
 	@Qualifier("buyerService")
 	private BuyerService buyerService;
 	
+	@RequestMapping(value="/downloadfile")
+	public void download(HttpServletRequest request,HttpServletResponse response) throws UnsupportedEncodingException{  
+        response.setCharacterEncoding("utf-8");  
+        response.setContentType("multipart/form-data");  
+        String fileName = request.getParameter("file");
+        response.setHeader("Content-Disposition", "attachment;fileName="+java.net.URLEncoder.encode(fileName, "UTF-8"));  
+        String path = request.getSession().getServletContext().getRealPath("/resource")+"/"+ fileName;
+        try {  
+            File file=new File(path);  
+            response.setContentLength((int)(long)file.length());
+            InputStream inputStream=new FileInputStream(file);  
+            OutputStream os=response.getOutputStream();  
+            byte[] b=new byte[1024];  
+            int length;  
+            while((length=inputStream.read(b))>0){  
+                os.write(b,0,length);  
+            }  
+            inputStream.close();  
+        } catch (FileNotFoundException e) {  
+            e.printStackTrace();  
+        } catch (IOException e) {  
+            e.printStackTrace();  
+        }  
+    }  
+	
 	@RequestMapping(value="/downloadsample")
 	public void downloadFile(HttpServletRequest request,HttpServletResponse response) throws UnsupportedEncodingException{  
         response.setCharacterEncoding("utf-8");  

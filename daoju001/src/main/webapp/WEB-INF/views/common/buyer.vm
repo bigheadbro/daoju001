@@ -24,6 +24,10 @@
 				</div>
 				<div class="company-contact-info">
 					<div class="item clearfix">
+						<div class="key">公司名称：</div>
+						<div class="value">$!{buyer.companyName}</div>
+					</div>
+					<div class="item clearfix">
 						<div class="key">地址：</div>
 						<div class="value">$!{buyer.companyAddress}</div>
 					</div>

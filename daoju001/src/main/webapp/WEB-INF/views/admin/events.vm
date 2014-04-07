@@ -1,7 +1,49 @@
 #set($layout = "/layout/admin_layout.vm")
 
 #foreach ($event in $events)
-<div class="admin clearfix">
-	
+<div class="eventlist clearfix">
+	<div>
+		<p>
+			<span>公司名称:</span>${event.company} 
+			<span>联系人名称：</span>${event.name} 
+			<span>联系地址：</span>${event.address} 
+			<span>联系人电话：</span>${event.phone} 
+			<span>备注:</span>${event.note}
+			<span>材质：</span>
+        		#if(${event.material} == 0)
+        			钢
+        		#elseif(${event.material} == 1)
+        			铸铁
+        		#elseif(${event.material} == 2)
+        			不锈钢
+        		#else
+        			其他
+				#end
+			<span>类型：</span>
+        		#if(${event.type} == 0)
+        			叶片
+        		#elseif(${event.type} == 1)
+        			模具
+        		#elseif(${event.type} == 2)
+        			普通平面
+        		#end
+			<span>数量：</span>
+        		#if(${event.count} == 0)
+        			2
+        		#elseif(${event.count} == 1)
+        			3
+        		#elseif(${event.count} == 2)
+        			4
+        		#elseif(${event.count} == 3)
+        			5
+        		#elseif(${event.count} == 4)
+        			6
+        		#elseif(${event.count} == 5)
+        			7
+        		#elseif(${event.count} == 6)
+        			8
+        		#end
+		</p>
+	</div>
 </div>
 #end

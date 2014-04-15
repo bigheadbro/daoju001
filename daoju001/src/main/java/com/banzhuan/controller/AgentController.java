@@ -47,7 +47,9 @@ import com.banzhuan.entity.ProfessionalAnswerEntity;
 import com.banzhuan.entity.SampleEntity;
 import com.banzhuan.form.AgentProfileForm;
 import com.banzhuan.form.GoodcaseForm;
+import com.banzhuan.form.ProductForm;
 import com.banzhuan.form.ProfessionalAnswerForm;
+import com.banzhuan.form.QuestionForm;
 import com.banzhuan.form.RegForm;
 import com.banzhuan.form.LoginForm;
 import com.banzhuan.form.SampleForm;
@@ -476,6 +478,34 @@ public class AgentController extends BaseController{
 		return responseStr;
 	}
 	
+	@RequestMapping(value = "uploadfile_product", produces="text/plain;charset=UTF-8")  
+	@ResponseBody
+	public String uploadfile_product(HttpServletRequest request, HttpServletResponse response)
+	{
+		Account account = (Account) WebUtils.getSessionAttribute(request, "account");
+		String responseStr="";  
+		MultipartHttpServletRequest r = (MultipartHttpServletRequest) request;
+		  
+        MultipartFile f = r.getFile("productlink");    
+        String path = request.getSession().getServletContext().getRealPath("/product");
+		String link = StringUtil.getTodayString() + "/" + f.getOriginalFilename();
+		path += "/" + StringUtil.getTodayString() + "/";
+		File file = new File(path + f.getOriginalFilename());
+		file.getParentFile().mkdirs();  
+		file.getParentFile().mkdirs();  
+
+		try 
+		{
+			FileCopyUtils.copy(f.getBytes(), file);
+			responseStr = link;
+
+		} catch (IOException e) {
+
+		}
+
+		return responseStr;
+	}
+	
 	@RequestMapping(value="/uploadgc")
 	public ModelAndView uploadgc(HttpServletRequest request, HttpServletResponse response, @ModelAttribute("account")Account account, 
 			@ModelAttribute("form")GoodcaseForm form, BindingResult result, @ModelAttribute("gcid") final Object gcid)
@@ -701,6 +731,67 @@ public class AgentController extends BaseController{
 		
 		ModelAndView mv = new ModelAndView(new RedirectView("/agent/uploadsample"));
 		redirectAttributes.addFlashAttribute("sid",sid);
+		return mv;
+	}
+	
+	@RequestMapping(value="/product/{id}")
+	public ModelAndView product(HttpServletRequest request, HttpServletResponse response,@PathVariable String id, @ModelAttribute("account")Account account,
+			final RedirectAttributes redirectAttributes) {
+		
+		int questionId = Integer.parseInt(id);
+		
+		ModelAndView mv = new ModelAndView(new RedirectView("/agent/newproduct"));
+		redirectAttributes.addFlashAttribute("productid",questionId);
+		return mv;
+	}
+	
+	@RequestMapping(value="/newproduct")
+	public ModelAndView newproduct(HttpServletRequest request, HttpServletResponse response, @ModelAttribute("account")Account account, 
+			@ModelAttribute("productForm")ProductForm form, BindingResult result, @ModelAttribute("productid") final Object productid) 
+	{
+		ModelAndView mv = new ModelAndView("agent/newproduct");
+		
+		if(!isDoSubmit(request))
+		{
+			Map<String,?> map = RequestContextUtils.getInputFlashMap(request);
+			if(map != null)
+			{
+				int pid = Integer.parseInt(productid.toString());
+				if(pid > 0)
+				{
+					agentService.setProductFormWithPid(form,pid);
+					form.setIsEdit(1);
+					form.setPid(pid);
+				}
+			}
+			return mv;
+		}
+		
+		form.setUserid(account.getUserId());
+		
+		if(form.getIsEdit() > 0)
+		{
+			//buyerService.updateQuestionById(form, result);
+			
+			if(result.hasErrors())
+			{
+				return mv;
+			}
+			
+			//account.setQuestionCnt(buyerService.getUserQuestionCount(account.getUserId()));
+			JsonUtil.showAlert(response, "编辑刀具", "刀具内容更新成功~~", "确定", "", "");
+		}
+		else
+		{
+			//buyerService.insertQuestion(form, account, result);
+			if(result.hasErrors())
+			{
+				return mv;
+			}
+
+			JsonUtil.showAlert(response, "新建刀具", "刀具新建成功~~", "确定", "", "");
+
+		}
 		return mv;
 	}
 

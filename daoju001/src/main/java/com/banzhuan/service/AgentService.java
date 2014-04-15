@@ -27,6 +27,7 @@ import com.banzhuan.entity.AgentEntity;
 import com.banzhuan.entity.CommentEntity;
 import com.banzhuan.entity.GoodcaseEntity;
 import com.banzhuan.entity.MessageEntity;
+import com.banzhuan.entity.ProductEntity;
 import com.banzhuan.entity.ProfessionalAnswerEntity;
 import com.banzhuan.entity.QuestionEntity;
 import com.banzhuan.entity.SampleEntity;
@@ -36,6 +37,7 @@ import com.banzhuan.common.Result;
 import com.banzhuan.form.AgentProfileForm;
 import com.banzhuan.form.GoodcaseForm;
 import com.banzhuan.form.LoginForm;
+import com.banzhuan.form.ProductForm;
 import com.banzhuan.form.ProfessionalAnswerForm;
 import com.banzhuan.form.QuestionForm;
 import com.banzhuan.form.RegForm;
@@ -709,5 +711,43 @@ public class AgentService {
 		return questionDAO.getAllQuestionCount(ques);
 	}
 
+    public void setProductFormWithPid(ProductForm form, int id)
+	{
+		ProductEntity product = new ProductEntity();//todo: query from DB;
+
+		if(product.getIndustry() >=0)
+		{
+			form.setIndustry(product.getIndustry());
+		}
+		if(product.getProcessMethod() >=0)
+		{
+			form.setProcessMethod(product.getProcessMethod());
+		}
+		if(product.getWpHardness() >=0)
+		{
+			form.setWpHardness(product.getWpHardness());
+		}
+		if(product.getWpMaterial() >=0)
+		{
+			form.setWpMaterial(product.getWpMaterial());
+		}
+		if(product.getAgentId() > 0)
+		{
+			form.setUserid(product.getAgentId());
+		}
+		if(StringUtil.isNotEmpty(product.getName()))
+		{
+			form.setName(product.getName());
+		}
+		if(StringUtil.isNotEmpty(product.getDescription()))
+		{
+			form.setDescription(product.getDescription());
+		}
+		if(StringUtil.isNotEmpty(product.getPicture()))
+		{
+			form.setPicture(product.getPicture());
+		}
+
+	}
     
 }

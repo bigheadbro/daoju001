@@ -1,0 +1,330 @@
+#set($layout = "/layout/agent_detail_layout.vm")
+<link rel="stylesheet" href="../css/uploadify.css">
+<script type="text/javascript" src="../js/jquery.uploadify.min.js"></script>
+<ul class="right-tab clearfix">
+    <li class="current">上传刀具</li>
+    <li>
+        <a href="myproduct">刀具管理</a>
+    </li>
+</ul>
+<div class="rigth-content">
+	<script>
+		function loadProduct(data){
+			$(".uploadify-queue-item").each(function(){
+				if(data.split("/")[1] == $(this).children(".fileName").text().split(" ")[0]){
+					$(this).empty();
+					$(this).append("<img class='product-tn' src='../product/" + data + "' /><div class='buttons'><a class='del' href=''>删除</a><label for='aa'><input type='radio' id='aa'/>设为封面</label></div>");
+				}
+			});
+		}
+		$(function() {
+			
+			$("#file_upload").uploadify({  
+                    'height'        : 30,   
+                    'width'         : 120,    
+    				'buttonText'    : '选择图片',
+    				'fileSizeLimit' : '5MB',
+                    'fileObjName'   : 'productlink',
+                    'swf'           : '/js/uploadify.swf',  
+                    'uploader'      : '/agent/uploadfile_product',  
+                    'auto'          : true,  
+    				'removeCompleted': false,
+    				'fileTypeExts'  : '*.jpg;*.png;*.gif;*',  
+					'uploadLimit'   : 4, 
+                    'onUploadStart' : function(file) {  
+                    },  
+                    'onUploadSuccess':function(file, data, response){    
+                    	loadProduct(data);
+                    },  
+    				'overrideEvents': 'onSelectError',
+    				'onSelectError' : function(file, errorCode, errorMsg) {
+    					if(errorCode == SWFUpload.QUEUE_ERROR.ZERO_BYTE_FILE){
+                    		this.queueData.errorMsg = "不能传空文件!!";
+                    	}
+    					if(errorCode == SWFUpload.QUEUE_ERROR.UPLOAD_LIMIT_EXCEEDED){
+                    		this.queueData.errorMsg = "只能上传一个文件!!";
+                    	}
+    					if(errorCode == SWFUpload.QUEUE_ERROR.FILE_EXCEEDS_SIZE_LIMIT){
+                    		this.queueData.errorMsg = "文件大小不能超过5MB!!";
+                    	}
+    					if(errorCode == SWFUpload.QUEUE_ERROR.INVALID_FILETYPE){
+                    		this.queueData.errorMsg = "不支持该文件类型!!";
+                    	}
+            		}
+            });  
+			$("#form_newquestion").validate({
+				rules:{
+					type:{
+						required:true
+					}
+				},
+				messages:{
+					type:{
+						required:"请输入刀具名称"
+					}
+				},
+				errorPlacement: function(error, element) {   
+					$(".error-msg").show();
+					var hasError = true;
+					$(".error-msg label").each(function(){
+						if($(this).attr("for") == error.attr("for")){
+							hasError = false;
+						}
+					});
+					if(hasError)
+					{
+                    	error.appendTo($(".error-msg"));     
+					}
+					else
+					{
+						$(".error-msg label").each(function(){
+							if($(this).attr("for") == error.attr("for")){
+								$(this).text(error.text());
+							}
+						});
+					}
+                },
+				success:function(label){
+					$(".error-msg").hide();
+					$(".error-msg label").each(function(){
+						if($(this).attr("for") == $(label).attr("for")){
+							$(this).text("");
+						}
+					}); 
+				},
+				submitHandler: function(form) {
+          			$(form).ajaxSubmit({
+						dataType:'json',
+						success:processQuestion
+					});
+					$(form)[0].reset();
+				}
+			});
+			
+		});
+	</script>
+    <form id="form_newproduct" method="post">
+        <!-- 隐藏字段，用于标示是表单提交 -->
+        <input type="hidden" name="do_submit" value="true"/>
+        #springBind("productForm.pid")
+        <input type="hidden" name="${status.expression}" value="$!{status.value}" id="qid" />
+        #springBind("productForm.isEdit")
+        <input type="hidden" name="${status.expression}" value="$!{status.value}" id="isEdit" />
+        #springBind("productForm.name")
+    	<div class="listitem clearfix">
+    		<ul class="user-info clearfix">
+    			<li class="key">
+    				刀具名称
+    			</li>
+    			<li class="value">
+    				<input type="text" class="dsf-form-text-input" name="${status.expression}"  value="$!{status.value}" />
+						<em for="$!{status.expression}" generated="true" class="error">$!{status.errorMessage}</em>
+    			</li>
+    		</ul>
+    	</div>
+		#if($stringUtil.isNotEmpty($!{status.errorMessage}))
+	        <em for="$!{status.expression}" generated="true" class="error">$!{status.errorMessage}</em>
+	    #end
+    	<div class="listitem clearfix">
+    		<ul class="user-info clearfix">
+    			<li class="key">
+    				刀具类型
+    			</li>
+    			<li class="value">
+    				<div class="mi question-param clearfix">
+                    <div class="question-param-li process clearfix">
+                        #springBind("productForm.processMethod")
+                        <input type="hidden" name="${status.expression}"  value="$!{status.value}" />
+                        <a class="sel" >加工方式</a>
+                        <ul class="param">
+							<li>
+                                <a>不限</a>
+                            </li>
+                            <li>
+                                <a>平面铣削</a>
+                            </li>
+                            <li>
+                                <a>侧壁铣削</a>
+                            </li>
+        					<li>
+                                <a>曲面铣削</a>
+                            </li>
+                            <li>
+                                <a>铣槽</a>
+                            </li>
+        					<li>
+                                <a>钻孔</a>
+                            </li>
+                            <li>
+                                <a>镗孔</a>
+                            </li>
+        					<li>
+                                <a>铰孔</a>
+                            </li>
+                            <li>
+                                <a>螺纹铣削</a>
+                            </li>
+        					<li>
+                                <a>车削(粗加工）</a>
+                            </li>
+                            <li>
+                                <a>车削(槽加工）</a>
+                            </li>
+        					<li>
+                                <a>车削(螺纹加工）</a>
+                            </li>
+                            <li>
+                                <a>去毛刺</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="question-param-li industry clearfix">
+                        #springBind("productForm.industry")
+                        <input type="hidden" name="${status.expression}"  value="$!{status.value}" />
+                        <a class="sel" >所属行业</a>
+                        <ul class="param">
+							<li>
+                                <a>不限</a>
+                            </li>
+                            <li>
+                                <a>模具</a>
+                            </li>
+                            <li>
+                                <a>船舶</a>
+                            </li>
+        					<li>
+                                <a>石油设备</a>
+                            </li>
+        					<li>
+                                <a>散热器/空调</a>
+                            </li>
+        					<li>
+                                <a>发电设备</a>
+                            </li>
+        					<li>
+                                <a>塑料机械</a>
+                            </li>
+        					<li>
+                                <a>内燃机</a>
+                            </li>
+        					<li>
+                                <a>大型机械设备</a>
+                            </li>
+        					<li>
+                                <a>汽车零件</a>
+                            </li>
+        					<li>
+                                <a>电子行业</a>
+                            </li>
+        					<li>
+                                <a>通用零件</a>
+                            </li>
+        					<li>
+                                <a>其它</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="question-param-li hardness clearfix">
+                        #springBind("productForm.wpHardness")
+                        <input type="hidden" name="${status.expression}"  value="$!{status.value}" />
+                        <a class="sel" >工件硬度</a>
+                        <ul class="param">
+							<li>
+                                <a>不限</a>
+                            </li>
+                            <li>
+                                <a>HRC20以下</a>
+                            </li>
+                            <li>
+                                <a>HRC20-30</a>
+                            </li>
+        					<li>
+                                <a>HRC30-40</a>
+                            </li>
+                            <li>
+                                <a>HRC40-50</a>
+                            </li>
+        					<li>
+                                <a>HRC50-58</a>
+                            </li>
+                            <li>
+                                <a>HRC58-62</a>
+                            </li>
+        					<li>
+                                <a>HRC62-65</a>
+                            </li>
+                            <li>
+                                <a>HRC65-68</a>
+                            </li>
+        					<li>
+                                <a>HRC68以上</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="question-param-li material clearfix">
+    					#springBind("productForm.wpMaterial")
+                        <input type="hidden" name="${status.expression}"  value="$!{status.value}" />
+                        <a class="sel" >工件材质</a>
+                        <ul class="param">
+							<li>
+                                <a>不限</a>
+                            </li>
+                            <li>
+                                <a>钢</a>
+                            </li>
+                            <li>
+                                <a>铸铁</a>
+                            </li>
+        					<li>
+                                <a>不锈钢</a>
+                            </li>
+                            <li>
+                                <a>高温合金</a>
+                            </li>
+        					<li>
+                                <a>铝</a>
+                            </li>
+                            <li>
+                                <a>有色金属</a>
+                            </li>
+        					<li>
+                                <a>石墨</a>
+                            </li>
+                            <li>
+                                <a>树脂</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+    			</li>
+    		</ul>
+    	</div>
+		#springBind("productForm.picture")
+		<input type="hidden" name="${status.expression}" value="$!{status.value}" id="product_pic" />
+    	<div class="listitem clearfix">
+    		<ul class="user-info clearfix">
+    			<li class="key">
+    				图片上传
+    			</li>
+    			<li class="value">
+    				<input type="file" name="productlink" id="file_upload"/>
+    			</li>
+    		</ul>
+    	</div>
+		#springBind("productForm.description")
+		<div class="listitem clearfix">
+    		<ul class="user-info clearfix">
+    			<li class="key">
+    				刀具描述
+    			</li>
+    			<li class="value">
+    				<textarea class="dsf-form-text-input company-info" name="${status.expression}" >$!{status.value}</textarea>
+    			</li>
+    		</ul>
+    	</div>
+		
+    	<div class="listitem mt20 pt20 btg clearfix">
+    		<a id="submit_uploadgc" class="save" >上 传</a>
+    	</div>
+    </form>
+</div>

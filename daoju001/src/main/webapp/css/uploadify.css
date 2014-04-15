@@ -54,6 +54,26 @@ Released under the MIT License <http://www.opensource.org/licenses/mit-license.p
 	background-color: #D0D0D0;
 	color: #808080;
 }
+
+#form_newproduct .uploadify-queue-item {
+	background-color: #F5F5F5;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 3px;
+	font: 11px Verdana, Geneva, sans-serif;
+	margin-top: 5px;
+	width: 100px;
+	padding: 5px;
+	float:left;
+	margin-right:5px;
+}
+#form_newproduct .uploadify-queue{width:470px;}
+#form_newproduct .uploadify-queue:after { content:"."; display:block; height:0; clear:both; visibility:hidden; } 
+
+#form_newproduct .uploadify-queue-item img.product-tn{width:100px;height:100px;}
+#form_newproduct .uploadify-queue-item .buttons{margin-top: 5px;}
+#form_newproduct .uploadify-queue-item .buttons a.del{float:right}
+#form_newproduct .uploadify-queue-item .buttons input[type="radio"]{vertical-align: middle;margin-right: 3px;}
 .uploadify-queue {
 	margin-bottom: 1em;
 }

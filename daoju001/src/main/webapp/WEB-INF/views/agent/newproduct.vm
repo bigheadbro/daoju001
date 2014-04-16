@@ -11,7 +11,7 @@
 	<script>
 		function loadProduct(data){
 			$(".uploadify-queue-item").each(function(){
-				if(data.split("/")[1] == $(this).children(".fileName").text().split(" ")[0]){
+				if(data.split("/")[1].substr(0,15) == $(this).children(".fileName").text().split(" ")[0].substr(0,15)){
 					$(this).empty();
 					$(this).append("<img class='product-tn' src='../product/" + data + "' /><div class='buttons'><a class='del' href=''>删除</a><label for='aa'><input type='radio' id='aa'/>设为封面</label></div>");
 				}

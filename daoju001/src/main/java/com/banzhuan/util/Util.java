@@ -288,7 +288,7 @@ public class Util {
 		}
 
 		// 去除重复邮箱
-		file = new File("EDM/failmail.txt");
+		file = new File("EDM/failedm.txt");
 		reader = null;
 		try {
 			reader = new BufferedReader(new FileReader(file));

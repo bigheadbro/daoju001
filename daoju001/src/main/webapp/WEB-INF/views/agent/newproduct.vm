@@ -11,14 +11,20 @@
 	<script>
 		function loadProduct(data){
 			$(".uploadify-queue-item").each(function(){
-				if(data.split("/")[1].substr(0,15) == $(this).children(".fileName").text().split(" ")[0].substr(0,15)){
+				var pn = data.split("/")[1];
+				if(pn.substr(0,15) == $(this).children(".fileName").text().split(" ")[0].substr(0,15)){
 					$(this).empty();
-					$(this).append("<img class='product-tn' src='../product/" + data + "' /><div class='buttons'><a class='del' href=''>删除</a><label for='aa'><input type='radio' id='aa'/>设为封面</label></div>");
+					$(this).append("<img class='product-tn' src='../product/" + data + "' /><div class='buttons'><a class='del' href=''>删除</a><label class='cover' for='" + pn + "'><input type='radio' id='" + pn + "'/>设为封面</label></div>");
 				}
 			});
 		}
 		$(function() {
-			
+			$("body").on("click", ".cover", function(){
+				$(".cover").each(function(){
+					$(this).children("[type=radio]").prop('checked', false);
+				});
+				$(this).children("[type=radio]").prop('checked', true);;
+			});
 			$("#file_upload").uploadify({  
                     'height'        : 30,   
                     'width'         : 120,    

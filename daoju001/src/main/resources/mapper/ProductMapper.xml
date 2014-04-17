@@ -10,9 +10,9 @@
 		<!--行业 -->
 		<id property="industry" column="industry" />
 		<!--工件材质 -->
-		<id property="workMaterial" column="work_material" />
+		<id property="wpMaterial" column="work_material" />
 		<!--工件硬度 -->
-		<id property="workSolidity" column="work_solidity" />
+		<id property="wpHardness" column="work_solidity" />
 		<!--加工方式 -->
 		<id property="processMethod" column="process_method" />
 		<!--代理商id -->
@@ -47,7 +47,7 @@
 	<select id="getProductCount" parameterType="int"
 			resultType="int">
 		<![CDATA[
-			SELECT count(1) from t_Product t WHERE t.agent_id = #{agentId};
+			SELECT count(1) from t_Product t WHERE t.agentId = #{agentId};
 		]]>
 	</select>
 
@@ -63,21 +63,21 @@
 		,work_material
 		,work_solidity
 		,process_method
-		,agent_id
-		,agent_name
+		,agentId
+		,agentName
 		,agent_logo
 		,brandId
 		,picture
 		,cover
 		,gmt_create
-		,gmt_modified)
+		,gmt_modify)
 		values
 		(
 		#{name}
 		,#{description}
 		,#{industry}
-		,#{workMaterial}
-		,#{workSolidity}
+		,#{wpMaterial}
+		,#{wpHardness}
 		,#{processMethod}
 		,#{agentId}
 		,#{agentName}
@@ -85,8 +85,8 @@
 		,#{brandId}
 		,#{picture}
 		,#{cover}
-		,#{gmtCreate}
-		,#{gmtModified}
+		,now()
+		,#{gmtModify}
 
 		)
 	</insert>
@@ -102,7 +102,7 @@
 		      <if test="picture != null">picture=#{picture},</if>
 		      <if test="cover != null">cover=#{cover},</if>
 		      <if test="description != null">description=#{description},</if>
-		   	  gmt_modified=now()
+		   	  gmt_modify=now()
 		</set>
 		where id=#{id}
 	</update>
@@ -110,7 +110,7 @@
 	<select id="queryProductEntityByUserid" parameterType="int"
 			resultMap="ProductResultMap">
 		<![CDATA[
-			SELECT * from t_Product t where t.agent_id=#{id} order by gmt_create desc
+			SELECT * from t_Product t where t.agentId=#{id} order by gmt_create desc
 		]]>
 	</select>
 	

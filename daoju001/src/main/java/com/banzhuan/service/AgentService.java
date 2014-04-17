@@ -404,6 +404,30 @@ public class AgentService {
     	
     }
     
+    public Result updateProductById(ProductForm form, Errors errors)
+	{
+		Result result = new Result();
+		
+		if(StringUtil.isNotEmpty(form.getName()))// 问题类型为空
+		{
+			errors.rejectValue("name", "PRODUCT_NAME_IS_NOT_NULL");
+			return result;
+		}
+
+		ProductEntity product = new ProductEntity();
+		product.setId(form.getPid());
+		product.setIndustry(form.getIndustry());
+		product.setProcessMethod(form.getProcessMethod());
+		product.setWpHardness(form.getWpHardness());
+		product.setWpMaterial(form.getWpMaterial());
+		product.setPicture(form.getPicture());
+		product.setCover(form.getCover());
+		
+		productDAO.updateProductById(product);
+		
+		return result;
+	}
+    
     public Result insertAnswer(ProfessionalAnswerForm answerForm, Account account)
     {
     	Result result = new Result();
@@ -760,7 +784,7 @@ public class AgentService {
 
     public void setProductFormWithPid(ProductForm form, int id)
 	{
-		ProductEntity product = new ProductEntity();//todo: query from DB;
+		ProductEntity product = productDAO.queryProductEntityById(id);
 
 		if(product.getIndustry() >=0)
 		{
@@ -794,7 +818,24 @@ public class AgentService {
 		{
 			form.setPicture(product.getPicture());
 		}
+		if(StringUtil.isNotEmpty(product.getDescription()))
+		{
+			form.setDescription(product.getDescription());
+		}
 
 	}
     
+    public Result queryProductByUserid(int userid)
+	{
+		Result result = new Result();
+		List<ProductEntity> products = productDAO.queryProductEntityByUserid(userid);
+		result.add("products", products);
+		
+		return result;
+	}
+    
+    public void delProduct(int id)
+    {
+    	productDAO.delProduct(id);
+    }
 }

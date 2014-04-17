@@ -15,7 +15,7 @@
 				var pn = data.split("/")[1];
 				if(pn.substr(0,15) == $(this).children(".fileName").text().split(" ")[0].substr(0,15)){
 					$(this).empty();
-					$(this).append("<img class='product-tn' src='../product/" + data + "' /><div class='buttons'><a class='del' href=''>删除</a><label class='cover' for='" + pn + "'><input origin='"+data+"' type='radio' id='" + pn + "'/>设为封面</label></div>");
+					$(this).append("<img class='product-tn' src='../product/" + data + "' /><div class='buttons'><a class='del' href=''>删除</a><label class='cover' for='" + data + "'><input origin='"+data+"' type='radio' id='" + data + "'/>设为封面</label></div>");
 					$("#product_pic").val($("#product_pic").val()+"|"+data);
 				}
 			});
@@ -28,6 +28,15 @@
 			$("#productCover").val($(this).children("[type=radio]").attr("origin"));
 		}
 		$(function() {
+			var pics = $("#product_pic").val().split('|');
+			for(var pic in pics){
+				if(pics[pic] != ""){
+					$("#file_upload-queue").append("<p>fafadfadfadsf</p>");
+					//$("#file_upload-queue").append('<div class="uploadify-queue-item"><img class="product-tn" src="../product/' + pics[pic] + '"><div class="buttons"><a class="del" href="">删除</a><label class="cover" for="'+ pics[pic] +'"><input origin="'+ pics[pic] +'" type="radio" id="'+ pics[pic] +'">设为封面</label></div></div>');
+				}
+			}
+
+			
 			$("body").on("click", ".cover", setCover);
 			
 			$("#file_upload").uploadify({  
@@ -313,7 +322,7 @@
     	</div>
 		<script>
 		  function processProduct(data) { 
-  			//showAlert(data.title,data.content,data.info,data.btn,data.link);
+  			showAlert(data.title,data.content,data.info,data.btn,data.link);
   		  }
 		  $(function() {
 			  $("#submit_uploadproduct").click(function(){

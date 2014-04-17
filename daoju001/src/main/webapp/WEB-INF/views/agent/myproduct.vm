@@ -26,8 +26,8 @@ $(function() {
     		<div class="listitem">
     			<p>$!{product.name}<span>$stringUtil.formatDate($!{product.gmtCreate})</span></p>
     			<div class="operation clearfix">
-    				<a href="/agent/newproduct/$!{product.id}">编辑</a><span>|</span>
-    				<a class="del" gid="$!{product.id}">删除</a>
+    				<a href="/agent/product/$!{product.id}">编辑</a><span>|</span>
+    				<a class="del" pid="$!{product.id}">删除</a>
     			</div>
     		</div>
 		#end

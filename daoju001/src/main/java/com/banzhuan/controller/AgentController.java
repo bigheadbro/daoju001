@@ -739,10 +739,20 @@ public class AgentController extends BaseController{
 	public ModelAndView product(HttpServletRequest request, HttpServletResponse response,@PathVariable String id, @ModelAttribute("account")Account account,
 			final RedirectAttributes redirectAttributes) {
 		
-		int questionId = Integer.parseInt(id);
+		int productid = Integer.parseInt(id);
 		
 		ModelAndView mv = new ModelAndView(new RedirectView("/agent/newproduct"));
-		redirectAttributes.addFlashAttribute("productid",questionId);
+		redirectAttributes.addFlashAttribute("productid",productid);
+		return mv;
+	}
+	
+	@RequestMapping(value="/myproduct")
+	public ModelAndView myproduct(HttpServletRequest request, HttpServletResponse response, @ModelAttribute("account")Account account) {
+		ModelAndView mv = new ModelAndView("agent/myproduct");
+		int userId = account.getUserId();
+		Result result = new Result();
+		result = agentService.queryProductByUserid(userId);
+		mv.addObject("products", result.get("products"));
 		return mv;
 	}
 	
@@ -768,15 +778,9 @@ public class AgentController extends BaseController{
 			return mv;
 		}
 		
-		ProductEntity product = new ProductEntity();
-		product.setAgentId(account.getUserId());
-		product.setAgentLogo(account.getLogo());
-		product.setAgentName(account.getUserName());
-		product.setBrandId(account.getBrandName());
-		
 		if(form.getIsEdit() > 0)
 		{
-			//buyerService.updateQuestionById(form, result);
+			agentService.updateProductById(form, result);
 			
 			if(result.hasErrors())
 			{
@@ -788,6 +792,11 @@ public class AgentController extends BaseController{
 		}
 		else
 		{
+			ProductEntity product = new ProductEntity();
+			product.setAgentId(account.getUserId());
+			product.setAgentLogo(account.getLogo());
+			product.setAgentName(account.getUserName());
+			product.setBrandId(account.getBrandName());
 			agentService.insertProduct(form, product, result);
 			if(result.hasErrors())
 			{
@@ -798,6 +807,16 @@ public class AgentController extends BaseController{
 
 		}
 		return mv;
+	}
+	
+	@RequestMapping(value="/delproduct/{id}")
+	public void delproduct(HttpServletRequest request, HttpServletResponse response, @PathVariable String id, @ModelAttribute("account")Account account) throws IOException 
+	{
+		String url = request.getHeader("Referer");
+		int pid = Integer.parseInt(id);
+		agentService.delProduct(pid);
+		//todo:account.setSampleCnt(agentService.getSampleCount(account.getUserId()));
+		response.sendRedirect(url);
 	}
 
 }

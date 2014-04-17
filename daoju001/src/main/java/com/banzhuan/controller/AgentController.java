@@ -43,6 +43,7 @@ import com.banzhuan.common.Result;
 import com.banzhuan.entity.AgentEntity;
 import com.banzhuan.entity.BrandEntity;
 import com.banzhuan.entity.GoodcaseEntity;
+import com.banzhuan.entity.ProductEntity;
 import com.banzhuan.entity.ProfessionalAnswerEntity;
 import com.banzhuan.entity.SampleEntity;
 import com.banzhuan.form.AgentProfileForm;
@@ -767,7 +768,11 @@ public class AgentController extends BaseController{
 			return mv;
 		}
 		
-		form.setUserid(account.getUserId());
+		ProductEntity product = new ProductEntity();
+		product.setAgentId(account.getUserId());
+		product.setAgentLogo(account.getLogo());
+		product.setAgentName(account.getUserName());
+		product.setBrandId(account.getBrandName());
 		
 		if(form.getIsEdit() > 0)
 		{
@@ -783,7 +788,7 @@ public class AgentController extends BaseController{
 		}
 		else
 		{
-			//buyerService.insertQuestion(form, account, result);
+			agentService.insertProduct(form, product, result);
 			if(result.hasErrors())
 			{
 				return mv;

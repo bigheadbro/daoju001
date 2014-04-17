@@ -18,6 +18,7 @@ public class ProductForm implements Serializable {
 	private int pid;
 	private int userid;
 	private String picture;
+	private String cover;
 	private int isEdit;
 
 	public int getProcessMethod() {
@@ -121,5 +122,17 @@ public class ProductForm implements Serializable {
 	 */
 	public void setPid(int pid) {
 		this.pid = pid;
+	}
+	/**
+	 * @return the cover
+	 */
+	public String getCover() {
+		return cover;
+	}
+	/**
+	 * @param cover the cover to set
+	 */
+	public void setCover(String cover) {
+		this.cover = cover;
 	}
 }

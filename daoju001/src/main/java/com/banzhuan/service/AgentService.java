@@ -20,6 +20,7 @@ import com.banzhuan.dao.BuyerDAO;
 import com.banzhuan.dao.CommentDAO;
 import com.banzhuan.dao.GoodcaseDAO;
 import com.banzhuan.dao.MsgDAO;
+import com.banzhuan.dao.ProductDAO;
 import com.banzhuan.dao.ProfessionalAnswerDAO;
 import com.banzhuan.dao.QuestionDAO;
 import com.banzhuan.dao.SampleDAO;
@@ -82,6 +83,10 @@ public class AgentService {
 	@Autowired
 	@Qualifier("commentDAO")
 	private CommentDAO commentDAO;
+	
+	@Autowired
+	@Qualifier("productDAO")
+	private ProductDAO productDAO;
 	
 	public Result register(RegForm form, Errors errors)
 	{
@@ -353,6 +358,48 @@ public class AgentService {
     		gc.setWorkMaterial(form.getWpMaterial());
     	}
     	gcDAO.insertGoodcaseEntity(gc);
+    	return result;
+    	
+    }
+    
+    public Result insertProduct(ProductForm form, ProductEntity product, Errors errors)
+    {
+    	Result result = new Result();
+    	if(StringUtil.isEmpty(form.getName()))
+		{
+    		errors.rejectValue("name", "GOODCASE_NAME_IS_NOT_NULL");
+			return result;
+		}
+    	if(StringUtil.isNotEmpty(form.getName()))
+    	{
+    		product.setName(form.getName());
+    	}
+
+    	if(form.getIndustry() != 0)
+    	{
+    		product.setIndustry(form.getIndustry());
+    	}
+    	if(form.getProcessMethod() != 0)
+    	{
+    		product.setProcessMethod(form.getProcessMethod());
+    	}
+    	if(form.getWpHardness() != 0)
+    	{
+    		product.setWpHardness(form.getWpHardness());
+    	}
+    	if(form.getWpMaterial() != 0)
+    	{
+    		product.setWpMaterial(form.getWpMaterial());
+    	}
+    	if(StringUtil.isNotEmpty(form.getPicture()))
+    	{
+    		product.setPicture(form.getPicture());
+    	}
+    	if(StringUtil.isNotEmpty(form.getCover()))
+    	{
+    		product.setCover(form.getCover());
+    	}
+    	productDAO.insertProductEntity(product);
     	return result;
     	
     }

@@ -1,6 +1,7 @@
 #set($layout = "/layout/agent_detail_layout.vm")
 <link rel="stylesheet" href="../css/uploadify.css">
 <script type="text/javascript" src="../js/jquery.uploadify.min.js"></script>
+<script type="text/javascript" src="../js/ques-handler.js"></script>
 <ul class="right-tab clearfix">
     <li class="current">上传刀具</li>
     <li>
@@ -14,17 +15,21 @@
 				var pn = data.split("/")[1];
 				if(pn.substr(0,15) == $(this).children(".fileName").text().split(" ")[0].substr(0,15)){
 					$(this).empty();
-					$(this).append("<img class='product-tn' src='../product/" + data + "' /><div class='buttons'><a class='del' href=''>删除</a><label class='cover' for='" + pn + "'><input type='radio' id='" + pn + "'/>设为封面</label></div>");
+					$(this).append("<img class='product-tn' src='../product/" + data + "' /><div class='buttons'><a class='del' href=''>删除</a><label class='cover' for='" + pn + "'><input origin='"+data+"' type='radio' id='" + pn + "'/>设为封面</label></div>");
+					$("#product_pic").val($("#product_pic").val()+"|"+data);
 				}
 			});
 		}
-		$(function() {
-			$("body").on("click", ".cover", function(){
-				$(".cover").each(function(){
-					$(this).children("[type=radio]").prop('checked', false);
-				});
-				$(this).children("[type=radio]").prop('checked', true);;
+		function setCover(){
+			$(".cover").each(function(){
+				$(this).children("[type=radio]").prop('checked', false);
 			});
+			$(this).children("[type=radio]").prop('checked', true);
+			$("#productCover").val($(this).children("[type=radio]").attr("origin"));
+		}
+		$(function() {
+			$("body").on("click", ".cover", setCover);
+			
 			$("#file_upload").uploadify({  
                     'height'        : 30,   
                     'width'         : 120,    
@@ -58,7 +63,7 @@
                     	}
             		}
             });  
-			$("#form_newquestion").validate({
+			$("#form_newproduct").validate({
 				rules:{
 					type:{
 						required:true
@@ -69,39 +74,11 @@
 						required:"请输入刀具名称"
 					}
 				},
-				errorPlacement: function(error, element) {   
-					$(".error-msg").show();
-					var hasError = true;
-					$(".error-msg label").each(function(){
-						if($(this).attr("for") == error.attr("for")){
-							hasError = false;
-						}
-					});
-					if(hasError)
-					{
-                    	error.appendTo($(".error-msg"));     
-					}
-					else
-					{
-						$(".error-msg label").each(function(){
-							if($(this).attr("for") == error.attr("for")){
-								$(this).text(error.text());
-							}
-						});
-					}
-                },
-				success:function(label){
-					$(".error-msg").hide();
-					$(".error-msg label").each(function(){
-						if($(this).attr("for") == $(label).attr("for")){
-							$(this).text("");
-						}
-					}); 
-				},
+				errorElement:"em",
 				submitHandler: function(form) {
           			$(form).ajaxSubmit({
 						dataType:'json',
-						success:processQuestion
+						success: processProduct
 					});
 					$(form)[0].reset();
 				}
@@ -116,6 +93,8 @@
         <input type="hidden" name="${status.expression}" value="$!{status.value}" id="qid" />
         #springBind("productForm.isEdit")
         <input type="hidden" name="${status.expression}" value="$!{status.value}" id="isEdit" />
+		#springBind("productForm.cover")
+        <input type="hidden" name="${status.expression}" value="$!{status.value}" id="productCover" />
         #springBind("productForm.name")
     	<div class="listitem clearfix">
     		<ul class="user-info clearfix">
@@ -330,7 +309,17 @@
     	</div>
 		
     	<div class="listitem mt20 pt20 btg clearfix">
-    		<a id="submit_uploadgc" class="save" >上 传</a>
+    		<a id="submit_uploadproduct" class="save" >上 传</a>
     	</div>
+		<script>
+		  function processProduct(data) { 
+  			//showAlert(data.title,data.content,data.info,data.btn,data.link);
+  		  }
+		  $(function() {
+			  $("#submit_uploadproduct").click(function(){
+				  $("#form_newproduct").submit();
+				});
+			});
+		</script>
     </form>
 </div>

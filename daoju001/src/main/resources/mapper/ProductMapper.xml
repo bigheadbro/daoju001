@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="product">
+	<resultMap type="ProductEntity" id="ProductResultMap">
+	  <!---->
+		<id property="id" column="id" />
+		<!--案例名称 -->
+		<id property="name" column="name" />
+		<id property="description" column="description" />
+		<!--行业 -->
+		<id property="industry" column="industry" />
+		<!--工件材质 -->
+		<id property="workMaterial" column="work_material" />
+		<!--工件硬度 -->
+		<id property="workSolidity" column="work_solidity" />
+		<!--加工方式 -->
+		<id property="processMethod" column="process_method" />
+		<!--代理商id -->
+		<id property="agentId" column="agentId" />
+		<!--代理商名字 -->
+		<id property="agentName" column="agentName" />
+		<!--代理商logo -->
+		<id property="agentLogo" column="agent_logo" />
+		<!--代理品牌 -->
+		<id property="brandId" column="brandId" />
+		<!--下载链接 -->
+		<id property="picture" column="picture" />
+		<!--下载次数 -->
+		<id property="cover" column="cover" />
+		<!--记录创建时间 -->
+		<id property="gmtCreate" column="gmt_create" />
+		<!--记录修改时间(最近时间) -->
+		<id property="gmtModify" column="gmt_modify" />
+	</resultMap>
+
+	<select id="queryProductEntityById" parameterType="int"
+		resultMap="ProductResultMap">
+	<![CDATA[
+		SELECT * from t_Product t WHERE t.id = #{id}
+	]]>
+	</select>
+	
+	<delete id="delProduct"  parameterType="int">
+	delete from t_Product where id =#{id};
+	</delete>
+	
+	<select id="getProductCount" parameterType="int"
+			resultType="int">
+		<![CDATA[
+			SELECT count(1) from t_Product t WHERE t.agent_id = #{agentId};
+		]]>
+	</select>
+
+	<insert id="insertProductEntity" parameterType="ProductEntity">
+		<selectKey resultType="int" order="AFTER" keyProperty="id">
+			SELECT LAST_INSERT_ID() AS id
+		</selectKey>
+		insert into t_Product
+		(
+		name
+		,description
+		,industry
+		,work_material
+		,work_solidity
+		,process_method
+		,agent_id
+		,agent_name
+		,agent_logo
+		,brandId
+		,picture
+		,cover
+		,gmt_create
+		,gmt_modified)
+		values
+		(
+		#{name}
+		,#{description}
+		,#{industry}
+		,#{workMaterial}
+		,#{workSolidity}
+		,#{processMethod}
+		,#{agentId}
+		,#{agentName}
+		,#{agentLogo}
+		,#{brandId}
+		,#{picture}
+		,#{cover}
+		,#{gmtCreate}
+		,#{gmtModified}
+
+		)
+	</insert>
+
+	<update id="updateProductById" parameterType="ProductEntity">
+		update t_Product
+		<set> 
+		      <if test="name != null">name=#{name},</if>
+		      <if test="industry != null">industry=#{industry},</if>
+		      <if test="processMethod != null">process_method=#{processMethod},</if>
+		      <if test="workSolidity != null">work_solidity=#{workSolidity},</if>
+		      <if test="workMaterial != null">work_material=#{workMaterial},</if>
+		      <if test="picture != null">picture=#{picture},</if>
+		      <if test="cover != null">cover=#{cover},</if>
+		      <if test="description != null">description=#{description},</if>
+		   	  gmt_modified=now()
+		</set>
+		where id=#{id}
+	</update>
+	
+	<select id="queryProductEntityByUserid" parameterType="int"
+			resultMap="ProductResultMap">
+		<![CDATA[
+			SELECT * from t_Product t where t.agent_id=#{id} order by gmt_create desc
+		]]>
+	</select>
+	
+	<select id="getProductCountByType" parameterType="ProductEntity"
+			resultType="int">
+			SELECT count(1) from t_Product t 
+			<where>
+				<if test="industry != 0">AND industry=#{industry}</if>
+			    <if test="processMethod != 0">AND work_type=#{processMethod}</if>
+			    <if test="workSolidity != 0">AND work_solidity=#{workSolidity}</if>
+			    <if test="workMaterial != 0">AND work_material=#{workMaterial}</if>
+		    </where> 
+			order by gmt_create desc
+	</select>
+	
+	
+	<select id="getAllProductsByType" parameterType="ProductEntity"
+			resultMap="ProductResultMap">
+		SELECT * from t_Product t 
+			<where>
+				<if test="industry != 0">AND industry=#{industry}</if>
+			    <if test="processMethod != 0">AND work_type=#{processMethod}</if>
+			    <if test="workSolidity != 0">AND work_solidity=#{workSolidity}</if>
+			    <if test="workMaterial != 0">AND work_material=#{workMaterial}</if>
+		    </where> 
+			order by gmt_create desc
+	</select>
+	
+	<select id="getMainProductsByType" parameterType="ProductEntity"
+			resultMap="ProductResultMap">
+		SELECT * from t_Product t order by gmt_create desc limit 3
+	</select>
+	
+</mapper>

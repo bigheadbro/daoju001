@@ -94,6 +94,8 @@
 			<mvc:mapping path="/agent/changepwd" />
 			<mvc:mapping path="/agent/profile" />
 			<mvc:mapping path="/agent/uploadlogo" />
+			<mvc:mapping path="/agent/newproduct" />
+			<mvc:mapping path="/agent/myproduct" />
 			<bean class="com.banzhuan.interceptor.AgentLoginInterceptor" />
 		</mvc:interceptor>
 	</mvc:interceptors>

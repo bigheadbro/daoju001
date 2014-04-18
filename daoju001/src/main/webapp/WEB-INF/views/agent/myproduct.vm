@@ -9,7 +9,7 @@ $(function() {
     		    type : "POST",   
     		    url : str,
 				success: function(){
-					window.location.href='/agent/newproduct';
+					window.location.href='/agent/myproduct';
 				}
     		});   
         }

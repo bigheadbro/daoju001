@@ -9,92 +9,6 @@
     </li>
 </ul>
 <div class="rigth-content">
-	<script>
-		function loadProduct(data){
-			$(".uploadify-queue-item").each(function(){
-				var pn = data.split("/")[1];
-				if(pn.substr(0,15) == $(this).children(".fileName").text().split(" ")[0].substr(0,15)){
-					$(this).empty();
-					$(this).append("<img class='product-tn' src='../product/" + data + "' /><div class='buttons'><a class='del' href=''>删除</a><label class='cover' for='" + data + "'><input origin='"+data+"' type='radio' id='" + data + "'/>设为封面</label></div>");
-					$("#product_pic").val($("#product_pic").val()+"|"+data);
-				}
-			});
-		}
-		function setCover(){
-			$(".cover").each(function(){
-				$(this).children("[type=radio]").prop('checked', false);
-			});
-			$(this).children("[type=radio]").prop('checked', true);
-			$("#productCover").val($(this).children("[type=radio]").attr("origin"));
-		}
-		$(function() {
-			var pics = $("#product_pic").val().split('|');
-			for(var pic in pics){
-				if(pics[pic] != ""){
-					$("#file_upload-queue").append("<p>fafadfadfadsf</p>");
-					//$("#file_upload-queue").append('<div class="uploadify-queue-item"><img class="product-tn" src="../product/' + pics[pic] + '"><div class="buttons"><a class="del" href="">删除</a><label class="cover" for="'+ pics[pic] +'"><input origin="'+ pics[pic] +'" type="radio" id="'+ pics[pic] +'">设为封面</label></div></div>');
-				}
-			}
-
-			
-			$("body").on("click", ".cover", setCover);
-			
-			$("#file_upload").uploadify({  
-                    'height'        : 30,   
-                    'width'         : 120,    
-    				'buttonText'    : '选择图片',
-    				'fileSizeLimit' : '5MB',
-                    'fileObjName'   : 'productlink',
-                    'swf'           : '/js/uploadify.swf',  
-                    'uploader'      : '/agent/uploadfile_product',  
-                    'auto'          : true,  
-    				'removeCompleted': false,
-    				'fileTypeExts'  : '*.jpg;*.png;*.gif;*',  
-					'uploadLimit'   : 4, 
-                    'onUploadStart' : function(file) {  
-                    },  
-                    'onUploadSuccess':function(file, data, response){    
-                    	loadProduct(data);
-                    },  
-    				'overrideEvents': 'onSelectError',
-    				'onSelectError' : function(file, errorCode, errorMsg) {
-    					if(errorCode == SWFUpload.QUEUE_ERROR.ZERO_BYTE_FILE){
-                    		this.queueData.errorMsg = "不能传空文件!!";
-                    	}
-    					if(errorCode == SWFUpload.QUEUE_ERROR.UPLOAD_LIMIT_EXCEEDED){
-                    		this.queueData.errorMsg = "只能上传一个文件!!";
-                    	}
-    					if(errorCode == SWFUpload.QUEUE_ERROR.FILE_EXCEEDS_SIZE_LIMIT){
-                    		this.queueData.errorMsg = "文件大小不能超过5MB!!";
-                    	}
-    					if(errorCode == SWFUpload.QUEUE_ERROR.INVALID_FILETYPE){
-                    		this.queueData.errorMsg = "不支持该文件类型!!";
-                    	}
-            		}
-            });  
-			$("#form_newproduct").validate({
-				rules:{
-					type:{
-						required:true
-					}
-				},
-				messages:{
-					type:{
-						required:"请输入刀具名称"
-					}
-				},
-				errorElement:"em",
-				submitHandler: function(form) {
-          			$(form).ajaxSubmit({
-						dataType:'json',
-						success: processProduct
-					});
-					$(form)[0].reset();
-				}
-			});
-			
-		});
-	</script>
     <form id="form_newproduct" method="post">
         <!-- 隐藏字段，用于标示是表单提交 -->
         <input type="hidden" name="do_submit" value="true"/>
@@ -102,7 +16,7 @@
         <input type="hidden" name="${status.expression}" value="$!{status.value}" id="qid" />
         #springBind("productForm.isEdit")
         <input type="hidden" name="${status.expression}" value="$!{status.value}" id="isEdit" />
-		#springBind("productForm.cover")
+				#springBind("productForm.cover")
         <input type="hidden" name="${status.expression}" value="$!{status.value}" id="productCover" />
         #springBind("productForm.name")
     	<div class="listitem clearfix">
@@ -320,15 +234,117 @@
     	<div class="listitem mt20 pt20 btg clearfix">
     		<a id="submit_uploadproduct" class="save" >上 传</a>
     	</div>
-		<script>
-		  function processProduct(data) { 
-  			showAlert(data.title,data.content,data.info,data.btn,data.link);
-  		  }
-		  $(function() {
-			  $("#submit_uploadproduct").click(function(){
-				  $("#form_newproduct").submit();
-				});
-			});
+			<script>
+				var picCnt = 0;
+				if($("#product_pic").val().split('|').length > 0){
+					picCnt = $("#product_pic").val().split('|').length - 1;
+				}
+    		var upCnt = 4 - picCnt;
+    		function loadProduct(data){
+    			$(".uploadify-queue-item").each(function(){
+    				var pn = data.split("/")[1];
+    				if(pn.substr(0,15) == $(this).children(".fileName").text().split(" ")[0].substr(0,15)){
+    					$(this).empty();
+    					$(this).append("<img class='product-tn' src='../product/" + data + "' /><div class='buttons'><a class='del'>删除</a><label class='cover' for='" + data + "'><input origin='"+data+"' type='radio' id='" + data + "'/>设为封面</label></div>");
+    					$("#product_pic").val($("#product_pic").val()+"|"+data);
+    				}
+    			});
+    		}
+    		function setCover(){
+    			$(".cover").each(function(){
+    				$(this).children("[type=radio]").prop('checked', false);
+    			});
+    			$(this).children("[type=radio]").prop('checked', true);
+    			$("#productCover").val($(this).children("[type=radio]").attr("origin"));
+    		}
+				function delPic(){
+					upCnt = upCnt + 1;
+					$('#file_upload').uploadify('settings','uploadLimit',upCnt);
+					$(this).parent().parent().remove();
+					var picAll = "";
+					$(".cover").each(function(){
+						picAll = picAll + "|" + $(this).attr("for");
+					});		
+					$("#product_pic").val(picAll);
+    		}
+    		$(function() {
+					$("body").on("click", ".del", delPic);
+    			$("body").on("click", ".cover", setCover);
+    			
+    			$("#file_upload").uploadify({  
+                  'height'        : 30,   
+                  'width'         : 120,    
+      		'buttonText'    : '选择图片',
+      		'fileSizeLimit' : '5MB',
+                  'fileObjName'   : 'productlink',
+                  'swf'           : '/js/uploadify.swf',  
+                  'uploader'      : '/agent/uploadfile_product',  
+                  'auto'          : true,  
+      		'removeCompleted': false,
+      		'fileTypeExts'  : '*.jpg;*.png;*.gif;*',  
+      	'uploadLimit'   : upCnt, 
+                  'onUploadStart' : function(file) {  
+                  },  
+                  'onUploadSuccess':function(file, data, response){    
+                  	loadProduct(data);
+                  },  
+      		'overrideEvents': 'onSelectError',
+      		'onSelectError' : function(file, errorCode, errorMsg) {
+      			if(errorCode == SWFUpload.QUEUE_ERROR.ZERO_BYTE_FILE){
+                  		this.queueData.errorMsg = "不能传空文件!!";
+                  	}
+      			if(errorCode == SWFUpload.QUEUE_ERROR.UPLOAD_LIMIT_EXCEEDED){
+                  		this.queueData.errorMsg = "只能上传一个文件!!";
+                  	}
+      			if(errorCode == SWFUpload.QUEUE_ERROR.FILE_EXCEEDS_SIZE_LIMIT){
+                  		this.queueData.errorMsg = "文件大小不能超过5MB!!";
+                  	}
+      			if(errorCode == SWFUpload.QUEUE_ERROR.INVALID_FILETYPE){
+                  		this.queueData.errorMsg = "不支持该文件类型!!";
+                  	}
+          		}
+          });  
+    			$("#form_newproduct").validate({
+    				rules:{
+    					type:{
+    						required:true
+    					}
+    				},
+    				messages:{
+    					type:{
+    						required:"请输入刀具名称"
+    					}
+    				},
+    				errorElement:"em",
+    				submitHandler: function(form) {
+              			$(form).ajaxSubmit({
+    						dataType:'json',
+    						success: processProduct
+    					});
+    					$(form)[0].reset();
+    				}
+    			});
+    			
+    		});
+  		  function processProduct(data) { 
+    			showAlert(data.title,data.content,data.info,data.btn,data.link);
+    		  }
+  		  $(function() {
+  			  $("#submit_uploadproduct").click(function(){
+  				  $("#form_newproduct").submit();
+  				});
+  			});
 		</script>
     </form>
 </div>
+<script>
+	$(function(){
+		var pics = $("#product_pic").val().split('|');
+			
+		for(var pic in pics){
+			if(pics[pic] != ""){
+				$("#file_upload-queue").append('<div class="uploadify-queue-item"><img class="product-tn" src="../product/' + pics[pic] + '"><div class="buttons"><a class="del" href="">删除</a><label class="cover" for="'+ pics[pic] +'"><input origin="'+ pics[pic] +'" type="radio" id="'+ pics[pic] +'">设为封面</label></div></div>');
+			}
+		}
+	});
+</script>

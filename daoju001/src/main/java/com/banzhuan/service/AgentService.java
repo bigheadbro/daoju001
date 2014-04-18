@@ -367,7 +367,7 @@ public class AgentService {
     	Result result = new Result();
     	if(StringUtil.isEmpty(form.getName()))
 		{
-    		errors.rejectValue("name", "GOODCASE_NAME_IS_NOT_NULL");
+    		errors.rejectValue("name", "PRODUCT_NAME_IS_NOT_NULL");
 			return result;
 		}
     	if(StringUtil.isNotEmpty(form.getName()))
@@ -408,7 +408,7 @@ public class AgentService {
 	{
 		Result result = new Result();
 		
-		if(StringUtil.isNotEmpty(form.getName()))// 问题类型为空
+		if(StringUtil.isEmpty(form.getName()))// 问题类型为空
 		{
 			errors.rejectValue("name", "PRODUCT_NAME_IS_NOT_NULL");
 			return result;

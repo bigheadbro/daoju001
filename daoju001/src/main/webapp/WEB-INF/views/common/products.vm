@@ -1,0 +1,201 @@
+#set($layout = "/layout/index_layout.vm")
+<script type="text/javascript" src="../js/ques-handler.js"></script>
+<div class="product-content-container clearfix">
+	<!-- 问题 -->
+	<div class="product-list-container">
+		<div class="product-param-wrap">
+			<div class="mi question-param clearfix">
+				<form  id="form_products" method="post" action="/products">
+                <div class="question-param-li process clearfix">
+                    #springBind("form.processMethod")
+                    <input type="hidden" name="${status.expression}"  value="$!{status.value}" />
+                    <a class="sel" >加工方式</a>
+                    <ul class="param">
+						<li>
+                            <a>不限</a>
+                        </li>
+                        <li>
+                            <a>平面铣削</a>
+                        </li>
+                        <li>
+                            <a>侧壁铣削</a>
+                        </li>
+    					<li>
+                            <a>曲面铣削</a>
+                        </li>
+                        <li>
+                            <a>铣槽</a>
+                        </li>
+    					<li>
+                            <a>钻孔</a>
+                        </li>
+                        <li>
+                            <a>镗孔</a>
+                        </li>
+    					<li>
+                            <a>铰孔</a>
+                        </li>
+                        <li>
+                            <a>螺纹铣削</a>
+                        </li>
+    					<li>
+                            <a>车削(粗加工）</a>
+                        </li>
+                        <li>
+                            <a>车削(槽加工）</a>
+                        </li>
+    					<li>
+                            <a>车削(螺纹加工）</a>
+                        </li>
+                        <li>
+                            <a>去毛刺</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="question-param-li industry clearfix">
+                    #springBind("form.industry")
+                    <input type="hidden" name="${status.expression}"  value="$!{status.value}" />
+                    <a class="sel" >所属行业</a>
+                    <ul class="param">
+						<li>
+                            <a>不限</a>
+                        </li>
+                        <li>
+                            <a>模具</a>
+                        </li>
+                        <li>
+                            <a>船舶</a>
+                        </li>
+    					<li>
+                            <a>石油设备</a>
+                        </li>
+    					<li>
+                            <a>散热器/空调</a>
+                        </li>
+    					<li>
+                            <a>发电设备</a>
+                        </li>
+    					<li>
+                            <a>塑料机械</a>
+                        </li>
+    					<li>
+                            <a>内燃机</a>
+                        </li>
+    					<li>
+                            <a>大型机械设备</a>
+                        </li>
+    					<li>
+                            <a>汽车零件</a>
+                        </li>
+    					<li>
+                            <a>电子行业</a>
+                        </li>
+    					<li>
+                            <a>通用零件</a>
+                        </li>
+    					<li>
+                            <a>其它</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="question-param-li hardness clearfix">
+                    #springBind("form.wpHardness")
+                    <input type="hidden" name="${status.expression}"  value="$!{status.value}" />
+                    <a class="sel" >工件硬度</a>
+                    <ul class="param">
+						<li>
+                            <a>不限</a>
+                        </li>
+                        <li>
+                            <a>HRC20以下</a>
+                        </li>
+                        <li>
+                            <a>HRC20-30</a>
+                        </li>
+    					<li>
+                            <a>HRC30-40</a>
+                        </li>
+                        <li>
+                            <a>HRC40-50</a>
+                        </li>
+    					<li>
+                            <a>HRC50-58</a>
+                        </li>
+                        <li>
+                            <a>HRC58-62</a>
+                        </li>
+    					<li>
+                            <a>HRC62-65</a>
+                        </li>
+                        <li>
+                            <a>HRC65-68</a>
+                        </li>
+    					<li>
+                            <a>HRC68以上</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="question-param-li material clearfix">
+					#springBind("form.wpMaterial")
+                    <input type="hidden" name="${status.expression}"  value="$!{status.value}" />
+                    <a class="sel" >工件材质</a>
+                    <ul class="param">
+						<li>
+                            <a>不限</a>
+                        </li>
+                        <li>
+                            <a>钢</a>
+                        </li>
+                        <li>
+                            <a>铸铁</a>
+                        </li>
+    					<li>
+                            <a>不锈钢</a>
+                        </li>
+                        <li>
+                            <a>高温合金</a>
+                        </li>
+    					<li>
+                            <a>铝</a>
+                        </li>
+                        <li>
+                            <a>有色金属</a>
+                        </li>
+    					<li>
+                            <a>石墨</a>
+                        </li>
+                        <li>
+                            <a>树脂</a>
+                        </li>
+                    </ul>
+				</div>    
+				<script>
+					$(function(){
+						$(".question-param-li input").change(function(){
+							$("#form_productss").submit();//提交
+							$("#form_products")[0].reset();
+						});
+					});
+				</script>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="product-item-container clearfix">
+	<div class="main-list-content">
+		#foreach($product in $products)
+			<div class="product-item">
+				<div class="pic">
+					<img src="../product/${product.cover}" />
+				</div>
+				<div class="info">
+    				<h5 class="name">${product.name}</h5>
+    				<div class="brand">
+    					<img src="../img/logo/$stringUtil.getBrandLogo($product.brandId)" />
+    				</div>
+				</div>
+			</div>
+		#end
+	</div>
+</div>

@@ -52,6 +52,7 @@ import com.banzhuan.entity.SampleEntity;
 import com.banzhuan.form.CommentForm;
 import com.banzhuan.form.GoodcaseForm;
 import com.banzhuan.form.LoginForm;
+import com.banzhuan.form.ProductForm;
 import com.banzhuan.form.ProfessionalAnswerForm;
 import com.banzhuan.form.QuestionForm;
 import com.banzhuan.service.AgentService;
@@ -345,7 +346,7 @@ public class CommonController extends BaseController{
 		event.setNote(String.valueOf(request.getParameter("note")));
 		if(commonService.insertEvent(event) > 0)
 		{
-			JsonUtil.showAlert(response, "申请成功", "我们的工作人员会尽快联系您。", "确定", "", "");
+			JsonUtil.showAlert(response, "申请成功", "我们的工作人员会尽快联系您。", "逛逛刀师傅", "http://www.daoshifu.com", "");
 		}
 		else
 		{
@@ -382,6 +383,18 @@ public class CommonController extends BaseController{
 
 		result = commonService.getMaingoodcases();
 		mv.addObject("goodcases", result.get("goodcases"));
+		return mv;
+		
+	}
+	
+	@RequestMapping(value = "/products")
+	public ModelAndView products(final HttpServletRequest request,final HttpServletResponse response, @ModelAttribute("form")ProductForm form) 
+	{
+		ModelAndView mv = new ModelAndView("/common/products");
+		
+		Result result = commonService.getAllproducts(form,null);//new RowBounds((page-1)*Constant.ALL_QUESTION_PAGE_SIZE, Constant.ALL_QUESTION_PAGE_SIZE));
+		mv.addObject("products", result.get("products"));
+
 		return mv;
 		
 	}

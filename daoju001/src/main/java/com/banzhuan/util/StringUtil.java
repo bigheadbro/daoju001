@@ -514,17 +514,7 @@ public class StringUtil {
 	
 	public static boolean isProperImageFile(String type)
 	{
-		if(type == "jpg" || type == "jpeg" || type == "gif")
-		{
-			return true;
-		}
-
-		return false;
-	}
-	
-	public static boolean isProperFile(String type)
-	{
-		if(type == "jpg" || type == "jpeg" || type == "gif" || type == "doc" || type == "docx" || type == "xls" || type == "pdf")
+		if(isEqual(type,".jpg") || isEqual(type , ".jpeg") || isEqual(type , ".gif") || isEqual(type , ".png"))
 		{
 			return true;
 		}

@@ -483,11 +483,15 @@ public class AgentController extends BaseController{
 	@ResponseBody
 	public String uploadfile_product(HttpServletRequest request, HttpServletResponse response)
 	{
-		Account account = (Account) WebUtils.getSessionAttribute(request, "account");
 		String responseStr="";  
 		MultipartHttpServletRequest r = (MultipartHttpServletRequest) request;
 		  
         MultipartFile f = r.getFile("productlink");    
+        String type = f.getOriginalFilename().substring(f.getOriginalFilename().lastIndexOf(".")).toLowerCase();
+        if(!StringUtil.isProperImageFile(type))
+        {
+        	return "";
+        }
         String path = request.getSession().getServletContext().getRealPath("/product");
 		String link = StringUtil.getTodayString() + "/" + f.getOriginalFilename();
 		path += "/" + StringUtil.getTodayString() + "/";
@@ -780,6 +784,18 @@ public class AgentController extends BaseController{
 		
 		if(form.getIsEdit() > 0)
 		{
+			if(StringUtil.calStrNum(form.getName()) > 50)
+			{
+				JsonUtil.showAlert(response, "编辑刀具失败", "上传失败，刀具名称太长~", "确定", "", "");
+			}
+			if(form.getProcessMethod() == 0)
+			{
+				JsonUtil.showAlert(response, "编辑刀具失败", "上传失败，请选择加工方式~", "确定", "", "");
+			}
+			if(StringUtil.isEmpty(form.getPicture()))
+			{
+				JsonUtil.showAlert(response, "编辑刀具失败", "上传失败，请选择刀具配图~", "确定", "", "");
+			}
 			agentService.updateProductById(form, result);
 			
 			if(result.hasErrors())
@@ -792,6 +808,18 @@ public class AgentController extends BaseController{
 		}
 		else
 		{
+			if(StringUtil.calStrNum(form.getName()) > 50)
+			{
+				JsonUtil.showAlert(response, "新建刀具失败", "上传失败，刀具名称太长~", "确定", "", "");
+			}
+			if(form.getProcessMethod() == 0)
+			{
+				JsonUtil.showAlert(response, "新建刀具失败", "上传失败，请选择加工方式~", "确定", "", "");
+			}
+			if(StringUtil.isEmpty(form.getPicture()))
+			{
+				JsonUtil.showAlert(response, "新建刀具失败", "上传失败，请选择刀具配图~", "确定", "", "");
+			}
 			ProductEntity product = new ProductEntity();
 			product.setAgentId(account.getUserId());
 			product.setAgentLogo(account.getLogo());

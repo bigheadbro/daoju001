@@ -147,6 +147,17 @@ div[contentEditable]{outline:0}
 .main-head-container .main-head-content .login .top-dropdown li{position:relative;}
 .main-head-container .main-head-content .login ul.top-dropdown li a{display:block;text-align:center;padding:10px;}
 .main-head-container .main-head-content .login ul.top-dropdown li a:hover{background-color:#0099cb;}
+
+/*product*/
+.product-content-container{margin:0 auto;width:960px;margin-top:30px;border-radius: 4px;background-color: #EFEFEF;border:1px solid #a3a3a3}
+.product-item-container{margin:0 auto;width:960px;margin-top:30px;}
+.product-list-container{position: relative;padding-top: 1px;padding-bottom: 7px;}
+.product-param-wrap {height: 32px;margin-top: 5px;}
+.product-item{float:left;width:220px;margin-right:15px;border:1px solid #A8A8A8}
+.product-item .info{background-color:white;padding: 10px;}
+.product-item .info .name{font-size:13px;margin-bottom:5px;}
+.product-item img{width:220px;}
+.product-item .brand img{width:80px;}
 /*main banner*/
 .main-banner-container{background:#a6cad9;width:100%;height:252px;opacity:0.8;position:relative;}
 
@@ -408,6 +419,7 @@ ul.pa-answer{margin-top:10px;border-bottom: 1px solid #D3D3D3;padding-bottom: 10
 .error-msg{display:none;border-radius:8px;background-color:#ffc8c8;border:1px solid #cc3333;text-align:center;color:#cc3333;font-size:14px;line-height: 40px;margin-bottom: 10px;}
 em.reg-error{color:#cc3333;font-size:14px;line-height: 40px;display: block;margin: 5px;}
 em.error{color:#cc3333;font-size:14px;}
+.question-param-li em.error{color:#cc3333;font-size:14px;margin-top:30px;}
 label em.error{float:right}
 .error-msg label{display:block;}
 #selbrand{color:#7E7E7E;}
@@ -494,7 +506,7 @@ opacity: .3;
 .alert-content-left h1{margin-bottom:5px}
 .alert-content-left h4{font-size:14px;width: 270px;}
 .alert-content-right{float:right}
-.alert-btn{display: block;color: white;font-size: 24px;text-align: center;line-height: 35px;width:115px;height:41px;background-color:#63a200;border-radius:4px;}
+.alert-btn{display: block;color: white;font-size: 24px;text-align: center;line-height: 35px;padding: 0 10px;height:41px;background-color:#63a200;border-radius:4px;}
 .alert-footer{margin: 0 35px 20px 35px;float:right;color:#d2d2d2}
 /*上传头像*/
 .uploadlogo-win{display:none;position:absolute;top:50px;right:400px;z-index:10002;width:600px;padding: 5px;border-radius: 5px;background:url(../img/transGray.png);font-size:13px;}
@@ -728,6 +740,7 @@ p.forget{font-size: 12px;margin: 10px;color: #707070;}
 .mt5{margin-top:5px}
 .ml15{margin-left:15px}
 .mt20{margin-top:20px}
+.mt30{margin-top:30px}
 .mt15{margin-top:15px}
 .mb20{margin-bottom:20px}
 .mb15{margin-bottom:15px}

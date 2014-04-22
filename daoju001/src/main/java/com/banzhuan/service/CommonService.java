@@ -20,6 +20,7 @@ import com.banzhuan.dao.ComplainDAO;
 import com.banzhuan.dao.EventDAO;
 import com.banzhuan.dao.GoodcaseDAO;
 import com.banzhuan.dao.MsgDAO;
+import com.banzhuan.dao.ProductDAO;
 import com.banzhuan.dao.ProfessionalAnswerDAO;
 import com.banzhuan.dao.QuestionDAO;
 import com.banzhuan.dao.SampleDAO;
@@ -29,6 +30,7 @@ import com.banzhuan.entity.CommentEntity;
 import com.banzhuan.entity.ComplainEntity;
 import com.banzhuan.entity.EventEntity;
 import com.banzhuan.entity.GoodcaseEntity;
+import com.banzhuan.entity.ProductEntity;
 import com.banzhuan.entity.ProfessionalAnswerEntity;
 import com.banzhuan.entity.QuestionEntity;
 import com.banzhuan.entity.SampleEntity;
@@ -37,6 +39,7 @@ import com.banzhuan.common.Result;
 import com.banzhuan.form.CommentForm;
 import com.banzhuan.form.GoodcaseForm;
 import com.banzhuan.form.LoginForm;
+import com.banzhuan.form.ProductForm;
 import com.banzhuan.form.QuestionForm;
 import com.banzhuan.util.ChineseSpelling;
 import com.banzhuan.util.StringUtil;
@@ -86,6 +89,10 @@ public class CommonService {
 	@Autowired
 	@Qualifier("eventDAO")
 	private EventDAO eventDAO;
+	
+	@Autowired
+	@Qualifier("productDAO")
+	private ProductDAO productDAO;
 	
 	public Result checkLogin(LoginForm form, Errors errors)
 	{
@@ -255,6 +262,39 @@ public class CommonService {
     		questions = questionDAO.getAllquestions(ques, bound);
     	}
 		result.add("questions", questions);
+		return result;
+	}
+	
+	public Result getAllproducts(ProductForm form, RowBounds bound)
+	{
+		Result result = new Result();
+		ProductEntity product = new ProductEntity();
+		if(form.getIndustry() != 0)
+    	{
+			product.setIndustry(form.getIndustry());
+    	}
+    	if(form.getProcessMethod() != 0)
+    	{
+    		product.setProcessMethod(form.getProcessMethod());
+    	}
+    	if(form.getWpHardness() != 0)
+    	{
+    		product.setWpHardness(form.getWpHardness());
+    	}
+    	if(form.getWpMaterial() != 0)
+    	{
+    		product.setWpMaterial(form.getWpMaterial());
+    	}
+    	List<ProductEntity> products;
+    	if(bound == null)
+    	{
+    		products = productDAO.getAllProductsByType(product);
+    	}
+    	else
+    	{
+    		products = productDAO.getAllProductsByType(product, bound);
+    	}
+		result.add("products", products);
 		return result;
 	}
 	

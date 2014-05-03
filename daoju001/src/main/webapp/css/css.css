@@ -158,6 +158,33 @@ div[contentEditable]{outline:0}
 .product-item .info .name{font-size:13px;margin-bottom:5px;}
 .product-item img{width:220px;}
 .product-item .brand img{width:80px;}
+
+
+.main-top{margin:0 auto;width:960px;margin-top:30px;}
+.main-top ul li{display:inline-block;background-color:#ebebeb;color:#7d7d7d;text-align:center;width:320px;font-size:18px;}
+.main-top ul li a{display:block;padding-top:10px;padding-bottom:10px;}
+.main-top ul li a:hover{color:white;background-color:#aaa}
+.main-top ul li.current{background-color:#888;color:white;}
+.main-top .demo{width:960px;height:303px;background: url(../img/banner1.png) no-repeat 0 0;margin-top:20px;padding-top:285px;}
+.main-top .demo .left{float:left;background-color:#ff2121;color:white;padding: 20px 20px 30px 20px;width:285px}
+.main-top .demo .left h1{font-weight:400}
+.main-top .demo .left p{font-size:14px;margin-top: 10px;line-height: 22px;}
+.main-top .demo .left a{display:inline-block;margin-top:20px;border:2px solid white;border-radius:4px;padding:5px 20px;}
+.main-top .demo .right{float:left;background-color:#ff2121;color:white;margin-left: 10px;font-size: 36px;margin-top: 106px;}
+.main-top .demo .right h1{padding:10px;}
+
+.main-top .demo2{width:960px;height:563px;background: url(../img/banner2.png) no-repeat 0 0;margin-top:20px;padding-top:25px;display:none}
+.main-top .demo2 .left{float:left;background-color:#42a7cd;color:white;padding: 20px 20px 30px 20px;width:285px}
+.main-top .demo2 .left h1{font-weight:400}
+.main-top .demo2 .left p{font-size:14px;margin-top: 10px;line-height: 22px;}
+.main-top .demo2 .left a{display:inline-block;margin-top:20px;border:2px solid white;border-radius:4px;padding:5px 20px;}
+
+.main-top .demo3{width:960px;height:198px;background: url(../img/banner3.png) no-repeat 0 0;margin-top:20px;padding-top:390px;display:none}
+.main-top .demo3 .left{float:right;background-color:#777878;color:white;padding: 10px 20px 20px 20px;width:595px;opacity: 0.9;}
+.main-top .demo3 .left h1{font-weight:400}
+.main-top .demo3 .left p{font-size:14px;margin-top: 10px;line-height: 22px;}
+.main-top .demo3 .left a{display:inline-block;margin-top:20px;background-color:#42a7cd;border-radius:4px;padding:5px 20px;}
+
 /*main banner*/
 .main-banner-container{background:#a6cad9;width:100%;height:252px;opacity:0.8;position:relative;}
 

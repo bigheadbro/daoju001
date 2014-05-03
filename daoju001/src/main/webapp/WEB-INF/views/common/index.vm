@@ -3,22 +3,86 @@
 <script type="text/javascript" src="../js/questions.js"></script>
 <script type="text/javascript" src="../js/jquery.flexslider-min.js"></script>
 <script>
+var num = 1;
+var userClick = 0;
+function changeTab(){
+	if(userClick == 0){
+    	if(num == 1){
+    		$("#demo1").trigger("click");
+    		num = 2;
+    	}else if(num == 2){
+    		$("#demo2").trigger("click");
+    		num = 3;
+    	}else if(num == 3){
+    		$("#demo3").trigger("click");
+    		num = 1;
+    	}
+	}
+}
 $(function() {
-	$('.flexslider').flexslider({
-        animation: "fade",
-		controlNav: false
-    });
+	setInterval(changeTab,"3000");
+	$('.main-top a').click(function(e){
+		e.preventDefault();
+
+        if (typeof e.which !== "undefined") {
+            userClick = 1;
+        }
+		$(".main-top li").each(function(){
+			$(this).removeClass("current");
+		});
+		$(this).parent().addClass("current");
+		if($(this).parent().attr("demo") == 1){
+			$(".demo").fadeIn();
+			$(".demo2").fadeOut();
+			$(".demo3").fadeOut();
+		}
+		if($(this).parent().attr("demo") == 2){
+			$(".demo2").fadeIn();
+			$(".demo").fadeOut();
+			$(".demo3").fadeOut();
+		}
+		if($(this).parent().attr("demo") == 3){
+			$(".demo3").fadeIn();
+			$(".demo").fadeOut();
+			$(".demo2").fadeOut();
+		}
+	});
 });
 
 </script>
-<div class="flexslider">
-  <ul class="slides">
-	<li>
-	    <a href="/event"><img src="../img/banner/banner9.jpg" /></a>
-	</li>
-  </ul>
+<div class="main-top">
+	<ul>
+		<li demo="1" class="current"><a id="demo1">特价刀具</a>
+		</li><li demo="2" ><a id="demo2">线上展会</a>
+		</li><li demo="3" ><a id="demo3">方案咨询</a></li>
+	</ul>
+	<div class="demo">
+		<div class="left">
+			<h1>常用刀具批发市场</h1>
+			<p>刀师傅网联合有实力的代理商/批发商<br/>为您带来常用型号的网上促销！ <br/>品质保证！价格优惠！</p>
+			<a href="products">点击进入</a>
+		</div>
+		<div class="right">
+			<h1>低价!</h1>
+		</div>
+	</div>
+	<div class="demo2">
+		<div class="left">
+			<h1>7x24小时刀具展会</h1>
+			<p>无需挤展会，一站看遍各大品牌特色刀具，<br/>助力您提高企业生产效率、加工能力。</p>
+			<a href="products">点击进入</a>
+		</div>
+	</div>
+	<div class="demo3">
+		<div class="left">
+			<h1>知名代理商在线解答</h1>
+			<p>无论是提升性价比或是解决加工难题，车削还是铣削，刀师傅网特约代理商随时为您服务。<br/>在加工现场？将图片和问题发送到刀师傅微信或者电话给我们的客服，我们来为您代发信息</p>
+			<a href="products">点击进入</a>
+		</div>
+	</div>
 </div>
 <div class="main-content-container clearfix">
+	
 	<!-- 问题 -->
 	<div class="main-list-container width630 mh600">
 		<div class="main-list-header">

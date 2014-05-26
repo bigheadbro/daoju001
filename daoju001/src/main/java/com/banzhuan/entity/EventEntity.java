@@ -10,6 +10,8 @@ public class EventEntity implements Serializable {
 	//
 	private int id;
 
+	private int eventid;
+	
 	private String company;
 	
 	private String name;
@@ -183,6 +185,20 @@ public class EventEntity implements Serializable {
 	 */
 	public void setNote(String note) {
 		this.note = note;
+	}
+
+	/**
+	 * @return the eventid
+	 */
+	public int getEventid() {
+		return eventid;
+	}
+
+	/**
+	 * @param eventid the eventid to set
+	 */
+	public void setEventid(int eventid) {
+		this.eventid = eventid;
 	}
 
 	

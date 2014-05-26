@@ -1,0 +1,180 @@
+#set($layout = "/layout/index_layout.vm")
+<script type="text/javascript" src="../js/event.js"></script>
+<div class="event-header clearfix">
+	<img src="../img/event/event2.png" />
+</div>
+<div class="event-body clearfix">
+    <div class="event-intro clearfix">
+		<div class="intro-cont clearfix">
+        	<div class="left">
+        		<h1>犀飞利</h1>
+    			<h2>毛刺解决专家</h2>
+				<p>成立于1960年的瓦格斯公司,首次将旗下手动工具产品线,SHAVIV手动去毛刺刀引入中国，是模具行业、汽车制造业、航空业、塑料电子产品以及管接头行业的首选工具</p>
+        	</div>
+			<div class="right">
+    			<img src="../img/event/event-item2.png" />
+        	</div>
+		</div>
+	</div>
+	<div class="event-detail clearfix" id="detail">
+		<div class="tag clearfix">
+			<img src="../img/event/event-detail.png" />
+		</div>
+		<div class="detail-cont clearfix">
+			<div class="info1">
+				<h4><em></em>只需一分钟填写您的邮寄地址与电子邮箱</h4>
+			</div>
+			<div class="info2">
+				<h4><em></em>六月刀具免费快递到您手中</h4>
+			</div>
+			<div class="info3">
+				<p>只需1分钟简单填写收件信息，即可在六月底获得试用品。由本站特约代理商-苏州鼎锐，以快递包邮形式发给各位，另可按各位要求，发送样本等资料。特约代理商均有资质认证，后续若愿意采用也请放心联系。</p>
+			</div>
+			<div class="user-info">
+				<div class="title">
+					<h3><em></em>请填写信息</h3>
+				</div>
+				<script>
+        			$(function() {	
+        				$("#form_event").validate({
+        					rules:{
+        						company:{
+        							required:true
+        						},
+        						address:{
+        							required:true
+        						},
+        						phone:{
+        							required:true,
+        						},
+        						name:{
+        							required:true,
+        						}
+        					},
+        					messages:{
+        						company:{
+        							required:"请输入公司名称"
+        						},
+        						address:{
+        							required:"请输入公司地址"
+        						},
+        						phone:{
+        							required:"请输入您的手机"
+        						},
+        						name:{
+        							required:"请输入联系人姓名"
+        						}
+        					},
+        					errorElement:"span",
+        					submitHandler: function(form) {
+                      			$(form).ajaxSubmit({
+            						dataType:'json',
+            						success:processJson
+            					});
+            				}
+        				});
+        			});
+					function processJson(data) { 
+						showAlert(data.title,data.content,data.info,data.btn,data.link);
+					}
+        			$(function() {
+        				$("#event_submit").click(function () {
+        					$("#form_event").submit();
+        				});
+        			});
+        		</script>
+				<form id="form_event" method="post">
+        			<!-- 隐藏字段，用于标示是表单提交 -->
+        		    <input type="hidden" name="do_submit" value="true"/>
+        			
+        			<ul class="event-listitem clearfix">
+						<li class="key">
+        				  公司名称<em></em>
+        				</li>
+						<li class="value">
+        				  <input type="text"  name="company"  class="event-form-text-input" placeholder="上海超达机械加工有限公司" />
+        				</li>
+        			</ul>
+					<ul class="event-listitem clearfix">
+						<li class="key">
+        				 邮寄地址<em></em>
+        				</li>
+						<li class="value">
+        				  <input type="text"  name="address"  class="event-form-text-input" placeholder="上海市创智天地4号楼2楼"/>
+        				</li>
+        			</ul>
+					<ul class="event-listitem clearfix">
+						<li class="key">
+        				 联系人姓名<em></em>
+        				</li>
+						<li class="value">
+        				  <input type="text"  name="name"  class="event-form-text-input" placeholder="张勇"/>
+        				</li>
+        			</ul>
+					<ul class="event-listitem clearfix">
+						<li class="key">
+        				 联系电话<em></em>
+        				</li>
+						<li class="value">
+        				  <input type="text"  name="phone"  class="event-form-text-input" placeholder="13526485214" />
+        				</li>
+        			</ul>
+					<ul class="event-listitem clearfix">
+						<li class="key">
+        				 申请型号
+        				</li>
+						<li class="value">
+							<input type="hidden" name="type"  value="1" />
+							<a class="sel" >随机发放</a>
+                            <ul class="param">
+        						<li>
+                                    <a>E100   重载荷，长屑产品</a>
+                                </li>
+                                <li>
+                                    <a>E111   薄壁刃，小孔用（1.5mm）</a>
+                                </li>
+                                <li>
+                                    <a>E200   短屑，正反转可加工</a>
+                                </li>
+								<li>
+                                    <a>E300   长屑，内外孔同时加工</a>
+                                </li>
+                            </ul>
+        				</li>
+        			</ul>
+					<ul class="event-listitem clearfix">
+						<li class="key">
+        				备注
+        				</li>
+						<li class="value">
+        				  <textarea class="event-note dsf-form-text-input " name="note" placeholder="可以填写您的需求，包括是否需要安排专家解释产品？刀具是否适合我的加工情况？可否给我一些意见等。"></textarea></li>		
+        				</li>
+        			</ul>
+					<ul class="event-listitem clearfix">
+        				带有<i></i>标记的为必填项
+        			</ul>
+					<ul class="event-listitem clearfix">
+        				<a id="event_submit">提 交</a>
+        			</ul>
+				</form>
+			</div>
+		</div>
+	</div>
+	<div class="event-tail">
+		<div class="tag clearfix">
+			<img src="../img/event/event-us.png" />
+		</div>
+		<div class="us-cont clearfix">
+			<div class="left">
+    			<a target="_blank" href="http://weibo.com/daoshifu"><img src="../img/event/wb.png" /></a>
+				<p>点击关注刀师傅新浪微博</p>
+        	</div>
+        	<div class="right">
+        		<img src="../img/2.png" />
+				<p>扫描二维码关注刀师傅微信账号</p>
+        	</div>
+		</div>
+	</div>
+</div>
+
+

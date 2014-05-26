@@ -3,7 +3,7 @@
 <script type="text/javascript" src="../js/questions.js"></script>
 <script type="text/javascript" src="../js/jquery.flexslider-min.js"></script>
 <script>
-var num = 1;
+/*var num = 1;
 var userClick = 0;
 function changeTab(){
 	if(userClick == 0){
@@ -21,7 +21,7 @@ function changeTab(){
 }
 $(function() {
 	setInterval(changeTab,"3000");
-	$('.main-top a').click(function(e){
+	$('.main-top li a').click(function(e){
 		e.preventDefault();
 
         if (typeof e.which !== "undefined") {
@@ -32,26 +32,34 @@ $(function() {
 		});
 		$(this).parent().addClass("current");
 		if($(this).parent().attr("demo") == 1){
-			$(".demo").fadeIn();
-			$(".demo2").fadeOut();
-			$(".demo3").fadeOut();
+			$(".demo").show();
+			$(".demo2").hide();
+			$(".demo3").hide();
 		}
 		if($(this).parent().attr("demo") == 2){
-			$(".demo2").fadeIn();
-			$(".demo").fadeOut();
-			$(".demo3").fadeOut();
+			$(".demo2").show();
+			$(".demo").hide();
+			$(".demo3").hide();
 		}
 		if($(this).parent().attr("demo") == 3){
-			$(".demo3").fadeIn();
-			$(".demo").fadeOut();
-			$(".demo2").fadeOut();
+			$(".demo3").show();
+			$(".demo").hide();
+			$(".demo2").hide();
 		}
 	});
+});*/
+$(function() {
+	$('.flexslider').flexslider({
+        animation: "fade",
+		controlNav: false
+    });
 });
-
 </script>
 <div class="main-top">
-	<ul>
+	<div class="main-event">
+    	<a href="event"><img src="../img/event/event2.png" /></a>
+    </div>
+	<!--<ul>
 		<li demo="1" class="current"><a id="demo1">特价刀具</a>
 		</li><li demo="2" ><a id="demo2">线上展会</a>
 		</li><li demo="3" ><a id="demo3">方案咨询</a></li>
@@ -60,7 +68,7 @@ $(function() {
 		<div class="left">
 			<h1>常用刀具批发市场</h1>
 			<p>刀师傅网联合有实力的代理商/批发商<br/>为您带来常用型号的网上促销！ <br/>品质保证！价格优惠！</p>
-			<a href="products">点击进入</a>
+			<a href="items">点击进入</a>
 		</div>
 		<div class="right">
 			<h1>低价!</h1>
@@ -79,10 +87,10 @@ $(function() {
 			<p>无论是提升性价比或是解决加工难题，车削还是铣削，刀师傅网特约代理商随时为您服务。<br/>在加工现场？将图片和问题发送到刀师傅微信或者电话给我们的客服，我们来为您代发信息</p>
 			<a href="products">点击进入</a>
 		</div>
-	</div>
+	</div>-->
 </div>
+
 <div class="main-content-container clearfix">
-	
 	<!-- 问题 -->
 	<div class="main-list-container width630 mh600">
 		<div class="main-list-header">

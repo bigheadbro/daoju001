@@ -1,0 +1,32 @@
+#set($layout = "/layout/item_layout.vm")
+<script type="text/javascript" src="../js/ques-handler.js"></script>
+<div class="item-content-container clearfix">
+	<div class="item-detail clearfix">
+		<div class="image">
+			<div class="photo">
+			</div>
+			<div class="">
+			</div>
+		</div>
+		<div class="description">
+			<h1 class="title">日本黛杰最新fjajfa刀具</h1>
+			<ul class="list">
+				<li><span>商品价格：</span></li>
+				<li><span>销量：</span></li>
+				<li><span>评价：</span></li>
+			</ul>
+			<div class="quatity"><span>数量：</span></div>
+			<a>立即购买</a>
+			<p>如果您大量购买我们的产品，可以与我们的客服联系，我们将为您提供更优质的服务</p>
+		</div>
+	</div>
+	<div class="item-list-wrapper">
+		<div class="header">
+			<a>商品详情</a>
+			<a>累计评价<span>24</span></a>
+		</div>
+		<div class="item-list clearfix">
+			<p>产品名称：黛杰xxxx铣刀</p>
+		</div>
+	</div>
+</div>

@@ -331,18 +331,17 @@ public class CommonController extends BaseController{
 	@RequestMapping(value="/event")
 	public ModelAndView event(final HttpServletRequest request,final HttpServletResponse response)
 	{
-		ModelAndView view = new ModelAndView("/common/event");
+		ModelAndView view = new ModelAndView("/common/event2");
 		if(!isDoSubmit(request))
 			return view;
 		
 		EventEntity event = new EventEntity();
 		event.setCompany(String.valueOf(request.getParameter("company")));
+		event.setEventid(2);
 		event.setAddress(String.valueOf(request.getParameter("address")));
 		event.setName(String.valueOf(request.getParameter("name")));
 		event.setPhone(String.valueOf(request.getParameter("phone")));
-		event.setMaterial(Integer.valueOf(request.getParameter("material")));
 		event.setType(Integer.valueOf(request.getParameter("type")));
-		event.setCount(Integer.valueOf(request.getParameter("count")));
 		event.setNote(String.valueOf(request.getParameter("note")));
 		if(commonService.insertEvent(event) > 0)
 		{
@@ -353,6 +352,7 @@ public class CommonController extends BaseController{
 			JsonUtil.showAlert(response, "申请失败", "如有任何问题，请联系我们。", "确定", "", "");
 		}
 		return view;
+
 	}
 	
 	
@@ -394,6 +394,24 @@ public class CommonController extends BaseController{
 		
 		Result result = commonService.getAllproducts(form,null);//new RowBounds((page-1)*Constant.ALL_QUESTION_PAGE_SIZE, Constant.ALL_QUESTION_PAGE_SIZE));
 		mv.addObject("products", result.get("products"));
+
+		return mv;
+		
+	}
+	
+	@RequestMapping(value = "/items")
+	public ModelAndView items(final HttpServletRequest request,final HttpServletResponse response) 
+	{
+		ModelAndView mv = new ModelAndView("/common/items");
+
+		return mv;
+		
+	}
+	
+	@RequestMapping(value = "/item")
+	public ModelAndView item(final HttpServletRequest request,final HttpServletResponse response) 
+	{
+		ModelAndView mv = new ModelAndView("/common/item");
 
 		return mv;
 		

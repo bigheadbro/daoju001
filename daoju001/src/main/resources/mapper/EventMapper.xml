@@ -4,6 +4,8 @@
 	<resultMap type="EventEntity" id="EventResultMap">
 	  <!---->
 		<id property="id" column="id" />
+		
+		<id property="eventid" column="eventid" />
 
 		<id property="company" column="company" />
 
@@ -43,7 +45,8 @@
 		</selectKey>
 		insert into t_event
 		(
-		company
+		eventid
+		,company
 		,address
 		,name
 		,phone
@@ -54,7 +57,8 @@
 		,gmt_create)
 		values
 		(
-		#{company}
+		#{eventid}
+		,#{company}
 		,#{address}
 		,#{name}
 		,#{phone}

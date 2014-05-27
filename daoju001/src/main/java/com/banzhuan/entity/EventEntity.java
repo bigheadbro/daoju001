@@ -14,6 +14,8 @@ public class EventEntity implements Serializable {
 	
 	private String company;
 	
+	private String mail;
+	
 	private String name;
 
 	private String address;
@@ -199,6 +201,20 @@ public class EventEntity implements Serializable {
 	 */
 	public void setEventid(int eventid) {
 		this.eventid = eventid;
+	}
+
+	/**
+	 * @return the mail
+	 */
+	public String getMail() {
+		return mail;
+	}
+
+	/**
+	 * @param mail the mail to set
+	 */
+	public void setMail(String mail) {
+		this.mail = mail;
 	}
 
 	

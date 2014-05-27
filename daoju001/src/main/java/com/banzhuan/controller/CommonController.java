@@ -338,6 +338,7 @@ public class CommonController extends BaseController{
 		EventEntity event = new EventEntity();
 		event.setCompany(String.valueOf(request.getParameter("company")));
 		event.setEventid(2);
+		event.setMail(String.valueOf(request.getParameter("mail")));
 		event.setAddress(String.valueOf(request.getParameter("address")));
 		event.setName(String.valueOf(request.getParameter("name")));
 		event.setPhone(String.valueOf(request.getParameter("phone")));

@@ -8,6 +8,8 @@
 		<id property="eventid" column="eventid" />
 
 		<id property="company" column="company" />
+		
+		<id property="mail" column="mail" />
 
 		<id property="address" column="address" />
 
@@ -47,6 +49,7 @@
 		(
 		eventid
 		,company
+		,mail
 		,address
 		,name
 		,phone
@@ -59,6 +62,7 @@
 		(
 		#{eventid}
 		,#{company}
+		,#{mail}
 		,#{address}
 		,#{name}
 		,#{phone}

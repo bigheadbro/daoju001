@@ -1,0 +1,74 @@
+#set($layout = "/layout/item_layout.vm")
+<script type="text/javascript">
+	var newaddrshow = false;
+	$(document).ready(function(){
+    	$("#addaddr").click(function(){
+    		shownewaddr();
+    	});
+	});
+   
+    function hidenewaddr() {
+    	$(".newaddr-win").hide();
+    	$("#pagemask-newaddr").hide();
+    	newaddrshow = false;
+    }
+    function shownewaddr() {
+    	$("#pagemask-newaddr").css("width", $(document).width());
+    	$("#pagemask-newaddr").css("height", $(document).height());
+    	$("#pagemask-newaddr").show();
+    	$(".newaddr-win").css("top",
+    			$(window).height() / 2 + $(document).scrollTop() - 220);
+    	$(".newaddr-win").css("left", $(document).width() / 2 - 300);
+    	if (!newaddrshow) {
+    		$(".newaddr-win").show();
+    		newaddrshow = true;
+    	}
+    }
+</script>
+<div class="purchase-content-container clearfix">
+	<h1>确认收货信息</h1>
+	<ul class="address">
+		<li class="current clearfix">
+			<span>寄送至</span><div><input type="radio" name="address" />上海市 杨浦区 四平路 1239号同济大学101室  陆佳元 13636331664</div><a>编辑该地址</a>
+		</li>
+		<li>
+			<span>寄送至</span><input type="radio" name="address" />上海市 杨浦区 四平路 1239号同济大学101室  陆佳元 13636331664<a>编辑该地址</a>
+		</li>
+		<a id="addaddr">使用新地址</a>
+	</ul>
+	<h1 class="mt20">确认订单信息</h1>
+	<div class="item-header clearfix">
+		<div class="name">商品</div>
+		<div class="price">单价(元)</div>
+		<div class="quatity">数量</div>
+		<div class="total">小计(元)</div>
+	</div>
+	<div class="item-list clearfix">
+		<div class="name"><a><img src="" /><span>日本黛杰全新RPMT1204可以让人家输入</span></a></div>
+		<div class="price"><span>20.00</span></div>
+		<div class="quatity"><span>X 50</span></div>
+		<div class="total"><span>1000.00</span></div>
+	</div>
+	<div class="trivial clearfix">
+		<div class="key">运费</div>
+		<div class="value">0.00</div>
+	</div>
+	<div class="trivial clearfix">
+		<div class="key">应付总额</div>
+		<div class="value"><span>1000.00</span></div>
+	</div>
+	<div class="clearfix">
+    	<div class="item-detail clearfix">
+    		<div class="key"><em>实付款:</em><span>￥1000.00</span></div>
+    		<div class="key"><em>寄送至:</em>上海市四平路1239号同济大学101室</div>
+    		<div class="key"><em>收件人:</em>陆佳元 13636331664</div>
+    	</div>
+	</div>
+	<div class="clearfix">
+    	<div class="operation clearfix">
+    		<a href="/purchase_handler">提交订单</a>
+			<p>如果您大量购买我们的产品，可以与我们的客服联系，我们将为您提供更优质的服务</p>
+    	</div>
+	</div>
+</div>
+#parse("/common/newaddr.vm")

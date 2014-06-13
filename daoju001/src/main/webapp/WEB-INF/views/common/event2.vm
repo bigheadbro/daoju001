@@ -140,7 +140,7 @@
         				 申请型号
         				</li>
 						<li class="value">
-							<input type="hidden" name="type"  value="1" />
+							<input type="hidden" name="type"  value="4" />
 							<a class="sel" >随机发放</a>
                             <ul class="param">
         						<li>

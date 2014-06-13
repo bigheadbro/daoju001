@@ -70,7 +70,7 @@
 		,#{type}
 		,#{count}
 		,#{note}
-		,#{gmtCreate}
+		,now()
 		)
 	</insert>
 

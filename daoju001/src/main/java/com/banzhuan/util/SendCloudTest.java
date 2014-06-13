@@ -43,7 +43,9 @@ public class SendCloudTest {
 	public static void main(String[] args) throws Exception {
 		ArrayList<String> set = readEdmFileByLines("EDM/edm.txt");
 
-		for (int i = 0; i < set.size(); i++) {
+		for (int i = 11240; i < set.size(); i++) {
+			try
+			{
 			while (true) {
 				Calendar time = Calendar.getInstance();
 				if (time.get(Calendar.HOUR_OF_DAY) == 13
@@ -95,6 +97,10 @@ public class SendCloudTest {
 			System.out.println(sendCloud.getEmailIdList());
 
 			Thread.sleep(5500);
+			}
+			catch(Exception ex){
+				System.out.println(ex.toString());
+			}
 		}
 	}
 }

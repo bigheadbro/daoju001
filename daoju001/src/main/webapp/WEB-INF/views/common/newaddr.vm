@@ -1,20 +1,25 @@
 <div id="pagemask-newaddr"></div>
-
+<link rel="stylesheet" href="../css/address.css">
+<script type="text/javascript" src="../js/pcasunzip.js"></script>
+<script type="text/javascript">
+	$(document).ready(function(){
+    	$(".close-newaddr").click(function(){
+    		hidenewaddr();
+    	});
+	});
+</script>
 <div class="newaddr-win">
     <div class="newaddr-win-content">
         <h2>
-            <a class="close-brand">x</a>
+            <a class="close-newaddr">x</a>
 			添加新地址
 		</h2>
         <div class="content clearfix">
+			<form>
 			<ul class="part1">
 				<li>
 					<em>选择所在地：</em>
-					<span id="district">
-                    	<select name="province" title="省" id="province">\</select>
-                    	<select name="city" title="市" id="city"></select>
-                    	<select name="area" title="区" id="area"></select>
-                    </span>
+					<input class="address" type="text" /> 
 				</li>
 				<li>
 					<em>邮政编码：</em>
@@ -42,6 +47,7 @@
 					<a>确认</a><a>取消</a>
 				</li>
 			</ul>
+			</form>
         </div>
     </div>
 </div>

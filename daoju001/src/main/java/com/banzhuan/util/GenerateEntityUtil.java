@@ -29,8 +29,8 @@ public class GenerateEntityUtil {
 		try {
 			connection = java.sql.DriverManager
 					.getConnection(
-							"jdbc:mysql://localhost:3307/daoju001?useUnicode=true&amp;characterEncoding=utf-8",
-							"root", "123");
+							"jdbc:mysql://114.80.208.103:60306/daoju001?useUnicode=true&amp;characterEncoding=utf-8",
+							"root", "123123");
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

@@ -1,4 +1,4 @@
-package com.banzhuan.util;
+/*package com.banzhuan.util;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -104,3 +104,4 @@ public class SendCloudTest {
 		}
 	}
 }
+*/

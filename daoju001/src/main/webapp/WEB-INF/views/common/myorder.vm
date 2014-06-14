@@ -1,0 +1,12 @@
+#set($layout = "/layout/buyer_detail_layout.vm")
+<ul class="right-tab clearfix">
+    <li class="current">
+        我的订单
+    </li>
+    <li>
+                           <a href="profile">地址管理</a>
+    </li>
+</ul>
+<div class="rigth-content">
+
+</div>

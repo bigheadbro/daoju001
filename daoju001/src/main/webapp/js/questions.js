@@ -11,7 +11,8 @@ $(function() {
 		else{
 			src = null;
 		}
-		$(this).children(".content").children().children(".text").children("p").text($(this).children(".hidden").text());
+		var tmp = $(this).children(".hidden").html().replace(/\<img.*\B\'\>/ig, "");
+		$(this).children(".content").children().children(".text").children("p").html(tmp);
 	});
 	$(".index-answer").each(function(){
 		var img = $(this).children(".hidden").children("img");

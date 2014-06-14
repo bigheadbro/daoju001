@@ -106,7 +106,16 @@
                                         <li>
                                             <a href="uploadsample">我的样本</a>
                                         </li>
-                                    #end
+																		#end
+																		#if($!stringUtil.isContains($request.getServletPath(),"/myorder") || $!stringUtil.isContains($request.getServletPath(),"/myaddr"))
+                                        <li class="current">
+                                            <a href="myorder">我的订单</a>
+                                        </li>
+                                    #else
+                                        <li>
+                                            <a href="myaddr">我的订单</a>
+                                        </li>
+																		#end
                                     #if($!stringUtil.isContains($request.getServletPath(),"/profile") || $!stringUtil.isContains($request.getServletPath(),"/changepwd"))
                                         <li class="current">
                                             <a href="profile">账户设置</a>

@@ -549,6 +549,7 @@ label em.error{float:right}
 #selbrand:hover{text-decoration:underline;color:#00c0ff}
 #uploadsample{color:white;background-color:#ff9000;border-radius:5px;padding:3px;display: inline-block;}
 .uploadv{width:62px;height:26px;opacity:0;position:absolute;left: 0;top: 10px;}
+
 #pagemask, #pagemask-complain,#pagemask-brand, #pagemask-answer,#pagemask-card,#pagemask-newaddr{
 position: absolute;
 display: none;
@@ -560,7 +561,7 @@ z-index: 10001;
 filter: alpha(opacity=30);
 opacity: .3;
 }
-
+#pagemask{z-index: 10003;}
 #pagemask-img{
 position: absolute;
 display: none;

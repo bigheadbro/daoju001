@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="address">
+	<resultMap type="AddressEntity" id="AddressResultMap">
+     <!---->
+	  <id property="id" column="id"/>
+   	  <!---->
+	  <id property="uid" column="uid"/>
+   	  <!---->
+	  <id property="province" column="province"/>
+   	  <!---->
+	  <id property="city" column="city"/>
+   	  <!---->
+	  <id property="area" column="area"/>
+   	  <!---->
+	  <id property="addr" column="addr"/>
+   	  <!---->
+	  <id property="zip" column="zip"/>
+   	  <!---->
+	  <id property="name" column="name"/>
+   	  <!---->
+	  <id property="phone" column="phone"/>
+   	  <!---->
+	  <id property="defaulte" column="defaulte"/>
+   	  <!---->
+	  <id property="gmtCreate" column="gmt_create"/>
+   	  <!---->
+	  <id property="gmtModify" column="gmt_modify"/>
+	</resultMap>
+	
+	<select id="queryAddressByUserid" parameterType="int"
+			resultMap="AddressResultMap">
+		<![CDATA[
+			SELECT * from t_address t where t.buyer_id=#{uid}
+		]]>
+	</select>
+	<select id="queryAddressById" parameterType="int"
+			resultMap="AddressResultMap">
+		<![CDATA[
+			SELECT * from t_address t where t.id=#{id}
+		]]>
+	</select>
+	<!-- 新代理商信息 -->
+	<insert id="insertAddressEntity" parameterType="AddressEntity">
+		<selectKey resultType="int" order="AFTER" keyProperty="id">
+			SELECT LAST_INSERT_ID() AS id
+		</selectKey>
+		insert into t_address
+		(
+	   	  uid
+	   	  ,province
+	   	  ,city
+	   	  ,area
+	   	  ,addr
+	   	  ,zip
+	   	  ,name
+	   	  ,phone
+	   	  ,defaulte
+	   	  ,gmt_create
+	   	  ,gmt_modify
+	      values
+	   (
+	   	  #{uid}
+	   	  ,#{province}
+	   	  ,#{city}
+	   	  ,#{area}
+	   	  ,#{addr}
+	   	  ,#{zip}
+	   	  ,#{name}
+	   	  ,#{phone}
+	   	  ,#{defaulte}
+	   	  ,#{gmtCreate}
+	   	  ,#{gmtModify}
+	   )
+	</insert>
+
+	<update id="updateAddressById" parameterType="AddressEntity">
+		update t_address
+		<set> 
+		      <if test="province != null">province=#{province},</if>
+		      <if test="city != null">city=#{city},</if>
+		      <if test="area != null">area=#{area},</if>
+		      <if test="addr != null">addr=#{addr},</if>
+		      <if test="zip != null">zip=#{zip},</if>
+		      <if test="name != null">name=#{name},</if>
+		      <if test="phone != null">phone=#{phone},</if>
+		      <if test="defaulte != 0">defaulte=#{defaulte},</if>
+		   	  gmt_modify=now()
+		</set>
+	   where id=#{id}
+	</update>
+</mapper>

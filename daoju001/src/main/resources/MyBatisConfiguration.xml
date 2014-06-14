@@ -14,6 +14,7 @@
 		<typeAlias alias="QuestionEntity" type="com.banzhuan.entity.QuestionEntity" />
 		<typeAlias alias="SampleEntity" type="com.banzhuan.entity.SampleEntity" />
 		<typeAlias alias="ComplainEntity" type="com.banzhuan.entity.ComplainEntity" />
+		<typeAlias alias="AddressEntity" type="com.banzhuan.entity.AddressEntity" />
 	</typeAliases>
 
 	<mappers>

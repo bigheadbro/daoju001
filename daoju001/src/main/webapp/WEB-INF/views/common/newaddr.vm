@@ -1,0 +1,47 @@
+<div id="pagemask-newaddr"></div>
+
+<div class="newaddr-win">
+    <div class="newaddr-win-content">
+        <h2>
+            <a class="close-brand">x</a>
+			添加新地址
+		</h2>
+        <div class="content clearfix">
+			<ul class="part1">
+				<li>
+					<em>选择所在地：</em>
+					<span id="district">
+                    	<select name="province" title="省" id="province">\</select>
+                    	<select name="city" title="市" id="city"></select>
+                    	<select name="area" title="区" id="area"></select>
+                    </span>
+				</li>
+				<li>
+					<em>邮政编码：</em>
+					<input type="text" /> 
+				</li>
+				<li>
+					<em>街道地址：</em>
+					<textarea></textarea>
+				</li>
+			</ul>
+			<ul class="part2">
+				<li>
+					<em>收件人姓名：</em>
+					<input type="text" /> 
+				</li>
+				<li>
+					<em>联系电话：</em>
+					<input type="text" /> 
+				</li>
+				<li>
+					<em>设置默认：</em>
+					<input type="checkbox" />设置为默认地址 <p>设置后系统将在购买时自动选中该收货地址</p> 
+				</li>
+				<li>
+					<a>确认</a><a>取消</a>
+				</li>
+			</ul>
+        </div>
+    </div>
+</div>

@@ -415,7 +415,21 @@ public class BuyerController extends BaseController{
 		return mv;
 	}
 	
+	@RequestMapping(value="/myaddr")
+	public ModelAndView myaddr(HttpServletRequest request, HttpServletResponse response, @ModelAttribute("account")Account account) {
+		ModelAndView mv = new ModelAndView("common/myaddr");
+		int userId = account.getUserId();
+		Result result = new Result();
+		
+		result = buyerService.queryAdressesByBuyerid(userId);
+
+		mv.addObject("addresses", result.get("addresses"));
+		return mv;
+	}
 	
-	
-	
+	@RequestMapping(value="/myorder")
+	public ModelAndView myorder(HttpServletRequest request, HttpServletResponse response, @ModelAttribute("account")Account account) {
+		ModelAndView mv = new ModelAndView("common/myorder");
+		return mv;
+	}
 }

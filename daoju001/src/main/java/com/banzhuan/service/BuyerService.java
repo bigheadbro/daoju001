@@ -8,10 +8,12 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.Errors;
 
+import com.banzhuan.dao.AddressDAO;
 import com.banzhuan.dao.AgentDAO;
 import com.banzhuan.dao.BuyerDAO;
 import com.banzhuan.dao.MsgDAO;
 import com.banzhuan.dao.QuestionDAO;
+import com.banzhuan.entity.AddressEntity;
 import com.banzhuan.entity.BuyerEntity;
 import com.banzhuan.entity.MessageEntity;
 import com.banzhuan.entity.QuestionEntity;
@@ -46,6 +48,10 @@ public class BuyerService {
 	@Autowired
 	@Qualifier("msgDAO")
 	private MsgDAO msgDAO;
+	
+	@Autowired
+	@Qualifier("addressDAO")
+	private AddressDAO addressDAO;
 	/**
 	 * 模拟QQ回调处理逻辑
 	 * @param uuid: 唯一ID
@@ -420,5 +426,11 @@ public class BuyerService {
 		return a;
 	}
 	
-
+	public Result queryAdressesByBuyerid(int userId)
+	{
+		Result result = new Result();
+		List<AddressEntity> addresses = addressDAO.queryAddressByUserid(userId, 0);
+		result.add("addresses", addresses);
+		return result;
+	}
 }

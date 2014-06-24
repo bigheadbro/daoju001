@@ -17,13 +17,20 @@ public class AddressDAOImpl extends SqlSessionDaoSupport implements AddressDAO {
 	}
 
 	@Override
-	public List<AddressEntity> queryAddressByUserid(int uid) {
-		return this.getSqlSession().selectList("queryAddressByUserid",uid);
+	public List<AddressEntity> queryAddressByUserid(int uid, int type) {
+		if(type == 0)//agent or buyer?
+		{
+			return this.getSqlSession().selectList("queryAddressByBuyerid",uid);
+		}
+		else
+		{
+			return this.getSqlSession().selectList("queryAddressByAgentid",uid);
+		}
 	}
 
 	@Override
-	public int insertAgentEntity(AddressEntity address) {
-		this.getSqlSession().insert("insertAgentEntity", address);
+	public int insertAddressEntity(AddressEntity address) {
+		this.getSqlSession().insert("insertAddressEntity", address);
 		return address.getId();
 	}
 

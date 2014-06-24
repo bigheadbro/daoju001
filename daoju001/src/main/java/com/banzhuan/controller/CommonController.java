@@ -51,12 +51,15 @@ import com.alipay.util.AlipaySubmit;
 import com.banzhuan.common.Account;
 import com.banzhuan.common.Constant;
 import com.banzhuan.common.Result;
+import com.banzhuan.entity.AddressEntity;
 import com.banzhuan.entity.AgentEntity;
 import com.banzhuan.entity.BuyerEntity;
 import com.banzhuan.entity.ComplainEntity;
 import com.banzhuan.entity.EventEntity;
+import com.banzhuan.entity.ItemEntity;
 import com.banzhuan.entity.ProfessionalAnswerEntity;
 import com.banzhuan.entity.SampleEntity;
+import com.banzhuan.form.AddressForm;
 import com.banzhuan.form.CommentForm;
 import com.banzhuan.form.GoodcaseForm;
 import com.banzhuan.form.LoginForm;
@@ -412,7 +415,9 @@ public class CommonController extends BaseController{
 	public ModelAndView items(final HttpServletRequest request,final HttpServletResponse response) 
 	{
 		ModelAndView mv = new ModelAndView("/common/items");
-
+		ItemEntity item = new ItemEntity();
+		List<ItemEntity> items = commonService.getItems(item);
+		mv.addObject("items", items);
 		return mv;
 		
 	}
@@ -421,7 +426,6 @@ public class CommonController extends BaseController{
 	public ModelAndView item(final HttpServletRequest request,final HttpServletResponse response) 
 	{
 		ModelAndView mv = new ModelAndView("/common/item");
-
 		return mv;
 		
 	}
@@ -487,9 +491,12 @@ public class CommonController extends BaseController{
 	}
 	
 	@RequestMapping(value = "/purchase")
-	public ModelAndView purchase(final HttpServletRequest request,final HttpServletResponse response, Model model) throws UnsupportedEncodingException 
+	public ModelAndView purchase(final HttpServletRequest request,final HttpServletResponse response, Model model,@ModelAttribute("form")AddressForm form) throws UnsupportedEncodingException 
 	{
 		ModelAndView mv = new ModelAndView("/common/purchase");
+		Account account = (Account) WebUtils.getSessionAttribute(request, "account");
+		List<AddressEntity> addresses = commonService.getAddresses(account.getUserId(), 0);
+		mv.addObject("addresses", addresses);
 		return mv;
 	}
 	
@@ -889,5 +896,26 @@ public class CommonController extends BaseController{
 				}
 			}
 		}
+	}
+	
+	@RequestMapping(value="/addaddr")
+	public void addaddr(HttpServletRequest request, HttpServletResponse response,@ModelAttribute("form")AddressForm form) {
+		AddressEntity address = new AddressEntity();
+		address.setType(0);
+		address.setUid(40);
+		address.setPca(form.getPca());
+		address.setAddr(form.getDetail());
+		address.setName(form.getUsername());
+		address.setPhone(form.getPhone());
+		address.setZip(form.getZip());
+		if(form.getIsdefault() != null && form.getIsdefault())
+		{
+			address.setDefaulte(true);
+		}
+		else
+		{
+			address.setDefaulte(false);
+		}
+		commonService.insertAddress(address);
 	}
 }

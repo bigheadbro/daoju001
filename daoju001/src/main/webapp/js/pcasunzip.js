@@ -24,7 +24,7 @@ $(function(){
 		$("#city").empty().removeClass("loc-pad");
 		$("#area").empty().removeClass("loc-pad");
 		$(".addr-wrapper").hide();
-		$("#pagemask").hide();
+		$("#pagemask-pca").hide();
 		$(".item-del li").addClass("nostyle");
 		$(".item-del li a.tabClose").remove();
 	});
@@ -41,7 +41,7 @@ $(function(){
 		$("#city").empty().removeClass("loc-pad");
 		$("#area").empty().removeClass("loc-pad");
 		$(".addr-wrapper").hide();
-		$("#pagemask").hide();
+		$("#pagemask-pca").hide();
 		$(".item-del li").addClass("nostyle");
 		$(".item-del li a.tabClose").remove();
 		$(".address").trigger("setaddr");
@@ -50,8 +50,8 @@ $(function(){
 		address=$(this);
 		if(addrfirst){
 			addrfirst=false;
-			$("body").append("<div id=\"pagemask\"></div>	<div class=\"addr-wrapper\">		<div class=\"addr-layer clearfix\">			<h3><a class=\"closeaddr\"><img src=\"../img/close.png\" /></a>请选择地区</h3>			<dl class=\"item-selected clearfix\">				<dt>已选择的地区：</dt>				<dd>					<ul class=\"item-del\">						<li class=\"nostyle\"><i id=\"pca\"></i></li>					</ul>					<span><a class=\"setloc\"><img src=\"../img/sure.png\" /></a></span>				</dd>			</dl>			<div id=\"province\" class=\"loc-pad clearfix\">			</div>			<div id=\"city\" class=\"clearfix\">			</div>			<div id=\"area\" class=\"clearfix\">			</div>		</div>	</div>");
-			for(i=0;i<provinceArray.length;i++){
+			$("body").append("<div id=\"pagemask-pca\"></div>	<div class=\"addr-wrapper\">		<div class=\"addr-layer clearfix\">			<h3><a class=\"closeaddr\"><img src=\"../img/close.png\" /></a>请选择地区</h3>			<dl class=\"item-selected clearfix\">				<dt>已选择的地区：</dt>				<dd>					<ul class=\"item-del\">						<li class=\"nostyle\"><i id=\"pca\"></i></li>					</ul>					<span><a class=\"setloc\"><img src=\"../img/sure.png\" /></a></span>				</dd>			</dl>			<div id=\"province\" class=\"loc-pad clearfix\">			</div>			<div id=\"city\" class=\"clearfix\">			</div>			<div id=\"area\" class=\"clearfix\">			</div>		</div>	</div>");
+			for(var i=0;i<provinceArray.length;i++){
 				$("#province").append(checkitem+"<a id=\"prov"+i+"\" title=\""+provinceArray[i].getName()+"\">"+provinceArray[i].getName()+"</a>"+endspan);
 			}
 		}
@@ -59,9 +59,9 @@ $(function(){
 		{
 			addrshow=true;
 			
-			$("#pagemask").css("width", $(document).width());
-			$("#pagemask").css("height", $(document).height());
-			$("#pagemask").show();
+			$("#pagemask-pca").css("width", $(document).width());
+			$("#pagemask-pca").css("height", $(document).height());
+			$("#pagemask-pca").show();
 			$(".addr-wrapper").css("top", $(window).height()/2+$(document).scrollTop()-180);
 			$(".addr-wrapper").css("left", $(document).width()/2-340);
 			$(".addr-wrapper").show();

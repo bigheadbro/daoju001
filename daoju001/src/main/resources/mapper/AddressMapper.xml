@@ -6,7 +6,11 @@
 	  <id property="id" column="id"/>
    	  <!---->
 	  <id property="uid" column="uid"/>
+	  <!---->
+	  <id property="type" column="type"/>
    	  <!---->
+	  <id property="pca" column="pca"/>
+	  <!---->
 	  <id property="province" column="province"/>
    	  <!---->
 	  <id property="city" column="city"/>
@@ -28,10 +32,16 @@
 	  <id property="gmtModify" column="gmt_modify"/>
 	</resultMap>
 	
-	<select id="queryAddressByUserid" parameterType="int"
+	<select id="queryAddressByBuyerid" parameterType="int"
 			resultMap="AddressResultMap">
 		<![CDATA[
-			SELECT * from t_address t where t.buyer_id=#{uid}
+			SELECT * from t_address t where t.uid=#{uid} and type = 0
+		]]>
+	</select>
+	<select id="queryAddressByAgentid" parameterType="int"
+			resultMap="AddressResultMap">
+		<![CDATA[
+			SELECT * from t_address t where t.uid=#{uid} and type = 1
 		]]>
 	</select>
 	<select id="queryAddressById" parameterType="int"
@@ -48,6 +58,8 @@
 		insert into t_address
 		(
 	   	  uid
+	   	  ,type
+	   	  ,pca
 	   	  ,province
 	   	  ,city
 	   	  ,area
@@ -57,10 +69,12 @@
 	   	  ,phone
 	   	  ,defaulte
 	   	  ,gmt_create
-	   	  ,gmt_modify
+	   	  ,gmt_modify)
 	      values
 	   (
 	   	  #{uid}
+	   	  ,#{type}
+	   	  ,#{pca}
 	   	  ,#{province}
 	   	  ,#{city}
 	   	  ,#{area}
@@ -69,23 +83,24 @@
 	   	  ,#{name}
 	   	  ,#{phone}
 	   	  ,#{defaulte}
-	   	  ,#{gmtCreate}
-	   	  ,#{gmtModify}
+	   	  ,now()
+	   	  ,now()
 	   )
 	</insert>
 
 	<update id="updateAddressById" parameterType="AddressEntity">
 		update t_address
 		<set> 
-		      <if test="province != null">province=#{province},</if>
-		      <if test="city != null">city=#{city},</if>
-		      <if test="area != null">area=#{area},</if>
-		      <if test="addr != null">addr=#{addr},</if>
-		      <if test="zip != null">zip=#{zip},</if>
-		      <if test="name != null">name=#{name},</if>
-		      <if test="phone != null">phone=#{phone},</if>
-		      <if test="defaulte != 0">defaulte=#{defaulte},</if>
-		   	  gmt_modify=now()
+		  <if test="pca != null">pca=#{pca},</if>
+	      <if test="province != null">province=#{province},</if>
+	      <if test="city != null">city=#{city},</if>
+	      <if test="area != null">area=#{area},</if>
+	      <if test="addr != null">addr=#{addr},</if>
+	      <if test="zip != null">zip=#{zip},</if>
+	      <if test="name != null">name=#{name},</if>
+	      <if test="phone != null">phone=#{phone},</if>
+	      <if test="defaulte != 0">defaulte=#{defaulte},</if>
+	   	  gmt_modify=now()
 		</set>
 	   where id=#{id}
 	</update>

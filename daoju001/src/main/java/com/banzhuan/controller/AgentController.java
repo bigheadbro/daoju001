@@ -846,5 +846,23 @@ public class AgentController extends BaseController{
 		//todo:account.setSampleCnt(agentService.getSampleCount(account.getUserId()));
 		response.sendRedirect(url);
 	}
+	
+	@RequestMapping(value="/myaddr")
+	public ModelAndView myaddr(HttpServletRequest request, HttpServletResponse response, @ModelAttribute("account")Account account) {
+		ModelAndView mv = new ModelAndView("common/myaddr");
+		int userId = account.getUserId();
+		Result result = new Result();
+		
+		result = agentService.queryAdressesByAgentid(userId);
+
+		mv.addObject("addresses", result.get("addresses"));
+		return mv;
+	}
+
+	@RequestMapping(value="/myorder")
+	public ModelAndView myorder(HttpServletRequest request, HttpServletResponse response, @ModelAttribute("account")Account account) {
+		ModelAndView mv = new ModelAndView("common/myorder");
+		return mv;
+	}
 
 }

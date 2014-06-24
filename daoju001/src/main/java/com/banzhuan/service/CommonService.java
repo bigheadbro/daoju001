@@ -13,23 +13,27 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.Errors;
 
+import com.banzhuan.dao.AddressDAO;
 import com.banzhuan.dao.AgentDAO;
 import com.banzhuan.dao.BuyerDAO;
 import com.banzhuan.dao.CommentDAO;
 import com.banzhuan.dao.ComplainDAO;
 import com.banzhuan.dao.EventDAO;
 import com.banzhuan.dao.GoodcaseDAO;
+import com.banzhuan.dao.ItemDAO;
 import com.banzhuan.dao.MsgDAO;
 import com.banzhuan.dao.ProductDAO;
 import com.banzhuan.dao.ProfessionalAnswerDAO;
 import com.banzhuan.dao.QuestionDAO;
 import com.banzhuan.dao.SampleDAO;
+import com.banzhuan.entity.AddressEntity;
 import com.banzhuan.entity.AgentEntity;
 import com.banzhuan.entity.BuyerEntity;
 import com.banzhuan.entity.CommentEntity;
 import com.banzhuan.entity.ComplainEntity;
 import com.banzhuan.entity.EventEntity;
 import com.banzhuan.entity.GoodcaseEntity;
+import com.banzhuan.entity.ItemEntity;
 import com.banzhuan.entity.ProductEntity;
 import com.banzhuan.entity.ProfessionalAnswerEntity;
 import com.banzhuan.entity.QuestionEntity;
@@ -93,6 +97,14 @@ public class CommonService {
 	@Autowired
 	@Qualifier("productDAO")
 	private ProductDAO productDAO;
+	
+	@Autowired
+	@Qualifier("addressDAO")
+	private AddressDAO addressDAO;
+	
+	@Autowired
+	@Qualifier("itemDAO")
+	private ItemDAO itemDAO;
 	
 	public Result checkLogin(LoginForm form, Errors errors)
 	{
@@ -537,5 +549,21 @@ public class CommonService {
 	{
 		int result = complainDAO.insertComplainEntity(en);
 		return result;
+	}
+	
+	public int insertAddress(AddressEntity address)
+	{
+		int result = addressDAO.insertAddressEntity(address);
+		return result;
+	}
+	
+	public List<AddressEntity> getAddresses(int uid, int type)
+	{
+		return addressDAO.queryAddressByUserid(uid, type);
+	}
+	
+	public List<ItemEntity> getItems(ItemEntity item)
+	{
+		return itemDAO.getAllItemsByType(item);
 	}
 }

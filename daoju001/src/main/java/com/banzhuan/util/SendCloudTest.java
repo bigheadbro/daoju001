@@ -1,4 +1,4 @@
-/*package com.banzhuan.util;
+package com.banzhuan.util;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -43,7 +43,7 @@ public class SendCloudTest {
 	public static void main(String[] args) throws Exception {
 		ArrayList<String> set = readEdmFileByLines("EDM/edm.txt");
 
-		for (int i = 11240; i < set.size(); i++) {
+		for (int i = 16917; i < set.size(); i++) {
 			try
 			{
 			while (true) {
@@ -104,4 +104,3 @@ public class SendCloudTest {
 		}
 	}
 }
-*/

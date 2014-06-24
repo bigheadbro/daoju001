@@ -15,6 +15,7 @@ import org.springframework.validation.Errors;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.support.DefaultMultipartHttpServletRequest;
 
+import com.banzhuan.dao.AddressDAO;
 import com.banzhuan.dao.AgentDAO;
 import com.banzhuan.dao.BuyerDAO;
 import com.banzhuan.dao.CommentDAO;
@@ -24,6 +25,7 @@ import com.banzhuan.dao.ProductDAO;
 import com.banzhuan.dao.ProfessionalAnswerDAO;
 import com.banzhuan.dao.QuestionDAO;
 import com.banzhuan.dao.SampleDAO;
+import com.banzhuan.entity.AddressEntity;
 import com.banzhuan.entity.AgentEntity;
 import com.banzhuan.entity.CommentEntity;
 import com.banzhuan.entity.GoodcaseEntity;
@@ -87,6 +89,10 @@ public class AgentService {
 	@Autowired
 	@Qualifier("productDAO")
 	private ProductDAO productDAO;
+	
+	@Autowired
+	@Qualifier("addressDAO")
+	private AddressDAO addressDAO;
 	
 	public Result register(RegForm form, Errors errors)
 	{
@@ -838,4 +844,12 @@ public class AgentService {
     {
     	productDAO.delProduct(id);
     }
+    
+    public Result queryAdressesByAgentid(int userId)
+	{
+		Result result = new Result();
+		List<AddressEntity> addresses = addressDAO.queryAddressByUserid(userId, 1);
+		result.add("addresses", addresses);
+		return result;
+	}
 }

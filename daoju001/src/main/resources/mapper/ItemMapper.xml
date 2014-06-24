@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="item">
+	<resultMap type="ItemEntity" id="ItemResultMap">
+	  <!---->
+	  <id property="id" column="id"/>
+   	  <!---->
+	  <id property="type" column="type"/>
+   	  <!---->
+	  <id property="detailtype" column="detailtype"/>
+	  <id property="version" column="version"/>
+   	  <!---->
+	  <id property="material" column="material"/>
+   	  <!---->
+	  <id property="workmaterial" column="workmaterial"/>
+   	  <!---->
+	  <id property="brand" column="brand"/>
+   	  <!---->
+	  <id property="price" column="price"/>
+	  <id property="picture" column="picture" />
+	  <id property="cover" column="cover" />
+   	  <!---->
+	  <id property="gmtCreate" column="gmt_create"/>
+   	  <!---->
+	  <id property="gmtModify" column="gmt_modify"/>
+	</resultMap>
+
+	<select id="queryItemEntityById" parameterType="int"
+		resultMap="ItemResultMap">
+	<![CDATA[
+		SELECT * from t_item t WHERE t.id = #{id}
+	]]>
+	</select>
+	
+	<select id="getItemCount" parameterType="int"
+			resultType="int">
+		<![CDATA[
+			SELECT count(1) from t_item t WHERE t.agentId = #{agentId};
+		]]>
+	</select>
+
+	<insert id="insertItemEntity" parameterType="ItemEntity">
+		<selectKey resultType="int" order="AFTER" keyProperty="id">
+			SELECT LAST_INSERT_ID() AS id
+		</selectKey>
+		insert into t_item
+		(
+		  id
+	   	  ,type
+	   	  ,detailtype
+	   	  ,version
+	   	  ,material
+	   	  ,workmaterial
+	   	  ,brand
+	   	  ,price
+	   	  ,picture
+	   	  ,cover
+	   	  ,gmt_create
+	   	  ,gmt_modify
+	   	 )
+	      values
+	   	 (
+	   	  #{id}
+	   	  ,#{type}
+	   	  ,#{detailtype}
+	   	  ,#{version}
+	   	  ,#{material}
+	   	  ,#{workmaterial}
+	   	  ,#{brand}
+	   	  ,#{price}
+	   	  ,#{picture}
+	   	  ,#{cover}
+	   	  ,now()
+	   	  ,now()
+	   )
+	</insert>
+	
+	<select id="getItemCountByType" parameterType="ItemEntity"
+			resultType="int">
+			SELECT count(1) from t_item t 
+			<where>
+				<if test="type != null">AND type=#{type}</if>
+			    <if test="detailtype != null">AND detailtype=#{detailtype}</if>
+			    <if test="version != null">AND version=#{version}</if>
+			    <if test="material != null">AND material=#{material}</if>
+			    <if test="workmaterial != null">AND workmaterial=#{workmaterial}</if>
+			    <if test="brand != null">AND brand=#{brand}</if>
+		    </where> 
+			order by gmt_create desc
+	</select>
+	
+	<select id="getAllItemsByType" parameterType="ItemEntity"
+			resultMap="ItemResultMap">
+		SELECT * from t_item t 
+			<where>
+				<if test="type != null">AND type=#{type}</if>
+			    <if test="detailtype != null">AND detailtype=#{detailtype}</if>
+			    <if test="version != null">AND version=#{version}</if>
+			    <if test="material != null">AND material=#{material}</if>
+			    <if test="workmaterial != null">AND workmaterial=#{workmaterial}</if>
+			    <if test="brand != null">AND brand=#{brand}</if>
+		    </where> 
+			order by gmt_create desc
+	</select>
+	
+	<select id="getMainItemsByType" parameterType="ItemEntity"
+			resultMap="ItemResultMap">
+		SELECT * from t_item t order by gmt_create desc limit 3
+	</select>
+	
+</mapper>

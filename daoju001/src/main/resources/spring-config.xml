@@ -78,6 +78,7 @@
 			<mvc:mapping path="/buyer/changepwd" />
 			<mvc:mapping path="/buyer/profile" />
 			<mvc:mapping path="/buyer/uploadlogo" />
+			<mvc:mapping path="/buyer/myaddr" />
 			<bean class="com.banzhuan.interceptor.BuyerLoginInterceptor" />
 		</mvc:interceptor>
 		<mvc:interceptor>
@@ -96,6 +97,7 @@
 			<mvc:mapping path="/agent/uploadlogo" />
 			<mvc:mapping path="/agent/newproduct" />
 			<mvc:mapping path="/agent/myproduct" />
+			<mvc:mapping path="/agent/myaddr" />
 			<bean class="com.banzhuan.interceptor.AgentLoginInterceptor" />
 		</mvc:interceptor>
 	</mvc:interceptors>

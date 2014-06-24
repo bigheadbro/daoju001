@@ -2,9 +2,12 @@ package com.banzhuan.controller;
 
 
 
+import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -12,22 +15,32 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.support.RequestContextUtils;
 
 import com.banzhuan.common.Account;
+import com.banzhuan.common.Constant;
 import com.banzhuan.dao.AgentDAO;
 import com.banzhuan.dao.EventDAO;
+import com.banzhuan.dao.ItemDAO;
 import com.banzhuan.dao.QuestionDAO;
 import com.banzhuan.dao.SampleDAO;
 import com.banzhuan.entity.AgentEntity;
+import com.banzhuan.entity.BrandEntity;
 import com.banzhuan.entity.EventEntity;
+import com.banzhuan.entity.ItemEntity;
 import com.banzhuan.entity.QuestionEntity;
 import com.banzhuan.entity.SampleEntity;
+import com.banzhuan.util.StringUtil;
 import com.banzhuan.util.Util;
 
 @Controller
@@ -50,6 +63,76 @@ public class AdminController extends BaseController{
 	@Autowired
 	@Qualifier("eventDAO")
 	private EventDAO eventDAO;
+	
+	@Autowired
+	@Qualifier("itemDAO")
+	private ItemDAO itemDAO;
+	
+	@RequestMapping(value="/lghlmclyhblsqtitem")
+	public ModelAndView item(final HttpServletRequest request, final HttpServletResponse response)
+	{
+		ModelAndView mv = new ModelAndView("/admin/newitem");
+		List<BrandEntity> brands = new ArrayList<BrandEntity>();
+		for(int i = 1;i<=Constant.BRAND_CNT;i++)
+		{
+			BrandEntity brand = new BrandEntity();
+			brand.setKey(i);
+			brand.setName(StringUtil.getBrand(i));
+			brand.setLink(StringUtil.getBrandLogo(i));
+			brand.setCountry(StringUtil.getBrandCountry(i));
+			brands.add(brand);
+		}
+		mv.addObject("brands", brands);
+		
+		if(isDoSubmit(request))
+		{
+			ItemEntity item = new ItemEntity();
+			item.setBrand(request.getParameter("brand"));
+			item.setType(request.getParameter("type"));
+			item.setDetailtype(request.getParameter("detailtype"));
+			item.setWorkmaterial(request.getParameter("workmaterial"));
+			item.setMaterial(request.getParameter("material"));
+			item.setVersion(request.getParameter("version"));
+			item.setPrice(Integer.parseInt(request.getParameter("price")));
+			item.setPicture(request.getParameter("picture"));
+			item.setCover(request.getParameter("cover"));
+			itemDAO.insertItemEntity(item);
+			return mv;
+		}
+		return mv;
+	}
+	
+	@RequestMapping(value = "uploadfile_item", produces="text/plain;charset=UTF-8")  
+	@ResponseBody
+	public String uploadfile_item(HttpServletRequest request, HttpServletResponse response)
+	{
+		String responseStr="";  
+		MultipartHttpServletRequest r = (MultipartHttpServletRequest) request;
+		  
+        MultipartFile f = r.getFile("productlink");    
+        String type = f.getOriginalFilename().substring(f.getOriginalFilename().lastIndexOf(".")).toLowerCase();
+        if(!StringUtil.isProperImageFile(type))
+        {
+        	return "";
+        }
+        String path = request.getSession().getServletContext().getRealPath("/item");
+		String link = StringUtil.getTodayString() + "/" + f.getOriginalFilename();
+		path += "/" + StringUtil.getTodayString() + "/";
+		File file = new File(path + f.getOriginalFilename());
+		file.getParentFile().mkdirs();  
+		file.getParentFile().mkdirs();  
+
+		try 
+		{
+			FileCopyUtils.copy(f.getBytes(), file);
+			responseStr = link;
+
+		} catch (IOException e) {
+
+		}
+
+		return responseStr;
+	}
 	
 	@RequestMapping(value="/lghlmclyhblsqtagent")
 	public ModelAndView agent(final HttpServletResponse response)

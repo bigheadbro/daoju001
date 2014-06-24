@@ -5,12 +5,12 @@
     	$("#addaddr").click(function(){
     		shownewaddr();
     	});
-			$("input[type=radio]").click(function(){
-					$(this).parent().parent().parent().children("li").each(function(){
-						$(this).removeClass("current");
-					});
-					$(this).parent().parent().addClass("current");
-			});
+		$("input[type=radio]").click(function(){
+				$(this).parent().parent().parent().children("li").each(function(){
+					$(this).removeClass("current");
+				});
+				$(this).parent().parent().addClass("current");
+		});
 	});
     function hidenewaddr() {
     	$(".newaddr-win").hide();
@@ -33,12 +33,11 @@
 <div class="purchase-content-container clearfix">
 	<h1>确认收货信息</h1>
 	<ul class="address">
+		#foreach($addr in $addresses)
 		<li class="current clearfix">
-			<span>寄送至</span><div><input type="radio" name="address" />上海市 杨浦区 四平路 1239号同济大学101室  陆佳元 13636331664</div><a>编辑该地址</a>
+			<span>寄送至</span><div><input type="radio" name="address" />$!{addr.pca} $!{addr.addr}  $!{addr.name} $!{addr.phone}</div><a>编辑该地址</a>
 		</li>
-		<li>
-			<span>寄送至</span><div><input type="radio" name="address" />上海市 杨浦区 四平路 1239号同济大学101室  陆佳元 13636331664</div><a>编辑该地址</a>
-		</li>
+		#end
 		<a id="addaddr">使用新地址</a>
 	</ul>
 	<h1 class="mt20">确认订单信息</h1>

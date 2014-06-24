@@ -6,7 +6,7 @@
     	<ul class="filter">
     		<li>
     			<div class="title">
-					品牌：
+					刀片类型：
     			</div>
     			<div class="content">
 					<a>双立人</a>
@@ -63,90 +63,29 @@
 			排序：<a>价格</a><a>销量</a><a>评论数量</a><a>上架时间</a>
 		</div>
 		<div class="item-list clearfix">
-			<div class="item">
-				<div class="img">
-					<a><img src="../img/aaa.jpg" /></a>
-				</div>
-				<div class="info">
-					<ul class="clearfix">
-						<li class="title">
-							<a>日本黛杰全新RPMT1204 可以让人家输入最多两行</a>
-						</li>
-						<li class="price">
-							<span>￥20.00</span>
-						</li>
-						<li class="quatity">
-							已售出 <span>235</span> 件
-						</li>
-						<li class="comment">
-							<span>23</span> 条评论
-						</li>
-					</ul>
-				</div>
-			</div>
-			<div class="item">
-				<div class="img">
-					<a><img src="../img/aaa.jpg" /></a>
-				</div>
-				<div class="info">
-					<ul>
-						<li class="title">
-							<a>日本黛杰全新RPMT1204 可以让人家输入最多两行</a>
-						</li>
-						<li class="price">
-							<span>￥20.00</span>
-						</li>
-						<li class="quatity">
-							已售出 <span>235</span> 件
-						</li>
-						<li class="comment">
-							<span>23</span> 条评论
-						</li>
-					</ul>
-				</div>
-			</div>
-			<div class="item">
-				<div class="img">
-					<a><img src="../img/aaa.jpg" /></a>
-				</div>
-				<div class="info">
-					<ul>
-						<li class="title">
-							<a>日本黛杰全新RPMT1204 可以让人家输入最多两行</a>
-						</li>
-						<li class="price">
-							<span>￥20.00</span>
-						</li>
-						<li class="quatity">
-							已售出 <span>235</span> 件
-						</li>
-						<li class="comment">
-							<span>23</span> 条评论
-						</li>
-					</ul>
-				</div>
-			</div>
-			<div class="item">
-				<div class="img">
-					<a><img src="../img/aaa.jpg" /></a>
-				</div>
-				<div class="info">
-					<ul>
-						<li class="title">
-							<a>日本黛杰全新RPMT1204 可以让人家输入最多两行</a>
-						</li>
-						<li class="price">
-							<span>￥20.00</span>
-						</li>
-						<li class="quatity">
-							已售出 <span>235</span> 件
-						</li>
-						<li class="comment">
-							<span>23</span> 条评论
-						</li>
-					</ul>
-				</div>
-			</div>
+			#foreach( $item in $items )
+    			<div class="item">
+    				<div class="img">
+    					<a><img src="../item/${item.cover}" /></a>
+    				</div>
+    				<div class="info">
+    					<ul class="clearfix">
+    						<li class="title">
+    							<a>${item.brand}${item.type}${item.version} <br/>${item.material}</a>
+    						</li>
+    						<li class="price">
+    							<span>￥${item.price}</span>
+    						</li>
+    						<li class="quatity">
+    							已售出 <span>235</span> 件
+    						</li>
+    						<li class="comment">
+    							<span>23</span> 条评论
+    						</li>
+    					</ul>
+    				</div>
+    			</div>
+			#end
 		</div>
 	</div>
 </div>

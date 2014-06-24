@@ -13,6 +13,10 @@ public class AddressEntity implements Serializable {
 	//
 	private int uid;
 	//
+	private int type;
+	//
+	private String pca;
+	//
 	private String province;
 	//
 	private String city;
@@ -27,7 +31,12 @@ public class AddressEntity implements Serializable {
 	//
 	private String phone;
 	//
-	private int defaulte;
+	private Boolean defaulte;
+	// 记录创建时间
+	private String gmtCreate;
+	// 记录修改时间(最近登录时间)
+	private String gmtModify;
+		
 	public int getId() {
 		return id;
 	}
@@ -82,10 +91,58 @@ public class AddressEntity implements Serializable {
 	public void setPhone(String phone) {
 		this.phone = phone;
 	}
-	public int getDefaulte() {
+	public Boolean getDefaulte() {
 		return defaulte;
 	}
-	public void setDefaulte(int defaulte) {
+	public void setDefaulte(Boolean defaulte) {
 		this.defaulte = defaulte;
+	}
+	/**
+	 * @return the pca
+	 */
+	public String getPca() {
+		return pca;
+	}
+	/**
+	 * @param pca the pca to set
+	 */
+	public void setPca(String pca) {
+		this.pca = pca;
+	}
+	/**
+	 * @return the type
+	 */
+	public int getType() {
+		return type;
+	}
+	/**
+	 * @param type the type to set
+	 */
+	public void setType(int type) {
+		this.type = type;
+	}
+	/**
+	 * @return the gmtCreate
+	 */
+	public String getGmtCreate() {
+		return gmtCreate;
+	}
+	/**
+	 * @param gmtCreate the gmtCreate to set
+	 */
+	public void setGmtCreate(String gmtCreate) {
+		this.gmtCreate = gmtCreate;
+	}
+	/**
+	 * @return the gmtModify
+	 */
+	public String getGmtModify() {
+		return gmtModify;
+	}
+	/**
+	 * @param gmtModify the gmtModify to set
+	 */
+	public void setGmtModify(String gmtModify) {
+		this.gmtModify = gmtModify;
 	}
 }

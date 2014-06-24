@@ -55,9 +55,10 @@ $(function() {
     });
 });
 </script>
-<div class="main-top">
+<!--<div class="main-top">
 	<div class="main-event">
-    	<a href="event"><img src="../img/event/event2.png" /></a>
+    	<a><img src="../img/banner/banner2.jpg" /></a>
+			<a><img src="../img/banner/banner3.jpg" /></a>
     </div>
 	<!--<ul>
 		<li demo="1" class="current"><a id="demo1">特价刀具</a>
@@ -87,7 +88,17 @@ $(function() {
 			<p>无论是提升性价比或是解决加工难题，车削还是铣削，刀师傅网特约代理商随时为您服务。<br/>在加工现场？将图片和问题发送到刀师傅微信或者电话给我们的客服，我们来为您代发信息</p>
 			<a href="products">点击进入</a>
 		</div>
-	</div>-->
+	</div>
+</div>-->
+<div class="flexslider">
+  <ul class="slides">
+	<li>
+	    <a><img src="../img/banner/banner2.jpg" /></a>
+	</li>
+	<li>
+			<a><img src="../img/banner/banner3.jpg" /></a>
+	</li>
+  </ul>
 </div>
 
 <div class="main-content-container clearfix">

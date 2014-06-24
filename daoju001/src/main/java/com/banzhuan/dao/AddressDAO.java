@@ -15,9 +15,9 @@ public interface AddressDAO {
 	 */
 	AddressEntity queryAddressById(int id);
 	
-	List<AddressEntity> queryAddressByUserid(int uid);
+	List<AddressEntity> queryAddressByUserid(int uid, int type);
 
-	public int insertAgentEntity(AddressEntity address);
+	public int insertAddressEntity(AddressEntity address);
 
 	public int updateAddressById(AddressEntity addr);
 

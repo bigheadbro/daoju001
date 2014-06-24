@@ -1,0 +1,240 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+    #parse("/common/agent_header.vm")
+    <body>
+        <div class="body-wrapper">
+            <div class="main-bk-wrapper">
+                <div class="mainpage-container clearfix">
+					<div class="main-right">
+    					<link rel="stylesheet" href="../css/uploadify.css">
+                        <script type="text/javascript" src="../js/jquery.uploadify.min.js"></script>
+						<script>
+                        $(function() {	
+                        	$(".sel_type").change(function(){
+								$("#type").val($(".sel_type").find("option:selected").text());
+							});
+							$(".sel_workmaterial").change(function(){
+								$("#workmaterial").val($(".sel_workmaterial").find("option:selected").text());
+							});
+							$(".sel_detailtype").change(function(){
+								$("#detailtype").val($(".sel_detailtype").find("option:selected").text());
+							});
+							$(".sel_brand").change(function(){
+								$("#brand").val($(".sel_brand").find("option:selected").text());
+							});
+							$("#submit_uploaditem").click(function(){
+                        		$("#form_newitem").submit();
+                        	});
+                        });
+                        </script>
+                        <div class="rigth-content">
+                            <form id="form_newitem" method="post">
+                                <!-- 隐藏字段，用于标示是表单提交 -->
+                                <input type="hidden" name="do_submit" value="true"/>
+								<input type="hidden" name="cover" id="productCover" />
+								<div class="listitem clearfix">
+									<input type="hidden" id="type" name="type" value="车刀片"/>
+									<ul class="user-info clearfix">
+                            			<li class="key">
+                            				刀片类型
+                            			</li>
+                            			<li class="value">
+                            				<select class="sel_type">
+                                              <option value ="车刀片">车刀片</option>
+                                              <option value ="铣刀片">铣刀片</option>
+                                            </select>
+                            			</li>
+                            		</ul>
+                            	</div>
+								<div class="listitem clearfix">
+									<ul class="user-info clearfix">
+										<input type="hidden" id="detailtype" name="detailtype" value="CN"/>
+                            			<li class="key">
+                            				详细类型
+                            			</li>
+                            			<li class="value">
+                            				<select class="sel_detailtype">
+                                              <option value ="CN">CN</option>
+                                              <option value ="WN">WN</option>
+											  <option value ="TN">TN</option>
+                                              <option value ="CC">CC</option>
+											  <option value ="TC">TC</option>
+                                              <option value ="R4">R4</option>
+                                              <option value ="R5">R5</option>
+											  <option value ="R6">R6</option>
+                                              <option value ="1135">1135</option>
+											  <option value ="1604">1604</option>
+											  <option value ="φ8精球">φ8精球</option>
+                                              <option value ="φ10精球">φ10精球</option>
+											  <option value ="φ12精球">φ12精球</option>
+                                              <option value ="φ16精球">φ16精球</option>
+											  <option value ="φ20精球">φ20精球</option>
+                                            </select>
+                            			</li>
+                            		</ul>
+                            	</div>
+								<div class="listitem clearfix">
+                                    <ul class="user-info clearfix">
+                                        <li class="key">
+											刀片型号
+                                        </li>
+                                        <li class="value">
+                                            <input type="text" class="dsf-form-text-input" name="version"  />
+                                        </li>
+                                    </ul>
+                                </div>
+								<div class="listitem clearfix">
+									<input type="hidden" id="brand" name="brand" value="EMUGE" />
+                                    <ul class="user-info clearfix">
+                                        <li class="key">
+												代理刀具品牌
+                                        </li>
+                                        <li class="value">
+                                            <select class="sel_brand">
+                                              #foreach( $brand in $brands )
+                                                <option>${brand.name}</option>
+                                              #end
+                                            </select>
+                                        </li>
+                                    </ul>
+                                </div>
+								<div class="listitem clearfix">
+									<input type="hidden" id="workmaterial" name="workmaterial" value="钢件"/>
+									<ul class="user-info clearfix">
+                            			<li class="key">
+                            				加工材质
+                            			</li>
+                            			<li class="value">
+                            				<select class="sel_workmaterial">
+                                              <option value ="钢件">钢件</option>
+                                              <option value ="通用">通用</option>
+											  <option value ="铸铁">铸铁</option>
+                                              <option value ="不锈钢">不锈钢</option>
+                                            </select>
+                            			</li>
+                            		</ul>
+                            	</div>
+								<div class="listitem clearfix">
+                                    <ul class="user-info clearfix">
+                                        <li class="key">
+												刀片材质
+                                        </li>
+                                        <li class="value">
+                                            <input type="text" class="dsf-form-text-input" name="material" value="$!{status.value}" />
+                                        </li>
+                                    </ul>
+                                </div>
+								<div class="listitem clearfix">
+                                    <ul class="user-info clearfix">
+                                        <li class="key">
+												单价
+                                        </li>
+                                        <li class="value">
+                                            <input type="text" class="dsf-form-text-input" name="price" value="$!{status.value}" />
+                                        </li>
+                                    </ul>
+                                </div>
+                            	<div class="listitem clearfix">
+									<input type="hidden" name="picture" id="product_pic" />
+                            		<ul class="user-info clearfix">
+                            			<li class="key">
+                            				图片上传
+                            			</li>
+                            			<li class="value">
+                            				<input type="file" name="productlink" id="file_upload"/>
+                        					<div>
+                        						<input type="hidden" name="${status.expression}" value="$!{status.value}" id="product_pic" />
+                        						<em for="$!{status.expression}" generated="true" class="error">$!{status.errorMessage}</em>
+                        					</div>
+                            			</li>
+                            		</ul>
+                            	</div>
+                            	<div class="listitem mt20 pt20 btg clearfix">
+                            		<a id="submit_uploaditem" class="save" >上 传</a>
+                            	</div>
+								<script>
+                            		$(function() {
+										
+                        				$("body").on("click", ".del", delPic);
+                            			$("body").on("click", ".cover", setCover);
+                            			var picCnt = 0;
+                                    	if($("#product_pic").val().split('|').length > 0){
+                                    		picCnt = $("#product_pic").val().split('|').length - 1;
+                                    	}
+                                    	var upCnt = 4 - picCnt;
+                                    	function loadProduct(data){
+                                    		$(".uploadify-queue-item").each(function(){
+                                    			var pn = data.split("/")[1];
+                                    			if(pn.substr(0,15) == $(this).children(".fileName").text().split(" ")[0].substr(0,15)){
+                                    				$(this).empty();
+                                    				$(this).append("<img class='product-tn' src='../item/" + data + "' /><div class='buttons'><a class='del'>删除</a><label class='cover' for='" + data + "'><input origin='"+data+"' type='radio' id='" + data + "'/>设为封面</label></div>");
+                                    				$("#product_pic").val($("#product_pic").val()+"|"+data);
+                                    			}
+                                    		});
+                                    	}
+                                    	function setCover(){
+                                    		$(".cover").each(function(){
+                                    			$(this).children("[type=radio]").prop('checked', false);
+                                    		});
+                                    		$(this).children("[type=radio]").prop('checked', true);
+                                    		$("#productCover").val($(this).children("[type=radio]").attr("origin"));
+                                    	}
+                                    	function delPic(){
+                                    		upCnt = upCnt + 1;
+                                    		$('#file_upload').uploadify('settings','uploadLimit',upCnt);
+                                    		$(this).parent().parent().remove();
+                                    		var picAll = "";
+                                    		$(".cover").each(function(){
+                                    			picAll = picAll + "|" + $(this).attr("for");
+                                    		});		
+                                    		$("#product_pic").val(picAll);
+                                    	}
+                            			$("#file_upload").uploadify({  
+                                          	'height'        : 30,   
+                                          	'width'         : 120,    
+                              				'buttonText'    : '选择图片',
+                              				'fileSizeLimit' : '5MB',
+                                       	   	'fileObjName'   : 'productlink',
+                                          	'swf'           : '/js/uploadify.swf',  
+                                          	'uploader'      : '/admin/uploadfile_item',  
+                                          	'auto'          : true,  
+                              				'removeCompleted': false,
+                              				'fileTypeExts'  : '*.jpg;*.png;*.gif;*',  
+                              				'uploadLimit'   : upCnt, 
+                                          	'onUploadSuccess':function(file, data, response){   
+                        						if(data == ""){
+                        							showAlert("上传失败", "文件类型必须是png，jpg或者gif", "", "确定", "")
+                        						}
+                                          		loadProduct(data);
+                                          	},  
+                              				'overrideEvents': 'onSelectError',
+                              				'onSelectError' : function(file, errorCode, errorMsg) {
+                                      			if(errorCode == SWFUpload.QUEUE_ERROR.ZERO_BYTE_FILE){
+                                              		this.queueData.errorMsg = "不能传空文件!!";
+                                              	}
+                                      			if(errorCode == SWFUpload.QUEUE_ERROR.UPLOAD_LIMIT_EXCEEDED){
+                                              		this.queueData.errorMsg = "只能上传一个文件!!";
+                                              	}
+                                      			if(errorCode == SWFUpload.QUEUE_ERROR.FILE_EXCEEDS_SIZE_LIMIT){
+                                              		this.queueData.errorMsg = "文件大小不能超过5MB!!";
+                                              	}
+                                      			if(errorCode == SWFUpload.QUEUE_ERROR.INVALID_FILETYPE){
+                                              		this.queueData.errorMsg = "不支持该文件类型!!";
+                                              	}
+                                      		}
+                        				});
+                                  });  
+                        		</script>
+                            </form>
+                        </div>
+					</div>
+                </div>
+            </div>
+        </div>
+		<script type="text/javascript">
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3Ffdd0d4853bd81366542daabbd8e3fcb8' type='text/javascript'%3E%3C/script%3E"));
+</script>
+    </body>
+</html>
+

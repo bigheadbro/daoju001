@@ -6,6 +6,50 @@
     	$(".close-newaddr").click(function(){
     		hidenewaddr();
     	});
+		$("#submit_addr").click(function () {
+			$("#form_addr").submit();
+		});
+    			
+		$("#form_addr").validate({
+			rules:{
+				pca:{
+					required:true
+				},
+				zip:{
+					required:true
+				},
+				addr:{
+					required:true
+				},
+				username:{
+					required:true
+				},
+				phone:{
+					required:true
+				}
+			},
+			messages:{
+				pca:{
+					required:"请选择地区"
+				},
+				zip:{
+					required:"请输入邮编"
+				},
+				addr:{
+					required:"请输入详细地址"  
+				},
+				username:{
+					required:"请输入收件人名字"  
+				},
+				phone:{
+					required:"请输入联系电话"  
+				}
+			},
+			errorElement:"em",
+			submitHandler: function(form) {
+      			$(form).ajaxSubmit();
+			}
+		});
 	});
 </script>
 <div class="newaddr-win">
@@ -15,36 +59,41 @@
 			添加新地址
 		</h2>
         <div class="content clearfix">
-			<form>
+			<form id="form_addr" method="post" action="/addaddr">
 			<ul class="part1">
 				<li>
 					<em>选择所在地：</em>
-					<input class="address" type="text" /> 
+					#springBind("form.pca")
+					<input class="address" name="${status.expression}" readonly="readonly" type="text" /> 
 				</li>
 				<li>
 					<em>邮政编码：</em>
-					<input type="text" /> 
+					#springBind("form.zip")
+					<input name="${status.expression}" type="text" /> 
 				</li>
 				<li>
 					<em>街道地址：</em>
-					<textarea></textarea>
+					#springBind("form.detail")
+					<textarea name="${status.expression}"></textarea>
 				</li>
 			</ul>
 			<ul class="part2">
 				<li>
 					<em>收件人姓名：</em>
-					<input type="text" /> 
+					#springBind("form.username")
+					<input name="${status.expression}" type="text" /> 
 				</li>
 				<li>
 					<em>联系电话：</em>
-					<input type="text" /> 
+					#springBind("form.phone")
+					<input name="${status.expression}" type="text" /> 
 				</li>
 				<li>
 					<em>设置默认：</em>
-					<input type="checkbox" />设置为默认地址 <p>设置后系统将在购买时自动选中该收货地址</p> 
+					<input type="checkbox" name="isdefault" />设置为默认地址 <p>设置后系统将在购买时自动选中该收货地址</p> 
 				</li>
 				<li>
-					<a>确认</a><a>取消</a>
+					<a id="submit_addr">确认</a><a class="close-newaddr">取消</a>
 				</li>
 			</ul>
 			</form>

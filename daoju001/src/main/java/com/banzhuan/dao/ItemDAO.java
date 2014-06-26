@@ -18,4 +18,6 @@ public interface ItemDAO {
 	int getItemCountByType(ItemEntity Item);
 	
 	int getItemCount(int userid);
+	
+	List<String> getItemTypeList(int type);
 }

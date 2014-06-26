@@ -4,16 +4,16 @@
 	<div class="item-detail clearfix">
 		<div class="image">
 			<div class="photo">
+				<img src="../item/${item.cover}" />
 			</div>
 			<div class="">
 			</div>
 		</div>
 		<div class="description">
-			<h1 class="title">日本黛杰最新fjajfa刀具</h1>
+			<h1 class="title">${item.brand}${item.type}${item.version}</h1>
 			<ul class="list">
-				<li><span>商品价格：</span><em class="price">￥20.00</em></li>
+				<li><span>商品价格：</span><em class="price">￥${item.price}0</em></li>
 				<li><span>销量：</span>30天内售出<em>550</em>件</li>
-				<li><span>评价：</span><em>12</em>条评价</li>
 			</ul>
 			<div class="buy">
     			<div class="quatity">
@@ -27,11 +27,12 @@
 	<div class="item-info-wrapper">
 		<div class="header clearfix">
 			<a class="current">商品详情</a>
-			<a>累计评价<em>24</em></a>
 		</div>
 		<div class="item-info-list clearfix">
-			<p>产品名称：黛杰xxxx铣刀</p>
-			<p>产品分类：黛杰xxxx铣刀</p>
+			<p>产品品牌：${item.brand}</p>
+			<p>产品型号：${item.version}</p>
+			<p>加工材质：${item.workmaterial}</p>
+			<p>刀具材质：${item.material}</p>
 			<p>产品简介：<br/>黛杰最新JC6102材质，配合TG的负前角刃型，一改以往做淬火件容易发生崩刃的缺点。即使只使用中心部位加工平面，在工件硬度高达HRC60的情况下也可以使用40小时以上。在汽车覆盖件模具行业使用最广。</p>
 		</div>
 	</div>

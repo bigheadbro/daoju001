@@ -21,7 +21,7 @@ public class ItemEntity implements Serializable {
 	// 
 	private String brand;
 	// 
-	private int price;
+	private double price;
 	private String picture;
 	private String cover;
 	// 
@@ -56,13 +56,13 @@ public class ItemEntity implements Serializable {
 	/**
 	 * @return the price
 	 */
-	public int getPrice() {
+	public double getPrice() {
 		return price;
 	}
 	/**
 	 * @param price the price to set
 	 */
-	public void setPrice(int price) {
+	public void setPrice(double price) {
 		this.price = price;
 	}
 	/**

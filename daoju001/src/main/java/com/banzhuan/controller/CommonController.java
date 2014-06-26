@@ -62,6 +62,7 @@ import com.banzhuan.entity.SampleEntity;
 import com.banzhuan.form.AddressForm;
 import com.banzhuan.form.CommentForm;
 import com.banzhuan.form.GoodcaseForm;
+import com.banzhuan.form.ItemForm;
 import com.banzhuan.form.LoginForm;
 import com.banzhuan.form.ProductForm;
 import com.banzhuan.form.ProfessionalAnswerForm;
@@ -412,20 +413,31 @@ public class CommonController extends BaseController{
 	}
 	
 	@RequestMapping(value = "/items")
-	public ModelAndView items(final HttpServletRequest request,final HttpServletResponse response) 
+	public ModelAndView items(final HttpServletRequest request,final HttpServletResponse response, @ModelAttribute("form")ItemForm form) 
 	{
 		ModelAndView mv = new ModelAndView("/common/items");
 		ItemEntity item = new ItemEntity();
-		List<ItemEntity> items = commonService.getItems(item);
+		List<ItemEntity> items = commonService.getItems(form,item);
+		List<String> detailtypes = commonService.getItemsType(1);
+		List<String> materials = commonService.getItemsType(2);
+		List<String> workmaterials = commonService.getItemsType(3);
+		List<String> brands = commonService.getItemsType(4);
 		mv.addObject("items", items);
+		mv.addObject("detailtypes", detailtypes);
+		mv.addObject("materials", materials);
+		mv.addObject("workmaterials", workmaterials);
+		mv.addObject("brands", brands);
 		return mv;
 		
 	}
 	
-	@RequestMapping(value = "/item")
-	public ModelAndView item(final HttpServletRequest request,final HttpServletResponse response) 
+	@RequestMapping(value = "/item/{id}")
+	public ModelAndView item(final HttpServletRequest request,final HttpServletResponse response, @PathVariable String id) 
 	{
 		ModelAndView mv = new ModelAndView("/common/item");
+		int itemid = Integer.parseInt(id);
+		ItemEntity item = commonService.getItem(itemid);
+		mv.addObject("item", item);
 		return mv;
 		
 	}

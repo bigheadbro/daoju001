@@ -52,5 +52,10 @@ public class ItemDAOImpl extends SqlSessionDaoSupport implements ItemDAO {
 		return this.getSqlSession().selectOne("getItemCountByType", gc);
 	}
 	
+	@Override
+	public List<String> getItemTypeList(int type)
+	{
+		return this.getSqlSession().selectList("getItemTypeList", type);
+	}
 	
 }

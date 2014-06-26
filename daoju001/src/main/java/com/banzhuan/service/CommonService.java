@@ -42,6 +42,7 @@ import com.banzhuan.common.Account;
 import com.banzhuan.common.Result;
 import com.banzhuan.form.CommentForm;
 import com.banzhuan.form.GoodcaseForm;
+import com.banzhuan.form.ItemForm;
 import com.banzhuan.form.LoginForm;
 import com.banzhuan.form.ProductForm;
 import com.banzhuan.form.QuestionForm;
@@ -562,8 +563,78 @@ public class CommonService {
 		return addressDAO.queryAddressByUserid(uid, type);
 	}
 	
-	public List<ItemEntity> getItems(ItemEntity item)
+	public List<ItemEntity> getItems(ItemForm form, ItemEntity item)
 	{
+		if(StringUtil.isNotEmpty(form.getType()))
+		{
+			if(StringUtil.isEqual(form.getType(), "不限"))
+			{
+				item.setType(null);
+			}
+			else
+			{
+				item.setType(form.getType());
+			}
+		}
+		
+		if(StringUtil.isNotEmpty(form.getDetailtype()))
+		{
+			if(StringUtil.isEqual(form.getDetailtype(), "不限"))
+			{
+				item.setDetailtype(null);
+			}
+			else
+			{
+				item.setDetailtype(form.getDetailtype());
+			}
+		}
+		
+		if(StringUtil.isNotEmpty(form.getMaterial()))
+		{
+			if(StringUtil.isEqual(form.getMaterial(), "不限"))
+			{
+				item.setMaterial(null);
+			}
+			else
+			{
+				item.setMaterial(form.getMaterial());
+			}
+		}
+		
+		if(StringUtil.isNotEmpty(form.getWorkmaterial()))
+		{
+			if(StringUtil.isEqual(form.getWorkmaterial(), "不限"))
+			{
+				item.setWorkmaterial(null);
+			}
+			else
+			{
+				item.setWorkmaterial(form.getWorkmaterial());
+			}
+		}
+		
+		if(StringUtil.isNotEmpty(form.getBrand()))
+		{
+			if(StringUtil.isEqual(form.getBrand(), "不限"))
+			{
+				item.setBrand(null);
+			}
+			else
+			{
+				item.setBrand(form.getBrand());
+			}
+		}
+
 		return itemDAO.getAllItemsByType(item);
+	}
+	
+	public List<String> getItemsType(int type)
+	{
+		return itemDAO.getItemTypeList(type);
+	}
+	
+	public ItemEntity getItem(int id)
+	{
+		return itemDAO.queryItemEntityById(id);
 	}
 }

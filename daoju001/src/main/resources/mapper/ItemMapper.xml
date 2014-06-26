@@ -32,11 +32,20 @@
 	]]>
 	</select>
 	
-	<select id="getItemCount" parameterType="int"
-			resultType="int">
-		<![CDATA[
-			SELECT count(1) from t_item t WHERE t.agentId = #{agentId};
-		]]>
+	<select id="getItemTypeList" parameterType="int"
+			resultType="String">
+		<if test="_parameter == 1">
+			SELECT distinct detailtype from t_item
+		</if>
+		<if test="_parameter == 2">
+			SELECT distinct material from t_item
+		</if>
+		<if test="_parameter == 3">
+			SELECT distinct workmaterial from t_item
+		</if>
+		<if test="_parameter == 4">
+			SELECT distinct brand from t_item
+		</if>
 	</select>
 
 	<insert id="insertItemEntity" parameterType="ItemEntity">

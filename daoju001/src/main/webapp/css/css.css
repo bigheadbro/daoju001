@@ -30,25 +30,27 @@ a.common:hover{text-decoration:underline;color:#00c0ff}
 .item-filter-wrapper{border:1px solid #9b9b9b;background-color: white;}
 .item-filter-wrapper h2{font-size:15px;padding:10px;padding-left:20px;background-color:#ebebeb}
 .item-filter-wrapper .filter{font-size:13px;}
-.item-filter-wrapper .filter li{border-bottom:1px solid #9b9b9b}
-.item-filter-wrapper .filter li .title{display:inline-block;width:100px;text-align: right;padding:10px;}
-.item-filter-wrapper .filter li .content{display:inline-block;}
-.item-filter-wrapper .filter li .content a{color:#006ab4;padding:5px;}
+.item-filter-wrapper .filter li{border-bottom:1px solid #9b9b9b;padding: 5px 0;}
+.item-filter-wrapper .filter li .title{float: left;width:100px;text-align: right;padding:10px;}
+.item-filter-wrapper .filter li .content{display:inline-block;padding: 5px 0;}
+.item-filter-wrapper .filter li .content a{color:#006ab4;padding:5px;display: inline-block;}
 .item-filter-wrapper .filter li .content a:hover{background-color:#006ab4;color:white;}
 
 .item-content-container .item-list-wrapper{border:1px solid #9b9b9b;margin-top:20px;background-color: white;}
 .item-list-wrapper .header{font-size:15px;padding:15px;padding-left:20px;background-color:#ebebeb}
 .item-list-wrapper .header a{background-color:white;padding:5px 10px;border:1px solid #bcbcbc;margin-left:10px;font-size:13px;}
 .item-list-wrapper .header a:hover{background-color:#ff3000;color:white;}
-.item-list-wrapper .item{float:left;width: 239px;}
-.item-list-wrapper .item .img{padding: 10px;width:210px;height:210px;overflow:hidden;text-align:center;display:table;background-color:black;}
+.item-list-wrapper .item-list{padding:20px;}
+.item-list-wrapper .item{float:left;width: 229px;}
+.item-list-wrapper .item .img{width:210px;height:210px;overflow:hidden;text-align:center;display:table;background-color:black;}
 .item-list-wrapper .item .img a{display:table-cell;vertical-align:middle;}
 .item-list-wrapper .item .img img{margin:0 auto;max-width:210px;max-height:210px;}
 
-.item-list-wrapper .item .info{padding: 10px;}
-.item-list-wrapper .item .info li.title{color:#525252;font-size:13px;line-height: 20px;}
+.item-list-wrapper .item .info{width:210px;margin-bottom: 20px;}
+.item-list-wrapper .item .info li.title{color:#494949;font-size:13px;line-height: 20px;}
 .item-list-wrapper .item .info li.title a:hover{color:#ff3000;text-decoration:underline;}
-.item-list-wrapper .item .info li.price{color:#ff3000;font-size:30px;line-height: 48px;}
+.item-list-wrapper .item .info li.price{color:#ff3000;font-size:24px;margin: 10px 0;}
+.item-list-wrapper .item .info li.price em{background-color:#ff3000;color:white;font-size:12px;padding:3px;float:right;margin-top:3px}
 .item-list-wrapper .item .info li.quatity{float:left;font-size:13px;}
 .item-list-wrapper .item .info li.quatity span{color:#2a93ff}
 .item-list-wrapper .item .info li.comment{float:right;font-size:13px;}
@@ -59,6 +61,7 @@ a.common:hover{text-decoration:underline;color:#00c0ff}
 .item-detail{}
 .item-detail .image{float:left;}
 .item-detail .image .photo{width:360px;height:360px;border:1px solid #d2d2d2}
+.item-detail .image .photo img{width:360px;height:360px;}
 .item-detail .description{float:left;margin-left:10px;font-size:15px;}
 .item-detail .description h1{font-size:16px;padding-bottom:10px;border-bottom:1px solid #d2d2d2}
 .item-detail .description ul.list{padding-bottom:10px;border-bottom:1px solid #d2d2d2;margin-top:10px;font-size:14px;}

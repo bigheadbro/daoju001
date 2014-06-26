@@ -1,87 +1,157 @@
 #set($layout = "/layout/index_layout.vm")
-<script type="text/javascript" src="../js/ques-handler.js"></script>
+<script>
+$(function() {
+	$(".content a").click(function(){
+		var value = $(this).text();
+		$(this).parent().parent().children("input").val(value);
+		$(this).trigger('change');
+	})
+	if($('input[name="type"]').val() != "" )
+	{
+		$(".type a").each(function(){
+			if($(this).text() == $('input[name="type"]').val())
+			{
+				$(this).css("color","white").css("background-color","#006ab4");
+			}
+		});
+	}
+	if($('input[name="brand"]').val() != "" )
+	{
+		$(".brand a").each(function(){
+			if($(this).text() == $('input[name="brand"]').val())
+			{
+				$(this).css("color","white").css("background-color","#006ab4");
+			}
+		});
+	}
+	if($('input[name="detailtype"]').val() != "" )
+	{
+		$(".detailtype a").each(function(){
+			if($(this).text() == $('input[name="detailtype"]').val())
+			{
+				$(this).css("color","white").css("background-color","#006ab4");
+			}
+		});
+	}
+	if($('input[name="workmaterial"]').val() != "" )
+	{
+		$(".workmaterial a").each(function(){
+			if($(this).text() == $('input[name="workmaterial"]').val())
+			{
+				$(this).css("color","white").css("background-color","#006ab4");
+			}
+		});
+	}
+	if($('input[name="material"]').val() != "" )
+	{
+		$(".material a").each(function(){
+			if($(this).text() == $('input[name="material"]').val())
+			{
+				$(this).css("color","white").css("background-color","#006ab4");
+			}
+		});
+	}
+});
+</script>
 <div class="item-content-container clearfix">
     <div class="item-filter-wrapper">
     	<h2>特价刀具分类</h2>
+		<form  id="form_items" method="post" action="/items">
     	<ul class="filter">
-    		<li>
+    		<li class="clearfix">
     			<div class="title">
 					刀片类型：
     			</div>
-    			<div class="content">
-					<a>双立人</a>
-					<a>双立人</a>
-					<a>双立人</a>
-					<a>双立人</a>
-					<a>双立人</a>
-					<a>双立人</a>
+				#springBind("form.type")
+                <input type="hidden" name="${status.expression}"  value="$!{status.value}" />
+    			<div class="content type">
+					<a>不限</a>
+					<a>车刀片</a>
+					<a>铣刀片</a>
     			</div>
     		</li>
-			<li>
+			<li class="clearfix">
+    			<div class="title">
+					品牌：
+    			</div>
+				#springBind("form.brand")
+                <input type="hidden" name="${status.expression}"  value="$!{status.value}" />
+    			<div class="content brand">
+					<a>不限</a>
+					#foreach( $brand in $brands )
+							<a>$brand</a>
+					#end
+    			</div>
+    		</li>
+			<li class="clearfix">
     			<div class="title">
 					型号：
     			</div>
-    			<div class="content">
-					<a>双立人</a>
-					<a>双立人</a>
-					<a>双立人</a>
-					<a>双立人</a>
-					<a>双立人</a>
-					<a>双立人</a>
+				#springBind("form.detailtype")
+                <input type="hidden" name="${status.expression}"  value="$!{status.value}" />
+    			<div class="content detailtype">
+					<a>不限</a>
+					#foreach( $detailtype in $detailtypes )
+							<a>$detailtype</a>
+					#end
     			</div>
     		</li>
-    		<li>
+    		<li class="clearfix">
     			<div class="title">
 					工件材质：
     			</div>
-    			<div class="content">
-					<a>双立人</a>
-					<a>双立人</a>
-					<a>双立人</a>
-					<a>双立人</a>
-					<a>双立人</a>
-					<a>双立人</a>
+				#springBind("form.workmaterial")
+                <input type="hidden" name="${status.expression}"  value="$!{status.value}" />
+    			<div class="content workmaterial">
+					<a>不限</a>
+					#foreach( $workmaterial in $workmaterials )
+							<a>$workmaterial</a>
+					#end
     			</div>
     		</li>
-    		<li>
+    		<li class="clearfix">
     			<div class="title">
-					加工方式：
+					刀片材质：
     			</div>
-    			<div class="content">
-					<a>双立人</a>
-					<a>双立人</a>
-					<a>双立人</a>
-					<a>双立人</a>
-					<a>双立人</a>
-					<a>双立人</a>
+				#springBind("form.material")
+                <input type="hidden" name="${status.expression}"  value="$!{status.value}" />
+    			<div class="content material">
+					<a>不限</a>
+					#foreach( $material in $materials )
+							<a>$material</a>
+					#end
     			</div>
     		</li>
     	</ul>
+		<script>
+			$(function(){
+				$(".content a").change(function(){
+					$("#form_items").submit();//提交
+					$("#form_items")[0].reset();
+				});
+			});
+		</script>
+		</form>
     </div>
 	<div class="item-list-wrapper">
 		<div class="header">
-			排序：<a>价格</a><a>销量</a><a>评论数量</a><a>上架时间</a>
+			排序：<a>价格</a><a>上架时间</a>
 		</div>
 		<div class="item-list clearfix">
 			#foreach( $item in $items )
     			<div class="item">
     				<div class="img">
-    					<a><img src="../item/${item.cover}" /></a>
+    					<a href="/item/${item.id}"><img src="../item/${item.cover}" /></a>
     				</div>
     				<div class="info">
     					<ul class="clearfix">
+							<li class="price clearfix">
+    							<span>￥${item.price}0 </span><em>包邮</em>
+    						</li>
     						<li class="title">
-    							<a>${item.brand}${item.type}${item.version} <br/>${item.material}</a>
+    							<a href="/item/${item.id}">${item.brand}${item.type}${item.version} <br/>${item.material}</a>
     						</li>
-    						<li class="price">
-    							<span>￥${item.price}</span>
-    						</li>
-    						<li class="quatity">
-    							已售出 <span>235</span> 件
-    						</li>
-    						<li class="comment">
-    							<span>23</span> 条评论
-    						</li>
+    						
     					</ul>
     				</div>
     			</div>

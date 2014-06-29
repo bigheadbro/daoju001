@@ -40,6 +40,8 @@
 		<id property="contactQq" column="contact_qq" />
 		<!--联系人邮箱 -->
 		<id property="contactEmail" column="contact_email" />
+		<id property="productlimit" column="productlimit" />
+		<id property="pca" column="pca" />
 		<!--注册时间 -->
 		<id property="regTime" column="reg_time" />
 		<!--记录创建时间 -->
@@ -114,6 +116,7 @@
    	  ,contact_phone
    	  ,contact_qq
    	  ,contact_email
+   	  ,pca
    	  ,reg_time
    	  ,gmt_create
    	  ,gmt_modified)
@@ -136,6 +139,7 @@
    	  ,#{contactPhone}
    	  ,#{contactQq}
    	  ,#{contactEmail}
+   	  ,#{pca}
    	  ,now()
    	  ,now()
    	  ,now()
@@ -168,6 +172,8 @@
 		      <if test="contactName != null">contact_name=#{contactName},</if>
 		      <if test="contactPhone != null">contact_phone=#{contactPhone},</if>
 		      <if test="contactQq != null">contact_qq=#{contactQq},</if>
+		      <if test="productlimit != null">productlimit=#{productlimit},</if>
+		      <if test="pca != null">pca=#{pca},</if>
 		      <if test="logo != null">logo=#{logo},</if>
 		   	  gmt_modified=now()
 		</set>

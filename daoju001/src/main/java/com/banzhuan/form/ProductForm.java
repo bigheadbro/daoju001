@@ -20,6 +20,7 @@ public class ProductForm implements Serializable {
 	private String picture;
 	private String cover;
 	private int isEdit;
+	private int brandid;
 
 	public int getProcessMethod() {
 		return processMethod;
@@ -134,5 +135,17 @@ public class ProductForm implements Serializable {
 	 */
 	public void setCover(String cover) {
 		this.cover = cover;
+	}
+	/**
+	 * @return the brandid
+	 */
+	public int getBrandid() {
+		return brandid;
+	}
+	/**
+	 * @param brandid the brandid to set
+	 */
+	public void setBrandid(int brandid) {
+		this.brandid = brandid;
 	}
 }

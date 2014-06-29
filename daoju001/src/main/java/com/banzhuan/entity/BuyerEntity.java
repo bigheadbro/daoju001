@@ -28,6 +28,10 @@ public class BuyerEntity implements Serializable {
 	private String contactName;
 	private String contactPhone;
 	private String contactQq;
+	
+	private int productlimit;
+	
+	private String pca;
 	// 注册时间
 	private String regTime;
 	// 记录创建时间
@@ -273,6 +277,34 @@ public class BuyerEntity implements Serializable {
 	 */
 	public static long getSerialversionuid() {
 		return serialVersionUID;
+	}
+
+	/**
+	 * @return the productlimit
+	 */
+	public int getProductlimit() {
+		return productlimit;
+	}
+
+	/**
+	 * @param productlimit the productlimit to set
+	 */
+	public void setProductlimit(int productlimit) {
+		this.productlimit = productlimit;
+	}
+
+	/**
+	 * @return the pca
+	 */
+	public String getPca() {
+		return pca;
+	}
+
+	/**
+	 * @param pca the pca to set
+	 */
+	public void setPca(String pca) {
+		this.pca = pca;
 	}
 
 	

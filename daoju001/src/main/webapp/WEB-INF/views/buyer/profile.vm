@@ -1,4 +1,6 @@
 #set($layout = "/layout/buyer_detail_layout.vm")
+<link rel="stylesheet" href="../css/address.css">
+<script type="text/javascript" src="../js/pcasunzip.js"></script>
 <ul class="right-tab clearfix">
     <li class="current">个人资料</li>
     <li>
@@ -33,6 +35,17 @@
 		<form id="form_profile" action="/buyer/profile" method="post">
 			<!-- 隐藏字段，用于标示是表单提交 -->
 		    <input type="hidden" name="do_submit" value="true"/>
+			<div class="listitem clearfix">
+    			#springBind("form.pca")
+                <ul class="user-info clearfix">
+                    <li class="key">
+    					所在省市
+                    </li>
+                    <li class="value">
+    					<input class="address dsf-form-text-input" name="${status.expression}" readonly="readonly" type="text" /> 
+                    </li>
+                </ul>
+            </div>
 			#springBind("form.userName")
     		<div class="listitem clearfix">
                     <ul class="user-info clearfix">

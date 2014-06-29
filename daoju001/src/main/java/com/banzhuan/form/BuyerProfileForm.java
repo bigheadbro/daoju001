@@ -16,6 +16,7 @@ public class BuyerProfileForm implements Serializable {
 	private String contactName;
 	private String contactPhone;
 	private String contactQQ;
+	private String pca;
 	
 	/**
 	 * @return the userName
@@ -106,6 +107,18 @@ public class BuyerProfileForm implements Serializable {
 	 */
 	public static long getSerialversionuid() {
 		return serialVersionUID;
+	}
+	/**
+	 * @return the pca
+	 */
+	public String getPca() {
+		return pca;
+	}
+	/**
+	 * @param pca the pca to set
+	 */
+	public void setPca(String pca) {
+		this.pca = pca;
 	}
 
 }

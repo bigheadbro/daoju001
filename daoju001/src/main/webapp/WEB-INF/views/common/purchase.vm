@@ -34,9 +34,15 @@
 	<h1>确认收货信息</h1>
 	<ul class="address">
 		#foreach($addr in $addresses)
-		<li class="current clearfix">
-			<span>寄送至</span><div><input type="radio" name="address" />$!{addr.pca} $!{addr.addr}  $!{addr.name} $!{addr.phone}</div><a>编辑该地址</a>
-		</li>
+    		#if(${addr.defaulte})
+    		<li class="current clearfix">
+    			<span>寄送至</span><div><input type="radio" checked name="address" /><i class="address">$!{addr.pca} $!{addr.addr}</i> <i class="name">$!{addr.name} $!{addr.phone}</i></div><a>编辑该地址</a>
+    		</li>
+			#else
+    		<li class="clearfix">
+				<span>寄送至</span><div><input type="radio" name="address" /><i class="address">$!{addr.pca} $!{addr.addr}</i> <i class="name">$!{addr.name} $!{addr.phone}</i></div><a>编辑该地址</a>
+    		</li>
+    		#end
 		#end
 		<a id="addaddr">使用新地址</a>
 	</ul>
@@ -48,10 +54,11 @@
 		<div class="total">小计(元)</div>
 	</div>
 	<div class="item-list clearfix">
-		<div class="name"><a><img src="" /><span>日本黛杰全新RPMT1204可以让人家输入</span></a></div>
-		<div class="price"><span>20.00</span></div>
-		<div class="quatity"><span>X 50</span></div>
-		<div class="total"><span>1000.00</span></div>
+		<div class="name"><a><img src="$cover" /><span>$itemName</span></a></div>
+		<div class="price"><span>$price</span></div>
+		<div class="quatity"><span>X $quatity</span></div>
+		#set($total=$price * $quatity)
+		<div class="total"><span>${total}0</span></div>
 	</div>
 	<div class="trivial clearfix">
 		<div class="key">运费</div>
@@ -59,18 +66,46 @@
 	</div>
 	<div class="trivial clearfix">
 		<div class="key">应付总额</div>
-		<div class="value"><span>1000.00</span></div>
+		<div class="value"><span>${total}0</span></div>
 	</div>
 	<div class="clearfix">
     	<div class="item-detail clearfix">
-    		<div class="key"><em>实付款:</em><span>￥1000.00</span></div>
+    		<div class="key"><em>实付款:</em><span>￥${total}0</span></div>
     		<div class="key"><em>寄送至:</em>上海市四平路1239号同济大学101室</div>
     		<div class="key"><em>收件人:</em>陆佳元 13636331664</div>
     	</div>
 	</div>
 	<div class="clearfix">
     	<div class="operation clearfix">
-    		<a href="/purchase_handler">提交订单</a>
+			<form id="form_purchase" method="post" action="/purchase_handler">
+				<input type="hidden" name="itemid" value="$itemid" />
+				<input type="hidden" name="itemname" value="$itemName" />
+				<input type="hidden" name="price" value="${total}" />
+				<input type="hidden" name="quatity" value="${quatity}" />
+				#if(${addresses.size()} > 0)
+    				#foreach($addr in $addresses)
+                		#if(${addr.defaulte})
+            				<input type="hidden" name="name"  value="${addr.name}" />
+            				<input type="hidden" name="address" value="${addr.addr}" />
+            				<input type="hidden" name="zip" value="${addr.zip}" />
+            				<input type="hidden" name="phone" value="${addr.phone}" />
+    					#end
+					#end
+				#else
+					<input type="hidden" name="name"  />
+    				<input type="hidden" name="address"  />
+    				<input type="hidden" name="zip"  />
+    				<input type="hidden" name="phone"  />
+				#end
+			</form>
+    		<a id="submit_purchase">提交订单</a>
+			<script>
+            $(function() {	
+        		$("#submit_purchase").click(function(){
+            		$("#form_purchase").submit();
+            	});
+            });
+            </script>
 			<p>如果您大量购买我们的产品，可以与我们的客服联系，我们将为您提供更优质的服务</p>
     	</div>
 	</div>

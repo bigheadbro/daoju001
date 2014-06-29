@@ -24,6 +24,7 @@ public class ItemEntity implements Serializable {
 	private double price;
 	private String picture;
 	private String cover;
+	private String description;
 	// 
 	private String gmtCreate;
 	// 
@@ -172,5 +173,17 @@ public class ItemEntity implements Serializable {
 	 */
 	public void setVersion(String version) {
 		this.version = version;
+	}
+	/**
+	 * @return the description
+	 */
+	public String getDescription() {
+		return description;
+	}
+	/**
+	 * @param description the description to set
+	 */
+	public void setDescription(String description) {
+		this.description = description;
 	}
    }

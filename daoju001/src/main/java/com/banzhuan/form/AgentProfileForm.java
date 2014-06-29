@@ -20,6 +20,7 @@ public class AgentProfileForm implements Serializable {
 	private String contactQQ;
 	private String verifiedLink;
 	private String description;
+	private String pca;
 	
 	/**
 	 * @return the userName
@@ -158,6 +159,18 @@ public class AgentProfileForm implements Serializable {
 	 */
 	public void setBrand(int brand) {
 		this.brand = brand;
+	}
+	/**
+	 * @return the pca
+	 */
+	public String getPca() {
+		return pca;
+	}
+	/**
+	 * @param pca the pca to set
+	 */
+	public void setPca(String pca) {
+		this.pca = pca;
 	}
 
 }

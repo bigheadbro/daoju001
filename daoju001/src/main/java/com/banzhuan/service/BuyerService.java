@@ -12,15 +12,18 @@ import com.banzhuan.dao.AddressDAO;
 import com.banzhuan.dao.AgentDAO;
 import com.banzhuan.dao.BuyerDAO;
 import com.banzhuan.dao.MsgDAO;
+import com.banzhuan.dao.ProductDAO;
 import com.banzhuan.dao.QuestionDAO;
 import com.banzhuan.entity.AddressEntity;
 import com.banzhuan.entity.BuyerEntity;
 import com.banzhuan.entity.MessageEntity;
+import com.banzhuan.entity.ProductEntity;
 import com.banzhuan.entity.QuestionEntity;
 import com.banzhuan.common.Account;
 import com.banzhuan.common.Constant;
 import com.banzhuan.common.Result;
 import com.banzhuan.form.BuyerProfileForm;
+import com.banzhuan.form.ProductForm;
 import com.banzhuan.form.RegForm;
 import com.banzhuan.form.LoginForm;
 import com.banzhuan.form.QuestionForm;
@@ -48,6 +51,10 @@ public class BuyerService {
 	@Autowired
 	@Qualifier("msgDAO")
 	private MsgDAO msgDAO;
+	
+	@Autowired
+	@Qualifier("productDAO")
+	private ProductDAO productDAO;
 	
 	@Autowired
 	@Qualifier("addressDAO")
@@ -219,6 +226,10 @@ public class BuyerService {
 			{
 				buyer.setContactQq(form.getContactQQ());
 			}
+			if(form.getPca() != "")
+			{
+				buyer.setPca(form.getPca());
+			}
 		}
 		buyerDAO.updateBuyerEntityById(buyer);
 		return 1;
@@ -258,6 +269,10 @@ public class BuyerService {
 		if(entity.getContactQq() != "")
 		{
 			form.setContactQQ(entity.getContactQq());
+		}
+		if(entity.getPca() != "")
+		{
+			form.setPca(entity.getPca());
 		}
 	}
 	
@@ -433,4 +448,151 @@ public class BuyerService {
 		result.add("addresses", addresses);
 		return result;
 	}
+	
+	public void setProductFormWithPid(ProductForm form, int id)
+	{
+		ProductEntity product = productDAO.queryProductEntityById(id);
+
+		if(product.getBrandId() >= 0)
+		{
+			form.setBrandid(product.getBrandId());
+		}
+		if(product.getIndustry() >=0)
+		{
+			form.setIndustry(product.getIndustry());
+		}
+		if(product.getProcessMethod() >=0)
+		{
+			form.setProcessMethod(product.getProcessMethod());
+		}
+		if(product.getWpHardness() >=0)
+		{
+			form.setWpHardness(product.getWpHardness());
+		}
+		if(product.getWpMaterial() >=0)
+		{
+			form.setWpMaterial(product.getWpMaterial());
+		}
+		if(product.getUserId() > 0)
+		{
+			form.setUserid(product.getUserId());
+		}
+		if(StringUtil.isNotEmpty(product.getName()))
+		{
+			form.setName(product.getName());
+		}
+		if(StringUtil.isNotEmpty(product.getDescription()))
+		{
+			form.setDescription(product.getDescription());
+		}
+		if(StringUtil.isNotEmpty(product.getPicture()))
+		{
+			form.setPicture(product.getPicture());
+		}
+		if(StringUtil.isNotEmpty(product.getDescription()))
+		{
+			form.setDescription(product.getDescription());
+		}
+
+	}
+    
+    public Result queryProductByUserid(int userid)
+	{
+		Result result = new Result();
+		List<ProductEntity> products = productDAO.queryProductEntityByBuyerid(userid);
+		result.add("products", products);
+		
+		return result;
+	}
+    
+    public void delProduct(int id)
+    {
+    	productDAO.delProduct(id);
+    }
+    
+    public Result queryAdressesByAgentid(int userId)
+	{
+		Result result = new Result();
+		List<AddressEntity> addresses = addressDAO.queryAddressByUserid(userId, 1);
+		result.add("addresses", addresses);
+		return result;
+	}
+    
+    public Result insertProduct(ProductForm form, ProductEntity product, Errors errors)
+    {
+    	Result result = new Result();
+    	if(StringUtil.isEmpty(form.getName()))
+		{
+    		errors.rejectValue("name", "PRODUCT_NAME_IS_NOT_NULL");
+			return result;
+		}
+    	if(StringUtil.isNotEmpty(form.getName()))
+    	{
+    		product.setName(form.getName());
+    	}
+    	
+    	if(form.getBrandid() != 0)
+    	{
+    		product.setBrandId((form.getBrandid()));
+    	}
+    	if(form.getIndustry() != 0)
+    	{
+    		product.setIndustry(form.getIndustry());
+    	}
+    	if(form.getProcessMethod() != 0)
+    	{
+    		product.setProcessMethod(form.getProcessMethod());
+    	}
+    	if(form.getWpHardness() != 0)
+    	{
+    		product.setWpHardness(form.getWpHardness());
+    	}
+    	if(form.getWpMaterial() != 0)
+    	{
+    		product.setWpMaterial(form.getWpMaterial());
+    	}
+    	if(StringUtil.isNotEmpty(form.getPicture()))
+    	{
+    		product.setPicture(form.getPicture());
+    	}
+    	if(StringUtil.isNotEmpty(form.getCover()))
+    	{
+    		product.setCover(form.getCover());
+    	}
+    	productDAO.insertProductEntity(product);
+    	return result;
+    	
+    }
+    
+    public Result updateProductById(ProductForm form, Errors errors)
+	{
+		Result result = new Result();
+		
+		if(StringUtil.isEmpty(form.getName()))// 问题类型为空
+		{
+			errors.rejectValue("name", "PRODUCT_NAME_IS_NOT_NULL");
+			return result;
+		}
+
+		ProductEntity product = new ProductEntity();
+		product.setId(form.getPid());
+		product.setIndustry(form.getIndustry());
+		product.setProcessMethod(form.getProcessMethod());
+		product.setWpHardness(form.getWpHardness());
+		product.setWpMaterial(form.getWpMaterial());
+		product.setPicture(form.getPicture());
+		product.setCover(form.getCover());
+		
+		productDAO.updateProductById(product);
+		
+		return result;
+	}
+    
+    public int getProductCount(int userid)
+    {
+    	ProductEntity product = new ProductEntity();
+    	product.setUsertype(2);
+    	product.setUserId(userid);
+    	return productDAO.getProductCount(product);
+    }
 }

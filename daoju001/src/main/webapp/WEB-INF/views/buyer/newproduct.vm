@@ -1,4 +1,4 @@
-#set($layout = "/layout/agent_detail_layout.vm")
+#set($layout = "/layout/buyer_detail_layout.vm")
 <link rel="stylesheet" href="../css/uploadify.css">
 <script type="text/javascript" src="../js/jquery.uploadify.min.js"></script>
 <script type="text/javascript" src="../js/ques-handler.js"></script>
@@ -330,7 +330,7 @@
       				'fileSizeLimit' : '5MB',
                	   	'fileObjName'   : 'productlink',
                   	'swf'           : '/js/uploadify.swf',  
-                  	'uploader'      : '/agent/uploadfile_product',  
+                  	'uploader'      : '/buyer/uploadfile_product',  
                   	'auto'          : true,  
       				'removeCompleted': false,
       				'fileTypeExts'  : '*.jpg;*.png;*.gif;*',  

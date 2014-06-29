@@ -15,12 +15,13 @@
 		<id property="wpHardness" column="work_solidity" />
 		<!--加工方式 -->
 		<id property="processMethod" column="process_method" />
+		<id property="usertype" column="usertype" />
 		<!--代理商id -->
-		<id property="agentId" column="agentId" />
+		<id property="userId" column="userId" />
 		<!--代理商名字 -->
-		<id property="agentName" column="agentName" />
+		<id property="userName" column="userName" />
 		<!--代理商logo -->
-		<id property="agentLogo" column="agent_logo" />
+		<id property="userLogo" column="user_logo" />
 		<!--代理品牌 -->
 		<id property="brandId" column="brandId" />
 		<!--下载链接 -->
@@ -44,10 +45,10 @@
 	delete from t_Product where id =#{id};
 	</delete>
 	
-	<select id="getProductCount" parameterType="int"
+	<select id="getProductCount" parameterType="ProductEntity"
 			resultType="int">
 		<![CDATA[
-			SELECT count(1) from t_Product t WHERE t.agentId = #{agentId};
+			SELECT count(1) from t_Product t WHERE t.userId = #{userId} and t.usertype = #{usertype};
 		]]>
 	</select>
 
@@ -63,9 +64,10 @@
 		,work_material
 		,work_solidity
 		,process_method
-		,agentId
-		,agentName
-		,agent_logo
+		,usertype
+		,userId
+		,userName
+		,user_logo
 		,brandId
 		,picture
 		,cover
@@ -79,9 +81,10 @@
 		,#{wpMaterial}
 		,#{wpHardness}
 		,#{processMethod}
-		,#{agentId}
-		,#{agentName}
-		,#{agentLogo}
+		,#{usertype}
+		,#{userId}
+		,#{userName}
+		,#{userLogo}
 		,#{brandId}
 		,#{picture}
 		,#{cover}
@@ -107,10 +110,17 @@
 		where id=#{id}
 	</update>
 	
-	<select id="queryProductEntityByUserid" parameterType="int"
+	<select id="queryProductEntityByAgentid" parameterType="int"
 			resultMap="ProductResultMap">
 		<![CDATA[
-			SELECT * from t_Product t where t.agentId=#{id} order by gmt_create desc
+			SELECT * from t_Product t where t.userId=#{id} and t.usertype = 2 order by gmt_create desc
+		]]>
+	</select>
+	
+	<select id="queryProductEntityByBuyerid" parameterType="int"
+			resultMap="ProductResultMap">
+		<![CDATA[
+			SELECT * from t_Product t where t.userId=#{id} and t.usertype = 1 order by gmt_create desc
 		]]>
 	</select>
 	

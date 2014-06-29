@@ -441,8 +441,9 @@ public class CommonController extends BaseController{
 		return mv;
 		
 	}
+	
 	@RequestMapping(value = "/purchase_return")
-	public ModelAndView purchase_return(final HttpServletRequest request,final HttpServletResponse response) throws UnsupportedEncodingException 
+	public ModelAndView purchase_return(final HttpServletRequest request,final HttpServletResponse response)
 	{
 		ModelAndView mv = new ModelAndView("/common/purchase_return");
 		Map<String,String> params = new HashMap<String,String>();
@@ -456,21 +457,21 @@ public class CommonController extends BaseController{
 						: valueStr + values[i] + ",";
 			}
 			//乱码解决，这段代码在出现乱码时使用。如果mysign和sign不相等也可以使用这段代码转化
-			valueStr = new String(valueStr.getBytes("ISO-8859-1"), "utf-8");
+			valueStr = new String(valueStr);
 			params.put(name, valueStr);
 		}
 		
 		//获取支付宝的通知返回参数，可参考技术文档中页面跳转同步通知参数列表(以下仅供参考)//
 		//商户订单号
 	
-		String out_trade_no = new String(request.getParameter("out_trade_no").getBytes("ISO-8859-1"),"UTF-8");
+		String out_trade_no = new String(request.getParameter("out_trade_no"));
 	
 		//支付宝交易号
 	
-		String trade_no = new String(request.getParameter("trade_no").getBytes("ISO-8859-1"),"UTF-8");
+		String trade_no = new String(request.getParameter("trade_no"));
 	
 		//交易状态
-		String trade_status = new String(request.getParameter("trade_status").getBytes("ISO-8859-1"),"UTF-8");
+		String trade_status = new String(request.getParameter("trade_status"));
 	
 		//获取支付宝的通知返回参数，可参考技术文档中页面跳转同步通知参数列表(以上仅供参考)//
 		
@@ -503,19 +504,30 @@ public class CommonController extends BaseController{
 	}
 	
 	@RequestMapping(value = "/purchase")
-	public ModelAndView purchase(final HttpServletRequest request,final HttpServletResponse response, Model model,@ModelAttribute("form")AddressForm form) throws UnsupportedEncodingException 
+	public ModelAndView purchase(HttpServletRequest request,final HttpServletResponse response, @ModelAttribute("form")AddressForm form)
 	{
 		ModelAndView mv = new ModelAndView("/common/purchase");
 		Account account = (Account) WebUtils.getSessionAttribute(request, "account");
 		List<AddressEntity> addresses = commonService.getAddresses(account.getUserId(), 0);
+		String name = request.getParameter("itemname");
+		String cover = request.getParameter("cover");
+		String itemid = request.getParameter("itemid");
+		double price = Double.parseDouble(request.getParameter("price"));
+		int quatity = Integer.parseInt(request.getParameter("quatity"));
 		mv.addObject("addresses", addresses);
+		mv.addObject("itemName", name);
+		mv.addObject("price", price);
+		mv.addObject("quatity", quatity);
+		mv.addObject("cover", cover);
+		mv.addObject("itemid", itemid);
 		return mv;
 	}
 	
 	@RequestMapping(value = "/purchase_handler")
-	public ModelAndView purchase_handler(final HttpServletRequest request,final HttpServletResponse response, Model model) throws UnsupportedEncodingException 
+	public ModelAndView purchase_handler(final HttpServletRequest request,final HttpServletResponse response, Model model)
 	{
 		ModelAndView mv = new ModelAndView("/common/purchase_handler");
+
 		//支付类型
 		String payment_type = "1";
 		//必填，不能修改
@@ -524,7 +536,7 @@ public class CommonController extends BaseController{
 		//需http://格式的完整路径，不能加?id=123这类自定义参数
 
 		//页面跳转同步通知页面路径
-		String return_url = "http://localhost/create_partner_trade_by_buyer-JAVA-UTF-8/return_url.jsp";
+		String return_url = "http://www.daoshifu.com/purchase_return";
 		//需http://格式的完整路径，不能加?id=123这类自定义参数，不能写成http://localhost/
 
 		//卖家支付宝帐户
@@ -532,15 +544,16 @@ public class CommonController extends BaseController{
 		//必填
 
 		//商户订单号
-		String out_trade_no = new String("123");
+		String out_trade_no = new String(Util.genOrderNO());
 		//商户网站订单系统中唯一订单号，必填
 
 		//订单名称
-		String subject = new String("刀具");
+		String subject = new String(request.getParameter("itemname"));
 		//必填
 
 		//付款金额
-		String price = new String("1");
+		String price = new String("0.01");
+		//String price = new String(request.getParameter("price"));
 		//必填
 
 		//商品数量
@@ -559,27 +572,27 @@ public class CommonController extends BaseController{
 
 		String body = new String("no description");
 		//商品展示地址
-		String show_url = new String("http://www.daoshifu.com");
+		String show_url = new String("http://www.daoshifu.com/item/"+request.getParameter("itemid"));
 		//需以http://开头的完整路径，如：http://www.xxx.com/myorder.html
 
 		//收货人姓名
-		String receive_name = new String("guicahoqun");
+		String receive_name = new String(request.getParameter("name"));
 		//如：张三
 
 		//收货人地址
-		String receive_address = new String("开鲁四村41号401");
+		String receive_address = new String(request.getParameter("address"));
 		//如：XX省XXX市XXX区XXX路XXX小区XXX栋XXX单元XXX号
 
 		//收货人邮编
-		String receive_zip = new String("200438");
+		String receive_zip = new String(request.getParameter("zip"));
 		//如：123456
 
 		//收货人电话号码
-		String receive_phone = new String("15021725054");
+		String receive_phone = new String("");
 		//如：0571-88158090
 
 		//收货人手机号码
-		String receive_mobile = new String("15021725054");
+		String receive_mobile = new String(request.getParameter("phone"));
 		//如：13312341234
 		
 		
@@ -613,9 +626,7 @@ public class CommonController extends BaseController{
 		String sHtmlText = AlipaySubmit.buildRequest(sParaTemp,"get","确认");
 		model.addAttribute(sHtmlText);
 		mv.addObject("alipay",sHtmlText);
-		return mv;
-		//return new ResponseEntity(model, HttpStatus.OK);  
-		
+		return mv;		
 	}
 	
 	@RequestMapping(value = "questions/{qid}")

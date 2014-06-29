@@ -67,6 +67,7 @@
 		</mvc:interceptor>
 		<mvc:interceptor>
    			<mvc:mapping path="/addcomment" />
+   			<mvc:mapping path="/purchase" />
    			<bean class="com.banzhuan.interceptor.UserLoginInterceptor" />
 		</mvc:interceptor>
 		<mvc:interceptor>
@@ -79,6 +80,9 @@
 			<mvc:mapping path="/buyer/profile" />
 			<mvc:mapping path="/buyer/uploadlogo" />
 			<mvc:mapping path="/buyer/myaddr" />
+			<mvc:mapping path="/buyer/newproduct" />
+			<mvc:mapping path="/buyer/myproduct" />
+			<mvc:mapping path="/buyer/product/*" />
 			<bean class="com.banzhuan.interceptor.BuyerLoginInterceptor" />
 		</mvc:interceptor>
 		<mvc:interceptor>
@@ -98,6 +102,9 @@
 			<mvc:mapping path="/agent/newproduct" />
 			<mvc:mapping path="/agent/myproduct" />
 			<mvc:mapping path="/agent/myaddr" />
+			<mvc:mapping path="/agent/newproduct" />
+			<mvc:mapping path="/agent/myproduct" />
+			<mvc:mapping path="/agent/product/*" />
 			<bean class="com.banzhuan.interceptor.AgentLoginInterceptor" />
 		</mvc:interceptor>
 	</mvc:interceptors>

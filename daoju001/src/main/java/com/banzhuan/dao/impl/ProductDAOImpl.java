@@ -21,10 +21,16 @@ public class ProductDAOImpl extends SqlSessionDaoSupport implements ProductDAO {
 	public List<ProductEntity> queryProductEntityByUserid(int id, RowBounds bound) {
 		return this.getSqlSession().selectList("queryProductEntityByUserid", id, bound);
 	}
+	
 
 	@Override
-	public List<ProductEntity> queryProductEntityByUserid(int id) {
-		return this.getSqlSession().selectList("queryProductEntityByUserid", id);
+	public List<ProductEntity> queryProductEntityByAgentid(int id) {
+		return this.getSqlSession().selectList("queryProductEntityByAgentid", id);
+	}
+	
+	@Override
+	public List<ProductEntity> queryProductEntityByBuyerid(int id) {
+		return this.getSqlSession().selectList("queryProductEntityByBuyerid", id);
 	}
 	
 	@Override
@@ -57,9 +63,9 @@ public class ProductDAOImpl extends SqlSessionDaoSupport implements ProductDAO {
 	}
 	
 	@Override
-	public int getProductCount(int userid)
+	public int getProductCount(ProductEntity Product)
 	{
-		return this.getSqlSession().selectOne("getProductCount", userid);
+		return this.getSqlSession().selectOne("getProductCount", Product);
 	}
 	
 	@Override

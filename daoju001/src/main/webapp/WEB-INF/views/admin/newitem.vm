@@ -149,6 +149,16 @@
                             			</li>
                             		</ul>
                             	</div>
+								<div class="listitem clearfix">
+                                    <ul class="user-info clearfix">
+                                        <li class="key">
+												产品描述
+                                        </li>
+                                        <li class="value">
+                                            <textarea class="dsf-form-text-input" name="description"></textarea>
+                                        </li>
+                                    </ul>
+                                </div>
                             	<div class="listitem mt20 pt20 btg clearfix">
                             		<a id="submit_uploaditem" class="save" >上 传</a>
                             	</div>

@@ -765,7 +765,17 @@ public class AgentController extends BaseController{
 			@ModelAttribute("productForm")ProductForm form, BindingResult result, @ModelAttribute("productid") final Object productid) 
 	{
 		ModelAndView mv = new ModelAndView("agent/newproduct");
-		
+		List<BrandEntity> brands = new ArrayList<BrandEntity>();
+		for(int i = 1;i<=Constant.BRAND_CNT;i++)
+		{
+			BrandEntity brand = new BrandEntity();
+			brand.setKey(i);
+			brand.setName(StringUtil.getBrand(i));
+			brand.setLink(StringUtil.getBrandLogo(i));
+			brand.setCountry(StringUtil.getBrandCountry(i));
+			brands.add(brand);
+		}
+		mv.addObject("brands", brands);
 		if(!isDoSubmit(request))
 		{
 			Map<String,?> map = RequestContextUtils.getInputFlashMap(request);
@@ -777,6 +787,7 @@ public class AgentController extends BaseController{
 					agentService.setProductFormWithPid(form,pid);
 					form.setIsEdit(1);
 					form.setPid(pid);
+					mv.addObject("brandid", form.getBrandid());
 				}
 			}
 			return mv;
@@ -821,10 +832,10 @@ public class AgentController extends BaseController{
 				JsonUtil.showAlert(response, "新建刀具失败", "上传失败，请选择刀具配图~", "确定", "", "");
 			}
 			ProductEntity product = new ProductEntity();
-			product.setAgentId(account.getUserId());
-			product.setAgentLogo(account.getLogo());
-			product.setAgentName(account.getUserName());
-			product.setBrandId(account.getBrandName());
+			product.setUserId(account.getUserId());
+			product.setUserLogo(account.getLogo());
+			product.setUserName(account.getUserName());
+			product.setUsertype(2);
 			agentService.insertProduct(form, product, result);
 			if(result.hasErrors())
 			{

@@ -146,6 +146,11 @@ public class Util {
 		}
 	}
 
+	public static String genOrderNO() {
+		String orderNumber = "DSF" + (new Date()).toString();
+		return orderNumber;
+	}
+	
 	public static String genRandomName(String prefix) {
 		UUID uuid = UUID.randomUUID();
 		return uuid.toString() + prefix;

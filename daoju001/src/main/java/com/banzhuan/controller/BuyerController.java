@@ -2,6 +2,7 @@ package com.banzhuan.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -21,8 +22,10 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.multipart.support.DefaultMultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -32,8 +35,11 @@ import org.springframework.web.util.WebUtils;
 
 import com.banzhuan.common.Constant;
 import com.banzhuan.common.Result;
+import com.banzhuan.entity.BrandEntity;
 import com.banzhuan.entity.BuyerEntity;
+import com.banzhuan.entity.ProductEntity;
 import com.banzhuan.form.BuyerProfileForm;
+import com.banzhuan.form.ProductForm;
 import com.banzhuan.form.RegForm;
 import com.banzhuan.form.LoginForm;
 import com.banzhuan.form.QuestionForm;
@@ -431,5 +437,156 @@ public class BuyerController extends BaseController{
 	public ModelAndView myorder(HttpServletRequest request, HttpServletResponse response, @ModelAttribute("account")Account account) {
 		ModelAndView mv = new ModelAndView("common/myorder");
 		return mv;
+	}
+	
+	@RequestMapping(value="/product/{id}")
+	public ModelAndView product(HttpServletRequest request, HttpServletResponse response,@PathVariable String id, @ModelAttribute("account")Account account,
+			final RedirectAttributes redirectAttributes) {
+		
+		int productid = Integer.parseInt(id);
+		
+		ModelAndView mv = new ModelAndView(new RedirectView("/buyer/newproduct"));
+		redirectAttributes.addFlashAttribute("productid",productid);
+		return mv;
+	}
+	
+	@RequestMapping(value="/myproduct")
+	public ModelAndView myproduct(HttpServletRequest request, HttpServletResponse response, @ModelAttribute("account")Account account) {
+		ModelAndView mv = new ModelAndView("buyer/myproduct");
+		int userId = account.getUserId();
+		Result result = new Result();
+		result = buyerService.queryProductByUserid(userId);
+		mv.addObject("products", result.get("products"));
+		return mv;
+	}
+	
+	@RequestMapping(value="/newproduct")
+	public ModelAndView newproduct(HttpServletRequest request, HttpServletResponse response, @ModelAttribute("account")Account account, 
+			@ModelAttribute("productForm")ProductForm form, BindingResult result, @ModelAttribute("productid") final Object productid) 
+	{
+		ModelAndView mv = new ModelAndView("buyer/newproduct");
+		List<BrandEntity> brands = new ArrayList<BrandEntity>();
+		for(int i = 1;i<=Constant.BRAND_CNT;i++)
+		{
+			BrandEntity brand = new BrandEntity();
+			brand.setKey(i);
+			brand.setName(StringUtil.getBrand(i));
+			brand.setLink(StringUtil.getBrandLogo(i));
+			brand.setCountry(StringUtil.getBrandCountry(i));
+			brands.add(brand);
+		}
+		mv.addObject("brands", brands);
+		if(!isDoSubmit(request))
+		{
+			Map<String,?> map = RequestContextUtils.getInputFlashMap(request);
+			if(map != null)
+			{
+				int pid = Integer.parseInt(productid.toString());
+				if(pid > 0)
+				{
+					buyerService.setProductFormWithPid(form,pid);
+					form.setIsEdit(1);
+					form.setPid(pid);
+					mv.addObject("brandid", form.getBrandid());
+				}
+			}
+			return mv;
+		}
+		
+		if(form.getIsEdit() > 0)
+		{
+			if(StringUtil.calStrNum(form.getName()) > 50)
+			{
+				JsonUtil.showAlert(response, "编辑刀具失败", "上传失败，刀具名称太长~", "确定", "", "");
+			}
+			if(form.getProcessMethod() == 0)
+			{
+				JsonUtil.showAlert(response, "编辑刀具失败", "上传失败，请选择加工方式~", "确定", "", "");
+			}
+			if(StringUtil.isEmpty(form.getPicture()))
+			{
+				JsonUtil.showAlert(response, "编辑刀具失败", "上传失败，请选择刀具配图~", "确定", "", "");
+			}
+			buyerService.updateProductById(form, result);
+			
+			if(result.hasErrors())
+			{
+				return mv;
+			}
+			
+			//account.setQuestionCnt(buyerService.getUserQuestionCount(account.getUserId()));
+			JsonUtil.showAlert(response, "编辑刀具", "刀具内容更新成功~~", "确定", "", "");
+		}
+		else
+		{
+			if(StringUtil.calStrNum(form.getName()) > 50)
+			{
+				JsonUtil.showAlert(response, "新建刀具失败", "上传失败，刀具名称太长~", "确定", "", "");
+			}
+			if(form.getProcessMethod() == 0)
+			{
+				JsonUtil.showAlert(response, "新建刀具失败", "上传失败，请选择加工方式~", "确定", "", "");
+			}
+			if(StringUtil.isEmpty(form.getPicture()))
+			{
+				JsonUtil.showAlert(response, "新建刀具失败", "上传失败，请选择刀具配图~", "确定", "", "");
+			}
+			ProductEntity product = new ProductEntity();
+			product.setUserId(account.getUserId());
+			product.setUserLogo(account.getLogo());
+			product.setUserName(account.getUserName());
+			product.setUsertype(1);
+			buyerService.insertProduct(form, product, result);
+			if(result.hasErrors())
+			{
+				return mv;
+			}
+
+			JsonUtil.showAlert(response, "新建刀具", "刀具新建成功~~", "确定", "", "");
+
+		}
+		return mv;
+	}
+	
+	@RequestMapping(value = "uploadfile_product", produces="text/plain;charset=UTF-8")  
+	@ResponseBody
+	public String uploadfile_product(HttpServletRequest request, HttpServletResponse response)
+	{
+		String responseStr="";  
+		MultipartHttpServletRequest r = (MultipartHttpServletRequest) request;
+		  
+        MultipartFile f = r.getFile("productlink");    
+        String type = f.getOriginalFilename().substring(f.getOriginalFilename().lastIndexOf(".")).toLowerCase();
+        if(!StringUtil.isProperImageFile(type))
+        {
+        	return "";
+        }
+        String path = request.getSession().getServletContext().getRealPath("/product");
+		String link = StringUtil.getTodayString() + "/" + f.getOriginalFilename();
+		path += "/" + StringUtil.getTodayString() + "/";
+		File file = new File(path + f.getOriginalFilename());
+		file.getParentFile().mkdirs();  
+		file.getParentFile().mkdirs();  
+
+		try 
+		{
+			FileCopyUtils.copy(f.getBytes(), file);
+			responseStr = link;
+
+		} catch (IOException e) {
+
+		}
+
+		return responseStr;
+	}
+	
+	@RequestMapping(value="/delproduct/{id}")
+	public void delproduct(HttpServletRequest request, HttpServletResponse response, @PathVariable String id, @ModelAttribute("account")Account account) throws IOException 
+	{
+		String url = request.getHeader("Referer");
+		int pid = Integer.parseInt(id);
+		buyerService.delProduct(pid);
+		//todo:account.setSampleCnt(buyerService.getSampleCount(account.getUserId()));
+		response.sendRedirect(url);
 	}
 }

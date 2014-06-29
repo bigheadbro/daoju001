@@ -9,7 +9,9 @@ import com.banzhuan.entity.ProductEntity;;;
 public interface ProductDAO {
 	ProductEntity queryProductEntityById(int id);
 	
-	List<ProductEntity> queryProductEntityByUserid(int id);
+	List<ProductEntity> queryProductEntityByAgentid(int id);
+	
+	List<ProductEntity> queryProductEntityByBuyerid(int id);
 	
 	List<ProductEntity> queryProductEntityByUserid(int id, RowBounds bound);
 	
@@ -25,7 +27,7 @@ public interface ProductDAO {
 	
 	int getProductCountByType(ProductEntity Product);
 	
-	int getProductCount(int userid);
+	int getProductCount(ProductEntity Product);
 	
 	void delProduct(int id);
 }

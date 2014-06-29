@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="order">
+	<resultMap type="OrderEntity" id="OrderResultMap">
+	  <!---->
+	  <id property="id" column="id"/>
+   	  <!---->
+	  <id property="userid" column="userid"/>
+   	  <!---->
+	  <id property="addressid" column="addressid"/>
+   	  <!---->
+	  <id property="itemid" column="itemid"/>
+   	  <!---->
+	  <id property="itemAddr" column="item_addr"/>
+   	  <!---->
+	  <id property="logNumber" column="log_number"/>
+   	  <!---->
+	  <id property="price" column="price"/>
+   	  <!---->
+	  <id property="state" column="state"/>
+   	  <!---->
+	  <id property="gmtCreate" column="gmt_create"/>
+	</resultMap>
+
+	<insert id="insertOrderEntity" parameterType="OrderEntity">
+		<selectKey resultType="int" order="AFTER" keyProperty="id">
+			SELECT LAST_INSERT_ID() AS id
+		</selectKey>
+		insert into t_order
+		(
+		  id
+	   	  ,userid
+	   	  ,addressid
+	   	  ,itemid
+	   	  ,item_addr
+	   	  ,log_number
+	   	  ,price
+	   	  ,state
+	   	  ,gmt_create)
+	      values
+	   (
+	   	  ,#{id}
+	   	  ,#{userid}
+	   	  ,#{addressid}
+	   	  ,#{itemid}
+	   	  ,#{itemAddr}
+	   	  ,#{logNumber}
+	   	  ,#{price}
+	   	  ,#{state}
+	   	  ,now()
+	   )
+	</insert>
+	
+</mapper>

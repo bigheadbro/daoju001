@@ -30,6 +30,8 @@
 		<id property="contactPhone" column="contact_phone"/>
 			  <!---->
 		<id property="contactQq" column="contact_qq"/>
+		<id property="productlimit" column="productlimit" />
+		<id property="pca" column="pca" />
 		<!--记录创建时间 -->
 		<id property="gmtCreate" column="gmt_create" />
 		<!--记录修改时间(最近登录时间) -->
@@ -78,6 +80,7 @@
 		,contact_name
 		,contact_phone
 		,contact_qq
+		,pca
 		,reg_time
 		,gmt_create
 		,gmt_modified)
@@ -95,6 +98,7 @@
 		,#{contactName}
 		,#{contactPhone}
 		,#{contactQq}
+		,#{pca}
 		,#{regTime}
 		,#{gmtCreate}
 		,#{gmtModified}
@@ -116,6 +120,8 @@
 		      <if test="contactName != null">contact_name=#{contactName},</if>
 		      <if test="contactPhone != null">contact_phone=#{contactPhone},</if>
 		      <if test="contactQq != null">contact_qq=#{contactQq},</if>
+		      <if test="productlimit != null">productlimit=#{productlimit},</if>
+		      <if test="pca != null">pca=#{pca},</if>
 		      <if test="logo != null">logo=#{logo},</if>
 	       
 		   	  gmt_modified=now()

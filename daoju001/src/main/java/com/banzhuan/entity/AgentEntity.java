@@ -44,6 +44,10 @@ public class AgentEntity implements Serializable {
 	private String contactQq;
 	// 联系人邮箱
 	private String contactEmail;
+	
+	private int productlimit;
+	
+	private String pca;
 	// 注册时间
 	private String regTime;
 	// 记录创建时间
@@ -420,6 +424,34 @@ public class AgentEntity implements Serializable {
 	 */
 	public void setCntRead(int cntRead) {
 		this.cntRead = cntRead;
+	}
+
+	/**
+	 * @return the productlimit
+	 */
+	public int getProductlimit() {
+		return productlimit;
+	}
+
+	/**
+	 * @param productlimit the productlimit to set
+	 */
+	public void setProductlimit(int productlimit) {
+		this.productlimit = productlimit;
+	}
+
+	/**
+	 * @return the pca
+	 */
+	public String getPca() {
+		return pca;
+	}
+
+	/**
+	 * @param pca the pca to set
+	 */
+	public void setPca(String pca) {
+		this.pca = pca;
 	}
 
 	

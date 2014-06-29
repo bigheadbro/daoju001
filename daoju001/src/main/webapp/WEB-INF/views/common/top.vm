@@ -34,13 +34,13 @@
                     <a href="/agents">代理商</a>
                 </li>
 				#end
-				#if($!stringUtil.isContains($request.getServletPath(),"/products"))
+				#if($!stringUtil.isContains($request.getServletPath(),"/articles"))
                 <li class="current">
-                    <a href="/products">在线展会</a>
+                    <a href="/articles">刀具文选</a>
                 </li>
 				#else
 				<li>
-                    <a href="/products">在线展会</a>
+                    <a href="/articles">刀具文选</a>
                 </li>
 				#end
 				#if($!stringUtil.isContains($request.getServletPath(),"/samples"))

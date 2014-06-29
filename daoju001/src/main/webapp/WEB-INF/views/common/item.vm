@@ -1,6 +1,17 @@
 #set($layout = "/layout/item_layout.vm")
-<script type="text/javascript" src="../js/ques-handler.js"></script>
 <div class="item-content-container clearfix">
+	<script>
+    $(function() {	
+		$("#submit_item").click(function(){
+    		$("#form_item").submit();
+    	});
+    });
+    </script>
+	<form id="form_item" method="post" action="/purchase">
+		<input type="hidden" name="itemname" value="${item.brand}${item.type}${item.version}"/>
+		<input type="hidden" name="itemid" value="${item.id}" />
+		<input type="hidden" name="cover" value="../item/${item.cover}" />
+		<input type="hidden" name="price" value=${item.price} />
 	<div class="item-detail clearfix">
 		<div class="image">
 			<div class="photo">
@@ -18,12 +29,14 @@
 			<div class="buy">
     			<div class="quatity">
 					<span>数量：</span>
+					<input type="hidden" name="quatity" value="110"  />
 				</div>
-    			<a>立即购买</a>
+    			<a id="submit_item">立即购买</a>
 			</div>
 			<p>如果您大量购买我们的产品，可以与我们的客服联系，我们将为您提供更优质的服务</p>
 		</div>
 	</div>
+	</form>
 	<div class="item-info-wrapper">
 		<div class="header clearfix">
 			<a class="current">商品详情</a>
@@ -33,7 +46,7 @@
 			<p>产品型号：${item.version}</p>
 			<p>加工材质：${item.workmaterial}</p>
 			<p>刀具材质：${item.material}</p>
-			<p>产品简介：<br/>黛杰最新JC6102材质，配合TG的负前角刃型，一改以往做淬火件容易发生崩刃的缺点。即使只使用中心部位加工平面，在工件硬度高达HRC60的情况下也可以使用40小时以上。在汽车覆盖件模具行业使用最广。</p>
+			<p>产品简介：<br/>$!{item.description}</p>
 		</div>
 	</div>
 </div>

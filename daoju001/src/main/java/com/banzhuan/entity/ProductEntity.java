@@ -11,7 +11,7 @@ public class ProductEntity implements Serializable {
 	private int id;
 	private String name;
 	private String description;
-	private int agentId;
+	private int userId;
 	
 	private int brandId;
 	
@@ -20,15 +20,16 @@ public class ProductEntity implements Serializable {
 	// 记录修改时间
 	private String gmtModify;
 	// 用户字
-	private String agentName;
+	private String userName;
 	// 用户logo
-	private String agentLogo;
+	private String userLogo;
 	private int industry;
 	private int processMethod;
 	private int wpHardness;
 	private int wpMaterial;
 	private String picture;
 	private String cover;
+	private int usertype;
 
 	/**
 	 * @return the id
@@ -48,16 +49,16 @@ public class ProductEntity implements Serializable {
 	/**
 	 * @return the buyerId
 	 */
-	public int getAgentId() {
-		return agentId;
+	public int getUserId() {
+		return userId;
 	}
 
 	/**
 	 * @param buyerId
 	 *            the buyerId to set
 	 */
-	public void setAgentId(int buyerId) {
-		this.agentId = buyerId;
+	public void setUserId(int buyerId) {
+		this.userId = buyerId;
 	}
 
 	/**
@@ -156,29 +157,29 @@ public class ProductEntity implements Serializable {
 	/**
 	 * @return the userName
 	 */
-	public String getAgentName() {
-		return agentName;
+	public String getUserName() {
+		return userName;
 	}
 
 	/**
 	 * @param userName the userName to set
 	 */
-	public void setAgentName(String userName) {
-		this.agentName = userName;
+	public void setUserName(String userName) {
+		this.userName = userName;
 	}
 
 	/**
 	 * @return the userLogo
 	 */
-	public String getAgentLogo() {
-		return agentLogo;
+	public String getUserLogo() {
+		return userLogo;
 	}
 
 	/**
 	 * @param userLogo the userLogo to set
 	 */
-	public void setAgentLogo(String userLogo) {
-		this.agentLogo = userLogo;
+	public void setUserLogo(String userLogo) {
+		this.userLogo = userLogo;
 	}
 
 	/**
@@ -249,6 +250,20 @@ public class ProductEntity implements Serializable {
 	 */
 	public void setCover(String cover) {
 		this.cover = cover;
+	}
+
+	/**
+	 * @return the usertype
+	 */
+	public int getUsertype() {
+		return usertype;
+	}
+
+	/**
+	 * @param usertype the usertype to set
+	 */
+	public void setUsertype(int usertype) {
+		this.usertype = usertype;
 	}
 
 	

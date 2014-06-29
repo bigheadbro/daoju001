@@ -250,6 +250,10 @@ public class AgentService {
 			{
 				agent.setDescription(form.getDescription());
 			}
+			if(StringUtil.isNotEmpty(form.getPca()))
+			{
+				agent.setPca(form.getPca());
+			}
 			
 
 			// /////////////////////////////////////////////////////////////获取上传的文件///////////////////////////////////
@@ -323,6 +327,10 @@ public class AgentService {
 			{
 				form.setDescription(agent.getDescription());
 			}
+			if(StringUtil.isNotEmpty(agent.getPca()))
+			{
+				form.setPca(agent.getPca());
+			}
 		}
 	}
 
@@ -381,6 +389,10 @@ public class AgentService {
     		product.setName(form.getName());
     	}
 
+    	if(form.getBrandid() != 0)
+    	{
+    		product.setBrandId((form.getBrandid()));
+    	}
     	if(form.getIndustry() != 0)
     	{
     		product.setIndustry(form.getIndustry());
@@ -792,6 +804,10 @@ public class AgentService {
 	{
 		ProductEntity product = productDAO.queryProductEntityById(id);
 
+		if(product.getBrandId() >= 0)
+		{
+			form.setBrandid(product.getBrandId());
+		}
 		if(product.getIndustry() >=0)
 		{
 			form.setIndustry(product.getIndustry());
@@ -808,9 +824,9 @@ public class AgentService {
 		{
 			form.setWpMaterial(product.getWpMaterial());
 		}
-		if(product.getAgentId() > 0)
+		if(product.getUserId() > 0)
 		{
-			form.setUserid(product.getAgentId());
+			form.setUserid(product.getUserId());
 		}
 		if(StringUtil.isNotEmpty(product.getName()))
 		{
@@ -834,11 +850,19 @@ public class AgentService {
     public Result queryProductByUserid(int userid)
 	{
 		Result result = new Result();
-		List<ProductEntity> products = productDAO.queryProductEntityByUserid(userid);
+		List<ProductEntity> products = productDAO.queryProductEntityByAgentid(userid);
 		result.add("products", products);
 		
 		return result;
 	}
+    
+    public int getProductCount(int userid)
+    {
+    	ProductEntity product = new ProductEntity();
+    	product.setUsertype(2);
+    	product.setUserId(userid);
+    	return productDAO.getProductCount(product);
+    }
     
     public void delProduct(int id)
     {

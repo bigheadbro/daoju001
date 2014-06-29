@@ -19,6 +19,7 @@
 	  <id property="price" column="price"/>
 	  <id property="picture" column="picture" />
 	  <id property="cover" column="cover" />
+	  <id property="description" column="description" />
    	  <!---->
 	  <id property="gmtCreate" column="gmt_create"/>
    	  <!---->
@@ -64,6 +65,7 @@
 	   	  ,price
 	   	  ,picture
 	   	  ,cover
+	   	  ,description
 	   	  ,gmt_create
 	   	  ,gmt_modify
 	   	 )
@@ -79,6 +81,7 @@
 	   	  ,#{price}
 	   	  ,#{picture}
 	   	  ,#{cover}
+	   	  ,#{description}
 	   	  ,now()
 	   	  ,now()
 	   )

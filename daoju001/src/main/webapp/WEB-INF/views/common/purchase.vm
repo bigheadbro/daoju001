@@ -10,6 +10,8 @@
 					$(this).removeClass("current");
 				});
 				$(this).parent().parent().addClass("current");
+				$("#destination").text($(this).parent().children(".address").text());
+				$("#receiver").text($(this).parent().children(".name").text());
 		});
 	});
     function hidenewaddr() {
@@ -71,8 +73,17 @@
 	<div class="clearfix">
     	<div class="item-detail clearfix">
     		<div class="key"><em>实付款:</em><span>￥${total}0</span></div>
-    		<div class="key"><em>寄送至:</em>上海市四平路1239号同济大学101室</div>
-    		<div class="key"><em>收件人:</em>陆佳元 13636331664</div>
+			#if(${addresses.size()} > 0)
+				#foreach($addr in $addresses)
+            		#if(${addr.defaulte})
+        				<div class="key"><em>寄送至:</em><i id="destination">$!{addr.pca} $!{addr.addr}</i></div>
+						<div class="key"><em>收件人:</em><i id="receiver">$!{addr.name} $!{addr.phone}</i></div>
+					#end
+				#end
+			#else
+				<div class="key"><em>寄送至:</em><i id="destination"></i></div>
+				<div class="key"><em>收件人:</em><i id="receiver"></i></div>
+			#end
     	</div>
 	</div>
 	<div class="clearfix">

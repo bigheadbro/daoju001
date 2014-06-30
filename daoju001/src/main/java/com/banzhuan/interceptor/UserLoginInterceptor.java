@@ -18,11 +18,23 @@ public class UserLoginInterceptor extends HandlerInterceptorAdapter {
 			throws Exception {	
 		Account account = (Account) WebUtils.getSessionAttribute(request, "account");
 		if (account == null) {
-			JsonUtil.showAlert(response, "登录后才可以回复", "", "登录", "/log", "问题详情>>回复");
+			//JsonUtil.showAlert(response, "登录后才可以回复", "", "登录", "/log", "问题详情>>回复");
+			ModelAndView modelAndView = new ModelAndView(new RedirectView("/log"));
+			String host=request.getLocalAddr();
+			int port = request.getLocalPort();
+			String contextPath = request.getContextPath();
+			String url = request.getServletPath();
+			String query = request.getQueryString();
+			if (query != null) {
+				modelAndView.addObject("redirect", "http://"+host+":"+port+contextPath+url+"?"+query);
+			}
+			else {
+				modelAndView.addObject("redirect", "http://"+host+":"+port+contextPath+url);
+			}
+			throw new ModelAndViewDefiningException(modelAndView);
 		}
 		else {
 			return true;
 		}
-		return false;
 	}
 }

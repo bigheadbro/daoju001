@@ -765,6 +765,7 @@ public class AgentController extends BaseController{
 			@ModelAttribute("productForm")ProductForm form, BindingResult result, @ModelAttribute("productid") final Object productid) 
 	{
 		ModelAndView mv = new ModelAndView("agent/newproduct");
+		
 		List<BrandEntity> brands = new ArrayList<BrandEntity>();
 		for(int i = 1;i<=Constant.BRAND_CNT;i++)
 		{
@@ -790,6 +791,17 @@ public class AgentController extends BaseController{
 					mv.addObject("brandid", form.getBrandid());
 				}
 			}
+			AgentEntity agent = (AgentEntity)agentService.getAgentEntity(account.getUserId()).get("agent");
+			String errormsg = null;
+			if(!agentService.isPersonalInfoGood(agent))
+			{
+				errormsg = "上传特色刀具前，请先完善您的个人资料";
+			}
+			if(agentService.getProductCount(account.getUserId()) >= account.getProductlimit())
+			{
+				errormsg = "每位用户最多上传2个特色刀具，如需要上传更多，请联系我们，400-042-1145";
+			}
+			mv.addObject("errormsg",errormsg);
 			return mv;
 		}
 		

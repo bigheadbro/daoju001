@@ -23,6 +23,7 @@ public class Account implements Serializable{
 	private int questionCnt;
 	private int sampleCnt;
 	private int gcCnt;
+	private int productlimit;
 	
 	public boolean isAgent() {
 		return isAgent;
@@ -173,6 +174,18 @@ public class Account implements Serializable{
 	 */
 	public void setCompanyName(String companyName) {
 		this.companyName = companyName;
+	}
+	/**
+	 * @return the productlimit
+	 */
+	public int getProductlimit() {
+		return productlimit;
+	}
+	/**
+	 * @param productlimit the productlimit to set
+	 */
+	public void setProductlimit(int productlimit) {
+		this.productlimit = productlimit;
 	}
 	
 

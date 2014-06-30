@@ -35,6 +35,7 @@ import org.springframework.web.util.WebUtils;
 
 import com.banzhuan.common.Constant;
 import com.banzhuan.common.Result;
+import com.banzhuan.entity.AgentEntity;
 import com.banzhuan.entity.BrandEntity;
 import com.banzhuan.entity.BuyerEntity;
 import com.banzhuan.entity.ProductEntity;
@@ -490,6 +491,17 @@ public class BuyerController extends BaseController{
 					mv.addObject("brandid", form.getBrandid());
 				}
 			}
+			BuyerEntity buyer = buyerService.getBuyerEntity(account.getUserId());
+			String errormsg = null;
+			if(!buyerService.isPersonalInfoGood(buyer))
+			{
+				errormsg = "上传特色刀具前，请先完善您的个人资料";
+			}
+			if(buyerService.getProductCount(account.getUserId()) >= account.getProductlimit())
+			{
+				errormsg = "每位用户最多上传2个特色刀具，如需要上传更多，请联系我们，400-042-1145";
+			}
+			mv.addObject("errormsg",errormsg);
 			return mv;
 		}
 		

@@ -42,7 +42,7 @@
     					所在省市
                     </li>
                     <li class="value">
-    					<input class="address dsf-form-text-input" name="${status.expression}" readonly="readonly" type="text" /> 
+    					<input class="address dsf-form-text-input" name="${status.expression}" value="$!{status.value}" readonly="readonly" type="text" /> 
                     </li>
                 </ul>
             </div>

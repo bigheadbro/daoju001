@@ -51,6 +51,11 @@
         <input type="hidden" name="${status.expression}" value="$!{status.value}" id="isEdit" />
 		#springBind("productForm.cover")
         <input type="hidden" name="${status.expression}" value="$!{status.value}" id="productCover" />
+		#if($errormsg)
+		<div class="error-msg-np">
+			$errormsg
+    	</div>
+		#end
         #springBind("productForm.name")
     	<div class="listitem clearfix">
     		<ul class="user-info clearfix">
@@ -279,13 +284,17 @@
     				刀具描述
     			</li>
     			<li class="value">
-    				<textarea class="dsf-form-text-input company-info" name="${status.expression}" >$!{status.value}</textarea>
+    				<textarea class="dsf-form-text-input ct-info" name="${status.expression}" >$!{status.value}</textarea>
     			</li>
     		</ul>
     	</div>
 		
     	<div class="listitem mt20 pt20 btg clearfix">
-    		<a id="submit_uploadproduct" class="save" >上 传</a>
+    		#if($errormsg)
+				<a class="disable" >无法上传</a>
+			#else
+				<a id="submit_uploadproduct" class="save" >上 传</a>
+			#end
     	</div>
 		<script>
     		$(function() {

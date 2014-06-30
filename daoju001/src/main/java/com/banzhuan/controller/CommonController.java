@@ -247,6 +247,7 @@ public class CommonController extends BaseController{
 					account.setBuyer(true);
 					account.setUnreadMsgCount(unreadMsgCount);
 					account.setQuestionCnt(questionCnt);
+					account.setProductlimit(user.getProductlimit());
 					//set cookie
 					if(form.getRememberme() != null && form.getRememberme())
 					{
@@ -281,6 +282,7 @@ public class CommonController extends BaseController{
 					account.setSampleCnt(sampleCnt);
 					account.setGcCnt(gcCnt);
 					account.setQuestionCnt(answerCnt);
+					account.setProductlimit(user.getProductlimit());
 					//set cookie
 					if(form.getRememberme() != null && form.getRememberme())
 					{

@@ -334,6 +334,26 @@ public class AgentService {
 		}
 	}
 
+	public boolean isPersonalInfoGood(AgentEntity agent)
+	{
+		if(agent != null)
+		{
+			if(StringUtil.isNotEmpty(agent.getMail()) && StringUtil.isNotEmpty(agent.getCompanyName()) && StringUtil.isNotEmpty(agent.getAddress()) && agent.getBrand() > 0
+					&& StringUtil.isNotEmpty(agent.getPhone()) && StringUtil.isNotEmpty(agent.getContactName()) && StringUtil.isNotEmpty(agent.getContactPhone()) && StringUtil.isNotEmpty(agent.getContactQq())
+					&& StringUtil.isNotEmpty(agent.getDescription()) && StringUtil.isNotEmpty(agent.getPca()))
+			{
+				return true;
+			}
+			else
+			{
+				return false;
+			}
+		}
+		else
+		{
+			return false;
+		}
+	}
     public Result insertGoodcase(GoodcaseForm form, GoodcaseEntity gc, Errors errors)
     {
     	Result result = new Result();

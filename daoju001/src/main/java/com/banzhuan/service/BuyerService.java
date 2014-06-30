@@ -276,6 +276,21 @@ public class BuyerService {
 		}
 	}
 	
+	public boolean isPersonalInfoGood(BuyerEntity entity)
+	{
+		if(StringUtil.isNotEmpty(entity.getUsername()) && StringUtil.isNotEmpty(entity.getCompanyName()) && StringUtil.isNotEmpty(entity.getCompanyAddress())
+				&& StringUtil.isNotEmpty(entity.getCompanyPhone()) && StringUtil.isNotEmpty(entity.getContactName()) 
+				&& StringUtil.isNotEmpty(entity.getContactPhone()) && StringUtil.isNotEmpty(entity.getContactQq())
+				&& StringUtil.isNotEmpty(entity.getPca()))
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+	
 	public Result insertQuestion(QuestionForm form, Account account, Errors errors)
 	{
 		Result result = new Result();

@@ -141,7 +141,7 @@ $(function() {
 			#foreach( $item in $items )
     			<div class="item">
     				<div class="img">
-    					<a href="/item/${item.id}"><img src="../item/${item.cover}" /></a>
+    					<a target="_blank" href="/item/${item.id}"><img src="../item/${item.cover}" /></a>
     				</div>
     				<div class="info">
     					<ul class="clearfix">
@@ -149,7 +149,7 @@ $(function() {
     							<span>￥${item.price}0 </span><em>包邮</em>
     						</li>
     						<li class="title">
-    							<a href="/item/${item.id}">${item.brand}${item.type}${item.version} <br/>${item.material}</a>
+    							<a target="_blank" href="/item/${item.id}">${item.brand}${item.type}${item.version} <br/>${item.material}</a>
     						</li>
     						
     					</ul>

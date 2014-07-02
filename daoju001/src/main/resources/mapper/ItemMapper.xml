@@ -20,6 +20,8 @@
 	  <id property="picture" column="picture" />
 	  <id property="cover" column="cover" />
 	  <id property="description" column="description" />
+	  <id property="limitq" column="limitq" />
+	  <id property="quantity" column="quantity" />
    	  <!---->
 	  <id property="gmtCreate" column="gmt_create"/>
    	  <!---->
@@ -66,6 +68,7 @@
 	   	  ,picture
 	   	  ,cover
 	   	  ,description
+	   	  ,limitq
 	   	  ,gmt_create
 	   	  ,gmt_modify
 	   	 )
@@ -82,6 +85,7 @@
 	   	  ,#{picture}
 	   	  ,#{cover}
 	   	  ,#{description}
+	   	  ,#{limitq}
 	   	  ,now()
 	   	  ,now()
 	   )

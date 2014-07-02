@@ -68,6 +68,7 @@
 		<mvc:interceptor>
    			<mvc:mapping path="/addcomment" />
    			<mvc:mapping path="/purchase" />
+   			<mvc:mapping path="addaddr" />
    			<bean class="com.banzhuan.interceptor.UserLoginInterceptor" />
 		</mvc:interceptor>
 		<mvc:interceptor>

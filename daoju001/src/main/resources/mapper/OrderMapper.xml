@@ -4,6 +4,7 @@
 	<resultMap type="OrderEntity" id="OrderResultMap">
 	  <!---->
 	  <id property="id" column="id"/>
+	  <id property="usertype" column="usertype"/>
    	  <!---->
 	  <id property="userid" column="userid"/>
    	  <!---->
@@ -15,40 +16,64 @@
    	  <!---->
 	  <id property="logNumber" column="log_number"/>
    	  <!---->
+   	  <id property="quantity" column="quantity"/>
 	  <id property="price" column="price"/>
    	  <!---->
 	  <id property="state" column="state"/>
    	  <!---->
 	  <id property="gmtCreate" column="gmt_create"/>
+	  <id property="gmtSubmitOrder" column="gmtSubmitOrder"/>
+	  <id property="gmtPay" column="gmtPay"/>
+	  <id property="gmtSell" column="gmtSell"/>
+	  <id property="gmtAssure" column="gmtAssure"/>
 	</resultMap>
 
+	<select id="queryOrderEntityById" parameterType="int"
+			resultMap="OrderResultMap">
+		<![CDATA[
+			SELECT * from t_order t where t.id=#{id}
+		]]>
+	</select>
 	<insert id="insertOrderEntity" parameterType="OrderEntity">
 		<selectKey resultType="int" order="AFTER" keyProperty="id">
 			SELECT LAST_INSERT_ID() AS id
 		</selectKey>
 		insert into t_order
 		(
-		  id
+		  usertype
 	   	  ,userid
 	   	  ,addressid
 	   	  ,itemid
 	   	  ,item_addr
-	   	  ,log_number
+	   	  ,quantity
 	   	  ,price
 	   	  ,state
-	   	  ,gmt_create)
+	   	  ,gmt_create
+	   	  ,gmtSubmitOrder
+	   )
 	      values
 	   (
-	   	  ,#{id}
+	   	  #{usertype}
 	   	  ,#{userid}
 	   	  ,#{addressid}
 	   	  ,#{itemid}
 	   	  ,#{itemAddr}
-	   	  ,#{logNumber}
+	   	  ,#{quantity}
 	   	  ,#{price}
 	   	  ,#{state}
+	   	  ,now()
 	   	  ,now()
 	   )
 	</insert>
 	
+	<update id="updateOrder" parameterType="OrderEntity">
+		update t_order
+		<set> 
+		  <if test="gmtPay != null">gmtPay=#{gmtPay},</if>
+	      <if test="gmtSell != null">gmtSell=#{gmtSell}),</if>
+	      <if test="gmtSell != null">gmtAssure=#{gmtAssure},</if>
+	      state = #{state}
+		</set>
+	   where id=#{id}
+	</update>
 </mapper>

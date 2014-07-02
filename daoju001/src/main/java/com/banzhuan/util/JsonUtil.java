@@ -180,6 +180,32 @@ public class JsonUtil {
         }  
 	}
 	
+	public static void sendAddress(HttpServletResponse response,String pca, String detail, String name, String zip, String phone, int id, boolean isedit)
+	{
+		JSONObject object = new JSONObject();  
+        response.setContentType("text/Xml;charset=gbk");  
+
+        object.element("pca", pca);
+        object.element("detail", detail);
+        object.element("name", name);
+        object.element("zip", zip);
+        object.element("phone", phone);
+        object.element("id", id);
+        object.element("isedit", isedit);
+        
+        PrintWriter out = null;  
+        try {  
+            out = response.getWriter();  
+            out.println(object.toString());  
+        }  
+        catch (IOException ex1) {  
+            ex1.printStackTrace();  
+        }  
+        finally {  
+            out.close();  
+        }  
+	}
+	
 	public static void sendComment(HttpServletResponse response, String comment, String userName, String logo, String brandName, String verifiedLink, String time,int commentid)
 	{
 		JSONObject object = new JSONObject();  

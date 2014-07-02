@@ -20,6 +20,8 @@ public interface AddressDAO {
 	public int insertAddressEntity(AddressEntity address);
 
 	public int updateAddressById(AddressEntity addr);
+	
+	public int updateOtherAddressById(AddressEntity addr);
 
 
 }

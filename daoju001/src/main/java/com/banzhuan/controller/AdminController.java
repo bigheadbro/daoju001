@@ -97,6 +97,7 @@ public class AdminController extends BaseController{
 			item.setPicture(request.getParameter("picture"));
 			item.setCover(request.getParameter("cover"));
 			item.setDescription(request.getParameter("description"));
+			item.setLimitq(Integer.parseInt(request.getParameter("limit")));
 			itemDAO.insertItemEntity(item);
 			return mv;
 		}

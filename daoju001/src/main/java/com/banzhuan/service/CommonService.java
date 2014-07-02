@@ -22,6 +22,7 @@ import com.banzhuan.dao.EventDAO;
 import com.banzhuan.dao.GoodcaseDAO;
 import com.banzhuan.dao.ItemDAO;
 import com.banzhuan.dao.MsgDAO;
+import com.banzhuan.dao.OrderDAO;
 import com.banzhuan.dao.ProductDAO;
 import com.banzhuan.dao.ProfessionalAnswerDAO;
 import com.banzhuan.dao.QuestionDAO;
@@ -34,6 +35,7 @@ import com.banzhuan.entity.ComplainEntity;
 import com.banzhuan.entity.EventEntity;
 import com.banzhuan.entity.GoodcaseEntity;
 import com.banzhuan.entity.ItemEntity;
+import com.banzhuan.entity.OrderEntity;
 import com.banzhuan.entity.ProductEntity;
 import com.banzhuan.entity.ProfessionalAnswerEntity;
 import com.banzhuan.entity.QuestionEntity;
@@ -106,6 +108,11 @@ public class CommonService {
 	@Autowired
 	@Qualifier("itemDAO")
 	private ItemDAO itemDAO;
+	
+	@Autowired
+	@Qualifier("orderDAO")
+	private OrderDAO orderDAO;
+	
 	
 	public Result checkLogin(LoginForm form, Errors errors)
 	{
@@ -554,13 +561,32 @@ public class CommonService {
 	
 	public int insertAddress(AddressEntity address)
 	{
+		if(address.getDefaulte())
+		{
+			addressDAO.updateOtherAddressById(address);
+		}
 		int result = addressDAO.insertAddressEntity(address);
+		return result;
+	}
+	
+	public int updateAddress(AddressEntity address)
+	{
+		int result = addressDAO.updateAddressById(address);
+		if(address.getDefaulte())
+		{
+			result = addressDAO.updateOtherAddressById(address);
+		}
 		return result;
 	}
 	
 	public List<AddressEntity> getAddresses(int uid, int type)
 	{
 		return addressDAO.queryAddressByUserid(uid, type);
+	}
+	
+	public AddressEntity getAddressById(int id)
+	{
+		return addressDAO.queryAddressById(id);
 	}
 	
 	public List<ItemEntity> getItems(ItemForm form, ItemEntity item)
@@ -637,4 +663,20 @@ public class CommonService {
 	{
 		return itemDAO.queryItemEntityById(id);
 	}
+	
+	public int insertOrder(OrderEntity order)
+	{
+		return orderDAO.insertOrderEntity(order);
+	}
+	
+	public int updateOrder(OrderEntity order)
+	{
+		return orderDAO.updateOrder(order);
+	}
+	
+	public OrderEntity getOrder(int id)
+	{
+		return orderDAO.queryOrderEntityById(id);
+	}
+	
 }

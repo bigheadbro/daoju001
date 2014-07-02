@@ -3,14 +3,32 @@
 <script type="text/javascript" src="../js/pcasunzip.js"></script>
 <script type="text/javascript">
 	function processNewaddress(data) { 
-		showAlert(data.title,data.content,data.info,data.btn,data.link);
+		if(data.isedit){
+			
+		}else{
+    		var str = "<li class=\"current clearfix\"><span>寄送至</span><div><input type=\"radio\" checked name=\"address\" /><i class=\"address\">"
+    			+ data.pca + "&nbsp;" + data.detail + "</i> <i class=\"name\">"
+    			+ data.name + "&nbsp;" + data.phone+"</i></div><a  class=\"editaddr\" addrid=" + data.id + "\">编辑该地址</a></li>";
+    		$("#addaddr").parent().children("li").each(function(){
+    			$(this).removeClass("current");
+    		});
+    		$("#addaddr").before(str);
+    		$("#destination").text(data.pca + " " + data.detail);
+    		$("#receiver").text(data.name + " " + data.phone);
+			$("#username").val(data.name);
+			$("#useraddress").val(data.pca + "," + data.detail);
+			$("#userzip").val(data.zip);
+			$("#userphone").val(data.phone);
+			$("#addressid").val(data.id);
+			
+		}
 	}
 	$(document).ready(function(){
     	$(".close-newaddr").click(function(){
     		hidenewaddr();
     	});
 		$("#submit_addr").click(function(){
-			
+			$("#form_addr").submit();
       	});
 		$("#form_addr").validate({
 			rules:{
@@ -50,8 +68,11 @@
 			errorElement:"em",
 			submitHandler: function(form) {
                 hidenewaddr();
-          		$("#form_addr").ajaxSubmit({success: processNewaddress});
-    			$("#form_addr")[0].reset();
+          		$(form).ajaxSubmit({
+					dataType:'json',
+					success: processNewaddress
+				});
+    			$(form)[0].reset();
             }
 		});
 	});
@@ -65,36 +86,45 @@
         <div class="content clearfix">
 			<form id="form_addr" method="post" action="/addaddr">
 			<ul class="part1">
+				#springBind("form.id")
+				<input type="hidden" name="${status.expression}" value="$!{status.value}" id="addrid" />
+				#springBind("form.isEdit")
+				<input type="hidden" name="${status.expression}" value="$!{status.value}" id="isEdit" />
 				<li class="clearfix">
 					<em class="key">选择所在地：</em>
 					#springBind("form.pca")
-					<input class="address dsf-form-text-input" name="${status.expression}" readonly="readonly" type="text" /> 
+					<input class="address dsf-form-text-input" name="${status.expression}" value="$!{status.value}" readonly="readonly" type="text" /> 
 				</li>
 				<li class="clearfix">
 					<em class="key">邮政编码：</em>
 					#springBind("form.zip")
-					<input class="dsf-form-text-input" name="${status.expression}" type="text" /> 
+					<input id="zip" class=" dsf-form-text-input" name="${status.expression}" value="$!{status.value}" type="text" /> 
 				</li>
 				<li class="clearfix">
 					<em class="key">街道地址：</em>
 					#springBind("form.detail")
-					<textarea class="dsf-form-text-input ct-info" name="${status.expression}"></textarea>
+					<textarea id="detail" class=" dsf-form-text-input ct-info" name="${status.expression}" value="$!{status.value}"></textarea>
 				</li>
 			</ul>
 			<ul class="part2">
 				<li class="clearfix">
 					<em class="key">收件人姓名：</em>
 					#springBind("form.username")
-					<input class="dsf-form-text-input" name="${status.expression}" type="text" /> 
+					<input id="name" class=" dsf-form-text-input" name="${status.expression}" type="text" value="$!{status.value}" /> 
 				</li>
 				<li class="clearfix">
 					<em class="key">联系电话：</em>
 					#springBind("form.phone")
-					<input class="dsf-form-text-input" name="${status.expression}" type="text" /> 
+					<input id="phone" class="dsf-form-text-input" name="${status.expression}" type="text" value="$!{status.value}" /> 
 				</li>
 				<li class="clearfix">
 					<em class="key">设置默认：</em>
-					<span class="default"><input type="checkbox" name="isdefault" id="isdefault" /><label for="isdefault">设置为默认地址 </label> <p class="note">设置后系统将在购买时自动选中该收货地址</p> </span>
+					#springBind("form.isdefault")
+					#if(${status.value})
+						<span class="default"><input type="checkbox" checked name="isdefault" id="isdefault" /><label for="isdefault">设置为默认地址 </label> <p class="note">设置后系统将在购买时自动选中该收货地址</p> </span>
+					#else
+						<span class="default"><input type="checkbox" name="isdefault" id="isdefault" /><label for="isdefault">设置为默认地址 </label> <p class="note">设置后系统将在购买时自动选中该收货地址</p> </span>
+					#end
 				</li>
 				<li>
 					<em class="key">&nbsp;</em><a id="submit_addr">确认</a><a id="close" class="close-newaddr">取消</a>

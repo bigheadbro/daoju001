@@ -9,6 +9,10 @@ public class AddressForm implements Serializable {
 	 */
 	private static final long serialVersionUID = 1849937900740869800L;
 	
+	private int id;
+	
+	private int isEdit;
+	
 	private String pca;
 	
 	private String zip;
@@ -103,6 +107,34 @@ public class AddressForm implements Serializable {
 	 */
 	public void setIsdefault(Boolean isdefault) {
 		this.isdefault = isdefault;
+	}
+
+	/**
+	 * @return the id
+	 */
+	public int getId() {
+		return id;
+	}
+
+	/**
+	 * @param id the id to set
+	 */
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	/**
+	 * @return the isEdit
+	 */
+	public int getIsEdit() {
+		return isEdit;
+	}
+
+	/**
+	 * @param isEdit the isEdit to set
+	 */
+	public void setIsEdit(int isEdit) {
+		this.isEdit = isEdit;
 	}
 
 }

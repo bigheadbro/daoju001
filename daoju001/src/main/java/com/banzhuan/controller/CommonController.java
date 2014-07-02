@@ -57,6 +57,7 @@ import com.banzhuan.entity.BuyerEntity;
 import com.banzhuan.entity.ComplainEntity;
 import com.banzhuan.entity.EventEntity;
 import com.banzhuan.entity.ItemEntity;
+import com.banzhuan.entity.OrderEntity;
 import com.banzhuan.entity.ProfessionalAnswerEntity;
 import com.banzhuan.entity.SampleEntity;
 import com.banzhuan.form.AddressForm;
@@ -440,8 +441,17 @@ public class CommonController extends BaseController{
 		int itemid = Integer.parseInt(id);
 		ItemEntity item = commonService.getItem(itemid);
 		mv.addObject("item", item);
+		String[] str = item.getPicture().substring(1).split("[|]");
+		mv.addObject("pictures",str);
 		return mv;
 		
+	}
+	
+	@RequestMapping(value = "/test")
+	public ModelAndView test(final HttpServletRequest request,final HttpServletResponse response)
+	{
+		ModelAndView mv = new ModelAndView("/common/purchase_return");
+		return mv;
 	}
 	
 	@RequestMapping(value = "/purchase_return")
@@ -488,8 +498,26 @@ public class CommonController extends BaseController{
 			
 			if(trade_status.equals("WAIT_SELLER_SEND_GOODS")){
 				//判断该笔订单是否在商户网站中已经做过处理
-					//如果没有做过处理，根据订单号（out_trade_no）在商户网站的订单系统中查到该笔订单的详细，并执行商户的业务程序
-					//如果有做过处理，不执行商户的业务程序
+				//如果没有做过处理，根据订单号（out_trade_no）在商户网站的订单系统中查到该笔订单的详细，并执行商户的业务程序
+				//如果有做过处理，不执行商户的业务程序
+				OrderEntity order = commonService.getOrder(Integer.parseInt(out_trade_no.substring(3)));
+				order.setState(2);
+				order.setGmtPay(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()));
+				commonService.updateOrder(order);
+				mv.addObject("orderid",out_trade_no);
+				AddressEntity addr = commonService.getAddressById(order.getAddressid());
+				mv.addObject("receiverinfo",addr.getName() + "," + addr.getPca() + "," + addr.getAddr());
+				mv.addObject("total",order.getPrice());
+				ItemEntity item = commonService.getItem(order.getItemid());
+				mv.addObject("itemName",item.getBrand()+item.getType() +item.getVersion());
+				mv.addObject("price",item.getPrice());
+				mv.addObject("quantity",order.getQuantity());
+				mv.addObject("cover",item.getCover());
+				mv.addObject("orderno", order.getLogNumber());
+				mv.addObject("timeSubmit",order.getGmtSubmitOrder());
+				mv.addObject("timePay",order.getGmtPay());
+				mv.addObject("state",2);
+				return mv;
 			}
 			
 			//该页面可做页面美工编辑
@@ -516,37 +544,147 @@ public class CommonController extends BaseController{
 		String itemid = request.getParameter("itemid");
 		double price = Double.parseDouble(request.getParameter("price"));
 		int quatity = Integer.parseInt(request.getParameter("quatity"));
+		boolean hasdefault = false;
+		for(int i = 0;i<addresses.size();i++)
+		{
+			if(addresses.get(i).getDefaulte())
+			{
+				hasdefault = true;
+				break;
+			}
+		}
+		mv.addObject("hasdefault", hasdefault);
 		mv.addObject("addresses", addresses);
 		mv.addObject("itemName", name);
 		mv.addObject("price", price);
 		mv.addObject("quatity", quatity);
+		mv.addObject("total", price*quatity);
 		mv.addObject("cover", cover);
 		mv.addObject("itemid", itemid);
 		return mv;
 	}
 	
+	@RequestMapping(value = "/notify_url")
+	public void notify_url(final HttpServletRequest request,final HttpServletResponse response)
+	{
+		//获取支付宝POST过来反馈信息
+		Map<String,String> params = new HashMap<String,String>();
+		Map requestParams = request.getParameterMap();
+		for (Iterator iter = requestParams.keySet().iterator(); iter.hasNext();) {
+			String name = (String) iter.next();
+			String[] values = (String[]) requestParams.get(name);
+			String valueStr = "";
+			for (int i = 0; i < values.length; i++) {
+				valueStr = (i == values.length - 1) ? valueStr + values[i]
+						: valueStr + values[i] + ",";
+			}
+			//乱码解决，这段代码在出现乱码时使用。如果mysign和sign不相等也可以使用这段代码转化
+			//valueStr = new String(valueStr.getBytes("ISO-8859-1"), "gbk");
+			params.put(name, valueStr);
+		}
+		
+		//获取支付宝的通知返回参数，可参考技术文档中页面跳转同步通知参数列表(以下仅供参考)//
+		//商户订单号
+
+		String out_trade_no = new String(request.getParameter("out_trade_no"));
+
+		//支付宝交易号
+
+		String trade_no = new String(request.getParameter("trade_no"));
+
+		//交易状态
+		String trade_status = new String(request.getParameter("trade_status"));
+
+		//获取支付宝的通知返回参数，可参考技术文档中页面跳转同步通知参数列表(以上仅供参考)//
+
+		if(AlipayNotify.verify(params)){//验证成功
+			//////////////////////////////////////////////////////////////////////////////////////////
+			//请在这里加上商户的业务逻辑程序代码
+
+			//——请根据您的业务逻辑来编写程序（以下代码仅作参考）——
+			
+			if(trade_status.equals("WAIT_BUYER_PAY")){
+				//该判断表示买家已在支付宝交易管理中产生了交易记录，但没有付款
+				
+					//判断该笔订单是否在商户网站中已经做过处理
+						//如果没有做过处理，根据订单号（out_trade_no）在商户网站的订单系统中查到该笔订单的详细，并执行商户的业务程序
+						//如果有做过处理，不执行商户的业务程序
+					
+					//out.println("success");	//请不要修改或删除
+				logger.error("chaoqun WAIT_BUYER_PAY");
+			} else if(trade_status.equals("WAIT_SELLER_SEND_GOODS")){
+			//该判断表示买家已在支付宝交易管理中产生了交易记录且付款成功，但卖家没有发货
+			
+				//判断该笔订单是否在商户网站中已经做过处理
+					//如果没有做过处理，根据订单号（out_trade_no）在商户网站的订单系统中查到该笔订单的详细，并执行商户的业务程序
+					//如果有做过处理，不执行商户的业务程序
+				
+				//out.println("success");	//请不要修改或删除
+				logger.error("chaoqun WAIT_SELLER_SEND_GOODS");
+			} else if(trade_status.equals("WAIT_BUYER_CONFIRM_GOODS")){
+			//该判断表示卖家已经发了货，但买家还没有做确认收货的操作
+			
+				//判断该笔订单是否在商户网站中已经做过处理
+					//如果没有做过处理，根据订单号（out_trade_no）在商户网站的订单系统中查到该笔订单的详细，并执行商户的业务程序
+					//如果有做过处理，不执行商户的业务程序
+				
+				//out.println("success");	//请不要修改或删除
+				logger.error("chaoqun WAIT_BUYER_CONFIRM_GOODS");
+			} else if(trade_status.equals("TRADE_FINISHED")){
+			//该判断表示买家已经确认收货，这笔交易完成
+			
+				//判断该笔订单是否在商户网站中已经做过处理
+					//如果没有做过处理，根据订单号（out_trade_no）在商户网站的订单系统中查到该笔订单的详细，并执行商户的业务程序
+					//如果有做过处理，不执行商户的业务程序
+				
+				//out.println("success");	//请不要修改或删除
+				logger.error("chaoqun TRADE_FINISHED");
+			}
+			else {
+				//out.println("success");	//请不要修改或删除
+			}
+
+			//——请根据您的业务逻辑来编写程序（以上代码仅作参考）——
+
+			//////////////////////////////////////////////////////////////////////////////////////////
+		}else{//验证失败
+			//out.println("fail");
+		}
+	}
 	@RequestMapping(value = "/purchase_handler")
 	public ModelAndView purchase_handler(final HttpServletRequest request,final HttpServletResponse response, Model model)
 	{
 		ModelAndView mv = new ModelAndView("/common/purchase_handler");
 
+		Account account = (Account) WebUtils.getSessionAttribute(request, "account");
+		
 		//支付类型
 		String payment_type = "1";
 		//必填，不能修改
 		//服务器异步通知页面路径
-		String notify_url = "http://localhost/create_partner_trade_by_buyer-JAVA-UTF-8/notify_url.jsp";
+		String notify_url = "http://www.daoshifu.com/notify_url";
 		//需http://格式的完整路径，不能加?id=123这类自定义参数
 
 		//页面跳转同步通知页面路径
-		String return_url = "http://www.daoshifu.com/purchase_return";
+		String return_url = "http://localhost/purchase_return";
 		//需http://格式的完整路径，不能加?id=123这类自定义参数，不能写成http://localhost/
 
 		//卖家支付宝帐户
 		String seller_email = new String("salyncious@aliyun.com");
 		//必填
 
+		OrderEntity order = new OrderEntity();
+		order.setItemAddr("http://www.daoshifu.com/item/"+request.getParameter("itemid"));
+		order.setItemid(Integer.parseInt(request.getParameter("itemid")));
+		order.setPrice(Double.parseDouble(request.getParameter("price")));
+		order.setState(1);
+		order.setUserid(account.getUserId());
+		order.setUsertype(account.isAgent()?1:0);
+		order.setAddressid(Integer.parseInt(request.getParameter("addressid")));
+		order.setQuantity(Integer.parseInt(request.getParameter("quantity")));
+		int id = commonService.insertOrder(order);
 		//商户订单号
-		String out_trade_no = new String(Util.genOrderNO());
+		String out_trade_no = "DSF" + String.valueOf(id);
 		//商户网站订单系统中唯一订单号，必填
 
 		//订单名称
@@ -925,9 +1063,10 @@ public class CommonController extends BaseController{
 	
 	@RequestMapping(value="/addaddr")
 	public void addaddr(HttpServletRequest request, HttpServletResponse response,@ModelAttribute("form")AddressForm form) {
+		Account account = (Account) WebUtils.getSessionAttribute(request, "account");
 		AddressEntity address = new AddressEntity();
-		address.setType(0);
-		address.setUid(40);
+		address.setType(account.isAgent()?1:0);
+		address.setUid(account.getUserId());
 		address.setPca(form.getPca());
 		address.setAddr(form.getDetail());
 		address.setName(form.getUsername());
@@ -941,6 +1080,22 @@ public class CommonController extends BaseController{
 		{
 			address.setDefaulte(false);
 		}
-		commonService.insertAddress(address);
+		if(form.getIsEdit() > 0)
+		{
+			int addressid = form.getId();
+			address.setId(addressid);
+			if(commonService.updateAddress(address) > 0)
+			{
+				JsonUtil.sendAddress(response, address.getPca(), address.getAddr(), address.getName(), address.getZip(), address.getPhone(), addressid, true);
+			}
+		}
+		else
+		{
+			int id = commonService.insertAddress(address);
+			if(id > 0)
+			{
+				JsonUtil.sendAddress(response, address.getPca(), address.getAddr(), address.getName(), address.getZip(), address.getPhone(), id, false);
+			}
+		}
 	}
 }

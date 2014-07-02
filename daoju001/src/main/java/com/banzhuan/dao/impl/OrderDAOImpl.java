@@ -24,9 +24,9 @@ public class OrderDAOImpl extends SqlSessionDaoSupport implements OrderDAO {
 	}
 	
 	@Override
-	public List<String> getOrderTypeList(int type)
+	public int updateOrder(OrderEntity order)
 	{
-		return this.getSqlSession().selectList("getOrderTypeList", type);
+		return this.getSqlSession().update("updateOrder", order);
 	}
 	
 }

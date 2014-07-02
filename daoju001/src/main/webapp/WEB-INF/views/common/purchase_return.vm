@@ -1,10 +1,79 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<html>
-	<head>
-		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-		<title>支付宝纯担保交易接口</title>
-	</head>
-	<body>
-		支付成功
-	</body>
-</html>
+#set($layout = "/layout/item_layout.vm")
+<div class="purchase-content-container clearfix">
+	<div class="head">
+		#if($isagent)
+			您的位置：<a href="http://www.daoshifu.com">首页</a>><a href="/agent/main">我的刀师傅</a>><a href="/agent/myorder">我的订单</a>
+		#else
+			您的位置：<a href="http://www.daoshifu.com">首页</a>><a href="/buyer/main">我的刀师傅</a>><a href="/buyer/myorder">我的订单</a>
+		#end
+	</div>
+	<div class="order-state">
+		<div class="key">
+			<span class="state1">提交订单</span>
+			<span class="state2">付款到支付宝</span>
+			<span class="state3">刀师傅发货</span>
+			<span class="state4">确认收货</span>
+		</div>
+		#if($state == 1)
+			<img src="../img/state1.png" />
+		#elseif($state == 2)
+			<img src="../img/state2.png" />
+		#elseif($state == 3)
+			<img src="../img/state3.png" />
+		#elseif($state == 4)
+			<img src="../img/state4.png" />
+		#else
+			<img src="../img/state1.png" />
+		#end
+		<div class="time">
+			<span class="state1">$!{timeSubmit}</span>
+			<span class="state2">$!{timePay}</span>
+			<span class="state3">$!{timeSell}</span>
+			<span class="state4">$!{timeAssure}</span>
+		</div>
+	</div>
+	<div class="purchase-info-wrapper">
+		<div class="order-info clearfix">
+			<div class="left">
+				<div class="header clearfix">
+        			<a class="current">商品详情</a>
+        		</div>
+				<ul class="order-detail">
+					<li>
+						订单编号：${orderid}
+					</li>
+					<li>
+						收货信息：${receiverinfo}
+					</li>
+					<li>
+						配送方式：顺丰包邮#if(${orderno})(${orderno})#end
+					</li>
+				</ul>
+			</div>
+			<div class="right">
+				<h1>订单状态：刀师傅已经返货，请确认收货<br/>您可以<a>确认收货</a></h1>
+				<p>如您有任何问题，可以与我们的客服联系，我们将为您提供更优质的服务</p>
+			</div>
+		</div>
+		<div class="order-header clearfix">
+    		<div class="name">商品</div>
+    		<div class="price">单价(元)</div>
+    		<div class="quatity">数量</div>
+    		<div class="total">小计(元)</div>
+    	</div>
+    	<div class="order-list clearfix">
+    		<div class="name"><a><img src="../item/$cover" /><span>$itemName</span></a></div>
+    		<div class="price"><span>$price</span></div>
+    		<div class="quatity"><span>X $quantity</span></div>
+    		<div class="total"><span>${total}0</span></div>
+    	</div>
+		<div class="trivial clearfix">
+    		<div class="key">运费</div>
+    		<div class="value">0.00</div>
+    	</div>
+    	<div class="trivial clearfix">
+    		<div class="key">应付总额</div>
+    		<div class="value"><span>${total}0</span></div>
+    	</div>
+	</div>
+</div>

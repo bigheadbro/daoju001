@@ -25,6 +25,9 @@ public class ItemEntity implements Serializable {
 	private String picture;
 	private String cover;
 	private String description;
+	
+	private int limitq;
+	private int quantity;
 	// 
 	private String gmtCreate;
 	// 
@@ -185,5 +188,29 @@ public class ItemEntity implements Serializable {
 	 */
 	public void setDescription(String description) {
 		this.description = description;
+	}
+	/**
+	 * @return the limit
+	 */
+	public int getLimitq() {
+		return limitq;
+	}
+	/**
+	 * @param limit the limit to set
+	 */
+	public void setLimitq(int limitq) {
+		this.limitq = limitq;
+	}
+	/**
+	 * @return the quantity
+	 */
+	public int getQuantity() {
+		return quantity;
+	}
+	/**
+	 * @param quantity the quantity to set
+	 */
+	public void setQuantity(int quantity) {
+		this.quantity = quantity;
 	}
    }

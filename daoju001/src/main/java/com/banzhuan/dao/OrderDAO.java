@@ -9,5 +9,5 @@ public interface OrderDAO {
 
 	public int insertOrderEntity(OrderEntity Order);
 	
-	List<String> getOrderTypeList(int type);
+	int updateOrder(OrderEntity order);
 }

@@ -2,10 +2,31 @@
 <div class="item-content-container clearfix">
 	<script>
     $(function() {	
+		var limit = parseInt($("#itemQuantity").val());
 		$("#submit_item").click(function(){
     		$("#form_item").submit();
     	});
+		$(".image .list a").click(function(){
+			$(this).parent().children().each(function(){
+				$(this).removeAttr("style");
+			});
+			$(this).css("border", "2px solid #0099cb");
+			$(".photo img").attr("src", $(this).children("img").attr("src"));
+		});
+		$("#minus").click(function(){
+			$("#itemQuantity").val($("#itemQuantity").val() - 10);
+			if($("#itemQuantity").val() < limit){
+				$("#itemQuantity").val(limit);
+			}
+		});
+		$("#add").click(function(){
+			$("#itemQuantity").val(parseInt($("#itemQuantity").val()) + 10);
+			if($("#itemQuantity").val() < limit){
+				$("#itemQuantity").val(limit);
+			}
+		});
     });
+	
     </script>
 	<form id="form_item" method="post" action="/purchase">
 		<input type="hidden" name="itemname" value="${item.brand}${item.type}${item.version}"/>
@@ -17,23 +38,48 @@
 			<div class="photo">
 				<img src="../item/${item.cover}" />
 			</div>
-			<div class="">
+			<div class="list">
+				#foreach($pic in $pictures)
+					<a><img src="../item/${pic}" /></a>
+				#end
 			</div>
 		</div>
 		<div class="description">
 			<h1 class="title">${item.brand}${item.type}${item.version}</h1>
 			<ul class="list">
 				<li><span>商品价格：</span><em class="price">￥${item.price}0</em></li>
-				<li><span>销量：</span>30天内售出<em>550</em>件</li>
+				<li><span>配送：</span><i>全国顺丰包邮</i></li>
+				<li><span>销量：</span>30天内售出<em>#if(${item.quantity})${item.quantity}#else 0 #end</em>件</li>
 			</ul>
-			<div class="buy">
-    			<div class="quatity">
-					<span>数量：</span>
-					<input type="hidden" name="quatity" value="110"  />
+			<div class="buy clearfix">
+				<div class="left">
+        			<div class="quatity clearfix">
+    					<span>数量：</span>
+						<div class="quantity-box">
+							<a id="minus">-</a><input id="itemQuantity" type="text" name="quatity" value=${item.limitq}  readonly /><a id="add">+</a>
+						</div>
+    				</div>
+        			<a id="submit_item">立即购买</a>
 				</div>
-    			<a id="submit_item">立即购买</a>
+				<div class="right clearfix">
+					<img src="../img/alipay.png" />
+					<div class="alipay">
+						<h1>支付宝担保交易</h1>
+						<p>刀师傅使用支付宝担保交易服务。<br/>保障买卖双方货款安全，防范欺诈。</p>
+					</div>
+				</div>
 			</div>
-			<p>如果您大量购买我们的产品，可以与我们的客服联系，我们将为您提供更优质的服务</p>
+			<div class="contact clearfix">
+				<p class="info">如果您大量购买我们的产品，可以与我们的客服联系，我们将为您提供更优质的服务!</p>
+				<div class="left">
+        			<a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=123576884&site=qq&menu=yes"><img src="../img/purchaseqq.png" /></a>
+					<p>QQ客服</p>
+				</div>
+				<div class="right">
+					<h1>400-042-1145</h1>
+					<p>刀师傅客服热线</p>
+				</div>
+			</div>
 		</div>
 	</div>
 	</form>

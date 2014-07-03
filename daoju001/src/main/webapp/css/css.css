@@ -109,6 +109,7 @@ a.common:hover{text-decoration:underline;color:#00c0ff}
 .purchase-content-container ul.address{margin-top: 15px;}
 .purchase-content-container ul.address li{padding:10px;font-size: 14px;line-height: 32px;position:relative;padding-left: 90px;}
 .purchase-content-container ul.address li.current{background-color:#dcf0ff;border:1px solid #76a7bc;}
+.purchase-content-container #addaddr{color: white;background-color: #ff3c00;font-size: 14px;border-radius: 5px;padding: 5px 10px;margin-top: 10px;display: inline-block;}
 .purchase-content-container ul.address li span{position:absolute;top: 10px;left: 12px;width:80px;color:#ff3000;background:url(../img/address.png) no-repeat 0 0;text-indent: 37px;display: inline-block;display:none;}
 .purchase-content-container ul.address li.current span{display:inline-block;}
 .purchase-content-container ul.address li div{display:inline-block;}
@@ -204,6 +205,25 @@ a.common:hover{text-decoration:underline;color:#00c0ff}
 .purchase-info-wrapper .trivial .key{width:160px;float:left;}
 .purchase-info-wrapper .trivial .value{width:275px;float:left;}
 .purchase-info-wrapper .trivial .value span{color:#ff3000}
+
+/*myorder*/
+.rigth-content .order-header{margin-top:20px;font-size: 14px;margin-left: 10px;}
+.rigth-content .order-header div{float:left;padding-bottom:5px;border-bottom:3px solid #def1ff;margin-right:5px;text-align:center;}
+.rigth-content .order-header .name{width:180px;}
+.rigth-content .order-header .price{width:100px;}
+.rigth-content .order-header .time{width:100px;}
+.rigth-content .order-header .state{width:150px;}
+.rigth-content .order-header .operation{width:150px;}
+
+.rigth-content .order-list{margin-top:20px;font-size: 14px;padding-bottom: 15px;border-bottom: 1px dotted #1ca4d1;margin-left: 10px;}
+.rigth-content .order-list div{float:left;margin-right:5px;text-align:center;}
+.rigth-content .order-list .name{padding-left:80px;width:180px;text-align:left;}
+.rigth-content .order-list .name img{float:left;margin-left:-80px;border:#d4d4d4;width:70px;height:70px;}
+.rigth-content .order-list  span{margin-top: 25px;display: block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.rigth-content .order-list .price{width:100px;}
+.rigth-content .order-list .time{width:100px;}
+.rigth-content .order-list .state{width:150px;}
+.rigth-content .order-list .operation{width:150px;}
 
 /*browser*/
 .page#page-compatable{width:660px;margin:0 auto}

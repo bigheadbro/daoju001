@@ -1086,7 +1086,7 @@ public class CommonController extends BaseController{
 			address.setId(addressid);
 			if(commonService.updateAddress(address) > 0)
 			{
-				JsonUtil.sendAddress(response, address.getPca(), address.getAddr(), address.getName(), address.getZip(), address.getPhone(), addressid, true);
+				JsonUtil.sendAddress(response, address.getPca(), address.getAddr(), address.getName(), address.getZip(), address.getPhone(), addressid, address.getDefaulte(), true);
 			}
 		}
 		else
@@ -1094,7 +1094,7 @@ public class CommonController extends BaseController{
 			int id = commonService.insertAddress(address);
 			if(id > 0)
 			{
-				JsonUtil.sendAddress(response, address.getPca(), address.getAddr(), address.getName(), address.getZip(), address.getPhone(), id, false);
+				JsonUtil.sendAddress(response, address.getPca(), address.getAddr(), address.getName(), address.getZip(), address.getPhone(), id, address.getDefaulte(),false);
 			}
 		}
 	}

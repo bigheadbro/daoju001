@@ -574,7 +574,7 @@ public class CommonService {
 		int result = addressDAO.updateAddressById(address);
 		if(address.getDefaulte())
 		{
-			result = addressDAO.updateOtherAddressById(address);
+			addressDAO.updateOtherAddressById(address);
 		}
 		return result;
 	}

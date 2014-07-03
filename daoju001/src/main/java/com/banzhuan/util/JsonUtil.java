@@ -180,7 +180,7 @@ public class JsonUtil {
         }  
 	}
 	
-	public static void sendAddress(HttpServletResponse response,String pca, String detail, String name, String zip, String phone, int id, boolean isedit)
+	public static void sendAddress(HttpServletResponse response,String pca, String detail, String name, String zip, String phone, int id, boolean isdefault, boolean isedit)
 	{
 		JSONObject object = new JSONObject();  
         response.setContentType("text/Xml;charset=gbk");  
@@ -191,6 +191,7 @@ public class JsonUtil {
         object.element("zip", zip);
         object.element("phone", phone);
         object.element("id", id);
+        object.element("isdefault", isdefault);
         object.element("isedit", isedit);
         
         PrintWriter out = null;  

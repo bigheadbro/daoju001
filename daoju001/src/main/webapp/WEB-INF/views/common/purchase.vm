@@ -3,17 +3,22 @@
 	var newaddrshow = false;
 	$(document).ready(function(){
     	$("#addaddr").click(function(){
+			$("#addrtitle").text("添加地址");
     		shownewaddr();
 			$("#isEdit").val(0);
     	});
-		$(".editaddr").click(function(){
+		$("body").on("click", ".editaddr", function(){
     		shownewaddr();
-			$("#pca").val($(this).attr("pca"));
+			$("#addrtitle").text("编辑地址");
+			$("#form-pca").val($(this).attr("pca"));
 			$("#detail").val($(this).attr("detail"));
 			$("#name").val($(this).attr("name"));
 			$("#phone").val($(this).attr("phone"));
 			$("#zip").val($(this).attr("zip"));
 			$("#addrid").val($(this).attr("addrid"));
+			if($(this).attr("isdefault") == "true"){
+				$("#isdefault").attr("checked","checked");
+			}
 			$("#isEdit").val(1);
     	});
 		$("body").on("click","input[type=radio]",function(){
@@ -95,7 +100,7 @@
 					<i class="address">$!{addr.pca} $!{addr.addr}</i> 
 					<i class="name">$!{addr.name} $!{addr.phone}</i>
 				</div>
-				<a class="editaddr" addrid="$!{addr.id}" zip="$!{addr.zip}" pca="$!{addr.pca}" detail="$!{addr.addr}" name="$!{addr.name}" phone="$!{addr.phone}">编辑该地址</a>
+				<a class="editaddr" addrid="$!{addr.id}" zip="$!{addr.zip}" pca="$!{addr.pca}" detail="$!{addr.addr}" name="$!{addr.name}" phone="$!{addr.phone}" isdefault="$!{addr.defaulte}">编辑该地址</a>
     		</li>
 			#else
     		<li class="clearfix">

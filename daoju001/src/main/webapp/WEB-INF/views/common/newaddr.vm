@@ -4,11 +4,21 @@
 <script type="text/javascript">
 	function processNewaddress(data) { 
 		if(data.isedit){
-			
+			$(".address li.current i.address").text(data.pca + " " + data.detail);
+			$(".address li.current i.name").text(data.name + " " + data.phone);
+			$(".address li.current .editaddr").attr("zip",data.zip);
+			$(".address li.current .editaddr").attr("pca",data.pca);
+			$(".address li.current .editaddr").attr("detail",data.detail);
+			$(".address li.current .editaddr").attr("name",data.name);
+			$(".address li.current .editaddr").attr("phone",data.phone);
+			$(".address li.current .editaddr").attr("isdefault",data.isdefault);
 		}else{
     		var str = "<li class=\"current clearfix\"><span>寄送至</span><div><input type=\"radio\" checked name=\"address\" /><i class=\"address\">"
     			+ data.pca + "&nbsp;" + data.detail + "</i> <i class=\"name\">"
-    			+ data.name + "&nbsp;" + data.phone+"</i></div><a  class=\"editaddr\" addrid=" + data.id + "\">编辑该地址</a></li>";
+    			+ data.name + "&nbsp;" + data.phone+"</i></div><a  class=\"editaddr\" addrid=\"" + data.id +"\" "
+				+ "zip=\"" + data.zip + "\" " + "pca=\"" + data.pca + "\" " 
+				+ "detail=\"" + data.detail + "\" " + "name=\"" + data.name + "\" " + "phone=\"" + data.phone + "\" " + "isdefault=\"" + data.isdefault
+				+ "\">编辑该地址</a></li>";
     		$("#addaddr").parent().children("li").each(function(){
     			$(this).removeClass("current");
     		});
@@ -26,6 +36,8 @@
 	$(document).ready(function(){
     	$(".close-newaddr").click(function(){
     		hidenewaddr();
+			$("#isdefault").attr("checked",false);
+			$("#form_addr")[0].reset();
     	});
 		$("#submit_addr").click(function(){
 			$("#form_addr").submit();
@@ -81,7 +93,7 @@
     <div class="newaddr-win-content">
         <h2>
             <a class="close-newaddr">x</a>
-			添加新地址
+			<span id="addrtitle">地址管理</span>
 		</h2>
         <div class="content clearfix">
 			<form id="form_addr" method="post" action="/addaddr">
@@ -93,7 +105,7 @@
 				<li class="clearfix">
 					<em class="key">选择所在地：</em>
 					#springBind("form.pca")
-					<input class="address dsf-form-text-input" name="${status.expression}" value="$!{status.value}" readonly="readonly" type="text" /> 
+					<input id="form-pca" class="address dsf-form-text-input" name="${status.expression}" value="$!{status.value}" readonly="readonly" type="text" /> 
 				</li>
 				<li class="clearfix">
 					<em class="key">邮政编码：</em>
@@ -120,11 +132,7 @@
 				<li class="clearfix">
 					<em class="key">设置默认：</em>
 					#springBind("form.isdefault")
-					#if(${status.value})
-						<span class="default"><input type="checkbox" checked name="isdefault" id="isdefault" /><label for="isdefault">设置为默认地址 </label> <p class="note">设置后系统将在购买时自动选中该收货地址</p> </span>
-					#else
-						<span class="default"><input type="checkbox" name="isdefault" id="isdefault" /><label for="isdefault">设置为默认地址 </label> <p class="note">设置后系统将在购买时自动选中该收货地址</p> </span>
-					#end
+					<span class="default"><input type="checkbox" name="isdefault" id="isdefault" /><label for="isdefault">设置为默认地址 </label> <p class="note">设置后系统将在购买时自动选中该收货地址</p> </span>
 				</li>
 				<li>
 					<em class="key">&nbsp;</em><a id="submit_addr">确认</a><a id="close" class="close-newaddr">取消</a>

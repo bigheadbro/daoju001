@@ -99,7 +99,7 @@
 	      <if test="zip != null">zip=#{zip},</if>
 	      <if test="name != null">name=#{name},</if>
 	      <if test="phone != null">phone=#{phone},</if>
-	      <if test="defaulte != 0">defaulte=#{defaulte},</if>
+	      <if test="defaulte != null">defaulte=#{defaulte},</if>
 	   	  gmt_modify=now()
 		</set>
 	   where id=#{id}

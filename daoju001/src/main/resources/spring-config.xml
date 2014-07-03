@@ -83,6 +83,7 @@
 			<mvc:mapping path="/buyer/myaddr" />
 			<mvc:mapping path="/buyer/newproduct" />
 			<mvc:mapping path="/buyer/myproduct" />
+			<mvc:mapping path="/buyer/myorder" />
 			<mvc:mapping path="/buyer/product/*" />
 			<bean class="com.banzhuan.interceptor.BuyerLoginInterceptor" />
 		</mvc:interceptor>
@@ -101,6 +102,7 @@
 			<mvc:mapping path="/agent/profile" />
 			<mvc:mapping path="/agent/uploadlogo" />
 			<mvc:mapping path="/agent/newproduct" />
+			<mvc:mapping path="/agent/myorder" />
 			<mvc:mapping path="/agent/myproduct" />
 			<mvc:mapping path="/agent/myaddr" />
 			<mvc:mapping path="/agent/newproduct" />
@@ -132,7 +134,7 @@
 
 	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
 		<constructor-arg index="0" ref="sqlSessionFactory" />
-		<constructor-arg index="1" value="BATCH" />
+		<constructor-arg index="1" value="SIMPLE" />
 	</bean>
 
 

@@ -1039,6 +1039,9 @@ public class CommonController extends BaseController{
 			return new ModelAndView(new RedirectView("/agents")); 
 		}
 		mv.addObject("agent", result.get("user"));
+		
+		result = userService.querySamplesByUserid(userid, new RowBounds(0, Integer.MAX_VALUE));
+		mv.addObject("samples", result.get("samples"));
 		return mv;
 		
 	}

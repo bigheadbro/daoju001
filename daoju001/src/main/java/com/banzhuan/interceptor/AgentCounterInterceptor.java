@@ -11,13 +11,13 @@ import org.springframework.web.servlet.ModelAndViewDefiningException;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 import org.springframework.web.servlet.view.RedirectView;
 
-import com.banzhuan.service.AgentService;
+import com.banzhuan.service.UserService;
 
 
 public class AgentCounterInterceptor extends HandlerInterceptorAdapter {
 	@Autowired
-	@Qualifier("agentService")
-	private AgentService agentService;
+	@Qualifier("userService")
+	private UserService userService;
 
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
@@ -26,7 +26,7 @@ public class AgentCounterInterceptor extends HandlerInterceptorAdapter {
 		try
 		{
 			int cntRead = Integer.parseInt(url.split("/")[url.split("/").length-1]);
-			agentService.updateAgentReadCountById(cntRead);
+			userService.updateUserReadCountById(cntRead);
 		}
 		catch(NumberFormatException e) { 
 			throw new ModelAndViewDefiningException(modelAndView);

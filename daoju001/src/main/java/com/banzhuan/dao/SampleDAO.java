@@ -20,4 +20,6 @@ public interface SampleDAO {
 	int getSampleCount(int userid);
 	
 	void delSample(int sid);
+	
+	int updateAgentidById(SampleEntity buyer);
 }

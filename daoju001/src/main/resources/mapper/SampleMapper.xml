@@ -99,4 +99,8 @@
 		update t_sample set
 		name = #{name}, gmt_modified=now() where id=#{id}
 	</update>
+	<update id="updateAgentidById" parameterType="SampleEntity">
+		update t_sample set
+		agent_id = #{agentId} where id=#{id}
+	</update>
 </mapper>

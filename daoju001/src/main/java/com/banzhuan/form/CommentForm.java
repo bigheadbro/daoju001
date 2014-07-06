@@ -13,8 +13,7 @@ public class CommentForm implements Serializable {
 	private int replyOther;
 	private String content;
 	private int commentId;
-	private int agentId;
-	private int buyerId;
+	private int userid;
 	private int parentId;
 	private String userName;
 	private String userLogo;
@@ -44,30 +43,6 @@ public class CommentForm implements Serializable {
 	 */
 	public void setContent(String content) {
 		this.content = content;
-	}
-	/**
-	 * @return the agentId
-	 */
-	public int getAgentId() {
-		return agentId;
-	}
-	/**
-	 * @param agentId the agentId to set
-	 */
-	public void setAgentId(int agentId) {
-		this.agentId = agentId;
-	}
-	/**
-	 * @return the buyerId
-	 */
-	public int getBuyerId() {
-		return buyerId;
-	}
-	/**
-	 * @param buyerId the buyerId to set
-	 */
-	public void setBuyerId(int buyerId) {
-		this.buyerId = buyerId;
 	}
 	/**
 	 * @return the parentId
@@ -158,6 +133,18 @@ public class CommentForm implements Serializable {
 	 */
 	public void setCommentId(int commentId) {
 		this.commentId = commentId;
+	}
+	/**
+	 * @return the userid
+	 */
+	public int getUserid() {
+		return userid;
+	}
+	/**
+	 * @param userid the userid to set
+	 */
+	public void setUserid(int userid) {
+		this.userid = userid;
 	}
 	
 }

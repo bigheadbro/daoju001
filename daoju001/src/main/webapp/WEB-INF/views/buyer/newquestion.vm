@@ -1,5 +1,5 @@
 #set($layout = "/layout/buyer_detail_layout.vm")
-<script type="text/javascript" src="../js/ques-handler.js"></script>
+<script type="text/javascript" src="/js/ques-handler.js"></script>
 <ul class="right-tab clearfix">
     <li class="current">新建问题</li>
     <li>

@@ -12,9 +12,9 @@
                                 <div class="logo">
                                     <a id="uploadlogo" href="#">
                                         #if($!{account.logo})
-                                            <img src="../logo/$!{account.logo}"  />
+                                            <img src="/logo/$!{account.logo}"  />
                                         #else
-                                            <img src="../img/avatar.png"  />
+                                            <img src="/img/avatar.png"  />
                                         #end
                                     </a>
                                 </div>
@@ -40,18 +40,18 @@
                                     #if($!stringUtil.isContains($request.getServletPath(),"/mymsg"))
                                         <li class="current">
                                             <a href="mymsg">我的消息
-																							#if($!{account.unreadMsgCount} > 0)
-																								<span class="zg-noti-number mt5">$!{account.unreadMsgCount}</span>
-																							#end
-																						</a>
+												#if($!{account.unreadMsgCount} > 0)
+													<span class="zg-noti-number mt5">$!{account.unreadMsgCount}</span>
+												#end
+											</a>
                                         </li>
                                     #else
                                         <li>
                                             <a href="mymsg">我的消息
-																							#if($!{account.unreadMsgCount} > 0)
-																								<span class="zg-noti-number mt5">$!{account.unreadMsgCount}</span>
-																							#end
-																						</a>
+												#if($!{account.unreadMsgCount} > 0)
+													<span class="zg-noti-number mt5">$!{account.unreadMsgCount}</span>
+												#end
+											</a>
                                         </li>
 									#end
 									#if($!stringUtil.isContains($request.getServletPath(),"/newproduct") || $!stringUtil.isContains($request.getServletPath(),"/myproduct"))
@@ -71,16 +71,16 @@
                                         <li>
                                             <a href="newquestion">我的问题</a>
                                         </li>
-																		#end
-																		#if($!stringUtil.isContains($request.getServletPath(),"/myorder") || $!stringUtil.isContains($request.getServletPath(),"/myaddr"))
+									#end
+									#if($!stringUtil.isContains($request.getServletPath(),"/myorder") || $!stringUtil.isContains($request.getServletPath(),"/myaddr"))
                                         <li class="current">
                                             <a href="myorder">我的订单</a>
                                         </li>
                                     #else
                                         <li>
-                                            <a href="myaddr">我的订单</a>
+                                            <a href="myorder">我的订单</a>
                                         </li>
-																		#end
+									#end
                                     #if($!stringUtil.isContains($request.getServletPath(),"/profile") || $!stringUtil.isContains($request.getServletPath(),"/changepwd"))
                                         <li class="current">
                                             <a href="profile">账户设置</a>

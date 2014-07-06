@@ -1,5 +1,5 @@
 #set($layout = "/layout/index_layout.vm")
-<script type="text/javascript" src="../js/azlist.js"></script>
+<script type="text/javascript" src="/js/azlist.js"></script>
 <div class="main-content-container clearfix">
     <div class="main-list-container width630 ml15">
         <div class="gc-list-header">
@@ -25,9 +25,9 @@
                                         <div class="agent-logo logo" aid="$!{sample.agentId}">
                                             <a href="/agents/$!{sample.agentId}">
     											#if($!{sample.agentLogo})
-    												<img src="../logo/$!{sample.agentLogo}" />
+    												<img src="/logo/$!{sample.agentLogo}" />
     											#else
-    												<img src="../img/avatar.png" />
+    												<img src="/img/avatar.png" />
     											#end
                                             </a>
                                         </div>
@@ -35,7 +35,7 @@
                                             <h2 class="clearfix">
     											<a class="agent-name" href="/agents/$!{sample.agentId}">$!{sample.agentName}</a>
     											#if($sample.isVerified())
-    												<a class="fancybox-v" title="$!{sample.agentName}的代理证书" href="$!{sample.verifiedLink}"><img src="../img/v.png" /></a>
+    												<a class="fancybox-v" title="$!{sample.agentName}的代理证书" href="$!{sample.verifiedLink}"><img src="/img/v.png" /></a>
     											#end
     										</h2>
                                             <h4>$stringUtil.getBrand($!{sample.brandName})</h4>

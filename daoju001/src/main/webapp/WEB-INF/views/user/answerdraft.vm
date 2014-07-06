@@ -1,0 +1,24 @@
+#set($layout = "/layout/user_detail_layout.vm")
+<script type="text/javascript" src="/js/mixed-handle.js"></script>
+<script type="text/javascript" src="/js/editanswer.js"></script>
+<ul class="right-tab clearfix">
+  <li><a href="answered">已回答的问题</a></li>
+  <li class="current"><span>草稿箱</span></li>
+</ul>
+<div class="rigth-content">
+	<div class="buyer-list">
+		#foreach($answer in $answers)
+        	<div class="listitem">
+        		<div class="clearfix">
+        		    <div class="mixed">$!{answer.content}</div>
+        		    <span class="time">$stringUtil.formatDate($!{answer.gmtCreate})</span>
+        		</div>
+        		<div class="operation clearfix">
+        			<a class="editanswer" answerid="$!{answer.id}">编辑</a>
+        		</div>
+        	</div>
+    	#end
+	</div>
+	
+</div>
+#parse("/common/answer.vm")

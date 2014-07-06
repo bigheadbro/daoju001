@@ -12,9 +12,9 @@
                                 <div class="logo">
                                     <a id="uploadlogo" href="#">
                                         #if($!{account.logo})
-                                            <img src="../logo/$!{account.logo}"  />
+                                            <img src="/logo/$!{account.logo}"  />
                                         #else
-                                            <img src="../img/avatar.png"  />
+                                            <img src="/img/avatar.png"  />
                                         #end
                                     </a>
                                 </div>

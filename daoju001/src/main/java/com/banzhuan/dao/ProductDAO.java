@@ -13,6 +13,8 @@ public interface ProductDAO {
 	
 	List<ProductEntity> queryProductEntityByBuyerid(int id);
 	
+	List<ProductEntity> queryProductEntityByUserid(int id);
+	
 	List<ProductEntity> queryProductEntityByUserid(int id, RowBounds bound);
 	
 	public int insertProductEntity(ProductEntity Product);

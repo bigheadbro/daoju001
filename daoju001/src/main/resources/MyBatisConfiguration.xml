@@ -3,8 +3,7 @@
 <configuration>
 
 	<typeAliases>
-		<typeAlias alias="AgentEntity" type="com.banzhuan.entity.AgentEntity" />
-		<typeAlias alias="BuyerEntity" type="com.banzhuan.entity.BuyerEntity" />
+		<typeAlias alias="UserEntity" type="com.banzhuan.entity.UserEntity" />
 		<typeAlias alias="CommentEntity" type="com.banzhuan.entity.CommentEntity" />
 		<typeAlias alias="EventEntity" type="com.banzhuan.entity.EventEntity" />
 		<typeAlias alias="GoodcaseEntity" type="com.banzhuan.entity.GoodcaseEntity" />

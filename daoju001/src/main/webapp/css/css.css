@@ -207,24 +207,41 @@ a.common:hover{text-decoration:underline;color:#00c0ff}
 .purchase-info-wrapper .trivial .value span{color:#ff3000}
 
 /*myorder*/
-.rigth-content .order-header{margin-top:20px;font-size: 14px;margin-left: 10px;}
-.rigth-content .order-header div{float:left;padding-bottom:5px;border-bottom:3px solid #def1ff;margin-right:5px;text-align:center;}
-.rigth-content .order-header .name{width:180px;}
-.rigth-content .order-header .price{width:100px;}
-.rigth-content .order-header .time{width:100px;}
-.rigth-content .order-header .state{width:150px;}
-.rigth-content .order-header .operation{width:150px;}
+.mainpage-container .main-right .rigth-content2{background-color:white;margin-top:10px;padding:5px;padding-top: 10px;height: 585px;position: relative;}
+.rigth-content2 .order-header{margin-top:10px;font-size: 14px;}
+.rigth-content2 .order-header div{float:left;padding-bottom:5px;border-bottom:3px solid #def1ff;margin-right:5px;text-align:center;}
+.rigth-content2 .order-header .name{width:175px;}
+.rigth-content2 .order-header .price{width:95px;}
+.rigth-content2 .order-header .time{width:95px;}
+.rigth-content2 .order-header .state{width:145px;}
+.rigth-content2 .order-header .operation{width:145px;}
 
-.rigth-content .order-list{margin-top:20px;font-size: 14px;padding-bottom: 15px;border-bottom: 1px dotted #1ca4d1;margin-left: 10px;}
-.rigth-content .order-list div{float:left;margin-right:5px;text-align:center;}
-.rigth-content .order-list .name{padding-left:80px;width:180px;text-align:left;}
-.rigth-content .order-list .name img{float:left;margin-left:-80px;border:#d4d4d4;width:70px;height:70px;}
-.rigth-content .order-list  span{margin-top: 25px;display: block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
-.rigth-content .order-list .price{width:100px;}
-.rigth-content .order-list .time{width:100px;}
-.rigth-content .order-list .state{width:150px;}
-.rigth-content .order-list .operation{width:150px;}
-
+.rigth-content2 .order-item{border:1px solid #d2d2d2;margin: 10px 15px 0 0;}
+.rigth-content2 .order-list-head{background-color:#eeeeee;border-bottom:1px solid #d2d2d2;font-size: 14px;padding: 5px;font-weight: 700;}
+.rigth-content2 .order-list{font-size: 13px;border-bottom: 1px dotted #1ca4d1;}
+.rigth-content2 .order-list div{float:left;margin-right:5px;text-align:center;height: 75px;}
+.rigth-content2 .order-list .name{padding-left:80px;width:95px;text-align:left;border-right: 1px solid #d2d2d2;}
+.rigth-content2 .order-list .name img{float:left;margin-left: -70px;border: 1px solid #d4d4d4;width: 60px;height: 60px;margin-top: 7px;}
+.rigth-content2 .order-list  span{margin-top: 25px;display: block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.rigth-content2 .order-list  .name span{margin-top: 18px;display: block;overflow:hidden;text-overflow:ellipsis;white-space: normal;color:#0071f1}
+.rigth-content2 .order-list .price{width:95px;border-right: 1px solid #d2d2d2;}
+.rigth-content2 .order-list .price span{font-weight:700}
+.rigth-content2 .order-list .time{width:95px;border-right: 1px solid #d2d2d2;}
+.rigth-content2 .order-list  .time span{display: block;overflow:hidden;text-overflow:ellipsis;white-space: normal;margin-top:15px;}
+.rigth-content2 .order-list .state{width:145px;border-right: 1px solid #d2d2d2;}
+.rigth-content2 .order-list .operation{width:134px;}
+.rigth-content2 .order-list .operation div{float:none;margin-top: 2px;}
+.rigth-content2 .order-list .operation em{display:inline-block;margin:0 2px;color:#4289f3;}
+.rigth-content2 .order-list .operation a{color:#4289f3}
+.rigth-content2 .order-list .operation .op{display:inline-block;}
+.rigth-content2 .order-list .operation .red{background-color:#ff3c00;color:white;padding:2px 5px;border-radius:4px;margin-top: 15px;}
+.rigth-content2 .order-list .operation .blue{background-color:#0099cb;color:white;padding:2px 5px;border-radius:4px;margin-top: 15px;}
+.rigth-content2 .order-list  span.green{color:#74bd00}
+.rigth-content2 .order-list  span.red{color:#ff3c00}
+.rigth-content2 .order-list  span.blue{color:#0099cb}
+.rigth-content2 .order-list  span.grey{color:#7a7a7a}
+.mt25{margin-top:25px;}
+.db{display:block}
 /*browser*/
 .page#page-compatable{width:660px;margin:0 auto}
 .page#page-compatable .topbar{width:660px;margin:0 auto;padding:40px 0;*zoom:1}

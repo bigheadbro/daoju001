@@ -26,7 +26,7 @@ $(function() {
 		    		window.location.href='/log';
 		    	  break;
 				case 2:
-		    		window.location.href='/buyer/newquestion';
+		    		window.location.href='/user/newquestion';
 		    	  break;
 				case 3:
 		    		showAlert("",data.code,"","确定","");

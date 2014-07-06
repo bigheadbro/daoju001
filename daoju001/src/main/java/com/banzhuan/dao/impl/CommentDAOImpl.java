@@ -40,4 +40,16 @@ public class CommentDAOImpl extends SqlSessionDaoSupport implements CommentDAO {
 	{
 		return this.getSqlSession().selectList("getCommentsInAnswerByParentid",pid);
 	}
+	
+	@Override
+	public List<CommentEntity> getAllComments()
+	{
+		return this.getSqlSession().selectList("getAllComments");
+	}
+	
+	@Override
+	public void updateUseridById(CommentEntity comment)
+	{
+		this.getSqlSession().update("updateUseridById", comment);
+	}
 }

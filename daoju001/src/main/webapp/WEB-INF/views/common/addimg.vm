@@ -1,4 +1,4 @@
-<script type="text/javascript" src="../js/addimg.js"></script>
+<script type="text/javascript" src="/js/addimg.js"></script>
 <div id="pagemask-img"></div>
 <div class="addimg-win">
 	<div class="addimg-cont">
@@ -19,12 +19,12 @@
 		  hideimg();
 			if($("#ques-cont-editor").length > 0)
 			{
-				$("#ques-cont-editor").append("<img class=\"img-in-question\" src=\"../uploadfile/" + data.addr + "\"/>");
+				$("#ques-cont-editor").append("<img class=\"img-in-question\" src=\"/uploadfile/" + data.addr + "\"/>");
 				$("#hasPic").val(1);
 			}
 			if($("#answer-editor").length > 0)
 			{
-				$("#answer-editor").append("<img class=\"img-in-question\" src=\"../uploadfile/" + data.addr + "\"/>");
+				$("#answer-editor").append("<img class=\"img-in-question\" src=\"/uploadfile/" + data.addr + "\"/>");
 				$("#hasPic").val(1);
 			}
 		}

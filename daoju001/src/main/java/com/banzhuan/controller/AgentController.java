@@ -40,9 +40,12 @@ import org.springframework.web.util.WebUtils;
 import com.banzhuan.common.Account;
 import com.banzhuan.common.Constant;
 import com.banzhuan.common.Result;
+import com.banzhuan.entity.AddressEntity;
 import com.banzhuan.entity.AgentEntity;
 import com.banzhuan.entity.BrandEntity;
 import com.banzhuan.entity.GoodcaseEntity;
+import com.banzhuan.entity.ItemEntity;
+import com.banzhuan.entity.OrderEntity;
 import com.banzhuan.entity.ProductEntity;
 import com.banzhuan.entity.ProfessionalAnswerEntity;
 import com.banzhuan.entity.SampleEntity;
@@ -55,6 +58,7 @@ import com.banzhuan.form.RegForm;
 import com.banzhuan.form.LoginForm;
 import com.banzhuan.form.SampleForm;
 import com.banzhuan.service.AgentService;
+import com.banzhuan.service.CommonService;
 import com.banzhuan.util.CookieUtil;
 import com.banzhuan.util.JsonUtil;
 import com.banzhuan.util.StringUtil;
@@ -68,6 +72,10 @@ public class AgentController extends BaseController{
 	@Autowired
 	@Qualifier("agentService")
 	private AgentService agentService;
+	
+	@Autowired
+	@Qualifier("commonService")
+	private CommonService commonService;
 	/**
 	 * 通用URL跳转， 统一将  /agent/*** 等未映射的URL重定向到login页面
 	 * @return
@@ -885,7 +893,65 @@ public class AgentController extends BaseController{
 	@RequestMapping(value="/myorder")
 	public ModelAndView myorder(HttpServletRequest request, HttpServletResponse response, @ModelAttribute("account")Account account) {
 		ModelAndView mv = new ModelAndView("common/myorder");
+		int page = 1;
+		if(request.getParameter("page") != null)
+		{
+			page = Integer.valueOf(request.getParameter("page"));
+		}
+		
+		int total= commonService.getOrdersCount(account.getUserId(), 1);
+		int totalPage=0;
+		if(total % Constant.ORDER_PAGE_SIZE == 0)
+			totalPage=total/Constant.ORDER_PAGE_SIZE;
+		else
+			totalPage=total/Constant.ORDER_PAGE_SIZE+1;
+		totalPage=totalPage==0?1:totalPage;
+		mv.addObject("page", page);
+		mv.addObject("total", total);
+		mv.addObject("totalPage", totalPage);
+		List<OrderEntity> orders = commonService.getOrders(account.getUserId(), 0, new RowBounds((page-1)*Constant.ORDER_PAGE_SIZE, Constant.ORDER_PAGE_SIZE));
+		for(int i = 0; i< orders.size(); i++)
+		{
+			orders.get(i).setItem(commonService.getItem(orders.get(i).getItemid()));
+		}
+		mv.addObject("orders",orders);
 		return mv;
+	}
+	
+	@RequestMapping(value="/order/{id}")
+	public ModelAndView myorder(HttpServletRequest request, HttpServletResponse response, @PathVariable String id, @ModelAttribute("account")Account account) {
+		ModelAndView mv = new ModelAndView("common/purchase_return");
+		int orderid = Integer.parseInt(id);
+		OrderEntity order = commonService.getOrder(orderid);
+		if(order.getUserid() == account.getUserId() && order.getUsertype() == (account.isAgent()?1:0))
+		{
+			mv.addObject("orderid",order.getId());
+			AddressEntity addr = commonService.getAddressById(order.getAddressid());
+			mv.addObject("receiverinfo",addr.getName() + "," + addr.getPca() + "," + addr.getAddr());
+			mv.addObject("total",order.getPrice());
+			ItemEntity item = commonService.getItem(order.getItemid());
+			mv.addObject("itemName",item.getBrand()+item.getType() +item.getVersion());
+			mv.addObject("price",item.getPrice());
+			mv.addObject("quantity",order.getQuantity());
+			mv.addObject("cover",item.getCover());
+			mv.addObject("orderno", order.getLogNumber());
+			
+			mv.addObject("timeSubmit",StringUtil.convertDate(order.getGmtSubmitOrder()));
+			
+			mv.addObject("timePay",StringUtil.convertDate(order.getGmtPay()));
+			
+			mv.addObject("timeSell",StringUtil.convertDate(order.getGmtSell()));
+			
+			mv.addObject("timeAssure",StringUtil.convertDate(order.getGmtAssure()));
+			
+			mv.addObject("state", order.getState());
+			mv.addObject("orderno", order.getLogNumber());
+			return mv;
+		}
+		else
+		{
+			return new ModelAndView("buyer/mainpage");
+		}
 	}
 
 }

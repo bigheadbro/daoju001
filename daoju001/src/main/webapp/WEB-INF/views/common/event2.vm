@@ -1,7 +1,7 @@
 #set($layout = "/layout/index_layout.vm")
-<script type="text/javascript" src="../js/event.js"></script>
+<script type="text/javascript" src="/js/event.js"></script>
 <div class="event-header clearfix">
-	<img src="../img/event/event-top.png" />
+	<img src="/img/event/event-top.png" />
 	<a href="#detail"></a>
 </div>
 <div class="event-body clearfix">
@@ -14,13 +14,13 @@
 				<a target="_blank" href="/downloadfile?file=犀飞利.pdf">下载犀飞利样本</a>
         	</div>
 			<div class="right">
-    			<img src="../img/event/event-item2.png" />
+    			<img src="/img/event/event-item2.png" />
         	</div>
 		</div>
 	</div>
 	<div class="event-detail clearfix" id="detail">
 		<div class="tag clearfix">
-			<img src="../img/event/event-detail.png" />
+			<img src="/img/event/event-detail.png" />
 		</div>
 		<div class="detail-cont clearfix">
 			<div class="info1">
@@ -178,15 +178,15 @@
 	</div>
 	<div class="event-tail">
 		<div class="tag clearfix">
-			<img src="../img/event/event-us.png" />
+			<img src="/img/event/event-us.png" />
 		</div>
 		<div class="us-cont clearfix">
 			<div class="left">
-    			<a target="_blank" href="http://weibo.com/daoshifu"><img src="../img/event/wb.png" /></a>
+    			<a target="_blank" href="http://weibo.com/daoshifu"><img src="/img/event/wb.png" /></a>
 				<p>点击关注刀师傅新浪微博</p>
         	</div>
         	<div class="right">
-        		<img src="../img/2.png" />
+        		<img src="/img/2.png" />
 				<p>扫描二维码关注刀师傅微信账号</p>
         	</div>
 		</div>

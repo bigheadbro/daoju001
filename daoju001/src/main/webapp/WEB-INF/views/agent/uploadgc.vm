@@ -1,7 +1,7 @@
 #set($layout = "/layout/agent_detail_layout.vm")
-<script type="text/javascript" src="../js/ques-handler.js"></script>
-<link rel="stylesheet" href="../css/uploadify.css">
-<script type="text/javascript" src="../js/jquery.uploadify.min.js"></script>
+<script type="text/javascript" src="/js/ques-handler.js"></script>
+<link rel="stylesheet" href="/css/uploadify.css">
+<script type="text/javascript" src="/js/jquery.uploadify.min.js"></script>
 <ul class="right-tab clearfix">
   <li class="current">上传案例</li>
   <li><a href="goodcase">案例管理</a></li>

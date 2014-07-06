@@ -15,6 +15,7 @@ public class CommentEntity implements Serializable {
 	// 评论内容
 	private String content;
 	private int commentId;
+	private int userid;
 	private int agentId;
 	private int buyerId;
 	// 上一条评论id
@@ -165,6 +166,34 @@ public class CommentEntity implements Serializable {
 	}
 
 	/**
+	 * @return the commentId
+	 */
+	public int getCommentId() {
+		return commentId;
+	}
+
+	/**
+	 * @param commentId the commentId to set
+	 */
+	public void setCommentId(int commentId) {
+		this.commentId = commentId;
+	}
+
+	/**
+	 * @return the userid
+	 */
+	public int getUserid() {
+		return userid;
+	}
+
+	/**
+	 * @param userid the userid to set
+	 */
+	public void setUserid(int userid) {
+		this.userid = userid;
+	}
+
+	/**
 	 * @return the agentId
 	 */
 	public int getAgentId() {
@@ -190,20 +219,6 @@ public class CommentEntity implements Serializable {
 	 */
 	public void setBuyerId(int buyerId) {
 		this.buyerId = buyerId;
-	}
-
-	/**
-	 * @return the commentId
-	 */
-	public int getCommentId() {
-		return commentId;
-	}
-
-	/**
-	 * @param commentId the commentId to set
-	 */
-	public void setCommentId(int commentId) {
-		this.commentId = commentId;
 	}
 
 	

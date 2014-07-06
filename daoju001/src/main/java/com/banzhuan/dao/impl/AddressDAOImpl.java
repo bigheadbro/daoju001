@@ -18,14 +18,7 @@ public class AddressDAOImpl extends SqlSessionDaoSupport implements AddressDAO {
 
 	@Override
 	public List<AddressEntity> queryAddressByUserid(int uid, int type) {
-		if(type == 0)//agent or buyer?
-		{
-			return this.getSqlSession().selectList("queryAddressByBuyerid",uid);
-		}
-		else
-		{
-			return this.getSqlSession().selectList("queryAddressByAgentid",uid);
-		}
+		return this.getSqlSession().selectList("queryAddressByUserid",uid);
 	}
 
 	@Override

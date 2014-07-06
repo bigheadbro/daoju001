@@ -15,15 +15,15 @@
 			<span class="state4">确认收货</span>
 		</div>
 		#if($state == 1)
-			<img src="../img/state1.png" />
+			<img src="/img/state1.png" />
 		#elseif($state == 2)
-			<img src="../img/state2.png" />
+			<img src="/img/state2.png" />
 		#elseif($state == 3)
-			<img src="../img/state3.png" />
+			<img src="/img/state3.png" />
 		#elseif($state == 4)
-			<img src="../img/state4.png" />
+			<img src="/img/state4.png" />
 		#else
-			<img src="../img/state1.png" />
+			<img src="/img/state1.png" />
 		#end
 		<div class="time">
 			<span class="state1">$!{timeSubmit}</span>
@@ -51,7 +51,18 @@
 				</ul>
 			</div>
 			<div class="right">
-				<h1>订单状态：刀师傅已经返货，请确认收货<br/>您可以<a>确认收货</a></h1>
+				#if($state == 1)
+        			<h1>订单状态：您还没有为货品付款<br/>您可以<a href="/purchase_handler/${orderid}">立即付款</a></h1>
+        		#elseif($state == 2)
+        			<h1>订单状态：付款已完成，刀师傅会尽快为您发货</h1>
+        		#elseif($state == 3)
+        			<h1>订单状态：刀师傅已经发货，请确认收货<br/>您可以<a href="http://www.alipay.com">确认收货</a></h1>
+        		#elseif($state == 4)
+        			<h1>订单状态：交易已经完成</h1>
+        		#else
+        			<h1>订单状态：交易已取消</h1>
+        		#end
+				
 				<p>如您有任何问题，可以与我们的客服联系，我们将为您提供更优质的服务</p>
 			</div>
 		</div>
@@ -62,7 +73,7 @@
     		<div class="total">小计(元)</div>
     	</div>
     	<div class="order-list clearfix">
-    		<div class="name"><a><img src="../item/$cover" /><span>$itemName</span></a></div>
+    		<div class="name"><a><img src="/item/$cover" /><span>$itemName</span></a></div>
     		<div class="price"><span>$price</span></div>
     		<div class="quatity"><span>X $quantity</span></div>
     		<div class="total"><span>${total}0</span></div>

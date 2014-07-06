@@ -11,7 +11,7 @@ public interface MsgDAO {
 	
 	public int insertMessageEntity(MessageEntity buyer);
 	
-	public int updateMessageById(MessageEntity buyer);
+	public int updateMessageById(MessageEntity msg);
 	
 	public int getUnreadMsgCount(MessageEntity msg);
 	
@@ -24,5 +24,7 @@ public interface MsgDAO {
 	int getMsgsCountByUserid(MessageEntity msg);
 	
 	int setMsgAsRead(int id);
+	
+	List<MessageEntity> getAllmsgs();
 	
 }

@@ -10,7 +10,7 @@
 		<id property="content" column="content" />
 		
 		<id property="commentId" column="comment_id" />
-		<!--评论内容 -->
+		<id property="userid" column="user_id" />
 		<id property="buyerId" column="buyer_id" />
 		<!--评论内容 -->
 		<id property="agentId" column="agent_id" />
@@ -61,8 +61,7 @@
 		type
 		,content
 		,comment_id
-		,buyer_id
-		,agent_id
+		,user_id
 		,logo
 		,verified_link
 		,parent
@@ -75,8 +74,7 @@
 		#{type}
 		,#{content}
 		,#{commentId}
-		,#{buyerId}
-		,#{agentId}
+		,#{userid}
 		,#{userAvatar}
 		,#{link}
 		,#{parent}
@@ -92,6 +90,18 @@
 	<update id="updateCommentById" parameterType="CommentEntity">
 		update t_comment
 		set content = #{content}, gmt_modified=now() where id=#{id}
+	</update>
+	
+	<select id="getAllComments" parameterType="int"
+		resultMap="CommentResultMap">
+	<![CDATA[
+		SELECT * from t_comment
+	]]>
+	</select>
+	
+	<update id="updateUseridById" parameterType="CommentEntity">
+		update t_comment
+		set user_id = #{userid} where id=#{id}
 	</update>
 
 </mapper>

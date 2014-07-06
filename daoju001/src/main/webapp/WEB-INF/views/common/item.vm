@@ -31,16 +31,16 @@
 	<form id="form_item" method="post" action="/purchase">
 		<input type="hidden" name="itemname" value="${item.brand}${item.type}${item.version}"/>
 		<input type="hidden" name="itemid" value="${item.id}" />
-		<input type="hidden" name="cover" value="../item/${item.cover}" />
+		<input type="hidden" name="cover" value="/item/${item.cover}" />
 		<input type="hidden" name="price" value=${item.price} />
 	<div class="item-detail clearfix">
 		<div class="image">
 			<div class="photo">
-				<img src="../item/${item.cover}" />
+				<img src="/item/${item.cover}" />
 			</div>
 			<div class="list">
 				#foreach($pic in $pictures)
-					<a><img src="../item/${pic}" /></a>
+					<a><img src="/item/${pic}" /></a>
 				#end
 			</div>
 		</div>
@@ -56,13 +56,13 @@
         			<div class="quatity clearfix">
     					<span>数量：</span>
 						<div class="quantity-box">
-							<a id="minus">-</a><input id="itemQuantity" type="text" name="quatity" value=${item.limitq}  readonly /><a id="add">+</a>
+							<a id="minus">-</a><input id="itemQuantity" type="text" name="quatity" value=${item.limitq} /><a id="add">+</a>
 						</div>
     				</div>
         			<a id="submit_item">立即购买</a>
 				</div>
 				<div class="right clearfix">
-					<img src="../img/alipay.png" />
+					<img src="/img/alipay.png" />
 					<div class="alipay">
 						<h1>支付宝担保交易</h1>
 						<p>刀师傅使用支付宝担保交易服务。<br/>保障买卖双方货款安全，防范欺诈。</p>
@@ -72,7 +72,7 @@
 			<div class="contact clearfix">
 				<p class="info">如果您大量购买我们的产品，可以与我们的客服联系，我们将为您提供更优质的服务!</p>
 				<div class="left">
-        			<a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=123576884&site=qq&menu=yes"><img src="../img/purchaseqq.png" /></a>
+        			<a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=123576884&site=qq&menu=yes"><img src="/img/purchaseqq.png" /></a>
 					<p>QQ客服</p>
 				</div>
 				<div class="right">

@@ -1,6 +1,7 @@
 package com.banzhuan.util;
 
 import java.security.MessageDigest;
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -538,6 +539,29 @@ public class StringUtil {
 		return dateString;
 	}
 	
+	public static String getCurrentTime()
+	{
+		Date currentTime = new Date();
+	    SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+	    String dateString = formatter.format(currentTime);
+		return dateString;
+	}
+	
+	public static String convertDate(String str)
+	{
+		if(str == null)
+		{
+			return null;
+		}
+		DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+		Date date = null;
+		try {
+			date = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(str);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		return df.format(date);
+	}
 	public static String convertToChar(int i)
 	{
 		String str = "";

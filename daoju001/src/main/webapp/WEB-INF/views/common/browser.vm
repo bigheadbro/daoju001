@@ -2,8 +2,8 @@
 <html>
 <head>
 	<title>刀师傅</title>
-	<link href="../css/css.css" media="all" rel="stylesheet" type="text/css" />
-	<script type="text/javascript" src="../js/jquery-1.10.2.min.js"></script>
+	<link href="/css/css.css" media="all" rel="stylesheet" type="text/css" />
+	<script type="text/javascript" src="/js/jquery-1.10.2.min.js"></script>
 	<script>
 	$(function(){
 		if (!document.all){  

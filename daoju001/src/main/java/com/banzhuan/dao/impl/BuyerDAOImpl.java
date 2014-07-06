@@ -1,5 +1,7 @@
 package com.banzhuan.dao.impl;
 
+import java.util.List;
+
 import org.mybatis.spring.support.SqlSessionDaoSupport;
 import org.springframework.stereotype.Repository;
 
@@ -22,6 +24,12 @@ public class BuyerDAOImpl extends SqlSessionDaoSupport implements BuyerDAO {
 	@Override
 	public BuyerEntity queryBuyerEntityByName(String name) {
 		return this.getSqlSession().selectOne("queryBuyerEntityByName", name);
+	}
+	
+	@Override
+	public List<BuyerEntity> getAllbuyers()
+	{
+		return this.getSqlSession().selectList("getAllbuyers");
 	}
 	
 	@Override

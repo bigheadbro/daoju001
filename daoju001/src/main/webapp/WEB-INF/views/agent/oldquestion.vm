@@ -1,6 +1,6 @@
 #set($layout = "/layout/agent_detail_layout.vm")
-<script type="text/javascript" src="../js/mixed-handle.js"></script>
-<script type="text/javascript" src="../js/editanswer.js"></script>
+<script type="text/javascript" src="/js/mixed-handle.js"></script>
+<script type="text/javascript" src="/js/editanswer.js"></script>
 <ul class="right-tab clearfix">
   <li class="current"><span>已回答的问题</span></li>
   <li><a href="draft">草稿箱</a></li>

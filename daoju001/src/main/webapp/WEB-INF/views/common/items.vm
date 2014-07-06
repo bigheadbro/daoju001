@@ -141,7 +141,7 @@ $(function() {
 			#foreach( $item in $items )
     			<div class="item">
     				<div class="img">
-    					<a target="_blank" href="/item/${item.id}"><img src="../item/${item.cover}" /></a>
+    					<a target="_blank" href="/item/${item.id}"><img src="/item/${item.cover}" /></a>
     				</div>
     				<div class="info">
     					<ul class="clearfix">

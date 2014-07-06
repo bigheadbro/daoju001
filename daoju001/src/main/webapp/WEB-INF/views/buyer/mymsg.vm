@@ -1,5 +1,5 @@
 #set($layout = "/layout/buyer_detail_layout.vm")
-<script type="text/javascript" src="../js/setread.js"></script>
+<script type="text/javascript" src="/js/setread.js"></script>
 <h2>全部消息</h2>
 <div class="rigth-content">
     <div class="buyer-list">

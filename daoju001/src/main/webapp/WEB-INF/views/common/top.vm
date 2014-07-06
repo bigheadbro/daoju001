@@ -1,9 +1,9 @@
-<script type="text/javascript" src="../js/top-nav.js"></script>
+<script type="text/javascript" src="/js/top-nav.js"></script>
 
 <div class="main-head-container">
     <div class="main-head-content clearfix">
         <div class="main-logo">
-            <a href="http://www.daoshifu.com"><img src="../img/logo.png" /></a>
+            <a href="http://www.daoshifu.com"><img src="/img/logo.png" /></a>
         </div>
         <div class="nav">
             <ul>
@@ -65,85 +65,44 @@
                         <a href="/log">登录</a>
                     </li>
                     <li>
-                        <a href="/buyer/reg">注册</a>
+                        <a href="/user/reg">注册</a>
                     </li>
                 </ul>
                 　                      #else
-                    #if($account.isBuyer())
-                        <div class="top-user" href="/buyer/main">
-                            <div class="logo">
-                                <a href="#">
-                                    #if($!{account.logo})
-                                        <img src="../logo/$!{account.logo}"  />
-                                    #else
-                                        <img src="../img/avatar.png"  />
-                                    #end
-                                </a>
-								
-                            </div>
-							<span class="name">${account.userName}</span>
-                        </div>
-						#if($!{account.unreadMsgCount} > 0)
-							<a class="zg-top zg-noti-number" href="/buyer/mymsg">$!{account.unreadMsgCount}</a>
-						#end
-                        <ul class="top-dropdown">
-                            <li>
-                                <a href="/buyer/main">我的刀师傅</a>
-                            </li>
-                            <li>
-                                <a href="/buyer/mymsg">
-									消息
-									#if($!{account.unreadMsgCount} > 0)
-                                        <span class="zg-noti-number">$!{account.unreadMsgCount}</span>
-                                    #end
-								</a>
-                            </li>
-                            <li>
-                                <a href="/buyer/profile">
-									设置
-								</a>
-								
-                            </li>
-                            <li>
-                                <a href="/buyer/logoff">退出</a>
-                            </li>
-                        </ul>
-                  	#else
-                            <div class="top-user" href="/agent/main">
-                                <div class="logo">
-                                    <a href="#">
-                                        #if($!{account.logo})
-                                            <img src="../logo/$!{account.logo}"  />
-                                        #else
-                                            <img src="../img/avatar.png"  />
-                                        #end
-                                    </a>
-									
-                                </div>
-								<span class="name">${account.userName}</span>
-                            </div>
+                <div class="top-user" href="/user/main">
+                    <div class="logo">
+                        <a href="#">
+                            #if($!{account.logo})
+                                <img src="/logo/$!{account.logo}"  />
+                            #else
+                                <img src="/img/avatar.png"  />
+                            #end
+                        </a>
+						
+                    </div>
+					<span class="name">${account.userName}</span>
+                </div>
+				#if($!{account.unreadMsgCount} > 0)
+					<a class="zg-noti-number zg-top" href="/user/mymsg">$!{account.unreadMsgCount}</a>
+				#end
+                <ul class="top-dropdown">
+                    <li>
+                        <a href="/user/main">我的刀师傅</a>
+                    </li>
+                    <li>
+                        <a href="/user/mymsg">消息
 							#if($!{account.unreadMsgCount} > 0)
-								<a class="zg-noti-number zg-top" href="/agent/mymsg">$!{account.unreadMsgCount}</a>
-							#end
-                            <ul class="top-dropdown">
-                                <li>
-                                    <a href="/agent/main">我的刀师傅</a>
-                                </li>
-                                <li>
-                                    <a href="/agent/mymsg">消息
-										#if($!{account.unreadMsgCount} > 0)
-                                            <span class="zg-noti-number">$!{account.unreadMsgCount}</span>
-                                        #end
-									</a>
-                                </li>
-                                <li>
-                                    <a href="/agent/profile">设置</a>
-                                </li>
-                                <li>
-                                    <a href="/agent/logoff">退出</a>
-                                </li>
-                            </ul>
-                    #end
+                                <span class="zg-noti-number">$!{account.unreadMsgCount}</span>
+                            #end
+						</a>
+                    </li>
+                    <li>
+                        <a href="/user/profile">设置</a>
+                    </li>
+                    <li>
+                        <a href="/user/logoff">退出</a>
+                    </li>
+                </ul>
             #end		
         </div>
     </div>

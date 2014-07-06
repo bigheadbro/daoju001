@@ -9,9 +9,9 @@
 				<div class="logo">
 					<a href="/agents/$!{agent.id}">
 						#if($!{agent.logo})
-							<img src="../logo/$!{agent.logo}" />
+							<img src="/logo/$!{agent.logo}" />
 						#else
-							<img src="../img/avatar.png" />
+							<img src="/img/avatar.png" />
 						#end
 					</a>
 				</div>
@@ -21,7 +21,7 @@
 					<h3 class="clearfix">
 						<span>$!{agent.companyName}</span>
 						#if($agent.isVerified())
-							<a class="fancybox-v" title="$!{agent.companyName}的代理证书" href="$!{agent.verifiedLink}"><img src="../img/v.png" /></a>
+							<a class="fancybox-v" title="$!{agent.companyName}的代理证书" href="$!{agent.verifiedLink}"><img src="/img/v.png" /></a>
 						#end
 					</h3>
 					<h4>代理刀具品牌：$stringUtil.getBrand($agent.brand)</h4>

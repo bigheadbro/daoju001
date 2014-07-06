@@ -9,9 +9,9 @@
 				<div class="logo">
 					<a>
 						#if($!{buyer.logo})
-							<img src="../logo/$!{buyer.logo}" />
+							<img src="/logo/$!{buyer.logo}" />
 						#else
-							<img src="../img/avatar.png" />
+							<img src="/img/avatar.png" />
 						#end
 					</a>
 				</div>

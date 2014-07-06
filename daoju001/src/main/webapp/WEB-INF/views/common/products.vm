@@ -1,5 +1,5 @@
 #set($layout = "/layout/index_layout.vm")
-<script type="text/javascript" src="../js/ques-handler.js"></script>
+<script type="text/javascript" src="/js/ques-handler.js"></script>
 <div class="product-content-container clearfix">
 	<!-- 问题 -->
 	<div class="product-list-container">
@@ -187,12 +187,12 @@
 		#foreach($product in $products)
 			<div class="product-item">
 				<div class="pic">
-					<img src="../product/${product.cover}" />
+					<img src="/product/${product.cover}" />
 				</div>
 				<div class="info">
     				<h5 class="name">${product.name}</h5>
     				<div class="brand">
-    					<img src="../img/logo/$stringUtil.getBrandLogo($product.brandId)" />
+    					<img src="/img/logo/$stringUtil.getBrandLogo($product.brandId)" />
     				</div>
 				</div>
 			</div>

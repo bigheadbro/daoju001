@@ -26,6 +26,7 @@
 	  <id property="gmtPay" column="gmtPay"/>
 	  <id property="gmtSell" column="gmtSell"/>
 	  <id property="gmtAssure" column="gmtAssure"/>
+	  <id property="gmtCancel" column="gmtCancel"/>
 	</resultMap>
 
 	<select id="queryOrderEntityById" parameterType="int"
@@ -34,6 +35,35 @@
 			SELECT * from t_order t where t.id=#{id}
 		]]>
 	</select>
+	
+	<select id="queryOrderByBuyerid" parameterType="int"
+			resultMap="OrderResultMap">
+		<![CDATA[
+			SELECT * from t_order t where t.userid=#{userid} and usertype = 0
+		]]>
+	</select>
+	
+	<select id="queryOrdersCountByBuyerid" parameterType="int"
+			resultType="int">
+		<![CDATA[
+			SELECT count(1) from t_order t where t.userid=#{userid} and usertype = 0 
+		]]>
+	</select>
+	
+	<select id="queryOrderByAgentid" parameterType="int"
+			resultMap="OrderResultMap">
+		<![CDATA[
+			SELECT * from t_order t where t.userid=#{userid} and usertype = 1
+		]]>
+	</select>
+	
+	<select id="queryOrdersCountByAgentid" parameterType="int"
+			resultType="int">
+		<![CDATA[
+			SELECT count(1) from t_order t where t.userid=#{userid} and usertype = 1
+		]]>
+	</select>
+	
 	<insert id="insertOrderEntity" parameterType="OrderEntity">
 		<selectKey resultType="int" order="AFTER" keyProperty="id">
 			SELECT LAST_INSERT_ID() AS id
@@ -71,7 +101,8 @@
 		<set> 
 		  <if test="gmtPay != null">gmtPay=#{gmtPay},</if>
 	      <if test="gmtSell != null">gmtSell=#{gmtSell}),</if>
-	      <if test="gmtSell != null">gmtAssure=#{gmtAssure},</if>
+	      <if test="gmtAssure != null">gmtAssure=#{gmtAssure},</if>
+	      <if test="gmtCancel != null">gmtCancel=#{gmtCancel},</if>
 	      state = #{state}
 		</set>
 	   where id=#{id}

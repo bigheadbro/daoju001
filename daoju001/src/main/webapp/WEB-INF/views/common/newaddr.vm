@@ -1,6 +1,7 @@
+
 <div id="pagemask-newaddr"></div>
-<link rel="stylesheet" href="../css/address.css">
-<script type="text/javascript" src="../js/pcasunzip.js"></script>
+<link rel="stylesheet" href="/css/address.css">
+<script type="text/javascript" src="/js/pcasunzip.js"></script>
 <script type="text/javascript">
 	function processNewaddress(data) { 
 		if(data.isedit){
@@ -57,7 +58,8 @@
 					required:true
 				},
 				phone:{
-					required:true
+					required:true,
+					number:true
 				}
 			},
 			messages:{
@@ -74,7 +76,8 @@
 					required:"请输入收件人名字"  
 				},
 				phone:{
-					required:"请输入联系电话"  
+					required:"请输入联系电话",
+					number:"电话格式不正确"
 				}
 			},
 			errorElement:"em",

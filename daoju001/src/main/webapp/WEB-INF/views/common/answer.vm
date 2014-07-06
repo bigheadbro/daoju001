@@ -5,7 +5,7 @@
             <a class="close-answer">x</a>
 				填写专业方案
 		</h2>
-		<form id="form_answer" action="/agent/answer" method="post">
+		<form id="form_answer" action="/user/answer" method="post">
 			<!-- 隐藏字段，用于标示是表单提交 -->
             <input type="hidden" name="do_submit" value="true"/>
             #springBind("answerForm.question.id")
@@ -75,7 +75,7 @@
                         success:function(data) { 
 							$("#form_answer")[0].reset();
 							hideanswer();
-							window.location.href='/agent/draft';
+							window.location.href='/user/answerdraft';
                         }
                     });
 				

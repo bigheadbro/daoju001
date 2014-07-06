@@ -26,11 +26,15 @@ public class MsgDAOImple extends SqlSessionDaoSupport implements MsgDAO {
 	}
 
 	@Override
-	public int updateMessageById(MessageEntity buyer) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int updateMessageById(MessageEntity msg) {
+		return this.getSqlSession().update("updateMessageById", msg);
 	}
 	
+	@Override
+	public List<MessageEntity> getAllmsgs()
+	{
+		return this.getSqlSession().selectList("getAllmsgs");
+	}
 	@Override
 	public int getUnreadMsgCount(MessageEntity msg)
 	{

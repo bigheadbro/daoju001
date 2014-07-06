@@ -34,6 +34,11 @@ public class ProductDAOImpl extends SqlSessionDaoSupport implements ProductDAO {
 	}
 	
 	@Override
+	public List<ProductEntity> queryProductEntityByUserid(int id) {
+		return this.getSqlSession().selectList("queryProductEntityByUserid", id);
+	}
+	
+	@Override
 	public int insertProductEntity(ProductEntity gc) {
 		this.getSqlSession().insert("insertProductEntity", gc);
 		return gc.getId();

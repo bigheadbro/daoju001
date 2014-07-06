@@ -1,6 +1,6 @@
 #set($layout = "/layout/buyer_detail_layout.vm")
-<link rel="stylesheet" href="../css/address.css">
-<script type="text/javascript" src="../js/pcasunzip.js"></script>
+<link rel="stylesheet" href="/css/address.css">
+<script type="text/javascript" src="/js/pcasunzip.js"></script>
 <ul class="right-tab clearfix">
     <li class="current">个人资料</li>
     <li>

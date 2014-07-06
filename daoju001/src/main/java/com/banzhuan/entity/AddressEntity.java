@@ -13,8 +13,6 @@ public class AddressEntity implements Serializable {
 	//
 	private int uid;
 	//
-	private int type;
-	//
 	private String pca;
 	//
 	private String province;
@@ -109,18 +107,7 @@ public class AddressEntity implements Serializable {
 	public void setPca(String pca) {
 		this.pca = pca;
 	}
-	/**
-	 * @return the type
-	 */
-	public int getType() {
-		return type;
-	}
-	/**
-	 * @param type the type to set
-	 */
-	public void setType(int type) {
-		this.type = type;
-	}
+
 	/**
 	 * @return the gmtCreate
 	 */

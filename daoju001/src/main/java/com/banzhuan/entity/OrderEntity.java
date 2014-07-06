@@ -37,6 +37,10 @@ public class OrderEntity implements Serializable {
 	
 	private String gmtAssure;
 	
+	private String gmtCancel;
+	
+	private ItemEntity item;
+	
 	/**
 	 * @return the id
 	 */
@@ -254,6 +258,34 @@ public class OrderEntity implements Serializable {
 	 */
 	public void setQuantity(int quantity) {
 		this.quantity = quantity;
+	}
+
+	/**
+	 * @return the address
+	 */
+	public ItemEntity getItem() {
+		return item;
+	}
+
+	/**
+	 * @param address the address to set
+	 */
+	public void setItem(ItemEntity item) {
+		this.item = item;
+	}
+
+	/**
+	 * @return the gmtCancel
+	 */
+	public String getGmtCancel() {
+		return gmtCancel;
+	}
+
+	/**
+	 * @param gmtCancel the gmtCancel to set
+	 */
+	public void setGmtCancel(String gmtCancel) {
+		this.gmtCancel = gmtCancel;
 	}
 
 }

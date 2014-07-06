@@ -27,6 +27,7 @@ import com.banzhuan.dao.ProductDAO;
 import com.banzhuan.dao.ProfessionalAnswerDAO;
 import com.banzhuan.dao.QuestionDAO;
 import com.banzhuan.dao.SampleDAO;
+import com.banzhuan.dao.UserDAO;
 import com.banzhuan.entity.AddressEntity;
 import com.banzhuan.entity.AgentEntity;
 import com.banzhuan.entity.BuyerEntity;
@@ -35,11 +36,13 @@ import com.banzhuan.entity.ComplainEntity;
 import com.banzhuan.entity.EventEntity;
 import com.banzhuan.entity.GoodcaseEntity;
 import com.banzhuan.entity.ItemEntity;
+import com.banzhuan.entity.MessageEntity;
 import com.banzhuan.entity.OrderEntity;
 import com.banzhuan.entity.ProductEntity;
 import com.banzhuan.entity.ProfessionalAnswerEntity;
 import com.banzhuan.entity.QuestionEntity;
 import com.banzhuan.entity.SampleEntity;
+import com.banzhuan.entity.UserEntity;
 import com.banzhuan.common.Account;
 import com.banzhuan.common.Result;
 import com.banzhuan.form.CommentForm;
@@ -57,17 +60,10 @@ import com.banzhuan.util.StringUtil;
  */
 @Service("commonService")
 public class CommonService {
-	@Autowired
-	@Qualifier("buyerDAO")
-	private BuyerDAO buyerDAO;
 
 	@Autowired
 	@Qualifier("questionDAO")
 	private QuestionDAO questionDAO;
-	
-	@Autowired
-	@Qualifier("agentDAO")
-	private AgentDAO agentDAO;
 	
 	@Autowired
 	@Qualifier("gcDAO")
@@ -113,6 +109,9 @@ public class CommonService {
 	@Qualifier("orderDAO")
 	private OrderDAO orderDAO;
 	
+	@Autowired
+	@Qualifier("userDAO")
+	private UserDAO userDAO;
 	
 	public Result checkLogin(LoginForm form, Errors errors)
 	{
@@ -122,7 +121,8 @@ public class CommonService {
 			errors.rejectValue("mail", "MAIL_IS_NOT_NULL"); // 邮箱不能为空
 			return result;
 		}
-		BuyerEntity buyer = buyerDAO.queryBuyerEntityByMail(form.getMail());
+		
+		/*BuyerEntity buyer = buyerDAO.queryBuyerEntityByMail(form.getMail());
 		if(buyer == null)
 		{
 			AgentEntity agent = agentDAO.queryAgentEntityByMail(form.getMail());
@@ -145,9 +145,15 @@ public class CommonService {
 		{
 			errors.rejectValue("password", "PASSWORD_ERROR"); // 密码错误
 			return result;
-		}
+		}*/
 		
-		result.add("user", buyer);
+		UserEntity user = userDAO.queryUserEntityByMail(form.getMail());
+		if(StringUtil.isNotEqual(user.getPassword(), StringUtil.encrypt(form.getPassword())))
+		{
+			errors.rejectValue("password", "PASSWORD_ERROR"); // 密码错误
+			return result;
+		}
+		result.add("user", user);
 		result.add("userType", 1);
 		return result;
 	}
@@ -155,24 +161,14 @@ public class CommonService {
 	public Result changpwd(String mail, String pwd, Errors errors)
 	{
 		Result result = new Result();
-		BuyerEntity buyer = buyerDAO.queryBuyerEntityByMail(mail);
-		if(buyer == null)
+		UserEntity user = userDAO.queryUserEntityByMail(mail);
+		if(user == null)
 		{
-			AgentEntity agent = agentDAO.queryAgentEntityByMail(mail);
-			if(agent == null)
-			{
-				errors.rejectValue("mail", "MAIL_IS_NOT_EXISTS"); // 邮箱不存在
-				return result;
-			}
-			agent.setPassword(StringUtil.encrypt(pwd)); 
-			agentDAO.updateAgentPwdById(agent);
+			errors.rejectValue("mail", "MAIL_IS_NOT_EXISTS"); // 邮箱不存在
 			return result;
 		}
-		else
-		{
-			buyer.setPassword(StringUtil.encrypt(pwd));
-			buyerDAO.updateBuyerPwdById(buyer);
-		}
+		user.setPassword(StringUtil.encrypt(pwd)); 
+		userDAO.updateUserPwdById(user);
 		return result;
 	}
 	
@@ -318,9 +314,9 @@ public class CommonService {
 		return result;
 	}
 	
-	public Map<Integer,Map<Integer,List<AgentEntity>>> getAllAgents()
+	public Map<Integer,Map<Integer,List<UserEntity>>> getAllAgents()
 	{
-		List<AgentEntity> agents = agentDAO.getAllagents(1);
+		List<UserEntity> agents = userDAO.getUsersByAuth(4);
 		
 		//按代理商首字母
 		/*Map<Integer,List<AgentEntity>> agentMap = new HashMap<Integer,List<AgentEntity>>();
@@ -337,7 +333,7 @@ public class CommonService {
 		}*/
 
 		
-		Map<Integer,Map<Integer,List<AgentEntity>>> agentMap = new HashMap<Integer, Map<Integer,List<AgentEntity>>>();
+		Map<Integer,Map<Integer,List<UserEntity>>> agentMap = new HashMap<Integer, Map<Integer,List<UserEntity>>>();
 		
 		for(int i = 0;i < agents.size(); i++)
 		{
@@ -345,16 +341,16 @@ public class CommonService {
 			{
 				continue;
 			}
-			String aa = StringUtil.getBrand(((AgentEntity)agents.get(i)).getBrand());
+			String aa = StringUtil.getBrand(((UserEntity)agents.get(i)).getBrand());
 			String bb = ChineseSpelling.getFirstLetter(aa);
 			int alpha = ChineseSpelling.letterToNum(bb);
-			Map<Integer,List<AgentEntity>> tmpMap = agentMap.get(alpha);
+			Map<Integer,List<UserEntity>> tmpMap = agentMap.get(alpha);
 			//是否存在该字母的代理商
 			if(tmpMap == null)
 			{
-				tmpMap = new HashMap<Integer,List<AgentEntity>>();
-				List<AgentEntity> tmp = new ArrayList<AgentEntity>();
-				tmp.add((AgentEntity)agents.get(i));
+				tmpMap = new HashMap<Integer,List<UserEntity>>();
+				List<UserEntity> tmp = new ArrayList<UserEntity>();
+				tmp.add((UserEntity)agents.get(i));
 				tmpMap.put(agents.get(i).getBrand(), tmp);
 			}
 			else
@@ -366,15 +362,15 @@ public class CommonService {
 					while (iter.hasNext()) 
 					{ 
 					    int key = Integer.valueOf(iter.next().toString()); 
-					    List<AgentEntity> val = tmpMap.get(key); 
+					    List<UserEntity> val = tmpMap.get(key); 
 					    if(val == null)
 						{
-					    	val = new ArrayList<AgentEntity>();
+					    	val = new ArrayList<UserEntity>();
 						}
 					    //如果是同一个品牌
 					    if(key == agents.get(i).getBrand())
 					    {
-						    val.add((AgentEntity)agents.get(i));
+						    val.add((UserEntity)agents.get(i));
 						    tmpMap.put(key, val);
 						    break;
 					    }
@@ -382,8 +378,8 @@ public class CommonService {
 				}
 				else
 				{
-					List<AgentEntity> tmp = new ArrayList<AgentEntity>();
-					tmp.add((AgentEntity)agents.get(i));
+					List<UserEntity> tmp = new ArrayList<UserEntity>();
+					tmp.add((UserEntity)agents.get(i));
 					tmpMap.put(agents.get(i).getBrand(), tmp);
 				}
 			}
@@ -456,7 +452,7 @@ public class CommonService {
 		List<ProfessionalAnswerEntity> answers = new ArrayList<ProfessionalAnswerEntity>();
 		for(int i = 0;i< questions.size();i++)
 		{
-			answers.add(paDAO.queryAnswersByQid(questions.get(i).getId()).get(0));
+ 			answers.add(paDAO.queryAnswersByQid(questions.get(i).getId()).get(0));
 		}
 		
 		result.add("questions", questions);
@@ -467,7 +463,7 @@ public class CommonService {
 	public Result getMainagents()
 	{
 		Result result = new Result();
-		List<AgentEntity> agents = agentDAO.getMainagents();
+		List<UserEntity> agents = userDAO.getMainagents();
 		result.add("agents", agents);
 		return result;
 	}
@@ -516,9 +512,9 @@ public class CommonService {
 			comment.setContent(form.getContent());
 		}
 		
-		if(form.getAgentId() > 0)
+		if(form.getUserid() > 0)
 		{
-			comment.setAgentId(form.getAgentId());
+			comment.setUserid(form.getUserid());
 		}
 		if(form.getBrandName() > 0)
 		{
@@ -536,11 +532,6 @@ public class CommonService {
 		if(StringUtil.isNotEmpty(form.getUserName()))
 		{
 			comment.setUserName(form.getUserName());
-		}
-		
-		if(form.getBuyerId() > 0)
-		{
-			comment.setBuyerId(form.getBuyerId());
 		}
 
 
@@ -679,4 +670,13 @@ public class CommonService {
 		return orderDAO.queryOrderEntityById(id);
 	}
 	
+	public List<OrderEntity> getOrders(int uid, int type, RowBounds bound)
+	{
+		return orderDAO.queryOrdersByUserid(uid, type, bound);
+	}
+	
+	public int getOrdersCount(int uid, int type)
+	{
+		return orderDAO.getOrdersCount(uid, type);
+	}
 }

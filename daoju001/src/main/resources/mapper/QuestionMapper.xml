@@ -143,7 +143,7 @@
 		      <if test="processMethod != null">process_method=#{processMethod},</if>
 		      <if test="wpHardness != null">wp_hardness=#{wpHardness},</if>
 		      <if test="wpMaterial != null">wp_material=#{wpMaterial},</if>
-	       
+	       	  <if test="buyerId != null">buyer_id=#{buyerId},</if>
 		   	  gmt_modify=now()
 		</set>
 		where id=#{id}
@@ -164,6 +164,6 @@
 	
 	<select id="getMainquestions" parameterType="QuestionEntity"
 			resultMap="QuestionResultMap">
-		SELECT * from t_question t where state = 1 and cnt_PA > 0 order by gmt_modify desc limit 3
+		SELECT * from t_question t where state = 1 and cnt_PA > 0 order by gmt_create desc limit 3
 	</select>
 </mapper>

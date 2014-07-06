@@ -37,5 +37,7 @@ public class Constant {
 	public static final int BRAND_CNT=54;
 	
 	public static final int MAX_AVATAR=43;
+	
+	public static final int ORDER_PAGE_SIZE=4;
 
 }

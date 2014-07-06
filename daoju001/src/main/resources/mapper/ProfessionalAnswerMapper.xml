@@ -118,4 +118,9 @@
 		t_professional_answer set password = #{password}, gmt_modified=now()
 		where id=#{id}
 	</update>
+	
+	<select id="getAllAnwser" parameterType="int"
+			resultMap="ProfessionalAnswerResultMap">
+		SELECT * from t_professional_answer 
+	</select>
 </mapper>

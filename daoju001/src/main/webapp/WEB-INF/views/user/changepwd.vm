@@ -1,0 +1,100 @@
+#set($layout = "/layout/user_detail_layout.vm")
+<ul class="right-tab clearfix">
+    <li>
+        <a href="profile">个人资料</a>
+    </li>
+	<li class="current">
+		 <a href="changepwd">密码</a>
+    </li>
+</ul>
+<div class="rigth-content">
+    <div>
+		<script>
+			$(function() {	
+				$("#form_changepwd").validate({
+					rules:{
+						pwd:{
+							required:true
+						},
+						pwd1:{
+							required:true
+						},
+						pwd2:{
+							required:true,
+							equalTo: "#pwd1" 
+						}
+					},
+					messages:{
+						pwd:{
+							required:"请输入旧密码"
+						},
+						pwd1:{
+							required:"请输入新密码"
+						},
+						pwd2:{
+							required:"请输入确认密码",
+							equalTo: "两次输入密码不一致"  
+						}
+					},
+					errorElement:"em",
+					submitHandler: function(form) {
+              			$(form).ajaxSubmit({
+    						dataType:'json',
+    						success:processJson
+    					});
+    				}
+				});
+			});
+		</script>
+		<form id="form_changepwd" method="post" action="/user/changepwd">
+			<!-- 隐藏字段，用于标示是表单提交 -->
+		    <input type="hidden" name="do_submit" value="true"/>
+			#springBind("form.pwd")
+            <div class="listitem bbg pb15 mb15 clearfix">
+                <ul class="user-info clearfix">
+                    <li class="width60 key">
+                        旧密码
+                    </li>
+                    <li class="value">
+                        <input type="password" name="${status.expression}" class="dsf-form-text-input" /><em for="$!{status.expression}" generated="true" class="error">$!{status.errorMessage}</em>
+                    </li>
+                </ul>
+            </div>
+			#springBind("form.pwd1")
+            <div class="listitem clearfix">
+                <ul class="user-info clearfix">
+                    <li class="key">
+                        新密码
+                    </li>
+                    <li class="value">
+                        <input type="password" name="${status.expression}" id="pwd1" class="dsf-form-text-input" /><em for="$!{status.expression}" generated="true" class="error">$!{status.errorMessage}</em>
+                    </li>
+                </ul>
+            </div>
+			#springBind("form.pwd2")
+            <div class="listitem  bbg pb15 mb15 clearfix">
+                <ul class="user-info clearfix">
+                    <li class="key">
+                        确认密码
+                    </li>
+                    <li class="value">
+                        <input type="password" name="${status.expression}" class="dsf-form-text-input" /><em for="$!{status.expression}" generated="true" class="error">$!{status.errorMessage}</em>
+                    </li>
+                </ul>
+            </div>
+            <div class="listitem mt20 clearfix">
+                <a id="submit_changepwd" class="save">保 存</a>
+            </div>
+			<script>
+					function processJson(data) { 
+						showAlert(data.title,data.content,data.info,data.btn,data.link);
+					}
+    			$(function() {
+    				$("#submit_changepwd").click(function () {
+    					$("#form_changepwd").submit();
+    				});
+    			});
+    		</script>
+		</form>
+    </div>
+</div>

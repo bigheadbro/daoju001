@@ -1,5 +1,7 @@
 package com.banzhuan.dao;
 
+import java.util.List;
+
 import com.banzhuan.entity.BuyerEntity;;
 
 public interface BuyerDAO {
@@ -17,6 +19,7 @@ public interface BuyerDAO {
 	
 	BuyerEntity queryBuyerEntityByName(String mail);
 	
+	List<BuyerEntity> getAllbuyers();
 	/**
 	 * 插入买家信息
 	 * @param companyUser

@@ -94,7 +94,7 @@
                             #end
     						/> 
     						同意
-							<a class="protocol fancybox-v" title="刀师傅协议" href="../img/proto.jpg">刀师傅协议</a>
+							<a class="protocol fancybox-v" title="刀师傅协议" href="/img/proto.jpg">刀师傅协议</a>
     					</label>
 						<em for="$!{status.expression}" generated="true" class="error">$!{status.errorMessage}</em>
     				</li>

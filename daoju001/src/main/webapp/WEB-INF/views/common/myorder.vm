@@ -1,4 +1,20 @@
-#set($layout = "/layout/buyer_detail_layout.vm")
+#set($layout = "/layout/user_detail_layout.vm")
+<script>
+$(function() {
+	$(".cancel").click(function()
+    {
+    	if(confirm("确定要取消订单吗？")){
+			$.ajax( {   
+    		    type : "POST",   
+    		    url : $(this).attr("orderid"),
+				success: function(){
+					window.location.href='/user/myorder';
+				}
+    		});   
+        }
+    });
+});
+</script>
 <ul class="right-tab clearfix">
     <li class="current">
 		我的订单
@@ -7,7 +23,7 @@
        <a href="myaddr">地址管理</a>
     </li>
 </ul>
-<div class="rigth-content">
+<div class="rigth-content2">
 	<div class="order-header clearfix">
 		<div class="name">商品</div>
 		<div class="price">订单金额(元)</div>
@@ -15,11 +31,47 @@
 		<div class="state">订单状态</div>
 		<div class="operation">操作</div>
 	</div>
-	<div class="order-list clearfix">
-		<div class="name"><a><img src="../item/$cover" /><span>$itemName</span></a></div>
-		<div class="price"><span>$price</span></div>
-		<div class="time"><span>X $quantity</span></div>
-		<div class="state"><span>${total}0</span></div>
-		<div class="operation"><span>${total}0</span></div>
+	#foreach($order in $orders)
+	<div class="order-item">
+    	<div class="order-list-head">
+    		订单号：DSF${order.id}
+    	</div>
+    	<div class="order-list clearfix">
+    		<div class="name"><a><img src="/item/${order.item.cover}" /><span>${order.item.brand}${order.item.type}${order.item.version}</span></a></div>
+    		<div class="price"><span>${order.price}0</span></div>
+			#if(${order.state} == 0)
+				<div class="time"><span>$stringUtil.convertDate(${order.gmtCancel})</span></div>
+				<div class="state"><span class="grey">订单已取消</span></div>
+				<div class="operation"><a class="mt25 db" target="_blank" href="order/${order.id}">查看详情</a></div>
+			#elseif(${order.state} == 1)
+				<div class="time"><span>$stringUtil.convertDate(${order.gmtSubmitOrder})</span></div>
+				<div class="state"><span class="red">等到付款</span></div>
+				<div class="operation">
+					<a class="op red" href="/purchase_handler/${order.id}">立即付款</a>
+					<div>
+						<a target="_blank" href="order/${order.id}">查看详情</a><em>|</em><a class="cancel" orderid="/cancelorder/${order.id}">取消订单</a>
+					</div>
+				</div>
+			#elseif(${order.state} == 2)
+				<div class="time"><span>$stringUtil.convertDate(${order.gmtPay})</span></div>
+				<div class="state"><span class="blue">等待刀师傅发货</span></div>
+				<div class="operation"><a class="mt25 db" target="_blank" href="order/${order.id}">查看详情</a></div>
+			#elseif(${order.state} == 3)
+				<div class="time"><span>$stringUtil.convertDate(${order.gmtSell})</span></div>
+				<div class="state"><span class="blue">刀师傅已发货</span></div>
+				<div class="operation">
+					<a class="op blue" target="_blank" href="http://www.alipay.com">确认收货</a>
+					<div>
+						<a class="db" target="_blank" href="order/${order.id}">查看详情</a>
+					</div>
+				</div>
+			#elseif(${order.state} == 4)
+				<div class="time"><span>$stringUtil.convertDate(${order.gmtAssure})</span></div>
+				<div class="state"><span class="green">交易成功</span></div>
+				<div class="operation"><a class="mt25 db" target="_blank" href="order/${order.id}">查看详情</a></div>
+			#end
+    	</div>
 	</div>
+	#end
+	#parse("/common/page.vm")
 </div>

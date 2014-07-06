@@ -5,7 +5,7 @@ $(function() {
 		$("#aid").val($(this).attr("answerid"));
 		$.ajax( {   
 		    type : "POST",   
-		    url : "/agent/editanswer", 
+		    url : "/user/editanswer", 
 		    data : {
 		      'answerid' : $(this).attr("answerid"),
 		     },  

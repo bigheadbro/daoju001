@@ -261,7 +261,7 @@ public class JsonUtil {
        		strStatus = "代理商登录后，才可以回答问题";
        		break;
        	case 2:
-       		strStatus = "普通用户不能提供专业解决方案，请使用回复进行交流！";
+       		strStatus = "您的账号没有足够的权限提供解决方案，详情请询问客服。";
        		break;
        	case 3:
        		strStatus = "未认证代理商不能提供专业解决方案，需要认证请联系我们！";

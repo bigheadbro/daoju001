@@ -1,0 +1,36 @@
+#set($layout = "/layout/user_detail_layout.vm")
+<script>
+$(function() {
+	$(".del").click(function()
+    {
+		var str = "/user/delproduct/" + $(this).attr("pid");
+    	if(confirm("确定要删除吗？")){
+			$.ajax( {   
+    		    type : "POST",   
+    		    url : str,
+				success: function(){
+					window.location.href='/user/myproduct';
+				}
+    		});   
+        }
+    });
+});
+</script>
+<ul class="right-tab clearfix">
+  <li><a href="newproduct">上传刀具</a></li>
+  <li class="current"><span>展会管理</span></li>
+</ul>
+<div class="rigth-content">
+	<div class="buyer-list">
+		#foreach($product in $products)
+    		<div class="listitem">
+    			<p>$!{product.name}<span>$stringUtil.formatDate($!{product.gmtCreate})</span></p>
+    			<div class="operation clearfix">
+    				<a href="/user/product/$!{product.id}">编辑</a><span>|</span>
+    				<a class="del" pid="$!{product.id}">删除</a>
+    			</div>
+    		</div>
+		#end
+	</div>
+	#parse("/common/page.vm")
+</div>

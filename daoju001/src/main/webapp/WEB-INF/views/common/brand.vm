@@ -10,7 +10,7 @@
 				<a class="brand-item" key="${brand.key}">
 					<div class="brand-logo">
 						<span>
-							<img src="../img/logo/${brand.link}" />
+							<img src="/img/logo/${brand.link}" />
 						</span>
 					</div>
 					<span class="name">${brand.name}</span>

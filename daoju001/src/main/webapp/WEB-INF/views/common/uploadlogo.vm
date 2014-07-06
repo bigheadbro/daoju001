@@ -1,4 +1,4 @@
-<link rel="stylesheet" href="../css/imgup.css">
+<link rel="stylesheet" href="/css/imgup.css">
 <div id="pagemask"></div>
 <div class="uploadlogo-win">
     <div class="uploadlog-win-content">
@@ -36,9 +36,9 @@
         </div>
     </div>
 </div>
-<script type="text/javascript" src="../js/imagepreview.js"></script>
-<script type="text/javascript" src="../js/jquery.crop.js"></script>
-<script type="text/javascript" src="../js/uploadlogo.js"></script>
+<script type="text/javascript" src="/js/imagepreview.js"></script>
+<script type="text/javascript" src="/js/jquery.crop.js"></script>
+<script type="text/javascript" src="/js/uploadlogo.js"></script>
 <script>
     imagepreview(document.getElementById("file"), document.getElementById("preview"), function(info){
         //这里若return false则不预览图片

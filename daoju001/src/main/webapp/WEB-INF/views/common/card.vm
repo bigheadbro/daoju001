@@ -2,12 +2,12 @@
 	<div class="top clearfix">
     	<div class="agent-logo">
     		<a href="">
-    			<img  class="card-logo" src="../img/avatar.png" />
+    			<img  class="card-logo" src="/img/avatar.png" />
     		</a>
     	</div>
     	<div class="agent-detail">
     		<h2 class="clearfix">
-    			<a class="agent-name" href="">上海时达</a><img class="vip" src="../img/v.png" />
+    			<a class="agent-name" href="">上海时达</a><img class="vip" src="/img/v.png" />
     		</h2>
     		<h4>黛杰刀具代理商</h4>
     		<h5>
@@ -22,7 +22,7 @@
 		<div class="listitem">
 			<div class="brand value">
 				<span>
-				<img class="card-brand" src="../img/logo/osg.jpg" />
+				<img class="card-brand" src="/img/logo/osg.jpg" />
 				</span>
 			</div>
 			<div class="key">

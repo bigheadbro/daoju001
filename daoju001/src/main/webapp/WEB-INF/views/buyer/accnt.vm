@@ -48,7 +48,7 @@
     						#if($!{form.logo})
     							<img src="${status.value}" />
     						#else
-    							<img src="../img/avatar.png" />
+    							<img src="/img/avatar.png" />
     						#end
                         </a>
                     </li>

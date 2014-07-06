@@ -5,7 +5,7 @@ $(function() {
 		$("#bid").val($(this).attr("bid"));
 		$.ajax( {   
 		    type : "POST",   
-		    url : "/agent/showanswer", 
+		    url : "/user/showanswer", 
 		    data : {
 		      'query' : 'isAgentLogin',
 		     },  
@@ -14,7 +14,7 @@ $(function() {
 		    	switch(data.status)
 		    	{
 		    	case 1:
-		    		window.location.href='/agent/log';
+		    		window.location.href='/log';
 		    	  break;
 		    	case 2:
 		    		showAlert("",data.code,"","确定","");

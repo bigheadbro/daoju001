@@ -1,0 +1,325 @@
+#set($layout = "/layout/user_detail_layout.vm")
+<script type="text/javascript" src="/js/ques-handler.js"></script>
+<ul class="right-tab clearfix">
+    <li class="current">新建问题</li>
+    <li>
+        <a href="oldquestion">我提的问题</a>
+    </li>
+    <li>
+        <a href="draft">草稿箱</a>
+    </li>
+</ul>
+<div class="rigth-content">
+	  <script>
+				$(function() {	
+					$("#form_newquestion").validate({
+						rules:{
+							type:{
+								required:true
+							}
+						},
+						messages:{
+							type:{
+								required:"请选择问题类型"
+							}
+						},
+						errorPlacement: function(error, element) {   
+							$(".error-msg").show();
+							var hasError = true;
+							$(".error-msg label").each(function(){
+								if($(this).attr("for") == error.attr("for")){
+									hasError = false;
+								}
+							});
+							if(hasError)
+							{
+                            	error.appendTo($(".error-msg"));     
+							}
+							else
+							{
+								$(".error-msg label").each(function(){
+									if($(this).attr("for") == error.attr("for")){
+										$(this).text(error.text());
+									}
+								});
+							}
+                        },
+						success:function(label){
+							$(".error-msg").hide();
+							$(".error-msg label").each(function(){
+								if($(this).attr("for") == $(label).attr("for")){
+									$(this).text("");
+								}
+							}); 
+						},
+    					submitHandler: function(form) {
+                  			$(form).ajaxSubmit({
+        						dataType:'json',
+        						success:processQuestion
+        					});
+							$(form)[0].reset();
+        				}
+					});
+				});
+		</script>
+	<div class="error-msg">
+		#springBind("questionForm")
+        #if($status.errors.hasErrors())
+			<script>
+			$(".error-msg").show();
+			</script>
+            ## Field error messages
+            #foreach($f in $status.errors.fieldErrors)
+                #springBind("questionForm.${f.field}")
+                #foreach($e in $status.errorMessages)
+                    <label for="$!{status.expression}" generated="true" class="error">${e}</label>
+                #end
+            #end
+        #end
+	</div>
+    <form id="form_newquestion" method="post">
+        <!-- 隐藏字段，用于标示是表单提交 -->
+        <input type="hidden" name="do_submit" value="true"/>
+        #springBind("questionForm.qid")
+        <input type="hidden" name="${status.expression}" value="$!{status.value}" id="qid" />
+        #springBind("questionForm.state")
+        <input type="hidden" name="${status.expression}" value="$!{status.value}" id="state" />
+        #springBind("questionForm.hasPic")
+        <input type="hidden" name="${status.expression}" value="$!{status.value}" id="hasPic" />
+        #springBind("questionForm.isEdit")
+        <input type="hidden" name="${status.expression}" value="$!{status.value}" id="isEdit" />
+        <div class="add-question-header">
+            <h5>选择问题类型</h5>
+            #springBind("questionForm.type")
+            <input type="hidden" name="${status.expression}" value="$!{status.value}" id="type" />
+            <div class="question-type-list clearfix">
+                <div class="question-type">
+                    <a value="1">性价比</a>
+                    <p>正常生产，希望找到更好的刀具提升性价比</p>
+                </div>
+                <div class="question-type">
+                    <a value="2">难加工</a>
+                    <p>现有刀具影响生产，想换新的刀具</p>
+                </div>
+                <div class="question-type">
+                    <a value="3">刀知识</a>
+                    <p>单纯咨询刀具知识</p>
+                </div>
+            </div>
+						
+        </div>
+        <script>
+            $(function() {
+                $(".question-type a").click(function(){
+                    $("#type").val($(this).attr("value"));
+                    $(".question-type a").css("background-color","#D2D2D2");
+                    $(this).css("background-color","#0088b5");
+                });
+            });
+        </script>
+        <div class="choose-param">
+            <h5>选择刀具条件</h5>
+            <div class="question-param clearfix">
+                <div class="question-param-li process clearfix">
+                    #springBind("questionForm.processMethod")
+                    <input type="hidden" name="${status.expression}"  value="$!{status.value}" />
+                    <a class="sel" >加工方式</a>
+                    <ul class="param">
+						<li>
+                            <a>不限</a>
+                        </li>
+                        <li>
+                            <a>平面铣削</a>
+                        </li>
+                        <li>
+                            <a>侧壁铣削</a>
+                        </li>
+                        <li>
+                            <a>曲面铣削</a>
+                        </li>
+                        <li>
+                            <a>铣槽</a>
+                        </li>
+                        <li>
+                            <a>钻孔</a>
+                        </li>
+                        <li>
+                            <a>镗孔</a>
+                        </li>
+                        <li>
+                            <a>铰孔</a>
+                        </li>
+                        <li>
+                            <a>螺纹铣削</a>
+                        </li>
+                        <li>
+                            <a>车削(粗加工）</a>
+                        </li>
+                        <li>
+                            <a>车削(槽加工）</a>
+                        </li>
+                        <li>
+                            <a>车削(螺纹加工）</a>
+                        </li>
+                        <li>
+                            <a>去毛刺</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="question-param-li industry clearfix">
+                    #springBind("questionForm.industry")
+                    <input type="hidden" name="${status.expression}"  value="$!{status.value}" />
+                    <a class="sel" >所属行业</a>
+                    <ul class="param">
+						<li>
+                            <a>不限</a>
+                        </li>
+                        <li>
+                            <a>模具</a>
+                        </li>
+                        <li>
+                            <a>船舶</a>
+                        </li>
+                        <li>
+                            <a>石油设备</a>
+                        </li>
+                        <li>
+                            <a>散热器/空调</a>
+                        </li>
+                        <li>
+                            <a>发电设备</a>
+                        </li>
+                        <li>
+                            <a>塑料机械</a>
+                        </li>
+                        <li>
+                            <a>内燃机</a>
+                        </li>
+                        <li>
+                            <a>大型机械设备</a>
+                        </li>
+                        <li>
+                            <a>汽车零件</a>
+                        </li>
+                        <li>
+                            <a>电子行业</a>
+                        </li>
+                        <li>
+                            <a>通用零件</a>
+                        </li>
+                        <li>
+                            <a>其它</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="question-param-li hardness clearfix">
+                    #springBind("questionForm.wpHardness")
+                    <input type="hidden" name="${status.expression}"  value="$!{status.value}" />
+                    <a class="sel" >工件硬度</a>
+                    <ul class="param">
+						<li>
+                            <a>不限</a>
+                        </li>
+                        <li>
+                            <a>HRC20以下</a>
+                        </li>
+                        <li>
+                            <a>HRC20-30</a>
+                        </li>
+                        <li>
+                            <a>HRC30-40</a>
+                        </li>
+                        <li>
+                            <a>HRC40-50</a>
+                        </li>
+                        <li>
+                            <a>HRC50-58</a>
+                        </li>
+                        <li>
+                            <a>HRC58-62</a>
+                        </li>
+                        <li>
+                            <a>HRC62-65</a>
+                        </li>
+                        <li>
+                            <a>HRC65-68</a>
+                        </li>
+                        <li>
+                            <a>HRC68以上</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="question-param-li material clearfix">
+                    #springBind("questionForm.wpMaterial")
+                    <input type="hidden" name="${status.expression}"  value="$!{status.value}" />
+                    <a class="sel" >工件材质</a>
+                    <ul class="param">
+						<li>
+                            <a>不限</a>
+                        </li>
+                        <li>
+                            <a>钢</a>
+                        </li>
+                        <li>
+                            <a>铸铁</a>
+                        </li>
+                        <li>
+                            <a>不锈钢</a>
+                        </li>
+                        <li>
+                            <a>高温合金</a>
+                        </li>
+                        <li>
+                            <a>铝</a>
+                        </li>
+                        <li>
+                            <a>有色金属</a>
+                        </li>
+                        <li>
+                            <a>石墨</a>
+                        </li>
+                        <li>
+                            <a>树脂</a>
+                        </li>
+                    </ul>
+                </div>
+				<a class="help" title='"四要素"是判断用刀情况的关键。提问清晰，方案会更明确哦'></a>
+            </div>
+        </div>
+        <div class="add-question-container">
+            #springBind("questionForm.content")
+            <input type="hidden" name="${status.expression}"  value="$!{status.value}" />
+            <h5 class="clearfix">
+                <a id="addimg" class="addimg" >点击插入图片</a>
+                填写问题详情 </h5>
+                <div class="add-question-wrap">
+                    <div id="ques-cont-editor" class="add-question-editor" contenteditable="true" placeholder="请输入问题详情">
+                    </div>
+                </div>
+        </div>	
+        <div class="question-op clearfix">
+            <a class="publish" id="submit_public" >发布</a>
+            <a class="savedraft" id="submit_draft" >保存草稿</a>
+        </div>
+        <script>
+				function processQuestion(data) { 
+  					showAlert(data.title,data.content,data.info,data.btn,data.link);
+  				}
+            $(function() {
+                $("#submit_public").click(function () {
+                    $("#state").val(1);
+                    $(".add-question-container").children("input").val($("#ques-cont-editor").html());
+                    $("#form_newquestion").submit();
+            	});
+				$("#submit_draft").click(function () {
+                    $("#state").val(0);
+                    $(".add-question-container").children("input").val($("#ques-cont-editor").html());
+                    $("#form_newquestion").submit();
+                });
+				
+
+            });
+        </script>
+    </form>
+</div>
+#parse("/common/addimg.vm")

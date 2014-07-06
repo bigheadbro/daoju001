@@ -16,11 +16,14 @@ public class Account implements Serializable{
 	private String logo;
 	private String mail;
 	private int brandName;
+	private int brandName2;
 	private String companyName;
 	private boolean isVerified;
+	private int authority;
 	private String verifiedLink;
 	private int unreadMsgCount;
 	private int questionCnt;
+	private int anwserCnt;
 	private int sampleCnt;
 	private int gcCnt;
 	private int productlimit;
@@ -186,6 +189,42 @@ public class Account implements Serializable{
 	 */
 	public void setProductlimit(int productlimit) {
 		this.productlimit = productlimit;
+	}
+	/**
+	 * @return the authority
+	 */
+	public int getAuthority() {
+		return authority;
+	}
+	/**
+	 * @param authority the authority to set
+	 */
+	public void setAuthority(int authority) {
+		this.authority = authority;
+	}
+	/**
+	 * @return the anwserCnt
+	 */
+	public int getAnwserCnt() {
+		return anwserCnt;
+	}
+	/**
+	 * @param anwserCnt the anwserCnt to set
+	 */
+	public void setAnwserCnt(int anwserCnt) {
+		this.anwserCnt = anwserCnt;
+	}
+	/**
+	 * @return the brandName2
+	 */
+	public int getBrandName2() {
+		return brandName2;
+	}
+	/**
+	 * @param brandName2 the brandName2 to set
+	 */
+	public void setBrandName2(int brandName2) {
+		this.brandName2 = brandName2;
 	}
 	
 

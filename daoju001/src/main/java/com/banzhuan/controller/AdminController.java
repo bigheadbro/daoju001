@@ -34,12 +34,14 @@ import com.banzhuan.dao.EventDAO;
 import com.banzhuan.dao.ItemDAO;
 import com.banzhuan.dao.QuestionDAO;
 import com.banzhuan.dao.SampleDAO;
+import com.banzhuan.dao.UserDAO;
 import com.banzhuan.entity.AgentEntity;
 import com.banzhuan.entity.BrandEntity;
 import com.banzhuan.entity.EventEntity;
 import com.banzhuan.entity.ItemEntity;
 import com.banzhuan.entity.QuestionEntity;
 import com.banzhuan.entity.SampleEntity;
+import com.banzhuan.entity.UserEntity;
 import com.banzhuan.util.StringUtil;
 import com.banzhuan.util.Util;
 
@@ -49,8 +51,8 @@ import com.banzhuan.util.Util;
 public class AdminController extends BaseController{
 
 	@Autowired
-	@Qualifier("agentDAO")
-	private AgentDAO agentDAO;
+	@Qualifier("userDAO")
+	private UserDAO userDAO;
 	
 	@Autowired
 	@Qualifier("sampleDAO")
@@ -140,7 +142,7 @@ public class AdminController extends BaseController{
 	public ModelAndView agent(final HttpServletResponse response)
 	{
 		ModelAndView mv = new ModelAndView("/admin/admin");
-		List<AgentEntity> agents = agentDAO.getAllagents(0);
+		List<UserEntity> agents = userDAO.getUsersByAuth(4);
 		mv.addObject("agents", agents);
 		return mv;
 	}
@@ -149,20 +151,20 @@ public class AdminController extends BaseController{
 	public void cancelauth(HttpServletRequest request, HttpServletResponse response, @PathVariable String id) throws IOException 
 	{
 		int sid = Integer.parseInt(id);
-		AgentEntity agent = new AgentEntity();
+		UserEntity agent = new UserEntity();
 		agent.setId(sid);
 		agent.setVerified(false);
-		agentDAO.updateAgentEntityById(agent);
+		userDAO.updateUserEntityById(agent);
 	}
 	
 	@RequestMapping(value="/add/{id}")
 	public void addauth(HttpServletRequest request, HttpServletResponse response, @PathVariable String id) throws IOException 
 	{
 		int sid = Integer.parseInt(id);
-		AgentEntity agent = new AgentEntity();
+		UserEntity agent = new UserEntity();
 		agent.setId(sid);
 		agent.setVerified(true);
-		agentDAO.updateAgentEntityById(agent);
+		userDAO.updateUserEntityById(agent);
 	}
 	
 	

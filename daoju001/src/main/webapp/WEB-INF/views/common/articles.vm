@@ -8,7 +8,7 @@
     		<div class="article-item clearfix">
     			<div class="left">
     				<a target="_blank" href="http://c.blog.sina.com.cn/profile.php?blogid=12b5fa6e0890019y7&qq-pf-to=pcqq.c2c">
-    					<img src="../img/article/1.jpg" />
+    					<img src="/img/article/1.jpg" />
     				</a>
     			</div>
     			<div class="right">
@@ -19,7 +19,7 @@
 			<div class="article-item clearfix">
     			<div class="left">
     				<a target="_blank" href="http://blog.sina.com.cn/s/blog_12b5fa6e00101hj92.html">
-    					<img src="../img/article/2.jpg" />
+    					<img src="/img/article/2.jpg" />
     				</a>
     			</div>
     			<div class="right">

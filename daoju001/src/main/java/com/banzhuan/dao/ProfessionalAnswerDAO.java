@@ -24,4 +24,6 @@ public interface ProfessionalAnswerDAO {
 	List<ProfessionalAnswerEntity> queryDraftsByUserid(int userid, RowBounds bound);
 	
 	int getAnswerCount(int userid);
+	
+	List<ProfessionalAnswerEntity> getAllAnwser();
 }

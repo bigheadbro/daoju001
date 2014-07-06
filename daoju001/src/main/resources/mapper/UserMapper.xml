@@ -1,25 +1,27 @@
 <?xml version="1.0" encoding="UTF-8" ?>  
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="agent">
-	<resultMap type="AgentEntity" id="AgentResultMap">
+<mapper namespace="user">
+	<resultMap type="UserEntity" id="UserResultMap">
     <!---->
 		<id property="id" column="id" />
 		<!--QQ connect 昵称 -->
 		<id property="nick" column="nick" />
-		<!--QQ connect 唯一ID -->
-		<id property="qqConnectId" column="qq_connect_id" />
 		<!--登录密码 -->
 		<id property="password" column="password" />
 		<!--电子邮箱 -->
-		<id property="mail" column="email" />
+		<id property="mail" column="mail" />
 		<!--公司名称 -->
 		<id property="companyName" column="company_name" />
+		<!--头像 -->
+		<id property="logo" column="logo" />
 		<!--代理品牌名称 -->
 		<id property="brand" column="brand" />
 		<!--代理品牌名称 -->
 		<id property="brandName" column="brand_name" />
-		<!--品牌logo -->
-		<id property="logo" column="logo" />
+		<!--代理品牌名称 -->
+		<id property="brand2" column="brand2" />
+		<!--代理品牌名称 -->
+		<id property="brandName2" column="brand_name2" />
 		<!--公司地址 -->
 		<id property="address" column="address" />
 		<!--公司电话 -->
@@ -28,8 +30,8 @@
 		<id property="fax" column="fax" />
 		<!--公司介绍 -->
 		<id property="description" column="description" />
-		<!--是否认证 -->
-		<id property="isVerified" column="is_verified" />
+		<!--曲线 -->
+		<id property="authority" column="authority" />
 		<!--证书链接 -->
 		<id property="verifiedLink" column="verified_link" />
 		<!--联系人名称 -->
@@ -56,62 +58,66 @@
 	</resultMap>
 	
 	<!-- 根据ID获取代理商信息 -->
-	<select id="queryAgentEntityById" parameterType="int"
-		resultMap="AgentResultMap">
+	<select id="queryUserEntityById" parameterType="int"
+		resultMap="UserResultMap">
 	<![CDATA[
-		SELECT * from t_agent t WHERE t.id = #{id}
+		SELECT * from t_user t WHERE t.id = #{id}
 	]]>
 	</select>
 	
-	<select id="queryAgentEntityByMail" parameterType="String" resultMap="AgentResultMap">
+	<select id="queryUserEntityByMail" parameterType="String" resultMap="UserResultMap">
 	<![CDATA[
-		SELECT * from t_agent t WHERE t.email = #{mail}
+		SELECT * from t_user t WHERE t.mail = #{mail}
 	]]>
 	</select>
 	
-	<select id="queryAgentEntityByName" parameterType="String" resultMap="AgentResultMap">
+	<select id="queryUserEntityByName" parameterType="String" resultMap="UserResultMap">
 	<![CDATA[
-		SELECT * from t_agent t WHERE t.company_name = #{name}
+		SELECT * from t_user t WHERE t.company_name = #{name}
 	]]>
 	</select>
 	
 	
-	<select id="getAgentsCount" resultType="int">
+	<select id="getUsersCount" resultType="int">
 	<![CDATA[
-		SELECT count(1) from t_agent t 
+		SELECT count(1) from t_user t 
 	]]>
 	</select>
 	
-	<select id="getAllagents" parameterType="int"
-			resultMap="AgentResultMap">
-		SELECT * from t_agent t <if test="_parameter == 1"> where is_verified=1</if> order by gmt_create desc
+	<select id="getUsers" parameterType="int"
+			resultMap="UserResultMap">
+		SELECT * from t_user t 
 	</select>
-	
+
+	<select id="getUsersByAuth" parameterType="int"
+			resultMap="UserResultMap">
+		SELECT * from t_user t where authority = #{type}
+	</select>
 	<select id="getMainagents" 
-			resultMap="AgentResultMap">
-		SELECT * from t_agent t  where is_verified=1 order by cnt_read desc limit 7
+			resultMap="UserResultMap">
+		SELECT * from t_user t  where authority = 4 order by cnt_read desc limit 7
 	</select>
 	
 	<!-- 新代理商信息 -->
-	<insert id="insertAgentEntity" parameterType="AgentEntity">
+	<insert id="insertUserEntity" parameterType="UserEntity">
 		<selectKey resultType="int" order="AFTER" keyProperty="id">
 			SELECT LAST_INSERT_ID() AS id
 		</selectKey>
-		insert into t_agent
+		insert into t_user
 		(
       nick
-   	  ,qq_connect_id
    	  ,password
-   	  ,email
+   	  ,mail
    	  ,company_name
    	  ,brand
    	  ,brand_name
+   	  ,brand2
+   	  ,brand_name2
    	  ,logo
    	  ,address
    	  ,phone
    	  ,fax
    	  ,description
-   	  ,verified_link
    	  ,contact_name
    	  ,contact_phone
    	  ,contact_qq
@@ -123,18 +129,18 @@
       values
    (
    	  #{nick}
-   	  ,#{qqConnectId}
    	  ,#{password}
    	  ,#{mail}
    	  ,#{companyName}
    	  ,#{brand}
    	  ,#{brandName}
+   	  ,#{brand2}
+   	  ,#{brandName2}
    	  ,#{logo}
    	  ,#{address}
    	  ,#{phone}
    	  ,#{fax}
    	  ,#{description}
-   	  ,#{verifiedLink}
    	  ,#{contactName}
    	  ,#{contactPhone}
    	  ,#{contactQq}
@@ -148,34 +154,36 @@
 	</insert>
 	
 	<!-- 根据企业用户ID称更新密码 -->
-	<update id="updateAgentPwdById" parameterType="AgentEntity">
-		update t_agent set password = #{password}, gmt_modified=now() where id=#{id}
+	<update id="updateUserPwdById" parameterType="UserEntity">
+		update t_user set password = #{password}, gmt_modified=now() where id=#{id}
 	</update>
 	
-	<update id="updateAgentReadCountById" parameterType="AgentEntity">
-		update t_agent set cnt_read = cnt_read + 1, gmt_modified=now() where id=#{id}
+	<update id="updateUserReadCountById" parameterType="UserEntity">
+		update t_user set cnt_read = cnt_read + 1, gmt_modified=now() where id=#{id}
 	</update>
 	
-	<update id="updateAgentEntityById" parameterType="AgentEntity">
-		update t_agent
+	<update id="updateUserEntityById" parameterType="UserEntity">
+		update t_user
 		<set> 
-		      <if test="mail != null">email=#{mail},</if>
-		      <if test="companyName != null">company_name=#{companyName},</if>
-		      <if test="brand != 0">brand=#{brand},</if>
-		      <if test="brandName != null">brand_name=#{brandName},</if>
-		      <if test="isVerified != null">is_verified=#{isVerified},</if>
-		      <if test="address != null">address=#{address},</if>
-		      <if test="phone != null">phone=#{phone},</if>
-		      <if test="fax != null">fax=#{fax},</if>
-		      <if test="description != null">description=#{description},</if>
-		      <if test="verifiedLink != null">verified_link=#{verifiedLink},</if>
-		      <if test="contactName != null">contact_name=#{contactName},</if>
-		      <if test="contactPhone != null">contact_phone=#{contactPhone},</if>
-		      <if test="contactQq != null">contact_qq=#{contactQq},</if>
-		      <if test="productlimit != null">productlimit=#{productlimit},</if>
-		      <if test="pca != null">pca=#{pca},</if>
-		      <if test="logo != null">logo=#{logo},</if>
-		   	  gmt_modified=now()
+		  <if test="nick != null">nick=#{nick},</if>
+	      <if test="mail != null">mail=#{mail},</if>
+	      <if test="companyName != null">company_name=#{companyName},</if>
+	      <if test="brand != 0">brand=#{brand},</if>
+	      <if test="brandName != null">brand_name=#{brandName},</if>
+	      <if test="brand2 != 0">brand2=#{brand2},</if>
+	      <if test="brandName2 != null">brand_name2=#{brandName2},</if>
+	      <if test="address != null">address=#{address},</if>
+	      <if test="phone != null">phone=#{phone},</if>
+	      <if test="fax != null">fax=#{fax},</if>
+	      <if test="description != null">description=#{description},</if>
+	      <if test="verifiedLink != null">verified_link=#{verifiedLink},</if>
+	      <if test="contactName != null">contact_name=#{contactName},</if>
+	      <if test="contactPhone != null">contact_phone=#{contactPhone},</if>
+	      <if test="contactQq != null">contact_qq=#{contactQq},</if>
+	      <if test="productlimit != null">productlimit=#{productlimit},</if>
+	      <if test="pca != null">pca=#{pca},</if>
+	      <if test="logo != null">logo=#{logo},</if>
+	   	  gmt_modified=now()
 		</set>
 	   where id=#{id}
 	</update>

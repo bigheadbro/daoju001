@@ -1,6 +1,6 @@
 #set($layout = "/layout/agent_detail_layout.vm")
-<link rel="stylesheet" href="../css/uploadify.css">
-<script type="text/javascript" src="../js/jquery.uploadify.min.js"></script>
+<link rel="stylesheet" href="/css/uploadify.css">
+<script type="text/javascript" src="/js/jquery.uploadify.min.js"></script>
 <ul class="right-tab clearfix">
     <li class="current">上传样本</li>
     <li>

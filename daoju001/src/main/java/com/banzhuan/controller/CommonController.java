@@ -52,14 +52,13 @@ import com.banzhuan.common.Account;
 import com.banzhuan.common.Constant;
 import com.banzhuan.common.Result;
 import com.banzhuan.entity.AddressEntity;
-import com.banzhuan.entity.AgentEntity;
-import com.banzhuan.entity.BuyerEntity;
 import com.banzhuan.entity.ComplainEntity;
 import com.banzhuan.entity.EventEntity;
 import com.banzhuan.entity.ItemEntity;
 import com.banzhuan.entity.OrderEntity;
 import com.banzhuan.entity.ProfessionalAnswerEntity;
 import com.banzhuan.entity.SampleEntity;
+import com.banzhuan.entity.UserEntity;
 import com.banzhuan.form.AddressForm;
 import com.banzhuan.form.CommentForm;
 import com.banzhuan.form.GoodcaseForm;
@@ -71,6 +70,7 @@ import com.banzhuan.form.QuestionForm;
 import com.banzhuan.service.AgentService;
 import com.banzhuan.service.BuyerService;
 import com.banzhuan.service.CommonService;
+import com.banzhuan.service.UserService;
 import com.banzhuan.util.JsonUtil;
 import com.banzhuan.util.StringUtil;
 import com.banzhuan.util.Util;
@@ -84,11 +84,9 @@ public class CommonController extends BaseController{
 	@Qualifier("commonService")
 	private CommonService commonService;
 	@Autowired
-	@Qualifier("agentService")
-	private AgentService agentService;
-	@Autowired
-	@Qualifier("buyerService")
-	private BuyerService buyerService;
+	@Qualifier("userService")
+	private UserService userService;
+
 	
 	@RequestMapping(value="/downloadfile")
 	public void download(HttpServletRequest request,HttpServletResponse response) throws UnsupportedEncodingException{  
@@ -231,71 +229,37 @@ public class CommonController extends BaseController{
 			
 			if(!result.hasErrors())
 			{
-				int userType = Integer.parseInt(re.get("userType").toString());
 				Account account = new Account();
-				if(userType == 1)
+				UserEntity user = (UserEntity)re.get("user");
+				int unreadMsgCount = userService.getUnreadMsgCount(user.getId());
+				int answerCnt = userService.getAnswerCount(user.getId());
+				int sampleCnt = userService.getSampleCount(user.getId());
+				int questionCnt = userService.getUserQuestionCount(user.getId());
+				account.setLogin(true); // 登录成功标识
+				account.setUserName(user.getNick()); // 用户登录名
+				account.setCompanyName(user.getCompanyName());
+				account.setUserId(user.getId()); // 用户ID
+				account.setMail(user.getMail()); // 邮箱
+				account.setLogo(user.getLogo()); // logo
+				account.setBrandName(user.getBrand());
+				account.setAuthority(user.getAuthority());
+				account.setVerifiedLink(user.getVerifiedLink());
+				account.setUnreadMsgCount(unreadMsgCount);
+				account.setSampleCnt(sampleCnt);
+				account.setAnwserCnt(answerCnt);
+				account.setProductlimit(user.getProductlimit());
+				account.setQuestionCnt(questionCnt);
+				//set cookie
+				if(form.getRememberme() != null && form.getRememberme())
 				{
-					BuyerEntity user = (BuyerEntity)re.get("user");
-					int unreadMsgCount = buyerService.getUnreadMsgCount(user.getId());
-					int questionCnt = buyerService.getUserQuestionCount(user.getId());
-					account.setUserId(user.getId());
-					account.setLogin(true); // 登录成功标识
-					account.setUserName(user.getUsername()); // 用户登录名
-					account.setCompanyName(user.getCompanyName());
-					account.setUserId(user.getId()); // 用户ID
-					account.setMail(user.getEmail()); // 邮箱
-					account.setLogo(user.getLogo()); // 邮箱
-					account.setBuyer(true);
-					account.setUnreadMsgCount(unreadMsgCount);
-					account.setQuestionCnt(questionCnt);
-					account.setProductlimit(user.getProductlimit());
-					//set cookie
-					if(form.getRememberme() != null && form.getRememberme())
-					{
-						this.addCookie(response, Constant.LOGIN_MAIL, user.getEmail(), Integer.MAX_VALUE);
-						this.addCookie(response, Constant.REMEMBER_ME, "1", Integer.MAX_VALUE);
-					}
-					//设置头像
-					account.setLogo(user.getLogo());
-					request.getSession().setAttribute("account", account);
-					// 登陆成功， 跳转到登陆页面
-					return new ModelAndView(new RedirectView("/buyer/main"));
+					this.addCookie(response, Constant.LOGIN_MAIL, user.getMail(), Integer.MAX_VALUE);
+					this.addCookie(response, Constant.REMEMBER_ME, "1", Integer.MAX_VALUE);
 				}
-				else
-				{
-					AgentEntity user = (AgentEntity)re.get("user");
-					int unreadMsgCount = agentService.getUnreadMsgCount(user.getId());
-					int answerCnt = agentService.getAnswerCount(user.getId());
-					int sampleCnt = agentService.getSampleCount(user.getId());
-					int gcCnt = agentService.getGoodcaseCount(user.getId());
-					account.setLogin(true); // 登录成功标识
-					account.setUserName(user.getCompanyName()); // 用户登录名
-					account.setCompanyName(user.getCompanyName());
-					account.setUserId(user.getId()); // 用户ID
-					account.setMail(user.getMail()); // 邮箱
-					account.setLogo(user.getLogo()); // logo
-					account.setBrandName(user.getBrand());
-					account.setBuyer(false);
-					account.setAgent(true);
-					account.setVerified(user.isVerified());
-					account.setVerifiedLink(user.getVerifiedLink());
-					account.setUnreadMsgCount(unreadMsgCount);
-					account.setSampleCnt(sampleCnt);
-					account.setGcCnt(gcCnt);
-					account.setQuestionCnt(answerCnt);
-					account.setProductlimit(user.getProductlimit());
-					//set cookie
-					if(form.getRememberme() != null && form.getRememberme())
-					{
-						this.addCookie(response, Constant.LOGIN_MAIL, user.getMail(), Integer.MAX_VALUE);
-						this.addCookie(response, Constant.REMEMBER_ME, "1", Integer.MAX_VALUE);
-					}
-					//设置头像
-					account.setLogo(user.getLogo());
-					request.getSession().setAttribute("account", account);
-					// 登陆成功， 跳转到登陆页面
-					return new ModelAndView(new RedirectView("/agent/main"));
-				}
+				//设置头像
+				account.setLogo(user.getLogo());
+				request.getSession().setAttribute("account", account);
+				// 登陆成功， 跳转到登陆页面
+				return new ModelAndView(new RedirectView("/user/main"));
 			}
 		}
 		return mv;
@@ -594,51 +558,69 @@ public class CommonController extends BaseController{
 
 		//交易状态
 		String trade_status = new String(request.getParameter("trade_status"));
-
+		
 		//获取支付宝的通知返回参数，可参考技术文档中页面跳转同步通知参数列表(以上仅供参考)//
 
 		if(AlipayNotify.verify(params)){//验证成功
 			//////////////////////////////////////////////////////////////////////////////////////////
 			//请在这里加上商户的业务逻辑程序代码
-
 			//——请根据您的业务逻辑来编写程序（以下代码仅作参考）——
-			
 			if(trade_status.equals("WAIT_BUYER_PAY")){
 				//该判断表示买家已在支付宝交易管理中产生了交易记录，但没有付款
-				
-					//判断该笔订单是否在商户网站中已经做过处理
-						//如果没有做过处理，根据订单号（out_trade_no）在商户网站的订单系统中查到该笔订单的详细，并执行商户的业务程序
-						//如果有做过处理，不执行商户的业务程序
-					
-					//out.println("success");	//请不要修改或删除
-				logger.error("chaoqun WAIT_BUYER_PAY");
+				//判断该笔订单是否在商户网站中已经做过处理
+				//如果没有做过处理，根据订单号（out_trade_no）在商户网站的订单系统中查到该笔订单的详细，并执行商户的业务程序
+				//如果有做过处理，不执行商户的业务程序
+
+				//price
+				String price = new String(request.getParameter("total_fee"));
+				OrderEntity order = commonService.getOrder(Integer.parseInt(out_trade_no.substring(3)));
+				if(price != null)
+				{
+					order.setPrice(Double.parseDouble(price));
+				}
+				if(commonService.updateOrder(order) > 0)
+				{
+					logger.error("WAIT_BUYER_CONFIRM_GOODS, Update orders successfully, order number is" + out_trade_no);
+				}
 			} else if(trade_status.equals("WAIT_SELLER_SEND_GOODS")){
-			//该判断表示买家已在支付宝交易管理中产生了交易记录且付款成功，但卖家没有发货
-			
+				//该判断表示买家已在支付宝交易管理中产生了交易记录且付款成功，但卖家没有发货
 				//判断该笔订单是否在商户网站中已经做过处理
-					//如果没有做过处理，根据订单号（out_trade_no）在商户网站的订单系统中查到该笔订单的详细，并执行商户的业务程序
-					//如果有做过处理，不执行商户的业务程序
+				//如果没有做过处理，根据订单号（out_trade_no）在商户网站的订单系统中查到该笔订单的详细，并执行商户的业务程序
+				//如果有做过处理，不执行商户的业务程序
 				
-				//out.println("success");	//请不要修改或删除
-				logger.error("chaoqun WAIT_SELLER_SEND_GOODS");
+				OrderEntity order = commonService.getOrder(Integer.parseInt(out_trade_no.substring(3)));
+				order.setState(2);
+				order.setGmtPay(StringUtil.getCurrentTime());
+				if(commonService.updateOrder(order) > 0)
+				{
+					logger.error("WAIT_SELLER_SEND_GOODS, Update orders successfully, order number is" + out_trade_no);
+				}
 			} else if(trade_status.equals("WAIT_BUYER_CONFIRM_GOODS")){
-			//该判断表示卖家已经发了货，但买家还没有做确认收货的操作
-			
+				//该判断表示卖家已经发了货，但买家还没有做确认收货的操作
 				//判断该笔订单是否在商户网站中已经做过处理
-					//如果没有做过处理，根据订单号（out_trade_no）在商户网站的订单系统中查到该笔订单的详细，并执行商户的业务程序
-					//如果有做过处理，不执行商户的业务程序
-				
-				//out.println("success");	//请不要修改或删除
-				logger.error("chaoqun WAIT_BUYER_CONFIRM_GOODS");
+				//如果没有做过处理，根据订单号（out_trade_no）在商户网站的订单系统中查到该笔订单的详细，并执行商户的业务程序
+				//如果有做过处理，不执行商户的业务程序
+
+				OrderEntity order = commonService.getOrder(Integer.parseInt(out_trade_no.substring(3)));
+				order.setState(3);
+				order.setGmtSell(StringUtil.getCurrentTime());
+				if(commonService.updateOrder(order) > 0)
+				{
+					logger.error("WAIT_BUYER_CONFIRM_GOODS, Update orders successfully, order number is" + out_trade_no);
+				}
 			} else if(trade_status.equals("TRADE_FINISHED")){
-			//该判断表示买家已经确认收货，这笔交易完成
-			
+				//该判断表示买家已经确认收货，这笔交易完成
 				//判断该笔订单是否在商户网站中已经做过处理
-					//如果没有做过处理，根据订单号（out_trade_no）在商户网站的订单系统中查到该笔订单的详细，并执行商户的业务程序
-					//如果有做过处理，不执行商户的业务程序
+				//如果没有做过处理，根据订单号（out_trade_no）在商户网站的订单系统中查到该笔订单的详细，并执行商户的业务程序
+				//如果有做过处理，不执行商户的业务程序
 				
-				//out.println("success");	//请不要修改或删除
-				logger.error("chaoqun TRADE_FINISHED");
+				OrderEntity order = commonService.getOrder(Integer.parseInt(out_trade_no.substring(3)));
+				order.setState(4);
+				order.setGmtAssure(StringUtil.getCurrentTime());
+				if(commonService.updateOrder(order) > 0)
+				{
+					logger.error("TRADE_FINISHED,Update orders successfully, order number is" + out_trade_no);
+				}
 			}
 			else {
 				//out.println("success");	//请不要修改或删除
@@ -651,6 +633,7 @@ public class CommonController extends BaseController{
 			//out.println("fail");
 		}
 	}
+	
 	@RequestMapping(value = "/purchase_handler")
 	public ModelAndView purchase_handler(final HttpServletRequest request,final HttpServletResponse response, Model model)
 	{
@@ -769,6 +752,130 @@ public class CommonController extends BaseController{
 		return mv;		
 	}
 	
+	@RequestMapping(value = "/cancelorder/{id}")
+	public void cancelorder(final HttpServletRequest request,final HttpServletResponse response, @PathVariable String id,Model model)
+	{
+		ModelAndView mv = new ModelAndView("/common/purchase_handler");
+		int orderid = Integer.parseInt(id);
+		Account account = (Account) WebUtils.getSessionAttribute(request, "account");
+		OrderEntity order = commonService.getOrder(orderid);
+		order.setState(0);
+		order.setGmtCancel(StringUtil.getCurrentTime());
+		commonService.updateOrder(order);
+		
+	}
+	
+	@RequestMapping(value = "/purchase_handler/{id}")
+	public ModelAndView purchase_handler_by_id(final HttpServletRequest request,final HttpServletResponse response, @PathVariable String id,Model model)
+	{
+		ModelAndView mv = new ModelAndView("/common/purchase_handler");
+		int orderid = Integer.parseInt(id);
+		Account account = (Account) WebUtils.getSessionAttribute(request, "account");
+		
+		//支付类型
+		String payment_type = "1";
+		//必填，不能修改
+		//服务器异步通知页面路径
+		String notify_url = "http://www.daoshifu.com/notify_url";
+		//需http://格式的完整路径，不能加?id=123这类自定义参数
+
+		//页面跳转同步通知页面路径
+		String return_url = "http://www.daoshifu.com/purchase_return";
+		//需http://格式的完整路径，不能加?id=123这类自定义参数，不能写成http://localhost/
+
+		//卖家支付宝帐户
+		String seller_email = new String("salyncious@aliyun.com");
+		//必填
+
+		OrderEntity order = commonService.getOrder(orderid);
+		AddressEntity addr = commonService.getAddressById(order.getAddressid());
+		ItemEntity item = commonService.getItem(order.getItemid());
+
+		//商户订单号
+		String out_trade_no = "DSF" + String.valueOf(order.getId());
+		//商户网站订单系统中唯一订单号，必填
+
+		//订单名称
+		String subject = new String(item.getBrand()+item.getType() +item.getVersion());
+		//必填
+
+		//付款金额
+		String price = String.valueOf(order.getPrice());
+		//必填
+
+		//商品数量
+		String quantity = "1";
+		//必填，建议默认为1，不改变值，把一次交易看成是一次下订单而非购买一件商品
+		//物流费用
+		String logistics_fee = "0.00";
+		//必填，即运费
+		//物流类型
+		String logistics_type = "EXPRESS";
+		//必填，三个值可选：EXPRESS（快递）、POST（平邮）、EMS（EMS）
+		//物流支付方式
+		String logistics_payment = "SELLER_PAY";
+		//必填，两个值可选：SELLER_PAY（卖家承担运费）、BUYER_PAY（买家承担运费）
+		//订单描述
+
+		String body = new String("no description");
+		//商品展示地址
+		String show_url = new String("http://www.daoshifu.com/item/"+order.getItemid());
+		//需以http://开头的完整路径，如：http://www.xxx.com/myorder.html
+
+		//收货人姓名
+		String receive_name = new String(addr.getName());
+		//如：张三
+
+		//收货人地址
+		String receive_address = new String(addr.getAddr());
+		//如：XX省XXX市XXX区XXX路XXX小区XXX栋XXX单元XXX号
+
+		//收货人邮编
+		String receive_zip = new String(addr.getZip());
+		//如：123456
+
+		//收货人电话号码
+		String receive_phone = new String("");
+		//如：0571-88158090
+
+		//收货人手机号码
+		String receive_mobile = new String(addr.getPhone());
+		//如：13312341234
+		
+		
+		//////////////////////////////////////////////////////////////////////////////////
+		
+		//把请求参数打包成数组
+		Map<String, String> sParaTemp = new HashMap<String, String>();
+		sParaTemp.put("service", "create_partner_trade_by_buyer");
+        sParaTemp.put("partner", AlipayConfig.partner);
+        sParaTemp.put("_input_charset", AlipayConfig.input_charset);
+		sParaTemp.put("payment_type", payment_type);
+		sParaTemp.put("notify_url", notify_url);
+		sParaTemp.put("return_url", return_url);
+		sParaTemp.put("seller_email", seller_email);
+		sParaTemp.put("out_trade_no", out_trade_no);
+		sParaTemp.put("subject", subject);
+		sParaTemp.put("price", price);
+		sParaTemp.put("quantity", quantity);
+		sParaTemp.put("logistics_fee", logistics_fee);
+		sParaTemp.put("logistics_type", logistics_type);
+		sParaTemp.put("logistics_payment", logistics_payment);
+		sParaTemp.put("body", body);
+		sParaTemp.put("show_url", show_url);
+		sParaTemp.put("receive_name", receive_name);
+		sParaTemp.put("receive_address", receive_address);
+		sParaTemp.put("receive_zip", receive_zip);
+		sParaTemp.put("receive_phone", receive_phone);
+		sParaTemp.put("receive_mobile", receive_mobile);
+		 
+		//建立请求
+		String sHtmlText = AlipaySubmit.buildRequest(sParaTemp,"get","确认");
+		model.addAttribute(sHtmlText);
+		mv.addObject("alipay",sHtmlText);
+		return mv;		
+	}
+	
 	@RequestMapping(value = "questions/{qid}")
 	public ModelAndView question(final HttpServletRequest request,final HttpServletResponse response, @PathVariable String qid,
 			@ModelAttribute("answerForm")ProfessionalAnswerForm answerForm, @ModelAttribute("form")CommentForm form)
@@ -776,14 +883,14 @@ public class CommonController extends BaseController{
 		ModelAndView mv = new ModelAndView("/common/question");
 		Result result = new Result();
 		int questionid = Integer.parseInt(qid);
-		result = agentService.queryQuestionById(questionid);
+		result = userService.queryQuestionById(questionid);
 		if(result.get("question") == null)
 		{
 			return new ModelAndView(new RedirectView("/questions")); 
 		}
 		mv.addObject("question", result.get("question"));
 		
-		result = agentService.queryAnswersByQid(questionid);
+		result = userService.queryAnswersByQid(questionid);
 		mv.addObject("answers", result.get("answers"));
 		
 		result = commonService.getMaingoodcases();
@@ -833,12 +940,12 @@ public class CommonController extends BaseController{
 		if(account.isAgent())
 		{
 			
-			int unreadMsgCount = agentService.getUnreadMsgCount(account.getUserId());
+			int unreadMsgCount = userService.getUnreadMsgCount(account.getUserId());
 			account.setUnreadMsgCount(unreadMsgCount);
 		}
 		else
 		{
-			int unreadMsgCount = buyerService.getUnreadMsgCount(account.getUserId());
+			int unreadMsgCount = userService.getUnreadMsgCount(account.getUserId());
 			account.setUnreadMsgCount(unreadMsgCount);
 		}
 		
@@ -876,7 +983,7 @@ public class CommonController extends BaseController{
 	{
 		ModelAndView mv = new ModelAndView("/common/agents");
 		
-		Map<Integer,Map<Integer,List<AgentEntity>>> agentMap = commonService.getAllAgents();
+		Map<Integer,Map<Integer,List<UserEntity>>> agentMap = commonService.getAllAgents();
 
 		//对key进行排序--字母
 		/*List<Map.Entry<Integer,List<AgentEntity>>> infoIds = new ArrayList<Map.Entry<Integer,List<AgentEntity>>>(agentMap.entrySet());
@@ -885,9 +992,9 @@ public class CommonController extends BaseController{
 		        return (o1.getKey()-o2.getKey());
 		    }
 		}); */
-		List<Map.Entry<Integer,Map<Integer,List<AgentEntity>>>> infoIds = new ArrayList<Map.Entry<Integer,Map<Integer,List<AgentEntity>>>>(agentMap.entrySet());
-		Collections.sort(infoIds, new Comparator<Map.Entry<Integer,Map<Integer,List<AgentEntity>>>>() {   
-		    public int compare(Map.Entry<Integer,Map<Integer,List<AgentEntity>>> o1, Map.Entry<Integer,Map<Integer,List<AgentEntity>>> o2) {      
+		List<Map.Entry<Integer,Map<Integer,List<UserEntity>>>> infoIds = new ArrayList<Map.Entry<Integer,Map<Integer,List<UserEntity>>>>(agentMap.entrySet());
+		Collections.sort(infoIds, new Comparator<Map.Entry<Integer,Map<Integer,List<UserEntity>>>>() {   
+		    public int compare(Map.Entry<Integer,Map<Integer,List<UserEntity>>> o1, Map.Entry<Integer,Map<Integer,List<UserEntity>>> o2) {      
 		        return (o1.getKey()-o2.getKey());
 		    }
 		}); 
@@ -926,19 +1033,12 @@ public class CommonController extends BaseController{
 		Result result = new Result();
 		int userid = Integer.parseInt(aid);
 		//add agent
-		result = agentService.getAgentEntity(userid);
-		if(result.get("agent") == null)
+		result = userService.getUserEntity(userid);
+		if(result.get("user") == null)
 		{
 			return new ModelAndView(new RedirectView("/agents")); 
 		}
-		mv.addObject("agent", result.get("agent"));
-		//add good cases
-		result = agentService.queryGoodcasesByUserid(userid);
-		mv.addObject("goodcases", result.get("goodcases"));
-		//add good cases
-		result = agentService.querySamplesByUserid(userid, new RowBounds(0, Integer.MAX_VALUE));
-		mv.addObject("samples", result.get("samples"));
-		
+		mv.addObject("agent", result.get("user"));
 		return mv;
 		
 	}
@@ -949,7 +1049,7 @@ public class CommonController extends BaseController{
 		ModelAndView mv = new ModelAndView("/common/buyer");
 		int userid = Integer.parseInt(aid);
 		//add agent
-		BuyerEntity buyer = buyerService.getBuyerEntity(userid);
+		UserEntity buyer = (UserEntity)userService.getUserEntity(userid).get("user");
 		if(buyer == null)
 		{
 			return new ModelAndView(new RedirectView("/index")); 
@@ -974,14 +1074,8 @@ public class CommonController extends BaseController{
 		{
 			if(account.isLogin())
 			{
-				if(account.isBuyer())
-				{
-					JsonUtil.checkAskStatus(response, 2);
-				}
-				if(account.isAgent())
-				{
-					JsonUtil.checkAskStatus(response, 3);
-				}
+
+				JsonUtil.checkAskStatus(response, 2);
 			}
 		}
 	}
@@ -994,7 +1088,7 @@ public class CommonController extends BaseController{
 		if(aid != null && aid.length() > 0)
 		{
 			int id = Integer.parseInt(aid);
-			AgentEntity agent = (AgentEntity)agentService.getAgentEntity(id).get("agent");
+			UserEntity agent = (UserEntity)userService.getUserEntity(id).get("user");
 			JsonUtil.sendAgentInfo(response, agent.getCompanyName(), agent.getLogo(), StringUtil.getBrand(agent.getBrand()), StringUtil.getBrandLogo(agent.getBrand()), 
 					agent.isVerified(), agent.getCntAnswer(), agent.getCntSample(), agent.getContactPhone(), agent.getContactQq());
 		}
@@ -1015,12 +1109,12 @@ public class CommonController extends BaseController{
 			{
 				if(account.isBuyer())
 				{
-					account.setUnreadMsgCount(buyerService.getUnreadMsgCount(account.getUserId()));
+					account.setUnreadMsgCount(userService.getUnreadMsgCount(account.getUserId()));
 					JsonUtil.sendMsgCount(response, account.getUnreadMsgCount());
 				}
 				if(account.isAgent())
 				{
-					account.setUnreadMsgCount(agentService.getUnreadMsgCount(account.getUserId()));
+					account.setUnreadMsgCount(userService.getUnreadMsgCount(account.getUserId()));
 					JsonUtil.sendMsgCount(response, account.getUnreadMsgCount());
 				}
 			}
@@ -1065,7 +1159,6 @@ public class CommonController extends BaseController{
 	public void addaddr(HttpServletRequest request, HttpServletResponse response,@ModelAttribute("form")AddressForm form) {
 		Account account = (Account) WebUtils.getSessionAttribute(request, "account");
 		AddressEntity address = new AddressEntity();
-		address.setType(account.isAgent()?1:0);
 		address.setUid(account.getUserId());
 		address.setPca(form.getPca());
 		address.setAddr(form.getDetail());

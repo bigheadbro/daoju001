@@ -1,5 +1,5 @@
 #set($layout = "/layout/agent_detail_layout.vm")
-<script type="text/javascript" src="../js/mixed-handle.js"></script>
+<script type="text/javascript" src="/js/mixed-handle.js"></script>
 <ul class="right-tab clearfix">
   <li class="current"><span>最新问题</span></li>
   <li><a href="oldquestion">已回答的问题</a></li>

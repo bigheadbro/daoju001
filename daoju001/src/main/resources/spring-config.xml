@@ -69,46 +69,24 @@
    			<mvc:mapping path="/addcomment" />
    			<mvc:mapping path="/purchase" />
    			<mvc:mapping path="addaddr" />
+   			<mvc:mapping path="showanswer" />
+   			<mvc:mapping path="/user/main" />
+   			<mvc:mapping path="/user/editanswer" />
+   			<mvc:mapping path="/user/answered" />
+			<mvc:mapping path="/user/mymsg" />
+			<mvc:mapping path="/user/newquestion" />
+			<mvc:mapping path="/user/oldquestion" />
+			<mvc:mapping path="/user/draft" />
+			<mvc:mapping path="/user/changepwd" />
+			<mvc:mapping path="/user/profile" />
+			<mvc:mapping path="/user/uploadlogo" />
+			<mvc:mapping path="/user/myaddr" />
+			<mvc:mapping path="/user/newproduct" />
+			<mvc:mapping path="/user/myproduct" />
+			<mvc:mapping path="/user/myorder" />
+			<mvc:mapping path="/user/product/*" />
+			<mvc:mapping path="/user/order/*" />
    			<bean class="com.banzhuan.interceptor.UserLoginInterceptor" />
-		</mvc:interceptor>
-		<mvc:interceptor>
-			<mvc:mapping path="/buyer/main" />
-			<mvc:mapping path="/buyer/mymsg" />
-			<mvc:mapping path="/buyer/newquestion" />
-			<mvc:mapping path="/buyer/oldquestion" />
-			<mvc:mapping path="/buyer/draft" />
-			<mvc:mapping path="/buyer/changepwd" />
-			<mvc:mapping path="/buyer/profile" />
-			<mvc:mapping path="/buyer/uploadlogo" />
-			<mvc:mapping path="/buyer/myaddr" />
-			<mvc:mapping path="/buyer/newproduct" />
-			<mvc:mapping path="/buyer/myproduct" />
-			<mvc:mapping path="/buyer/myorder" />
-			<mvc:mapping path="/buyer/product/*" />
-			<bean class="com.banzhuan.interceptor.BuyerLoginInterceptor" />
-		</mvc:interceptor>
-		<mvc:interceptor>
-			<mvc:mapping path="/agent/main" />
-			<mvc:mapping path="/agent/mymsg" />
-			<mvc:mapping path="/agent/newquestion" />
-			<mvc:mapping path="/agent/oldquestion" />
-			<mvc:mapping path="/agent/answer" />
-			<mvc:mapping path="/agent/draft" />
-			<mvc:mapping path="/agent/goodcase" />
-			<mvc:mapping path="/agent/uploadgc" />
-			<mvc:mapping path="/agent/mysample" />
-			<mvc:mapping path="/agent/uploadsample" /> 
-			<mvc:mapping path="/agent/changepwd" />
-			<mvc:mapping path="/agent/profile" />
-			<mvc:mapping path="/agent/uploadlogo" />
-			<mvc:mapping path="/agent/newproduct" />
-			<mvc:mapping path="/agent/myorder" />
-			<mvc:mapping path="/agent/myproduct" />
-			<mvc:mapping path="/agent/myaddr" />
-			<mvc:mapping path="/agent/newproduct" />
-			<mvc:mapping path="/agent/myproduct" />
-			<mvc:mapping path="/agent/product/*" />
-			<bean class="com.banzhuan.interceptor.AgentLoginInterceptor" />
 		</mvc:interceptor>
 	</mvc:interceptors>
 

@@ -79,52 +79,6 @@ public class BuyerService {
 		return user;
 	}
 
-	
-	public Result register(RegForm form, Errors errors)
-	{
-		Result result = new Result();
-		
-		if(StringUtil.isEmpty(form.getName()))// 第一步， 判断注册名是否为空
-		{
-			errors.rejectValue("name", "USER_NAME_IS_NOT_NULL");
-			return result;
-		}
-		else if(StringUtil.isIlegal(form.getName()))
-		{
-			errors.rejectValue("name", "USER_NAME_IS_ILLEGAL");
-			return result;
-		}
-		else if(buyerDAO.queryBuyerEntityByName(form.getName().trim()) != null) 
-		{
-			errors.rejectValue("name", "USER_NAME_IS_EXISTS");
-			return result;
-		}
-		else if(buyerDAO.queryBuyerEntityByMail(form.getMail()) != null || agentDAO.queryAgentEntityByMail(form.getMail()) != null) // 第二步，判断注册用户名是否存在
-		{
-			errors.rejectValue("mail", "MAIL_IS_EXISTS");
-			return result;
-		}
-		if(StringUtil.isEmpty(form.getPwd())) //  第三步，判断密码不能为空
-		{
-			errors.rejectValue("pwd", "PASSWORD_IS_NOT_NULL");
-			return result;
-		}
-		if(!form.isAgree())
-		{
-			errors.rejectValue("agree", "MUST_FOLLOW_DAOSHIFU_RULES");
-			return result;
-		}
-		
-		BuyerEntity buyer = new BuyerEntity();
-		buyer.setUsername(form.getName());
-		buyer.setPassword(StringUtil.encrypt(form.getPwd())); // 对密码加密
-		buyer.setEmail(form.getMail()); // 设置邮箱地址
-		buyer.setLogo(Util.GenAvatar());
-		buyerDAO.insertBuyerEntity(buyer);
-		result.add("buyer", buyer);
-		return result;
-	}
-	
 	/**
 	 * 用户是否登录
 	 * @param name

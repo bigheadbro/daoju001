@@ -723,7 +723,6 @@ public class UserController extends BaseController{
 			sample.setAgentLogo(account.getLogo());
 			sample.setAgentName(account.getUserName());
 			sample.setBrandName(account.getBrandName());
-			sample.setVerified(account.isVerified());
 			sample.setVerifiedLink(account.getVerifiedLink());
 			
 			if(form.getLink().substring(5).split("/")[2].length() > 100)
@@ -876,7 +875,7 @@ public class UserController extends BaseController{
 			}
 			if(userService.getProductCount(account.getUserId()) >= account.getProductlimit())
 			{
-				errormsg = "每位用户最多上传2个特色刀具，如需要上传更多，请联系我们，400-042-1145";
+				errormsg = "您的账户最多上传" + String.valueOf(account.getProductlimit()) + "个特色刀具，如需要上传更多，请联系我们，400-042-1145";
 			}
 			mv.addObject("errormsg",errormsg);
 			return mv;
@@ -924,7 +923,6 @@ public class UserController extends BaseController{
 			product.setUserId(account.getUserId());
 			product.setUserLogo(account.getLogo());
 			product.setUserName(account.getUserName());
-			product.setUsertype(2);
 			userService.insertProduct(form, product, result);
 			if(result.hasErrors())
 			{

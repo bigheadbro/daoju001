@@ -331,7 +331,7 @@ public class UserService {
 	{
 		if(user != null)
 		{
-			if(StringUtil.isNotEmpty(user.getMail()) && StringUtil.isNotEmpty(user.getCompanyName()) && StringUtil.isNotEmpty(user.getAddress()) && user.getBrand() > 0
+			if(StringUtil.isNotEmpty(user.getMail()) && StringUtil.isNotEmpty(user.getCompanyName()) && StringUtil.isNotEmpty(user.getAddress()) 
 					&& StringUtil.isNotEmpty(user.getPhone()) && StringUtil.isNotEmpty(user.getContactName()) && StringUtil.isNotEmpty(user.getContactPhone()) && StringUtil.isNotEmpty(user.getContactQq())
 					&& StringUtil.isNotEmpty(user.getDescription()) && StringUtil.isNotEmpty(user.getPca()))
 			{
@@ -865,10 +865,8 @@ public class UserService {
     
     public int getProductCount(int userid)
     {
-    	ProductEntity product = new ProductEntity();
-    	product.setUsertype(2);
-    	product.setUserId(userid);
-    	return productDAO.getProductCount(product);
+    	int ss = productDAO.getProductCountByUserid(userid);
+    	return ss;
     }
     
     public void delProduct(int id)

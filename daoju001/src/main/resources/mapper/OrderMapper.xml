@@ -4,8 +4,7 @@
 	<resultMap type="OrderEntity" id="OrderResultMap">
 	  <!---->
 	  <id property="id" column="id"/>
-	  <id property="usertype" column="usertype"/>
-   	  <!---->
+
 	  <id property="userid" column="userid"/>
    	  <!---->
 	  <id property="addressid" column="addressid"/>
@@ -39,28 +38,28 @@
 	<select id="queryOrderByBuyerid" parameterType="int"
 			resultMap="OrderResultMap">
 		<![CDATA[
-			SELECT * from t_order t where t.userid=#{userid} and usertype = 0
+			SELECT * from t_order t where t.userid=#{userid} 
 		]]>
 	</select>
 	
 	<select id="queryOrdersCountByBuyerid" parameterType="int"
 			resultType="int">
 		<![CDATA[
-			SELECT count(1) from t_order t where t.userid=#{userid} and usertype = 0 
+			SELECT count(1) from t_order t where t.userid=#{userid} 
 		]]>
 	</select>
 	
 	<select id="queryOrderByAgentid" parameterType="int"
 			resultMap="OrderResultMap">
 		<![CDATA[
-			SELECT * from t_order t where t.userid=#{userid} and usertype = 1
+			SELECT * from t_order t where t.userid=#{userid}
 		]]>
 	</select>
 	
 	<select id="queryOrdersCountByAgentid" parameterType="int"
 			resultType="int">
 		<![CDATA[
-			SELECT count(1) from t_order t where t.userid=#{userid} and usertype = 1
+			SELECT count(1) from t_order t where t.userid=#{userid} 
 		]]>
 	</select>
 	
@@ -70,8 +69,7 @@
 		</selectKey>
 		insert into t_order
 		(
-		  usertype
-	   	  ,userid
+		  userid
 	   	  ,addressid
 	   	  ,itemid
 	   	  ,item_addr
@@ -83,8 +81,7 @@
 	   )
 	      values
 	   (
-	   	  #{usertype}
-	   	  ,#{userid}
+	   	  #{userid}
 	   	  ,#{addressid}
 	   	  ,#{itemid}
 	   	  ,#{itemAddr}
@@ -100,7 +97,7 @@
 		update t_order
 		<set> 
 		  <if test="gmtPay != null">gmtPay=#{gmtPay},</if>
-	      <if test="gmtSell != null">gmtSell=#{gmtSell}),</if>
+	      <if test="gmtSell != null">gmtSell=#{gmtSell},</if>
 	      <if test="gmtAssure != null">gmtAssure=#{gmtAssure},</if>
 	      <if test="gmtCancel != null">gmtCancel=#{gmtCancel},</if>
 	      state = #{state}

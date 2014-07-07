@@ -68,9 +68,9 @@ public class ProductDAOImpl extends SqlSessionDaoSupport implements ProductDAO {
 	}
 	
 	@Override
-	public int getProductCount(ProductEntity Product)
+	public int getProductCountByUserid(int userid)
 	{
-		return this.getSqlSession().selectOne("getProductCount", Product);
+		return this.getSqlSession().selectOne("getProductCountByUserid", userid);
 	}
 	
 	@Override

@@ -18,8 +18,6 @@
 		<id property="brandName" column="brand_name" />
 		<!--代理商logo -->
 		<id property="agentLogo" column="agent_logo" />
-		<!--是否认证 -->
-		<id property="isVerified" column="is_verified" />
 		<!--认证文件 -->
 		<id property="verifiedLink" column="verified_link" />
 		<!--下载链接 -->

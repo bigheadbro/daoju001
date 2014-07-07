@@ -34,7 +34,7 @@
                                         <div class="agent-detail">
                                             <h2 class="clearfix">
     											<a class="agent-name" href="/agents/$!{sample.agentId}">$!{sample.agentName}</a>
-    											#if($sample.isVerified())
+    											#if($stringUtil.isNotEmpty(${sample.verifiedLink}))
     												<a class="fancybox-v" title="$!{sample.agentName}的代理证书" href="$!{sample.verifiedLink}"><img src="/img/v.png" /></a>
     											#end
     										</h2>

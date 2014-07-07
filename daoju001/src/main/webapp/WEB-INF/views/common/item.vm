@@ -4,6 +4,10 @@
     $(function() {	
 		var limit = parseInt($("#itemQuantity").val());
 		$("#submit_item").click(function(){
+			if(parseInt($("#itemQuantity").val()) < limit || parseInt($("#itemQuantity").val())%10 != 0){
+				alert("最低起卖数量为"+limit+",并且不做零散销售");
+				return;
+			}
     		$("#form_item").submit();
     	});
 		$(".image .list a").click(function(){

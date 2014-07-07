@@ -4,11 +4,7 @@
     <div class="uploadlog-win-content">
         <h2><a class="close" >x</a>修改头像</h2>
         <div class="content clearfix">
-			 #if($!{account.isBuyer()})
-                <form id="form_uploadlogo" action="/buyer/uploadlogo" method="post" enctype="multipart/form-data">
-            #else
-                <form id="form_uploadlogo" action="/agent/uploadlogo" method="post" enctype="multipart/form-data">
-            #end
+            <form id="form_uploadlogo" action="/user/uploadlogo" method="post" enctype="multipart/form-data">
 			<div class="left">
                 <div class="preview-wrap">
 					<div class="preview-out">

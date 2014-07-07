@@ -29,7 +29,7 @@ public interface ProductDAO {
 	
 	int getProductCountByType(ProductEntity Product);
 	
-	int getProductCount(ProductEntity Product);
+	int getProductCountByUserid(int userid);
 	
 	void delProduct(int id);
 }

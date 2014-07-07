@@ -33,7 +33,7 @@ $(function() {
 		<span>为上传证书</span>
 	#end
 	
-	#if($agent.isVerified())
+	#if($stringUtil.isNotEmpty(${agent.verifiedLink}))
 		<a class="cancel" aid="${agent.id}">取消认证</a>
 	#else
 		<a class="add" aid="${agent.id}">添加认证</a>

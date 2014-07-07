@@ -18,7 +18,6 @@ public class Account implements Serializable{
 	private int brandName;
 	private int brandName2;
 	private String companyName;
-	private boolean isVerified;
 	private int authority;
 	private String verifiedLink;
 	private int unreadMsgCount;
@@ -112,18 +111,7 @@ public class Account implements Serializable{
 	public void setBrandName(int brandName) {
 		this.brandName = brandName;
 	}
-	/**
-	 * @return the isVerified
-	 */
-	public boolean isVerified() {
-		return isVerified;
-	}
-	/**
-	 * @param isVerified the isVerified to set
-	 */
-	public void setVerified(boolean isVerified) {
-		this.isVerified = isVerified;
-	}
+
 	/**
 	 * @return the verifiedLink
 	 */

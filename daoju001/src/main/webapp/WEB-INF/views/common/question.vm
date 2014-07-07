@@ -103,9 +103,9 @@ $(function() {
 								<li class="agent-info clearfix">
 									<div class="logo">
 										#if($!{comment.agentId} != 0)
-											<a  href="/agents/$!{comment.agentId}">
+											<a  href="/agents/$!{comment.userid}">
 										#else
-											<a  href="/users/$!{comment.buyerId}">
+											<a  href="/users/$!{comment.userid}">
 										#end
                     						#if($!{comment.userAvatar})
                     							<img src="/logo/$!{comment.userAvatar}" />
@@ -117,9 +117,9 @@ $(function() {
             						<div class="agent-detail">
             							<h2 class="clearfix">
 											#if($!{comment.agentId} != 0)
-												<a class="agent-name" href="/agents/$!{comment.agentId}">$!{comment.userName}</a>
+												<a class="agent-name" href="/agents/$!{comment.userid}">$!{comment.userName}</a>
 											#else
-												<a class="agent-name" href="/users/$!{comment.buyerId}">$!{comment.userName}</a>
+												<a class="agent-name" href="/users/$!{comment.userid}">$!{comment.userName}</a>
 											#end
 											#if($stringUtil.isNotEmpty($!{comment.link}))
 												<a class="fancybox-v" title="$!{comment.userName}的代理证书" href="$!{comment.link}"><img src="/img/v.png" /></a>
@@ -246,9 +246,9 @@ $(function() {
             								<li class="agent-info clearfix">
             									<div class="logo">
                             						#if($!{comment.agentId} != 0)
-            											<a  href="/agents/$!{comment.agentId}">
+            											<a  href="/agents/$!{comment.userid}">
             										#else
-            											<a  href="/users/$!{comment.buyerId}">
+            											<a  href="/users/$!{comment.userid}">
             										#end
                                 						#if($!{comment.userAvatar})
                                 							<img src="/logo/$!{comment.userAvatar}" />
@@ -260,9 +260,9 @@ $(function() {
                         						<div class="agent-detail">
                         							<h2 class="clearfix">
             											#if($!{comment.agentId} != 0)
-            												<a class="agent-name" href="/agents/$!{comment.agentId}">$!{comment.userName}</a>
+            												<a class="agent-name" href="/agents/$!{comment.userid}">$!{comment.userName}</a>
             											#else
-            												<a class="agent-name" href="/users/$!{comment.buyerId}">$!{comment.userName}</a>
+            												<a class="agent-name" href="/users/$!{comment.userid}">$!{comment.userName}</a>
             											#end
             											#if($!{comment.link})
             												<a class="fancybox-v" title="$!{comment.userName}的代理证书" href="$!{comment.link}"><img src="/img/v.png" /></a>

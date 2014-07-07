@@ -15,7 +15,6 @@
 		<id property="wpHardness" column="work_solidity" />
 		<!--加工方式 -->
 		<id property="processMethod" column="process_method" />
-		<id property="usertype" column="usertype" />
 		<!--代理商id -->
 		<id property="userId" column="userId" />
 		<!--代理商名字 -->
@@ -45,10 +44,10 @@
 	delete from t_Product where id =#{id};
 	</delete>
 	
-	<select id="getProductCount" parameterType="ProductEntity"
+	<select id="getProductCountByUserid" parameterType="int"
 			resultType="int">
 		<![CDATA[
-			SELECT count(1) from t_Product t WHERE t.userId = #{userId} and t.usertype = #{usertype};
+			SELECT count(1) from t_Product t WHERE t.userId = #{userid}
 		]]>
 	</select>
 
@@ -64,7 +63,6 @@
 		,work_material
 		,work_solidity
 		,process_method
-		,usertype
 		,userId
 		,userName
 		,user_logo
@@ -81,7 +79,6 @@
 		,#{wpMaterial}
 		,#{wpHardness}
 		,#{processMethod}
-		,#{usertype}
 		,#{userId}
 		,#{userName}
 		,#{userLogo}
@@ -110,17 +107,10 @@
 		where id=#{id}
 	</update>
 	
-	<select id="queryProductEntityByAgentid" parameterType="int"
+	<select id="queryProductEntityByUserid" parameterType="int"
 			resultMap="ProductResultMap">
 		<![CDATA[
-			SELECT * from t_Product t where t.userId=#{id} and t.usertype = 2 order by gmt_create desc
-		]]>
-	</select>
-	
-	<select id="queryProductEntityByBuyerid" parameterType="int"
-			resultMap="ProductResultMap">
-		<![CDATA[
-			SELECT * from t_Product t where t.userId=#{id} and t.usertype = 1 order by gmt_create desc
+			SELECT * from t_Product t where t.userId=#{id} order by gmt_create desc
 		]]>
 	</select>
 	

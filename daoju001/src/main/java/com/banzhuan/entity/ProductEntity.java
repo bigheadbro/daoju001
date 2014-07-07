@@ -29,7 +29,6 @@ public class ProductEntity implements Serializable {
 	private int wpMaterial;
 	private String picture;
 	private String cover;
-	private int usertype;
 
 	/**
 	 * @return the id
@@ -251,20 +250,5 @@ public class ProductEntity implements Serializable {
 	public void setCover(String cover) {
 		this.cover = cover;
 	}
-
-	/**
-	 * @return the usertype
-	 */
-	public int getUsertype() {
-		return usertype;
-	}
-
-	/**
-	 * @param usertype the usertype to set
-	 */
-	public void setUsertype(int usertype) {
-		this.usertype = usertype;
-	}
-
 	
 }

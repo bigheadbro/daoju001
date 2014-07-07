@@ -14,8 +14,10 @@ import java.util.Comparator;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
@@ -67,8 +69,6 @@ import com.banzhuan.form.LoginForm;
 import com.banzhuan.form.ProductForm;
 import com.banzhuan.form.ProfessionalAnswerForm;
 import com.banzhuan.form.QuestionForm;
-import com.banzhuan.service.AgentService;
-import com.banzhuan.service.BuyerService;
 import com.banzhuan.service.CommonService;
 import com.banzhuan.service.UserService;
 import com.banzhuan.util.JsonUtil;
@@ -186,6 +186,47 @@ public class CommonController extends BaseController{
 		return mv;
 	}
 
+
+	@RequestMapping(value="/*/*")
+	public ModelAndView level2Enter(final HttpServletResponse response,@ModelAttribute("form")LoginForm form)
+	{
+		ModelAndView mv = new ModelAndView("/common/index");
+		
+		Result result = new Result();
+		
+		result = commonService.getMainagents();
+		mv.addObject("agents", result.get("agents"));
+		
+		result = commonService.getMaingoodcases();
+		mv.addObject("goodcases", result.get("goodcases"));
+		
+		result = commonService.getMainquestions();
+		mv.addObject("questions", result.get("questions"));
+		mv.addObject("answers", result.get("answers"));
+		
+		return mv;
+	}
+	
+	@RequestMapping(value="/*/*/*")
+	public ModelAndView level3Enter(final HttpServletResponse response,@ModelAttribute("form")LoginForm form)
+	{
+		ModelAndView mv = new ModelAndView("/common/index");
+		
+		Result result = new Result();
+		
+		result = commonService.getMainagents();
+		mv.addObject("agents", result.get("agents"));
+		
+		result = commonService.getMaingoodcases();
+		mv.addObject("goodcases", result.get("goodcases"));
+		
+		result = commonService.getMainquestions();
+		mv.addObject("questions", result.get("questions"));
+		mv.addObject("answers", result.get("answers"));
+		
+		return mv;
+	}
+	
 	@RequestMapping(value="/reg")
 	public ModelAndView reg(final HttpServletResponse response)
 	{
@@ -385,10 +426,18 @@ public class CommonController extends BaseController{
 		ModelAndView mv = new ModelAndView("/common/items");
 		ItemEntity item = new ItemEntity();
 		List<ItemEntity> items = commonService.getItems(form,item);
-		List<String> detailtypes = commonService.getItemsType(1);
-		List<String> materials = commonService.getItemsType(2);
-		List<String> workmaterials = commonService.getItemsType(3);
-		List<String> brands = commonService.getItemsType(4);
+		Set<String> detailtypes = new LinkedHashSet<String>();
+		Set<String> materials = new LinkedHashSet<String>();
+		Set<String> workmaterials = new LinkedHashSet<String>();
+		Set<String> brands = new LinkedHashSet<String>();
+		for(int i = 0;i<items.size();i++)
+		{
+			detailtypes.add(items.get(i).getDetailtype());
+			materials.add(items.get(i).getMaterial());
+			workmaterials.add(items.get(i).getWorkmaterial());
+			brands.add(items.get(i).getBrand());
+		}
+		
 		mv.addObject("items", items);
 		mv.addObject("detailtypes", detailtypes);
 		mv.addObject("materials", materials);
@@ -580,7 +629,7 @@ public class CommonController extends BaseController{
 				}
 				if(commonService.updateOrder(order) > 0)
 				{
-					logger.error("WAIT_BUYER_CONFIRM_GOODS, Update orders successfully, order number is" + out_trade_no);
+					logger.error("WAIT_BUYER_PAY, Update orders successfully, order number is" + out_trade_no);
 				}
 			} else if(trade_status.equals("WAIT_SELLER_SEND_GOODS")){
 				//该判断表示买家已在支付宝交易管理中产生了交易记录且付款成功，但卖家没有发货
@@ -589,11 +638,15 @@ public class CommonController extends BaseController{
 				//如果有做过处理，不执行商户的业务程序
 				
 				OrderEntity order = commonService.getOrder(Integer.parseInt(out_trade_no.substring(3)));
-				order.setState(2);
-				order.setGmtPay(StringUtil.getCurrentTime());
-				if(commonService.updateOrder(order) > 0)
+				logger.error("WAIT_SELLER_SEND_GOODS,state:"+String.valueOf(order.getState()));
+				if(order.getState() < 2)
 				{
-					logger.error("WAIT_SELLER_SEND_GOODS, Update orders successfully, order number is" + out_trade_no);
+					order.setState(2);
+					order.setGmtPay(StringUtil.getCurrentTime());
+					if(commonService.updateOrder(order) > 0)
+					{
+						logger.error("WAIT_SELLER_SEND_GOODS, Update orders successfully, order number is" + out_trade_no);
+					}
 				}
 			} else if(trade_status.equals("WAIT_BUYER_CONFIRM_GOODS")){
 				//该判断表示卖家已经发了货，但买家还没有做确认收货的操作
@@ -602,11 +655,17 @@ public class CommonController extends BaseController{
 				//如果有做过处理，不执行商户的业务程序
 
 				OrderEntity order = commonService.getOrder(Integer.parseInt(out_trade_no.substring(3)));
-				order.setState(3);
-				order.setGmtSell(StringUtil.getCurrentTime());
-				if(commonService.updateOrder(order) > 0)
+				logger.error("WAIT_BUYER_CONFIRM_GOODS, state:"+String.valueOf(order.getState()));
+				if(order.getState() < 3)
 				{
-					logger.error("WAIT_BUYER_CONFIRM_GOODS, Update orders successfully, order number is" + out_trade_no);
+					order.setState(3);
+					order.setGmtSell(StringUtil.getCurrentTime());
+					logger.error("before");
+					if(commonService.updateOrder(order) > 0)
+					{
+						logger.error("WAIT_BUYER_CONFIRM_GOODS, Update orders successfully, order number is" + out_trade_no);
+					}
+					logger.error("after");
 				}
 			} else if(trade_status.equals("TRADE_FINISHED")){
 				//该判断表示买家已经确认收货，这笔交易完成
@@ -615,11 +674,14 @@ public class CommonController extends BaseController{
 				//如果有做过处理，不执行商户的业务程序
 				
 				OrderEntity order = commonService.getOrder(Integer.parseInt(out_trade_no.substring(3)));
-				order.setState(4);
-				order.setGmtAssure(StringUtil.getCurrentTime());
-				if(commonService.updateOrder(order) > 0)
+				if(order.getState() < 4)
 				{
-					logger.error("TRADE_FINISHED,Update orders successfully, order number is" + out_trade_no);
+					order.setState(4);
+					order.setGmtAssure(StringUtil.getCurrentTime());
+					if(commonService.updateOrder(order) > 0)
+					{
+						logger.error("TRADE_FINISHED,Update orders successfully, order number is" + out_trade_no);
+					}
 				}
 			}
 			else {
@@ -662,7 +724,6 @@ public class CommonController extends BaseController{
 		order.setPrice(Double.parseDouble(request.getParameter("price")));
 		order.setState(1);
 		order.setUserid(account.getUserId());
-		order.setUsertype(account.isAgent()?1:0);
 		order.setAddressid(Integer.parseInt(request.getParameter("addressid")));
 		order.setQuantity(Integer.parseInt(request.getParameter("quantity")));
 		int id = commonService.insertOrder(order);
@@ -759,7 +820,7 @@ public class CommonController extends BaseController{
 		int orderid = Integer.parseInt(id);
 		Account account = (Account) WebUtils.getSessionAttribute(request, "account");
 		OrderEntity order = commonService.getOrder(orderid);
-		order.setState(0);
+		order.setState(5);
 		order.setGmtCancel(StringUtil.getCurrentTime());
 		commonService.updateOrder(order);
 		
@@ -792,7 +853,7 @@ public class CommonController extends BaseController{
 		ItemEntity item = commonService.getItem(order.getItemid());
 
 		//商户订单号
-		String out_trade_no = "DSF" + String.valueOf(order.getId());
+		String out_trade_no = "DSD" + String.valueOf(order.getId());
 		//商户网站订单系统中唯一订单号，必填
 
 		//订单名称
@@ -800,7 +861,8 @@ public class CommonController extends BaseController{
 		//必填
 
 		//付款金额
-		String price = String.valueOf(order.getPrice());
+		String price = "0.01";
+		//String price = String.valueOf(order.getPrice());
 		//必填
 
 		//商品数量
@@ -915,7 +977,7 @@ public class CommonController extends BaseController{
 				return;
 			}
 			Account account = (Account) WebUtils.getSessionAttribute(request, "account");
-			if(!account.isVerified())
+			if(!StringUtil.isNotEmpty(account.getVerifiedLink()))
 			{
 				form.setVerifiedLink(null);
 			}

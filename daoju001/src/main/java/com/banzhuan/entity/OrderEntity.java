@@ -9,7 +9,6 @@ public class OrderEntity implements Serializable {
 	private static final long serialVersionUID = -1313893719946146309L;
 	//
 	private int id;
-	private int usertype;
 	//
 	private int userid;
 	//
@@ -174,20 +173,6 @@ public class OrderEntity implements Serializable {
 	 */
 	public void setGmtCreate(String gmtCreate) {
 		this.gmtCreate = gmtCreate;
-	}
-
-	/**
-	 * @return the usertype
-	 */
-	public int getUsertype() {
-		return usertype;
-	}
-
-	/**
-	 * @param usertype the usertype to set
-	 */
-	public void setUsertype(int usertype) {
-		this.usertype = usertype;
 	}
 
 	/**

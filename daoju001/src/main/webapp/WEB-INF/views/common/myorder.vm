@@ -24,6 +24,7 @@ $(function() {
     </li>
 </ul>
 <div class="rigth-content2">
+	#if(${orders.size()} > 0)
 	<div class="order-header clearfix">
 		<div class="name">商品</div>
 		<div class="price">订单金额(元)</div>
@@ -31,6 +32,7 @@ $(function() {
 		<div class="state">订单状态</div>
 		<div class="operation">操作</div>
 	</div>
+	#end
 	#foreach($order in $orders)
 	<div class="order-item">
     	<div class="order-list-head">
@@ -39,7 +41,7 @@ $(function() {
     	<div class="order-list clearfix">
     		<div class="name"><a><img src="/item/${order.item.cover}" /><span>${order.item.brand}${order.item.type}${order.item.version}</span></a></div>
     		<div class="price"><span>${order.price}0</span></div>
-			#if(${order.state} == 0)
+			#if(${order.state} == 5)
 				<div class="time"><span>$stringUtil.convertDate(${order.gmtCancel})</span></div>
 				<div class="state"><span class="grey">订单已取消</span></div>
 				<div class="operation"><a class="mt25 db" target="_blank" href="order/${order.id}">查看详情</a></div>

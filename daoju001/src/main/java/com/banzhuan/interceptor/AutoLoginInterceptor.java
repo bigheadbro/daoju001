@@ -14,31 +14,26 @@ import org.springframework.web.util.WebUtils;
 
 import com.banzhuan.common.Account;
 import com.banzhuan.common.Constant;
-import com.banzhuan.dao.AgentDAO;
-import com.banzhuan.dao.BuyerDAO;
+
 import com.banzhuan.dao.QuestionDAO;
-import com.banzhuan.entity.AgentEntity;
-import com.banzhuan.entity.BuyerEntity;
-import com.banzhuan.service.AgentService;
-import com.banzhuan.service.BuyerService;
+import com.banzhuan.dao.UserDAO;
+
+import com.banzhuan.entity.UserEntity;
+
+import com.banzhuan.service.UserService;
 import com.banzhuan.util.CookieUtil;
 import com.banzhuan.util.StringUtil;
 
 public class AutoLoginInterceptor extends HandlerInterceptorAdapter
 {
 	@Autowired
-	@Qualifier("agentService")
-	private AgentService agentService;
+	@Qualifier("userService")
+	private UserService userService;
+
 	@Autowired
-	@Qualifier("buyerService")
-	private BuyerService buyerService;
-	@Autowired
-	@Qualifier("buyerDAO")
-	private BuyerDAO buyerDAO;
+	@Qualifier("userDAO")
+	private UserDAO userDAO;
 	
-	@Autowired
-	@Qualifier("agentDAO")
-	private AgentDAO agentDAO;
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
 		Account account = (Account) WebUtils.getSessionAttribute(request, "account");
@@ -47,52 +42,29 @@ public class AutoLoginInterceptor extends HandlerInterceptorAdapter
 			String rememberme = CookieUtil.getCookie(request, Constant.REMEMBER_ME);
 			if(rememberme != null && StringUtil.isEqual(rememberme, "1"))
 			{
-				BuyerEntity buyer = buyerDAO.queryBuyerEntityByMail(mail);
-				if(buyer == null)
+				UserEntity user = userDAO.queryUserEntityByMail(mail);
+				if(user != null)
 				{
-					AgentEntity agent = agentDAO.queryAgentEntityByMail(mail);
-					if(agent != null)
-					{
-						int unreadMsgCount = agentService.getUnreadMsgCount(agent.getId());
-						int answerCnt = agentService.getAnswerCount(agent.getId());
-						int sampleCnt = agentService.getSampleCount(agent.getId());
-						int gcCnt = agentService.getGoodcaseCount(agent.getId());
-						account = new Account();
-						account.setLogin(true); // 登录成功标识
-						account.setUserName(agent.getCompanyName()); // 用户登录名
-						account.setUserId(agent.getId()); // 用户ID
-						account.setMail(agent.getMail()); // 邮箱
-						account.setLogo(agent.getLogo()); // logo
-						account.setBrandName(agent.getBrand());
-						account.setBuyer(false);
-						account.setAgent(true);
-						account.setVerified(agent.isVerified());
-						account.setVerifiedLink(agent.getVerifiedLink());
-						account.setUnreadMsgCount(unreadMsgCount);
-						account.setSampleCnt(sampleCnt);
-						account.setGcCnt(gcCnt);
-						account.setQuestionCnt(answerCnt);
-						//设置头像
-						account.setLogo(agent.getLogo());
-						request.getSession().setAttribute("account", account);
-					}
-				}
-				else
-				{
-					int unreadMsgCount = buyerService.getUnreadMsgCount(buyer.getId());
-					int questionCnt = buyerService.getUserQuestionCount(buyer.getId());
+					int unreadMsgCount = userService.getUnreadMsgCount(user.getId());
+					int answerCnt = userService.getAnswerCount(user.getId());
+					int sampleCnt = userService.getSampleCount(user.getId());
+					int gcCnt = userService.getGoodcaseCount(user.getId());
 					account = new Account();
-					account.setUserId(buyer.getId());
 					account.setLogin(true); // 登录成功标识
-					account.setUserName(buyer.getUsername()); // 用户登录名
-					account.setUserId(buyer.getId()); // 用户ID
-					account.setMail(buyer.getEmail()); // 邮箱
-					account.setLogo(buyer.getLogo()); // 邮箱
-					account.setBuyer(true);
+					account.setUserName(user.getNick()); // 用户登录名
+					account.setUserId(user.getId()); // 用户ID
+					account.setMail(user.getMail()); // 邮箱
+					account.setLogo(user.getLogo()); // logo
+					account.setBrandName(user.getBrand());
+					account.setVerifiedLink(user.getVerifiedLink());
+					account.setAuthority(user.getAuthority());
+					account.setProductlimit(user.getProductlimit());
 					account.setUnreadMsgCount(unreadMsgCount);
-					account.setQuestionCnt(questionCnt);
+					account.setSampleCnt(sampleCnt);
+					account.setGcCnt(gcCnt);
+					account.setQuestionCnt(answerCnt);
 					//设置头像
-					account.setLogo(buyer.getLogo());
+					account.setLogo(user.getLogo());
 					request.getSession().setAttribute("account", account);
 				}
 			}

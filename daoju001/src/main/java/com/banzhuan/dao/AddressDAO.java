@@ -22,6 +22,7 @@ public interface AddressDAO {
 	public int updateAddressById(AddressEntity addr);
 	
 	public int updateOtherAddressById(AddressEntity addr);
-
+	
+	void delAddr(int id);
 
 }

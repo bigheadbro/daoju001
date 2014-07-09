@@ -32,6 +32,12 @@
     			<b></b>
     		</a>
     	</li>
+		<li class="code">
+			<em>
+    		<img src="/img/2.png" />
+			</em>
+			<i><img src="/img/2.png" /></i>
+    	</li>
     </ul>
 </div>
 

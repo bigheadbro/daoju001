@@ -16,6 +16,18 @@
 			}
 			$("#isEdit").val(1);
     	});
+		$(".del").click(function()
+        {
+        	if(confirm("确定要删除地址吗？")){
+    			$.ajax( {   
+        		    type : "POST",   
+        		    url : "/user/deladdr/"+$(this).attr("addrid"),
+    				success: function(){
+    					window.location.href='/user/myaddr';
+    				}
+        		});   
+            }
+        });
 	});
 	function hidenewaddr() {
     	$(".newaddr-win").hide();
@@ -51,7 +63,7 @@
     			<div class="operation clearfix">
     				<a class="editaddr"  addrid="$!{addr.id}" zip="$!{addr.zip}" pca="$!{addr.pca}" detail="$!{addr.addr}" name="$!{addr.name}" phone="$!{addr.phone}" isdefault="$!{addr.defaulte}">编辑</a>
 					<span>|</span>
-    				<a class="del" pid="$!{addr.id}">删除</a>
+    				<a class="del" addrid="$!{addr.id}">删除</a>
     			</div>
     		</div>
 		#end

@@ -27,6 +27,8 @@
 		<id property="picture" column="picture" />
 		<!--下载次数 -->
 		<id property="cover" column="cover" />
+		
+		<id property="state" column="state" />
 		<!--记录创建时间 -->
 		<id property="gmtCreate" column="gmt_create" />
 		<!--记录修改时间(最近时间) -->
@@ -102,6 +104,7 @@
 		      <if test="picture != null">picture=#{picture},</if>
 		      <if test="cover != null">cover=#{cover},</if>
 		      <if test="description != null">description=#{description},</if>
+		      <if test="state != 0">state=#{state},</if>
 		   	  gmt_modify=now()
 		</set>
 		where id=#{id}
@@ -110,7 +113,7 @@
 	<select id="queryProductEntityByUserid" parameterType="int"
 			resultMap="ProductResultMap">
 		<![CDATA[
-			SELECT * from t_Product t where t.userId=#{id} order by gmt_create desc
+			SELECT * from t_Product t where t.userId=#{userId} order by gmt_create desc
 		]]>
 	</select>
 	
@@ -119,7 +122,7 @@
 			SELECT count(1) from t_Product t 
 			<where>
 				<if test="industry != 0">AND industry=#{industry}</if>
-			    <if test="processMethod != 0">AND work_type=#{processMethod}</if>
+			    <if test="processMethod != 0">AND process_method=#{processMethod}</if>
 			    <if test="wpHardness != 0">AND work_solidity=#{wpHardness}</if>
 			    <if test="wpMaterial != 0">AND work_material=#{wpMaterial}</if>
 		    </where> 
@@ -132,9 +135,10 @@
 		SELECT * from t_Product t 
 			<where>
 				<if test="industry != 0">AND industry=#{industry}</if>
-			    <if test="processMethod != 0">AND work_type=#{processMethod}</if>
+			    <if test="processMethod != 0">AND process_method=#{processMethod}</if>
 			    <if test="wpHardness != 0">AND work_solidity=#{wpHardness}</if>
 			    <if test="wpMaterial != 0">AND work_material=#{wpMaterial}</if>
+			    AND state = 1
 		    </where> 
 			order by gmt_create desc
 	</select>

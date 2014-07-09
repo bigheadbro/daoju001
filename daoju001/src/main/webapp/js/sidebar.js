@@ -15,4 +15,9 @@ $(document).ready(function() {
 	$(".complain a").click(function(){
 		showcomplain();
 	});
+	$(".code").mouseenter(function(){
+		$(this).children("i").show();
+	}).mouseleave(function(){
+		$(this).children("i").hide();
+	});
 });

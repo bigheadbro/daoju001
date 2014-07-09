@@ -35,28 +35,14 @@
 		]]>
 	</select>
 	
-	<select id="queryOrderByBuyerid" parameterType="int"
+	<select id="queryOrdersByUserid" parameterType="int"
 			resultMap="OrderResultMap">
 		<![CDATA[
-			SELECT * from t_order t where t.userid=#{userid} 
+			SELECT * from t_order t where t.userid=#{userid} order by gmt_create desc
 		]]>
 	</select>
 	
-	<select id="queryOrdersCountByBuyerid" parameterType="int"
-			resultType="int">
-		<![CDATA[
-			SELECT count(1) from t_order t where t.userid=#{userid} 
-		]]>
-	</select>
-	
-	<select id="queryOrderByAgentid" parameterType="int"
-			resultMap="OrderResultMap">
-		<![CDATA[
-			SELECT * from t_order t where t.userid=#{userid}
-		]]>
-	</select>
-	
-	<select id="queryOrdersCountByAgentid" parameterType="int"
+	<select id="getOrdersCount" parameterType="int"
 			resultType="int">
 		<![CDATA[
 			SELECT count(1) from t_order t where t.userid=#{userid} 

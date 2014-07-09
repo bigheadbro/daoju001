@@ -9,6 +9,7 @@
 				return;
 			}
     		$("#form_item").submit();
+			$("#form_item")[0].reset();
     	});
 		$(".image .list a").click(function(){
 			$(this).parent().children().each(function(){

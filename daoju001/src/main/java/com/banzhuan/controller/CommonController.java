@@ -58,6 +58,7 @@ import com.banzhuan.entity.ComplainEntity;
 import com.banzhuan.entity.EventEntity;
 import com.banzhuan.entity.ItemEntity;
 import com.banzhuan.entity.OrderEntity;
+import com.banzhuan.entity.ProductEntity;
 import com.banzhuan.entity.ProfessionalAnswerEntity;
 import com.banzhuan.entity.SampleEntity;
 import com.banzhuan.entity.UserEntity;
@@ -227,14 +228,6 @@ public class CommonController extends BaseController{
 		return mv;
 	}
 	
-	@RequestMapping(value="/reg")
-	public ModelAndView reg(final HttpServletResponse response)
-	{
-		ModelAndView mv = new ModelAndView("/common/reg");
-		
-		return mv;
-	}
-	
 	@RequestMapping(value="/forgetpwd")
 	public ModelAndView forgetpwd(final HttpServletRequest request, final HttpServletResponse response, @ModelAttribute("form")LoginForm form, BindingResult result)
 	{
@@ -263,6 +256,11 @@ public class CommonController extends BaseController{
 	public ModelAndView log(final HttpServletRequest request,
 			final HttpServletResponse response, @ModelAttribute("form")LoginForm form, BindingResult result) throws IOException 
 	{
+		Account accnt = (Account) WebUtils.getSessionAttribute(request, "account");
+		if(accnt != null && accnt.isLogin())
+		{
+			return new ModelAndView(new RedirectView("/user/main")); 
+		}
 		ModelAndView mv = new ModelAndView("/common/log");
 		if(isDoSubmit(request))
 		{
@@ -408,12 +406,43 @@ public class CommonController extends BaseController{
 		
 	}
 	
+	@RequestMapping(value = "/products/{id}")
+	public ModelAndView products(final HttpServletRequest request,final HttpServletResponse response, @PathVariable String id) 
+	{
+		ModelAndView mv = new ModelAndView("/common/product");
+		int productid = Integer.parseInt(id);
+		ProductEntity product = commonService.getProduct(productid);
+		mv.addObject("product", product);
+		String[] str = product.getPicture().substring(1).split("[|]");
+		UserEntity user = commonService.getUser(product.getUserId());
+		mv.addObject("pictures",str);
+		mv.addObject("user",user);
+		return mv;
+	}
 	@RequestMapping(value = "/products")
 	public ModelAndView products(final HttpServletRequest request,final HttpServletResponse response, @ModelAttribute("form")ProductForm form) 
 	{
 		ModelAndView mv = new ModelAndView("/common/products");
+		int page = 1;
+		if(request.getParameter("page") != null)
+		{
+			page = Integer.valueOf(request.getParameter("page"));
+		}
 		
-		Result result = commonService.getAllproducts(form,null);//new RowBounds((page-1)*Constant.ALL_QUESTION_PAGE_SIZE, Constant.ALL_QUESTION_PAGE_SIZE));
+		Result result = commonService.getAllproducts(form,new RowBounds((page-1)*Constant.ALL_PRODUCT_PAGE_SIZE, Constant.ALL_PRODUCT_PAGE_SIZE));
+		mv.addObject("questions", result.get("questions"));
+		List<ProductEntity> tmp = (List<ProductEntity>)result.get("products");
+		int total= tmp.size();
+		int totalPage=0;
+		if(total % Constant.ALL_PRODUCT_PAGE_SIZE == 0)
+			totalPage=total/Constant.ALL_PRODUCT_PAGE_SIZE;
+		else
+			totalPage=total/Constant.ALL_PRODUCT_PAGE_SIZE+1;
+		totalPage=totalPage==0?1:totalPage;
+		mv.addObject("page", page);
+		mv.addObject("total", total);
+		mv.addObject("totalPage", totalPage);
+		
 		mv.addObject("products", result.get("products"));
 
 		return mv;
@@ -522,6 +551,7 @@ public class CommonController extends BaseController{
 				mv.addObject("receiverinfo",addr.getName() + "," + addr.getPca() + "," + addr.getAddr());
 				mv.addObject("total",order.getPrice());
 				ItemEntity item = commonService.getItem(order.getItemid());
+				mv.addObject("itemid",item.getId());
 				mv.addObject("itemName",item.getBrand()+item.getType() +item.getVersion());
 				mv.addObject("price",item.getPrice());
 				mv.addObject("quantity",order.getQuantity());
@@ -736,8 +766,8 @@ public class CommonController extends BaseController{
 		//必填
 
 		//付款金额
-		String price = new String("0.01");
-		//String price = new String(request.getParameter("price"));
+		//String price = new String("0.01");
+		String price = new String(request.getParameter("price"));
 		//必填
 
 		//商品数量
@@ -853,7 +883,7 @@ public class CommonController extends BaseController{
 		ItemEntity item = commonService.getItem(order.getItemid());
 
 		//商户订单号
-		String out_trade_no = "DSD" + String.valueOf(order.getId());
+		String out_trade_no = "DSF" + String.valueOf(order.getId());
 		//商户网站订单系统中唯一订单号，必填
 
 		//订单名称
@@ -861,8 +891,8 @@ public class CommonController extends BaseController{
 		//必填
 
 		//付款金额
-		String price = "0.01";
-		//String price = String.valueOf(order.getPrice());
+		//String price = "0.01";
+		String price = String.valueOf(order.getPrice());
 		//必填
 
 		//商品数量
@@ -1119,9 +1149,11 @@ public class CommonController extends BaseController{
 		{
 			return new ModelAndView(new RedirectView("/index")); 
 		}
+		if(buyer.getAuthority() == 4)
+		{
+			return new ModelAndView(new RedirectView("agents/"+aid));  
+		}
 		mv.addObject("buyer", buyer);
-
-		
 		return mv;
 		
 	}
@@ -1255,5 +1287,17 @@ public class CommonController extends BaseController{
 				JsonUtil.sendAddress(response, address.getPca(), address.getAddr(), address.getName(), address.getZip(), address.getPhone(), id, address.getDefaulte(),false);
 			}
 		}
+	}
+	
+	@RequestMapping(value="/membership")
+	public ModelAndView membership(HttpServletRequest request, HttpServletResponse response) {
+		ModelAndView view = new ModelAndView("common/membership");
+		return view;
+	}
+	
+	@RequestMapping(value="/paymembership")
+	public ModelAndView paymembership(HttpServletRequest request, HttpServletResponse response) {
+		ModelAndView view = new ModelAndView("common/paymembership");
+		return view;
 	}
 }

@@ -16,12 +16,37 @@
 				ignore: "",
     			rules:{
     				name:{
+    					required:true,
+						maxlength:50
+    				},
+					brandid:{
     					required:true
+    				},
+					picture:{
+    					required:true
+    				},
+					brandid:{
+    					min:1
+    				},
+					description:{
+    					required:true,
+						maxlength:1100
     				}
     			},
     			messages:{
     				name:{
-    					required:"请输入刀具名称"
+    					required:"请输入刀具名称",
+						maxlength:"名称不得超过50字"
+    				},
+					picture:{
+    					required:"请上传刀具图片"
+    				},
+					brandid:{
+    					min:"请选择刀具品牌"
+    				},
+					description:{
+    					required:"请输入详细介绍",
+						maxlength:"介绍不得超过1000字"
     				}
     			},
     			errorElement:"em",
@@ -70,7 +95,7 @@
     	</div>
 		<div class="listitem clearfix">
 			#springBind("productForm.brandid")
-			<input type="hidden" id="brand" name="${status.expression}" value="${status.value}"/>
+			
             <ul class="user-info clearfix">
                 <li class="key">
 					刀具品牌
@@ -83,6 +108,8 @@
 							选择刀具品牌
 						#end
 					</a>
+					<input type="hidden" id="brand" name="${status.expression}" value="${status.value}"/>
+					<em for="$!{status.expression}" generated="true" class="error">$!{status.errorMessage}</em>
                 </li>
             </ul>
         </div>
@@ -269,6 +296,7 @@
     			</li>
     			<li class="value">
     				<input type="file" name="productlink" id="file_upload"/>
+					<p>为了线上展会的显示效果，请上传正方形的图片。最多上传4张图片</p>
 					<div>
 						#springBind("productForm.picture")
 						<input type="hidden" name="${status.expression}" value="$!{status.value}" id="product_pic" />
@@ -285,14 +313,15 @@
     			</li>
     			<li class="value">
     				<textarea class="dsf-form-text-input ct-info" name="${status.expression}" >$!{status.value}</textarea>
+					<em style="display: block;"for="$!{status.expression}" generated="true" class="error">$!{status.errorMessage}</em>
     			</li>
     		</ul>
     	</div>
-		
     	<div class="listitem mt20 pt20 btg clearfix">
 			#if($errormsg)
 				<a class="disable" >无法上传</a>
 			#else
+				<p id="product-tn">详细完备的资料更容易吸引用户查看，<a target="_blank" href="/img/product-tn.jpg">查看示例图</a></p>
 				<a id="submit_uploadproduct" class="save" >上 传</a>
 			#end
     	</div>
@@ -310,7 +339,7 @@
             			var pn = data.split("/")[1];
             			if(pn.substr(0,15) == $(this).children(".fileName").text().split(" ")[0].substr(0,15)){
             				$(this).empty();
-            				$(this).append("<img class='product-tn' src='/product/" + data + "' /><div class='buttons'><a class='del'>删除</a><label class='cover' for='" + data + "'><input origin='"+data+"' type='radio' id='" + data + "'/>设为封面</label></div>");
+            				$(this).append("<img class='product-tn' src='/product/" + data + "' /><div class='buttons'><em class='del'>删除</em><label class='cover' for='" + data + "'><input origin='"+data+"' type='radio' id='" + data + "'/>设为封面</label></div>");
             				$("#product_pic").val($("#product_pic").val()+"|"+data);
             			}
             		});
@@ -376,7 +405,7 @@
 			
 		for(var pic in pics){
 			if(pics[pic] != ""){
-				$("#file_upload-queue").append('<div class="uploadify-queue-item"><img class="product-tn" src="/product/' + pics[pic] + '"><div class="buttons"><a class="del" href="">删除</a><label class="cover" for="'+ pics[pic] +'"><input origin="'+ pics[pic] +'" type="radio" id="'+ pics[pic] +'">设为封面</label></div></div>');
+				$("#file_upload-queue").append('<div class="uploadify-queue-item"><img class="product-tn" src="/product/' + pics[pic] + '"><div class="buttons"><em class="del" href="">删除</em><label class="cover" for="'+ pics[pic] +'"><input origin="'+ pics[pic] +'" type="radio" id="'+ pics[pic] +'">设为封面</label></div></div>');
 			}
 		}
 	});

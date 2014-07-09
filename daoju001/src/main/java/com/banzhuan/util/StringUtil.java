@@ -16,11 +16,6 @@ import java.util.regex.Pattern;
 import sun.misc.BASE64Decoder;
 import sun.misc.BASE64Encoder;
 
-/**
- * 一个字符串工具类
- * @author yaoyinjie.michael
- * 2012-12-17
- */
 public class StringUtil {
 	/**
 	 * 是否空字符串 null OR "" 都认为是空字符串 返回true. 其他返回 false

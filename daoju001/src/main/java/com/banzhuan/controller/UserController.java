@@ -94,6 +94,11 @@ public class UserController extends BaseController{
 	public ModelAndView reg(final HttpServletRequest request,
 			final HttpServletResponse response, @ModelAttribute("form")RegForm form, BindingResult result) 
 	{
+		Account accnt = (Account) WebUtils.getSessionAttribute(request, "account");
+		if(accnt != null && accnt.isLogin())
+		{
+			return new ModelAndView(new RedirectView("/user/main")); 
+		}
 		if(isDoSubmit(request))
 		{
 			Result re = userService.register(form, result);
@@ -784,6 +789,15 @@ public class UserController extends BaseController{
 		}
 	}
 
+	@RequestMapping(value="/deladdr/{id}")
+	public void deladdr(HttpServletRequest request, HttpServletResponse response, @PathVariable String id, @ModelAttribute("account")Account account) throws IOException 
+	{
+		String url = request.getHeader("Referer");
+		int sid = Integer.parseInt(id);
+		userService.delAddr(sid);
+		response.sendRedirect(url);
+	}
+	
 	@RequestMapping(value="/delsample/{id}")
 	public void delsample(HttpServletRequest request, HttpServletResponse response, @PathVariable String id, @ModelAttribute("account")Account account) throws IOException 
 	{
@@ -883,7 +897,7 @@ public class UserController extends BaseController{
 		
 		if(form.getIsEdit() > 0)
 		{
-			if(StringUtil.calStrNum(form.getName()) > 50)
+			if(StringUtil.calStrNum(form.getName()) > 30)
 			{
 				JsonUtil.showAlert(response, "编辑刀具失败", "上传失败，刀具名称太长~", "确定", "", "");
 			}
@@ -910,14 +924,17 @@ public class UserController extends BaseController{
 			if(StringUtil.calStrNum(form.getName()) > 50)
 			{
 				JsonUtil.showAlert(response, "新建刀具失败", "上传失败，刀具名称太长~", "确定", "", "");
+				return mv;
 			}
 			if(form.getProcessMethod() == 0)
 			{
 				JsonUtil.showAlert(response, "新建刀具失败", "上传失败，请选择加工方式~", "确定", "", "");
+				return mv;
 			}
 			if(StringUtil.isEmpty(form.getPicture()))
 			{
 				JsonUtil.showAlert(response, "新建刀具失败", "上传失败，请选择刀具配图~", "确定", "", "");
+				return mv;
 			}
 			ProductEntity product = new ProductEntity();
 			product.setUserId(account.getUserId());
@@ -997,6 +1014,7 @@ public class UserController extends BaseController{
 			mv.addObject("receiverinfo",addr.getName() + "," + addr.getPca() + "," + addr.getAddr());
 			mv.addObject("total",order.getPrice());
 			ItemEntity item = commonService.getItem(order.getItemid());
+			mv.addObject("itemid",item.getId());
 			mv.addObject("itemName",item.getBrand()+item.getType() +item.getVersion());
 			mv.addObject("price",item.getPrice());
 			mv.addObject("quantity",order.getQuantity());

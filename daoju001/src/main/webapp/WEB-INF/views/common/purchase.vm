@@ -29,6 +29,7 @@
     		$("#destination").text($(this).parent().children(".address").text());
     		$("#receiver").text($(this).parent().children(".name").text());
     	});
+		
 		$("#form_purchase").validate({
 			ignore:[],
 			rules:{
@@ -96,9 +97,11 @@
     		<li class="current clearfix">
     			<span>寄送至</span>
 				<div>
-					<input type="radio" checked name="address" />
+					<input type="radio" checked="checked" name="address" id="addr$velocityCount" />
+					<label for="addr$velocityCount">
 					<i class="address">$!{addr.pca} $!{addr.addr}</i> 
 					<i class="name">$!{addr.name} $!{addr.phone}</i>
+					</label>
 				</div>
 				<a class="editaddr" addrid="$!{addr.id}" zip="$!{addr.zip}" pca="$!{addr.pca}" detail="$!{addr.addr}" name="$!{addr.name}" phone="$!{addr.phone}" isdefault="$!{addr.defaulte}">编辑该地址</a>
     		</li>
@@ -106,9 +109,11 @@
     		<li class="clearfix">
     			<span>寄送至</span>
 				<div>
-					<input type="radio" name="address" />
+					<input type="radio" name="address" id="addr$velocityCount" />
+					<label for="addr$velocityCount">
 					<i class="address">$!{addr.pca} $!{addr.addr}</i> 
 					<i class="name">$!{addr.name} $!{addr.phone}</i>
+					</label>
 				</div>
 				<a class="editaddr" addrid="$!{addr.id}" zip="$!{addr.zip}" pca="$!{addr.pca}" detail="$!{addr.addr}" name="$!{addr.name}" phone="$!{addr.phone}">编辑该地址</a>
     		</li>

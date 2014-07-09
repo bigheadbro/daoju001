@@ -1,0 +1,18 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+  #parse("/common/header.vm")
+  <body>
+	<div class="item-body-wrapper">
+      	#parse("/common/top.vm")
+		<div class="main-bk-wrapper pt0">$screen_content</div>
+		#parse("/common/connectus.vm")
+		#parse("/common/complain.vm")
+        #parse("/common/footer.vm")
+	</div>
+	<script type="text/javascript">
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3Ffdd0d4853bd81366542daabbd8e3fcb8' type='text/javascript'%3E%3C/script%3E"));
+</script>
+
+  </body>
+</html>

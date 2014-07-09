@@ -29,6 +29,7 @@ public class ProductEntity implements Serializable {
 	private int wpMaterial;
 	private String picture;
 	private String cover;
+	private int state;
 
 	/**
 	 * @return the id
@@ -249,6 +250,20 @@ public class ProductEntity implements Serializable {
 	 */
 	public void setCover(String cover) {
 		this.cover = cover;
+	}
+
+	/**
+	 * @return the state
+	 */
+	public int getState() {
+		return state;
+	}
+
+	/**
+	 * @param state the state to set
+	 */
+	public void setState(int state) {
+		this.state = state;
 	}
 	
 }

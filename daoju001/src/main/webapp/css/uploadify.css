@@ -71,7 +71,7 @@ Released under the MIT License <http://www.opensource.org/licenses/mit-license.p
 
 #form_newproduct .uploadify-queue-item img.product-tn{width:100px;height:100px;}
 #form_newproduct .uploadify-queue-item .buttons{margin-top: 5px;}
-#form_newproduct .uploadify-queue-item .buttons a.del{float:right}
+#form_newproduct .uploadify-queue-item .buttons em.del{float:right;cursor:pointer}
 #form_newproduct .uploadify-queue-item .buttons input[type="radio"]{vertical-align: middle;margin-right: 3px;}
 
 
@@ -96,7 +96,7 @@ Released under the MIT License <http://www.opensource.org/licenses/mit-license.p
 #form_newitem .uploadify-queue-item .buttons input[type="radio"]{vertical-align: middle;margin-right: 3px;}
 
 .uploadify-queue {
-	margin-bottom: 1em;
+	margin-bottom: 5px;margin-top: 5px;
 }
 .uploadify-queue-item {
 	background-color: #F5F5F5;

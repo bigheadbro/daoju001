@@ -14,9 +14,10 @@
 			$(".address li.current .editaddr").attr("phone",data.phone);
 			$(".address li.current .editaddr").attr("isdefault",data.isdefault);
 		}else{
-    		var str = "<li class=\"current clearfix\"><span>寄送至</span><div><input type=\"radio\" checked name=\"address\" /><i class=\"address\">"
+			var count = $("ul.address li").length + 1;
+    		var str = "<li class=\"current clearfix\"><span>寄送至</span><div><input type=\"radio\" checked name=\"address\" id=\"addr"+count+"\"/><label for=\"addr"+count+"\"><i class=\"address\">"
     			+ data.pca + "&nbsp;" + data.detail + "</i> <i class=\"name\">"
-    			+ data.name + "&nbsp;" + data.phone+"</i></div><a  class=\"editaddr\" addrid=\"" + data.id +"\" "
+    			+ data.name + "&nbsp;" + data.phone+"</i></label></div><a  class=\"editaddr\" addrid=\"" + data.id +"\" "
 				+ "zip=\"" + data.zip + "\" " + "pca=\"" + data.pca + "\" " 
 				+ "detail=\"" + data.detail + "\" " + "name=\"" + data.name + "\" " + "phone=\"" + data.phone + "\" " + "isdefault=\"" + data.isdefault
 				+ "\">编辑该地址</a></li>";

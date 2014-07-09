@@ -1,0 +1,25 @@
+#set($layout = "/layout/item_layout.vm")
+<div class="membership-container clearfix">
+	<h1>付费会员申请</h1>
+	<div class="member-content">
+		<div>
+		</div>
+		<div class="contact clearfix">
+			<h5>如您有任何疑问，可以通过QQ或电话与我们直接联系,我们的客服将为您服务！</h5>
+			<div class="contact-detail clearfix">
+				<div class="left">
+        			<a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=123576884&site=qq&menu=yes"><img src="/img/purchaseqq.png" /></a>
+					<p>QQ客服</p>
+				</div>
+				<div class="middle">
+					<h2>400-042-1145</h2>
+					<p>刀师傅客服热线</p>
+				</div>
+				<div class="right clearfix">
+					<img src="/img/2.png" />
+					<p>扫描二维码，<br/>关注刀师傅官方微信平台</p>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

@@ -103,4 +103,8 @@
 		</set>
 	   where id!=#{id} and uid = #{uid}
 	</update>
+	
+	<delete id="delAddr"  parameterType="int">
+	delete from t_address where id =#{id};
+	</delete>
 </mapper>

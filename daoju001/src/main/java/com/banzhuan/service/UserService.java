@@ -430,6 +430,15 @@ public class UserService {
     	{
     		product.setCover(form.getCover());
     	}
+    	if(StringUtil.isEmpty(product.getCover()))
+    	{
+    		product.setCover(form.getPicture().split("[|]")[1]);
+    	}
+    	if(StringUtil.isNotEmpty(form.getDescription()))
+    	{
+    		String des = form.getDescription().replace("\n", "<br/>");
+    		product.setDescription(des);
+    	}
     	productDAO.insertProductEntity(product);
     	return result;
     	
@@ -453,7 +462,8 @@ public class UserService {
 		product.setWpMaterial(form.getWpMaterial());
 		product.setPicture(form.getPicture());
 		product.setCover(form.getCover());
-		
+		String des = form.getDescription().replace("\n", "<br/>");
+		product.setDescription(des);
 		productDAO.updateProductById(product);
 		
 		return result;
@@ -619,6 +629,10 @@ public class UserService {
     	sampleDAO.delSample(id);
     }
     
+    public void delAddr(int id)
+    {
+    	addressDAO.delAddr(id);
+    }
     public void delGoodcase(int id)
     {
     	gcDAO.delGoodcase(id);
@@ -810,6 +824,52 @@ public class UserService {
     public void setProductFormWithPid(ProductForm form, int id)
 	{
 		ProductEntity product = productDAO.queryProductEntityById(id);
+
+		if(product.getBrandId() >= 0)
+		{
+			form.setBrandid(product.getBrandId());
+		}
+		if(product.getIndustry() >=0)
+		{
+			form.setIndustry(product.getIndustry());
+		}
+		if(product.getProcessMethod() >=0)
+		{
+			form.setProcessMethod(product.getProcessMethod());
+		}
+		if(product.getWpHardness() >=0)
+		{
+			form.setWpHardness(product.getWpHardness());
+		}
+		if(product.getWpMaterial() >=0)
+		{
+			form.setWpMaterial(product.getWpMaterial());
+		}
+		if(product.getUserId() > 0)
+		{
+			form.setUserid(product.getUserId());
+		}
+		if(StringUtil.isNotEmpty(product.getName()))
+		{
+			form.setName(product.getName());
+		}
+		if(StringUtil.isNotEmpty(product.getDescription()))
+		{
+			form.setDescription(product.getDescription());
+		}
+		if(StringUtil.isNotEmpty(product.getPicture()))
+		{
+			form.setPicture(product.getPicture());
+		}
+		if(StringUtil.isNotEmpty(product.getDescription()))
+		{
+			form.setDescription(product.getDescription());
+		}
+
+	}
+    
+    public void setProductFormWithProduct(ProductForm form, ProductEntity product)
+	{
 
 		if(product.getBrandId() >= 0)
 		{

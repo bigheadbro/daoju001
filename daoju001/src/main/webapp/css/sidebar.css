@@ -5,10 +5,13 @@
 .erweima{}
 .erweima p{background-color:#0099cb;color:white;font-size:12px;margin-top: 5px;text-align: center;line-height: 18px;padding: 5px;}
 
-.goTab {position: fixed;bottom: 56px;right: 10px;_position: absolute;z-index: 9999;}
+.goTab {position: fixed;bottom: 156px;right: 10px;_position: absolute;z-index: 9999;}
 .goTab li {position: relative;width: 45px;height: 45px;line-height: 45px;margin-bottom: 4px;font-size: 14px;list-style: none;}
 .goTab li a {position: absolute;width: 45px;height: 45px;right: 0;top: 0;text-align: center;color: #fff !important;background-color: #71b6cd;overflow: hidden;text-decoration: none;cursor: pointer;color: #fff;}
+.goTab li em {position: absolute;width: 45px;height: 45px;right: 0;top: 0;text-align: center;color: #fff !important;background-color: #71b6cd;overflow: hidden;text-decoration: none;cursor: pointer;color: #fff;}
 .goTab li b {display: block;position: absolute;}
+.goTab li.code em img{width:40px;height:40px;margin-top:2px;}
+.goTab li.code i{display:block;position:absolute;width:165px;height:165px;left:-170px;bottom:0px;display:none;}
 .goTab li span {position: absolute;color: #fff;right: 32px;width: 125px;}
 .goTab .gTop b{background:url(../img/up.png) no-repeat 0 0;width:28px;height:28px;top: 9px;right: 8px;}
 .goTab .qq b{background:url(../img/qq.png) no-repeat 0 0;width:19px;height:22px;top: 11px;right: 13px;}

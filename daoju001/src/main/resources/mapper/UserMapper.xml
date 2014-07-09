@@ -30,7 +30,7 @@
 		<id property="fax" column="fax" />
 		<!--公司介绍 -->
 		<id property="description" column="description" />
-		<!--曲线 -->
+		<!--0是免费用户，1是200元用户，4是1000元用户 -->
 		<id property="authority" column="authority" />
 		<!--证书链接 -->
 		<id property="verifiedLink" column="verified_link" />

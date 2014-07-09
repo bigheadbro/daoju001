@@ -69,7 +69,7 @@
     		<div class="total">小计(元)</div>
     	</div>
     	<div class="order-list clearfix">
-    		<div class="name"><a><img src="/item/$cover" /><span>$itemName</span></a></div>
+    		<div class="name"><a target="_blank" href="/item/${itemid}"><img src="/item/$cover" /><span>$itemName</span></a></div>
     		<div class="price"><span>$price</span></div>
     		<div class="quatity"><span>X $quantity</span></div>
     		<div class="total"><span>${total}0</span></div>

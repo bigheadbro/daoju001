@@ -39,7 +39,7 @@ $(function() {
     		订单号：DSF${order.id}
     	</div>
     	<div class="order-list clearfix">
-    		<div class="name"><a><img src="/item/${order.item.cover}" /><span>${order.item.brand}${order.item.type}${order.item.version}</span></a></div>
+    		<div class="name"><a target="_blank" href="/item/${order.item.id}"><img src="/item/${order.item.cover}" /><span>${order.item.brand}${order.item.type}${order.item.version}</span></a></div>
     		<div class="price"><span>${order.price}0</span></div>
 			#if(${order.state} == 5)
 				<div class="time"><span>$stringUtil.convertDate(${order.gmtCancel})</span></div>

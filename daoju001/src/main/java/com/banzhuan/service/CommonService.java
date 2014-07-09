@@ -122,32 +122,13 @@ public class CommonService {
 			return result;
 		}
 		
-		/*BuyerEntity buyer = buyerDAO.queryBuyerEntityByMail(form.getMail());
-		if(buyer == null)
-		{
-			AgentEntity agent = agentDAO.queryAgentEntityByMail(form.getMail());
-			if(agent == null)
-			{
-				errors.rejectValue("mail", "MAIL_IS_NOT_EXISTS"); // 邮箱不存在
-				return result;
-			}
-			if(StringUtil.isNotEqual(agent.getPassword(), StringUtil.encrypt(form.getPassword())))
-			{
-				errors.rejectValue("password", "PASSWORD_ERROR"); // 密码错误
-				return result;
-			}
-			result.add("user", agent);
-			result.add("userType", 0);
-			return result;
-		}
-		
-		if(StringUtil.isNotEqual(buyer.getPassword(), StringUtil.encrypt(form.getPassword())))
-		{
-			errors.rejectValue("password", "PASSWORD_ERROR"); // 密码错误
-			return result;
-		}*/
 		
 		UserEntity user = userDAO.queryUserEntityByMail(form.getMail());
+		if(user == null)
+		{
+			errors.rejectValue("mail", "MAIL_IS_NOT_EXISTS"); // 邮箱不存在
+			return result;
+		}
 		if(StringUtil.isNotEqual(user.getPassword(), StringUtil.encrypt(form.getPassword())))
 		{
 			errors.rejectValue("password", "PASSWORD_ERROR"); // 密码错误
@@ -655,6 +636,11 @@ public class CommonService {
 		return itemDAO.queryItemEntityById(id);
 	}
 	
+	public ProductEntity getProduct(int id)
+	{
+		return productDAO.queryProductEntityById(id);
+	}
+	
 	public int insertOrder(OrderEntity order)
 	{
 		return orderDAO.insertOrderEntity(order);
@@ -678,5 +664,10 @@ public class CommonService {
 	public int getOrdersCount(int uid, int type)
 	{
 		return orderDAO.getOrdersCount(uid, type);
+	}
+	
+	public UserEntity getUser(int id)
+	{
+		return userDAO.queryUserEntityById(id);
 	}
 }

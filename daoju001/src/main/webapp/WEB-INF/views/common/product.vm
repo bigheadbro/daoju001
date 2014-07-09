@@ -1,0 +1,73 @@
+#set($layout = "/layout/item_layout.vm")
+<div class="product-detail-container clearfix">
+	<script>
+    $(function() {	
+		$(".image .list a").click(function(){
+			$(this).parent().children().each(function(){
+				$(this).removeClass("current");
+			});
+			$(this).addClass("current");
+			$(".photo img").attr("src", $(this).children("img").attr("src"));
+		});
+    });
+	
+    </script>
+	<div class="product-wrap clearfix">
+    	<div class="product-info clearfix">
+    		<div class="image">
+    			<div class="photo">
+    				<img src="/product/${product.cover}" />
+    			</div>
+    			<div class="list">
+    				#foreach($pic in $pictures)
+						#if($velocityCount == 1)
+							<a class="current"><img src="/product/${pic}" /></a>
+						#else
+							<a><img src="/product/${pic}" /></a>
+						#end
+    				#end
+    			</div>
+    		</div>
+    		<div class="info">
+    			<h1>${product.name}</h1>
+    			<div class="brand">
+    				<i class="key">刀具品牌：</i>$stringUtil.getBrand(${product.brandId})<img src="/img/logo/$stringUtil.getBrandLogo(${product.brandId})" />
+    			</div>
+    			<div class="param">
+    				<span><i class="key">加工方式：</i>$stringUtil.getMethod(${product.processMethod})</span>
+					<span><i class="key">所属行业：</i>$stringUtil.getIndustry(${product.industry})</span>
+					<span><i class="key">工件硬度：</i>$stringUtil.getHardness(${product.wpHardness})</span>
+					<span><i class="key">工件材质：</i>$stringUtil.getMaterial(${product.wpMaterial})</span>
+    			</div>
+    			<div class="detail">
+    				<ul>
+    					<li>
+    						<span><i class="key">代理商：</i><em><a targt="_blank" href="/users/${user.id}">${user.nick}</a></em></span>
+    					</li>
+    					<li>
+    						<span><i class="key">地址：</i>${user.address}</span>
+    					</li>
+    					<li>
+    						<span><i class="key">联系电话：</i>${user.contactPhone}</span>
+    					</li>
+    					<li>
+    						<span><i class="key">QQ：</i>${user.contactQq}</span>
+    					</li>
+    				</ul>
+    			</div>
+    		</div>
+    	</div>
+    	<div class="description">
+    		<div class="head">
+				<img src="/img/product-des.png" />
+    		</div>
+    		<p>${product.description}</p>
+    	</div>
+	</div>
+	<div class="product-side">
+		<div class="advert">
+		</div>
+		<div class="advert">
+		</div>
+	</div>
+</div>

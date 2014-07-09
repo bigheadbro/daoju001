@@ -32,27 +32,13 @@ public class OrderDAOImpl extends SqlSessionDaoSupport implements OrderDAO {
 	
 	@Override
 	public List<OrderEntity> queryOrdersByUserid(int uid, int type, RowBounds bound) {
-		if(type == 0)//agent or buyer?
-		{
-			return this.getSqlSession().selectList("queryOrderByBuyerid",uid, bound);
-		}
-		else
-		{
-			return this.getSqlSession().selectList("queryOrderByAgentid",uid, bound);
-		}
+		return this.getSqlSession().selectList("queryOrdersByUserid",uid, bound);
 	}
 	
 	@Override
 	public int getOrdersCount(int uid, int type)
 	{
-		if(type == 0)//agent or buyer?
-		{
-			return this.getSqlSession().selectOne("queryOrdersCountByBuyerid",uid);
-		}
-		else
-		{
-			return this.getSqlSession().selectOne("queryOrdersCountByAgentid",uid);
-		}
+		return this.getSqlSession().selectOne("getOrdersCount",uid);
 	}
 	
 }

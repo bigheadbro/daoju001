@@ -22,6 +22,8 @@ public class Constant {
 	
 	public static final int ALL_QUESTION_PAGE_SIZE=6;
 	
+	public static final int ALL_PRODUCT_PAGE_SIZE=6;
+	
 	public static final int ALL_GOOD_CASE_PAGE_SIZE=6;
 	
 	public static final int LIST_PAGE_SIZE=7;

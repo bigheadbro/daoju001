@@ -36,5 +36,11 @@ public class AddressDAOImpl extends SqlSessionDaoSupport implements AddressDAO {
 	public int updateOtherAddressById(AddressEntity addr) {
 		return this.getSqlSession().update("updateOtherAddressById", addr);
 	}
+	
+	@Override
+	public void delAddr(int id)
+	{
+		this.getSqlSession().delete("delAddr",id);
+	}
 
 }

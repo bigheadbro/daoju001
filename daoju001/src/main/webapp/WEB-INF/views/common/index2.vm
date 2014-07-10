@@ -1,9 +1,163 @@
-#set($layout = "/layout/working_layout.vm")
-<div class="go-content">
-<img src="/img/go.jpg" />
+#set($layout = "/layout/index_layout.vm")
+<link rel="stylesheet" href="/css/flexslider.css">
+<script type="text/javascript" src="/js/questions.js"></script>
+<script type="text/javascript" src="/js/jquery.flexslider-min.js"></script>
+<div class="flexslider">
+  <ul class="slides">
+	<li>
+	    <a><img src="/img/banner/banner2.jpg" /></a>
+	</li>
+	<li>
+			<a><img src="/img/banner/banner3.jpg" /></a>
+	</li>
+  </ul>
 </div>
-<!-- daoshifu.com Baidu tongji analytics -->
-<script type="text/javascript">
-var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
-document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3Ffdd0d4853bd81366542daabbd8e3fcb8' type='text/javascript'%3E%3C/script%3E"));
-</script>
+
+<div class="main-content-container clearfix">
+	<!-- 问题 -->
+	<div class="main-list-container width630 mh600">
+		<div class="main-list-header">
+                                             热门问题
+         <a href="questions">点击查看更多问题</a>
+		</div>
+		<div class="main-list-content">
+			#foreach($question in $questions)
+			<div class="hot-question-listitem first clearfix">
+				<div class="hidden">$!{question.content}</div>
+				<div class="logo">
+					<a href="/users/$!{question.buyerId}">
+						#if($!{question.userLogo})
+							<img src="/logo/$!{question.userLogo}" />
+						#else
+							<img src="/img/avatar.png" />
+						#end
+					</a>
+				</div>
+				<div class="content">
+					<ul>
+						<li class="name"><a href="/users/$!{question.buyerId}">$!{question.userName}</a></li>
+						<li class="title clearfix">
+							<div class="questions-param">
+    							#if($!{question.industry} > 0)
+    								<span>$stringUtil.getIndustry($!{question.industry})</span>
+    							#end
+    							#if($!{question.processMethod} > 0)
+    								<span>$stringUtil.getMethod($!{question.processMethod})</span>
+    							#end
+    							#if($!{question.wpHardness} > 0)
+    								<span>$stringUtil.getHardness($!{question.wpHardness})</span>
+    							#end
+    							#if($!{question.wpMaterial} > 0)
+    								<span>$stringUtil.getMaterial($!{question.wpMaterial})</span>
+    							#end
+    						</div>
+							<div class="questions-type">
+								#if($!{question.type} == 1)
+									<span class="type1" title="正常生产，希望找到更好的刀具提升性价比">性价比</span>
+								#elseif($!{question.type} == 2)
+									<span class="type2" title="现有刀具影响生产，想换新的刀具">难加工</span>
+								#else
+									<span class="type3" title="单纯咨询刀具知识">刀知识</span>
+								#end
+								
+							</div>
+						</li>
+						<li class="text clearfix">
+							<p></p>
+						</li>
+						<li class="info">
+							<p>$stringUtil.formatDate($!{question.gmtModify})</span> <span> |</span> <a href="/questions/$!{question.id}">$!{question.cntPA}个解决方案</a> <span>|</span> <a href="/questions/$!{question.id}">$!{question.cntCA}条评论</a> <span>|</span> <a href="/questions/$!{question.id}">查看详情</a> <span class="answer"></span></p>
+						</li>
+						<li class="index-answer">
+							#set($tmp = $!{velocityCount})
+							#set($index = $tmp - 1)
+							<div class="hidden">$!{answers[$index].content}</div>
+						    <div class="answer-arrow">
+							    <em class="S_line1_c">◆</em>
+							    <em class="S_bg1_c">◆</em>
+							</div>
+							<ul class="pa-answer clearfix">
+            				    <li class="agent-info clearfix">
+            					    <div class="logo" aid="$!{answers[$index].agentId}">
+                						<a href="/agents/$!{answers[$index].agentId}">
+                    						#if($!{answers[$index].agentLogo})
+                    							<img src="/logo/$!{answers[$index].agentLogo}" />
+                    						#else
+                    							<img src="/img/avatar.png" />
+                    						#end
+                    					</a>
+                					</div>
+            						<div class="agent-detail">
+            							<h2 class="clearfix">
+											<a class="agent-name" href="/agents/$!{answers[$index].agentId}">$!{answers[$index].agentName}</a>
+                							<a class="fancybox-v" title="$!{answers[$index].agentName}的代理证书" href="$!{answers[$index].verifiedLink}"><img src="/img/v.png" /></a>
+            							</h2>
+            							<h4>$stringUtil.getBrand($!{answers[$index].brandName})</h4>
+            						</div>
+            						<div class="answer-price">
+            							#if($stringUtil.isNotEmpty($!{answers[$index].price}))
+            								<span>已报价</span>
+            							#end
+            							#if($!{answers[$index].FreeUse})
+            								<span>免费试用</span>
+            							#end
+            						</div>
+            					</li>
+            				    <li class="answer-cont">
+            					    <p></p>
+            					</li>
+							</ul>
+						</li>
+					</ul>
+				</div>
+			</div>
+			#end
+		</div>
+	</div>
+	<!-- 代理商 -->
+	<div class="main-list-container width300 ml50">
+		<div class="main-list-header ">
+                                                      浏览最多的代理商
+			<a class="seemore" href="/agents">查看更多</a>
+		</div>
+		<div class="main-list-content">
+			#foreach($agent in $agents)
+			<div class="new-agent-listitem agent-info clearfix">
+				<div class="logo" aid="${agent.id}">
+					<a href="/agents/${agent.id}">
+							#if($!{agent.logo})
+								<img src="/logo/$!{agent.logo}" />
+							#else
+								<img src="/img/avatar.png" />
+							#end
+						</a>
+				</div>
+				<div class="content">
+					<ul>
+						<li class="name clearfix">
+								<a href="/agents/$!{agent.id}">$!{agent.companyName}</a>
+								#if($stringUtil.isNotEmpty(${agent.verifiedLink}))
+									<a class="fancybox-v" title="$!{agent.companyName}的代理证书" href="$!{agent.verifiedLink}"><img src="/img/v.png" /></a>
+								#end
+							</li>
+						<li class="title">$!stringUtil.getBrand($!{agent.brand})</li>
+					</ul>
+				</div>
+			</div>
+				#end
+   </div>
+	</div>
+    <div class="main-list-container width300 ml50">
+		<div class="agent-right">
+    		<h1>为什么要找一级代理商？</h1>
+    		<h2>货真</h2>
+			<p>一级代理商一般直接从国外进口刀具产品,直接进入公司总仓管理，安全可靠。不会像一些不良商家使用仿品、走私品、次品来破坏品牌形象。</p>
+			<h2>价实</h2>
+			<p>一级代理商的报价不一定永远是最低的（大部分时候是）。但是绝不会出现仗着用户和经销商的信任，开出动辄几倍的虚高价格。</p>
+			<h2>方案准确</h2>
+			<p>一级代理商对自己产品，永远最为了解。刀具费用一般只占加工费的5%以内，不同的方案对加工效果产生的影响远远不止于此。好的方案提高用户效率、产品质量，廉价的错误方案只会增加客户的生产成本。</p>
+    	</div>
+	</div>
+	
+</div>
+#parse("/common/card.vm")

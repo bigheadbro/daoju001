@@ -1,5 +1,12 @@
 <script type="text/javascript" src="/js/top-nav.js"></script>
-
+<script type="text/javascript" src="/js/stickUp.min.js"></script>
+<script type="text/javascript">
+  jQuery(function($) {
+    $(document).ready( function() {
+      $('.main-head-container').stickUp();
+    });
+  });
+</script>
 <div class="main-head-container">
     <div class="main-head-content clearfix">
         <div class="main-logo">

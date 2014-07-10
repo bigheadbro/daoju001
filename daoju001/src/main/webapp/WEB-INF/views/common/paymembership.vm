@@ -2,8 +2,69 @@
 <div class="membership-container clearfix">
 	<h1>付费会员申请</h1>
 	<div class="member-content">
-		<div>
-		</div>
+		<ul class="info">
+			<li class="first clearfix">
+				<span class="key">刀师傅账号：</span><span class="value">${account.username}</span>
+			</li>
+			<li class="clearfix">
+				<span class="key">当前等级：</span><span class="value">免费会员</span>
+				<span class="key">会员有效期：</span><span class="value">通过审核之日起之后一年</span>
+			</li>
+			<li class="clearfix">
+				<span class="key">您现在申请的是：</span><span class="value"><b class="yellow">认证代理会员</b></span>
+				<span class="key">代理会员费用：</span><span class="value">1000元/年</span>
+			</li>
+			<li class="clearfix">
+				<span class="key">认证代理会员的特权：</span>
+				<span class="value">
+					<ul class="member-detail">
+						<li><b>10</b>个线上展位</li>
+    					<li><b>免费参与刀具商城交易</b></li>
+    					<li>可在刀具咨询中提供<b>专业方案</b></li>
+    					<li>可以参加<b class="green">微信推送</b>(副图文位置)</li>
+    					<li><b>1次全网邮件推广活动</b></li>
+					</ul>
+				</span>
+			</li>
+			<li class="clearfix">
+				<span class="key">申请流程：</span>
+				<div class="apply-state">
+            		<img src="/img/member-process.png" />
+					<div class="state clearfix">
+            			<span class="state1">
+							<h4>付款到支付宝</h4>
+							<p>刀师傅使用支付宝担保交易服务<br/>保障买卖双方货款安全，防范欺诈</p>
+						</span>
+            			<span class="state2">
+							<h4>刀师傅审核</h4>
+							<p>上传相关资料<br/>刀师傅进行审核</p>
+						</span>
+            			<span class="state3">
+							<h4>审核通过，升级成功</h4>
+							<p>经过刀师傅审批通过<br/>您将会得到刀师傅认证标签，得到跟多信誉度</p>
+						</span>
+            		</div>
+				</div>
+			</li>
+			<li class="clearfix">
+				<span class="key">费用：</span>
+				<span class="buy clearfix">
+					<h4><b class="yellow">1000</b>元</h4>
+					<div class="pay-wrap clearfix">
+        				<div class="left">
+                			<a id="submit_member">去付款</a>
+        				</div>
+        				<div class="right clearfix">
+        					<img src="/img/alipay.png" />
+        					<div class="alipay">
+        						<h2>支付宝担保交易</h2>
+        						<p>刀师傅使用支付宝担保交易服务。<br/>保障买卖双方货款安全，防范欺诈。</p>
+        					</div>
+        				</div>
+					</div>
+    			</span>
+			</li>
+		</ul>
 		<div class="contact clearfix">
 			<h5>如您有任何疑问，可以通过QQ或电话与我们直接联系,我们的客服将为您服务！</h5>
 			<div class="contact-detail clearfix">

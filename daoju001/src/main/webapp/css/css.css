@@ -332,7 +332,7 @@ div[contentEditable]{outline:0}
 .footer-content p.bottom{color:#666666;}
 
 /*main head*/
-.main-head-container{background:#0099cb;width:100%;}
+.main-head-container{background:#0099cb;width:100%;z-index:10000}
 .main-head-content{margin:0 auto;width:960px;color:#f1f1f1;}
 .main-head-container .main-head-content .main-logo{float:left;padding: 5px;padding-top: 11px;}
 .main-logo img{width: 110px;}
@@ -903,7 +903,7 @@ opacity: .3;
 .product-item .info .param{font-size:13px;color:#b5b5b5}
 .product-item img{width:160px;height:160px;}
 .product-item .brand img{width:80px;}
-.product-item p{color:#828282;width: 460px;font-size: 15px;margin-top: 5px;height:80px;overflow: hidden;text-overflow:ellipsis;line-height: 22px;}
+.product-item p{color:#828282;width: 460px;font-size: 15px;margin-top: 5px;height:90px;overflow: hidden;text-overflow:ellipsis;line-height: 22px;}
 .product-item span{display:inline-block;float:right;color:#828282;font-size: 13px;margin: 5px;}
 .product-banner{background: url(../img/product-banner.png) no-repeat 0 0;width:960px;height:228px;}
 .product-side{float:left;width:305px;margin-left:20px;}
@@ -951,6 +951,8 @@ opacity: .3;
 .member-content .member-level ul li{height: 55px;line-height: 55px;}
 .member-content .member-level ul li a{color:white;background-color:#7bd83d;padding:10px 20px;display:inline-block;border-radius:5px;font-size:18px;line-height:30px;margin-top:20px;}
 .member-content .member-level ul li.clearheight{height:inherit}
+.member-content .edm{border-top:1px solid #e1e1e1;padding-top:50px;padding-bottom:50px;text-align:center}
+.member-content .edm h3{background: url(../img/edm.png) no-repeat 160px 0;text-indent: 70px;color: #42caf1;font-size: 18px;line-height: 74px;}
 .member-content .contact{border-top:1px solid #e1e1e1;padding-top:50px;text-align:center}
 .member-content .contact h5{color:#5592c5;}
 .member-content .contact .contact-detail{margin-left: 200px;margin-top: 31px;}
@@ -962,7 +964,30 @@ opacity: .3;
 .member-content .contact .contact-detail .right{float:left;margin-left:50px;}
 .member-content .contact .contact-detail .right img{width:90px;height:90px;float:left;}
 .member-content .contact .contact-detail .right p{float:left;margin: 25px 0 0 15px;font-weight:700;font-size:13px;text-align:left;color:#5592c5}
-
+.member-content ul.info li{border-top:1px solid #e1e1e1;padding-top:10px;margin-bottom:10px;}
+.member-content ul.info li.first{border-top:none}
+.member-content ul.info li span.key{width:170px;display:inline-block;float:left;font-size:14px;color:#616161;line-height: 25px;}
+.member-content ul.info li span.value{width:250px;display:inline-block;float:left;font-size:14px;color:#616161;line-height: 25px;}
+.member-content ul.info li .apply-state{float:left;width:765px;margin-top:10px;}
+.member-content ul.info li .apply-state img{margin-left: 85px;}
+.member-content ul.info li .apply-state .state h4{color:#616161;font-size:14px;text-align:center;margin-top:10px;}
+.member-content ul.info li .apply-state .state p{color:#c5c5c5;font-size:13px;text-align:center;margin-top:10px;}
+.member-content ul.info li .apply-state .state1{float:left;}
+.member-content ul.info li .apply-state .state2{float:left;margin-left: 98px;}
+.member-content ul.info li .apply-state .state3{float:left;margin-left:55px}
+.member-content ul.info b.yellow{color:#ffb400;font-size:18px}
+.member-content ul.member-detail li{border-top:none;padding:0}
+.member-content ul.member-detail b.green{color:#65b42c;font-weight:700;}
+.member-content ul.info #submit_member{background-color:#7bd83d;color:white;font-size:24px;border-radius:5px;padding:10px 40px;display: inline-block;}
+.member-content ul.info .left{float:left;border-right:1px solid #e0e0e0;margin-top: 20px;padding: 10px 85px 10px 0;}
+.member-content ul.info .buy {display: inline-block;}
+.member-content ul.info .buy h4 {font-size:14px;}
+.member-content ul.info .buy h4 b.yellow{margin-right:5px;}
+.member-content ul.info .right{float:left;padding: 15px;margin-left:75px;}
+.member-content ul.info .right img{float:left;margin-top: 5px;}
+.member-content ul.info .right .alipay{float:left;color:#e56b15;margin-left: 10px;}
+.member-content ul.info .right .alipay h2{font-size:20px;margin-bottom:5px;}
+.member-content ul.info .right .alipay p{font-size:13px;line-height: 22px;}
 /*代理商列表*/
 .brand-list{padding-bottom:30px;border-bottom:1px solid #eee;margin-top:30px;}
 .brand-list .agent-list{float:left;}

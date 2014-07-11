@@ -102,7 +102,7 @@
 			    <if test="workmaterial != null">AND workmaterial=#{workmaterial}</if>
 			    <if test="brand != null">AND brand=#{brand}</if>
 		    </where> 
-			order by gmt_create desc
+		    order by gmt_create desc
 	</select>
 	
 	<select id="getAllItemsByType" parameterType="ItemEntity"
@@ -116,12 +116,13 @@
 			    <if test="workmaterial != null">AND workmaterial=#{workmaterial}</if>
 			    <if test="brand != null">AND brand=#{brand}</if>
 		    </where> 
-			order by gmt_create desc
+			<if test="order == 1">order by price</if>
+		    <if test="order == 2">order by gmt_create desc </if>
 	</select>
 	
-	<select id="getMainItemsByType" parameterType="ItemEntity"
+	<select id="getMainItems" parameterType="ItemEntity"
 			resultMap="ItemResultMap">
-		SELECT * from t_item t order by gmt_create desc limit 3
+		SELECT * from t_item t order by gmt_create desc limit 6
 	</select>
 	
 </mapper>

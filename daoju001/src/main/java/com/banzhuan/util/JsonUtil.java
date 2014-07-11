@@ -258,16 +258,52 @@ public class JsonUtil {
        	switch(status)
        	{
        	case 1:
-       		strStatus = "代理商登录后，才可以回答问题";
+       		strStatus = "登录后，才可以回答问题";
        		break;
        	case 2:
-       		strStatus = "您的账号没有足够的权限提供解决方案，详情请询问客服。";
+       		strStatus = "您的账号没有提供解决方案的权限，请升级账户或者咨询客服查询详情。";
        		break;
        	case 3:
        		strStatus = "未认证代理商不能提供专业解决方案，需要认证请联系我们！";
        		break;
        	case 4:
        		strStatus = "";
+       	}
+	
+        object.element("status", status);
+        object.element("code", strStatus);
+        PrintWriter out = null;  
+        try {  
+            out = response.getWriter();  
+            out.println(object.toString());  
+        }  
+        catch (IOException ex1) {  
+            ex1.printStackTrace();  
+        }  
+        finally {  
+            out.close();  
+        }  
+	}
+	
+	public static void checkAuthStatus(HttpServletResponse response, int status)
+	{
+		JSONObject object = new JSONObject();  
+		String strStatus = "";
+		int mid = 0;
+        response.setContentType("text/Xml;charset=gbk");  
+       	switch(status)
+       	{
+       	case 1://未登录
+       		strStatus = "登录之后，才可以升级账户。";
+       		break;
+       	case 2:
+       		strStatus = "你已经拥有该权限，无需升级账户。";
+       		break;
+       	case 3:
+       		mid = 1;
+       		break;
+       	case 4:
+       		mid = 2;
        	}
 	
         object.element("status", status);

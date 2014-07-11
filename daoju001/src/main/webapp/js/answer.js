@@ -17,13 +17,10 @@ $(function() {
 		    		window.location.href='/log';
 		    	  break;
 		    	case 2:
-		    		showAlert("",data.code,"","确定","");
-		    	  break;
-		    	case 3:
-		    		showAlert("",data.code,"","确定","");
+		    		showAlert("权限不够",data.code,"","确定","/membership");
 		    	  break;
 		    	default:
-		    		showanswer(); 
+		    		
 		    	}  
 		    }
 		});   

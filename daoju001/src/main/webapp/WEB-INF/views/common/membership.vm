@@ -1,4 +1,37 @@
 #set($layout = "/layout/item_layout.vm")
+<script>
+$(function() {
+	$(".paymembership").click(function() {
+		var mid = $(this).attr("mid");
+		$.ajax( {   
+		    type : "POST",   
+		    url : "/paymembership", 
+		    data : {
+		      'mid' : mid,
+		     },  
+		    dataType: "json",   
+		    success : function(data) {   
+		    	switch(data.status)
+		    	{
+		    	case 1:
+		    		showAlert("账户未登录",data.code,"","确定","");
+		    	  break;
+		    	case 2:
+		    		showAlert("",data.code,"","确定","");
+		    	  break;
+		    	case 3:
+		    		window.location.href='/paymembership/1';
+		    	  break;
+				case 4:
+		    		window.location.href='/paymembership/2';
+		    	  break;
+		    	}  
+		    }
+		});   
+		
+	});
+});
+</script>
 <div class="membership-container clearfix">
 	<h1>请选择您的会员等级</h1>
 	<div class="member-content">
@@ -12,7 +45,7 @@
 					<li><i>可在刀具咨询中发表普通评论</i></li>
 					<li><i>不能参加微信推送</i></li>
 					<li><i>不能参加邮件推广活动</i></li>
-					<li class="clearheight"><a href="/reg">注册免费会员</a></li>
+					<li class="clearheight"><a href="/user/reg">注册免费会员</a></li>
 				</ul>
 			</div>
 			<div class="level red">
@@ -24,7 +57,7 @@
 					<li>可在刀具咨询中提供<b>专业方案</b></li>
 					<li>可以参加<b class="green">微信推送</b>(副图文位置)</li>
 					<li>付费参与邮件推广活动</li>
-					<li class="clearheight"><a>申请认证会员</a></li>
+					<li class="clearheight"><a class="paymembership" mid="1">申请认证会员</a></li>
 				</ul>
 			</div>
 			<div class="level yellow">
@@ -36,7 +69,7 @@
 					<li>可在刀具咨询中提供<b>专业方案</b></li>
 					<li>可以参加<b class="green">微信推送</b>(副图文位置)</li>
 					<li><b>1次全网邮件推广活动</b></li>
-					<li class="clearheight"><a>申请认证代理</a></li>
+					<li class="clearheight"><a class="paymembership" mid="2">申请认证代理</a></li>
 				</ul>
 			</div>
 		</div>

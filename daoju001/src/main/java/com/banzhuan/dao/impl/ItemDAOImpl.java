@@ -18,26 +18,26 @@ public class ItemDAOImpl extends SqlSessionDaoSupport implements ItemDAO {
 	}
 	
 	@Override
-	public int insertItemEntity(ItemEntity gc) {
-		this.getSqlSession().insert("insertItemEntity", gc);
-		return gc.getId();
+	public int insertItemEntity(ItemEntity item) {
+		this.getSqlSession().insert("insertItemEntity", item);
+		return item.getId();
 	}
 
 	@Override
-	public int updateItemById(ItemEntity gc) {
-		return this.getSqlSession().update("updateItemById", gc);
+	public int updateItemById(ItemEntity item) {
+		return this.getSqlSession().update("updateItemById", item);
 	}
 
 	@Override
-	public List<ItemEntity> getAllItemsByType(ItemEntity gc)
+	public List<ItemEntity> getAllItemsByType(ItemEntity item)
 	{
-		return this.getSqlSession().selectList("getAllItemsByType", gc);
+		return this.getSqlSession().selectList("getAllItemsByType", item);
 	}
 	
 	@Override
-	public List<ItemEntity> getMainItemsByType()
+	public List<ItemEntity> getMainItems()
 	{
-		return this.getSqlSession().selectList("getMainItemsByType");
+		return this.getSqlSession().selectList("getMainItems");
 	}
 	
 	@Override
@@ -47,9 +47,9 @@ public class ItemDAOImpl extends SqlSessionDaoSupport implements ItemDAO {
 	}
 	
 	@Override
-	public int getItemCountByType(ItemEntity gc)
+	public int getItemCountByType(ItemEntity item)
 	{
-		return this.getSqlSession().selectOne("getItemCountByType", gc);
+		return this.getSqlSession().selectOne("getItemCountByType", item);
 	}
 	
 	@Override

@@ -143,9 +143,9 @@
 			order by gmt_create desc
 	</select>
 	
-	<select id="getMainProductsByType" parameterType="ProductEntity"
+	<select id="getMainProducts" parameterType="ProductEntity"
 			resultMap="ProductResultMap">
-		SELECT * from t_Product t order by gmt_create desc limit 3
+		SELECT * from t_Product t order by gmt_create desc limit 4
 	</select>
 	
 </mapper>

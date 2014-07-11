@@ -24,7 +24,14 @@ $(function() {
 	<div class="buyer-list">
 		#foreach($product in $products)
     		<div class="listitem">
-    			<p>$!{product.name}<span>$stringUtil.formatDate($!{product.gmtCreate})</span></p>
+    			<p>
+					$!{product.name}
+					#if(${product.state} == 0)
+						<span>刀师傅正在审核</span>
+					#else
+						<span>$stringUtil.formatDate($!{product.gmtCreate})</span>
+					#end
+				</p>
     			<div class="operation clearfix">
     				<a href="/user/product/$!{product.id}">编辑</a><span>|</span>
     				<a class="del" pid="$!{product.id}">删除</a>

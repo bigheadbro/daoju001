@@ -39,38 +39,49 @@ $(function() {
     		订单号：DSF${order.id}
     	</div>
     	<div class="order-list clearfix">
+			#if(${order.itemid} == 1)
+				<div class="member">认证会员</div>
+			#elseif(${order.itemid} == 2)
+				<div class="member">认证代理会员</div>
+			#else
     		<div class="name"><a target="_blank" href="/item/${order.item.id}"><img src="/item/${order.item.cover}" /><span>${order.item.brand}${order.item.type}${order.item.version}</span></a></div>
-    		<div class="price"><span>${order.price}0</span></div>
+    		#end
+			<div class="price"><span>${order.price}0</span></div>
 			#if(${order.state} == 5)
 				<div class="time"><span>$stringUtil.convertDate(${order.gmtCancel})</span></div>
 				<div class="state"><span class="grey">订单已取消</span></div>
-				<div class="operation"><a class="mt25 db" target="_blank" href="order/${order.id}">查看详情</a></div>
+				#if(${order.itemid} != 1 && ${order.itemid} != 2)<div class="operation"><a class="mt25 db" target="_blank" href="order/${order.id}">查看详情</a></div>#end
 			#elseif(${order.state} == 1)
 				<div class="time"><span>$stringUtil.convertDate(${order.gmtSubmitOrder})</span></div>
-				<div class="state"><span class="red">等到付款</span></div>
+				<div class="state"><span class="red">等待付款</span></div>
 				<div class="operation">
-					<a class="op red" href="/purchase_handler/${order.id}">立即付款</a>
+					#if(${order.itemid} != 1 && ${order.itemid} != 2)
+						<a class="op red" href="/purchase_handler/${order.id}">立即付款</a>
+					#else
+						<a class="op red" href="/membership_handler/${order.id}">立即付款</a>
+					#end
 					<div>
-						<a target="_blank" href="order/${order.id}">查看详情</a><em>|</em><a class="cancel" orderid="/cancelorder/${order.id}">取消订单</a>
+						#if(${order.itemid} != 1 && ${order.itemid} != 2)<a target="_blank" href="order/${order.id}">查看详情</a><em>|</em>#end
+						<a class="cancel" orderid="/cancelorder/${order.id}">取消订单</a>
 					</div>
 				</div>
 			#elseif(${order.state} == 2)
 				<div class="time"><span>$stringUtil.convertDate(${order.gmtPay})</span></div>
 				<div class="state"><span class="blue">等待刀师傅发货</span></div>
-				<div class="operation"><a class="mt25 db" target="_blank" href="order/${order.id}">查看详情</a></div>
+				#if(${order.itemid} != 1 && ${order.itemid} != 2)<div class="operation"><a class="mt25 db" target="_blank" href="order/${order.id}">查看详情</a></div>#end
 			#elseif(${order.state} == 3)
 				<div class="time"><span>$stringUtil.convertDate(${order.gmtSell})</span></div>
 				<div class="state"><span class="blue">刀师傅已发货</span></div>
 				<div class="operation">
 					<a class="op blue" target="_blank" href="http://www.alipay.com">确认收货</a>
 					<div>
-						<a class="db" target="_blank" href="order/${order.id}">查看详情</a>
+						#if(${order.itemid} != 1 && ${order.itemid} != 2)<a class="db" target="_blank" href="order/${order.id}">查看详情</a>#end
 					</div>
 				</div>
 			#elseif(${order.state} == 4)
 				<div class="time"><span>$stringUtil.convertDate(${order.gmtAssure})</span></div>
 				<div class="state"><span class="green">交易成功</span></div>
-				<div class="operation"><a class="mt25 db" target="_blank" href="order/${order.id}">查看详情</a></div>
+				#if(${order.itemid} != 1 && ${order.itemid} != 2)<div class="operation"><a class="mt25 db" target="_blank" href="order/${order.id}">查看详情</a></div>#end
 			#end
     	</div>
 	</div>

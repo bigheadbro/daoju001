@@ -78,7 +78,7 @@
         <input type="hidden" name="${status.expression}" value="$!{status.value}" id="productCover" />
 		#if($errormsg)
 		<div class="error-msg-np">
-			$errormsg
+			$errormsg，<a href="/membership">请升级账户</a>
     	</div>
 		#end
         #springBind("productForm.name")

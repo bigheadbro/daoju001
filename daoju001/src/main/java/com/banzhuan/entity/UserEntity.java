@@ -59,6 +59,8 @@ public class UserEntity implements Serializable {
 	// 记录修改时间(最近登录时间)
 	private String gmtModified;
 	
+	private String gmtAuth;
+	
 	private int cntAnswer;
 	private int cntSample;
 	private int cntGc;
@@ -484,6 +486,20 @@ public class UserEntity implements Serializable {
 	 */
 	public void setAuthority(int authority) {
 		this.authority = authority;
+	}
+
+	/**
+	 * @return the gmtAuth
+	 */
+	public String getGmtAuth() {
+		return gmtAuth;
+	}
+
+	/**
+	 * @param gmtAuth the gmtAuth to set
+	 */
+	public void setGmtAuth(String gmtAuth) {
+		this.gmtAuth = gmtAuth;
 	}
 
 	

@@ -235,6 +235,11 @@ public class UserService {
 				user.setBrand(form.getBrand());
 				account.setBrandName(form.getBrand());
 			}
+			if(form.getBrand2() > 0)
+			{
+				user.setBrand2(form.getBrand2());
+				account.setBrandName2(form.getBrand2());
+			}
 			if(StringUtil.isNotEmpty(form.getAddress()))
 			{
 				user.setAddress(form.getAddress());

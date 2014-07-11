@@ -163,6 +163,27 @@ public class CommonController extends BaseController{
             e.printStackTrace();  
         }  
     }  
+	
+	@RequestMapping(value="/index")
+	public ModelAndView index(final HttpServletRequest request,final HttpServletResponse response)
+	{
+		ModelAndView mv = new ModelAndView("/common/index2");
+		
+		Result result = new Result();
+		
+		List<ItemEntity> items = commonService.getMainItems();
+		mv.addObject("items", items);
+		
+		List<ProductEntity> products = commonService.getMainProducts();
+		mv.addObject("products", products);
+		
+		result = commonService.getMainquestions();
+		mv.addObject("questions", result.get("questions"));
+		mv.addObject("answers", result.get("answers"));
+		
+		return mv;
+	}
+	
 	/**
 	 * 其他未识别的URL都统一到
 	 * @return
@@ -170,15 +191,15 @@ public class CommonController extends BaseController{
 	@RequestMapping(value="*")
 	public ModelAndView otherEnter(final HttpServletResponse response,@ModelAttribute("form")LoginForm form)
 	{
-		ModelAndView mv = new ModelAndView("/common/index");
+		ModelAndView mv = new ModelAndView("/common/index2");
 		
 		Result result = new Result();
 		
-		result = commonService.getMainagents();
-		mv.addObject("agents", result.get("agents"));
+		List<ItemEntity> items = commonService.getMainItems();
+		mv.addObject("items", items);
 		
-		result = commonService.getMaingoodcases();
-		mv.addObject("goodcases", result.get("goodcases"));
+		List<ProductEntity> products = commonService.getMainProducts();
+		mv.addObject("products", products);
 		
 		result = commonService.getMainquestions();
 		mv.addObject("questions", result.get("questions"));
@@ -191,15 +212,15 @@ public class CommonController extends BaseController{
 	@RequestMapping(value="/*/*")
 	public ModelAndView level2Enter(final HttpServletResponse response,@ModelAttribute("form")LoginForm form)
 	{
-		ModelAndView mv = new ModelAndView("/common/index");
+		ModelAndView mv = new ModelAndView("/common/index2");
 		
 		Result result = new Result();
 		
-		result = commonService.getMainagents();
-		mv.addObject("agents", result.get("agents"));
+		List<ItemEntity> items = commonService.getMainItems();
+		mv.addObject("items", items);
 		
-		result = commonService.getMaingoodcases();
-		mv.addObject("goodcases", result.get("goodcases"));
+		List<ProductEntity> products = commonService.getMainProducts();
+		mv.addObject("products", products);
 		
 		result = commonService.getMainquestions();
 		mv.addObject("questions", result.get("questions"));
@@ -211,15 +232,15 @@ public class CommonController extends BaseController{
 	@RequestMapping(value="/*/*/*")
 	public ModelAndView level3Enter(final HttpServletResponse response,@ModelAttribute("form")LoginForm form)
 	{
-		ModelAndView mv = new ModelAndView("/common/index");
+		ModelAndView mv = new ModelAndView("/common/index2");
 		
 		Result result = new Result();
 		
-		result = commonService.getMainagents();
-		mv.addObject("agents", result.get("agents"));
+		List<ItemEntity> items = commonService.getMainItems();
+		mv.addObject("items", items);
 		
-		result = commonService.getMaingoodcases();
-		mv.addObject("goodcases", result.get("goodcases"));
+		List<ProductEntity> products = commonService.getMainProducts();
+		mv.addObject("products", products);
 		
 		result = commonService.getMainquestions();
 		mv.addObject("questions", result.get("questions"));
@@ -308,26 +329,6 @@ public class CommonController extends BaseController{
 	public ModelAndView browser(final HttpServletResponse response)
 	{
 		ModelAndView mv = new ModelAndView("/common/browser");
-		
-		return mv;
-	}
-	
-	@RequestMapping(value="/index")
-	public ModelAndView index(final HttpServletRequest request,final HttpServletResponse response)
-	{
-		ModelAndView mv = new ModelAndView("/common/index");
-		
-		Result result = new Result();
-		
-		result = commonService.getMainagents();
-		mv.addObject("agents", result.get("agents"));
-		
-		result = commonService.getMaingoodcases();
-		mv.addObject("goodcases", result.get("goodcases"));
-		
-		result = commonService.getMainquestions();
-		mv.addObject("questions", result.get("questions"));
-		mv.addObject("answers", result.get("answers"));
 		
 		return mv;
 	}
@@ -843,6 +844,239 @@ public class CommonController extends BaseController{
 		return mv;		
 	}
 	
+	@RequestMapping(value = "/membership_handler")
+	public ModelAndView membership_handler(final HttpServletRequest request,final HttpServletResponse response, Model model)
+	{
+		ModelAndView mv = new ModelAndView("/common/purchase_handler");
+
+		Account account = (Account) WebUtils.getSessionAttribute(request, "account");
+		
+		//支付类型
+		String payment_type = "1";
+		//必填，不能修改
+		//服务器异步通知页面路径
+		String notify_url = "http://www.daoshifu.com/notify_url";
+		//需http://格式的完整路径，不能加?id=123这类自定义参数
+
+		//页面跳转同步通知页面路径
+		String return_url = "http://www.daoshifu.com/purchase_return";
+		//需http://格式的完整路径，不能加?id=123这类自定义参数，不能写成http://localhost/
+
+		//卖家支付宝帐户
+		String seller_email = new String("salyncious@aliyun.com");
+		//必填
+
+		OrderEntity order = new OrderEntity();
+		order.setItemAddr("http://www.daoshifu.com/membership");
+		if(Integer.parseInt(request.getParameter("mid")) == 1)
+		{
+			order.setItemid(1);
+		}
+		else
+		{
+			order.setItemid(2);
+		}
+		order.setPrice(Double.parseDouble(request.getParameter("price")));
+		order.setState(1);
+		order.setUserid(account.getUserId());
+		order.setAddressid(1);
+		order.setQuantity(1);
+		int id = commonService.insertOrder(order);
+		//商户订单号
+		String out_trade_no = "DSF" + String.valueOf(id);
+		//商户网站订单系统中唯一订单号，必填
+
+		//订单名称
+		String subject = new String("会员年费");
+		//必填
+
+		//付款金额
+		//String price = new String("0.01");
+		String price = new String(request.getParameter("price"));
+		//必填
+
+		//商品数量
+		String quantity = "1";
+		//必填，建议默认为1，不改变值，把一次交易看成是一次下订单而非购买一件商品
+		//物流费用
+		String logistics_fee = "0.00";
+		//必填，即运费
+		//物流类型
+		String logistics_type = "EXPRESS";
+		//必填，三个值可选：EXPRESS（快递）、POST（平邮）、EMS（EMS）
+		//物流支付方式
+		String logistics_payment = "SELLER_PAY";
+		//必填，两个值可选：SELLER_PAY（卖家承担运费）、BUYER_PAY（买家承担运费）
+		//订单描述
+
+		String body = new String("no description");
+		//商品展示地址
+		String show_url = new String("http://www.daoshifu.com/membership");
+		//需以http://开头的完整路径，如：http://www.xxx.com/myorder.html
+
+		//收货人姓名
+		String receive_name = new String(account.getUserName());
+		//如：张三
+
+		//收货人地址
+		String receive_address = new String("");
+		//如：XX省XXX市XXX区XXX路XXX小区XXX栋XXX单元XXX号
+
+		//收货人邮编
+		String receive_zip = new String("");
+		//如：123456
+
+		//收货人电话号码
+		String receive_phone = new String("");
+		//如：0571-88158090
+
+		//收货人手机号码
+		String receive_mobile = new String("");
+		//如：13312341234
+		
+		
+		//////////////////////////////////////////////////////////////////////////////////
+		
+		//把请求参数打包成数组
+		Map<String, String> sParaTemp = new HashMap<String, String>();
+		sParaTemp.put("service", "create_partner_trade_by_buyer");
+        sParaTemp.put("partner", AlipayConfig.partner);
+        sParaTemp.put("_input_charset", AlipayConfig.input_charset);
+		sParaTemp.put("payment_type", payment_type);
+		sParaTemp.put("notify_url", notify_url);
+		sParaTemp.put("return_url", return_url);
+		sParaTemp.put("seller_email", seller_email);
+		sParaTemp.put("out_trade_no", out_trade_no);
+		sParaTemp.put("subject", subject);
+		sParaTemp.put("price", price);
+		sParaTemp.put("quantity", quantity);
+		sParaTemp.put("logistics_fee", logistics_fee);
+		sParaTemp.put("logistics_type", logistics_type);
+		sParaTemp.put("logistics_payment", logistics_payment);
+		sParaTemp.put("body", body);
+		sParaTemp.put("show_url", show_url);
+		sParaTemp.put("receive_name", receive_name);
+		sParaTemp.put("receive_address", receive_address);
+		sParaTemp.put("receive_zip", receive_zip);
+		sParaTemp.put("receive_phone", receive_phone);
+		sParaTemp.put("receive_mobile", receive_mobile);
+		 
+		//建立请求
+		String sHtmlText = AlipaySubmit.buildRequest(sParaTemp,"get","确认");
+		model.addAttribute(sHtmlText);
+		mv.addObject("alipay",sHtmlText);
+		return mv;		
+	}
+	
+	@RequestMapping(value = "/membership_handler/{id}")
+	public ModelAndView membership_handler(final HttpServletRequest request,final HttpServletResponse response, @PathVariable String id, Model model)
+	{
+		ModelAndView mv = new ModelAndView("/common/purchase_handler");
+		int orderid = Integer.parseInt(id);
+		Account account = (Account) WebUtils.getSessionAttribute(request, "account");
+		
+		//支付类型
+		String payment_type = "1";
+		//必填，不能修改
+		//服务器异步通知页面路径
+		String notify_url = "http://www.daoshifu.com/notify_url";
+		//需http://格式的完整路径，不能加?id=123这类自定义参数
+
+		//页面跳转同步通知页面路径
+		String return_url = "http://www.daoshifu.com/purchase_return";
+		//需http://格式的完整路径，不能加?id=123这类自定义参数，不能写成http://localhost/
+
+		//卖家支付宝帐户
+		String seller_email = new String("salyncious@aliyun.com");
+		//必填
+
+		OrderEntity order = commonService.getOrder(orderid);
+		//商户订单号
+		String out_trade_no = "DSF" + String.valueOf(order.getId());
+		//商户网站订单系统中唯一订单号，必填
+
+		//订单名称
+		String subject = new String("会员年费");
+		//必填
+
+		//付款金额
+		//String price = new String("0.01");
+		String price = String.valueOf(order.getPrice());
+		//必填
+
+		//商品数量
+		String quantity = "1";
+		//必填，建议默认为1，不改变值，把一次交易看成是一次下订单而非购买一件商品
+		//物流费用
+		String logistics_fee = "0.00";
+		//必填，即运费
+		//物流类型
+		String logistics_type = "EXPRESS";
+		//必填，三个值可选：EXPRESS（快递）、POST（平邮）、EMS（EMS）
+		//物流支付方式
+		String logistics_payment = "SELLER_PAY";
+		//必填，两个值可选：SELLER_PAY（卖家承担运费）、BUYER_PAY（买家承担运费）
+		//订单描述
+
+		String body = new String("no description");
+		//商品展示地址
+		String show_url = new String("http://www.daoshifu.com/membership");
+		//需以http://开头的完整路径，如：http://www.xxx.com/myorder.html
+
+		//收货人姓名
+		String receive_name = new String(account.getUserName());
+		//如：张三
+
+		//收货人地址
+		String receive_address = new String("");
+		//如：XX省XXX市XXX区XXX路XXX小区XXX栋XXX单元XXX号
+
+		//收货人邮编
+		String receive_zip = new String("");
+		//如：123456
+
+		//收货人电话号码
+		String receive_phone = new String("");
+		//如：0571-88158090
+
+		//收货人手机号码
+		String receive_mobile = new String("");
+		//如：13312341234
+		
+		
+		//////////////////////////////////////////////////////////////////////////////////
+		
+		//把请求参数打包成数组
+		Map<String, String> sParaTemp = new HashMap<String, String>();
+		sParaTemp.put("service", "create_partner_trade_by_buyer");
+        sParaTemp.put("partner", AlipayConfig.partner);
+        sParaTemp.put("_input_charset", AlipayConfig.input_charset);
+		sParaTemp.put("payment_type", payment_type);
+		sParaTemp.put("notify_url", notify_url);
+		sParaTemp.put("return_url", return_url);
+		sParaTemp.put("seller_email", seller_email);
+		sParaTemp.put("out_trade_no", out_trade_no);
+		sParaTemp.put("subject", subject);
+		sParaTemp.put("price", price);
+		sParaTemp.put("quantity", quantity);
+		sParaTemp.put("logistics_fee", logistics_fee);
+		sParaTemp.put("logistics_type", logistics_type);
+		sParaTemp.put("logistics_payment", logistics_payment);
+		sParaTemp.put("body", body);
+		sParaTemp.put("show_url", show_url);
+		sParaTemp.put("receive_name", receive_name);
+		sParaTemp.put("receive_address", receive_address);
+		sParaTemp.put("receive_zip", receive_zip);
+		sParaTemp.put("receive_phone", receive_phone);
+		sParaTemp.put("receive_mobile", receive_mobile);
+		 
+		//建立请求
+		String sHtmlText = AlipaySubmit.buildRequest(sParaTemp,"get","确认");
+		model.addAttribute(sHtmlText);
+		mv.addObject("alipay",sHtmlText);
+		return mv;		
+	}
+	
 	@RequestMapping(value = "/cancelorder/{id}")
 	public void cancelorder(final HttpServletRequest request,final HttpServletResponse response, @PathVariable String id,Model model)
 	{
@@ -1296,8 +1530,40 @@ public class CommonController extends BaseController{
 	}
 	
 	@RequestMapping(value="/paymembership")
-	public ModelAndView paymembership(HttpServletRequest request, HttpServletResponse response) {
+	public void paymembership(HttpServletRequest request, HttpServletResponse response) {
 		ModelAndView view = new ModelAndView("common/paymembership");
+		int mid = Integer.parseInt(request.getParameter("mid"));
+		Account account = (Account) WebUtils.getSessionAttribute(request, "account");
+		if(account == null)
+		{
+			JsonUtil.checkAuthStatus(response, 1);
+		}
+		else
+		{
+			if(account.isLogin())
+			{
+				if((account.getAuthority() == 3 && mid == 1) || (account.getAuthority() == 4) )
+				{
+					JsonUtil.checkAnswerStatus(response, 2);
+				}
+				if(mid == 1)
+				{
+					JsonUtil.checkAnswerStatus(response, 3);
+				}
+				else
+				{
+					JsonUtil.checkAnswerStatus(response, 4);
+				}
+			}
+		}
+	}
+	
+	@RequestMapping(value="/paymembership/{id}")
+	public ModelAndView paymembership(HttpServletRequest request, HttpServletResponse response, @PathVariable String id) {
+		ModelAndView view = new ModelAndView("common/paymembership");
+		int mid = Integer.parseInt(id);
+		view.addObject("mid",mid);
 		return view;
 	}
+
 }

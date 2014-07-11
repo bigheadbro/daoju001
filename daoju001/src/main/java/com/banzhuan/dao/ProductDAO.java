@@ -25,7 +25,7 @@ public interface ProductDAO {
 	
 	List<ProductEntity> getAllProductsByType(ProductEntity Product, RowBounds bound);
 	
-	List<ProductEntity> getMainProductsByType();
+	List<ProductEntity> getMainProducts();
 	
 	int getProductCountByType(ProductEntity Product);
 	

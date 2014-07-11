@@ -51,12 +51,33 @@ $(function() {
 			}
 		});
 	}
+	
+	var order = parseInt($('input[name="order"]').val());
+	if( order != 0 )
+	{
+		$(".item-list-wrapper .header a").each(function(){
+			$(this).removeClass("current");
+		});
+		if(order == 1){
+			$(".item-list-wrapper .header a.price").addClass("current");
+		}
+		if(order == 2){
+			$(".item-list-wrapper .header a.time").addClass("current");
+		}
+	}
+	
+	$(".item-list-wrapper .header a").click(function(){
+		var value = $(this).attr("order");
+		$(this).parent().children("input").val(value);
+		$(this).trigger('change');
+	});
 });
 </script>
 <div class="item-content-container clearfix">
+	<form  id="form_items" method="post" action="/items">
     <div class="item-filter-wrapper">
     	<h2>特价刀具分类</h2>
-		<form  id="form_items" method="post" action="/items">
+		
     	<ul class="filter">
     		<li class="clearfix">
     			<div class="title">
@@ -123,19 +144,14 @@ $(function() {
     			</div>
     		</li>
     	</ul>
-		<script>
-			$(function(){
-				$(".content a").change(function(){
-					$("#form_items").submit();//提交
-					$("#form_items")[0].reset();
-				});
-			});
-		</script>
-		</form>
     </div>
 	<div class="item-list-wrapper">
 		<div class="header">
-			排序：<a>价格</a><a>上架时间</a>
+			排序：
+			#springBind("form.order")
+            <input type="hidden" name="${status.expression}"  value="$!{status.value}" />
+			<a class="price" order="1">价格</a>
+			<a class="time" order="2">上架时间</a>
 		</div>
 		<div class="item-list clearfix">
 			#foreach( $item in $items )
@@ -158,4 +174,18 @@ $(function() {
 			#end
 		</div>
 	</div>
+	</form>
+	<script>
+		$(function(){
+			$(".item-list-wrapper a").change(function(){
+				$("#form_items").submit();//提交
+				$("#form_items")[0].reset();
+			});
+
+			$(".content a").change(function(){
+				$("#form_items").submit();//提交
+				$("#form_items")[0].reset();
+			});
+		});
+	</script>
 </div>

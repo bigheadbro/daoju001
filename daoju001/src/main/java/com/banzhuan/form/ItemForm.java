@@ -18,6 +18,8 @@ public class ItemForm implements Serializable {
 	private String material;
 	
 	private String workmaterial;
+	
+	private int order;//1是价格升序，2是时间降序
 
 	/**
 	 * @return the type
@@ -87,6 +89,20 @@ public class ItemForm implements Serializable {
 	 */
 	public void setWorkmaterial(String workmaterial) {
 		this.workmaterial = workmaterial;
+	}
+
+	/**
+	 * @return the order
+	 */
+	public int getOrder() {
+		return order;
+	}
+
+	/**
+	 * @param order the order to set
+	 */
+	public void setOrder(int order) {
+		this.order = order;
 	}
 	
 }

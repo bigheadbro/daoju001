@@ -50,6 +50,7 @@
 		<id property="gmtCreate" column="gmt_create" />
 		<!--记录修改时间(最近登录时间) -->
 		<id property="gmtModified" column="gmt_modified" />
+		<id property="gmtAuth" column="gmt_auth" />
 		<id property="cntAnswer" column="cnt_answer" />
 		<id property="cntGc" column="cnt_gc" />
 		<id property="cntSample" column="cnt_sample" />
@@ -183,6 +184,7 @@
 	      <if test="productlimit != null">productlimit=#{productlimit},</if>
 	      <if test="pca != null">pca=#{pca},</if>
 	      <if test="logo != null">logo=#{logo},</if>
+	      <if test="gmtAuth != null">gmt_auth=#{gmtAuth},</if>
 	   	  gmt_modified=now()
 		</set>
 	   where id=#{id}

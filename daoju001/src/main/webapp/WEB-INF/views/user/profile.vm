@@ -94,19 +94,30 @@
             </ul>
         </div>
 		<div class="listitem clearfix">
-			#springBind("form.brand")
-			<input type="hidden" id="brand" name="${status.expression}" value="${status.value}"/>
+			
             <ul class="user-info clearfix">
                 <li class="key">
 					主营刀具品牌
                 </li>
                 <li class="value">
-                    <a id="selbrand">
+					#springBind("form.brand")
+					<input type="hidden" class="brand1" name="${status.expression}" value="${status.value}"/>
+                    <a class="selbrand bid1" bid="1">
 						#if($!{status.value} != 0)
 							#springBind("form.brandName")
 							$!{status.value}
 						#else
-							选择刀具品牌
+							品牌1
+						#end
+					</a>
+					#springBind("form.brand2")
+					<input type="hidden" class="brand2" name="${status.expression}" value="${status.value}"/>
+                    <a class="selbrand bid2" bid="2" >
+						#if($!{status.value} != 0)
+							#springBind("form.brandName2")
+							$!{status.value}
+						#else
+							品牌2
 						#end
 					</a>
                 </li>

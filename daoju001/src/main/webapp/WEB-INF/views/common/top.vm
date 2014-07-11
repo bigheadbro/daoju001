@@ -3,114 +3,109 @@
 <script type="text/javascript">
   jQuery(function($) {
     $(document).ready( function() {
-      $('.main-head-container').stickUp();
+      $('.main-head-wrap').stickUp();
     });
   });
 </script>
-<div class="main-head-container">
-    <div class="main-head-content clearfix">
-        <div class="main-logo">
-            <a href="http://www.daoshifu.com"><img src="/img/logo.png" /></a>
-        </div>
-        <div class="nav">
-            <ul>
-				#if($!stringUtil.isContains($request.getServletPath(),"/index"))
-                <li class="current">
-                    <a href="/index">首页</a>
-                </li>
+<div class="main-head-wrap">
+    <div class="main-head-container2">
+    	<div class="main-head-content clearfix">
+        	<div class="welcome">
+        		欢迎来到刀师傅，
+				#if(!$!session.getAttribute("account"))  
+					请您<a href="/user/reg">注册</a>或<a href="/log">登录</a>
 				#else
-				<li>
-                    <a href="/index">首页</a>
-                </li>
+					${account.userName}. <a href="/user/logoff">退出</a>
 				#end
-				#if($!stringUtil.isContains($request.getServletPath(),"/questions") )
-                <li class="current">
-                    <a href="/questions">所有问题</a>
-                </li>
-				#else
-				<li>
-                    <a href="/questions">所有问题</a>
-                </li>
-				#end
-				#if($!stringUtil.isContains($request.getServletPath(),"/agents") )
-                <li class="current">
-                    <a href="/agents">代理商</a>
-                </li>
-				#else
-				<li>
-                    <a href="/agents">代理商</a>
-                </li>
-				#end
-				#if($!stringUtil.isContains($request.getServletPath(),"/articles"))
-                <li class="current">
-                    <a href="/articles">刀具文选</a>
-                </li>
-				#else
-				<li>
-                    <a href="/articles">刀具文选</a>
-                </li>
-				#end
-				#if($!stringUtil.isContains($request.getServletPath(),"/samples"))
-                <li class="current">
-                    <a href="samples">刀具样本</a>
-                </li>
-				#else
-				<li>
-                    <a href="/samples">刀具样本</a>
-                </li>
-				#end
-            </ul>
-        </div>
-        <div class="ask">
-            <a>提问</a>
-        </div>
-        <div class="login">
-            #if(!$!session.getAttribute("account"))  
-                <a class="auth-reg" href="">注册/登陆</a>
-                <ul class="top-dropdown-reg">
-                    <li>
-                        <a href="/log">登录</a>
+        	</div>
+    		<div class="right">
+        		<a href="/user/main">我的刀师傅</a>
+    			<a class="complain">网站建议</a>
+        	</div>
+    	</div>
+    </div>
+    <div class="main-head-container">
+        <div class="main-head-content clearfix">
+            <div class="main-logo">
+                <a href="http://www.daoshifu.com"><img src="/img/logo-blue.png" /></a>
+            </div>
+            <div class="nav">
+                <ul class="clearfix">
+    				#if($!stringUtil.isContains($request.getServletPath(),"/index"))
+                    <li class="current">
+                        <a href="/index">首页</a>
                     </li>
-                    <li>
-                        <a href="/user/reg">注册</a>
+    				#else
+    				<li>
+                        <a href="/index">首页</a>
                     </li>
+    				#end
+    				#if($!stringUtil.isContains($request.getServletPath(),"/items") )
+                    <li class="current">
+                        <a href="/items">刀具商城</a>
+                    </li>
+    				#else
+    				<li>
+                        <a href="/items">刀具商城</a>
+                    </li>
+    				#end
+    				#if($!stringUtil.isContains($request.getServletPath(),"/products") )
+                    <li class="current">
+                        <a href="/products">线上展会</a>
+                    </li>
+    				#else
+    				<li>
+                        <a href="/products">线上展会</a>
+                    </li>
+    				#end
+    				#if($!stringUtil.isContains($request.getServletPath(),"/questions"))
+                    <li class="current">
+                        <a href="/questions">刀具咨询</a>
+                    </li>
+    				#else
+    				<li>
+                        <a href="/questions">刀具咨询</a>
+                    </li>
+    				#end
+    				#if($!stringUtil.isContains($request.getServletPath(),"/agents"))
+                    <li class="current">
+                        <a href="/agents">代理商</a>
+                    </li>
+    				#else
+    				<li>
+                        <a href="/agents">代理商</a>
+                    </li>
+    				#end
+    				#if($!stringUtil.isContains($request.getServletPath(),"/articles") || $!stringUtil.isContains($request.getServletPath(),"/samples"))
+                    <li class="current ctinfo">
+                        <a>刀具资料</a>
+						<ul class="top-dropdown">
+                            <li>
+                                <a href="/samples">刀具样本</a>
+                            </li>
+                            <li>
+                                <a href="/articles">刀具小百科</a>
+                            </li>
+                        </ul>
+                    </li>
+    				#else
+    				<li class="ctinfo">
+                        <a>刀具资料</a>
+						<ul class="top-dropdown">
+                            <li>
+                                <a href="/samples">刀具样本</a>
+                            </li>
+                            <li>
+                                <a href="/articles">刀具小百科</a>
+                            </li>
+                        </ul>
+                    </li>
+    				#end
                 </ul>
-                　                      #else
-                <div class="top-user" href="/user/main">
-                    <div class="logo">
-                        <a href="#">
-                            #if($!{account.logo})
-                                <img src="/logo/$!{account.logo}"  />
-                            #else
-                                <img src="/img/avatar.png"  />
-                            #end
-                        </a>
-						
-                    </div>
-					<span class="name">${account.userName}</span>
-                </div>
-				#if($!{account.unreadMsgCount} > 0)
-					<a class="zg-noti-number zg-top" href="/user/mymsg">$!{account.unreadMsgCount}</a>
-				#end
-                <ul class="top-dropdown">
-                    <li>
-                        <a href="/user/main">我的刀师傅</a>
-                    </li>
-                    <li>
-                        <a href="/user/mymsg">消息
-							#if($!{account.unreadMsgCount} > 0)
-                                <span class="zg-noti-number">$!{account.unreadMsgCount}</span>
-                            #end
-						</a>
-                    </li>
-                    <li>
-                        <a href="/user/profile">设置</a>
-                    </li>
-                    <li>
-                        <a href="/user/logoff">退出</a>
-                    </li>
-                </ul>
-            #end		
+            </div>
+    		<h4 class="phone">
+    			客服热线 4000-421-145
+    		</h4>
         </div>
     </div>
 </div>

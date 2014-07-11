@@ -28,7 +28,8 @@ public class ItemEntity implements Serializable {
 	
 	private int limitq;
 	private int quantity;
-	// 
+	
+	private int order;
 	private String gmtCreate;
 	// 
 	private String gmtModify;
@@ -212,5 +213,17 @@ public class ItemEntity implements Serializable {
 	 */
 	public void setQuantity(int quantity) {
 		this.quantity = quantity;
+	}
+	/**
+	 * @return the order
+	 */
+	public int getOrder() {
+		return order;
+	}
+	/**
+	 * @param order the order to set
+	 */
+	public void setOrder(int order) {
+		this.order = order;
 	}
    }

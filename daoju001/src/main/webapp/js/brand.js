@@ -1,14 +1,21 @@
 var brandshow = false;
+var bid = 0;
 $(function() {
 	$(".close-brand").on("click", function() {
 		hidebrand();
 	});
-    $("#selbrand").click(function(){
+    $(".selbrand").click(function(){
     	showbrand();
+    	bid = parseInt($(this).attr("bid"));
     });
     $("a.brand-item").click(function(){
-    	$("#brand").val($(this).attr("key"));
-    	$("#selbrand").text($(this).children(".name").text());
+    	if(bid == 1){
+	    	$(".brand1").val($(this).attr("key"));
+	    	$(".bid1").text($(this).children(".name").text());
+    	}else{
+    		$(".brand2").val($(this).attr("key"));
+	    	$(".bid2").text($(this).children(".name").text());
+    	}
     	hidebrand();
     });
 });

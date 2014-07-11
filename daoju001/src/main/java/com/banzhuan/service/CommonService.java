@@ -561,6 +561,17 @@ public class CommonService {
 		return addressDAO.queryAddressById(id);
 	}
 	
+	public List<ItemEntity> getMainItems()
+	{
+		return itemDAO.getMainItems();
+	}
+	
+	public List<ProductEntity> getMainProducts()
+	{
+		return productDAO.getMainProducts();
+	}
+	
+	
 	public List<ItemEntity> getItems(ItemForm form, ItemEntity item)
 	{
 		if(StringUtil.isNotEmpty(form.getType()))
@@ -623,6 +634,11 @@ public class CommonService {
 			}
 		}
 
+		if(form.getOrder() != 0)
+		{
+			item.setOrder(form.getOrder());
+		}
+		
 		return itemDAO.getAllItemsByType(item);
 	}
 	

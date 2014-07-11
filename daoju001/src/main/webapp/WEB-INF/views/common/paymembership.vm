@@ -4,8 +4,29 @@
 	<div class="member-content">
 		<ul class="info">
 			<li class="first clearfix">
-				<span class="key">刀师傅账号：</span><span class="value">${account.username}</span>
+				<span class="key">刀师傅账号：</span><span class="value">${account.userName}</span>
 			</li>
+			#if($mid == 1)
+			<li class="clearfix">
+				<span class="key">当前等级：</span><span class="value">免费会员</span>
+				<span class="key">会员有效期：</span><span class="value">通过审核之日起之后一年</span>
+			</li>
+			<li class="clearfix">
+				<span class="key">您现在申请的是：</span><span class="value"><b class="yellow">认证会员</b></span>
+				<span class="key">认证会员费用：</span><span class="value">200元/年</span>
+			</li>
+			<li class="clearfix">
+				<span class="key">认证会员的特权：</span>
+				<span class="value">
+					<ul class="member-detail">
+						<li><b>4</b>个线上展位</li>
+    					<li>可在刀具咨询中提供<b>专业方案</b></li>
+    					<li>可以参加<b class="green">微信推送</b>(副图文位置)</li>
+    					<li><b>付费参与邮件推广活动</b></li>
+					</ul>
+				</span>
+			</li>
+			#else
 			<li class="clearfix">
 				<span class="key">当前等级：</span><span class="value">免费会员</span>
 				<span class="key">会员有效期：</span><span class="value">通过审核之日起之后一年</span>
@@ -26,6 +47,7 @@
 					</ul>
 				</span>
 			</li>
+			#end
 			<li class="clearfix">
 				<span class="key">申请流程：</span>
 				<div class="apply-state">
@@ -49,10 +71,27 @@
 			<li class="clearfix">
 				<span class="key">费用：</span>
 				<span class="buy clearfix">
+					<form id="form_member" method="post" action="/membership_handler">
+					#if($mid == 1)
+					<h4><b class="yellow">200</b>元</h4>
+					<input type="hidden" name="mid" value="1" />
+					<input type="hidden" name="price" value="200" />
+					#else
 					<h4><b class="yellow">1000</b>元</h4>
+					<input type="hidden" name="mid" value="2" />
+					<input type="hidden" name="price" value="1000" />
+					#end
+					</form>
 					<div class="pay-wrap clearfix">
         				<div class="left">
                 			<a id="submit_member">去付款</a>
+							<script>
+                            $(function() {	
+                        		$("#submit_member").click(function(){
+                            		$("#form_member").submit();
+                            	});
+                            });
+                            </script>
         				</div>
         				<div class="right clearfix">
         					<img src="/img/alipay.png" />

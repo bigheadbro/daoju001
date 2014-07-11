@@ -13,7 +13,7 @@ public interface ItemDAO {
 	
 	List<ItemEntity> getAllItemsByType(ItemEntity Item);
 
-	List<ItemEntity> getMainItemsByType();
+	List<ItemEntity> getMainItems();
 	
 	int getItemCountByType(ItemEntity Item);
 	

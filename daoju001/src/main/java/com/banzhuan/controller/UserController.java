@@ -889,7 +889,7 @@ public class UserController extends BaseController{
 			}
 			if(userService.getProductCount(account.getUserId()) >= account.getProductlimit())
 			{
-				errormsg = "您的账户最多上传" + String.valueOf(account.getProductlimit()) + "个特色刀具，如需要上传更多，请联系我们，400-042-1145";
+				errormsg = "您的账户最多上传" + String.valueOf(account.getProductlimit()) + "个特色刀具，如需要上传更多";
 			}
 			mv.addObject("errormsg",errormsg);
 			return mv;

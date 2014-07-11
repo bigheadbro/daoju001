@@ -1,17 +1,17 @@
 $(function() {
-	$(".login").hover(function() {
+	$(".ctinfo").hover(function() {
 		$(".top-user").css("background-color","#007298");
 		$(".top-dropdown").show();
 	});
-	$(".login").mouseleave(function() {
+	$(".ctinfo").mouseleave(function() {
 		$(".top-user").css("background-color","#0099cb");
 		$(".top-dropdown").hide();
 	});
-	$(".login").hover(function() {
-		$(".top-dropdown-reg").show();
+	$(".ctinfo").hover(function() {
+		$(".top-dropdown").show();
 		$(this).children(".auth-reg").css("background-color","#007298");
 	}).mouseleave(function() {
-		$(".top-dropdown-reg").hide();
+		$(".top-dropdown").hide();
 		$(this).children(".auth-reg").css("background-color","#0099cb");
 	});
 	$(".ask").click(function() {

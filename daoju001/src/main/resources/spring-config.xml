@@ -86,6 +86,8 @@
 			<mvc:mapping path="/user/myorder" />
 			<mvc:mapping path="/user/product/*" />
 			<mvc:mapping path="/user/order/*" />
+			<mvc:mapping path="/paymembership/*" />
+			<mvc:mapping path="/paymembership" />
    			<bean class="com.banzhuan.interceptor.UserLoginInterceptor" />
 		</mvc:interceptor>
 	</mvc:interceptors>

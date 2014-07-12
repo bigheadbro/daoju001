@@ -17,6 +17,7 @@
 			});
 			$(this).css("border", "2px solid #0099cb");
 			$(".photo img").attr("src", $(this).children("img").attr("src"));
+			$(".photo a").attr("href", $(this).children("img").attr("src"));
 		});
 		$("#minus").click(function(){
 			$("#itemQuantity").val($("#itemQuantity").val() - 10);

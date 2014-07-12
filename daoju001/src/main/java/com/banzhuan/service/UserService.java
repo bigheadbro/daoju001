@@ -461,12 +461,17 @@ public class UserService {
 
 		ProductEntity product = new ProductEntity();
 		product.setId(form.getPid());
+		product.setName(form.getName());
 		product.setIndustry(form.getIndustry());
 		product.setProcessMethod(form.getProcessMethod());
 		product.setWpHardness(form.getWpHardness());
 		product.setWpMaterial(form.getWpMaterial());
 		product.setPicture(form.getPicture());
 		product.setCover(form.getCover());
+		if(StringUtil.isEmpty(product.getCover()))
+    	{
+    		product.setCover(product.getPicture().split("[|]")[1]);
+    	}
 		String des = form.getDescription().replace("\n", "<br/>");
 		product.setDescription(des);
 		productDAO.updateProductById(product);
@@ -865,6 +870,10 @@ public class UserService {
 		if(StringUtil.isNotEmpty(product.getPicture()))
 		{
 			form.setPicture(product.getPicture());
+		}
+		if(StringUtil.isNotEmpty(product.getCover()))
+		{
+			form.setCover(product.getCover());
 		}
 		if(StringUtil.isNotEmpty(product.getDescription()))
 		{

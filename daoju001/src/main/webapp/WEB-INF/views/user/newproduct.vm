@@ -28,9 +28,6 @@
 					brandid:{
     					min:1
     				},
-					processMethod:{
-    					min:1
-    				},
 					description:{
     					required:true,
 						maxlength:1100
@@ -46,9 +43,6 @@
     				},
 					brandid:{
     					min:"请选择刀具品牌"
-    				},
-					processMethod:{
-    					min:"请选择加工方式"
     				},
 					description:{
     					required:"请输入详细介绍",
@@ -66,6 +60,12 @@
 			
             });  
 		    $("#submit_uploadproduct").click(function(){
+				if($("input[name='processMethod']").val() == 0){
+					$(".method-err").css("visibility","visible");
+					return;
+				}else{
+					$(".method-err").css("visibility","hidden");
+				}
           		$("#form_newproduct").submit();
           	});
 		});
@@ -130,174 +130,175 @@
     			</li>
     			<li class="value">
 					<div class="question-param-con">
-    				<div class="mi question-param clearfix">
-                        <div class="question-param-li process clearfix">
-							#springBind("productForm.processMethod")
-							<input type="hidden" name="${status.expression}"  value="$!{status.value}" />
-                            <a class="sel" >加工方式</a>
-                            <ul class="param">
-    							<li>
-                                    <a>不限</a>
-                                </li>
-                                <li>
-                                    <a>平面铣削</a>
-                                </li>
-                                <li>
-                                    <a>侧壁铣削</a>
-                                </li>
-            					<li>
-                                    <a>曲面铣削</a>
-                                </li>
-                                <li>
-                                    <a>铣槽</a>
-                                </li>
-            					<li>
-                                    <a>钻孔</a>
-                                </li>
-                                <li>
-                                    <a>镗孔</a>
-                                </li>
-            					<li>
-                                    <a>铰孔</a>
-                                </li>
-                                <li>
-                                    <a>螺纹铣削</a>
-                                </li>
-            					<li>
-                                    <a>车削(粗加工）</a>
-                                </li>
-								<li>
-                                    <a>车削(精加工）</a>
-                                </li>
-                                <li>
-                                    <a>车削(槽加工）</a>
-                                </li>
-            					<li>
-                                    <a>车削(螺纹加工）</a>
-                                </li>
-                                <li>
-                                    <a>去毛刺</a>
-                                </li>
-                            </ul>
+        				<div class="mi question-param clearfix">
+                            <div class="question-param-li process clearfix">
+    							#springBind("productForm.processMethod")
+    							<input type="hidden" name="${status.expression}"  value="$!{status.value}" />
+                                <a class="sel" >加工方式</a>
+                                <ul class="param">
+        							<li>
+                                        <a>不限</a>
+                                    </li>
+                                    <li>
+                                        <a>平面铣削</a>
+                                    </li>
+                                    <li>
+                                        <a>侧壁铣削</a>
+                                    </li>
+                					<li>
+                                        <a>曲面铣削</a>
+                                    </li>
+                                    <li>
+                                        <a>铣槽</a>
+                                    </li>
+                					<li>
+                                        <a>钻孔</a>
+                                    </li>
+                                    <li>
+                                        <a>镗孔</a>
+                                    </li>
+                					<li>
+                                        <a>铰孔</a>
+                                    </li>
+                                    <li>
+                                        <a>螺纹铣削</a>
+                                    </li>
+                					<li>
+                                        <a>车削(粗加工）</a>
+                                    </li>
+    								<li>
+                                        <a>车削(精加工）</a>
+                                    </li>
+                                    <li>
+                                        <a>车削(槽加工）</a>
+                                    </li>
+                					<li>
+                                        <a>车削(螺纹加工）</a>
+                                    </li>
+                                    <li>
+                                        <a>去毛刺</a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="question-param-li industry clearfix">
+                                #springBind("productForm.industry")
+                                <input type="hidden" name="${status.expression}"  value="$!{status.value}" />
+                                <a class="sel" >所属行业</a>
+                                <ul class="param">
+        							<li>
+                                        <a>不限</a>
+                                    </li>
+                                    <li>
+                                        <a>模具</a>
+                                    </li>
+                                    <li>
+                                        <a>船舶</a>
+                                    </li>
+                					<li>
+                                        <a>石油设备</a>
+                                    </li>
+                					<li>
+                                        <a>散热器/空调</a>
+                                    </li>
+                					<li>
+                                        <a>发电设备</a>
+                                    </li>
+                					<li>
+                                        <a>塑料机械</a>
+                                    </li>
+                					<li>
+                                        <a>内燃机</a>
+                                    </li>
+                					<li>
+                                        <a>大型机械设备</a>
+                                    </li>
+                					<li>
+                                        <a>汽车零件</a>
+                                    </li>
+                					<li>
+                                        <a>电子行业</a>
+                                    </li>
+                					<li>
+                                        <a>通用零件</a>
+                                    </li>
+                					<li>
+                                        <a>其它</a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="question-param-li hardness clearfix">
+                                #springBind("productForm.wpHardness")
+                                <input type="hidden" name="${status.expression}"  value="$!{status.value}" />
+                                <a class="sel" >工件硬度</a>
+                                <ul class="param">
+        							<li>
+                                        <a>不限</a>
+                                    </li>
+                                    <li>
+                                        <a>HRC20以下</a>
+                                    </li>
+                                    <li>
+                                        <a>HRC20-30</a>
+                                    </li>
+                					<li>
+                                        <a>HRC30-40</a>
+                                    </li>
+                                    <li>
+                                        <a>HRC40-50</a>
+                                    </li>
+                					<li>
+                                        <a>HRC50-58</a>
+                                    </li>
+                                    <li>
+                                        <a>HRC58-62</a>
+                                    </li>
+                					<li>
+                                        <a>HRC62-65</a>
+                                    </li>
+                                    <li>
+                                        <a>HRC65-68</a>
+                                    </li>
+                					<li>
+                                        <a>HRC68以上</a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="question-param-li material clearfix">
+            					#springBind("productForm.wpMaterial")
+                                <input type="hidden" name="${status.expression}"  value="$!{status.value}" />
+                                <a class="sel" >工件材质</a>
+                                <ul class="param">
+        							<li>
+                                        <a>不限</a>
+                                    </li>
+                                    <li>
+                                        <a>钢</a>
+                                    </li>
+                                    <li>
+                                        <a>铸铁</a>
+                                    </li>
+                					<li>
+                                        <a>不锈钢</a>
+                                    </li>
+                                    <li>
+                                        <a>高温合金</a>
+                                    </li>
+                					<li>
+                                        <a>铝</a>
+                                    </li>
+                                    <li>
+                                        <a>有色金属</a>
+                                    </li>
+                					<li>
+                                        <a>石墨</a>
+                                    </li>
+                                    <li>
+                                        <a>树脂</a>
+                                    </li>
+                                </ul>
+                            </div>
                         </div>
-                        <div class="question-param-li industry clearfix">
-                            #springBind("productForm.industry")
-                            <input type="hidden" name="${status.expression}"  value="$!{status.value}" />
-                            <a class="sel" >所属行业</a>
-                            <ul class="param">
-    							<li>
-                                    <a>不限</a>
-                                </li>
-                                <li>
-                                    <a>模具</a>
-                                </li>
-                                <li>
-                                    <a>船舶</a>
-                                </li>
-            					<li>
-                                    <a>石油设备</a>
-                                </li>
-            					<li>
-                                    <a>散热器/空调</a>
-                                </li>
-            					<li>
-                                    <a>发电设备</a>
-                                </li>
-            					<li>
-                                    <a>塑料机械</a>
-                                </li>
-            					<li>
-                                    <a>内燃机</a>
-                                </li>
-            					<li>
-                                    <a>大型机械设备</a>
-                                </li>
-            					<li>
-                                    <a>汽车零件</a>
-                                </li>
-            					<li>
-                                    <a>电子行业</a>
-                                </li>
-            					<li>
-                                    <a>通用零件</a>
-                                </li>
-            					<li>
-                                    <a>其它</a>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="question-param-li hardness clearfix">
-                            #springBind("productForm.wpHardness")
-                            <input type="hidden" name="${status.expression}"  value="$!{status.value}" />
-                            <a class="sel" >工件硬度</a>
-                            <ul class="param">
-    							<li>
-                                    <a>不限</a>
-                                </li>
-                                <li>
-                                    <a>HRC20以下</a>
-                                </li>
-                                <li>
-                                    <a>HRC20-30</a>
-                                </li>
-            					<li>
-                                    <a>HRC30-40</a>
-                                </li>
-                                <li>
-                                    <a>HRC40-50</a>
-                                </li>
-            					<li>
-                                    <a>HRC50-58</a>
-                                </li>
-                                <li>
-                                    <a>HRC58-62</a>
-                                </li>
-            					<li>
-                                    <a>HRC62-65</a>
-                                </li>
-                                <li>
-                                    <a>HRC65-68</a>
-                                </li>
-            					<li>
-                                    <a>HRC68以上</a>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="question-param-li material clearfix">
-        					#springBind("productForm.wpMaterial")
-                            <input type="hidden" name="${status.expression}"  value="$!{status.value}" />
-                            <a class="sel" >工件材质</a>
-                            <ul class="param">
-    							<li>
-                                    <a>不限</a>
-                                </li>
-                                <li>
-                                    <a>钢</a>
-                                </li>
-                                <li>
-                                    <a>铸铁</a>
-                                </li>
-            					<li>
-                                    <a>不锈钢</a>
-                                </li>
-                                <li>
-                                    <a>高温合金</a>
-                                </li>
-            					<li>
-                                    <a>铝</a>
-                                </li>
-                                <li>
-                                    <a>有色金属</a>
-                                </li>
-            					<li>
-                                    <a>石墨</a>
-                                </li>
-                                <li>
-                                    <a>树脂</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
+						<i class="method-err">请选择加工方式</i>
 					</div>
     			</li>
     		</ul>
@@ -415,10 +416,14 @@
 <script>
 	$(function(){
 		var pics = $("#product_pic").val().split('|');
-			
+		var cover = $("#productCover").val();
 		for(var pic in pics){
 			if(pics[pic] != ""){
-				$("#file_upload-queue").append('<div class="uploadify-queue-item"><img class="product-tn" src="/product/' + pics[pic] + '"><div class="buttons"><em class="del" href="">删除</em><label class="cover" for="'+ pics[pic] +'"><input origin="'+ pics[pic] +'" type="radio" id="'+ pics[pic] +'">设为封面</label></div></div>');
+				if(pics[pic] == cover){
+					$("#file_upload-queue").append('<div class="uploadify-queue-item"><img class="product-tn" src="/product/' + pics[pic] + '"><div class="buttons"><em class="del" href="">删除</em><label class="cover" for="'+ pics[pic] +'"><input origin="'+ pics[pic] +'" type="radio" checked id="'+ pics[pic] +'">设为封面</label></div></div>');
+				}else{
+					$("#file_upload-queue").append('<div class="uploadify-queue-item"><img class="product-tn" src="/product/' + pics[pic] + '"><div class="buttons"><em class="del" href="">删除</em><label class="cover" for="'+ pics[pic] +'"><input origin="'+ pics[pic] +'" type="radio" id="'+ pics[pic] +'">设为封面</label></div></div>');
+				}
 			}
 		}
 	});

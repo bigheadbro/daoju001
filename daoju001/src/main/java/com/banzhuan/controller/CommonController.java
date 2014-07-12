@@ -60,6 +60,7 @@ import com.banzhuan.entity.ItemEntity;
 import com.banzhuan.entity.OrderEntity;
 import com.banzhuan.entity.ProductEntity;
 import com.banzhuan.entity.ProfessionalAnswerEntity;
+import com.banzhuan.entity.QuestionEntity;
 import com.banzhuan.entity.SampleEntity;
 import com.banzhuan.entity.UserEntity;
 import com.banzhuan.form.AddressForm;
@@ -171,16 +172,28 @@ public class CommonController extends BaseController{
 		
 		Result result = new Result();
 		
-		List<ItemEntity> items = commonService.getMainItems();
+		List<ItemEntity> items = new ArrayList<ItemEntity>();
+		items.add(commonService.getItem(18));
+		items.add(commonService.getItem(20));
+		items.add(commonService.getItem(23));
+		items.add(commonService.getItem(24));
+		items.add(commonService.getItem(31));
+		items.add(commonService.getItem(34));
 		mv.addObject("items", items);
 		
-		List<ProductEntity> products = commonService.getMainProducts();
+		List<ProductEntity> products = new ArrayList<ProductEntity>();
+		products.add(commonService.getProduct(33));
+		products.add(commonService.getProduct(37));
+		products.add(commonService.getProduct(41));
+		products.add(commonService.getProduct(42));
 		mv.addObject("products", products);
 		
-		result = commonService.getMainquestions();
-		mv.addObject("questions", result.get("questions"));
-		mv.addObject("answers", result.get("answers"));
-		
+		List<QuestionEntity> questions = new ArrayList<QuestionEntity>();
+		questions.add(commonService.getQuestion(165));
+		questions.add(commonService.getQuestion(161));
+		questions.add(commonService.getQuestion(160));
+		mv.addObject("questions", questions);
+
 		return mv;
 	}
 	
@@ -431,9 +444,8 @@ public class CommonController extends BaseController{
 		}
 		
 		Result result = commonService.getAllproducts(form,new RowBounds((page-1)*Constant.ALL_PRODUCT_PAGE_SIZE, Constant.ALL_PRODUCT_PAGE_SIZE));
-		mv.addObject("questions", result.get("questions"));
-		List<ProductEntity> tmp = (List<ProductEntity>)result.get("products");
-		int total= tmp.size();
+
+		int total= commonService.getProductsCount();
 		int totalPage=0;
 		if(total % Constant.ALL_PRODUCT_PAGE_SIZE == 0)
 			totalPage=total/Constant.ALL_PRODUCT_PAGE_SIZE;

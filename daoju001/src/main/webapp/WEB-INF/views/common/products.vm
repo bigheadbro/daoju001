@@ -212,9 +212,10 @@
     							<span>$stringUtil.formatDate(${product.gmtCreate})</span>
             				</div>
             			</div>
-            		#end
+					#end
             	</div>
             </div>
+			#parse("/common/page.vm")
     	</div>
 		<div class="product-side">
     		<div class="product-side-items">

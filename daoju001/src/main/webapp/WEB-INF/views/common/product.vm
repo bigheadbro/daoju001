@@ -9,14 +9,19 @@
 			$(this).addClass("current");
 			$(".photo img").attr("src", $(this).children("img").attr("src"));
 		});
+		$(".fancybox-v").mouseenter(function(){
+			$("em.hover").show();
+		}).mouseleave(function(){
+			$("em.hover").hide();
+		});
     });
-	
     </script>
 	<div class="product-wrap clearfix">
     	<div class="product-info clearfix">
     		<div class="image">
     			<div class="photo">
-    				<img src="/product/${product.cover}" />
+    				<a class="fancybox-v" href="/product/${product.cover}"><img src="/product/${product.cover}" /></a>
+					<em class="hover">点击放大</em>
     			</div>
     			<div class="list">
     				#foreach($pic in $pictures)

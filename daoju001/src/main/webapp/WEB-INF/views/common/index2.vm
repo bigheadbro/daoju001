@@ -105,40 +105,45 @@ $(function() {
             </div>
     	</div>
 	</div>
-	<div class="main-questions">
-		<div class="head">
-			&nbsp;<span><a class="green" href="/user/newquestion">我也要提问</a> | <a href="/questions">更多</a></span>
-		</div>
-		<div class="content">
-			#foreach($question in $questions)
-			<div class="question-item clearfix">
-				<div class="hidden">$!{question.content}</div>
-				<div class="logo">
-					<a href="/users/$!{question.buyerId}">
-						#if($!{question.userLogo})
-							<img src="/logo/$!{question.userLogo}" />
-						#else
-							<img src="/img/avatar.png" />
-						#end
-					</a>
-				</div>
-				<div class="info">
-					<ul>
-						<li class="name"><a href="/users/$!{question.buyerId}">$!{question.userName}</a></li>
-						<li class="title clearfix">
-							提问
-						</li>
-						<li class="text clearfix">
-							<p></p>
-						</li>
-						<li class="operation">
-							<p><em>$!{question.cntPA}个方案</em><span>$stringUtil.formatDate($!{question.gmtCreate}) <a href="/questions/$!{question.id}">查看详情</a> </span> </p>
-						</li>
-					</ul>
-				</div>
-			</div>
-			#end
-		</div>
+	<div class="main-side">
+    	<div class="main-questions">
+    		<div class="head">
+    			&nbsp;<span><a class="green" href="/user/newquestion">我也要提问</a> | <a href="/questions">更多</a></span>
+    		</div>
+    		<div class="content">
+    			#foreach($question in $questions)
+    			<div class="question-item clearfix">
+    				<div class="hidden">$!{question.content}</div>
+    				<div class="logo">
+    					<a href="/users/$!{question.buyerId}">
+    						#if($!{question.userLogo})
+    							<img src="/logo/$!{question.userLogo}" />
+    						#else
+    							<img src="/img/avatar.png" />
+    						#end
+    					</a>
+    				</div>
+    				<div class="info">
+    					<ul>
+    						<li class="name"><a href="/users/$!{question.buyerId}">$!{question.userName}</a></li>
+    						<li class="title clearfix">
+    							提问
+    						</li>
+    						<li class="text clearfix">
+    							<p></p>
+    						</li>
+    						<li class="operation">
+    							<p><em>$!{question.cntPA}个方案</em><span>$stringUtil.formatDate($!{question.gmtCreate}) <a href="/questions/$!{question.id}">查看详情</a> </span> </p>
+    						</li>
+    					</ul>
+    				</div>
+    			</div>
+    			#end
+    		</div>
+    	</div>
+		<div class="advert">
+    		<a href="/articles"><img src="/img/wiki.jpg" /></a>
+    	</div>
 	</div>
 </div>
 #parse("/common/card.vm")

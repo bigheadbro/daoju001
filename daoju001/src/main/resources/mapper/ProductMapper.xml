@@ -145,7 +145,7 @@
 	
 	<select id="getMainProducts" parameterType="ProductEntity"
 			resultMap="ProductResultMap">
-		SELECT * from t_Product t order by gmt_create desc limit 4
+		SELECT * from t_Product t where state = 1 order by gmt_create desc limit 4
 	</select>
 	
 </mapper>

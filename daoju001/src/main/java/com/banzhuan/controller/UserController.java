@@ -890,13 +890,16 @@ public class UserController extends BaseController{
 			}
 			UserEntity user = (UserEntity)userService.getUserEntity(account.getUserId()).get("user");
 			int errormsg = 0;
-			if(!userService.isPersonalInfoGood(user))
+			if(form.getIsEdit() == 0)
 			{
-				errormsg = 1;
-			}
-			if(userService.getProductCount(account.getUserId()) >= account.getProductlimit())
-			{
-				errormsg = account.getProductlimit();
+				if(!userService.isPersonalInfoGood(user))
+				{
+					errormsg = 1;
+				}
+				if(userService.getProductCount(account.getUserId()) >= account.getProductlimit())
+				{
+					errormsg = account.getProductlimit();
+				}
 			}
 			mv.addObject("errormsg",errormsg);
 			return mv;

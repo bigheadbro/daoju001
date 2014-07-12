@@ -640,7 +640,7 @@ public class StringUtil {
 		brandMap.put(53, "世邦,世邦.jpg,台湾");
 		brandMap.put(54, "田野井,田野井.png,日本");
 		brandMap.put(55, "布鲁克纳,bruckner.jpg,德国");
-		brandMap.put(56, "杜海尔,duhaier.jpg,德国");
+		brandMap.put(56, "杜梅尔,duhaier.jpg,德国");
 		brandMap.put(100, "其他,otherbrand.jpg,其他");
 		
 		brandMap.put(10000, "刀师傅,刀师傅.jpg,中国");

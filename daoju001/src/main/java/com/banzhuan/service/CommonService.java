@@ -295,6 +295,11 @@ public class CommonService {
 		return result;
 	}
 	
+	public int getProductsCount()
+	{
+		ProductEntity product = new ProductEntity();
+		return productDAO.getProductCountByType(product);
+	}
 	public Map<Integer,Map<Integer,List<UserEntity>>> getAllAgents()
 	{
 		List<UserEntity> agents = userDAO.getUsersByAuth(4);
@@ -685,5 +690,10 @@ public class CommonService {
 	public UserEntity getUser(int id)
 	{
 		return userDAO.queryUserEntityById(id);
+	}
+	
+	public QuestionEntity getQuestion(int id)
+	{
+		return questionDAO.queryQuestionEntityById(id);
 	}
 }

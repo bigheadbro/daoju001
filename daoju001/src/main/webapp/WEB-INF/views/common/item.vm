@@ -30,6 +30,11 @@
 				$("#itemQuantity").val(limit);
 			}
 		});
+		$(".fancybox-v").mouseenter(function(){
+			$("em.hover").show();
+		}).mouseleave(function(){
+			$("em.hover").hide();
+		});
     });
 	
     </script>
@@ -41,7 +46,8 @@
 	<div class="item-detail clearfix">
 		<div class="image">
 			<div class="photo">
-				<img src="/item/${item.cover}" />
+				<a class="fancybox-v" href="/item/${item.cover}"><img src="/item/${item.cover}" /></a>
+				<em class="hover">点击放大</em>
 			</div>
 			<div class="list">
 				#foreach($pic in $pictures)

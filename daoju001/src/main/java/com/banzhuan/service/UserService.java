@@ -435,7 +435,7 @@ public class UserService {
     	{
     		product.setCover(form.getCover());
     	}
-    	if(StringUtil.isEmpty(product.getCover()))
+    	else
     	{
     		product.setCover(form.getPicture().split("[|]")[1]);
     	}

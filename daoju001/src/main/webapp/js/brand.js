@@ -4,6 +4,9 @@ $(function() {
 	$(".close-brand").on("click", function() {
 		hidebrand();
 	});
+	$("#selbrand").click(function(){
+    	showbrand();
+    });
     $(".selbrand").click(function(){
     	showbrand();
     	bid = parseInt($(this).attr("bid"));
@@ -16,6 +19,8 @@ $(function() {
     		$(".brand2").val($(this).attr("key"));
 	    	$(".bid2").text($(this).children(".name").text());
     	}
+    	$("#brand").val($(this).attr("key"));
+    	$("#selbrand").text($(this).children(".name").text());
     	hidebrand();
     });
 });

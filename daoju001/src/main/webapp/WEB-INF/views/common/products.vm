@@ -8,7 +8,7 @@
     		<div class="head clearfix">
     			<h1>线上展会</h1>
     			<div class="more">
-    				<a href="/user/newproduct">上传免费展位</a>
+    				<a href="/user/newproduct">免费发布新品</a>
     				<p>免费发布，直接沟通,打造刀具界O2O平台</p>
     			</div>
     		</div>
@@ -49,6 +49,9 @@
                             </li>
         					<li>
                                 <a>车削(粗加工）</a>
+                            </li>
+							<li>
+                                <a>车削(精加工）</a>
                             </li>
                             <li>
                                 <a>车削(槽加工）</a>
@@ -213,11 +216,25 @@
             	</div>
             </div>
     	</div>
-    	<div class="product-side">
+		<div class="product-side">
+    		<div class="product-side-items">
+        		#foreach($item in $items)
+    				#if($velocityCount < 5)
+    					<div class="item clearfix">
+    						<div class="left">
+    							<a href="/item/${item.id}"><img src="/item/${item.cover}" /></a>
+    						</div>
+    						<div class="right">
+    							<a href="/item/${item.id}">${item.brand}${item.type}${item.version} ${item.material}</a>
+    							<p><span>￥${item.price}0 </span><em>包邮</em></p>
+    						</div>
+    					</div>
+    				#end
+    			#end
+        	</div>
     		<div class="advert">
-    		</div>
-			<div class="advert">
-    		</div>
-    	</div>
+        		<a href="/items"><img src="/img/ctshop.png" /></a>
+        	</div>
+		</div>
 	</div>
 </div>

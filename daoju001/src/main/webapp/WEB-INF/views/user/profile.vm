@@ -25,12 +25,24 @@
 					rules:{
 						nick:{
 							required:true
-						}
+						},
+        				contactPhone:{
+        					number:true
+        				},
+        				contactQQ:{
+        					number:true
+        				}
 					},
 					messages:{
 						nick:{
 							required:"请输入昵称"
-						}
+						},
+        				contactPhone:{
+        					number:"只能包含数字"
+        				},
+        				contactQQ:{
+        					number:"只能包含数字"
+        				}
 					},
 					errorElement:"em",
 					submitHandler: function(form) {

@@ -28,6 +28,9 @@
 					brandid:{
     					min:1
     				},
+					processMethod:{
+    					min:1
+    				},
 					description:{
     					required:true,
 						maxlength:1100
@@ -43,6 +46,9 @@
     				},
 					brandid:{
     					min:"请选择刀具品牌"
+    				},
+					processMethod:{
+    					min:"请选择加工方式"
     				},
 					description:{
     					required:"请输入详细介绍",
@@ -76,9 +82,13 @@
         <input type="hidden" name="${status.expression}" value="$!{status.value}" id="isEdit" />
 		#springBind("productForm.cover")
         <input type="hidden" name="${status.expression}" value="$!{status.value}" id="productCover" />
-		#if($errormsg)
+		#if($errormsg > 0)
 		<div class="error-msg-np">
-			$errormsg，<a href="/membership">请升级账户</a>
+			#if($errormsg == 1)
+				上传特色刀具前，请先完善您的个人信息，<a href="/user/profile">完善资料</a>
+			#else
+				您的账户最多上传$errormsg个特色刀具，如需要上传更多，<a href="/membership">请升级账户</a>
+			#end
     	</div>
 		#end
         #springBind("productForm.name")
@@ -123,7 +133,7 @@
     				<div class="mi question-param clearfix">
                         <div class="question-param-li process clearfix">
 							#springBind("productForm.processMethod")
-                            <input type="hidden" name="${status.expression}"  value="$!{status.value}" />
+							<input type="hidden" name="${status.expression}"  value="$!{status.value}" />
                             <a class="sel" >加工方式</a>
                             <ul class="param">
     							<li>
@@ -155,6 +165,9 @@
                                 </li>
             					<li>
                                     <a>车削(粗加工）</a>
+                                </li>
+								<li>
+                                    <a>车削(精加工）</a>
                                 </li>
                                 <li>
                                     <a>车削(槽加工）</a>
@@ -318,7 +331,7 @@
     		</ul>
     	</div>
     	<div class="listitem mt20 pt20 btg clearfix">
-			#if($errormsg)
+			#if($errormsg > 0)
 				<a class="disable" >无法上传</a>
 			#else
 				<p id="product-tn">详细完备的资料更容易吸引用户查看，<a target="_blank" href="/img/product-tn.jpg">查看示例图</a></p>

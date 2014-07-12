@@ -36,7 +36,7 @@ public class Constant {
 	
 	public static final int MSG_AGENT_END=5;
 	
-	public static final int BRAND_CNT=54;
+	public static final int BRAND_CNT=100;
 	
 	public static final int MAX_AVATAR=43;
 	

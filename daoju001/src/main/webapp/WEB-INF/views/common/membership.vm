@@ -45,7 +45,7 @@ $(function() {
 					<li><i>可在刀具咨询中发表普通评论</i></li>
 					<li><i>不能参加微信推送</i></li>
 					<li><i>不能参加邮件推广活动</i></li>
-					<li class="clearheight"><a href="/user/reg">注册免费会员</a></li>
+					<li class="clearheight"><a href="/index">继续试用免费账户</a></li>
 				</ul>
 			</div>
 			<div class="level red">

@@ -444,6 +444,8 @@ public class CommonController extends BaseController{
 		mv.addObject("total", total);
 		mv.addObject("totalPage", totalPage);
 		
+		List<ItemEntity> items = commonService.getMainItems();
+		mv.addObject("items", items);
 		mv.addObject("products", result.get("products"));
 
 		return mv;
@@ -1385,7 +1387,7 @@ public class CommonController extends BaseController{
 		}
 		if(buyer.getAuthority() == 4)
 		{
-			return new ModelAndView(new RedirectView("agents/"+aid));  
+			return new ModelAndView(new RedirectView("/agents/"+aid));  
 		}
 		mv.addObject("buyer", buyer);
 		return mv;

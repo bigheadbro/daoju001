@@ -639,6 +639,9 @@ public class StringUtil {
 		brandMap.put(52, "TIZ,TIZ.jpg,波兰");
 		brandMap.put(53, "世邦,世邦.jpg,台湾");
 		brandMap.put(54, "田野井,田野井.png,日本");
+		brandMap.put(55, "布鲁克纳,bruckner.jpg,德国");
+		brandMap.put(56, "杜海尔,duhaier.jpg,德国");
+		brandMap.put(100, "其他,otherbrand.jpg,其他");
 		
 		brandMap.put(10000, "刀师傅,刀师傅.jpg,中国");
 		
@@ -670,9 +673,10 @@ public class StringUtil {
 		processMethodMap.put(7, "铰孔");
 		processMethodMap.put(8, "螺纹铣削");
 		processMethodMap.put(9, "车削(粗加工）");
-		processMethodMap.put(10, "车削(槽加工）");
-		processMethodMap.put(11, "车削(螺纹加工）");
-		processMethodMap.put(12, "去毛刺");
+		processMethodMap.put(10, "车削（精加工）");
+		processMethodMap.put(11, "车削(槽加工）");
+		processMethodMap.put(12, "车削(螺纹加工）");
+		processMethodMap.put(13, "去毛刺");
 		
 		wpMaterialMap.put(0, "不限");
 		wpMaterialMap.put(1, "钢");
@@ -699,21 +703,21 @@ public class StringUtil {
 	
 	public static String getBrand(int key)
 	{
-		if(key == 0)
+		if(key == 0 || StringUtil.isEmpty(brandMap.get(key)))
 			return "";
 		return brandMap.get(key).split(",")[0];
 	}
 	
 	public static String getBrandLogo(int key)
 	{
-		if(key == 0)
+		if(key == 0 || StringUtil.isEmpty(brandMap.get(key)))
 			return "";
 		return brandMap.get(key).split(",")[1];
 	}
 	
 	public static String getBrandCountry(int key)
 	{
-		if(key == 0)
+		if(key == 0 || StringUtil.isEmpty(brandMap.get(key)))
 			return "";
 		return brandMap.get(key).split(",")[2];
 	}

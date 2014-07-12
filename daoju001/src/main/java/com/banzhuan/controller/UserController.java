@@ -112,6 +112,7 @@ public class UserController extends BaseController{
 				account.setMail(user.getMail());
 				account.setUserId(user.getId()); // 用户ID
 				account.setLogo(user.getLogo());
+				account.setProductlimit(user.getProductlimit());
 				request.getSession().setAttribute("account", account);
 				// 注册成功， 跳转到登陆页面
 				return new ModelAndView(new RedirectView("/user/profile")); 
@@ -198,11 +199,14 @@ public class UserController extends BaseController{
 		for(int i = 1;i<=Constant.BRAND_CNT;i++)
 		{
 			BrandEntity brand = new BrandEntity();
-			brand.setKey(i);
-			brand.setName(StringUtil.getBrand(i));
-			brand.setLink(StringUtil.getBrandLogo(i));
-			brand.setCountry(StringUtil.getBrandCountry(i));
-			brands.add(brand);
+			if(StringUtil.isNotEmpty(StringUtil.getBrand(i)))
+			{
+				brand.setKey(i);
+				brand.setName(StringUtil.getBrand(i));
+				brand.setLink(StringUtil.getBrandLogo(i));
+				brand.setCountry(StringUtil.getBrandCountry(i));
+				brands.add(brand);
+			}
 		}
 		mv.addObject("brands", brands);
 		UserEntity user = (UserEntity)userService.getUserEntity(account.getUserId()).get("user");
@@ -860,11 +864,14 @@ public class UserController extends BaseController{
 		for(int i = 1;i<=Constant.BRAND_CNT;i++)
 		{
 			BrandEntity brand = new BrandEntity();
-			brand.setKey(i);
-			brand.setName(StringUtil.getBrand(i));
-			brand.setLink(StringUtil.getBrandLogo(i));
-			brand.setCountry(StringUtil.getBrandCountry(i));
-			brands.add(brand);
+			if(StringUtil.isNotEmpty(StringUtil.getBrand(i)))
+			{
+				brand.setKey(i);
+				brand.setName(StringUtil.getBrand(i));
+				brand.setLink(StringUtil.getBrandLogo(i));
+				brand.setCountry(StringUtil.getBrandCountry(i));
+				brands.add(brand);
+			}
 		}
 		mv.addObject("brands", brands);
 		if(!isDoSubmit(request))
@@ -882,14 +889,14 @@ public class UserController extends BaseController{
 				}
 			}
 			UserEntity user = (UserEntity)userService.getUserEntity(account.getUserId()).get("user");
-			String errormsg = null;
+			int errormsg = 0;
 			if(!userService.isPersonalInfoGood(user))
 			{
-				errormsg = "上传特色刀具前，请先完善您的个人资料";
+				errormsg = 1;
 			}
 			if(userService.getProductCount(account.getUserId()) >= account.getProductlimit())
 			{
-				errormsg = "您的账户最多上传" + String.valueOf(account.getProductlimit()) + "个特色刀具，如需要上传更多";
+				errormsg = account.getProductlimit();
 			}
 			mv.addObject("errormsg",errormsg);
 			return mv;

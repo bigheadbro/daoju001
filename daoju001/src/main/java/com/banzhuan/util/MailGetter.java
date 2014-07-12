@@ -90,27 +90,18 @@ public class MailGetter {
     public static void main(String[] args) throws IOException, InterruptedException {  
   
          String url;
-  
-/*         String proxy = "http://192.168.22.81";  
-  
-         int port = 80;  
-  
-         String username = "username";  
-  
-         String password = "password";  
-  
-         initProxy(proxy, port, username, password);  */
          
          String curLine = "";  
+         String curLine2 ="";
          
          String qq = "";  
          String name = "";  
          int rowCnt = 4;
          int count = 0;
-         for(int index = 1;index <= 474;index++)
+         for(int index = 0;index <= 3373;index++)
          {
-        	 Thread.sleep(5000);
-        	 url = "http://company.cut35.com/pv-s-v-p"+ String.valueOf(index) + ".html";  
+        	 Thread.sleep(2000);
+        	 url = "http://www.waixie.net/task/index.php?pageNum_treat=" + String.valueOf(index);  
 	         URL server = new URL(url);  
 	  
 	         HttpURLConnection connection = (HttpURLConnection) server.openConnection();  
@@ -119,27 +110,50 @@ public class MailGetter {
 	  
 	         InputStream is = connection.getInputStream();  
 	  
-	         BufferedReader reader = new BufferedReader(new  
-	  
-	         InputStreamReader(is));  
+	         BufferedReader reader = new BufferedReader(new InputStreamReader(is));  
 	  
 	         while ((curLine = reader.readLine()) != null) 
 	         {  
-	        	 if(StringUtil.isContains(curLine, "<a href=\"http://wpa.qq.com/msgrd?V=1&amp;Uin="))
+	        	 if(StringUtil.isContains(curLine, "class=\"STYLE22 STYLE9\">"))
 	        	 {
-	        		 int begin =curLine.lastIndexOf("&amp;Site=") + "&amp;Site=".length();
-	        		 int end = curLine.indexOf("&", begin);
-	        		 name = curLine.substring(begin,end);
-	        		 System.out.print(name+":");
-	        		 begin = curLine.lastIndexOf("<a href=\"http://wpa.qq.com/msgrd?V=1&amp;Uin=") + "<a href=\"http://wpa.qq.com/msgrd?V=1&amp;Uin=".length();
-	        		 end = curLine.indexOf("&", begin);
-	        		 qq = curLine.substring(begin,end);
-	        		 System.out.print(qq+"@qq.com;");  
-	        		 count++;
-	        		 if(count%rowCnt == 0)
-	        		 {
-	        			 System.out.print("\n");
-	        		 }
+	        		 int begin =curLine.lastIndexOf("href=\"") + "href=\"".length();
+	        		 int end = curLine.indexOf("\" target=\"_blank\"", begin);
+	        		 name = "http://www.waixie.net/task/" + curLine.substring(begin,end);
+
+	    	         URL server2 = new URL(name);  
+	    	  
+	    	         HttpURLConnection connection2 = (HttpURLConnection) server2.openConnection();  
+	    	  
+	    	         connection2.connect();  
+	    	         InputStream is2 = connection2.getInputStream();  
+	    	  
+	    	         BufferedReader reader2 = new BufferedReader(new InputStreamReader(is2));  
+	    	         boolean nextlineismail = false;
+	    	         while ((curLine2 = reader2.readLine()) != null) 
+	    	         {  
+	    	        	 if(StringUtil.isContains(curLine2, "class=\"STYLE37\">"))
+	    	        	 {
+	    	        		 int begin2 =curLine2.lastIndexOf("class=\"STYLE37\">") + "class=\"STYLE37\">".length();
+	    	        		 int end2 = curLine2.indexOf("</span></u></td>", begin);
+	    	        		 String company = curLine2.substring(begin2,end2);
+	    	        		 System.out.print(company+":");  
+	    	        	 } 
+	    	        	 if(nextlineismail)
+	    	        	 {
+	    	        		 nextlineismail = false;
+	    	        		 int begin2 =curLine2.lastIndexOf("<span class=\"STYLE19 STYLE35 STYLE36\">") + "<span class=\"STYLE19 STYLE35 STYLE36\">".length();
+	    	        		 int end2 = curLine2.indexOf("</span></td>", begin2);
+	    	        		 String mail = curLine2.substring(begin2,end2);
+	    	        		 System.out.println(mail);
+	    	        		 
+	    	        	 }
+	    	        	 if(StringUtil.isContains(curLine2, "电子信箱"))
+	    	        	 {
+	    	        		 nextlineismail = true;
+	    	        	 } 
+	    	  
+	    	         }  
+	    	         is2.close();
 	        	 } 
 	  
 	         }  

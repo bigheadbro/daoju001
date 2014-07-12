@@ -165,7 +165,7 @@ $(function() {
     							<span>￥${item.price}0 </span><em>包邮</em>
     						</li>
     						<li class="title">
-    							<a target="_blank" href="/item/${item.id}">${item.brand}${item.type}<br/>${item.version} <br/>${item.material}</a>
+								<a target="_blank" href="/item/${item.id}">${item.brand}${item.type}${item.version}</a> <br/>${item.material}
     						</li>
     						
     					</ul>

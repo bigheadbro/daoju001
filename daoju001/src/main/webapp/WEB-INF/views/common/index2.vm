@@ -27,7 +27,7 @@ $(function() {
     </div>
 	<div class="main-items-wrap">
     	<div class="main-items">
-    		<div class="head">
+    		<div class="head items">
     			刀具商城<span><a href="/items">想看更多低价？马上点击</a></span>
     		</div>
     		<div class="content clearfix">
@@ -57,7 +57,7 @@ $(function() {
     		</div>
     	</div>
     	<div class="main-items mt50">
-    		<div class="head">
+    		<div class="head products">
     			线上展会<span><a href="/products">想看更多特色刀具？马上点击</a></span>
     		</div>
     		<div class="product-item-container clearfix">

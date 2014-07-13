@@ -516,9 +516,66 @@ public class Util {
 		return avatar;
 	}
 	
+	public static void removeSameMail(String fileName) {
+		HashSet<String> array = new HashSet<String>();
+		File file = new File(fileName);
+		BufferedReader reader = null;
+		try {
+			reader = new BufferedReader(new FileReader(file));
+			String tempString = null;
+			// 一次读入一行，直到读入null为文件结束
+			while ((tempString = reader.readLine()) != null) {
+				if(StringUtil.isNotEmpty(tempString))
+					array.add(tempString);
+			}
+			reader.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} finally {
+			if (reader != null) {
+				try {
+					reader.close();
+				} catch (IOException e1) {
+				}
+			}
+		}
+		Iterator<String> iterator=array.iterator();
+		while(iterator.hasNext()){
+			System.out.println(iterator.next());
+		}
+	}
+	public static void removeSameMailFromWaixie() {
+		HashSet<String> array = new HashSet<String>();
+		File file = new File("EDM/waixie.txt");
+		BufferedReader reader = null;
+		String tempString = null;
+		try {
+			reader = new BufferedReader(new FileReader(file));
+			
+			// 一次读入一行，直到读入null为文件结束
+			while ((tempString = reader.readLine()) != null) {
+				if(!StringUtil.isEqual(tempString.substring(tempString.length()-1, tempString.length()), ":"))
+					array.add(tempString);
+			}
+			reader.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} finally {
+			if (reader != null) {
+				try {
+					reader.close();
+				} catch (IOException e1) {
+				}
+			}
+		}
+		Iterator<String> iterator=array.iterator();
+		while(iterator.hasNext()){
+			System.out.println(iterator.next().split(":")[2]);
+		}
+	}
 	public static void main(String[] args) {
 		//String rec[] ={"346938819@qq.com"};
 		//sendEmail("noreply@daoshifu.com","cisco123",rec,"找回密码", "test", null, "", "UTF-8");
-		removeMailFromEDM();
+		removeSameMail("EDM/waixie_mail.txt");
 	}
 }

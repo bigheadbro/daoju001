@@ -420,7 +420,8 @@ div[contentEditable]{outline:0}
 .main-content-wrap{margin:0 auto;width:960px;}
 .main-content-wrap .main-items-wrap{float:left;margin-top: 20px;}
 .main-content-wrap .main-items{width:634px;}
-.main-content-wrap .main-items .head{color: #616161;font-size: 18px;font-weight: 700;background: url(../img/realproduct.png) no-repeat 80px 7px;line-height: 29px;border-bottom: 2px solid #ff3000;}
+.main-content-wrap .main-items .products{color: #616161;font-size: 18px;font-weight: 700;background: url(../img/freesend.png) no-repeat 80px 7px;line-height: 29px;border-bottom: 2px solid #ff3000;}
+.main-content-wrap .main-items .items{color: #616161;font-size: 18px;font-weight: 700;background: url(../img/realproduct.png) no-repeat 80px 7px;line-height: 29px;border-bottom: 2px solid #ff3000;}
 .main-content-wrap .main-items .head span{color:#525252;font-size:13px;float:right;}
 .main-content-wrap .main-items .content{}
 .main-content-wrap .main-items .content .item{float:left;width:200px;border:1px solid #e1e1e1;border-top:none;border-right:none;padding: 5px;}

@@ -414,8 +414,8 @@ public class CommonController extends BaseController{
 		mv.addObject("total", total);
 		mv.addObject("totalPage", totalPage);
 
-		result = commonService.getMaingoodcases();
-		mv.addObject("goodcases", result.get("goodcases"));
+		result = commonService.getMainagents();
+		mv.addObject("agents", result.get("agents"));
 		return mv;
 		
 	}

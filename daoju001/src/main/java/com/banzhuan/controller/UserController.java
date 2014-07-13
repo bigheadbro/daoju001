@@ -956,7 +956,7 @@ public class UserController extends BaseController{
 				return mv;
 			}
 
-			JsonUtil.showAlert(response, "新建刀具", "刀具新建成功~~", "确定", "", "");
+			JsonUtil.showAlert(response, "新建刀具", "发布成功，请等待管理员审核", "确定", "", "");
 
 		}
 		return mv;

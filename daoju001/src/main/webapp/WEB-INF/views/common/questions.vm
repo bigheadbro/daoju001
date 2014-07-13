@@ -239,33 +239,37 @@
 		</div>
 		#parse("/common/page.vm")
 	</div>
-    <!-- 成功案例 -->
-	<div class="main-list-container width300 ml50">
-		<div class="main-list-header">
-			成功案例
-		  <a class="seemore" href="/goodcases">查看更多</a>
+    <div class="main-list-container width300 ml50">
+		<div class="main-list-header ">
+                                                      浏览最多的代理商
+			<a class="seemore" href="/agents">查看更多</a>
 		</div>
-		#foreach($gc in $goodcases)
-		<div class="goodcase-listitem clearfix">
-			<div class="name">
-				<a target="_blank" href="/downloadgc?file=$!{gc.link}">$!{gc.name}</a>
+		<div class="main-list-content">
+			#foreach($agent in $agents)
+			<div class="new-agent-listitem agent-info clearfix">
+				<div class="logo" aid="${agent.id}">
+					<a href="/agents/${agent.id}">
+							#if($!{agent.logo})
+								<img src="/logo/$!{agent.logo}" />
+							#else
+								<img src="/img/avatar.png" />
+							#end
+						</a>
+				</div>
+				<div class="content">
+					<ul>
+						<li class="name clearfix">
+								<a href="/agents/$!{agent.id}">$!{agent.companyName}</a>
+								#if($stringUtil.isNotEmpty(${agent.verifiedLink}))
+									<a class="fancybox-v" title="$!{agent.companyName}的代理证书" href="$!{agent.verifiedLink}"><img src="/img/v.png" /></a>
+								#end
+							</li>
+						<li class="title">$!stringUtil.getBrand($!{agent.brand})</li>
+					</ul>
+				</div>
 			</div>
-			<div class="property">
-				#if($!{gc.industry} > 0)
-					<span>$stringUtil.getIndustry($!{gc.industry})</span>
-				#end
-				#if($!{gc.processMethod} > 0)
-					<span>$stringUtil.getMethod($!{gc.processMethod})</span>
-				#end
-				#if($!{gc.workMaterial} > 0)
-					<span>$stringUtil.getMaterial($!{gc.workMaterial})</span>
-				#end
-				#if($!{gc.workSolidity} > 0)
-					<span>$stringUtil.getHardness($!{gc.workSolidity})</span>
-				#end
-			</div>
+			#end
 		</div>
-		#end
 	</div>
 </div>
 #parse("/common/answer.vm")

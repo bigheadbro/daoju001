@@ -576,6 +576,6 @@ public class Util {
 	public static void main(String[] args) {
 		//String rec[] ={"346938819@qq.com"};
 		//sendEmail("noreply@daoshifu.com","cisco123",rec,"找回密码", "test", null, "", "UTF-8");
-		removeSameMail("EDM/waixie_mail.txt");
+		removeSameMail("EDM/edm.txt");
 	}
 }

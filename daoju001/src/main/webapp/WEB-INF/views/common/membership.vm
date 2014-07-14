@@ -14,10 +14,10 @@ $(function() {
 		    	switch(data.status)
 		    	{
 		    	case 1:
-		    		showAlert("账户未登录",data.code,"","确定","");
+		    		showAlert("账户未登录",data.code,"","确定","#");
 		    	  break;
 		    	case 2:
-		    		showAlert("",data.code,"","确定","");
+		    		showAlert("",data.code,"","确定","#");
 		    	  break;
 		    	case 3:
 		    		window.location.href='/paymembership/1';

@@ -183,10 +183,10 @@ public class UserController extends BaseController{
 		userService.changePwd(form, result);
 		if(result.hasErrors())
 		{
-			JsonUtil.showAlert(response, "旧密码错误", "旧密码输入错误，请重新输入", "确定", "", "");
+			JsonUtil.showAlert(response, "旧密码错误", "旧密码输入错误，请重新输入", "确定", "", "#");
 			return view;
 		}
-		JsonUtil.showAlert(response, "修改密码", "修改密码成功~~", "确定", "", "");
+		JsonUtil.showAlert(response, "修改密码", "修改密码成功~~", "确定", "", "#");
 		return view;
 	}
 	
@@ -223,10 +223,10 @@ public class UserController extends BaseController{
 			}
 			if(userService.updateUserAccnt(request, form, user, account, result) == 0)
 			{
-				JsonUtil.showAlert(response, "更新资料失败", "公司名已存在，请重新输入！", "确定", "", "");
+				JsonUtil.showAlert(response, "更新资料失败", "公司名已存在，请重新输入！", "确定", "", "#");
 				return mv;
 			}
-			JsonUtil.showAlert(response, "更新资料", "公司资料更新成功~~", "确定", "", "");
+			JsonUtil.showAlert(response, "更新资料", "公司资料更新成功~~", "确定", "", "#");
 		}
 		return mv;
 	}
@@ -292,7 +292,7 @@ public class UserController extends BaseController{
 
 		if(userService.getTodayQuestionCount(account.getUserId()) >= 3)
 		{
-			JsonUtil.showAlert(response, "无法提问", "每位用户每天最多提问3次", "确定", "", "");
+			JsonUtil.showAlert(response, "无法提问", "每位用户每天最多提问3次", "确定", "", "#");
 			return mv;
 		}
 		
@@ -308,11 +308,11 @@ public class UserController extends BaseController{
 			if(form.getState() == 1)
 			{
 				account.setQuestionCnt(userService.getUserQuestionCount(account.getUserId()));
-				JsonUtil.showAlert(response, "编辑问题", "问题内容更新成功~~", "确定", "", "");
+				JsonUtil.showAlert(response, "编辑问题", "问题内容更新成功~~", "确定", "", "#");
 			}
 			else
 			{
-				JsonUtil.showAlert(response, "编辑问题", "更新内容已保存到草稿~~", "确定", "", "");
+				JsonUtil.showAlert(response, "编辑问题", "更新内容已保存到草稿~~", "确定", "", "#");
 			}
 		}
 		else
@@ -324,12 +324,12 @@ public class UserController extends BaseController{
 			}
 			if(form.getState() == 0)
 			{
-				JsonUtil.showAlert(response, "新建草稿", "问题已保存到草稿~~", "确定", "", "");
+				JsonUtil.showAlert(response, "新建草稿", "问题已保存到草稿~~", "确定", "", "#");
 			}
 			else
 			{
 				account.setQuestionCnt(userService.getUserQuestionCount(account.getUserId()));
-				JsonUtil.showAlert(response, "新建问题", "问题新建成功~~", "确定", "", "");
+				JsonUtil.showAlert(response, "新建问题", "问题新建成功~~", "确定", "", "#");
 			}
 		}
 		return mv;
@@ -736,7 +736,7 @@ public class UserController extends BaseController{
 			
 			if(form.getLink().substring(5).split("/")[2].length() > 100)
 			{
-				JsonUtil.showAlert(response, "上传失败", "文件名称过长，请重命名该文件", "确定", "", "");
+				JsonUtil.showAlert(response, "上传失败", "文件名称过长，请重命名该文件", "确定", "", "#");
 				return mv;
 			}
 			if(form.getIsEdit() > 0)
@@ -749,7 +749,7 @@ public class UserController extends BaseController{
 					return mv;
 				}
 
-				JsonUtil.showAlert(response, "上传样本", "更新样本成功~~", "确定", "", "");
+				JsonUtil.showAlert(response, "上传样本", "更新样本成功~~", "确定", "", "#");
 				
 			}
 			else
@@ -767,7 +767,7 @@ public class UserController extends BaseController{
 					
 					int sampleCnt = userService.getSampleCount(account.getUserId());
 					account.setSampleCnt(sampleCnt);
-					JsonUtil.showAlert(response, "上传样本", "上传样本成功~~", "确定", "", "");
+					JsonUtil.showAlert(response, "上传样本", "上传样本成功~~", "确定", "", "#");
 				}
 				catch(Exception e){
 					logger.info("sampleissue:"+String.valueOf(result.getErrorCount())+";ex:"+e.toString());
@@ -909,15 +909,15 @@ public class UserController extends BaseController{
 		{
 			if(StringUtil.calStrNum(form.getName()) > 30)
 			{
-				JsonUtil.showAlert(response, "编辑刀具失败", "上传失败，刀具名称太长~", "确定", "", "");
+				JsonUtil.showAlert(response, "编辑刀具失败", "上传失败，刀具名称太长~", "确定", "", "#");
 			}
 			if(form.getProcessMethod() == 0)
 			{
-				JsonUtil.showAlert(response, "编辑刀具失败", "上传失败，请选择加工方式~", "确定", "", "");
+				JsonUtil.showAlert(response, "编辑刀具失败", "上传失败，请选择加工方式~", "确定", "", "#");
 			}
 			if(StringUtil.isEmpty(form.getPicture()))
 			{
-				JsonUtil.showAlert(response, "编辑刀具失败", "上传失败，请选择刀具配图~", "确定", "", "");
+				JsonUtil.showAlert(response, "编辑刀具失败", "上传失败，请选择刀具配图~", "确定", "", "#");
 			}
 			userService.updateProductById(form, result);
 			
@@ -927,23 +927,23 @@ public class UserController extends BaseController{
 			}
 			
 			//account.setQuestionCnt(buyerService.getUserQuestionCount(account.getUserId()));
-			JsonUtil.showAlert(response, "编辑刀具", "刀具内容更新成功~~", "确定", "", "");
+			JsonUtil.showAlert(response, "编辑刀具", "刀具内容更新成功~~", "确定", "", "#");
 		}
 		else
 		{
 			if(StringUtil.calStrNum(form.getName()) > 50)
 			{
-				JsonUtil.showAlert(response, "新建刀具失败", "上传失败，刀具名称太长~", "确定", "", "");
+				JsonUtil.showAlert(response, "新建刀具失败", "上传失败，刀具名称太长~", "确定", "", "#");
 				return mv;
 			}
 			if(form.getProcessMethod() == 0)
 			{
-				JsonUtil.showAlert(response, "新建刀具失败", "上传失败，请选择加工方式~", "确定", "", "");
+				JsonUtil.showAlert(response, "新建刀具失败", "上传失败，请选择加工方式~", "确定", "", "#");
 				return mv;
 			}
 			if(StringUtil.isEmpty(form.getPicture()))
 			{
-				JsonUtil.showAlert(response, "新建刀具失败", "上传失败，请选择刀具配图~", "确定", "", "");
+				JsonUtil.showAlert(response, "新建刀具失败", "上传失败，请选择刀具配图~", "确定", "", "#");
 				return mv;
 			}
 			ProductEntity product = new ProductEntity();
@@ -956,7 +956,7 @@ public class UserController extends BaseController{
 				return mv;
 			}
 
-			JsonUtil.showAlert(response, "新建刀具", "发布成功，请等待管理员审核", "确定", "", "");
+			JsonUtil.showAlert(response, "新建刀具", "发布成功，请等待管理员审核", "确定", "", "#");
 
 		}
 		return mv;

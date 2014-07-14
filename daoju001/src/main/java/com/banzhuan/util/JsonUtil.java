@@ -93,7 +93,7 @@ public class JsonUtil {
 		return json.toString();
 	}
 	
-	public static void showAlert(HttpServletResponse response, String title, String content, String btn, String link, String info){
+	public static void showAlert(HttpServletResponse response, String title, String content, String btn, String info, String link){
 		JSONObject object = new JSONObject();  
         response.setContentType("text/Xml;charset=gbk");  
         object.element("title", title);

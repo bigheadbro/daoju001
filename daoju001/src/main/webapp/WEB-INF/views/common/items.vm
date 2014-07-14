@@ -150,14 +150,15 @@ $(function() {
 			排序：
 			#springBind("form.order")
             <input type="hidden" name="${status.expression}"  value="$!{status.value}" />
-			<a class="price" order="1">价格</a>
-			<a class="time" order="2">上架时间</a>
+			<a class="price order" order="1">价格</a>
+			<a class="time order" order="2">上架时间</a>
+			<span><a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=123576884&site=qq&menu=yes">你也想免费发布产品？马上点击联系客服</a></span>
 		</div>
 		<div class="item-list clearfix">
 			#foreach( $item in $items )
     			<div class="item">
     				<div class="img">
-    					<a target="_blank" href="/item/${item.id}"><img src="/item/${item.cover}" /></a>
+    					<a target="_blank" href="/item/${item.id}"><img src="/item/${item.cover}" data-original="/item/${item.cover}" /></a>
     				</div>
     				<div class="info">
     					<ul class="clearfix">

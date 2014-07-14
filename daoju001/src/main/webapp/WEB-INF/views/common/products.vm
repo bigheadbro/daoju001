@@ -197,7 +197,7 @@
             		#foreach($product in $products)
             			<div class="product-item clearfix">
             				<div class="pic">
-            					<a href="/products/${product.id}"><img src="/product/${product.cover}" /></a>
+            					<a href="/products/${product.id}"><img src="/product/${product.cover}" data-original="/product/${product.cover}" /></a>
             				</div>
             				<div class="info">
                 				<h5 class="name"><a href="/products/${product.id}">${product.name}</a></h5>
@@ -223,7 +223,7 @@
     				#if($velocityCount < 5)
     					<div class="item clearfix">
     						<div class="left">
-    							<a href="/item/${item.id}"><img src="/item/${item.cover}" /></a>
+    							<a href="/item/${item.id}"><img src="/item/${item.cover}" data-original="/item/${item.cover}" /></a>
     						</div>
     						<div class="right">
     							<a href="/item/${item.id}">${item.brand}${item.type}${item.version} ${item.material}</a>
@@ -234,7 +234,7 @@
     			#end
         	</div>
     		<div class="advert">
-        		<a href="/items"><img src="/img/ctshop.png" /></a>
+        		<a href="/items"><img src="/img/ctshop.png" data-original /></a>
         	</div>
 		</div>
 	</div>

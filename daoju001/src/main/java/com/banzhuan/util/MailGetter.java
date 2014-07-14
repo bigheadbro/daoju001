@@ -188,10 +188,73 @@ public class MailGetter {
 			}
 			is2.close();
 		}
+		
+		
 	}
 
+	public static void daojuz() throws IOException 
+	{
+
+		for (int index = 1; index <= 1; index++) 
+		{
+			for(int j = 1;j<= 40;j++)
+			{
+				String curLine2 = "";
+				String curLine = "";
+				URL server2 = new URL("http://www.daojuz.com/company/search.php?areaid="+ String.valueOf(index) +"&page="+ String.valueOf(j));
+	
+				HttpURLConnection connection2 = (HttpURLConnection) server2
+						.openConnection();
+	
+				connection2.connect();
+				InputStream is2 = connection2.getInputStream();
+	
+				BufferedReader reader2 = new BufferedReader(new InputStreamReader(
+						is2));
+	
+				while ((curLine2 = reader2.readLine()) != null) 
+				{
+					if (StringUtil.isContains(curLine2, "<strong class=\"px14\">")) 
+					{
+						int begin2 = curLine2.lastIndexOf("<a href=\"") + "<a href=\"".length();
+						int end2 = curLine2.indexOf("\" target=\"_blank\">", begin2);
+						String link = curLine2.substring(begin2, end2);
+						URL server = new URL(link + "contact");
+	
+						try
+						{
+						HttpURLConnection connection = (HttpURLConnection) server.openConnection();
+	
+						connection.connect();
+						InputStream is = connection.getInputStream();
+	
+						BufferedReader reader = new BufferedReader(new InputStreamReader(is));
+						boolean nextlineismail = false;
+						while ((curLine = reader.readLine()) != null) 
+						{
+							if (nextlineismail) {
+								nextlineismail = false;
+								System.out.println(String.valueOf(index)+":" +String.valueOf(j)+":"+curLine);
+								break;
+							}
+							if (StringUtil.isContains(curLine, "电子邮件")) 
+							{
+								nextlineismail = true;
+							}
+						}
+						is.close();
+						}catch(Exception ex){
+							
+						}
+					}
+				}
+				is2.close();
+			}
+		}
+	}
+	
 	public static void main(String[] args) throws IOException {
-		cutinfo();
+		daojuz();
 	}
 
 }

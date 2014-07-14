@@ -224,7 +224,7 @@
                               				'uploadLimit'   : upCnt, 
                                           	'onUploadSuccess':function(file, data, response){   
                         						if(data == ""){
-                        							showAlert("上传失败", "文件类型必须是png，jpg或者gif", "", "确定", "")
+                        							showAlert("上传失败", "文件类型必须是png，jpg或者gif", "", "确定", "#")
                         						}
                                           		loadProduct(data);
                                           	},  

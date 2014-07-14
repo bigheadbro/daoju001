@@ -461,6 +461,7 @@ public class UserService {
 
 		ProductEntity product = new ProductEntity();
 		product.setId(form.getPid());
+		product.setBrandId(form.getBrandid());
 		product.setName(form.getName());
 		product.setIndustry(form.getIndustry());
 		product.setProcessMethod(form.getProcessMethod());

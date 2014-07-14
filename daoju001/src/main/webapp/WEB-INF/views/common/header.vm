@@ -9,4 +9,5 @@
 	<script type="text/javascript" src="/js/complain.js"></script>
     <script type="text/javascript" src="/js/jquery.fancybox.pack.js"></script>
 	<script type="text/javascript" src="/js/jQuery.mouseDelay.min.js"></script>
+	<script type="text/javascript" src="/js/jquery.lazyload.min.js"></script>
 </head>

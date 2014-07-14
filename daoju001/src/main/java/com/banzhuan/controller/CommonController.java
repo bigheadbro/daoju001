@@ -208,16 +208,28 @@ public class CommonController extends BaseController{
 		
 		Result result = new Result();
 		
-		List<ItemEntity> items = commonService.getMainItems();
+		List<ItemEntity> items = new ArrayList<ItemEntity>();
+		items.add(commonService.getItem(18));
+		items.add(commonService.getItem(20));
+		items.add(commonService.getItem(23));
+		items.add(commonService.getItem(24));
+		items.add(commonService.getItem(31));
+		items.add(commonService.getItem(34));
 		mv.addObject("items", items);
 		
-		List<ProductEntity> products = commonService.getMainProducts();
+		List<ProductEntity> products = new ArrayList<ProductEntity>();
+		products.add(commonService.getProduct(33));
+		products.add(commonService.getProduct(37));
+		products.add(commonService.getProduct(41));
+		products.add(commonService.getProduct(42));
 		mv.addObject("products", products);
 		
-		result = commonService.getMainquestions();
-		mv.addObject("questions", result.get("questions"));
-		mv.addObject("answers", result.get("answers"));
-		
+		List<QuestionEntity> questions = new ArrayList<QuestionEntity>();
+		questions.add(commonService.getQuestion(165));
+		questions.add(commonService.getQuestion(161));
+		questions.add(commonService.getQuestion(160));
+		mv.addObject("questions", questions);
+
 		return mv;
 	}
 
@@ -229,16 +241,28 @@ public class CommonController extends BaseController{
 		
 		Result result = new Result();
 		
-		List<ItemEntity> items = commonService.getMainItems();
+		List<ItemEntity> items = new ArrayList<ItemEntity>();
+		items.add(commonService.getItem(18));
+		items.add(commonService.getItem(20));
+		items.add(commonService.getItem(23));
+		items.add(commonService.getItem(24));
+		items.add(commonService.getItem(31));
+		items.add(commonService.getItem(34));
 		mv.addObject("items", items);
 		
-		List<ProductEntity> products = commonService.getMainProducts();
+		List<ProductEntity> products = new ArrayList<ProductEntity>();
+		products.add(commonService.getProduct(33));
+		products.add(commonService.getProduct(37));
+		products.add(commonService.getProduct(41));
+		products.add(commonService.getProduct(42));
 		mv.addObject("products", products);
 		
-		result = commonService.getMainquestions();
-		mv.addObject("questions", result.get("questions"));
-		mv.addObject("answers", result.get("answers"));
-		
+		List<QuestionEntity> questions = new ArrayList<QuestionEntity>();
+		questions.add(commonService.getQuestion(165));
+		questions.add(commonService.getQuestion(161));
+		questions.add(commonService.getQuestion(160));
+		mv.addObject("questions", questions);
+
 		return mv;
 	}
 	
@@ -249,16 +273,28 @@ public class CommonController extends BaseController{
 		
 		Result result = new Result();
 		
-		List<ItemEntity> items = commonService.getMainItems();
+		List<ItemEntity> items = new ArrayList<ItemEntity>();
+		items.add(commonService.getItem(18));
+		items.add(commonService.getItem(20));
+		items.add(commonService.getItem(23));
+		items.add(commonService.getItem(24));
+		items.add(commonService.getItem(31));
+		items.add(commonService.getItem(34));
 		mv.addObject("items", items);
 		
-		List<ProductEntity> products = commonService.getMainProducts();
+		List<ProductEntity> products = new ArrayList<ProductEntity>();
+		products.add(commonService.getProduct(33));
+		products.add(commonService.getProduct(37));
+		products.add(commonService.getProduct(41));
+		products.add(commonService.getProduct(42));
 		mv.addObject("products", products);
 		
-		result = commonService.getMainquestions();
-		mv.addObject("questions", result.get("questions"));
-		mv.addObject("answers", result.get("answers"));
-		
+		List<QuestionEntity> questions = new ArrayList<QuestionEntity>();
+		questions.add(commonService.getQuestion(165));
+		questions.add(commonService.getQuestion(161));
+		questions.add(commonService.getQuestion(160));
+		mv.addObject("questions", questions);
+
 		return mv;
 	}
 	

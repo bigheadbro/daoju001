@@ -363,6 +363,35 @@ public class UserController extends BaseController{
 		return mv;
 	}
 	
+	@RequestMapping(value="/addimg")
+	public void addimg(HttpServletRequest request, HttpServletResponse response)
+	{
+		String fileName = "";
+		// /////////////////////////////////////////////////////////////获取上传的图片///////////////////////////////////
+		if (request instanceof DefaultMultipartHttpServletRequest) 
+		{
+			DefaultMultipartHttpServletRequest r = (DefaultMultipartHttpServletRequest) request;
+			List<MultipartFile> files = r.getMultiFileMap().get("file_upload");
+			if (files != null && files.size() > 0) {
+				MultipartFile f = files.get(0);
+				if (StringUtil.isNotEmpty(f.getOriginalFilename()))
+				{
+					String path = request.getSession().getServletContext().getRealPath("/uploadfile");
+					fileName = Util.genRandomName(f.getOriginalFilename().substring(f.getOriginalFilename().lastIndexOf(".")));
+					File file = new File(path + "/" + fileName);
+					try 
+					{
+						FileCopyUtils.copy(f.getBytes(), file);
+					} catch (IOException e) {
+						logger.error("upload company logo error:"
+								+ e.getMessage());
+					}
+				}
+			}
+		}
+		JsonUtil.sendImg(response, fileName);
+		return ; 
+	}
 	
 	@RequestMapping(value="/answered")
 	public ModelAndView answered(HttpServletRequest request, HttpServletResponse response, @ModelAttribute("account")Account account, @ModelAttribute("answerForm")ProfessionalAnswerForm answerForm) {

@@ -14,7 +14,7 @@ $(function() {
 		    	switch(data.status)
 		    	{
 		    	case 1:
-		    		showAlert("账户未登录",data.code,"","确定","#");
+		    		showAlert("账户未登录",data.code,"","确定","/log");
 		    	  break;
 		    	case 2:
 		    		showAlert("",data.code,"","确定","#");

@@ -5,6 +5,13 @@
 <div class="main-content-container clearfix">
 	<!-- 问题 -->
 	<div class="main-list-container width630">
+		<div class="question-head clearfix">
+			<h2>现在用的刀具不合适？<br/>想找一款性价比更高的刀具？</h2>
+			<div class="ask">
+				<a href="/user/newquestion">马上提问</a>
+				<p>刀师傅和你一起解决</p>
+			</div>
+		</div>
 		<div class="gc-list-header">
 			<h1>所有问题</h1>
 			<div class="question-param-wrap">

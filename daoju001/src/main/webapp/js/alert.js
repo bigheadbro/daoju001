@@ -130,7 +130,7 @@ $(function() {
 			$(".alert-wrapper").hide();
 			$("#pagemask").hide();
 			alertshow = false;
-			window.location.href = "/products";
+			window.location.href = $(".alert-btn").attr("href");
 		}
 	});
 	$(".close-complain").on("click", function() {

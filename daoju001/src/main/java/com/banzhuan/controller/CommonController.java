@@ -495,10 +495,10 @@ public class CommonController extends BaseController{
 		mv.addObject("page", page);
 		mv.addObject("total", total);
 		mv.addObject("totalPage", totalPage);
-		
-		List<ItemEntity> items = commonService.getMainItems();
-		mv.addObject("items", items);
 		mv.addObject("products", result.get("products"));
+		result = commonService.getMainquestions();
+		mv.addObject("questions", result.get("questions"));
+		
 
 		return mv;
 		
@@ -1598,15 +1598,15 @@ public class CommonController extends BaseController{
 			{
 				if((account.getAuthority() == 3 && mid == 1) || (account.getAuthority() == 4) )
 				{
-					JsonUtil.checkAnswerStatus(response, 2);
+					JsonUtil.checkAuthStatus(response, 2);
 				}
 				if(mid == 1)
 				{
-					JsonUtil.checkAnswerStatus(response, 3);
+					JsonUtil.checkAuthStatus(response, 3);
 				}
 				else
 				{
-					JsonUtil.checkAnswerStatus(response, 4);
+					JsonUtil.checkAuthStatus(response, 4);
 				}
 			}
 		}

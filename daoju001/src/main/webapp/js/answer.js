@@ -20,7 +20,7 @@ $(function() {
 		    		showAlert("权限不够",data.code,"","确定","/membership");
 		    	  break;
 		    	default:
-		    		
+		    		showanswer(); 
 		    	}  
 		    }
 		});   

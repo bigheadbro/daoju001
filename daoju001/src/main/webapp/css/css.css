@@ -980,6 +980,11 @@ opacity: .3;
 .product-side .item .right p em{float:right;font-weight:700;color:white;background-color:#ff7555;font-size:12px;padding: 0 5px;}
 .product-side .advert{margin-top:20px;float:right;width:303px;margin-left:20px;border:1px solid #bfbfbf}
 .product-side .advert img{width:303px;}
+.product-side .goask{border:1px solid #d7d7d7;text-align: center;padding: 40px;}
+.product-side .goask h1 {font-size:18px; color:#444;margin-bottom: 25px;}
+.product-side .goask h1 span{color:#7d7d7d;font-size:13px;}
+.product-side .goask a{display:inline-block;color:white;background-color:#ff4444;padding:10px 30px;border-radius:10px;}
+.product-side .goask p{font-size:14px;color:#7d7d7d;margin-top:5px;}
 
 .product-detail-container{margin:30px auto;width:960px;}
 .product-wrap{width:630px;float:left;}

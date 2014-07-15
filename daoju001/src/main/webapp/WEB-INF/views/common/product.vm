@@ -71,9 +71,10 @@
     	</div>
 	</div>
 	<div class="product-side">
-		<div class="advert">
-		</div>
-		<div class="advert">
+		<div class="goask">
+			<h1>还是没找到合适的刀具？<br/><span>秀出你的需求，刀师傅和你一起解决！</span></h1>
+			<a href="/user/newquestion">马上提问</a>
+			<p>刀师傅助你一臂之力</p>
 		</div>
 	</div>
 </div>

@@ -195,9 +195,9 @@ public class MailGetter {
 	public static void daojuz() throws IOException 
 	{
 
-		for (int index = 1; index <= 1; index++) 
+		for (int index = 16; index <= 16; index++) 
 		{
-			for(int j = 1;j<= 40;j++)
+			for(int j = 1;j<= 13;j++)
 			{
 				String curLine2 = "";
 				String curLine = "";
@@ -234,7 +234,7 @@ public class MailGetter {
 						{
 							if (nextlineismail) {
 								nextlineismail = false;
-								System.out.println(String.valueOf(index)+":" +String.valueOf(j)+":"+curLine);
+								System.out.println(curLine);
 								break;
 							}
 							if (StringUtil.isContains(curLine, "电子邮件")) 

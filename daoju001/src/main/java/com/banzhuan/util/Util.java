@@ -396,87 +396,6 @@ public class Util {
 		}
 	}
 
-	public static void EDM(final String sender, final String password,
-			String[] receivers, String title, String mailContent,
-			File[] attachements, String mimetype, String charset) {
-		Properties props = new Properties();
-		// 设置smtp服务器地址
-		// 这里使用QQ邮箱，记得关闭独立密码保护功能和在邮箱中设置POP3/IMAP/SMTP服务
-		//props.put("mail.smtp.host", "smtp.exmail.qq.com");
-		props.put("mail.smtp.host", "smtp.gmail.com");
-		// 需要验证
-		props.put("mail.smtp.auth", "true");
-		// 创建验证器
-		Authenticator authenticator = new Authenticator() {
-			protected PasswordAuthentication getPasswordAuthentication() {
-				return new PasswordAuthentication(sender, password);
-			}
-		};
-		// 使用Properties创建Session
-		Session session = Session.getDefaultInstance(props, authenticator);
-		// Set the debug setting for this Session
-		session.setDebug(true);
-		try {
-			// 使用session创建MIME类型的消息
-			MimeMessage mimeMessage = new MimeMessage(session);
-			// 设置发件人邮件
-			mimeMessage.setFrom(new InternetAddress(sender));
-			// 获取所有收件人邮箱地址
-			InternetAddress[] receiver = new InternetAddress[receivers.length];
-			for (int i = 0; i < receivers.length; i++) {
-				receiver[i] = new InternetAddress(receivers[i]);
-			}
-			// 设置收件人邮件
-			mimeMessage.setRecipients(Message.RecipientType.TO, receiver);
-			// 设置标题
-			mimeMessage.setSubject(title, charset);
-
-			//
-			// This HTML mail have to 2 part, the BODY and the embedded image
-			//
-			MimeMultipart multipart = new MimeMultipart("related");
-
-			// first part (the html)
-			BodyPart messageBodyPart = new MimeBodyPart();
-
-			/*String htmlText = "<h1 style=\"font-size:24px;font-family:'微软雅黑';color:#0099cb;border-bottom:1px solid #0099cb;padding-bottom:10px;\">刀师傅</h1>"
-					+ "<img style=\"width:1024px\" src=\"cid:image\">"
-					+ "<p style=\"font-size:14px;font-family:'微软雅黑';margin-left:65px\">抢先关注刀师傅，2014颠覆刀具旧世界！更多内容尽在<a href=\"http://www.daoshifu.com?fromlink\">www.daoshifu.com</a></p>"
-					+ "<p style=\"border-top:1px solid #e0e0e0;font-family:'微软雅黑';color:#aaa;text-align:center;padding-top:10px;font-size:13px;\">© 2013 刀师傅 | 沪ICP备13047239号-1</p>";*/
-			String htmlText = "<div style=\"text-align: center;width: 700px;background-color:#e6e6e6;padding: 20px;\">"
-					+"<div style=\"text-align:center;border-radius: 10px;background-color:white;\">"
-					+"<h1 style=\"color:#0099cb;font-size:30px;padding-top: 30px;font-family:'微软雅黑';font-weight: 100;\">还在QQ群里找刀具？</h1>"
-					+"<p style=\"font-size:14px;font-family:'hei';font-weight: 100;line-height: 25px;letter-spacing: 2px;\">30多个知名刀具品牌一级代理商入驻,百分百安全认证，安全可靠;<br/>"
-				+"有问必答，当天获得各品牌代理商提供方案、报价以及免费试用;<br/>"
-				+"代理商联系方式公开透明，线上交流，线下交易，防止恶性竞争;<br/>"
-				+"提供各品牌样本下载，具体细致了解产品性能与特点。</p>"
-					+"<a style=\"font-size:16px;font-family:'微软雅黑';display: inline-block;text-decoration: none;margin-top: 30px;color:white;background-color:#0099cb;padding:10px 30px;border-radius:5px\" href=\"http://www.daoshifu.com\">马上加入</a>"
-					+"<div style=\"text-align:center;margin-top: 80px;margin-bottom: 15px;\"><img style=\"\" src=\"http://daoshifu.com/uploadfile/edm228.png\"></img></div>"
-					+"</div>"
-				+"</div>";
-			messageBodyPart.setContent(htmlText, "text/html; charset=utf-8");
-
-			// add it
-			multipart.addBodyPart(messageBodyPart);
-
-			// second part (the image)
-			/*messageBodyPart = new MimeBodyPart();
-			DataSource fds = new FileDataSource("EDM/EDM001.png");
-			messageBodyPart.setDataHandler(new DataHandler(fds));
-			messageBodyPart.setHeader("Content-ID", "<image>");*/
-
-			// add it
-			//multipart.addBodyPart(messageBodyPart);
-
-			// put everything together
-			mimeMessage.setContent(multipart);
-
-			Transport.send(mimeMessage);
-		} catch (Exception e) {
-
-		}
-	}
-
 	private static String getLastName(String fileName) {
 		int pos = fileName.lastIndexOf("\\");
 		if (pos > -1) {
@@ -576,6 +495,5 @@ public class Util {
 	public static void main(String[] args) {
 		//String rec[] ={"346938819@qq.com"};
 		//sendEmail("noreply@daoshifu.com","cisco123",rec,"找回密码", "test", null, "", "UTF-8");
-		removeSameMail("EDM/edm.txt");
 	}
 }

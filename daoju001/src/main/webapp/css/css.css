@@ -249,26 +249,28 @@ a.common:hover{text-decoration:underline;color:#00c0ff}
 .mt25{margin-top:25px;}
 .db{display:block}
 /*browser*/
-.page#page-compatable{width:660px;margin:0 auto}
-.page#page-compatable .topbar{width:660px;margin:0 auto;padding:40px 0;*zoom:1}
-.page#page-compatable .topbar:before,.page#page-compatable .topbar:after{display:table;content:""}
-.page#page-compatable .topbar:after{clear:both;height:0;visibility:hidden}
-.page#page-compatable .topbar .logo{float:left}
-.page#page-compatable .topbar .logo a{background:url(../img/logo.png) no-repeat 0 0;display:block;width:139px;height:46px;overflow:hidden;text-indent:-9999px}
-.page#page-compatable .content{text-align:center;-webkit-text-shadow:0 1px 0px #fff;-moz-text-shadow:0 1px 0px #fff;text-shadow:0 1px 0px #fff}
-.page#page-compatable .content h2{font-size:28px;color:#333;font-family:"Microsoft Yahei","SimHei",Helvetica,Arial;letter-spacing:1px;padding:20px 0;text-align:left}
-.page#page-compatable .content h2 em{margin:0 3px;letter-spacing:0;font-family:"Microsoft Yahei","SimHei",Helvetica,Arial}
-.page#page-compatable .content .upgrade_desc{text-align:left;margin-top:10px}
-.page#page-compatable .content .browser-list{width:380px;margin:0 auto;*zoom:1}
-.page#page-compatable .content .browser-list:before,.page#page-compatable .content .browser-list:after{display:table;content:""}
-.page#page-compatable .content .browser-list:after{clear:both;height:0;visibility:hidden}
-.page#page-compatable .content .browser-list li{float:left;padding:40px 25px 80px}
-.page#page-compatable .content .browser-list a{display:block;width:140px;padding-top:130px;height:30px;color:#7d9c95;font-size:16px}
-.page#page-compatable .content .browser-list a:hover{opacity:0.9}
-.page#page-compatable .content .browser-list .chrome{background:url(../img/logo-chrome.png) center 8px no-repeat}
-.page#page-compatable .content .browser-list .flash-360{background:url(../img/logo-360.png) center 10px no-repeat}
-.page#page-compatable .content .supported{font-size:14px;color:#666}
-.page#page-compatable .content .supported a{margin:0 4px}
+html.browser{flow-y:scroll;height:100%;background: url(../img/browser-bk.png) repeat 0 0;}  
+#page-compatable{width:720px;margin:0 auto}
+#page-compatable .topbar{width:720px;margin:120px auto 0;}
+#page-compatable .topbar:before,#page-compatable .topbar:after{display:table;content:""}
+#page-compatable .topbar:after{clear:both;height:0;visibility:hidden}
+#page-compatable .topbaro{float:left}
+#page-compatable .topbar .logo a{background:url(../img/logo-blue.png) no-repeat 0 0;display:block;width:139px;height:46px;overflow:hidden;text-indent:-9999px}
+#page-compatable .content{text-align:center;-webkit-text-shadow:0 1px 0px #fff;-moz-text-shadow:0 1px 0px #fff;text-shadow:0 1px 0px #fff}
+#page-compatable .content h2{font-size:24px;color:#616161;font-family:"Microsoft Yahei","SimHei",Helvetica,Arial;letter-spacing:1px;padding:20px 0;text-align:left}
+#page-compatable .content .upgrade_desc{text-align:left;margin-top:10px;color:#616161;font-size: 18px;line-height: 28px;}
+#page-compatable .content .upgrade_desc span{color:#dd2d3a}
+#page-compatable .content .browser-list{width:640px;margin:0 auto;*zoom:1}
+#page-compatable .content .browser-list:before,#page-compatable .content .browser-list:after{display:table;content:""}
+#page-compatable .content .browser-list:after{clear:both;height:0;visibility:hidden}
+#page-compatable .content .browser-list li{float:left;padding:40px 25px 80px}
+#page-compatable .content .browser-list a{display:block;width:140px;padding-top:150px;height:30px;color:#688aa4;font-size:16px}
+#page-compatable .content .browser-list a:hover{opacity:0.9}
+#page-compatable .content .browser-list .chrome{background:url(../img/chrome.png) center 8px no-repeat}
+#page-compatable .content .browser-list .flash-360{background:url(../img/360.png) center 10px no-repeat}
+#page-compatable .content .browser-list .ff{background:url(../img/ff.png) center 10px no-repeat}
+#page-compatable .content .supported{font-size:14px;color:#616161}
+#page-compatable .content .supported a{margin:0 4px}
 
 
 

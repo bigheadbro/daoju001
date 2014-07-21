@@ -503,7 +503,7 @@ public class Util {
 	
 	public static String queryMaterial(String param)
 	{
-		String result = "";
+		String result = "该材质不在查询范围";
 		String brand = "";
     	String material = "";
 		List<String> range = new ArrayList<String>();
@@ -547,6 +547,6 @@ public class Util {
 		return result;
 	}
 	public static void main(String[] args) {
-		System.out.print(queryMaterial("PV7005"));
+		System.out.print(queryMaterial("aa"));
 	}
 }

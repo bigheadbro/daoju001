@@ -40,6 +40,14 @@ import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 import javax.mail.internet.MimeUtility;
 
+import jxl.Cell;
+import jxl.Sheet;
+import jxl.Workbook;
+import jxl.write.Label;
+import jxl.write.WritableSheet;
+import jxl.write.WritableWorkbook;
+import jxl.write.biff.LabelRecord;
+
 import org.apache.sanselan.ImageReadException;
 
 import com.banzhuan.common.Constant;
@@ -492,8 +500,53 @@ public class Util {
 			System.out.println(iterator.next().split(":")[2]);
 		}
 	}
+	
+	public static String queryMaterial(String param)
+	{
+		String result = "";
+		String brand = "";
+    	String material = "";
+		List<String> range = new ArrayList<String>();
+		try {
+            Workbook book = Workbook.getWorkbook(new File("Data/materilsort.xls"));
+            // 获得第一个工作表对象
+            Sheet sheet;
+            for(int i = 0; i < book.getSheets().length;i++)
+            {
+	            sheet = book.getSheet(i);
+	            for(int j = 1; j < sheet.getRows(); j++)
+	            {
+	            	for(int k = 1; k < sheet.getColumns(); k++)
+	            	{
+			            // 得到第一列第一行的单元格
+			            Cell cell1 = sheet.getCell(k, j);
+			            if(StringUtil.isContains(cell1.getContents(), param))
+			            {
+			            	brand = sheet.getCell(k,0).getContents();
+			            	material = sheet.getName() + "材质, ";
+			            	
+			            	String tmp = sheet.getCell(0,j).getContents();
+			            	range.add(tmp);
+			            }
+	            	}
+	            }
+	            if(range.size() != 0)
+	            {
+	            	result = brand + material + "加工范围";
+	            	for(int a = 0; a< range.size(); a++)
+	            	{
+	            		result += range.get(a)+ " ";
+	            	}
+	            	return result;
+	            }
+            }
+            book.close();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+		return result;
+	}
 	public static void main(String[] args) {
-		//String rec[] ={"346938819@qq.com"};
-		//sendEmail("noreply@daoshifu.com","cisco123",rec,"找回密码", "test", null, "", "UTF-8");
+		System.out.print(queryMaterial("PV7005"));
 	}
 }

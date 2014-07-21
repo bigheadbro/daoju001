@@ -134,6 +134,7 @@ public class UserService {
 		user.setPassword(StringUtil.encrypt(form.getPwd())); // 对密码加密
 		user.setMail(form.getMail()); // 设置邮箱地址
 		user.setLogo(Util.GenAvatar());
+		user.setProductlimit(2);
 		userDAO.insertUserEntity(user);
 		result.add("user", user);
 		return result;

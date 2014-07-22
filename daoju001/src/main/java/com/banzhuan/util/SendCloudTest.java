@@ -43,15 +43,12 @@ public class SendCloudTest {
 	public static void main(String[] args) throws Exception {
 		ArrayList<String> set = readEdmFileByLines("EDM/edm.txt");
 
-		for (int i = 16917; i < set.size(); i++) {
+		for (int i = 11088; i < set.size(); i++) {
 			try
 			{
 			while (true) {
 				Calendar time = Calendar.getInstance();
-				if (time.get(Calendar.HOUR_OF_DAY) == 13
-						|| time.get(Calendar.HOUR_OF_DAY) == 9
-						|| time.get(Calendar.HOUR_OF_DAY) == 17
-						|| time.get(Calendar.HOUR_OF_DAY) == 20) {
+				if (time.get(Calendar.HOUR_OF_DAY)%3 == 2) {
 					if (time.get(Calendar.MINUTE) <= 30) {
 						break;
 					}
@@ -59,28 +56,46 @@ public class SendCloudTest {
 			}
 			Message message = new Message("client@daoshifu.com", "刀师傅");
 			// 正文， 使用html形式，或者纯文本形式
-			message.setBody("<div style=\"text-align: center;width: 700px;background-color:#e6e6e6;padding: 20px;\">"
-					+ "<div style=\"position:relative;text-align:center;background-color:white;border-radius: 10px;\">"
-					+ "	<div style=\"margin-top:30px;text-align:center;\">"
-					+ "<h2 style=\"font-family:'微软雅黑';display: inline-block;text-align:center;background-color:white;border-radius: 5px;color:#3f5e81;border:1px solid #3f5e81;font-size:16px;padding:8px\">第二季</h2>"
-					+ "	</div>	"
-					+ "<h1 style=\"display: inline-block;color:#3f5e81;font-size:72px;font-family:'微软雅黑';font-weight: 100;margin-top:0px;margin-bottom:10px;border-bottom:1px solid #3f5e81;padding-bottom:15px;\">疯狂放送</h1>"
-					+ "<p style=\"color:#3f5e81;font-size:16px;font-family:'微软雅黑';font-weight: 700;line-height: 25px;\">刀师傅邀您免费试用 瓦格斯™<br/>旗下新品 犀飞利 去毛刺刀</p>"
-					+ "<p style=\"font-size:14px;font-family:'微软雅黑';font-weight: 100;line-height: 25px;color:#8e8e8e\">只需1分钟简单填写收件信息，即可在6月底获得试用品。<br/>"
-					+ "由本站特约代理商-苏州鼎锐，以快递包邮形式发给各位，<br/>"
-					+ "另可按各位要求，发送样本等资料。<br/></p>"
-					+ "<a style=\"font-size:16px;font-family:'微软雅黑';display: inline-block;text-decoration: none;margin-top: 30px;color:white;background-color:#3f5e81;padding:10px 30px;border-radius:5px\" href=\"http://www.daoshifu.com/event\">立即预约</a>"
-					+ "<p style=\"font-size:14px;font-family:'微软雅黑';font-weight: 100;line-height: 25px;color:#8e8e8e\">本产品由犀飞利全国总代理  苏州鼎锐提供</p>"
-					+ "<h1 style=\"color:#3d5e81;font-size:30px;padding-top: 30px;font-family:'微软雅黑';font-weight: 100;border-top: 1px solid #eee;margin: 20px\">犀飞利</h1>"
-					+ "<p style=\"font-size:12px;font-family:'微软雅黑';font-weight: 100;line-height: 25px;color:#3d5e81;margin: 0 107px;\">"
-					+ "			成立于1960年的瓦格斯公司,首次将旗下手动工具产品线,犀飞利手动去毛刺刀引入中国。<br/>"
-					+ "是模具行业、汽车制造业、航空业、塑料电子产品以及管接头行业的首选工具。<br/></p>"
-					+ "<img style=\"margin-top:40px;margin-bottom:80px;padding-bottom:25px;border-bottom:1px solid #e9e9e9;\" src=\"http://www.daoshifu.com/uploadfile/edm-item.png\" />"
-					+"<p style=\"position:absolute;left: 65px;bottom: 10px;font-size:12px;font-family:'微软雅黑';color:#8e8e8e\">如果您不愿意继续接受此类邮件,可点此<a href=\"https://sendcloud.sohu.com/webapi/unsubscribes.get.xml?api_user=yourusername\">退订此类邮件</a></p>"
-					+ "<img style=\"position:absolute;right: 65px;bottom: 10px;\" src=\"http://www.daoshifu.com/uploadfile/edmdsf.png\" />"
-					+ "</div>");
+			message.setBody("<div style=\"font-family:'楷体';text-align: center;\">"
+					+"<div style=\"width: 832px;background-color:#7d7d7d;display:inline-block;\">"
+					+"<div style=\"text-align: center;width: 832px;background: url(http://www.daoshifu.com/img/edm4.png) repeat-x 0 0;\">"
+						+"	<h1 style=\"color:white;padding-top:900px;font-size:100px;font-weight:100;margin-bottom:20px;margin-top:0\">全新改版</h1>"
+							+"<p style=\"color:white;font-size:28px;line-height:40px;\">三大功能重装上阵！<br/>2014年7月,我们期待您的光临！</p>"
+							+"<div style=\"margin-top: 60px;\">"
+								+"<div style=\"margin-left:10px;width:230px;border-right: 1px solid white;display:inline-block;\">"
+									+"<h2 style=\"font-weight:100;display:inline-block;color:white;border:2px solid white;padding:10px 30px;border-radius:10px;margin-top: 0;\"><a style=\"color:white\" href=\"http://www.daoshifu.com/items\">刀具商城</a></h2>"
+									+"<div style=\"width:160px;display:inline-block;\">"
+										+"<p style=\"text-align:left;color:white;font-size: 14px;\">?刀师傅网精选认证卖家，支付宝担保交易，网上买刀具再无后顾之忧。"
+										+"<br/><br/>?双向免费，价格优惠，全部顺丰包邮，货源不断更新。"
+										+"</p>"
+									+"</div>"
+								+"</div>"
+								+"<div style=\"width:230px;border-right: 1px solid white;display:inline-block;\">"
+									+"<h2 style=\"font-weight:100;display:inline-block;color:white;border:2px solid white;padding:10px 30px;border-radius:10px;margin-top: 0;\"><a style=\"color:white\" href=\"http://www.daoshifu.com/products\">线上展会</a></h2>"
+									+"<div style=\"width:160px;display:inline-block;\">"
+										+"<p style=\"text-align:left;color:white;font-size: 14px;\">?刀师傅网精选特色刀具，足不出户看24小时在线刀具展会。"
+										+"<br/><br/>?免费发布，有效展示，直接沟通，打造刀具界O2O平台。"
+										+"</p>"
+									+"</div>"
+								+"</div>"
+								+"<div style=\"width:230px;display:inline-block;\">"
+									+"<h2 style=\"font-weight:100;display:inline-block;color:white;border:2px solid white;padding:10px 30px;border-radius:10px;margin-top: 0;\"><a style=\"color:white\" href=\"http://www.daoshifu.com/questions\">刀具咨询</a></h2>"
+									+"<div style=\"width:160px;display:inline-block;\">"
+										+"<p style=\"text-align:left;color:white;font-size: 14px;\">?找不到合适的刀具？来刀师傅提问！资深刀具专家为你解答！"
+										+"<br/><br/>?免费提问！高质量解答！打造最专业刀具咨询平台！"
+										+"</p>"
+									+"</div>"
+								+"</div>"
+							+"</div>"
+							+"<div style=\"margin-top: 70px;padding-bottom: 100px;\">"
+							+"<img src=\"http://www.daoshifu.com/img/edm41.png\" />"
+							+"</div>"
+							+"<p style=\"text-align: center;font-size:12px;font-family:'微软雅黑';color:white\">如果您不愿意继续接受此类邮件,可点此<a href=\"https://sendcloud.sohu.com/webapi/unsubscribes.get.xml?api_user=yourusername\">退订此类邮件</a></p>"
+						+"</div>"
+					+"</div>"
+				+"</div>");
 			// 添加to, cc, bcc replyto
-			message.setSubject("犀飞利免费试用——刀师傅6月活动");
+			message.setSubject("刀师傅 全新改版 重装上阵");
 
 			message.addRecipient(set.get(i));
 

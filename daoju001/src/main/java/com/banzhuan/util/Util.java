@@ -547,6 +547,6 @@ public class Util {
 		return result;
 	}
 	public static void main(String[] args) {
-		System.out.print(queryMaterial("aa"));
+		System.out.print(queryMaterial("T9115"));
 	}
 }

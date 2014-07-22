@@ -1,52 +1,106 @@
+#if($showlogin == 1)
+<div style="display:block" id="pagemask"></div>
+<div style="display:block" class="log-win">
+#else
 <div id="pagemask"></div>
 <div class="log-win">
+#end
     <div class="log-layer">
         <h3>
-            <a class="closealert" href="#">×</a>注册
+            <a class="closealert" href="#">×</a><img src="/img/logo-white.png" />
         </h3>
         <div class="log-con clearfix">
+			<script>
+				$(function() {	
+					$("#form_log").validate({
+						rules:{
+							mail:{
+								required:true,
+								email:true
+							},
+							password:{
+								required:true
+							}
+						},
+						messages:{
+							mail:{
+								required:"请输入邮箱",
+								email:"邮箱格式不正确"
+							},
+							password:{
+								required:"请输入密码"
+							}
+						},
+						errorPlacement: function(error, element) {   
+							$(".error-msg").show();
+							var hasError = true;
+							$(".error-msg label").each(function(){
+								if($(this).attr("for") == error.attr("for")){
+									hasError = false;
+								}
+							});
+							if(hasError)
+							{
+                            	error.appendTo($(".error-msg"));     
+							}
+							else
+							{
+								$(".error-msg label").each(function(){
+									if($(this).attr("for") == error.attr("for")){
+										$(this).text(error.text());
+									}
+								});
+							}
+                        },
+						success:function(label){
+							$(".error-msg").hide();
+							$(".error-msg label").each(function(){
+								if($(this).attr("for") == $(label).attr("for")){
+									$(this).text("");
+								}
+							}); 
+						}
+					});
+				});
+			</script>
+			<div class="error-msg">
+    		</div>
             <div class="left">
-                <h2>
-                                                          登录刀师傅<a href="reg">注册</a>
-                </h2>
                 <form id="form_log" method="post" action="/common/login">
                     <!-- 隐藏字段，用于标示是表单提交 -->
                     <input type="hidden" name="do_submit" value="true"/>
                     <div class="log_seg">
+						<span>邮箱</span>
                         <input type="text" name="mail" placeholder="请输入邮箱"/>
-				                #if($stringUtil.isNotEmpty($!{status.errorMessage}))
-        						        <em for="$!{status.expression}" generated="true" class="error">$!{status.errorMessage}</em>
-        						    #end
-										</div>
+					</div>
                     <div class="log_seg">
+						<span>密码</span>
                         <input name="password" type="password" placeholder="请输入密码"/>
-				                <em id="pwd" class="error"></em>
                     </div>
-                    <div class="log_seg">
+                    <div class="mt10 clearfix">
+						<a class="forgetpwd" href="/forgetpwd">忘记密码&nbsp;?</a>
                         <label for="rememberme">
-              					  <input id="rememberme" name="rememberme" type="checkbox" />
-              						记住我
-              					</label>
-              					<a class="forgetpwd" href="#">忘记密码&nbsp;?</a>
+      					  <input id="rememberme" name="rememberme" type="checkbox" />
+      						记住我
+      					</label>
+              					
                     </div>
                     <a class="submit_log" id="submit_log" href="#">登&nbsp;&nbsp;录</a>
-                <script>
-
-                    $(function() {
-                      $("#submit_log").click(function () {
-                        $("#form_log").submit();//提交
-                      });
-                    });
-                </script>
+					<a class="reg" href="/user/reg">免费注册</a>
+                    <script>
+        				$(function() {
+        				  $('input').bind("keypress",function(event){
+        				    if (event.keyCode == 13) {
+                              $("#form_log").trigger("submit");
+                            }
+        				  });
+                          $("#submit_log").click(function () {
+                            $("#form_log").submit();//提交
+                          });
+        				});
+        			</script>
 				</form>
             </div>
-			<div class="right">
-				<h2>或者使用</h2>
-				<a href="">QQ账号登录</a>
-				<p>
-					一键登录<br/>快速注册<br/>
-				</p>
-			</div>
         </div>
     </div>
 </div>

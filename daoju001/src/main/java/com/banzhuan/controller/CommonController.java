@@ -9,6 +9,7 @@ import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
@@ -17,6 +18,7 @@ import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Set;
 import java.util.UUID;
 
@@ -88,7 +90,6 @@ public class CommonController extends BaseController{
 	@Autowired
 	@Qualifier("userService")
 	private UserService userService;
-
 	
 	@RequestMapping(value="/downloadfile")
 	public void download(HttpServletRequest request,HttpServletResponse response) throws UnsupportedEncodingException{  
@@ -182,10 +183,10 @@ public class CommonController extends BaseController{
 		mv.addObject("items", items);
 		
 		List<ProductEntity> products = new ArrayList<ProductEntity>();
-		products.add(commonService.getProduct(33));
-		products.add(commonService.getProduct(37));
-		products.add(commonService.getProduct(41));
-		products.add(commonService.getProduct(42));
+		products.add(commonService.getProduct(55));
+		products.add(commonService.getProduct(54));
+		products.add(commonService.getProduct(48));
+		products.add(commonService.getProduct(43));
 		mv.addObject("products", products);
 		
 		List<QuestionEntity> questions = new ArrayList<QuestionEntity>();
@@ -218,10 +219,10 @@ public class CommonController extends BaseController{
 		mv.addObject("items", items);
 		
 		List<ProductEntity> products = new ArrayList<ProductEntity>();
-		products.add(commonService.getProduct(33));
-		products.add(commonService.getProduct(37));
-		products.add(commonService.getProduct(41));
-		products.add(commonService.getProduct(42));
+		products.add(commonService.getProduct(55));
+		products.add(commonService.getProduct(54));
+		products.add(commonService.getProduct(48));
+		products.add(commonService.getProduct(43));
 		mv.addObject("products", products);
 		
 		List<QuestionEntity> questions = new ArrayList<QuestionEntity>();
@@ -251,10 +252,10 @@ public class CommonController extends BaseController{
 		mv.addObject("items", items);
 		
 		List<ProductEntity> products = new ArrayList<ProductEntity>();
-		products.add(commonService.getProduct(33));
-		products.add(commonService.getProduct(37));
-		products.add(commonService.getProduct(41));
-		products.add(commonService.getProduct(42));
+		products.add(commonService.getProduct(55));
+		products.add(commonService.getProduct(54));
+		products.add(commonService.getProduct(48));
+		products.add(commonService.getProduct(43));
 		mv.addObject("products", products);
 		
 		List<QuestionEntity> questions = new ArrayList<QuestionEntity>();
@@ -283,10 +284,10 @@ public class CommonController extends BaseController{
 		mv.addObject("items", items);
 		
 		List<ProductEntity> products = new ArrayList<ProductEntity>();
-		products.add(commonService.getProduct(33));
-		products.add(commonService.getProduct(37));
-		products.add(commonService.getProduct(41));
-		products.add(commonService.getProduct(42));
+		products.add(commonService.getProduct(55));
+		products.add(commonService.getProduct(54));
+		products.add(commonService.getProduct(48));
+		products.add(commonService.getProduct(43));
 		mv.addObject("products", products);
 		
 		List<QuestionEntity> questions = new ArrayList<QuestionEntity>();

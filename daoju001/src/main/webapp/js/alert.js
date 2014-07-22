@@ -1,7 +1,8 @@
 ﻿var alertshow = false;
 var alertfirst = true;
 var complainshow = false;
-
+var side_show = false;
+var complainshow = false;
 function hidecomplain() {
 	$(".complain-win").hide();
 	$("#pagemask-complain").hide();
@@ -26,6 +27,32 @@ $(function() {
 	$("img").lazyload({
 		placeholder : "../img/grey.gif",
 		event : "click"
+	});
+	$(".complain-win").hide();
+	$("#pagemask-complain").hide();
+	complainshow = false;
+	$(".goTab ul li").mouseenter(function(){
+		$(this).children("a").animate({width:"145px"});
+		$(this).children("a").css("background-color","#0099cb");
+	}).mouseleave(function(){
+		$(this).children("a").animate({width:"45px"});
+		$(this).children("a").css("background-color","#71b6cd");
+	});
+	
+	$(".gTop a").click(function(){
+		jQuery('html,body').animate({scrollTop:0},1000);
+	});
+
+	$(".complain a").click(function(){
+		showcomplain();
+	});
+	$("a.complain").click(function(){
+		showcomplain();
+	});
+	$(".code").mouseenter(function(){
+		$(this).children("i").show();
+	}).mouseleave(function(){
+		$(this).children("i").hide();
 	});
 	$(".agent-info .logo").mouseDelay(150).hover(function(){
 		var aid = $(this).attr("aid");

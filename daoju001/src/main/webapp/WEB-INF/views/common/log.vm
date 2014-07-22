@@ -2,7 +2,7 @@
 <div class="main-bk-wrapper">
   <div class="mainpage-container clearfix">
 	  <div class="reg-left">
-		  <h2><span>我还没有账号<a href="/buyer/reg">立即注册</a></span>登录</h2>
+		  <h2><span>我还没有账号<a href="/user/reg">立即注册</a></span>登录</h2>
 			<script>
 					$(function() {	
 						$("#form_log").validate({

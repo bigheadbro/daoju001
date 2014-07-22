@@ -1,4 +1,26 @@
-#set($layout = "/layout/index_layout.vm")
-<div class="main-content-container clearfix">
-	
-</div>
+<!DOCTYPE html>
+<html class="browser">
+<head>
+	<title>刀师傅</title>
+	<link href="/css/css.css" media="all" rel="stylesheet" type="text/css" />
+</head>
+<body>
+	<div class="main-bk-wrapper pt0">
+		<div class="" id="page-compatable">
+    		<div class="topbar mt30">
+    			<h1 class="logo"><a href="/" title="返回">刀师傅</a></h1>
+    		</div>
+    		<h2 class="aboutus mt100">关于我们</h2>
+    		<p class="aboutus">刀师傅网创立于2014年，是国内首家数控刀具交流平台，运用互联网/移动互联网的优势，破解信息不对称，帮助广大有选刀需求的用户免费快捷地找到高性价比的刀具方案，解决“找刀具难，买刀具贵”的难题。刀师傅网同时也帮助代理商突破传统熟人圈的限制，在公平竞争的基础上找到高质量的实际用户和地区经销商，从而促进整个刀具行业的信息化与标准化，提高行业效率。</p>
+    		<h2 class="aboutus">核心优势</h2>
+    		<p class="aboutus">
+    			专业性，垂直B2B社区，所有信息都体现出行业的独特性。<br/>
+    			创新性，结合互联网和移动互联网，更高效的解决客户问题。<br/>
+    			全面性，行业大代理商加盟，覆盖全国的经销商网络，方便用户快速找到合适的供应商。<br/>
+    		</p>
+    		<h2 class="aboutus">我们的愿景</h2>
+    		<p class="aboutus">刀师傅希望结合互联网和移动互联网技术，充分整合行业信息，成为最专业的刀具行业社区。从而更快捷高效的满足供需双方的要求。</p>
+		</div>
+	</div>
+</body>
+</html>

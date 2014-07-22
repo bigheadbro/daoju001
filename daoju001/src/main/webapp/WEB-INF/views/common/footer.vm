@@ -1,12 +1,7 @@
 <div class="clear-footer"></div>
 <div class="footer-container">
   <div class="footer-content">
-	  <p class="top">© 2013 <a href="http://www.daoshifu.com">刀师傅</a> <span>|</span> <a href="/about">关于刀师傅</a> <span>|</span> <a class="protocol fancybox-v" title="刀师傅协议" href="/img/proto.jpg">用户协议</a> <span>|</span> <a href="mailto:client@daoshifu.com">联系我们</a> <span>|</span> <a class="complainus">意见反馈</a></p>
+	  <p class="top">© 2013 <a href="http://www.daoshifu.com">刀师傅</a> <span>|</span> <a target="_blank" href="/about">关于刀师傅</a> <span>|</span> <a class="protocol fancybox-v" title="刀师傅协议" href="/img/proto.jpg">用户协议</a> <span>|</span> <a href="mailto:client@daoshifu.com">联系我们</a> <span>|</span> <a class="complainus">意见反馈</a></p>
 		<p class="bottom">沪ICP备13047239号-1　</p>
 	</div>
 </div>
-<!-- daoshifu.com Baidu tongji analytics -->
-<script type="text/javascript">
-var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
-document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3Ffdd0d4853bd81366542daabbd8e3fcb8' type='text/javascript'%3E%3C/script%3E"));
-</script>

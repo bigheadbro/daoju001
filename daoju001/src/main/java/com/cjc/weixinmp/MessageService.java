@@ -42,7 +42,6 @@ public class MessageService {
             if (e.isNeedLog()) {
                 controller.saveToFile(e.getLogFilename(), e.getLogContent());
             }
-            controller.logError("ssssss");
             throw e;
         } catch (IOException e) {
             throw new WeixinException(CommonUtils.getNextId() + "_SendMessageError(" + message.msgtype + ")", e.getMessage(), e);
@@ -62,7 +61,7 @@ public class MessageService {
         TextMessage msg = new TextMessage();
         msg.touser = toUser;
         msg.addContent(content);
-        controller.logInfo("发送主动文本消息：" + msg);
+        controller.logWarn("guic发送主动文本消息：" + msg);
         sendMessae(msg);
     }
 

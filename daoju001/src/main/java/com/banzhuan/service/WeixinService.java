@@ -25,11 +25,8 @@ public class WeixinService extends AbstractWeixinmpController {
 		synchronized (userOperateMap) {
 			AbstractUserOperate operate = userOperateMap
 					.get(FromUserNameOpenID);
-			logger.error("2323\n");
 			if (operate == null) {
-				logger.error("bbbbb\n");
 				operate = new UserOperate(FromUserNameOpenID);
-				logger.error("cccc\n");
 				userOperateMap.put(FromUserNameOpenID, operate);
 			}
 			return operate;

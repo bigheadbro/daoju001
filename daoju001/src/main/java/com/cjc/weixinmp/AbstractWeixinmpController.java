@@ -479,7 +479,11 @@ public abstract class AbstractWeixinmpController {
                 TextResponse resp2 = new TextResponse();
                 resp2.Content = findHelp("开发者账号不正确");
                 resp = resp2;
+                logWarn("1");
+                logWarn(resp.toString());
+                logWarn("2");
             }
+            
             // 鉴权
             if (resp == null) {
                 SignatureInfo sign = getSignatureInfo(request);
@@ -501,15 +505,13 @@ public abstract class AbstractWeixinmpController {
             if (resp == null) {
                 // 获取用户操作器
             	AbstractUserOperate operate = getUserOperate(req.FromUserName);
-                logError("44");
                 operate.setController(this);
-                logError("33");
                 // 调用处理器
                 try {
                     if (req instanceof TextRequest) { // 用户发送文本信息事件
-                        logInfo(req.toString());
+                        logWarn("before:"+req.toString());
                         resp = operate.onTextMessage((TextRequest) req);
-                        logError("55");
+                        logWarn("after:"+resp.toString());
                     } else if (req instanceof ImageRequest) { // 用户发送图片信息事件
                         logInfo(req.toString());
                         resp = operate.onImageMessage((ImageRequest) req);
@@ -839,7 +841,7 @@ public abstract class AbstractWeixinmpController {
             if (param != null) {
                 conn.setDoOutput(true);
                 String reqJson = gson.toJson(param);
-                logDebug("JSON:\t"+reqJson);
+                logWarn("JSON:\t"+reqJson);
                 os = conn.getOutputStream();
                 os.write(reqJson.getBytes(encoding)); // 必须这样getByte(encoding)才不会乱码
                 os.flush();
@@ -860,6 +862,7 @@ public abstract class AbstractWeixinmpController {
                     AccessToken token = getAccessToken(true);
                     // 重新请求
                     url = url.replaceAll("access_token=[^&]+", "access_token=" + token.access_token);
+                    logWarn("before:"+token.access_token);
                     return postWithJson(url, param, returnType, actionName);
                 } else if (error.errcode != 0) {
                     // 其他错误

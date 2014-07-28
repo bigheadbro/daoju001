@@ -48,7 +48,6 @@ public class AbstractUserOperate {
      * @param controller
      */
     protected final void setController(AbstractWeixinmpController controller) {
-    	logger.error("aaaa\n");
         if (this.controller != controller) {
             this.controller = controller;
         }

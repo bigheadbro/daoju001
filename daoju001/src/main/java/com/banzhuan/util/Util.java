@@ -508,7 +508,7 @@ public class Util {
     	String material = "";
 		List<String> range = new ArrayList<String>();
 		try {
-            Workbook book = Workbook.getWorkbook(new File("Data/materilsort.xls"));
+            Workbook book = Workbook.getWorkbook(new File("D:/Data/materilsort.xls"));
             // 获得第一个工作表对象
             Sheet sheet;
             for(int i = 0; i < book.getSheets().length;i++)
@@ -520,7 +520,7 @@ public class Util {
 	            	{
 			            // 得到第一列第一行的单元格
 			            Cell cell1 = sheet.getCell(k, j);
-			            if(StringUtil.isContains(cell1.getContents(), param))
+			            if(StringUtil.isContains(cell1.getContents().toLowerCase(), param.toLowerCase()))
 			            {
 			            	brand = sheet.getCell(k,0).getContents();
 			            	material = sheet.getName() + "材质, ";

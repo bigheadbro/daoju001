@@ -96,10 +96,16 @@ var ratio = 120;
 				mask.middle.height(Math.min(mask.mask.height() - mask.top.height(), posint(size.height + o.y)));
 			},
 			right: function(o) {
-				mask.right.width(Math.min(mask.mask.width() - mask.left.width(), posint(size.right - o.x)));
+				if(Math.min(mask.mask.width() - mask.left.width(), posint(size.right - o.x)) == 0)
+					mask.right.width(1);
+				else
+					mask.right.width(Math.min(mask.mask.width() - mask.left.width(), posint(size.right - o.x)));
 			},
 			left: function(o) {
-				mask.left.width(Math.min(mask.mask.width() - mask.right.width(), posint(size.left + o.x)));
+				if(Math.min(mask.mask.width() - mask.right.width(), posint(size.left + o.x)) == 0)
+					mask.left.width(1);
+				else
+					mask.left.width(Math.min(mask.mask.width() - mask.right.width(), posint(size.left + o.x)));
 			},
 			top: function(o) {
 				return posint(size.top + o.y);

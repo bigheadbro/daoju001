@@ -26,6 +26,7 @@ import com.banzhuan.dao.OrderDAO;
 import com.banzhuan.dao.ProductDAO;
 import com.banzhuan.dao.ProfessionalAnswerDAO;
 import com.banzhuan.dao.QuestionDAO;
+import com.banzhuan.dao.QuickrequestDAO;
 import com.banzhuan.dao.SampleDAO;
 import com.banzhuan.dao.UserDAO;
 import com.banzhuan.entity.AddressEntity;
@@ -41,6 +42,7 @@ import com.banzhuan.entity.OrderEntity;
 import com.banzhuan.entity.ProductEntity;
 import com.banzhuan.entity.ProfessionalAnswerEntity;
 import com.banzhuan.entity.QuestionEntity;
+import com.banzhuan.entity.QuickrequestEntity;
 import com.banzhuan.entity.SampleEntity;
 import com.banzhuan.entity.UserEntity;
 import com.banzhuan.common.Account;
@@ -51,6 +53,7 @@ import com.banzhuan.form.ItemForm;
 import com.banzhuan.form.LoginForm;
 import com.banzhuan.form.ProductForm;
 import com.banzhuan.form.QuestionForm;
+import com.banzhuan.form.RequestForm;
 import com.banzhuan.util.ChineseSpelling;
 import com.banzhuan.util.StringUtil;
 
@@ -112,6 +115,10 @@ public class CommonService {
 	@Autowired
 	@Qualifier("userDAO")
 	private UserDAO userDAO;
+	
+	@Autowired
+	@Qualifier("quickrequestDAO")
+	private QuickrequestDAO quickrequestDAO;
 	
 	public Result checkLogin(LoginForm form, Errors errors)
 	{
@@ -695,5 +702,58 @@ public class CommonService {
 	public QuestionEntity getQuestion(int id)
 	{
 		return questionDAO.queryQuestionEntityById(id);
+	}
+	
+	public void setRequestFormWithAccount(RequestForm form, Account accnt)
+	{
+		if(accnt.isLogin())
+		{
+			if(StringUtil.isNotEmpty(accnt.getQq()))
+			{
+				form.setQq(accnt.getQq());
+			}
+			if(StringUtil.isNotEmpty(accnt.getPhone()))
+			{
+				form.setPhone(accnt.getPhone());
+			}
+			if(StringUtil.isNotEmpty(accnt.getArea()))
+			{
+				form.setArea(accnt.getArea());
+			}
+		}
+	}
+	
+	public int addRequest(RequestForm form)
+	{
+		QuickrequestEntity request = new QuickrequestEntity();
+		request.setType(form.getType());
+		request.setContent(form.getContent());
+		request.setArea(form.getArea());
+		if(StringUtil.isNotEmpty(form.getBrand()))
+		{
+			request.setBrand(form.getBrand());
+		}
+		if(StringUtil.isNotEmpty(form.getQq()))
+		{
+			request.setQq(form.getQq());
+		}
+		if(StringUtil.isNotEmpty(form.getPhone()))
+		{
+			request.setPhone(form.getPhone());
+		}
+		return quickrequestDAO.insertQuickrequestEntity(request);
+	}
+	
+	public List<QuickrequestEntity> getMainRequests(){
+		return quickrequestDAO.queryMainQuickrequests();
+	}
+	
+	public List<QuickrequestEntity> getAllRequests(int type, RowBounds bound){
+		return quickrequestDAO.queryQuickrequests(type,bound);
+	}
+	
+	public int getAllRequestsCount(int type)
+	{
+		return quickrequestDAO.getAllRequestsCount(type);
 	}
 }

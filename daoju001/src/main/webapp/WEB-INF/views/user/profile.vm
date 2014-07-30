@@ -1,4 +1,3 @@
-
 #set($layout = "/layout/user_detail_layout.vm")
 <script type="text/javascript" src="/js/brand.js"></script>
 <link rel="stylesheet" href="/css/address.css">

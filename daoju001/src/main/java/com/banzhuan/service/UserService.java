@@ -257,10 +257,12 @@ public class UserService {
 			if(StringUtil.isNotEmpty(form.getContactPhone()))
 			{
 				user.setContactPhone(form.getContactPhone());
+				account.setPhone(user.getContactPhone());
 			}
 			if(StringUtil.isNotEmpty(form.getContactQQ()))
 			{
 				user.setContactQq(form.getContactQQ());
+				account.setQq(user.getContactQq());
 			}
 			if(StringUtil.isNotEmpty(form.getDescription()))
 			{
@@ -269,6 +271,7 @@ public class UserService {
 			if(StringUtil.isNotEmpty(form.getPca()))
 			{
 				user.setPca(form.getPca());
+				account.setArea(user.getPca());
 			}
 		}
 		

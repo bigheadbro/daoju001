@@ -26,6 +26,9 @@ public class Account implements Serializable{
 	private int sampleCnt;
 	private int gcCnt;
 	private int productlimit;
+	private String qq;
+	private String area;
+	private String phone;
 	
 	public boolean isAgent() {
 		return isAgent;
@@ -213,6 +216,42 @@ public class Account implements Serializable{
 	 */
 	public void setBrandName2(int brandName2) {
 		this.brandName2 = brandName2;
+	}
+	/**
+	 * @return the qq
+	 */
+	public String getQq() {
+		return qq;
+	}
+	/**
+	 * @param qq the qq to set
+	 */
+	public void setQq(String qq) {
+		this.qq = qq;
+	}
+	/**
+	 * @return the area
+	 */
+	public String getArea() {
+		return area;
+	}
+	/**
+	 * @param area the area to set
+	 */
+	public void setArea(String area) {
+		this.area = area;
+	}
+	/**
+	 * @return the phone
+	 */
+	public String getPhone() {
+		return phone;
+	}
+	/**
+	 * @param phone the phone to set
+	 */
+	public void setPhone(String phone) {
+		this.phone = phone;
 	}
 	
 

@@ -12,6 +12,15 @@ $(function() {
 		var tmp = $(this).children(".hidden").html().replace(/\<img.*\B\'\>/ig, "");
 		$(this).children(".info").children().children(".text").children("p").html(tmp);
 	});
+	$("a.phone").click(function(){
+		$(this).animate({width:"142px"});
+	}).mouseleave(function(){
+		$(this).animate({width:"32px"});
+		$(this).css("border-bottom-left-radius","16px").css("border-top-left-radius","16px");
+	});
+	$("#showrequest").click(function(){
+		showrequest();
+	});
 });
 </script>
 <div class="main-content-wrap clearfix">
@@ -28,69 +37,39 @@ $(function() {
 	<div class="main-items-wrap">
     	<div class="main-items">
     		<div class="head quickrequests clearfix">
-    			<h5>快速发布<a>一键发布</a></h5><span><a href="/requests">点击查看更多</a></span>
+    			<h5>快速发布<a id="showrequest">一键发布</a></h5><span><a href="/requests">点击查看更多</a></span>
     		</div>
     		<div class="content clearfix">
+				#foreach($request in $requests)
     			<div class="qr-item clearfix">
-  					<h3>方案</h3>
+					#if(${request.type} == 1)
+						<h3>方案</h3>
+					#else
+						<h3 class="zhaohuo">找货</h3>
+					#end
 					  <div class="qr-content">
-						    <h1>这句话字数有点长，看看到底能放多少子，但是不能换行，还是不够长，我只能再加几个字啦啦啦啦啦阿里</h1>
+						    <h1>${request.content}</h1>
     						<div class="detail">
-    								<span><em>品牌</em>日立</span>
-    								<span><em>地区</em>西安</span>
-    								<span><em>时间</em>2014-08-01</span>
+								<span><em>品牌</em>
+									#if($stringUtil.isNotEmpty(${request.brand}))
+										${request.brand}
+									#else
+										无
+									#end</span>
+								<span><em>地区</em>${request.area}</span>
+								<span><em>时间</em>$stringUtil.formatDate(${request.gmtCreate})</span>
     						</div>
 					  </div>
 					  <div class="contact">
-								<a>QQ</a>
-								<a class="phone"><span>400 042 1145</span></a>
+							#if($stringUtil.isNotEmpty(${request.qq}))
+							<a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=${request.qq}&site=qq&menu=yes">QQ</a>
+							#end
+							#if($stringUtil.isNotEmpty(${request.phone}))
+							<a class="phone"><span>${request.phone}</span><b></b></a>
+							#end
 					  </div>
   				</div>
-					<div class="qr-item clearfix">
-  					<h3>方案</h3>
-					  <div class="qr-content">
-						    <h1>ZCFW160</h1>
-    						<div class="detail">
-    								<span><em>品牌</em>日立</span>
-    								<span><em>地区</em>西安</span>
-    								<span><em>时间</em>2014-08-01</span>
-    						</div>
-					  </div>
-					  <div class="contact">
-								<a>QQ</a>
-								<a class="phone">&nbsp;</a>
-					  </div>
-  				</div>
-					<div class="qr-item clearfix">
-  					<h3 class="zhaohuo">找货</h3>
-					  <div class="qr-content">
-						    <h1>ZCFW160</h1>
-    						<div class="detail">
-    								<span><em>品牌</em>日立</span>
-    								<span><em>地区</em>西安</span>
-    								<span><em>时间</em>2014-08-01</span>
-    						</div>
-					  </div>
-					  <div class="contact">
-								<a>QQ</a>
-								<a class="phone">&nbsp;</a>
-					  </div>
-  				</div>
-					<div class="qr-item clearfix">
-  					<h3>方案</h3>
-					  <div class="qr-content">
-						    <h1>ZCFW160</h1>
-    						<div class="detail">
-    								<span><em>品牌</em>日立</span>
-    								<span><em>地区</em>西安</span>
-    								<span><em>时间</em>2014-08-01</span>
-    						</div>
-					  </div>
-					  <div class="contact">
-								<a>QQ</a>
-								<a class="phone">&nbsp;</a>
-					  </div>
-  				</div>
+				#end
     		</div>
     	</div>
     	<div class="main-items mt50">

@@ -63,6 +63,7 @@ import com.banzhuan.entity.OrderEntity;
 import com.banzhuan.entity.ProductEntity;
 import com.banzhuan.entity.ProfessionalAnswerEntity;
 import com.banzhuan.entity.QuestionEntity;
+import com.banzhuan.entity.QuickrequestEntity;
 import com.banzhuan.entity.SampleEntity;
 import com.banzhuan.entity.UserEntity;
 import com.banzhuan.form.AddressForm;
@@ -73,6 +74,7 @@ import com.banzhuan.form.LoginForm;
 import com.banzhuan.form.ProductForm;
 import com.banzhuan.form.ProfessionalAnswerForm;
 import com.banzhuan.form.QuestionForm;
+import com.banzhuan.form.RequestForm;
 import com.banzhuan.service.CommonService;
 import com.banzhuan.service.UserService;
 import com.banzhuan.util.JsonUtil;
@@ -141,6 +143,11 @@ public class CommonController extends BaseController{
         }  
     }  
 	
+	@RequestMapping(value="/newrequest")
+	public void newrequest(HttpServletRequest request,HttpServletResponse response,@ModelAttribute("form")RequestForm form){  
+		commonService.addRequest(form);
+    }  
+	
 	@RequestMapping(value="/downloadgc")
 	public void downloadgc(HttpServletRequest request,HttpServletResponse response) throws UnsupportedEncodingException{  
         response.setCharacterEncoding("utf-8");  
@@ -167,19 +174,15 @@ public class CommonController extends BaseController{
     }  
 	
 	@RequestMapping(value="/index")
-	public ModelAndView index(final HttpServletRequest request,final HttpServletResponse response)
+	public ModelAndView index(final HttpServletRequest request,final HttpServletResponse response,@ModelAttribute("form")RequestForm form)
 	{
+		Account account = (Account) WebUtils.getSessionAttribute(request, "account");
+		if(account != null)
+			commonService.setRequestFormWithAccount(form, account);
 		ModelAndView mv = new ModelAndView("/common/index2");
-		Result result = new Result();
 		
-		List<ItemEntity> items = new ArrayList<ItemEntity>();
-		items.add(commonService.getItem(18));
-		items.add(commonService.getItem(20));
-		items.add(commonService.getItem(23));
-		items.add(commonService.getItem(24));
-		items.add(commonService.getItem(31));
-		items.add(commonService.getItem(34));
-		mv.addObject("items", items);
+		List<QuickrequestEntity> requests = commonService.getMainRequests();
+		mv.addObject("requests", requests);
 		
 		List<ProductEntity> products = new ArrayList<ProductEntity>();
 		products.add(commonService.getProduct(73));
@@ -202,20 +205,15 @@ public class CommonController extends BaseController{
 	 * @return
 	 */
 	@RequestMapping(value="*")
-	public ModelAndView otherEnter(final HttpServletResponse response,@ModelAttribute("form")LoginForm form)
+	public ModelAndView otherEnter(final HttpServletRequest request,final HttpServletResponse response,@ModelAttribute("form")RequestForm form)
 	{
+		Account account = (Account) WebUtils.getSessionAttribute(request, "account");
+		if(account != null)
+			commonService.setRequestFormWithAccount(form, account);
 		ModelAndView mv = new ModelAndView("/common/index2");
 		
-		Result result = new Result();
-		
-		List<ItemEntity> items = new ArrayList<ItemEntity>();
-		items.add(commonService.getItem(18));
-		items.add(commonService.getItem(20));
-		items.add(commonService.getItem(23));
-		items.add(commonService.getItem(24));
-		items.add(commonService.getItem(31));
-		items.add(commonService.getItem(34));
-		mv.addObject("items", items);
+		List<QuickrequestEntity> requests = commonService.getMainRequests();
+		mv.addObject("requests", requests);
 		
 		List<ProductEntity> products = new ArrayList<ProductEntity>();
 		products.add(commonService.getProduct(73));
@@ -235,20 +233,15 @@ public class CommonController extends BaseController{
 
 
 	@RequestMapping(value="/*/*")
-	public ModelAndView level2Enter(final HttpServletResponse response,@ModelAttribute("form")LoginForm form)
+	public ModelAndView level2Enter(final HttpServletRequest request,final HttpServletResponse response,@ModelAttribute("form")RequestForm form)
 	{
+		Account account = (Account) WebUtils.getSessionAttribute(request, "account");
+		if(account != null)
+			commonService.setRequestFormWithAccount(form, account);
 		ModelAndView mv = new ModelAndView("/common/index2");
 		
-		Result result = new Result();
-		
-		List<ItemEntity> items = new ArrayList<ItemEntity>();
-		items.add(commonService.getItem(18));
-		items.add(commonService.getItem(20));
-		items.add(commonService.getItem(23));
-		items.add(commonService.getItem(24));
-		items.add(commonService.getItem(31));
-		items.add(commonService.getItem(34));
-		mv.addObject("items", items);
+		List<QuickrequestEntity> requests = commonService.getMainRequests();
+		mv.addObject("requests", requests);
 		
 		List<ProductEntity> products = new ArrayList<ProductEntity>();
 		products.add(commonService.getProduct(73));
@@ -267,20 +260,15 @@ public class CommonController extends BaseController{
 	}
 	
 	@RequestMapping(value="/*/*/*")
-	public ModelAndView level3Enter(final HttpServletResponse response,@ModelAttribute("form")LoginForm form)
+	public ModelAndView level3Enter(final HttpServletRequest request,final HttpServletResponse response,@ModelAttribute("form")RequestForm form)
 	{
+		Account account = (Account) WebUtils.getSessionAttribute(request, "account");
+		if(account != null)
+			commonService.setRequestFormWithAccount(form, account);
 		ModelAndView mv = new ModelAndView("/common/index2");
 		
-		Result result = new Result();
-		
-		List<ItemEntity> items = new ArrayList<ItemEntity>();
-		items.add(commonService.getItem(18));
-		items.add(commonService.getItem(20));
-		items.add(commonService.getItem(23));
-		items.add(commonService.getItem(24));
-		items.add(commonService.getItem(31));
-		items.add(commonService.getItem(34));
-		mv.addObject("items", items);
+		List<QuickrequestEntity> requests = commonService.getMainRequests();
+		mv.addObject("requests", requests);
 		
 		List<ProductEntity> products = new ArrayList<ProductEntity>();
 		products.add(commonService.getProduct(73));
@@ -358,6 +346,9 @@ public class CommonController extends BaseController{
 				account.setAnwserCnt(answerCnt);
 				account.setProductlimit(user.getProductlimit());
 				account.setQuestionCnt(questionCnt);
+				account.setQq(user.getContactQq());
+				account.setPhone(user.getContactPhone());
+				account.setArea(user.getPca());
 				//set cookie
 				if(form.getRememberme() != null && form.getRememberme())
 				{
@@ -505,9 +496,34 @@ public class CommonController extends BaseController{
 	}
 	
 	@RequestMapping(value = "/requests")
-	public ModelAndView requests(final HttpServletRequest request,final HttpServletResponse response) 
+	public ModelAndView requests(final HttpServletRequest request,final HttpServletResponse response,@ModelAttribute("form")RequestForm form)
 	{
+		int type = 0;
+		if(StringUtil.isNotEmpty(request.getParameter("type")))
+		{
+			type = Integer.parseInt(request.getParameter("type"));
+		}
+		
 		ModelAndView mv = new ModelAndView("/common/requests");
+		int page = 1;
+		if(request.getParameter("page") != null)
+		{
+			page = Integer.valueOf(request.getParameter("page"));
+		}
+		
+		List<QuickrequestEntity> requests = commonService.getAllRequests(type,new RowBounds((page-1)*Constant.ALL_REQUEST_PAGE_SIZE, Constant.ALL_REQUEST_PAGE_SIZE));
+
+		int total= commonService.getAllRequestsCount(type);
+		int totalPage=0;
+		if(total % Constant.ALL_REQUEST_PAGE_SIZE == 0)
+			totalPage=total/Constant.ALL_REQUEST_PAGE_SIZE;
+		else
+			totalPage=total/Constant.ALL_REQUEST_PAGE_SIZE+1;
+		totalPage=totalPage==0?1:totalPage;
+		mv.addObject("page", page);
+		mv.addObject("total", total);
+		mv.addObject("totalPage", totalPage);
+		mv.addObject("requests", requests);
 		return mv;
 	}
 	

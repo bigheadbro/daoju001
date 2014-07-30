@@ -24,8 +24,36 @@
 	
 	<select id="queryQuickrequests" parameterType="int"
 			resultMap="QuickrequestResultMap">
+		<if test="_parameter != 0" >   
 		<![CDATA[
-			SELECT * from t_quickrequest order by gmt_create;
+			SELECT * from t_quickrequest where type = #{type} order by gmt_create desc;
+		]]>
+		</if>
+		<if test="_parameter == 0" >   
+		<![CDATA[
+			SELECT * from t_quickrequest order by gmt_create desc;
+		]]>
+		</if>
+	</select>
+
+
+	<select id="getAllRequestsCount" parameterType="int"
+			resultType="int">
+		<if test="_parameter != 0" >   
+		<![CDATA[
+			SELECT count(1) from t_quickrequest where type != #{type};
+		]]>
+		</if>
+		<if test="_parameter == 0" >   
+		<![CDATA[
+			SELECT count(1) from t_quickrequest;
+		]]>
+		</if>
+	</select>
+	<select id="queryMainQuickrequests" parameterType="int"
+			resultMap="QuickrequestResultMap">
+		<![CDATA[
+			SELECT * from t_quickrequest order by gmt_create desc limit 4;
 		]]>
 	</select>
 

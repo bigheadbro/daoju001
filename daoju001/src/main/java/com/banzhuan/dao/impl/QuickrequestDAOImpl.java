@@ -2,6 +2,7 @@ package com.banzhuan.dao.impl;
 
 import java.util.List;
 
+import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.support.SqlSessionDaoSupport;
 import org.springframework.stereotype.Repository;
 
@@ -17,13 +18,24 @@ public class QuickrequestDAOImpl extends SqlSessionDaoSupport implements Quickre
 	}
 
 	@Override
-	public List<QuickrequestEntity> queryQuickrequests() {
-		return this.getSqlSession().selectList("queryQuickrequests");
+	public List<QuickrequestEntity> queryQuickrequests(int type, RowBounds bound) {
+		return this.getSqlSession().selectList("queryQuickrequests",type,bound);
 	}
 
 	@Override
+	public int getAllRequestsCount(int type)
+	{
+		return this.getSqlSession().selectOne("getAllRequestsCount", type);
+	}
+	
+	@Override
+	public List<QuickrequestEntity> queryMainQuickrequests() {
+		return this.getSqlSession().selectList("queryMainQuickrequests");
+	}
+	
+	@Override
 	public int insertQuickrequestEntity(QuickrequestEntity qr) {
-		this.getSqlSession().insert("updateQuickrequestCountById", qr);
+		this.getSqlSession().insert("insertQuickrequestEntity", qr);
 		return qr.getId();
 	}
 

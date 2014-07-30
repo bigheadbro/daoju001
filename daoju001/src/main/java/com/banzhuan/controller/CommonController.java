@@ -504,6 +504,13 @@ public class CommonController extends BaseController{
 		
 	}
 	
+	@RequestMapping(value = "/requests")
+	public ModelAndView requests(final HttpServletRequest request,final HttpServletResponse response) 
+	{
+		ModelAndView mv = new ModelAndView("/common/requests");
+		return mv;
+	}
+	
 	@RequestMapping(value = "/items")
 	public ModelAndView items(final HttpServletRequest request,final HttpServletResponse response, @ModelAttribute("form")ItemForm form) 
 	{

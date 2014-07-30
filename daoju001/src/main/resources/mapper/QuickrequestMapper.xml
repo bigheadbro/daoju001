@@ -22,10 +22,10 @@
 	  <id property="gmtCreate" column="gmt_create"/>
 	</resultMap>
 	
-	<select id="queryQuickrequestByUserid" parameterType="int"
+	<select id="queryQuickrequests" parameterType="int"
 			resultMap="QuickrequestResultMap">
 		<![CDATA[
-			SELECT * from t_quickrequest t where t.uid=#{uid} 
+			SELECT * from t_quickrequest order by gmt_create;
 		]]>
 	</select>
 

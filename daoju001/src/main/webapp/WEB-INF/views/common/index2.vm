@@ -27,17 +27,70 @@ $(function() {
     </div>
 	<div class="main-items-wrap">
     	<div class="main-items">
-    		<div class="head quickrequests">
-    			<h5>快速发布</h5><span><a href="/items">点击查看更多</a></span>
+    		<div class="head quickrequests clearfix">
+    			<h5>快速发布<a>一键发布</a></h5><span><a href="/requests">点击查看更多</a></span>
     		</div>
     		<div class="content clearfix">
     			<div class="qr-item clearfix">
-					<h3>方案</h3>
-					<div>
-						<h1>ZCFW160</h1>
-						<div
-					</div>
-				</div>
+  					<h3>方案</h3>
+					  <div class="qr-content">
+						    <h1>这句话字数有点长，看看到底能放多少子，但是不能换行，还是不够长，我只能再加几个字啦啦啦啦啦阿里</h1>
+    						<div class="detail">
+    								<span><em>品牌</em>日立</span>
+    								<span><em>地区</em>西安</span>
+    								<span><em>时间</em>2014-08-01</span>
+    						</div>
+					  </div>
+					  <div class="contact">
+								<a>QQ</a>
+								<a class="phone"><span>400 042 1145</span></a>
+					  </div>
+  				</div>
+					<div class="qr-item clearfix">
+  					<h3>方案</h3>
+					  <div class="qr-content">
+						    <h1>ZCFW160</h1>
+    						<div class="detail">
+    								<span><em>品牌</em>日立</span>
+    								<span><em>地区</em>西安</span>
+    								<span><em>时间</em>2014-08-01</span>
+    						</div>
+					  </div>
+					  <div class="contact">
+								<a>QQ</a>
+								<a class="phone">&nbsp;</a>
+					  </div>
+  				</div>
+					<div class="qr-item clearfix">
+  					<h3 class="zhaohuo">找货</h3>
+					  <div class="qr-content">
+						    <h1>ZCFW160</h1>
+    						<div class="detail">
+    								<span><em>品牌</em>日立</span>
+    								<span><em>地区</em>西安</span>
+    								<span><em>时间</em>2014-08-01</span>
+    						</div>
+					  </div>
+					  <div class="contact">
+								<a>QQ</a>
+								<a class="phone">&nbsp;</a>
+					  </div>
+  				</div>
+					<div class="qr-item clearfix">
+  					<h3>方案</h3>
+					  <div class="qr-content">
+						    <h1>ZCFW160</h1>
+    						<div class="detail">
+    								<span><em>品牌</em>日立</span>
+    								<span><em>地区</em>西安</span>
+    								<span><em>时间</em>2014-08-01</span>
+    						</div>
+					  </div>
+					  <div class="contact">
+								<a>QQ</a>
+								<a class="phone">&nbsp;</a>
+					  </div>
+  				</div>
     		</div>
     	</div>
     	<div class="main-items mt50">
@@ -131,3 +184,4 @@ $(function() {
 	</div>
 </div>
 #parse("/common/card.vm")
+#parse("/common/quickrequest.vm")

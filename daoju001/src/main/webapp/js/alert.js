@@ -24,10 +24,6 @@ $(function() {
 	if (document.all) {
 		window.location.href = "/browser";
 	}
-	$("img").lazyload({
-		placeholder : "../img/grey.gif",
-		event : "click"
-	});
 	$(".complain-win").hide();
 	$("#pagemask-complain").hide();
 	complainshow = false;

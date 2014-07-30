@@ -1,0 +1,94 @@
+#set($layout = "/layout/product_layout.vm")
+<div class="request-content-container clearfix">
+	<div class="requests-wrapper clearfix">
+		<div class="request-banner">
+		</div>
+		<div class="main-items">
+    		<div class="head quickrequests clearfix">
+    			<h5>快速发布<a>一键发布</a></h5><span><a href="/items">点击查看更多</a></span>
+    		</div>
+    		<div class="content clearfix">
+    			<div class="qr-item clearfix">
+  					<h3>方案</h3>
+					  <div class="qr-content">
+						    <h1>这句话字数有点长，看看到底能放多少子，但是不能换行，还是不够长，我只能再加几个字啦啦啦啦啦阿里</h1>
+    						<div class="detail">
+    								<span><em>品牌</em>日立</span>
+    								<span><em>地区</em>西安</span>
+    								<span><em>时间</em>2014-08-01</span>
+    						</div>
+					  </div>
+					  <div class="contact">
+								<a>QQ</a>
+								<a class="phone">&nbsp;</a>
+					  </div>
+  				</div>
+					<div class="qr-item clearfix">
+  					<h3>方案</h3>
+					  <div class="qr-content">
+						    <h1>ZCFW160</h1>
+    						<div class="detail">
+    								<span><em>品牌</em>日立</span>
+    								<span><em>地区</em>西安</span>
+    								<span><em>时间</em>2014-08-01</span>
+    						</div>
+					  </div>
+					  <div class="contact">
+								<a>QQ</a>
+								<a class="phone">&nbsp;</a>
+					  </div>
+  				</div>
+					<div class="qr-item clearfix">
+  					<h3 class="zhaohuo">找货</h3>
+					  <div class="qr-content">
+						    <h1>ZCFW160</h1>
+    						<div class="detail">
+    								<span><em>品牌</em>日立</span>
+    								<span><em>地区</em>西安</span>
+    								<span><em>时间</em>2014-08-01</span>
+    						</div>
+					  </div>
+					  <div class="contact">
+								<a>QQ</a>
+								<a class="phone">&nbsp;</a>
+					  </div>
+  				</div>
+					<div class="qr-item clearfix">
+  					<h3>方案</h3>
+					  <div class="qr-content">
+						    <h1>ZCFW160</h1>
+    						<div class="detail">
+    								<span><em>品牌</em>日立</span>
+    								<span><em>地区</em>西安</span>
+    								<span><em>时间</em>2014-08-01</span>
+    						</div>
+					  </div>
+					  <div class="contact">
+								<a>QQ</a>
+								<a class="phone">&nbsp;</a>
+					  </div>
+  				</div>
+    		</div>
+    	</div>
+	</div>
+	<div class="product-side">
+    		<div class="product-side-items">
+        		#foreach($item in $items)
+    				#if($velocityCount < 5)
+    					<div class="item clearfix">
+    						<div class="left">
+    							<a href="/item/${item.id}"><img src="/item/${item.cover}" data-original="/item/${item.cover}" /></a>
+    						</div>
+    						<div class="right">
+    							<a href="/item/${item.id}">${item.brand}${item.type}${item.version} ${item.material}</a>
+    							<p><span>￥${item.price}0 </span><em>包邮</em></p>
+    						</div>
+    					</div>
+    				#end
+    			#end
+        	</div>
+    		<div class="advert">
+        		<a href="/items"><img src="/img/ctshop.png" data-original /></a>
+        	</div>
+		</div>
+</div>

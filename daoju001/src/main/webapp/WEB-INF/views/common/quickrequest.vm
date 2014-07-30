@@ -1,0 +1,53 @@
+<div id="pagemask-quickrequest"></div>
+<div class="quickrequest-win">
+    <div class="quickrequest-win-content">
+        <h2>
+            <a class="close-quickrequest">x</a>
+							快速发布
+        </h2>
+				<div class="content">
+					<div class="part">
+						<div class="section">
+							<em>请选择发布类型</em>
+              <div class="type">
+								<div class="detail">
+									<a class="solution">方案</a>
+									<p>对你的问题没有头绪？<br/>请选择方案</p>
+								</div>
+								<div class="detail ">
+									<a class="zhaohuo">找货</a>
+									<p>知道需要什么刀具却没有货源？<br/>请选择找货</p>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="part">
+						<div class="section clearfix">
+							<span>内容</span>
+              <textarea  class="dsf-form-text-input qr-cont" placeholder="请输入需要发布的内容"></textarea>
+						</div>
+						<div class="section clearfix">
+							<span>品牌</span>
+              <input type="text" class="dsf-form-text-input" placeholder="请输入需要查找的品牌" />
+						</div>
+						<div class="section clearfix">
+							<span>地区</span>
+              <input type="text" class="dsf-form-text-input" placeholder="请选择您的地区" />
+						</div>
+					</div>
+					<div class="part">
+						<div class="section clearfix">
+							<span>QQ</span>
+              <input type="text" class="dsf-form-text-input" placeholder="请输入您的QQ"/>
+						</div>
+						<div class="section clearfix">
+							<span>电话</span>
+              <input type="text" class="dsf-form-text-input" placeholder="请输入您的手机号" />
+						</div>
+					</div>
+					<div class="op">
+						<a>发    布</a>
+					</div>
+				</div>
+		</div>
+</div>

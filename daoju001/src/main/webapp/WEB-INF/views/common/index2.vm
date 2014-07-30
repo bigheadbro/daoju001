@@ -27,33 +27,17 @@ $(function() {
     </div>
 	<div class="main-items-wrap">
     	<div class="main-items">
-    		<div class="head items">
-    			刀具商城<span><a href="/items">想看更多低价？马上点击</a></span>
+    		<div class="head quickrequests">
+    			<h5>快速发布</h5><span><a href="/items">点击查看更多</a></span>
     		</div>
     		<div class="content clearfix">
-    			#foreach($item in $items)
-        			#if($velocityCount == 3 || $velocityCount == 6)
-        			<div class="item br clearfix">
-        				<a href="/item/${item.id}"><img src="/item/${item.cover}" /></a>
-        				<p>
-        					${item.brand}<br/>
-        					${item.version}<br/>
-        					${item.material}<br/>
-        					<span>￥${item.price}0</span>
-        				</p>
-        			</div>
-        			#else
-        			<div class="item clearfix">
-        				<a href="/item/${item.id}"><img src="/item/${item.cover}" /></a>
-        				<p>
-        					${item.brand}<br/>
-        					${item.version}<br/>
-        					${item.material}<br/>
-        					<span>￥${item.price}0</span>
-        				</p>
-        			</div>
-        			#end
-    			#end
+    			<div class="qr-item clearfix">
+					<h3>方案</h3>
+					<div>
+						<h1>ZCFW160</h1>
+						<div
+					</div>
+				</div>
     		</div>
     	</div>
     	<div class="main-items mt50">

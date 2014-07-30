@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="quickrequest">
+	<resultMap type="QuickrequestEntity" id="QuickrequestResultMap">
+      <!---->
+	  <id property="id" column="id"/>
+   	  <!---->
+	  <id property="type" column="type"/>
+   	  <!---->
+	  <id property="content" column="content"/>
+   	  <!---->
+	  <id property="brand" column="brand"/>
+   	  <!---->
+	  <id property="area" column="area"/>
+   	  <!---->
+	  <id property="qq" column="qq"/>
+   	  <!---->
+	  <id property="phone" column="phone"/>
+	  <!---->
+	  <id property="count" column="count"/>
+   	  <!---->
+	  <id property="gmtCreate" column="gmt_create"/>
+	</resultMap>
+	
+	<select id="queryQuickrequestByUserid" parameterType="int"
+			resultMap="QuickrequestResultMap">
+		<![CDATA[
+			SELECT * from t_quickrequest t where t.uid=#{uid} 
+		]]>
+	</select>
+
+	<select id="queryQuickrequestById" parameterType="int"
+			resultMap="QuickrequestResultMap">
+		<![CDATA[
+			SELECT * from t_quickrequest t where t.id=#{id}
+		]]>
+	</select>
+	<!-- 新代理商信息 -->
+	<insert id="insertQuickrequestEntity" parameterType="QuickrequestEntity">
+		<selectKey resultType="int" order="AFTER" keyProperty="id">
+			SELECT LAST_INSERT_ID() AS id
+		</selectKey>
+		insert into t_quickrequest
+		(
+	   	  id
+	   	  ,type
+	   	  ,content
+	   	  ,brand
+	   	  ,area
+	   	  ,qq
+	   	  ,phone
+	   	  ,gmt_create)
+	      values
+	   (
+	   
+	   	  #{id}
+	   	  ,#{type}
+	   	  ,#{content}
+	   	  ,#{brand}
+	   	  ,#{area}
+	   	  ,#{qq}
+	   	  ,#{phone}
+	   	  ,now()
+	      
+	   )
+	</insert>
+	
+	<update id="updateQuickrequestCountById" parameterType="QuickrequestEntity">
+		update t_quickrequest
+		<set> 
+	      count=count+1
+		</set>
+	   where id!=#{id}
+	</update>
+	
+	<delete id="delQuickrequest"  parameterType="int">
+		delete from t_quickrequest where id =#{id};
+	</delete>
+</mapper>

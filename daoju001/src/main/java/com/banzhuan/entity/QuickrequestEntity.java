@@ -1,0 +1,163 @@
+package com.banzhuan.entity;
+
+import java.io.Serializable;
+
+public class QuickrequestEntity implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -8115255705059473432L;
+	//
+	private int id;
+
+	//
+	private int type;
+	//
+	private String content;
+	//
+	private String brand;
+	//
+	private String area;
+	//
+	private String qq;
+	//
+	private String phone;
+	//
+	private String gmtCreate;
+	
+	private int count;
+
+	/**
+	 * @return the id
+	 */
+	public int getId() {
+		return id;
+	}
+
+	/**
+	 * @param id
+	 *            the id to set
+	 */
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	/**
+	 * @return the type
+	 */
+	public int getType() {
+		return type;
+	}
+
+	/**
+	 * @param type
+	 *            the type to set
+	 */
+	public void setType(int type) {
+		this.type = type;
+	}
+
+	/**
+	 * @return the content
+	 */
+	public String getContent() {
+		return content;
+	}
+
+	/**
+	 * @param content
+	 *            the content to set
+	 */
+	public void setContent(String content) {
+		this.content = content;
+	}
+
+	/**
+	 * @return the brand
+	 */
+	public String getBrand() {
+		return brand;
+	}
+
+	/**
+	 * @param brand
+	 *            the brand to set
+	 */
+	public void setBrand(String brand) {
+		this.brand = brand;
+	}
+
+	/**
+	 * @return the area
+	 */
+	public String getArea() {
+		return area;
+	}
+
+	/**
+	 * @param area
+	 *            the area to set
+	 */
+	public void setArea(String area) {
+		this.area = area;
+	}
+
+	/**
+	 * @return the qq
+	 */
+	public String getQq() {
+		return qq;
+	}
+
+	/**
+	 * @param qq
+	 *            the qq to set
+	 */
+	public void setQq(String qq) {
+		this.qq = qq;
+	}
+
+	/**
+	 * @return the phone
+	 */
+	public String getPhone() {
+		return phone;
+	}
+
+	/**
+	 * @param phone
+	 *            the phone to set
+	 */
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+
+	/**
+	 * @return the gmtCreate
+	 */
+	public String getGmtCreate() {
+		return gmtCreate;
+	}
+
+	/**
+	 * @param gmtCreate
+	 *            the gmtCreate to set
+	 */
+	public void setGmtCreate(String gmtCreate) {
+		this.gmtCreate = gmtCreate;
+	}
+
+	/**
+	 * @return the count
+	 */
+	public int getCount() {
+		return count;
+	}
+
+	/**
+	 * @param count the count to set
+	 */
+	public void setCount(int count) {
+		this.count = count;
+	}
+}

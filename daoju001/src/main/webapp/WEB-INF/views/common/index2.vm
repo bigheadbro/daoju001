@@ -12,7 +12,25 @@ $(function() {
 		var tmp = $(this).children(".hidden").html().replace(/\<img.*\B\'\>/ig, "");
 		$(this).children(".info").children().children(".text").children("p").html(tmp);
 	});
-	$("a.phone").click(function(){
+	$(".qr-item a.qq").click(function(){
+		var rid = parseInt($(this).attr("rid"));
+		$.ajax( {   
+		    type : "POST",   
+		    url : "/updaterequest", 
+		    data : {
+		      'rid' : rid,
+		    }
+		});   
+	});
+	$(".qr-item a.phone").click(function(){
+		var rid = parseInt($(this).attr("rid"));
+		$.ajax( {   
+		    type : "POST",   
+		    url : "/updaterequest", 
+		    data : {
+		      'rid' : rid,
+		    }
+		});   
 		$(this).animate({width:"142px"});
 	}).mouseleave(function(){
 		$(this).animate({width:"32px"});
@@ -62,10 +80,10 @@ $(function() {
 					  </div>
 					  <div class="contact">
 							#if($stringUtil.isNotEmpty(${request.qq}))
-							<a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=${request.qq}&site=qq&menu=yes">QQ</a>
+							<a class="qq" rid="${request.id}" target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=${request.qq}&site=qq&menu=yes">QQ</a>
 							#end
 							#if($stringUtil.isNotEmpty(${request.phone}))
-							<a class="phone"><span>${request.phone}</span><b></b></a>
+							<a class="phone" rid="${request.id}"><span>${request.phone}</span><b></b></a>
 							#end
 					  </div>
   				</div>
@@ -88,10 +106,18 @@ $(function() {
                 				<h5 class="name"><a href="/products/${product.id}">${product.name}</a></h5>
                 				<div class="param">
                 					$stringUtil.getBrand(${product.brandId})
-    								#if(${product.processMethod} > 0)$stringUtil.getMethod(${product.processMethod})#end
-    								#if(${product.industry} > 0)$stringUtil.getIndustry(${product.industry})#end
-    								#if(${product.wpMaterial} > 0)$stringUtil.getMaterial(${product.wpMaterial})#end
-    								#if(${product.wpHardness} > 0)$stringUtil.getHardness(${product.wpHardness})#end
+    								#if(${product.processMethod} > 0)
+											$stringUtil.getMethod(${product.processMethod})
+										#end
+    								#if(${product.industry} > 0)
+											$stringUtil.getIndustry(${product.industry})
+										#end
+    								#if(${product.wpMaterial} > 0)
+											$stringUtil.getMaterial(${product.wpMaterial})
+										#end
+    								#if(${product.wpHardness} > 0)
+											$stringUtil.getHardness(${product.wpHardness})
+										#end
                 				</div>
     							<p>${product.description}</p>
     							<span>$stringUtil.formatDate(${product.gmtCreate})</span>

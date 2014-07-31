@@ -79,10 +79,17 @@
 	</select>
 	
 	
-	<select id="getUsersCount" resultType="int">
+	<select id="getUsersCount" parameterType="int" resultType="int">
+	<if test="_parameter == false" >   
 	<![CDATA[
 		SELECT count(1) from t_user t 
 	]]>
+	</if>
+	<if test="_parameter == true" >   
+	<![CDATA[
+		SELECT count(1) from t_user t where to_days(gmt_create)=to_days(now())
+	]]>
+	</if>
 	</select>
 	
 	<select id="getUsers" parameterType="int"

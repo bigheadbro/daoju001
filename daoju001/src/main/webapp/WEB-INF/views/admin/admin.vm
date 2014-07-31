@@ -27,10 +27,11 @@ $(function() {
 <p class="admin">
 	<a href="/agents/${agent.id}">$!{agent.companyName}</a> 
 	<span>$!{agent.brandName}</span>
-	#if($agent.verifiedLink)
+	<span>$!{agent.mail}</span>
+	#if($stringUtil.isNotEmpty($agent.verifiedLink))
 		<a target="_blank" href="${agent.verifiedLink}" />代理证书连接</a>
 	#else
-		<span>为上传证书</span>
+		<span>未上传证书</span>
 	#end
 	
 	#if($stringUtil.isNotEmpty(${agent.verifiedLink}))

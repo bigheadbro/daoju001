@@ -230,61 +230,6 @@ public class CommonController extends BaseController{
 
 		return mv;
 	}
-
-
-	@RequestMapping(value="/*/*")
-	public ModelAndView level2Enter(final HttpServletRequest request,final HttpServletResponse response,@ModelAttribute("form")RequestForm form)
-	{
-		Account account = (Account) WebUtils.getSessionAttribute(request, "account");
-		if(account != null)
-			commonService.setRequestFormWithAccount(form, account);
-		ModelAndView mv = new ModelAndView("/common/index2");
-		
-		List<QuickrequestEntity> requests = commonService.getMainRequests();
-		mv.addObject("requests", requests);
-		
-		List<ProductEntity> products = new ArrayList<ProductEntity>();
-		products.add(commonService.getProduct(73));
-		products.add(commonService.getProduct(70));
-		products.add(commonService.getProduct(67));
-		products.add(commonService.getProduct(72));
-		mv.addObject("products", products);
-		
-		List<QuestionEntity> questions = new ArrayList<QuestionEntity>();
-		questions.add(commonService.getQuestion(165));
-		questions.add(commonService.getQuestion(161));
-		questions.add(commonService.getQuestion(160));
-		mv.addObject("questions", questions);
-
-		return mv;
-	}
-	
-	@RequestMapping(value="/*/*/*")
-	public ModelAndView level3Enter(final HttpServletRequest request,final HttpServletResponse response,@ModelAttribute("form")RequestForm form)
-	{
-		Account account = (Account) WebUtils.getSessionAttribute(request, "account");
-		if(account != null)
-			commonService.setRequestFormWithAccount(form, account);
-		ModelAndView mv = new ModelAndView("/common/index2");
-		
-		List<QuickrequestEntity> requests = commonService.getMainRequests();
-		mv.addObject("requests", requests);
-		
-		List<ProductEntity> products = new ArrayList<ProductEntity>();
-		products.add(commonService.getProduct(73));
-		products.add(commonService.getProduct(70));
-		products.add(commonService.getProduct(67));
-		products.add(commonService.getProduct(72));
-		mv.addObject("products", products);
-		
-		List<QuestionEntity> questions = new ArrayList<QuestionEntity>();
-		questions.add(commonService.getQuestion(165));
-		questions.add(commonService.getQuestion(161));
-		questions.add(commonService.getQuestion(160));
-		mv.addObject("questions", questions);
-
-		return mv;
-	}
 	
 	@RequestMapping(value="/forgetpwd")
 	public ModelAndView forgetpwd(final HttpServletRequest request, final HttpServletResponse response, @ModelAttribute("form")LoginForm form, BindingResult result)
@@ -495,6 +440,12 @@ public class CommonController extends BaseController{
 		
 	}
 	
+	@RequestMapping(value = "/updaterequest")
+	public void updaterequest(final HttpServletRequest request,final HttpServletResponse response)
+	{
+		int rid = Integer.parseInt(request.getParameter("rid"));
+		commonService.updateRequests(rid);
+	}
 	@RequestMapping(value = "/requests")
 	public ModelAndView requests(final HttpServletRequest request,final HttpServletResponse response,@ModelAttribute("form")RequestForm form)
 	{

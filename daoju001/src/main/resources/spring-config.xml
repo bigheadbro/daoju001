@@ -61,6 +61,14 @@
    			<mvc:mapping path="/*" />
    			<bean class="com.banzhuan.interceptor.AutoLoginInterceptor" />
 		</mvc:interceptor>
+			<mvc:interceptor>
+   			<mvc:mapping path="/admin/newitem" />
+   			<mvc:mapping path="/admin/main" />
+   			<mvc:mapping path="/admin/questions" />
+   			<mvc:mapping path="/admin/sample" />
+   			<mvc:mapping path="/admin/agent" />
+   			<bean class="com.banzhuan.interceptor.AdminLoginInterceptor" />
+		</mvc:interceptor>
 		<mvc:interceptor>
    			<mvc:mapping path="/agents/*" />
    			<bean class="com.banzhuan.interceptor.AgentCounterInterceptor" />

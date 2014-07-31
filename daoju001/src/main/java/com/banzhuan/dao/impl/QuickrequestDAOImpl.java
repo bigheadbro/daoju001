@@ -41,7 +41,7 @@ public class QuickrequestDAOImpl extends SqlSessionDaoSupport implements Quickre
 
 	@Override
 	public int updateQuickrequestCountById(int id) {
-		return this.getSqlSession().update("updateQuickrequestById", id);
+		return this.getSqlSession().update("updateQuickrequestCountById", id);
 	}
 	
 	@Override

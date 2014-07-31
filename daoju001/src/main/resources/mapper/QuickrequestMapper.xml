@@ -98,7 +98,7 @@
 		<set> 
 	      count=count+1
 		</set>
-	   where id!=#{id}
+	   where id=#{id}
 	</update>
 	
 	<delete id="delQuickrequest"  parameterType="int">

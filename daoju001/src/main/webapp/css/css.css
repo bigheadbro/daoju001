@@ -297,6 +297,10 @@ h2.mt100{margin-top:70px;}
 
 
 /*管理员页面*/
+.admin-wrap{}
+.admin-wrap fieldset{display:inline-block;width:250px;padding:10px;margin-left:20px;}
+.admin-wrap fieldset legend{margin-left:20px;}
+.admin-wrap fieldset span{color:red}
 p.admin{margin-bottom:5px;border-bottom:2px solid black;padding-bottom:10px;}
 p.admin span{width:200px;display: inline-block;}
 p.admin a{width:200px;display: inline-block;}

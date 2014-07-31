@@ -4,11 +4,12 @@ import java.io.Serializable;
 
 public class RequestForm implements Serializable {
 
+	
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 1849937900741269800L;
-	
+	private static final long serialVersionUID = -7247247103762977636L;
+
 	private int type;
 	
 	private String content;

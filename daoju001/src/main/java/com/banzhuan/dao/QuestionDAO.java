@@ -36,4 +36,6 @@ public interface QuestionDAO {
 	int getAllQuestionCount(QuestionEntity question);
 	
 	void delQuestion(int qid);
+	
+	int getQuestionCount(boolean istoday);
 }

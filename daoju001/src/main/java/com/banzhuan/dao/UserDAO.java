@@ -44,6 +44,6 @@ public interface UserDAO {
 	
 	List<UserEntity> getMainagents();
 	
-	int getUsersCount();
+	int getUsersCount(boolean istoday);
 
 }

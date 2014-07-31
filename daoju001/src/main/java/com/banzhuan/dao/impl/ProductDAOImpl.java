@@ -85,6 +85,10 @@ public class ProductDAOImpl extends SqlSessionDaoSupport implements ProductDAO {
 		this.getSqlSession().delete("delProduct", id);
 	}
 	
-	
+	@Override
+	public int getProductCount(boolean istoday)
+	{
+		return this.getSqlSession().selectOne("getProductCount", istoday);
+	}
 	
 }

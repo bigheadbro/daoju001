@@ -99,5 +99,12 @@ public class QuestionDAOImpl extends SqlSessionDaoSupport implements QuestionDAO
 	{
 		this.getSqlSession().delete("delQuestion", qid);
 	}
+	
+	@Override
+	public int getQuestionCount(boolean istoday)
+	{
+		return this.getSqlSession().selectOne("getQuestionCount",istoday); 
+	}
 
+	
 }

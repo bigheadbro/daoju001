@@ -32,4 +32,6 @@ public interface ProductDAO {
 	int getProductCountByUserid(int userid);
 	
 	void delProduct(int id);
+	
+	int getProductCount(boolean istoday);
 }

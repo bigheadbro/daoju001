@@ -752,6 +752,11 @@ public class CommonService {
 		return quickrequestDAO.queryQuickrequests(type,bound);
 	}
 	
+	public void updateRequests(int id)
+	{
+		quickrequestDAO.updateQuickrequestCountById(id);
+	}
+	
 	public int getAllRequestsCount(int type)
 	{
 		return quickrequestDAO.getAllRequestsCount(type);

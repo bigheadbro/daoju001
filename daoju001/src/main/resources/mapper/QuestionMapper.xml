@@ -53,6 +53,20 @@
 		]]>
 	</select>
 	
+	<select id="getQuestionCount" parameterType="int"
+			resultType="int">
+	<if test="_parameter == true" >   
+		<![CDATA[
+			SELECT count(1) from t_question t WHERE state = 1 and DATEDIFF(t.gmt_create,NOW()) =0;
+		]]>
+	</if>
+	<if test="_parameter == false" >   
+		<![CDATA[
+			SELECT count(1) from t_question t WHERE state = 1;
+		]]>
+	</if>
+	</select>
+	
 	<select id="getUserTodayQuestionCount" parameterType="int"
 			resultType="int">
 		<![CDATA[

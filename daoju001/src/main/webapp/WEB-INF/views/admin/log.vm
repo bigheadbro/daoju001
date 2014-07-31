@@ -1,0 +1,6 @@
+#set($layout = "/layout/admin_layout.vm")
+<form>	
+		<input type="hidden" name="do_submit" value="true"/>
+		<input type="password" name="adminpwd" />
+		<input type="submit" value="刀师傅加油" />
+</form>

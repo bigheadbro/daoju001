@@ -76,9 +76,9 @@ public class UserDAOImpl extends SqlSessionDaoSupport implements UserDAO {
 	}
 	
 	@Override
-	public int getUsersCount()
+	public int getUsersCount(boolean istoday)
 	{
-		return this.getSqlSession().selectOne("getUsersCount");
+		return this.getSqlSession().selectOne("getUsersCount",istoday);
 	}
 
 }

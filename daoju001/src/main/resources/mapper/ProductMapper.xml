@@ -46,6 +46,20 @@
 	delete from t_Product where id =#{id};
 	</delete>
 	
+	<select id="getProductCount" parameterType="int"
+			resultType="int">
+		<if test="_parameter == false" >   
+		<![CDATA[
+			SELECT count(1) from t_Product t
+		]]>
+		</if>
+		<if test="_parameter == true" >   
+		<![CDATA[
+			SELECT count(1) from t_Product t where to_days(gmt_create)=to_days(now())
+		]]>
+		</if>
+	</select>
+	
 	<select id="getProductCountByUserid" parameterType="int"
 			resultType="int">
 		<![CDATA[

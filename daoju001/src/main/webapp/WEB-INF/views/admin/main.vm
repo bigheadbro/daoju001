@@ -1,0 +1,19 @@
+#set($layout = "/layout/admin_layout.vm")
+<div class="admin-wrap">
+	<fieldset>
+		<legend>用户情况</legend>
+		<p>当前注册人数：<span>${usercount}</span></p>
+		<p>今日注册人数：<span>${userCountToday}</span></p>
+		<a target="_blank" href="/admin/lghlmclyhblsqtagent">代理商页面</a>
+	</fieldset>
+	<fieldset>
+		<legend>问答情况</legend>
+		<p>当前问题总数：<span>${quescount}</span></p>
+		<p>今日问题数：<span>${quescounttoday}</span></p>
+	</fieldset>
+	<fieldset>
+		<legend>特色刀具情况</legend>
+		<p>当前特色刀具总数：<span>${productcount}</span></p>
+		<p>今日上传数：<span>${productcounttoday}</span></p>
+	</fieldset>
+</div>

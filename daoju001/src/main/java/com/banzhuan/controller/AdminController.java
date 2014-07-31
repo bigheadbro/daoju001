@@ -26,12 +26,14 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.support.RequestContextUtils;
+import org.springframework.web.servlet.view.RedirectView;
 
 import com.banzhuan.common.Account;
 import com.banzhuan.common.Constant;
 import com.banzhuan.dao.AgentDAO;
 import com.banzhuan.dao.EventDAO;
 import com.banzhuan.dao.ItemDAO;
+import com.banzhuan.dao.ProductDAO;
 import com.banzhuan.dao.QuestionDAO;
 import com.banzhuan.dao.SampleDAO;
 import com.banzhuan.dao.UserDAO;
@@ -47,7 +49,7 @@ import com.banzhuan.util.Util;
 
 @Controller
 @RequestMapping("/admin")
-@SessionAttributes({"account"})
+@SessionAttributes({"isadmin"})
 public class AdminController extends BaseController{
 
 	@Autowired
@@ -69,6 +71,51 @@ public class AdminController extends BaseController{
 	@Autowired
 	@Qualifier("itemDAO")
 	private ItemDAO itemDAO;
+	
+	@Autowired
+	@Qualifier("productDAO")
+	private ProductDAO productDAO;
+	
+	@RequestMapping(value="/log")
+	public ModelAndView log(final HttpServletRequest request, final HttpServletResponse response)
+	{
+		ModelAndView mv = new ModelAndView("/admin/log");
+		if(isDoSubmit(request))
+		{
+			String pwd = request.getParameter("adminpwd");
+			if(StringUtil.isEqual(pwd, "sglycjcqy"))
+			{
+				request.getSession().setAttribute("isadmin", true);
+				return new ModelAndView(new RedirectView("/admin/main"));
+			}
+		}
+		return mv;
+	}
+	
+	@RequestMapping(value="/main")
+	public ModelAndView main(final HttpServletRequest request, final HttpServletResponse response)
+	{
+		ModelAndView mv = new ModelAndView("/admin/main");
+		//user
+		int userCount = userDAO.getUsersCount(false);
+		int userCountToday = userDAO.getUsersCount(true);
+		mv.addObject("usercount",userCount);
+		mv.addObject("userCountToday",userCountToday);
+		
+		//question
+		int quescount = questionDAO.getQuestionCount(false);
+		int quescounttoday = questionDAO.getQuestionCount(true);
+		mv.addObject("quescount",quescount);
+		mv.addObject("quescounttoday",quescounttoday);
+		
+		//products
+		int productcount = productDAO.getProductCount(false);
+		int productcounttoday = productDAO.getProductCount(true);
+		mv.addObject("productcount",productcount);
+		mv.addObject("productcounttoday",productcounttoday);
+		
+		return mv;
+	}
 	
 	@RequestMapping(value="/lghlmclyhblsqtitem")
 	public ModelAndView item(final HttpServletRequest request, final HttpServletResponse response)

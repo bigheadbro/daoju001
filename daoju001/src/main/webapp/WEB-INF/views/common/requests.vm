@@ -1,7 +1,25 @@
 #set($layout = "/layout/product_layout.vm")
 <script>
 $(function() {
+	$(".qr-item a.qq").click(function(){
+		var rid = parseInt($(this).attr("rid"));
+		$.ajax( {   
+		    type : "POST",   
+		    url : "/updaterequest", 
+		    data : {
+		      'rid' : rid,
+		    }
+		});   
+	});
 	$("a.phone").click(function(){
+		var rid = parseInt($(this).attr("rid"));
+		$.ajax( {   
+		    type : "POST",   
+		    url : "/updaterequest", 
+		    data : {
+		      'rid' : rid,
+		    }
+		});  
 		$(this).animate({width:"142px"});
 	}).mouseleave(function(){
 		$(this).animate({width:"32px"});
@@ -51,10 +69,10 @@ $(function() {
 					  </div>
 					  <div class="contact">
 							#if($stringUtil.isNotEmpty(${request.qq}))
-							<a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=${request.qq}&site=qq&menu=yes">QQ</a>
+							<a class="qq" rid="${request.id}" target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=${request.qq}&site=qq&menu=yes">QQ</a>
 							#end
 							#if($stringUtil.isNotEmpty(${request.phone}))
-							<a class="phone"><span>${request.phone}</span><b></b></a>
+							<a class="phone" rid="${request.id}"><span>${request.phone}</span><b></b></a>
 							#end
 					  </div>
   				</div>

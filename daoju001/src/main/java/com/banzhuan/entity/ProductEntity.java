@@ -30,6 +30,7 @@ public class ProductEntity implements Serializable {
 	private String picture;
 	private String cover;
 	private int state;
+	private int count;
 
 	/**
 	 * @return the id
@@ -264,6 +265,14 @@ public class ProductEntity implements Serializable {
 	 */
 	public void setState(int state) {
 		this.state = state;
+	}
+
+	public int getCount() {
+		return count;
+	}
+
+	public void setCount(int count) {
+		this.count = count;
 	}
 	
 }

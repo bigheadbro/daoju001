@@ -29,6 +29,8 @@
 		<id property="cover" column="cover" />
 		
 		<id property="state" column="state" />
+		
+		<id property="count" column="count" />
 		<!--记录创建时间 -->
 		<id property="gmtCreate" column="gmt_create" />
 		<!--记录修改时间(最近时间) -->
@@ -120,6 +122,7 @@
 		      <if test="description != null">description=#{description},</if>
 		       <if test="brandId != 0">brandId=#{brandId},</if>
 		      <if test="state != 0">state=#{state},</if>
+		      <if test="count != 0">count=#{count},</if>
 		   	  gmt_modify=now()
 		</set>
 		where id=#{id}

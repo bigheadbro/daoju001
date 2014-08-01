@@ -669,6 +669,14 @@ public class CommonService {
 		return productDAO.queryProductEntityById(id);
 	}
 	
+	public void addProductCount(int pid, int count)
+	{
+		ProductEntity product = new ProductEntity();
+		product.setId(pid);
+		product.setCount(count);
+		productDAO.updateProductById(product);
+	}
+	
 	public int insertOrder(OrderEntity order)
 	{
 		return orderDAO.insertOrderEntity(order);

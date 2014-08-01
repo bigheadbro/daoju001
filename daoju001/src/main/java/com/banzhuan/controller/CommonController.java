@@ -402,6 +402,7 @@ public class CommonController extends BaseController{
 		{
 			return new ModelAndView(new RedirectView("/products"));  
 		}
+		commonService.addProductCount(product.getId(), product.getCount());
 		mv.addObject("product", product);
 		String[] str = product.getPicture().substring(1).split("[|]");
 		UserEntity user = commonService.getUser(product.getUserId());

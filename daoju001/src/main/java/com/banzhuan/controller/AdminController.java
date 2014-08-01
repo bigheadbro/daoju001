@@ -12,6 +12,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -35,6 +36,7 @@ import com.banzhuan.dao.EventDAO;
 import com.banzhuan.dao.ItemDAO;
 import com.banzhuan.dao.ProductDAO;
 import com.banzhuan.dao.QuestionDAO;
+import com.banzhuan.dao.QuickrequestDAO;
 import com.banzhuan.dao.SampleDAO;
 import com.banzhuan.dao.UserDAO;
 import com.banzhuan.entity.AgentEntity;
@@ -42,6 +44,7 @@ import com.banzhuan.entity.BrandEntity;
 import com.banzhuan.entity.EventEntity;
 import com.banzhuan.entity.ItemEntity;
 import com.banzhuan.entity.QuestionEntity;
+import com.banzhuan.entity.QuickrequestEntity;
 import com.banzhuan.entity.SampleEntity;
 import com.banzhuan.entity.UserEntity;
 import com.banzhuan.util.StringUtil;
@@ -76,6 +79,10 @@ public class AdminController extends BaseController{
 	@Qualifier("productDAO")
 	private ProductDAO productDAO;
 	
+	@Autowired
+	@Qualifier("quickrequestDAO")
+	private QuickrequestDAO quickrequestDAO;
+	
 	@RequestMapping(value="/log")
 	public ModelAndView log(final HttpServletRequest request, final HttpServletResponse response)
 	{
@@ -90,6 +97,22 @@ public class AdminController extends BaseController{
 			}
 		}
 		return mv;
+	}
+	
+	@RequestMapping(value="/requests")
+	public ModelAndView requests(final HttpServletRequest request, final HttpServletResponse response)
+	{
+		ModelAndView mv = new ModelAndView("/admin/requests");
+		List<QuickrequestEntity> requests = quickrequestDAO.queryQuickrequests(0, new RowBounds());
+		mv.addObject("requests",requests);
+		return mv;
+	}
+	
+	@RequestMapping(value="/delrequest/{id}")
+	public void delrequest(HttpServletRequest request, HttpServletResponse response, @PathVariable String id) throws IOException 
+	{
+		int rid = Integer.parseInt(id);
+		quickrequestDAO.delQuickrequest(rid);
 	}
 	
 	@RequestMapping(value="/main")

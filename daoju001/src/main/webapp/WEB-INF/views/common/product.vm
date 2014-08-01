@@ -35,7 +35,10 @@
     			</div>
     		</div>
     		<div class="info">
-    			<h1>${product.name}</h1>
+    			<div class="title clearfix">
+					<h1>${product.name}</h1>
+					<p>${product.count}<br/><span>浏览次数</span></p>
+				</div>
     			<div class="brand">
     				<i class="key">刀具品牌：</i>$stringUtil.getBrand(${product.brandId})<img src="/img/logo/$stringUtil.getBrandLogo(${product.brandId})" />
     			</div>

@@ -143,6 +143,7 @@
 			    <if test="processMethod != 0">AND process_method=#{processMethod}</if>
 			    <if test="wpHardness != 0">AND work_solidity=#{wpHardness}</if>
 			    <if test="wpMaterial != 0">AND work_material=#{wpMaterial}</if>
+			    AND state = 1
 		    </where> 
 			order by gmt_create desc
 	</select>

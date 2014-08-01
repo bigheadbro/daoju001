@@ -29,7 +29,7 @@ $(function() {
 		showrequest();
 	});
 	$(".changetype").click(function(){
-		$("#type").val($(this).attr("value"));
+		$("#rtype").val($(this).attr("value"));
 		$("#form_type").submit();
 	});
 });
@@ -42,8 +42,8 @@ $(function() {
 		<div class="main-items">
     		<div class="head quickrequests clearfix">
 				<form id="form_type">
-				<input type="hidden" name="type" id="type" />
-    			<h5>快速发布<a class="showrequest">一键发布</a></h5><span><a class="changetype all" value="0">所有发布</a><a class="changetype zhaohuo" value="2">只看找货</a><a class="changetype solution" value="1">只看方案</a></span>
+				<input type="hidden" name="type" id="rtype" />
+    			<h5>每日需求<a class="showrequest">一键发布</a></h5><span><a class="changetype all" value="0">所有发布</a><a class="changetype zhaohuo" value="2">只看求购</a><a class="changetype solution" value="1">只看方案</a></span>
 				</form>
     		</div>
     		<div class="content clearfix">
@@ -52,7 +52,7 @@ $(function() {
 					#if(${request.type} == 1)
 						<h3>方案</h3>
 					#else
-						<h3 class="zhaohuo">找货</h3>
+						<h3 class="zhaohuo">求购</h3>
 					#end
 					  <div class="qr-content">
 						    <h1>${request.content}</h1>

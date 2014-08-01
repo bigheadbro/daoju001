@@ -402,7 +402,7 @@ public class CommonController extends BaseController{
 		{
 			return new ModelAndView(new RedirectView("/products"));  
 		}
-		commonService.addProductCount(product.getId(), product.getCount());
+		commonService.addProductCount(product.getId(), product.getCount() + 1);
 		mv.addObject("product", product);
 		String[] str = product.getPicture().substring(1).split("[|]");
 		UserEntity user = commonService.getUser(product.getUserId());
@@ -476,6 +476,8 @@ public class CommonController extends BaseController{
 		mv.addObject("total", total);
 		mv.addObject("totalPage", totalPage);
 		mv.addObject("requests", requests);
+		List<ItemEntity> items = commonService.getMainItems();
+		mv.addObject("items", items);
 		return mv;
 	}
 	

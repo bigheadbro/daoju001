@@ -1,0 +1,22 @@
+#set($layout = "/layout/admin_layout.vm")
+<script>
+$(function() {
+	$(".del").click(function()
+    {
+		var str = "/admin/delrequest/" + $(this).attr("rid");
+    	if(confirm("确定认证吗？想清楚了？")){
+			$.ajax( {   
+    		    type : "POST",   
+    		    url : str
+    		});   
+        }
+    });
+});
+</script>
+#foreach ($request in $requests)
+<p class="admin">
+	<span>${request.content}</span>
+	<span>${request.count}</span>
+	<a class="del" rid="${request.id}">删除</a>
+</p>
+#end

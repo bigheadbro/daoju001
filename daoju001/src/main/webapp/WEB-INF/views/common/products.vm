@@ -1,4 +1,5 @@
 #set($layout = "/layout/product_layout.vm")
+<script type="text/javascript" src="/js/questions.js"></script>
 <script type="text/javascript" src="/js/product-handler.js"></script>
 <div class="product-content-container clearfix">
 	<div class="product-banner">
@@ -209,7 +210,7 @@
     								#if(${product.wpHardness} > 0)$stringUtil.getHardness(${product.wpHardness})#end
                 				</div>
     							<p>${product.description}</p>
-    							<span>$stringUtil.formatDate(${product.gmtCreate})</span>
+    							<span>$stringUtil.formatDate(${product.gmtCreate})</span><span>浏览次数(${product.count})</span>
             				</div>
             			</div>
 					#end
@@ -217,21 +218,41 @@
             </div>
 			#parse("/common/page.vm")
     	</div>
-		<div class="product-side">
-    		<div class="product-side-items">
-        		#foreach($item in $items)
-    				#if($velocityCount < 5)
-    					<div class="item clearfix">
-    						<div class="left">
-    							<a href="/item/${item.id}"><img src="/item/${item.cover}" data-original="/item/${item.cover}" /></a>
-    						</div>
-    						<div class="right">
-    							<a href="/item/${item.id}">${item.brand}${item.type}${item.version} ${item.material}</a>
-    							<p><span>￥${item.price}0 </span><em>包邮</em></p>
-    						</div>
-    					</div>
-    				#end
-    			#end
+		<div class="main-side">
+    		<div class="main-questions">
+        		<div class="head">
+        			&nbsp;<span><a class="green" href="/user/newquestion">我也要提问</a> | <a href="/questions">更多</a></span>
+        		</div>
+        		<div class="content">
+        			#foreach($question in $questions)
+        			<div class="question-item clearfix">
+        				<div class="hidden">$!{question.content}</div>
+        				<div class="logo">
+        					<a href="/users/$!{question.buyerId}">
+        						#if($!{question.userLogo})
+        							<img src="/logo/$!{question.userLogo}" />
+        						#else
+        							<img src="/img/avatar.png" />
+        						#end
+        					</a>
+        				</div>
+        				<div class="info">
+        					<ul>
+        						<li class="name"><a href="/users/$!{question.buyerId}">$!{question.userName}</a></li>
+        						<li class="title clearfix">
+        							提问
+        						</li>
+        						<li class="text clearfix">
+        							<p></p>
+        						</li>
+        						<li class="operation">
+        							<p><em>$!{question.cntPA}个方案</em><span>$stringUtil.formatDate($!{question.gmtCreate}) <a href="/questions/$!{question.id}">查看详情</a> </span> </p>
+        						</li>
+        					</ul>
+        				</div>
+        			</div>
+        			#end
+        		</div>
         	</div>
     		<div class="advert">
         		<a href="/items"><img src="/img/ctshop.png" data-original /></a>

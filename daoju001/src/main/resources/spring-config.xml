@@ -67,6 +67,7 @@
    			<mvc:mapping path="/admin/questions" />
    			<mvc:mapping path="/admin/sample" />
    			<mvc:mapping path="/admin/agent" />
+   			<mvc:mapping path="/admin/requests" />
    			<bean class="com.banzhuan.interceptor.AdminLoginInterceptor" />
 		</mvc:interceptor>
 		<mvc:interceptor>

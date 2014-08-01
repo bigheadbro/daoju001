@@ -55,7 +55,7 @@ $(function() {
 	<div class="main-items-wrap">
     	<div class="main-items">
     		<div class="head quickrequests clearfix">
-    			<h5>快速发布<a id="showrequest">一键发布</a></h5><span><a href="/requests">点击查看更多</a></span>
+    			<h5>每日需求<a id="showrequest">一键发布</a></h5><span><a href="/requests">点击查看更多</a></span>
     		</div>
     		<div class="content clearfix">
 				#foreach($request in $requests)
@@ -63,7 +63,7 @@ $(function() {
 					#if(${request.type} == 1)
 						<h3>方案</h3>
 					#else
-						<h3 class="zhaohuo">找货</h3>
+						<h3 class="zhaohuo">求购</h3>
 					#end
 					  <div class="qr-content">
 						    <h1>${request.content}</h1>

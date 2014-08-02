@@ -22,6 +22,13 @@
 	  <id property="gmtCreate" column="gmt_create"/>
 	</resultMap>
 	
+	<select id="queryQuickrequestsForwx" parameterType="int"
+			resultMap="QuickrequestResultMap"> 
+		<![CDATA[
+			SELECT * from t_quickrequest order by gmt_create desc limit 3;
+		]]>
+	</select>
+	
 	<select id="queryQuickrequests" parameterType="int"
 			resultMap="QuickrequestResultMap">
 		<if test="_parameter != 0" >   

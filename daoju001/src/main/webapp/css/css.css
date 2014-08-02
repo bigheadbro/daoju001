@@ -910,23 +910,46 @@ opacity: .3;
 /*快速发布*/
 .quickrequest-win{display:none;position:absolute;top:50px;right:400px;z-index:10002;width:636px;padding: 5px;border-radius: 5px;background:url(../img/transGray.png);font-size:13px;}
 .quickrequest-win-content{background-color:white;padding-bottom:5px;}
-.quickrequest-win h2{background-color:#0099cb;color:white;font-size:14px;padding:3px 10px;}
-.quickrequest-win h2 a{float:right;}
-.quickrequest-win .content{}
-.quickrequest-win .content .part{border-bottom:1px solid #e1e1e1;padding: 0 30px 20px 30px;margin-top:20px;}
-.quickrequest-win .content .part .section{margin-top: 20px;}
+.quickrequest-win-content h2{background-color:#0099cb;color:white;font-size:14px;padding:3px 10px;}
+.quickrequest-win-content h2 a{float:right;}
+.quickrequest-win-content .content{}
+.quickrequest-win-content .content .part{border-bottom:1px solid #e1e1e1;padding: 0 30px 20px 30px;margin-top:20px;}
+.quickrequest-win-content .content .part .section{margin-top: 20px;}
 .request-cont em.error{display: block;margin-left: 70px;}
-.quickrequest-win .content .part .section b{display: inline-block;background: url(../img/qrdian.png) no-repeat 0 8px;text-indent:10px;color:#535353}
-.quickrequest-win .content .part .section span{float:left;margin-right: 20px;width:50px;line-height: 29px;background: url(../img/qrdian.png) no-repeat 0 13px;text-indent:10px;color:#535353}
-.quickrequest-win .content .part .section textarea{width: 425px;height: 90px;}
-.quickrequest-win .content .part .type{margin-top:15px;text-align: center;}
-.quickrequest-win .content .part .type .detail{padding: 0 30px;display:inline-block;text-align: center;}
-.quickrequest-win .content .part .type .detail a{color:white;background-color:#c3c3c3;width:55px;height:55px;line-height:55px;display:inline-block;border-radius:2px;font-size:15px;font-weight: bold;}
-.quickrequest-win .content .part .type .detail a.solution:hover{background-color:#3986AF;}
-.quickrequest-win .content .part .type .detail a.zhaohuo:hover{background-color:#E37C44;}
-.quickrequest-win .content .part .type .detail p{color:#A6A6A6;margin-top: 7px;}
-.quickrequest-win .content .op{text-align:center;margin: 40px 0;}
-.quickrequest-win .content .op a{background-color:#0099CB;color:white;width:280px;line-height:35px;font-size:18px;display: inline-block;}
+.quickrequest-win-content .content .part .section b{display: inline-block;background: url(../img/qrdian.png) no-repeat 0 8px;text-indent:10px;color:#535353}
+.quickrequest-win-content .content .part .section span{float:left;margin-right: 20px;width:50px;line-height: 29px;background: url(../img/qrdian.png) no-repeat 0 13px;text-indent:10px;color:#535353}
+.quickrequest-win-content .content .part .section textarea{width: 425px;height: 90px;}
+.quickrequest-win-content .content .part .type{margin-top:15px;text-align: center;}
+.quickrequest-win-content .content .part .type .detail{padding: 0 30px;display:inline-block;text-align: center;}
+.quickrequest-win-content .content .part .type .detail a{color:white;background-color:#c3c3c3;width:55px;height:55px;line-height:55px;display:inline-block;border-radius:2px;font-size:15px;font-weight: bold;}
+.quickrequest-win-content .content .part .type .detail a.solution:hover{background-color:#3986AF;}
+.quickrequest-win-content .content .part .type .detail a.zhaohuo:hover{background-color:#E37C44;}
+.quickrequest-win-content .content .part .type .detail p{color:#A6A6A6;margin-top: 7px;}
+.quickrequest-win-content .content .op{text-align:center;margin: 40px 0;}
+.quickrequest-win-content .content .op a{background-color:#0099CB;color:white;width:280px;line-height:35px;font-size:18px;display: inline-block;}
+/*for weixin*/
+.wxquickrequest-win-content{background-color:white;padding-bottom:5px;}
+.wxquickrequest-win-content h2{background-color:#0099cb;color:white;font-size:48px;padding:3px 10px;}
+.wxquickrequest-win-content h2 a{float:right;}
+.wxquickrequest-win-content .content{}
+.wxquickrequest-win-content .content .part{border-bottom:1px solid #e1e1e1;padding: 0 30px 40px 30px;margin-top:40px;}
+.wxquickrequest-win-content .content .part .section{margin-top: 40px;font-size:30px;}
+.request-cont em.error{display: block;margin-left: 70px;}
+.wxquickrequest-win-content .content .part .section b{display: inline-block;background: url(../img/qrdian.png) no-repeat 0 20px;text-indent:10px;color:#535353}
+.wxquickrequest-win-content .content .part .section span{float:left;margin-right: 20px;width:100px;line-height: 30px;background: url(../img/qrdian.png) no-repeat 0 13px;text-indent:10px;color:#535353}
+.wxquickrequest-win-content .content .part .section textarea{width: 425px;height: 90px;}
+.wxquickrequest-win-content .content .part .type{margin-top:15px;}
+.wxquickrequest-win-content .content .part .type .detail{padding: 0 30px;display:inline-block;text-align: center;}
+.wxquickrequest-win-content .content .part .type .detail a{color:white;background-color:#c3c3c3;width:150px;height:150px;line-height:150px;display:inline-block;border-radius:2px;font-size:36px;font-weight: bold;}
+.wxquickrequest-win-content .content .part .type .detail a.solution:hover{background-color:#3986AF;}
+.wxquickrequest-win-content .content .part .type .detail a.zhaohuo:hover{background-color:#E37C44;}
+.wxquickrequest-win-content .content .part .type .detail p{color:#A6A6A6;margin-top: 7px;}
+.wxquickrequest-win-content .content .op{text-align:center;margin: 40px 0;}
+.wxquickrequest-win-content .content .op a{background-color:#0099CB;color:white;width:380px;line-height:70px;font-size:36px;display: inline-block;}
+.wxquickrequest-win-content .dsf-form-text-input{font-size:36px;line-height: 50px;}
+.wxquickrequest-win-content .content .part .section textarea.qr-cont{width:600px;}
+.wxquickrequest-win-content .request-cont em.error {display: block;margin-left: 120px;font-size:36px;}
+.wxquickrequest-win-content  em.error {font-size:36px;}
 /*投诉*/
 .complain-win{display:none;position:absolute;top:50px;right:400px;z-index:10002;width:600px;padding: 5px;border-radius: 5px;background:url(../img/transGray.png);font-size:13px;}
 .complain-win-content{background-color:white;padding-bottom:5px;}

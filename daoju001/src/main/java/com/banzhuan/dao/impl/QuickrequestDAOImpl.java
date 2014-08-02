@@ -34,6 +34,11 @@ public class QuickrequestDAOImpl extends SqlSessionDaoSupport implements Quickre
 	}
 	
 	@Override
+	public List<QuickrequestEntity> queryQuickrequestsForwx() {
+		return this.getSqlSession().selectList("queryQuickrequestsForwx");
+	}
+	
+	@Override
 	public int insertQuickrequestEntity(QuickrequestEntity qr) {
 		this.getSqlSession().insert("insertQuickrequestEntity", qr);
 		return qr.getId();

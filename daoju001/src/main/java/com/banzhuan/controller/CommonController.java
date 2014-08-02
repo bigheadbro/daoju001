@@ -185,10 +185,10 @@ public class CommonController extends BaseController{
 		mv.addObject("requests", requests);
 		
 		List<ProductEntity> products = new ArrayList<ProductEntity>();
-		products.add(commonService.getProduct(73));
-		products.add(commonService.getProduct(70));
-		products.add(commonService.getProduct(67));
-		products.add(commonService.getProduct(72));
+		products.add(commonService.getProduct(79));
+		products.add(commonService.getProduct(78));
+		products.add(commonService.getProduct(75));
+		products.add(commonService.getProduct(80));
 		mv.addObject("products", products);
 		
 		List<QuestionEntity> questions = new ArrayList<QuestionEntity>();
@@ -216,10 +216,10 @@ public class CommonController extends BaseController{
 		mv.addObject("requests", requests);
 		
 		List<ProductEntity> products = new ArrayList<ProductEntity>();
-		products.add(commonService.getProduct(73));
-		products.add(commonService.getProduct(70));
-		products.add(commonService.getProduct(67));
-		products.add(commonService.getProduct(72));
+		products.add(commonService.getProduct(79));
+		products.add(commonService.getProduct(78));
+		products.add(commonService.getProduct(75));
+		products.add(commonService.getProduct(80));
 		mv.addObject("products", products);
 		
 		List<QuestionEntity> questions = new ArrayList<QuestionEntity>();
@@ -1594,6 +1594,12 @@ public class CommonController extends BaseController{
 		ModelAndView view = new ModelAndView("common/paymembership");
 		int mid = Integer.parseInt(id);
 		view.addObject("mid",mid);
+		return view;
+	}
+	
+	@RequestMapping(value="/wxnewrequest")
+	public ModelAndView wxnewrequest(HttpServletRequest request, HttpServletResponse response,@ModelAttribute("form")RequestForm form) {
+		ModelAndView view = new ModelAndView("wx/wxnewrequest");
 		return view;
 	}
 

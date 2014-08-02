@@ -25,5 +25,7 @@ public interface QuickrequestDAO {
 	public int updateQuickrequestCountById(int id);
 	
 	void delQuickrequest(int id);
+	
+	List<QuickrequestEntity> queryQuickrequestsForwx();
 
 }

@@ -18,10 +18,11 @@ $(function() {
 				required:true
 			},
 			qq:{
-				required:true,
+				require_from_group: [1, ".contact-group"],
 				number:true
 			},
 			phone:{
+				require_from_group: [1, ".contact-group"],
 				number:true
 			}
 		},
@@ -36,11 +37,10 @@ $(function() {
 				required:"请输入所在地区"
 			},
 			qq:{
-				required:"请输入您的QQ",
 				number:"QQ只能包含数字"
 			},
 			phone:{
-				number:"电话只能包含数字"
+				number:"电话号码只能包含数字"
 			}
 		},
 		errorElement:"em",
@@ -110,12 +110,12 @@ $(function() {
 				<div class="section clearfix">
 					<span>QQ</span>
 					#springBind("form.qq")
-					<input type="text" class="dsf-form-text-input" name="${status.expression}" placeholder="请输入您的QQ" />
+					<input type="text" class="dsf-form-text-input contact-group" name="${status.expression}" placeholder="请输入您的QQ" />
 				</div>
 				<div class="section clearfix">
 					<span>电话</span>
 					#springBind("form.phone")
-					<input type="text" class="dsf-form-text-input" name="${status.expression}" placeholder="请输入您的手机号" />
+					<input type="text" class="dsf-form-text-input contact-group" name="${status.expression}" placeholder="请输入您的手机号" />
 				</div>
 			</div>
 			<div class="op">

@@ -756,6 +756,9 @@ public class CommonService {
 		return quickrequestDAO.queryMainQuickrequests();
 	}
 	
+	public List<QuickrequestEntity> getRequestsForwx(){
+		return quickrequestDAO.queryQuickrequestsForwx();
+	}
 	public List<QuickrequestEntity> getAllRequests(int type, RowBounds bound){
 		return quickrequestDAO.queryQuickrequests(type,bound);
 	}

@@ -44,7 +44,7 @@ $(function() {
 					<li><i>不能在刀具商城中出售刀具</i></li>
 					<li><i>可在刀具咨询中发表普通评论</i></li>
 					<li><i>不能参加微信推送</i></li>
-					<li><i>不能参加邮件推广活动</i></li>
+					<li><i>选择现有刀具品牌</i></li>
 					<li class="clearheight"><a href="/index">继续试用免费账户</a></li>
 				</ul>
 			</div>
@@ -56,7 +56,7 @@ $(function() {
 					<li><i>不能在刀具商城中出售刀具</i></li>
 					<li>可在刀具咨询中提供<b>专业方案</b></li>
 					<li>可以参加<b class="green">微信推送</b>(副图文位置)</li>
-					<li>付费参与邮件推广活动</li>
+					<li>可选择或添加刀具品牌（限2个）</li>
 					<li class="clearheight"><a class="paymembership" mid="1">申请认证会员</a></li>
 				</ul>
 			</div>
@@ -68,7 +68,7 @@ $(function() {
 					<li><b>免费参与刀具商城交易</b></li>
 					<li>可在刀具咨询中提供<b>专业方案</b></li>
 					<li>可以参加<b class="green">微信推送</b>(副图文位置)</li>
-					<li><b>1次全网邮件推广活动</b></li>
+					<li><b>成为品牌代理商</b></li>
 					<li class="clearheight"><a class="paymembership" mid="2">申请认证代理</a></li>
 				</ul>
 			</div>

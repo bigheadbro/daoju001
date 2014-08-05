@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="article">
+	<resultMap type="ArticleEntity" id="ArticleResultMap">
+	  <!---->
+	  <id property="id" column="id"/>
+   	  <!---->
+	  <id property="title" column="title"/>
+   	  <!---->
+	  <id property="outline" column="outline"/>
+   	  <!---->
+	  <id property="link" column="link"/>
+   	  <!---->
+	  <id property="cover" column="cover"/>
+   	  <!---->
+	  <id property="gmtCreate" column="gmt_create"/>
+	</resultMap>
+	
+	<select id="getAllarticles" 
+			resultMap="ArticleResultMap">
+		<![CDATA[
+			SELECT * from t_article order by gmt_create desc
+		]]>
+	</select>
+
+	<!-- 新代理商信息 -->
+	<insert id="insertArticleEntity" parameterType="ArticleEntity">
+		<selectKey resultType="int" order="AFTER" keyProperty="id">
+			SELECT LAST_INSERT_ID() AS id
+		</selectKey>
+		insert into t_article
+		(
+	   	  id
+	   	  ,title
+	   	  ,outline
+	   	  ,link
+	   	  ,cover
+	   	  ,gmt_create)
+	      values
+	   (
+	   	  #{id}
+	   	  ,#{title}
+	   	  ,#{outline}
+	   	  ,#{link}
+	   	  ,#{cover}
+	   	  ,now()
+	   )
+	</insert>
+
+	<update id="updateArticleById" parameterType="ArticleEntity">
+		update t_article set count = count + 1 where id=#{id}
+	</update>
+
+	<delete id="delArticle"  parameterType="int">
+	delete from t_article where id =#{id};
+	</delete>
+</mapper>

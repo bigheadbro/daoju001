@@ -641,6 +641,15 @@ public class StringUtil {
 		brandMap.put(54, "田野井,田野井.png,日本");
 		brandMap.put(55, "布鲁克纳,bruckner.jpg,德国");
 		brandMap.put(56, "杜梅尔,duhaier.jpg,德国");
+		brandMap.put(57, "UFS,UFS.jpg,意大利");
+		brandMap.put(58, "野牛,bison.jpg,波兰");
+		brandMap.put(59, "格贝尔,gerber.jpg,瑞士");
+		brandMap.put(60, "格博,gprtops.jpg,瑞士");
+		brandMap.put(61, "哈勃,hobe.jpg,德国");
+		brandMap.put(62, "伊芬戈,ifanger.jpg,瑞士");
+		brandMap.put(63, "精博,jbo.jpg,德国");
+		brandMap.put(64, "路易斯,lb.jpg,瑞士");
+		brandMap.put(65, "上工,sg.jpg,中国");
 		brandMap.put(100, "其他,otherbrand.jpg,其他");
 		
 		brandMap.put(10000, "刀师傅,刀师傅.jpg,中国");

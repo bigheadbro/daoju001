@@ -1,5 +1,5 @@
 #set($layout = "/layout/product_layout.vm")
-<script type="text/javascript" src="/js/questions.js"></script>
+<script type="text/javascript" src="/js/questions-nopic.js"></script>
 <script type="text/javascript" src="/js/product-handler.js"></script>
 <div class="product-content-container clearfix">
 	<div class="product-banner">
@@ -226,7 +226,7 @@
         		<div class="content">
         			#foreach($question in $questions)
         			<div class="question-item clearfix">
-        				<div class="hidden">$!{question.content}</div>
+        				<div class="hidden"></div>
         				<div class="logo">
         					<a href="/users/$!{question.buyerId}">
         						#if($!{question.userLogo})
@@ -243,7 +243,7 @@
         							提问
         						</li>
         						<li class="text clearfix">
-        							<p></p>
+        							<p>$!{question.content}</p>
         						</li>
         						<li class="operation">
         							<p><em>$!{question.cntPA}个方案</em><span>$stringUtil.formatDate($!{question.gmtCreate}) <a href="/questions/$!{question.id}">查看详情</a> </span> </p>

@@ -1,0 +1,117 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+    #parse("/common/agent_header.vm")
+    <body>
+        <div class="body-wrapper">
+            <div class="main-bk-wrapper">
+                <div class="mainpage-container clearfix">
+					<div class="main-right">
+    					<link rel="stylesheet" href="/css/uploadify.css">
+                        <script type="text/javascript" src="/js/jquery.uploadify.min.js"></script>
+						<script>
+                        $(function() {	
+							$("#submit_uploadarticle").click(function(){
+                        		$("#form_newarticle").submit();
+                        	});
+                        });
+                        </script>
+                        <div class="rigth-content">
+                            <form id="form_newarticle" method="post">
+                                <!-- 隐藏字段，用于标示是表单提交 -->
+                                <input type="hidden" name="do_submit" value="true"/>
+								<div class="listitem clearfix">
+                                    <ul class="user-info clearfix">
+                                        <li class="key">
+											文章题目
+                                        </li>
+                                        <li class="value">
+                                            <input type="text" class="dsf-form-text-input" name="title"  />
+                                        </li>
+                                    </ul>
+                                </div>
+								<div class="listitem clearfix">
+                                    <ul class="user-info clearfix">
+                                        <li class="key">
+											文章概要
+                                        </li>
+                                        <li class="value">
+                                            <textarea type="text" class="dsf-form-text-input" name="outline"></textarea>
+                                        </li>
+                                    </ul>
+                                </div>
+								<div class="listitem clearfix">
+                                    <ul class="user-info clearfix">
+                                        <li class="key">
+											文章链接
+                                        </li>
+                                        <li class="value">
+                                            <input type="text" class="dsf-form-text-input" name="link" value="$!{status.value}" />
+                                        </li>
+                                    </ul>
+                                </div>
+                            	<div class="listitem clearfix">
+									<input type="hidden" name="picture" id="product_pic" />
+                            		<ul class="user-info clearfix">
+                            			<li class="key">
+                            				封面上传
+                            			</li>
+                            			<li class="value">
+                            				<input type="file" name="productlink" id="file_upload"/>
+                        					<div>
+                        						<input type="hidden" name="${status.expression}" value="$!{status.value}" id="article_cover" />
+                        						<em for="$!{status.expression}" generated="true" class="error">$!{status.errorMessage}</em>
+                        					</div>
+                            			</li>
+                            		</ul>
+                            	</div>
+                            	<div class="listitem mt20 pt20 btg clearfix">
+                            		<a id="submit_uploadarticle" class="save" >上 传</a>
+                            	</div>
+								<script>
+                            		$(function() {
+                            			$("#file_upload").uploadify({  
+                                            'height'        : 30,   
+                                            'width'         : 120,    
+                            				'buttonText'    : '选择样本',
+                            				'fileSizeLimit' : '1000MB',
+                                            'fileObjName'   : 'productlink',
+                                            'swf'           : '/js/uploadify.swf', 
+                                            'uploader'      : '/admin/uploadfile_article',
+                                            'auto'          : true,  
+                            				'removeCompleted': false,
+                                            'uploadLimit'   : 1, 
+                                            'onUploadStart' : function(file) { 
+                                            },  
+                                            'onUploadSuccess':function(file, data, response){  
+                                            	$("#product_pic").val(data);
+                                            },  
+                            				'onQueueFull ' : function(){
+                            				    alert("只能上传一个文件！");
+                            				},
+                            				'overrideEvents': 'onSelectError',
+                            				'onSelectError' : function(file, errorCode, errorMsg) {
+                            					if(errorCode == SWFUpload.QUEUE_ERROR.ZERO_BYTE_FILE){
+                                            		this.queueData.errorMsg = "不能传空文件!!";
+                                            	}
+                            					if(errorCode == SWFUpload.QUEUE_ERROR.UPLOAD_LIMIT_EXCEEDED){
+                                            		this.queueData.errorMsg = "只能上传一个文件!!";
+                                            	}
+                            					if(errorCode == SWFUpload.QUEUE_ERROR.FILE_EXCEEDS_SIZE_LIMIT){
+                                            		this.queueData.errorMsg = "文件大小不能超过1000MB!!";
+                                            	}
+                            					if(errorCode == SWFUpload.QUEUE_ERROR.INVALID_FILETYPE){
+                                            		this.queueData.errorMsg = "不支持该文件类型!!";
+                                            	}
+                                    		}
+                                        });  
+									});
+                        		</script>
+                            </form>
+                        </div>
+					</div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
+

@@ -450,7 +450,7 @@ div[contentEditable]{outline:0}
 .main-items .content .qr-item .contact a{position:absolute;right: 42px;display:inline-block;margin-left: 10px;width:32px;height:32px;line-height:32px;text-align:center;background-color:#59b9d1;color:white;border-radius: 16px;font-size: 12px;font-weight: bold;}
 .main-items .content .qr-item .contact a.phone{right:0;}
 .main-items .content .qr-item .contact a.phone{overflow: hidden;}
-.main-items .content .qr-item .contact a.phone span{position:absolute;background-color:#59b9d1;width:110px;right: 32px;border-radius: 16px;border-top-right-radius: 0;border-bottom-right-radius: 0;}
+.main-items .content .qr-item .contact a.phone span{position:absolute;background-color:#59b9d1;width:110px;right: 32px;border-radius: 16px;border-top-right-radius: 0;border-bottom-right-radius: 0;font-size: 13px;font-weight: 100;}
 .main-items .content .qr-item .contact a.phone b{background-image: url(../img/qrphone.png);background-repeat: no-repeat;position: absolute;right: 7px;top: 6px;display: block;width: 18px;height: 18px;}
 .main-items .content .qr-item .contact a:hover{background-color:#3c7f8f}
 .main-content-wrap .main-items .content .item{float:left;width:200px;border:1px solid #e1e1e1;border-top:none;border-right:none;padding: 5px;}

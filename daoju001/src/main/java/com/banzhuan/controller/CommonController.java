@@ -56,6 +56,7 @@ import com.banzhuan.common.Account;
 import com.banzhuan.common.Constant;
 import com.banzhuan.common.Result;
 import com.banzhuan.entity.AddressEntity;
+import com.banzhuan.entity.ArticleEntity;
 import com.banzhuan.entity.ComplainEntity;
 import com.banzhuan.entity.EventEntity;
 import com.banzhuan.entity.ItemEntity;
@@ -329,6 +330,8 @@ public class CommonController extends BaseController{
 	public ModelAndView articles(final HttpServletRequest request,final HttpServletResponse response)
 	{
 		ModelAndView mv = new ModelAndView("/common/articles");
+		List<ArticleEntity> articles = commonService.getAllarticles();
+		mv.addObject("articles",articles);
 		return mv;
 	}
 	

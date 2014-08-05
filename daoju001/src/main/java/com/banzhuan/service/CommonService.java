@@ -15,6 +15,7 @@ import org.springframework.validation.Errors;
 
 import com.banzhuan.dao.AddressDAO;
 import com.banzhuan.dao.AgentDAO;
+import com.banzhuan.dao.ArticleDAO;
 import com.banzhuan.dao.BuyerDAO;
 import com.banzhuan.dao.CommentDAO;
 import com.banzhuan.dao.ComplainDAO;
@@ -31,6 +32,7 @@ import com.banzhuan.dao.SampleDAO;
 import com.banzhuan.dao.UserDAO;
 import com.banzhuan.entity.AddressEntity;
 import com.banzhuan.entity.AgentEntity;
+import com.banzhuan.entity.ArticleEntity;
 import com.banzhuan.entity.BuyerEntity;
 import com.banzhuan.entity.CommentEntity;
 import com.banzhuan.entity.ComplainEntity;
@@ -119,6 +121,10 @@ public class CommonService {
 	@Autowired
 	@Qualifier("quickrequestDAO")
 	private QuickrequestDAO quickrequestDAO;
+	
+	@Autowired
+	@Qualifier("articleDAO")
+	private ArticleDAO articleDAO;
 	
 	public Result checkLogin(LoginForm form, Errors errors)
 	{
@@ -771,5 +777,10 @@ public class CommonService {
 	public int getAllRequestsCount(int type)
 	{
 		return quickrequestDAO.getAllRequestsCount(type);
+	}
+	
+	public List<ArticleEntity> getAllarticles()
+	{
+		return articleDAO.getAllarticles();
 	}
 }

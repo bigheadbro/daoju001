@@ -520,7 +520,7 @@ public class Util {
 	            	{
 			            // 得到第一列第一行的单元格
 			            Cell cell1 = sheet.getCell(k, j);
-			            if(StringUtil.isContains(cell1.getContents().toLowerCase(), param.toLowerCase()))
+			            if(StringUtil.isEqual(cell1.getContents().toLowerCase(), param.toLowerCase()))
 			            {
 			            	brand = sheet.getCell(k,0).getContents();
 			            	material = sheet.getName() + "材质, ";
@@ -546,7 +546,49 @@ public class Util {
         }
 		return result;
 	}
+	
+	public static String querySteel(String param)
+	{
+		String result = "该材质不在查询范围";
+		String brand = "";
+    	String material = "";
+		List<String> range = new ArrayList<String>();
+		try {
+            Workbook book = Workbook.getWorkbook(new File("D:/Data/steel.xls"));
+            // 获得第一个工作表对象
+            Sheet sheet;
+            for(int i = 0; i < book.getSheets().length;i++)
+            {
+	            sheet = book.getSheet(i);
+	            for(int j = 1; j < sheet.getRows(); j++)
+	            {
+	            	for(int k = 0; k < sheet.getColumns(); k++)
+	            	{
+			            // 得到第一列第一行的单元格
+			            Cell cell1 = sheet.getCell(k, j);
+			            if(StringUtil.isEqual(cell1.getContents().toLowerCase(), param.toLowerCase()))
+			            {
+			            	material = sheet.getName() + ", ";
+			            	result = material;
+			            	for(int tmp=0;tmp<5;tmp++)
+			            	{
+			            		if(tmp != k)
+			            		{
+			            			result += sheet.getCell(tmp,0).getContents() + " " + sheet.getCell(tmp,j).getContents()+"、";
+			            		}
+			            	}
+			            	break;
+			            }
+	            	}
+	            }
+            }
+            book.close();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+		return result;
+	}
 	public static void main(String[] args) {
-		System.out.print(queryMaterial("T9115"));
+		removeMailFromEDM();
 	}
 }

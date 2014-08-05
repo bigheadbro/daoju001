@@ -32,6 +32,7 @@ import org.springframework.web.servlet.view.RedirectView;
 import com.banzhuan.common.Account;
 import com.banzhuan.common.Constant;
 import com.banzhuan.dao.AgentDAO;
+import com.banzhuan.dao.ArticleDAO;
 import com.banzhuan.dao.EventDAO;
 import com.banzhuan.dao.ItemDAO;
 import com.banzhuan.dao.ProductDAO;
@@ -40,6 +41,7 @@ import com.banzhuan.dao.QuickrequestDAO;
 import com.banzhuan.dao.SampleDAO;
 import com.banzhuan.dao.UserDAO;
 import com.banzhuan.entity.AgentEntity;
+import com.banzhuan.entity.ArticleEntity;
 import com.banzhuan.entity.BrandEntity;
 import com.banzhuan.entity.EventEntity;
 import com.banzhuan.entity.ItemEntity;
@@ -82,6 +84,10 @@ public class AdminController extends BaseController{
 	@Autowired
 	@Qualifier("quickrequestDAO")
 	private QuickrequestDAO quickrequestDAO;
+	
+	@Autowired
+	@Qualifier("articleDAO")
+	private ArticleDAO articleDAO;
 	
 	@RequestMapping(value="/log")
 	public ModelAndView log(final HttpServletRequest request, final HttpServletResponse response)
@@ -190,6 +196,57 @@ public class AdminController extends BaseController{
         	return "";
         }
         String path = request.getSession().getServletContext().getRealPath("/item");
+		String link = StringUtil.getTodayString() + "/" + f.getOriginalFilename();
+		path += "/" + StringUtil.getTodayString() + "/";
+		File file = new File(path + f.getOriginalFilename());
+		file.getParentFile().mkdirs();  
+		file.getParentFile().mkdirs();  
+
+		try 
+		{
+			FileCopyUtils.copy(f.getBytes(), file);
+			responseStr = link;
+
+		} catch (IOException e) {
+
+		}
+
+		return responseStr;
+	}
+	
+	
+	@RequestMapping(value="/lghlmclyhblsqtarticle")
+	public ModelAndView newarticle(final HttpServletRequest request, final HttpServletResponse response)
+	{
+		ModelAndView mv = new ModelAndView("/admin/newarticle");
+		
+		if(isDoSubmit(request))
+		{
+			ArticleEntity article = new ArticleEntity();
+			article.setCover(request.getParameter("picture"));
+			article.setLink(request.getParameter("link"));
+			article.setTitle(request.getParameter("title"));
+			article.setOutline(request.getParameter("outline"));
+			articleDAO.insertArticleEntity(article);
+			return mv;
+		}
+		return mv;
+	}
+	
+	@RequestMapping(value = "uploadfile_article", produces="text/plain;charset=UTF-8")  
+	@ResponseBody
+	public String uploadfile_article(HttpServletRequest request, HttpServletResponse response)
+	{
+		String responseStr="";  
+		MultipartHttpServletRequest r = (MultipartHttpServletRequest) request;
+		  
+        MultipartFile f = r.getFile("productlink");    
+        String type = f.getOriginalFilename().substring(f.getOriginalFilename().lastIndexOf(".")).toLowerCase();
+        if(!StringUtil.isProperImageFile(type))
+        {
+        	return "";
+        }
+        String path = request.getSession().getServletContext().getRealPath("/article");
 		String link = StringUtil.getTodayString() + "/" + f.getOriginalFilename();
 		path += "/" + StringUtil.getTodayString() + "/";
 		File file = new File(path + f.getOriginalFilename());

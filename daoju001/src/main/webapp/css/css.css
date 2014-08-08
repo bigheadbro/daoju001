@@ -769,6 +769,7 @@ em.error{color:#cc3333;font-size:14px;}
 label em.error{float:right}
 .error-msg label{display:block;}
 .selbrand{color:#7E7E7E;width:100px;display:inline-block;}
+#otherbrand{display:none;color:#ff9000}
 .selbrand:hover{text-decoration:underline;color:#00c0ff}
 #uploadsample{color:white;background-color:#ff9000;border-radius:5px;padding:3px;display: inline-block;}
 .uploadv{width:62px;height:26px;opacity:0;position:absolute;left: 0;top: 10px;}
@@ -1303,7 +1304,7 @@ p.forget{font-size: 12px;margin: 10px;color: #707070;}
 	background:#fff;
 }
 
-.page .next, .page .prev{background:#f30;color:white;}
+.page .next, .page .prev{background:#3986af;color:white;}
 
 .page .current {
     background: #d6d6d6;

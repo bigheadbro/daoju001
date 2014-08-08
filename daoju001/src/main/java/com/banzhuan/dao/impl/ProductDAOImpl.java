@@ -56,6 +56,12 @@ public class ProductDAOImpl extends SqlSessionDaoSupport implements ProductDAO {
 	}
 	
 	@Override
+	public List<ProductEntity> getAllProducts()
+	{
+		return this.getSqlSession().selectList("getAllProducts");
+	}
+	
+	@Override
 	public List<ProductEntity> getAllProductsByType(ProductEntity gc, RowBounds bound)
 	{
 		return this.getSqlSession().selectList("getAllProductsByType", gc, bound);

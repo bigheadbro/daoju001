@@ -118,6 +118,7 @@
 							选择刀具品牌
 						#end
 					</a>
+					<span id="otherbrand">需要添加品牌请联系刀师傅客服</span>
 					<input type="hidden" id="brand" name="${status.expression}" value="${status.value}"/>
 					<em for="$!{status.expression}" generated="true" class="error">$!{status.errorMessage}</em>
                 </li>
@@ -379,7 +380,7 @@
                   	'height'        : 30,   
                   	'width'         : 120,    
       				'buttonText'    : '选择图片',
-      				'fileSizeLimit' : '5MB',
+      				'fileSizeLimit' : '2MB',
                	   	'fileObjName'   : 'productlink',
                   	'swf'           : '/js/uploadify.swf',  
                   	'uploader'      : '/user/uploadfile_product',  

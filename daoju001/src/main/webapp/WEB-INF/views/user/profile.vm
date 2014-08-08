@@ -131,6 +131,7 @@
 							品牌2
 						#end
 					</a>
+					<span id="otherbrand">需要添加品牌请联系刀师傅客服</span>
                 </li>
             </ul>
         </div>

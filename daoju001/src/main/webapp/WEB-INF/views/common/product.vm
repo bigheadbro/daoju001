@@ -51,7 +51,7 @@
     			<div class="detail">
     				<ul>
     					<li>
-    						<span><i class="key">代理商：</i><em><a targt="_blank" href="/users/${user.id}">${user.nick}</a></em></span>
+    						<span><i class="key">供应商：</i><em><a targt="_blank" href="/users/${user.id}">${user.nick}</a></em></span>
     					</li>
     					<li>
     						<span><i class="key">地址：</i>${user.address}</span>

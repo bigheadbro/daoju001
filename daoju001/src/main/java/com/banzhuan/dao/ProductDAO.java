@@ -23,6 +23,8 @@ public interface ProductDAO {
 	
 	List<ProductEntity> getAllProductsByType(ProductEntity Product);
 	
+	List<ProductEntity> getAllProducts();
+	
 	List<ProductEntity> getAllProductsByType(ProductEntity Product, RowBounds bound);
 	
 	List<ProductEntity> getMainProducts();

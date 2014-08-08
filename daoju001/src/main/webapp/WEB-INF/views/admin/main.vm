@@ -15,6 +15,7 @@
 		<legend>特色刀具情况</legend>
 		<p>当前特色刀具总数：<span>${productcount}</span></p>
 		<p>今日上传数：<span>${productcounttoday}</span></p>
+		<a target="_blank" href="/admin/lghlmclyhblsqtproduct">特色刀具</a>
 	</fieldset>
 	<fieldset>
 		<legend>小百科情况</legend>

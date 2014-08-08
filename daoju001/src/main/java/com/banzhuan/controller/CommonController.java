@@ -450,6 +450,7 @@ public class CommonController extends BaseController{
 		int rid = Integer.parseInt(request.getParameter("rid"));
 		commonService.updateRequests(rid);
 	}
+	
 	@RequestMapping(value = "/requests")
 	public ModelAndView requests(final HttpServletRequest request,final HttpServletResponse response,@ModelAttribute("form")RequestForm form)
 	{

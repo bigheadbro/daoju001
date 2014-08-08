@@ -1,0 +1,41 @@
+#set($layout = "/layout/admin_layout.vm")
+<script>
+$(function() {
+	$(".pass").click(function()
+    {
+		var str = "/admin/passproduct/" + $(this).attr("pid");
+    	if(confirm("确定通过吗？想清楚了？")){
+			$.ajax( {   
+    		    type : "POST",   
+    		    url : str
+    		});   
+        }
+    });
+	$(".fail").click(function()
+    {
+		var str = "/admin/failproduct/" + $(this).attr("pid");
+    	if(confirm("确定不通过吗？想清楚了？")){
+			$.ajax( {   
+    		    type : "POST",   
+    		    url : str
+    		});   
+        }
+    });
+});
+</script>
+#foreach ($product in $products)
+<p class="admin">
+	<a target="_blank" href="/products/${product.id}">$!{product.name}</a> 
+	#if(${product.state} == 0)
+		<span>状态：未审核</span>
+	#elseif(${product.state} == 1)
+		<span>状态：已通过</span>
+	#else
+		<span>状态：未通过</span>
+	#end
+	<a class="pass" pid="${product.id}">通过</a>
+
+	<a class="fail" pid="${product.id}">不通过</a>
+
+</p>
+#end

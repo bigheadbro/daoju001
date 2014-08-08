@@ -23,7 +23,11 @@ $(function() {
     	$("#selbrand").text($(this).children(".name").text());
     	hidebrand();
     	if(parseInt($(this).attr("key")) ==  100){
-    		showAlert("品牌添加","如果希望添加自己的品牌，请与我们的客服联系","","确定","");
+    		$("#otherbrand").show();
+    	}
+    	else
+    	{
+    		$("#otherbrand").hide();
     	}
     });
 });

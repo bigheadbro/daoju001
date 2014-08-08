@@ -30,7 +30,14 @@ public class UserOperate extends AbstractUserOperate {
     public AbstractResponse onTextMessage(TextRequest text) throws WeixinException {
 		TextResponse tr = new TextResponse();
     	tr.ToUserName = text.ToUserName;
-    	tr.Content =  Util.queryMaterial(text.Content);
+    	if(StringUtil.isEqual(text.Content.substring(0,2), "材料"))
+    	{
+    		tr.Content =  Util.queryMaterial(text.Content);
+    	}
+    	else if(StringUtil.isEqual(text.Content.substring(0,2), "钢材"))
+    	{
+    		tr.Content =  Util.querySteel(text.Content);
+    	}
 		return tr;
     }
 	
@@ -44,7 +51,7 @@ public class UserOperate extends AbstractUserOperate {
 				.addSubButton(CustomMenu.TYPE.view, "我要发布", null, "http://115017.ichengyun.net/wxnewrequest")
 				.addSubButton(CustomMenu.TYPE.click, "今日发布", "todayrequest", null);
 		button.addButton(CustomMenu.TYPE.click, "小刀工具", "tools", null) 
-		        .addSubButton(CustomMenu.TYPE.click, "材料查询", "material", null) 
+		        .addSubButton(CustomMenu.TYPE.click, "材质查询", "material", null) 
 		        .addSubButton(CustomMenu.TYPE.click, "钢材查询", "steel", null) 
 		        .addSubButton(CustomMenu.TYPE.click, "螺纹查询","luowen", null);
 		this.controller.getCustomMenuService().updateMenu(button);
@@ -68,11 +75,11 @@ public class UserOperate extends AbstractUserOperate {
         }
         if(StringUtil.isEqual(click.EventKey, "material"))
         {
-        	tr.Content =  "输入一个刀具材料名称，会返回其他品牌的相关信息。\n如查询T9115，可以得到泰珂洛CVD材质, 加工范围M10 ";
+        	tr.Content =  "输入一个刀具材质，将会返回该材质相关信息。\n请输入\"材质T9115\" 或 \"材质WKP35S\"或\"材质YBC251\" 试试吧! ";
         }
         if(StringUtil.isEqual(click.EventKey, "steel"))
         {
-        	tr.Content =  "输入一个钢铁材质名称，会返回其他国家标准的名称。\n如查询40CrNi，可以得到合金结构钢, 日本JiS SNC236、美国AiSi / SAE 3135、德国W.nr 1.571、德国DiN 36NiCr6、";
+        	tr.Content =  "输入一个钢铁材质名称，将会返回信息和其他国家标准的名称。\n请输入\"钢材40#\"或\"钢材1.4837\"或\"钢材42CrMo\" 试试吧!";
         }
         if(StringUtil.isEqual(click.EventKey, "luowen"))
         {

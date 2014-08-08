@@ -116,9 +116,6 @@ $(function() {
 		    		if(data.cntSample){
 		    			$(".card-win .sample").text(data.cntSample);
 		    		}
-		    		else{
-		    			$(".card-win .sample").text("0");
-		    		}
 		    		if(top2 > 210){
 		    			var tmp = top - 210;
 		    			$(".card-win").css("top",tmp+"px");

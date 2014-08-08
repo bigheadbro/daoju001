@@ -188,7 +188,6 @@
 	      <if test="contactName != null">contact_name=#{contactName},</if>
 	      <if test="contactPhone != null">contact_phone=#{contactPhone},</if>
 	      <if test="contactQq != null">contact_qq=#{contactQq},</if>
-	      <if test="productlimit != null">productlimit=#{productlimit},</if>
 	      <if test="pca != null">pca=#{pca},</if>
 	      <if test="logo != null">logo=#{logo},</if>
 	      <if test="gmtAuth != null">gmt_auth=#{gmtAuth},</if>

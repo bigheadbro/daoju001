@@ -45,6 +45,7 @@ import com.banzhuan.entity.ArticleEntity;
 import com.banzhuan.entity.BrandEntity;
 import com.banzhuan.entity.EventEntity;
 import com.banzhuan.entity.ItemEntity;
+import com.banzhuan.entity.ProductEntity;
 import com.banzhuan.entity.QuestionEntity;
 import com.banzhuan.entity.QuickrequestEntity;
 import com.banzhuan.entity.SampleEntity;
@@ -272,6 +273,36 @@ public class AdminController extends BaseController{
 		List<UserEntity> agents = userDAO.getUsersByAuth(4);
 		mv.addObject("agents", agents);
 		return mv;
+	}
+	
+	@RequestMapping(value="/lghlmclyhblsqtproduct")
+	public ModelAndView products(final HttpServletResponse response)
+	{
+		ModelAndView mv = new ModelAndView("/admin/products");
+		List<ProductEntity> products = productDAO.getAllProducts();
+		mv.addObject("products", products);
+		return mv;
+	}
+	
+	
+	@RequestMapping(value="/passproduct/{id}")
+	public void passproduct(HttpServletRequest request, HttpServletResponse response, @PathVariable String id) throws IOException 
+	{
+		int pid = Integer.parseInt(id);
+		ProductEntity product = new ProductEntity();
+		product.setId(pid);
+		product.setState(1);
+		productDAO.updateProductById(product);
+	}
+	
+	@RequestMapping(value="/failproduct/{id}")
+	public void failproduct(HttpServletRequest request, HttpServletResponse response, @PathVariable String id) throws IOException 
+	{
+		int pid = Integer.parseInt(id);
+		ProductEntity product = new ProductEntity();
+		product.setId(pid);
+		product.setState(2);
+		productDAO.updateProductById(product);
 	}
 	
 	@RequestMapping(value="/cancel/{id}")

@@ -9,6 +9,7 @@
 			<a class="profile" href="profile">编辑个人资料</a>
 		</h2>
 		<ul class="info">
+			#if($!{account.authority} != 1)
 			<li>
 				供应品牌1
 				<span>
@@ -19,6 +20,7 @@
 					#end
 				</span>
 			</li>
+			#end
 			<li>
 				联系人
 				<span>
@@ -29,6 +31,7 @@
 					#end
 				</span>
 			</li>
+			#if($!{account.authority} != 1)
 			<li>
 				供应品牌2
 				<span>
@@ -39,6 +42,7 @@
 					#end
 				</span>
 			</li>
+			#end
 			<li>
 				公司电话
 				<span>
@@ -92,6 +96,7 @@
 		</ul>
 	</div>
 	<div class="part">
+		#if(${account.authority}!=1)
 		<div class="section">
 			<h1>上传</h1>
 			<h3>线上展会<span>${productCnt}</span>个<a href="newproduct">上传特色刀具</a><a href="myproduct">展会管理</a></h3>
@@ -101,10 +106,13 @@
 				<h3>&nbsp;</h3>
 			#end
 		</div>
+		#end
 		<div class="section">
 			<h1>问答</h1>
 			<h3>已提问<span>${qCnt}</span>个<a href="newquestion">提新问题</a></h3>
+			#if(${account.authority}!=1)
 			<h3>已回答<span>${user.cntAnswer}</span>个<a href="/questions">查看更多问题</a></h3>
+			#end
 		</div>
 	</div>
 	<div class="part nb">

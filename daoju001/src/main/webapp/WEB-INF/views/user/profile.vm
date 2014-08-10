@@ -104,8 +104,8 @@
                 </li>
             </ul>
         </div>
+		#if($!{account.authority} != 1)
 		<div class="listitem clearfix">
-			
             <ul class="user-info clearfix">
                 <li class="key">
 					主营刀具品牌
@@ -135,6 +135,7 @@
                 </li>
             </ul>
         </div>
+		#end
         <div class="listitem clearfix">
 			#springBind("form.address")
             <ul class="user-info clearfix">

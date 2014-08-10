@@ -126,6 +126,7 @@
    	  ,phone
    	  ,fax
    	  ,description
+   	  ,authority
    	  ,contact_name
    	  ,contact_phone
    	  ,contact_qq
@@ -149,6 +150,7 @@
    	  ,#{phone}
    	  ,#{fax}
    	  ,#{description}
+   	  ,#{authority}
    	  ,#{contactName}
    	  ,#{contactPhone}
    	  ,#{contactQq}

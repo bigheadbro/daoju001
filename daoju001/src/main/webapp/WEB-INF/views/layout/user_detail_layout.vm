@@ -19,29 +19,6 @@
                                     </a>
                                 </div>
                                 <h5>$!{account.userName}</h5>
-                                <h6>$stringUtil.getBrand($!{account.brandName})</h6>
-                            </div>
-                            <div class="agent-other-info">
-                                <ul class="clearfix">
-                                    <li class="ml30">
-										<a href="oldquestion">
-                                        <h2>$!{account.questionCnt}</h2>
-                                        <span>问题</span>
-										</a>
-                                    </li>
-                                    <li class="blrg">
-										<a href="answered">
-                                        <h2>$!{account.anwserCnt}</h2>
-                                        <span>回答</span>
-										</a>
-                                    </li>
-									<li>
-										<a href="mysample">
-                                        <h2>$!{account.sampleCnt}</h2>
-                                        <span>样本</span>
-										</a>
-                                    </li>
-                                </ul>
                             </div>
                             <div class="function">
                                 <ul>
@@ -71,44 +48,54 @@
 											</a>
                                         </li>
 									#end
-									#if($!stringUtil.isContains($request.getServletPath(),"/newproduct") || $!stringUtil.isContains($request.getServletPath(),"/myproduct"))
-                                        <li class="current">
-                                            <a href="newproduct">我的展会</a>
-                                        </li>
-                                    #else
-                                        <li>
-                                            <a href="newproduct">我的展会</a>
-                                        </li>
-									#end
-									#if($!stringUtil.isContains($request.getServletPath(),"/newquestion") || $!stringUtil.isContains($request.getServletPath(),"/oldquestion") ||$!stringUtil.isContains($request.getServletPath(),"/draft"))
-                                        <li class="current">
-                                            <a href="newquestion">我的问题</a>
-                                        </li>
-                                    #else
-                                        <li>
-                                            <a href="newquestion">我的问题</a>
-                                        </li>
-									#end
-                                    #if($!stringUtil.isContains($request.getServletPath(),"/answered") || $!stringUtil.isContains($request.getServletPath(),"/answerdraft"))
-                                        <li class="current">
-                                            <a href="answered">我的回答</a>
-                                        </li>
-                                    #else
-                                        <li>
-                                            <a href="answered">我的回答</a>
-                                        </li>
-									#end
-									#if($!{account.authority} == 4)
-                                        #if($!stringUtil.isContains($request.getServletPath(),"/mysample") || $!stringUtil.isContains($request.getServletPath(),"/uploadsample"))
-                                            <li class="current">
-                                                <a href="uploadsample">我的样本</a>
-                                            </li>
-                                        #else
-                                            <li>
-                                                <a href="uploadsample">我的样本</a>
-                                            </li>
-										#end
-									#end
+									<li class="nosidepadding">
+										<span class="item">我的上传<i></i></span>
+										<ul class="subitem">
+        									#if($!stringUtil.isContains($request.getServletPath(),"/newproduct") || $!stringUtil.isContains($request.getServletPath(),"/myproduct"))
+                                                <li class="current">
+                                                    <a href="newproduct">我的展会</a>
+                                                </li>
+                                            #else
+                                                <li>
+                                                    <a href="newproduct">我的展会</a>
+                                                </li>
+        									#end
+        									#if($!{account.authority} == 4)
+                                                #if($!stringUtil.isContains($request.getServletPath(),"/mysample") || $!stringUtil.isContains($request.getServletPath(),"/uploadsample"))
+                                                    <li class="current">
+                                                        <a href="uploadsample">我的样本</a>
+                                                    </li>
+                                                #else
+                                                    <li>
+                                                        <a href="uploadsample">我的样本</a>
+                                                    </li>
+        										#end
+    										#end
+										</ul>
+									</li>
+									<li class="nosidepadding">
+										<span class="item">我的问答<i></i></span>
+										<ul class="subitem">
+        									#if($!stringUtil.isContains($request.getServletPath(),"/newquestion") || $!stringUtil.isContains($request.getServletPath(),"/oldquestion") ||$!stringUtil.isContains($request.getServletPath(),"/draft"))
+                                                <li class="current">
+                                                    <a href="newquestion">我的问题</a>
+                                                </li>
+                                            #else
+                                                <li>
+                                                    <a href="newquestion">我的问题</a>
+                                                </li>
+        									#end
+                                            #if($!stringUtil.isContains($request.getServletPath(),"/answered") || $!stringUtil.isContains($request.getServletPath(),"/answerdraft"))
+                                                <li class="current">
+                                                    <a href="answered">我的回答</a>
+                                                </li>
+                                            #else
+                                                <li>
+                                                    <a href="answered">我的回答</a>
+                                                </li>
+											#end
+										</ul>
+									</li>
 									#if($!stringUtil.isContains($request.getServletPath(),"/myorder") || $!stringUtil.isContains($request.getServletPath(),"/myaddr"))
                                         <li class="current">
                                             <a href="myorder">我的订单</a>
@@ -141,8 +128,19 @@
             #parse("/common/footer.vm")
         </div>
 		<script type="text/javascript">
-var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
-document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3Ffdd0d4853bd81366542daabbd8e3fcb8' type='text/javascript'%3E%3C/script%3E"));
-</script>
+        var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+        document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3Ffdd0d4853bd81366542daabbd8e3fcb8' type='text/javascript'%3E%3C/script%3E"));
+		$("span.item").click(function(){
+			if($(this).parent().children(".subitem").is(":visible") == true){
+    			$(this).parent().children(".subitem").hide();
+    			$(this).children("i").css("background-position","0 0");
+    			$(this).children("i").css("height","7px");
+			}else{
+				$(this).parent().children(".subitem").show();
+    			$(this).children("i").css("background-position","0 -7px");
+    			$(this).children("i").css("height","14px");
+			}
+		});
+        </script>
     </body>
 </html>

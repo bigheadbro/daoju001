@@ -1,7 +1,7 @@
 ﻿#set($layout = "/layout/index_layout.vm")
 <div class="main-bk-wrapper">
   <div class="mainpage-container clearfix">
-	  <div class="reg-left">
+	  <div class="log-left">
 		  <h2><span>我还没有账号<a href="/user/reg">立即注册</a></span>登录</h2>
 			<script>
 					$(function() {	
@@ -126,7 +126,7 @@
 			</script>
 		  </form>
       </div>
-      <div class="reg-right">
+      <div class="log-right">
     	  <div class="header">
     			<h1>刀师傅</h1>
     			<p>国内第一家专业刀具交流平台，<br/>着力于向客户提供最具性价比的刀具方案。</p>

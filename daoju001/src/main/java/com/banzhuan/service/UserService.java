@@ -135,6 +135,23 @@ public class UserService {
 		user.setMail(form.getMail()); // 设置邮箱地址
 		user.setLogo(Util.GenAvatar());
 		user.setProductlimit(2);
+		if(StringUtil.isNotEmpty(form.getCompany()))
+		{
+			user.setCompanyName(form.getCompany());
+		}
+		if(StringUtil.isNotEmpty(form.getQq()))
+		{
+			user.setContactQq(form.getQq());
+		}
+		if(StringUtil.isNotEmpty(form.getPhone()))
+		{
+			user.setPhone(form.getPhone());
+		}
+		if(StringUtil.isNotEmpty(form.getMobile()))
+		{
+			user.setContactPhone(form.getMobile());
+		}
+		user.setAuthority(form.getUsertype());
 		userDAO.insertUserEntity(user);
 		result.add("user", user);
 		return result;
@@ -342,7 +359,7 @@ public class UserService {
 		{
 			if(StringUtil.isNotEmpty(user.getMail()) && StringUtil.isNotEmpty(user.getCompanyName()) && StringUtil.isNotEmpty(user.getAddress()) 
 					&& StringUtil.isNotEmpty(user.getPhone()) && StringUtil.isNotEmpty(user.getContactName()) && StringUtil.isNotEmpty(user.getContactPhone()) && StringUtil.isNotEmpty(user.getContactQq())
-					&& StringUtil.isNotEmpty(user.getDescription()) && StringUtil.isNotEmpty(user.getPca()))
+					&& StringUtil.isNotEmpty(user.getPca()))
 			{
 				return true;
 			}

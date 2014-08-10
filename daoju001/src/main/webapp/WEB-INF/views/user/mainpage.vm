@@ -1,36 +1,141 @@
 #set($layout = "/layout/user_detail_layout.vm")
-<h1><a href="/user/profile">点击编辑</a>个人信息</h1>
-<div class="profile-list clearfix">
-    <div class="listitem">
-		<div class="content">
-			<span>账户名</span>$!{name}
+<div class="mydsf">
+	<div class="part">
+		<h2>
+			${user.nick} 
+			#if($stringUtil.isNotEmpty(${user.verifiedLink}))
+				<a class="v"></a>
+			#end
+			<a class="profile" href="profile">编辑个人资料</a>
+		</h2>
+		<ul class="info">
+			<li>
+				供应品牌1
+				<span>
+					#if($stringUtil.isEmpty($stringUtil.getBrand(${user.brand})))
+						无
+					#else
+						$stringUtil.getBrand(${user.brand})
+					#end
+				</span>
+			</li>
+			<li>
+				联系人
+				<span>
+					#if($stringUtil.isEmpty(${user.contactName}))
+						无
+					#else
+						${user.contactName}
+					#end
+				</span>
+			</li>
+			<li>
+				供应品牌2
+				<span>
+					#if($stringUtil.isEmpty($stringUtil.getBrand(${user.brand2})))
+						无
+					#else
+						$stringUtil.getBrand(${user.brand2})
+					#end
+				</span>
+			</li>
+			<li>
+				公司电话
+				<span>
+					#if($stringUtil.isEmpty(${user.phone}))
+						无
+					#else
+						${user.phone}
+					#end
+				</span>
+			</li>
+			<li>
+				邮箱
+				<span>
+					#if($stringUtil.isEmpty(${user.mail}))
+						无
+					#else
+						${user.mail}
+					#end
+				</span>
+			</li>
+			<li>
+				手机
+				<span>
+					#if($stringUtil.isEmpty(${user.contactPhone}))
+						无
+					#else
+						${user.contactPhone}
+					#end
+				</span>
+			</li>
+			<li>
+				地址
+				<span>
+					#if($stringUtil.isEmpty(${user.address}))
+						无
+					#else
+						${user.address}
+					#end
+				</span>
+			</li>
+			<li>
+				QQ
+				<span>
+					#if($stringUtil.isEmpty(${user.contactQq}))
+						无
+					#else
+						${user.contactQq}
+					#end
+				</span>
+			</li>
+		</ul>
+	</div>
+	<div class="part">
+		<div class="section">
+			<h1>上传</h1>
+			<h3>线上展会<span>${productCnt}</span>个<a href="newproduct">上传特色刀具</a><a href="myproduct">展会管理</a></h3>
+			#if(${account.authority}==4)
+				<h3>刀具样本<span>${user.cntSample}</span>个<a href="uploadsample">上传刀具样本</a><a href="mysample">样本管理</a></h3>
+			#else
+				<h3>&nbsp;</h3>
+			#end
+		</div>
+		<div class="section">
+			<h1>问答</h1>
+			<h3>已提问<span>${qCnt}</span>个<a href="newquestion">提新问题</a></h3>
+			<h3>已回答<span>${user.cntAnswer}</span>个<a href="/questions">查看更多问题</a></h3>
 		</div>
 	</div>
-    <div class="listitem">
-		<div class="content">
-			<span>邮箱</span>$!{mail}
-		</div>
-	</div>
-    <div class="listitem">
-		<div class="content">
-			<span>品牌</span>$!stringUtil.getBrand($!{brand})
-		</div>
-	</div>
-</div>
-<p class="profile-info">真实的个人信息，可以更快增加您的信誉度，为您带来更多便捷！</p>
-<h1>我的回答</h1>
-<div class="mainpage">
-	<h2>专业刀具咨询平台</h2>
-	<div class="mainpage-content clearfix">
-    	<div class="left">
-    		<p>刀具订单？<br>还在等什么！</p>
-    		<a href="/questions">查看问题</a>
-    	</div>
-    	<div class="right">
-    		<h3>永久免费</h3>
-    		<p class="mb15">刀师傅为用户与代理商双方提供优质交流平台，终身免收任何费用。</p>
-    		<h3>交流平台</h3>
-    		<p>刀师傅为代理商提供高效的交流平台，线上交流，线下交易，给予代理商提升业绩的新途径。</p>
-	</div>
+	<div class="part nb">
+		<h1>交易记录<a class="more" href="myorder">更多</a></h1>
+		#if($total > 0)
+			#foreach($order in $orders)
+        	<div class="order-list clearfix">
+				<div class="time"><span>$stringUtil.formatDate(${order.gmtCreate})</span></div>
+    			#if(${order.itemid} == 1)
+    				<div class="member">认证会员</div>
+    			#elseif(${order.itemid} == 2)
+    				<div class="member">认证代理会员</div>
+    			#else
+        		<div class="name"><a target="_blank" href="/item/${order.item.id}"><span>${order.item.brand}${order.item.type}${order.item.version}</span></a></div>
+        		#end
+    			<div class="price"><span>+${order.price}0</span></div>
+    			#if(${order.state} == 5)
+    				<div class="state"><span class="red">订单已取消</span></div>
+    			#elseif(${order.state} == 1)
+    				<div class="state"><span class="red">等待付款</span></div>
+    			#elseif(${order.state} == 2)
+    				<div class="state"><span class="green">等待刀师傅发货</span></div>
+    			#elseif(${order.state} == 3)
+    				<div class="state"><span class="green">刀师傅已发货</span></div>
+    			#elseif(${order.state} == 4)
+    				<div class="state"><span class="green">交易成功</span></div>
+    			#end
+        	</div>
+        	#end
+		#else
+			<p>您目前没有交易记录</p>
+		#end	
 	</div>
 </div>

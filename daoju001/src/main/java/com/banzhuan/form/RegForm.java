@@ -8,6 +8,7 @@ public class RegForm implements Serializable {
 	 */
 	private static final long serialVersionUID = -2353178323817894578L;
 	private int userid;
+	private int usertype;
 	private String name;
 	private String pwd;
 	private String pwd1;
@@ -15,6 +16,10 @@ public class RegForm implements Serializable {
 	private String mail;
 	private String logo;
 	private boolean agree;
+	private String company;
+	private String phone;
+	private String mobile;
+	private String qq;
 	/**
 	 * @return the userid
 	 */
@@ -110,6 +115,66 @@ public class RegForm implements Serializable {
 	 */
 	public void setAgree(boolean agree) {
 		this.agree = agree;
+	}
+	/**
+	 * @return the company
+	 */
+	public String getCompany() {
+		return company;
+	}
+	/**
+	 * @param company the company to set
+	 */
+	public void setCompany(String company) {
+		this.company = company;
+	}
+	/**
+	 * @return the phone
+	 */
+	public String getPhone() {
+		return phone;
+	}
+	/**
+	 * @param phone the phone to set
+	 */
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+	/**
+	 * @return the mobile
+	 */
+	public String getMobile() {
+		return mobile;
+	}
+	/**
+	 * @param mobile the mobile to set
+	 */
+	public void setMobile(String mobile) {
+		this.mobile = mobile;
+	}
+	/**
+	 * @return the qq
+	 */
+	public String getQq() {
+		return qq;
+	}
+	/**
+	 * @param qq the qq to set
+	 */
+	public void setQq(String qq) {
+		this.qq = qq;
+	}
+	/**
+	 * @return the usertype
+	 */
+	public int getUsertype() {
+		return usertype;
+	}
+	/**
+	 * @param usertype the usertype to set
+	 */
+	public void setUsertype(int usertype) {
+		this.usertype = usertype;
 	}
 
 }

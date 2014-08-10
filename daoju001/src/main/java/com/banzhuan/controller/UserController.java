@@ -112,10 +112,13 @@ public class UserController extends BaseController{
 				account.setMail(user.getMail());
 				account.setUserId(user.getId()); // 用户ID
 				account.setLogo(user.getLogo());
+				account.setCompanyName(user.getCompanyName());
+				account.setPhone(user.getContactPhone());
+				account.setQq(user.getContactQq());
 				account.setProductlimit(user.getProductlimit());
 				request.getSession().setAttribute("account", account);
 				// 注册成功， 跳转到登陆页面
-				return new ModelAndView(new RedirectView("/user/profile")); 
+				return new ModelAndView(new RedirectView("/user/main")); 
 			}
 			else
 			{
@@ -234,9 +237,21 @@ public class UserController extends BaseController{
 	@RequestMapping(value="/main")
 	public ModelAndView main(HttpServletRequest request, HttpServletResponse response, @ModelAttribute("account")Account account) {
 		ModelAndView mv = new ModelAndView("user/mainpage");
-		mv.addObject("name", account.getUserName());
-		mv.addObject("mail", account.getMail());
-		mv.addObject("brand", account.getBrandName());
+		UserEntity user = (UserEntity)userService.getUserEntity(account.getUserId()).get("user");
+		mv.addObject("user", user);
+		mv.addObject("qCnt",account.getQuestionCnt());
+		mv.addObject("productCnt",userService.getProductCount(account.getUserId()));
+		int total= commonService.getOrdersCount(account.getUserId(), 1);
+		mv.addObject("total", total);
+		if(total > 0)
+		{
+			List<OrderEntity> orders = commonService.getOrders(account.getUserId(), 0, new RowBounds(0,3));
+			for(int i = 0; i< orders.size(); i++)
+			{
+				orders.get(i).setItem(commonService.getItem(orders.get(i).getItemid()));
+			}
+			mv.addObject("orders",orders);
+		}
 		return mv;
 	}
 	

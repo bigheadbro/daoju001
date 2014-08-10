@@ -673,7 +673,13 @@ p#product-tn a:hover{text-decoration:underline;}
 
 .mainpage-container .main-left .function{margin:20px auto;}
 .mainpage-container .main-left .function ul li{padding:15px;color:#9b9b9b;font-size:14px;position: relative;}
+.mainpage-container .main-left .function ul li span.item{padding:15px;display:block;position:relative;cursor:pointer}
+.mainpage-container .main-left .function ul li span.item i{background: url(../img/updown.png) no-repeat 0 0;width:7px;height:14px;position:absolute;top: 22px;right: 57px;background-position: 0 -7px;}
 .mainpage-container .main-left .function ul li.current{color:white;background-color:#4799b1;}
+.mainpage-container .main-left .function ul li.nosidepadding{padding:0;}
+.mainpage-container .main-left .function ul.subitem{}
+.mainpage-container .main-left .function ul.subitem li{padding:8px;}
+.mainpage-container .main-left .function ul.subitem li a{margin-left: 30px;font-size:13px;}
 .mainpage-container .main-right h2{font-size:14px;color:#656565;padding:8.5px;}
 .mainpage-container .main-right h1{font-size:16px;color:#626262;border-bottom:1px solid #088bb7;padding-bottom:5px;margin-bottom:10px;}
 .mainpage-container .main-right h1 a{font-size:11px;float:right;}
@@ -694,7 +700,32 @@ p#product-tn a:hover{text-decoration:underline;}
 .mainpage-container .main-right  .buyer-list .listitem a{color:#0099cb}
 .upload-gc a{color: white;background-color: #ff9000;padding: 5px;display: block;width: 70px;text-align: center;border-radius: 7px;line-height: 19px;margin-bottom: 10px;}
 .upload-gc p{font-size:11px;color:#9d9d9d}
-
+.mainpage-container .main-right .mydsf .part{margin-left: 15px;border-bottom:1px solid #e7e7e7;padding-bottom:30px;margin-top:30px;}
+.mainpage-container .main-right .mydsf .part h2{padding:0;font-weight:100;color:#606060;font-size:24px;border:none;}
+.mainpage-container .main-right .mydsf h2 a{font-size:12px;color:#4ca2d8;float:none;}
+.mainpage-container .main-right .mydsf .part h1{border:none;}
+.mainpage-container .main-right .mydsf .part h1 a{font-size:12px;color:#4ca2d8;float:none;}
+.mainpage-container .main-right .mydsf .part ul.info{margin-top:20px;}
+.mainpage-container .main-right .mydsf .part h2 a.v{width:15px;height:13px;background: url(../img/v.png) no-repeat 0 0;display: inline-block;}
+.mainpage-container .main-right .mydsf .part h2 a.profile{margin-left:10px;}
+.mainpage-container .main-right .mydsf .part ul.info li{padding:5px 0;display:inline-block;width:330px;font-size:14px;color:#bebebe}
+.mainpage-container .main-right .mydsf .part ul.info li span{display:inline-block;margin-left:10px;color:#606060;width: 220px;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;vertical-align: top;}
+.mainpage-container .main-right .mydsf .part .section{display:inline-block;width:330px;}
+.mainpage-container .main-right .mydsf .part .section h3{font-size:14px;color:#606060;font-weight:100;padding:10px 0;}
+.mainpage-container .main-right .mydsf .part .section h3 span{display:inline-block;color:#4ca2d8;font-size:18px;margin:0 5px;}
+.mainpage-container .main-right .mydsf .part .section h3 a{color:#a5a5a5;font-size:12px;margin:0 10px;}
+.mainpage-container .main-right .mydsf .part h1 a.more{color:#a5a5a5;font-size:12px;margin-left: 10px;}
+.mainpage-container .main-right .mydsf .nb{border:0}
+.mainpage-container .main-right .mydsf .part p{color: #606060;}
+.mainpage-container .main-right .mydsf .order-list{font-size:14px;border-bottom:1px solid #ececec;padding-bottom:5px;margin-top:5px;}
+.mainpage-container .main-right .mydsf .order-list:last-child{border:none;}
+.mainpage-container .main-right .mydsf .order-list .time{float:left;width: 100px;color:#707070}
+.mainpage-container .main-right .mydsf .order-list .member{float:left;width: 290px;color:#2f2f2f}
+.mainpage-container .main-right .mydsf .order-list .name{float:left;width: 290px;color:#2f2f2f;}
+.mainpage-container .main-right .mydsf .order-list .price{float:left;width: 100px;color:#6dbe42;font-weight:700;}
+.mainpage-container .main-right .mydsf .order-list .state{float:right}
+.mainpage-container .main-right .mydsf .order-list .state span.green{color:#5bb07b}
+.mainpage-container .main-right .mydsf .order-list .state span.red{color:#b05b5b}
 /*我的问题*/
 .mainpage-container .main-right .add-question-header input[type="text"]{width:450px;height: 25px;font-size: 14px;}
 .add-question-header h5{color:#4a4a4a;background: url(../img/num1.png) no-repeat 0 0;font-size: 18px;padding-left: 35px;}
@@ -726,13 +757,14 @@ p#product-tn a:hover{text-decoration:underline;}
 .question-op .savedraft{background-color:#dd5a5a;color:white;border-radius:4px;display: block;float: left;width: 100px;text-align: center;padding: 10px;}
 
 
-.reg-left{background-color:#f6f6f6;float:left;width: 340px;padding:40px 45px 15px;border-radius: 10px;margin-right: 100px;min-height: 400px;}
-.reg-left h2{color:#737373;font-size:18px;}
-.reg-left h2 span{float:right;color:#bababa;font-size:14px;line-height: 26px;}
-.reg-left h2 span a{color:#0099cb;margin-left:3px;}
+.reg-left{float:left;width: 600px;min-height: 400px;border-right:1px solid #e1e1e1}
+.log-left{float:left;width: 600px;min-height: 400px;border-right:1px solid #e1e1e1}
+.reg-left h1{color:#616161;font-size:24px;}
+.reg-left h1 span{color:#616161;font-size:14px;line-height: 26px;display:inline-block;margin-left:20px;}
+.reg-left h1 span em{color:red}
 .reg-left ul{margin:30px 0}
-.reg-left ul li{float:left;width:250px;}
-.reg-left ul li.key{font-size:14px;color:#9b9b9b;width:90px;}
+.reg-left ul li{float:left;margin-left:20px;}
+.reg-left ul li.key{font-size:14px;color:#878787;width:73px;text-align: right;}
 .reg-left ul li.value .type{font-size:14px;background-color:#e9e9e9;padding:18px 28px;color:#707070;border-radius: 8px;}
 .reg-left ul li.value .current{background-color:#0081b7;color:white;}
 .reg-left ul li.value input[type="text"]{width: 226px;height: 24px;}
@@ -742,22 +774,51 @@ p#product-tn a:hover{text-decoration:underline;}
 .reg-left ul li.value label #rememberme{width:12px;height: 12px;}
 .reg-left ul li.value .forgetpwd{color: #7a7a7a;font-size: 15px;padding-left: 90px;}
 .reg-left ul li.value .protocol{font-size:14px;color:#00b4ff}
-.reg-left ul li.value .reg{font-size:18px;background-color:#63a200;color:white;border-radius: 5px;padding: 10px 70px;}
+.reg-left ul li.value .reg{font-size:18px;background-color:#63a200;color:white;padding: 10px 70px;}
 .reg-left ul li.value .qqlogin{font-size:18px;color:white;background-color:#0081b7;border-radius: 5px;padding: 10px 22px 10px 70px;background-image: url(../img/reg3.png);background-repeat:no-repeat;background-position: 40px 12px;}
 .reg-left p.info{margin-top:20px;line-height: 30px;}
 .reg-left .bottom{border-top: 1px solid grey;padding-top: 10px;}
 .reg-left .bottom a{float: right;font-size: 14px;}
 .reg-left .bottom a:hover{text-decoration:underline;color:#00c0ff}
-.reg-right{float:left;}
+.reg-right{float:left;width: 300px;margin-left: 40px;}
 .reg-right .header{margin-bottom:20px;}
-.reg-right h1{color:#0099cb;font-size:48px;margin-top: 30px;margin-bottom: 20px;}
-.reg-right p{color:#707070;font-size:18px;line-height: 30px;}
-.reg-right .verified{background:url(../img/reg1.png) no-repeat 0 0;padding-left: 100px;margin: 35px 0 45px;}
-.reg-right .verified h2{font-size:24px;color:#707070;}
-.reg-right .verified p{font-size:13px;color:#707070;line-height:20px;}
-.reg-right .goodservice{background:url(../img/reg2.png) no-repeat 0 0;padding-left: 100px;}
-.reg-right .goodservice h2{font-size:24px;color:#707070;}
-.reg-right .goodservice p{font-size:13px;color:#707070;line-height:20px;}
+.reg-right h1{color:#616161;font-size:18px;font-weight:100;margin-bottom: 20px;background: url(../img/pin.png) no-repeat 0 0;text-indent: 35px;}
+.reg-right p{color:#616161;font-size:14px;line-height: 35px;}
+.reg-right h3{color:#0099cb;font-size:12px;margin-top:50px;margin-bottom: 2px;}
+.reg-right a{font-size:16px;display:inline-block;color:white;background-color:#63a200;padding:10px 50px;line-height:20px;}
+
+.log-left{background-color:#f6f6f6;float:left;width: 340px;padding:40px 45px 15px;border-radius: 10px;margin-right: 100px;min-height: 400px;}
+.log-left h2{color:#737373;font-size:18px;}
+.log-left h2 span{float:right;color:#bababa;font-size:14px;line-height: 26px;}
+.log-left h2 span a{color:#0099cb;margin-left:3px;}
+.log-left ul{margin:30px 0}
+.log-left ul li{float:left;width:250px;}
+.log-left ul li.key{font-size:14px;color:#9b9b9b;width:90px;}
+.log-left ul li.value .type{font-size:14px;background-color:#e9e9e9;padding:18px 28px;color:#707070;border-radius: 8px;}
+.log-left ul li.value .current{background-color:#0081b7;color:white;}
+.log-left ul li.value input[type="text"]{width: 226px;height: 24px;}
+.log-left ul li.value input[type="password"]{width: 226px;height: 24px;}
+.log-left ul li.value label{font-size:14px;color:#7a7a7a}
+.log-left ul li.value label #agree{width:12px;height: 12px;}
+.log-left ul li.value label #rememberme{width:12px;height: 12px;}
+.log-left ul li.value .forgetpwd{color: #7a7a7a;font-size: 15px;padding-left: 90px;}
+.log-left ul li.value .protocol{font-size:14px;color:#00b4ff}
+.log-left ul li.value .reg{font-size:18px;background-color:#63a200;color:white;border-radius: 5px;padding: 10px 70px;}
+.log-left ul li.value .qqlogin{font-size:18px;color:white;background-color:#0081b7;border-radius: 5px;padding: 10px 22px 10px 70px;background-image: url(../img/reg3.png);background-repeat:no-repeat;background-position: 40px 12px;}
+.log-left p.info{margin-top:20px;line-height: 30px;}
+.log-left .bottom{border-top: 1px solid grey;padding-top: 10px;}
+.log-left .bottom a{float: right;font-size: 14px;}
+.log-left .bottom a:hover{text-decoration:underline;color:#00c0ff}
+.log-right{float:left;}
+.log-right .header{margin-bottom:20px;}
+.log-right h1{color:#0099cb;font-size:48px;margin-top: 30px;margin-bottom: 20px;}
+.log-right p{color:#707070;font-size:18px;line-height: 30px;}
+.log-right .verified{background:url(../img/reg1.png) no-repeat 0 0;padding-left: 100px;margin: 35px 0 45px;}
+.log-right .verified h2{font-size:24px;color:#707070;}
+.log-right .verified p{font-size:13px;color:#707070;line-height:20px;}
+.log-right .goodservice{background:url(../img/reg2.png) no-repeat 0 0;padding-left: 100px;}
+.log-right .goodservice h2{font-size:24px;color:#707070;}
+.log-right .goodservice p{font-size:13px;color:#707070;line-height:20px;}
 #form_purchase em.error{border-radius:8px;background-color:#ffc8c8;border:1px solid #cc3333;text-align:center;color:#cc3333;font-size:14px;line-height: 40px;margin-bottom: 10px;display: block;margin-top: 10px;}
 .error-msg-np{border-radius:8px;background-color:#ffc8c8;border:1px solid #cc3333;text-align:center;color:#cc3333;font-size:14px;line-height: 40px;margin-bottom: 10px;}
 .error-msg{display:none;border-radius:8px;background-color:#ffc8c8;border:1px solid #cc3333;text-align:center;color:#cc3333;font-size:14px;line-height: 40px;margin-bottom: 10px;}

@@ -223,7 +223,7 @@ public class Util {
 	public static void addmailToEDM(String fileName) {
 		HashSet<String> array = new HashSet<String>();
 		// 先读取edm邮箱
-		File file = new File("EDM/edm.txt");
+		File file = new File("EDM/client.txt");
 		BufferedReader reader = null;
 		try {
 			reader = new BufferedReader(new FileReader(file));
@@ -598,8 +598,6 @@ public class Util {
 		return result;
 	}
 	public static void main(String[] args) {
-		System.out.println(new Date());
-		System.out.println(queryMaterial("材质"));
-		System.out.println(new Date());
+		addmailToEDM("EDM/edm1.txt");
 	}
 }

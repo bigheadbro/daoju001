@@ -3,7 +3,7 @@
     <div class="brand-win-content">
         <h2>
             <a class="close-brand">x</a>
-				选择品牌
+				选择品牌(按拼音首字母排序)
 		</h2>
         <div class="content clearfix">
 			#foreach($brand in $brands)

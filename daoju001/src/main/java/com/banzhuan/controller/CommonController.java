@@ -66,6 +66,7 @@ import com.banzhuan.entity.ProfessionalAnswerEntity;
 import com.banzhuan.entity.QuestionEntity;
 import com.banzhuan.entity.QuickrequestEntity;
 import com.banzhuan.entity.SampleEntity;
+import com.banzhuan.entity.StockEntity;
 import com.banzhuan.entity.UserEntity;
 import com.banzhuan.form.AddressForm;
 import com.banzhuan.form.CommentForm;
@@ -1604,6 +1605,37 @@ public class CommonController extends BaseController{
 	@RequestMapping(value="/wxnewrequest")
 	public ModelAndView wxnewrequest(HttpServletRequest request, HttpServletResponse response,@ModelAttribute("form")RequestForm form) {
 		ModelAndView view = new ModelAndView("wx/wxnewrequest");
+		return view;
+	}
+
+	@RequestMapping(value="/wxstockhome")
+	public ModelAndView wxstockhome(HttpServletRequest request, HttpServletResponse response,@ModelAttribute("form")RequestForm form) {
+		ModelAndView view = new ModelAndView("wx/stockhome");
+		return view;
+	}
+
+	@RequestMapping(value="/wxstocklist")
+	public ModelAndView wxstocklist(HttpServletRequest request, HttpServletResponse response,@ModelAttribute("form")RequestForm form) {
+		ModelAndView view = new ModelAndView("wx/stocklist");
+		List<StockEntity> stocks = commonService.getAllstocks();
+		view.addObject("stocks",stocks);
+		return view;
+	}
+
+	@RequestMapping(value="/wxstockadd")
+	public ModelAndView wxstockadd(HttpServletRequest request, HttpServletResponse response) {
+		ModelAndView view = new ModelAndView("wx/stockadd");
+		if(isDoSubmit(request))
+		{
+			String company = request.getParameter("company");
+			String content = request.getParameter("content");
+			String phone = request.getParameter("phone");
+			StockEntity stock = new StockEntity();
+			stock.setCompany(company);
+			stock.setContent(content);
+			stock.setPhone(phone);
+			commonService.addStock(stock);
+		}
 		return view;
 	}
 

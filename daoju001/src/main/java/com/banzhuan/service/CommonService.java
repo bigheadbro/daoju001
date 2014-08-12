@@ -29,6 +29,7 @@ import com.banzhuan.dao.ProfessionalAnswerDAO;
 import com.banzhuan.dao.QuestionDAO;
 import com.banzhuan.dao.QuickrequestDAO;
 import com.banzhuan.dao.SampleDAO;
+import com.banzhuan.dao.StockDAO;
 import com.banzhuan.dao.UserDAO;
 import com.banzhuan.entity.AddressEntity;
 import com.banzhuan.entity.AgentEntity;
@@ -46,6 +47,7 @@ import com.banzhuan.entity.ProfessionalAnswerEntity;
 import com.banzhuan.entity.QuestionEntity;
 import com.banzhuan.entity.QuickrequestEntity;
 import com.banzhuan.entity.SampleEntity;
+import com.banzhuan.entity.StockEntity;
 import com.banzhuan.entity.UserEntity;
 import com.banzhuan.common.Account;
 import com.banzhuan.common.Result;
@@ -125,6 +127,11 @@ public class CommonService {
 	@Autowired
 	@Qualifier("articleDAO")
 	private ArticleDAO articleDAO;
+	
+	@Autowired
+	@Qualifier("stockDAO")
+	private StockDAO stockDAO;
+	
 	
 	public Result checkLogin(LoginForm form, Errors errors)
 	{
@@ -740,6 +747,10 @@ public class CommonService {
 	public int addRequest(RequestForm form)
 	{
 		QuickrequestEntity request = new QuickrequestEntity();
+		/*if(form.getType() == 0 || StringUtil.isEmpty(form.getContent()) || StringUtil.isEmpty(form.getArea()))
+		{
+			
+		}*/
 		request.setType(form.getType());
 		request.setContent(form.getContent());
 		request.setArea(form.getArea());
@@ -782,5 +793,15 @@ public class CommonService {
 	public List<ArticleEntity> getAllarticles()
 	{
 		return articleDAO.getAllarticles();
+	}
+	
+	public List<StockEntity> getAllstocks()
+	{
+		return stockDAO.queryAllStock();
+	}
+	
+	public int addStock(StockEntity stock)
+	{
+		return stockDAO.insertStockEntity(stock);
 	}
 }

@@ -48,7 +48,7 @@ public class UserOperate extends AbstractUserOperate {
 				.addSubButton(CustomMenu.TYPE.click, "最近文章", "latestarticle", null) 
 		        .addSubButton(CustomMenu.TYPE.click, "关于我们", "aboutus", null) ;
 		button.addButton(CustomMenu.TYPE.click, "小刀发布", "request", null)
-				.addSubButton(CustomMenu.TYPE.view, "我要发布", null, "http://115017.ichengyun.net/wxnewrequest")
+				.addSubButton(CustomMenu.TYPE.view, "我要发布", null, "http://www.daoshifu.com/wxnewrequest")
 				.addSubButton(CustomMenu.TYPE.click, "今日发布", "todayrequest", null);
 		button.addButton(CustomMenu.TYPE.click, "小刀工具", "tools", null) 
 		        .addSubButton(CustomMenu.TYPE.click, "材质查询", "material", null) 

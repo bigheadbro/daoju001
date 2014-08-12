@@ -1,141 +1,86 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html>
-#parse("/common/header.vm")
-<body>
+<head>
 	<script type="text/javascript" src="/js/jquery-1.10.2.min.js"></script>
+	<link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.css">
+    <script src="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.js"></script>
 	<script type="text/javascript" src="/js/jquery.form.js"></script>
 	<script type="text/javascript" src="/js/jquery.validate.min.js"></script>
 	<script type="text/javascript" src="/js/additional-methods.js"></script>
-	<link rel="stylesheet" href="/css/css.css">
-<script>
-function processComplete(data){
-	$('#form_request')[0].reset();
-	hiderequest();
-}
-$(function() {	
-	$("#form_request").validate({
-		ignore:[],
-		rules:{
-			type:{
-				min:1
-			},
-			content:{
-				required:true
-			},
-			area:{
-				required:true
-			},
-			qq:{
-				require_from_group: [1, ".contact-group"],
-				number:true
-			},
-			phone:{
-				require_from_group: [1, ".contact-group"],
-				number:true
-			}
-		},
-		messages:{
-			type:{
-				min:"请选择类型"
-			},
-			content:{
-				required:"请输入发布内容"
-			},
-			area:{
-				required:"请输入所在地区"
-			},
-			qq:{
-				number:"QQ只能包含数字"
-			},
-			phone:{
-				number:"电话号码只能包含数字"
-			}
-		},
-		errorElement:"em",
-		submitHandler: function(form) {
-            $(form).ajaxSubmit({
-				dataType:'json',
-				complete:processComplete
-			});
-          }
-
-	});
-	$(".detail a.solution").click(function(){
-		$("#type").val(1);
-		$(".detail a.zhaohuo").removeAttr("style");
-		$(this).css("background-color","#3986af");
-	});
-	$(".detail a.zhaohuo").click(function(){
-		$("#type").val(2);
-		$(".detail a.solution").removeAttr("style");
-		$(this).css("background-color","#e37c44");
-	});
-});
-</script>
-<div class="wxquickrequest-win-content">
-    <h2>
-		快速发布
-    </h2>
-	<div class="content">
-		<form id="form_request" action="/newrequest" method="post">
-		<div class="part">
-			<div class="section">
-				<b>请选择发布类型</b>
-				#springBind("form.type")
-				<input id="type" type="hidden" name="${status.expression}" value=0 />
-				<div class="type">
-					<div class="detail">
-						<a class="solution">方案</a>
-						<p>对你的问题没有头绪？<br/>请选择方案</p>
-					</div>
-					<div class="detail ">
-						<a class="zhaohuo">找货</a>
-						<p>知道需要什么刀具却没有货源？<br/>请选择找货</p>
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="part">
-			<div class="section request-cont clearfix">
-				<span>内容</span>
-				#springBind("form.content")
-				<textarea  class="dsf-form-text-input qr-cont" name="${status.expression}" placeholder="请输入需要发布的内容"></textarea>
-			</div>
-			<div class="section clearfix">
-				<span>品牌</span>
-				#springBind("form.brand")
-				<input type="text" class="dsf-form-text-input" name="${status.expression}" placeholder="请输入需要查找的品牌" />
-			</div>
-			<div class="section clearfix">
-				<span>地区</span>
-				#springBind("form.area")
-				<input type="text" class="dsf-form-text-input" name="${status.expression}" placeholder="请选择您的地区" />
-			</div>
-		</div>
-		<div class="part">
-			<div class="section clearfix">
-				<span>QQ</span>
-				#springBind("form.qq")
-				<input type="text" class="dsf-form-text-input contact-group" name="${status.expression}" placeholder="请输入您的QQ" />
-			</div>
-			<div class="section clearfix">
-				<span>电话</span>
-				#springBind("form.phone")
-				<input type="text" class="dsf-form-text-input contact-group" name="${status.expression}" placeholder="请输入您的手机号" />
-			</div>
-		</div>
-		<div class="op">
-			<a id="submit_request">发    布</a>
-		</div>
-		<script>
-			$(function() {
-				$("#submit_request").click(function () {
-                	$(this).submit();
-				});
-			});
-		</script>
-		</form>
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<script>
+	$(function() {	
+    	$("#form_request").validate({
+    		ignore:[],
+    		rules:{
+    			type:{
+    				min:1
+    			},
+    			content:{
+    				required:true
+    			},
+    			area:{
+    				required:true
+    			},
+    			phone:{
+    				required:true,
+    				number:true
+    			}
+    		},
+    		messages:{
+    			type:{
+    				min:"请选择类型"
+    			},
+    			content:{
+    				required:"请输入发布内容"
+    			},
+    			area:{
+    				required:"请输入所在地区"
+    			},
+    			phone:{
+					required:"请输入电话号码",
+    				number:"电话号码只能包含数字"
+    			}
+    		},
+    		errorElement:"em",
+    		submitHandler: function(form) {
+                $(form).ajaxSubmit({
+    				dataType:'json',
+    				complete:processComplete
+    			});
+              }
+    
+    	});
+    });
+	</script>
+</head>
+<body>
+	<div data-role="header" data-theme="b">
+		<h1>快速发布</h1>
 	</div>
-</div>
+	<div data-role="content">
+        <form id="form_request" method="post" action="/newrequest">
+			<fieldset data-role="controlgroup">
+				#springBind("form.type")
+                <label for="solution">方案（问题没有头绪？）</label>
+                <input type="radio" name="${status.expression}" id="solution" value=1 checked>
+                <label for="zhaohuo">找货（知道需要什么刀具却没有货源？）</label>
+                <input type="radio" name="${status.expression}" id="zhaohuo" value=2> 
+				#springBind("form.content")
+				<label for="content" class="ui-hidden-accessible">内容</label>
+				<textarea type="text" name="${status.expression}" id="content" class="required" placeholder="简单描述需要发布的内容..."></textarea>
+				#springBind("form.brand")
+				<label for="area" class="ui-hidden-accessible">品牌</label>
+				<input type="text" name="${status.expression}" id="brand" placeholder="品牌" />
+				#springBind("form.area")
+				<label for="area" class="ui-hidden-accessible">地区</label>
+				<input type="text" name="${status.expression}" id="area" placeholder="地区" />
+				#springBind("form.phone")
+				<label for="phone" class="ui-hidden-accessible">电话</label>
+				<input type="text" name="${status.expression}" id="phone" placeholder="电话" />
+            </fieldset>
+			<button type="submit" data-theme="b">发布需求</button>
+        </form>
+	</div>
 </body>
 </html>

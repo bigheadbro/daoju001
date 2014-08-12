@@ -3,6 +3,8 @@ package com.banzhuan.controller;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 
@@ -54,6 +56,7 @@ import com.banzhuan.form.RegForm;
 import com.banzhuan.form.SampleForm;
 import com.banzhuan.service.CommonService;
 import com.banzhuan.service.UserService;
+import com.banzhuan.util.ChineseSpelling;
 import com.banzhuan.util.CookieUtil;
 import com.banzhuan.util.JsonUtil;
 import com.banzhuan.util.StringUtil;
@@ -211,6 +214,11 @@ public class UserController extends BaseController{
 				brands.add(brand);
 			}
 		}
+		Collections.sort(brands,new Comparator<BrandEntity>() {   
+		    public int compare(BrandEntity o1, BrandEntity o2) {      
+		        return (ChineseSpelling.letterToNum(ChineseSpelling.getFirstLetter(o1.getName()))-ChineseSpelling.letterToNum(ChineseSpelling.getFirstLetter(o2.getName())));
+		    }
+		}); 
 		mv.addObject("brands", brands);
 		UserEntity user = (UserEntity)userService.getUserEntity(account.getUserId()).get("user");
 		if(!isDoSubmit(request))
@@ -917,6 +925,11 @@ public class UserController extends BaseController{
 				brands.add(brand);
 			}
 		}
+		Collections.sort(brands,new Comparator<BrandEntity>() {   
+		    public int compare(BrandEntity o1, BrandEntity o2) {      
+		        return (ChineseSpelling.letterToNum(ChineseSpelling.getFirstLetter(o1.getName()))-ChineseSpelling.letterToNum(ChineseSpelling.getFirstLetter(o2.getName())));
+		    }
+		}); 
 		mv.addObject("brands", brands);
 		if(!isDoSubmit(request))
 		{

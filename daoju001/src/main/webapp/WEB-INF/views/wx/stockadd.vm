@@ -2,8 +2,8 @@
 <html>
     <head>
         <script type="text/javascript" src="/js/jquery-1.10.2.min.js"></script>
-        <link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.css">
-        <script src="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.js"></script>
+        <link rel="stylesheet" href="/css/jquery.mobile-1.3.2.min.css">
+        <script src="/js/jquery.mobile-1.3.2.min.js"></script>
         <script type="text/javascript" src="/js/jquery.form.js"></script>
         <script type="text/javascript" src="/js/jquery.validate.min.js"></script>
         <script type="text/javascript" src="/js/additional-methods.js"></script>
@@ -50,7 +50,7 @@
 	</head>
     <body>
         <div data-role="header">
-            <h1>清仓拍，刀师傅出品</h1>
+            <h1>清仓拍 by刀师傅</h1>
             <div data-role="navbar">
                 <ul>
                     <li>
@@ -79,7 +79,7 @@
 			<button type="submit" data-theme="b">发布库存</button>
         </form>
         <div data-role="footer">
-            <h1>其它内容，欢迎登陆刀师傅<a href="http://www.daoshifu.com">www.daoshifu.com</a></h1>
+            <h1>更多内容，请登陆<a target="_blank" href="http://www.daoshifu.com/">刀师傅</a></h1>
         </div>
     </body>
 </html>

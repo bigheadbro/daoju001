@@ -74,6 +74,9 @@ $(function() {
 });
 </script>
 <div class="item-content-container clearfix">
+	<div class="stock">
+		<p>想淘到更便宜的产品，可以到<a href="/stocks">清仓拍</a>看一看</p>
+	</div>
 	<form  id="form_items" method="post" action="/items">
     <div class="item-filter-wrapper">
     	<h2>特价刀具分类</h2>

@@ -7,13 +7,17 @@ $(function() {
 		$(".top-user").css("background-color","#0099cb");
 		$(".top-dropdown").hide();
 	});
-	$(".ctinfo").hover(function() {
-		$(".top-dropdown").show();
-		$(this).children(".auth-reg").css("background-color","#007298");
-	}).mouseleave(function() {
-		$(".top-dropdown").hide();
-		$(this).children(".auth-reg").css("background-color","#0099cb");
+
+	
+	$(".ctshop").hover(function() {
+		$(".ctshop-user").css("background-color","#007298");
+		$(".ctshop-dropdown").show();
 	});
+	$(".ctshop").mouseleave(function() {
+		$(".ctshop-user").css("background-color","#0099cb");
+		$(".ctshop-dropdown").hide();
+	});
+	
 	$(".ask").click(function() {
 		$.ajax( {   
 		    type : "POST",   

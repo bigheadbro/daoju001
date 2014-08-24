@@ -128,6 +128,16 @@
 								<div class="listitem clearfix">
                                     <ul class="user-info clearfix">
                                         <li class="key">
+												供应商
+                                        </li>
+                                        <li class="value">
+                                            <input type="text" class="dsf-form-text-input" name="provider" value="$!{status.value}" />
+                                        </li>
+                                    </ul>
+                                </div>
+								<div class="listitem clearfix">
+                                    <ul class="user-info clearfix">
+                                        <li class="key">
 												最低起卖数量
                                         </li>
                                         <li class="value">

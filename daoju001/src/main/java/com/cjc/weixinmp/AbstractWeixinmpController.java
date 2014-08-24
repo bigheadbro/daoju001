@@ -706,7 +706,7 @@ public abstract class AbstractWeixinmpController {
      */
     private HttpURLConnection openConnection(String url) throws MalformedURLException, IOException, WeixinException {
         // 填充accessToken
-        url = replaceAccessToken(url);
+        //url = replaceAccessToken(url,id,secret);
         // 创建connection
         HttpURLConnection conn;
         if (proxy != null) {
@@ -729,13 +729,26 @@ public abstract class AbstractWeixinmpController {
      * @return
      * @throws WeixinException
      */
-    protected String replaceAccessToken(String url) throws WeixinException {
+    protected String replaceAccessToken(String url, String id, String secret) throws WeixinException {
         if (url.indexOf("ACCESS_TOKEN") != -1) {
             url = url.replaceFirst("ACCESS_TOKEN", getAccessToken(false).access_token);
+        }
+        if (url.indexOf("APPID") != -1) {
+            url = url.replaceFirst("APPID", id);
+        }
+        if (url.indexOf("SECRET") != -1) {
+            url = url.replaceFirst("SECRET", secret);
         }
         return url;
     }
 
+    protected String replaceAccessToken(String url) throws WeixinException {
+        if (url.indexOf("ACCESS_TOKEN") != -1) {
+            url = url.replaceFirst("ACCESS_TOKEN", getAccessToken(false).access_token);
+        }
+
+        return url;
+    }
     /**
      * 请求（GET）一个URL，返回数据流
      * @author jianqing.cai@qq.com, https://github.com/caijianqing/weixinmp4java/, 2014-2-25 下午4:31:01
@@ -827,6 +840,71 @@ public abstract class AbstractWeixinmpController {
      * @throws IOException
      *             如果打开连接或者保存文件的时候出错
      */
+    protected final <T> T postWithJson(String url, String appid, String secret, Object param, Class<T> returnType, String actionName) throws WeixinException, IOException {
+        String id = CommonUtils.getNextId();
+        OutputStream os = null;
+        InputStream is = null;
+        try {
+            Gson gson = getGson();
+            logError(url);
+            // 打开连接
+            url = replaceAccessToken(url, appid, secret);
+            HttpURLConnection conn = openConnection(url);
+            conn.setRequestMethod("POST");
+            if (param != null) {
+                conn.setDoOutput(true);
+                String reqJson = gson.toJson(param);
+                logWarn("JSON:\t"+reqJson);
+                os = conn.getOutputStream();
+                os.write(reqJson.getBytes(encoding)); // 必须这样getByte(encoding)才不会乱码
+                os.flush();
+                os.close();
+            }
+            // 接收响应
+            is = conn.getInputStream();
+            Object[] data = CommonUtils.readXml(getDataFileDir(), encoding, //
+                    id + "_" + actionName + ".data", conn.getContentLength(), is);
+            String json = data[1].toString();
+            logError("fuck请求:" + url + " ，返回: " + json);
+            // 检查是否出现错误
+            GlobalError error = gson.fromJson(json, GlobalError.class);
+            if (error.errcode != null) {
+                if (error.errcode == 40001) {
+                    // 如果token超时则重新获取
+                    logInfo("AccessToken过时，重新获取。");
+                    AccessToken token = getAccessToken(true);
+                    // 重新请求
+                    url = url.replaceAll("access_token=[^&]+", "access_token=" + token.access_token);
+                    logWarn("before:"+token.access_token);
+                    return postWithJson(url, appid, secret, param, returnType, actionName);
+                } else if (error.errcode != 0) {
+                    // 其他错误
+                    throw new WeixinException(error.errcode, error.toString(), null);
+                }
+            }
+            // 请求完成
+            T obj = gson.fromJson(data[1].toString(), returnType);
+            return obj;
+        } catch (JsonSyntaxException e) {
+            throw new WeixinException(id + "_JsonSyntaxException", e.getMessage(), e);
+        } finally {
+            if (os != null) {
+                try {
+                    os.close();
+                } catch (IOException e2) {
+                    e2.printStackTrace();
+                }
+            }
+            if (is != null) {
+                try {
+                    is.close();
+                } catch (IOException e2) {
+                    e2.printStackTrace();
+                }
+            }
+        }
+    }
+    
     protected final <T> T postWithJson(String url, Object param, Class<T> returnType, String actionName) throws WeixinException, IOException {
         String id = CommonUtils.getNextId();
         OutputStream os = null;
@@ -891,7 +969,7 @@ public abstract class AbstractWeixinmpController {
             }
         }
     }
-
+    
     /**
      * 执行一个post请求（以实体的方式发送）
      * @param url
@@ -914,7 +992,7 @@ public abstract class AbstractWeixinmpController {
         try {
             Gson gson = getGson();
             // 打开连接
-            url = replaceAccessToken(url);
+            url = replaceAccessToken(url,null,null);
             HttpURLConnection conn = openConnection(url);
             // 设置请求头
             String BOUNDARY = "---------7d4a6d158c9"; // 定义数据分隔线

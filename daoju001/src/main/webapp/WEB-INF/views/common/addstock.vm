@@ -1,0 +1,82 @@
+<div id="pagemask-addstock"></div>
+<script>
+function processComplete(data){
+	$('#form_stock')[0].reset();
+	window.location.href='/stocks';
+}
+$(function() {
+	$("#form_stock").validate({
+		ignore:[],
+		rules:{
+			content:{
+				required:true
+			},
+			company:{
+				required:true
+			},
+			phone:{
+				required:true,
+				number:true
+			}
+		},
+		messages:{
+			content:{
+				required:"请输入发布内容"
+			},
+			company:{
+				required:"请输入公司名称"
+			},
+			phone:{
+				required:"请输入电话号码",
+				number:"电话号码只能包含数字"
+			}
+		},
+		errorElement:"em",
+		submitHandler: function(form) {
+            $(form).ajaxSubmit({
+				dataType:'json',
+				complete:processComplete
+			});
+          }
+
+	});
+});
+</script>
+<div class="addstock-win">
+    <div class="addstock-win-content">
+        <h2>
+            <a class="close-addstock" data-role="none">x</a>
+							清仓拍
+        </h2>
+		<div class="content">
+			<form id="form_stock" action="/wxstockadd" method="post">
+			<!-- 隐藏字段，用于标示是表单提交 -->
+    		<input type="hidden" name="do_submit" value="true"/>
+			<div class="part">
+				<div class="section clearfix">
+					<span>公司</span>
+					<input data-role="none" type="text" class="dsf-form-text-input" name="company" placeholder="公司名称" />
+				</div>
+				<div class="section clearfix">
+					<span>电话</span>
+					<input data-role="none" type="text" class="dsf-form-text-input" name="phone" placeholder="手机号码" />
+				</div>
+				<div class="section request-cont clearfix">
+					<span>内容</span>
+					<textarea data-role="none"  class="dsf-form-text-input qr-cont" name="content" placeholder="简单描述需要清仓的货品，型号，数量。税前单价..."></textarea>
+				</div>
+			</div>
+			<div class="op">
+				<a id="submit_stock">发    布</a>
+			</div>
+			<script>
+    			$(function() {
+    				$("#submit_stock").click(function () {
+                    	$(this).submit();
+    				});
+    			});
+    		</script>
+			</form>
+		</div>
+	</div>
+</div>

@@ -18,6 +18,7 @@
    	  <!---->
 	  <id property="price" column="price"/>
 	  <id property="picture" column="picture" />
+	  <id property="provider" column="provider" />
 	  <id property="cover" column="cover" />
 	  <id property="description" column="description" />
 	  <id property="limitq" column="limitq" />
@@ -66,6 +67,7 @@
 	   	  ,brand
 	   	  ,price
 	   	  ,picture
+	   	  ,provider
 	   	  ,cover
 	   	  ,description
 	   	  ,limitq
@@ -83,6 +85,7 @@
 	   	  ,#{brand}
 	   	  ,#{price}
 	   	  ,#{picture}
+	   	  ,#{provider}
 	   	  ,#{cover}
 	   	  ,#{description}
 	   	  ,#{limitq}

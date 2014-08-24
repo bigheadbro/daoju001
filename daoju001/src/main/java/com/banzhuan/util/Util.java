@@ -50,11 +50,15 @@ import jxl.write.WritableWorkbook;
 import jxl.write.biff.LabelRecord;
 
 import org.apache.sanselan.ImageReadException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.banzhuan.common.Constant;
+import com.banzhuan.controller.CommonController;
 
 public class Util {
 
+	private static Logger logger = LoggerFactory.getLogger(Util.class);
 	public static void cropImage(String lastdir, File file, String aa,
 			String subpath) throws IOException {
 		FileInputStream is = null;
@@ -553,7 +557,7 @@ public class Util {
             }
             book.close();
         } catch (Exception e) {
-            System.out.println(e);
+        	logger.error(e.toString());
         }
 		return result;
 	}
@@ -598,6 +602,6 @@ public class Util {
 		return result;
 	}
 	public static void main(String[] args) {
-		addmailToEDM("EDM/edm1.txt");
+		System.out.print(queryMaterial("材质t9115"));
 	}
 }

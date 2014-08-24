@@ -27,6 +27,7 @@
 		<id property="picture" column="picture" />
 		<!--下载次数 -->
 		<id property="cover" column="cover" />
+		<id property="videolink" column="videolink" />
 		
 		<id property="state" column="state" />
 		
@@ -87,6 +88,7 @@
 		,brandId
 		,picture
 		,cover
+		,videolink
 		,gmt_create
 		,gmt_modify)
 		values
@@ -103,6 +105,7 @@
 		,#{brandId}
 		,#{picture}
 		,#{cover}
+		,#{videolink}
 		,now()
 		,#{gmtModify}
 

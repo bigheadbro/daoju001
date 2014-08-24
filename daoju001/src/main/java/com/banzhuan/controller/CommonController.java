@@ -79,9 +79,14 @@ import com.banzhuan.form.QuestionForm;
 import com.banzhuan.form.RequestForm;
 import com.banzhuan.service.CommonService;
 import com.banzhuan.service.UserService;
+import com.banzhuan.service.WeixinService;
 import com.banzhuan.util.JsonUtil;
 import com.banzhuan.util.StringUtil;
+import com.banzhuan.util.TwoDimensionCode;
 import com.banzhuan.util.Util;
+import com.cjc.weixinmp.WeixinException;
+import com.cjc.weixinmp.bean.Openid;
+import com.cjc.weixinmp.bean.WeixinmpUser;
 
 @Controller
 @RequestMapping("/")
@@ -187,10 +192,10 @@ public class CommonController extends BaseController{
 		mv.addObject("requests", requests);
 		
 		List<ProductEntity> products = new ArrayList<ProductEntity>();
-		products.add(commonService.getProduct(87));
-		products.add(commonService.getProduct(92));
-		products.add(commonService.getProduct(33));
-		products.add(commonService.getProduct(38));
+		products.add(commonService.getProduct(105));
+		products.add(commonService.getProduct(125));
+		products.add(commonService.getProduct(115));
+		products.add(commonService.getProduct(114));
 		mv.addObject("products", products);
 		
 		List<QuestionEntity> questions = new ArrayList<QuestionEntity>();
@@ -218,10 +223,10 @@ public class CommonController extends BaseController{
 		mv.addObject("requests", requests);
 		
 		List<ProductEntity> products = new ArrayList<ProductEntity>();
-		products.add(commonService.getProduct(87));
-		products.add(commonService.getProduct(92));
-		products.add(commonService.getProduct(33));
-		products.add(commonService.getProduct(38));
+		products.add(commonService.getProduct(105));
+		products.add(commonService.getProduct(125));
+		products.add(commonService.getProduct(115));
+		products.add(commonService.getProduct(114));
 		mv.addObject("products", products);
 		
 		List<QuestionEntity> questions = new ArrayList<QuestionEntity>();
@@ -412,8 +417,32 @@ public class CommonController extends BaseController{
 		UserEntity user = commonService.getUser(product.getUserId());
 		mv.addObject("pictures",str);
 		mv.addObject("user",user);
+		String path = request.getSession().getServletContext().getRealPath("/qrcode");
+		String qrcode = Util.genRandomName("") + ".png";
+		TwoDimensionCode.encoderQRCode("http://www.daoshifu.com/wxproducts/" + id,path +"/"+ qrcode);
+		mv.addObject("qrcode",qrcode);
 		return mv;
 	}
+	
+	@RequestMapping(value = "/wxproducts/{id}")
+	public ModelAndView wxproducts(final HttpServletRequest request,final HttpServletResponse response, @PathVariable String id) 
+	{
+		ModelAndView mv = new ModelAndView("/wx/wxproduct");
+		int productid = Integer.parseInt(id);
+		ProductEntity product = commonService.getProduct(productid);
+		if(product == null)
+		{
+			return new ModelAndView(new RedirectView("/products"));  
+		}
+		commonService.addProductCount(product.getId(), product.getCount() + 1);
+		mv.addObject("product", product);
+		String[] str = product.getPicture().substring(1).split("[|]");
+		UserEntity user = commonService.getUser(product.getUserId());
+		mv.addObject("pictures",str);
+		mv.addObject("user",user);
+		return mv;
+	}
+	
 	@RequestMapping(value = "/products")
 	public ModelAndView products(final HttpServletRequest request,final HttpServletResponse response, @ModelAttribute("form")ProductForm form) 
 	{
@@ -1614,10 +1643,29 @@ public class CommonController extends BaseController{
 		return view;
 	}
 
+	@RequestMapping(value="/stocks")
+	public ModelAndView stocks(HttpServletRequest request, HttpServletResponse response,@ModelAttribute("form")RequestForm form) {
+		ModelAndView view = new ModelAndView("common/stocklist");
+		List<StockEntity> stocks = commonService.getAllstocks();
+		for(int i=0;i<stocks.size();i++)
+		{
+			stocks.get(i).setContent(stocks.get(i).getContent().replace("\n", "<br/>"));
+		}
+		view.addObject("stocks",stocks);
+		List<ItemEntity> items = commonService.getMainItems();
+		view.addObject("items", items);
+		return view;
+	}
+
+	
 	@RequestMapping(value="/wxstocklist")
 	public ModelAndView wxstocklist(HttpServletRequest request, HttpServletResponse response,@ModelAttribute("form")RequestForm form) {
 		ModelAndView view = new ModelAndView("wx/stocklist");
 		List<StockEntity> stocks = commonService.getAllstocks();
+		for(int i=0;i<stocks.size();i++)
+		{
+			stocks.get(i).setContent(stocks.get(i).getContent().replace("\n", "<br/>"));
+		}
 		view.addObject("stocks",stocks);
 		return view;
 	}
@@ -1636,6 +1684,45 @@ public class CommonController extends BaseController{
 			stock.setPhone(phone);
 			commonService.addStock(stock);
 		}
+		return view;
+	}
+	
+	@RequestMapping(value="/wxcard")
+	public ModelAndView wxcard(HttpServletRequest request, HttpServletResponse response) throws WeixinException, IOException {
+		ModelAndView view = new ModelAndView("wx/wxcard");
+		String openid = request.getParameter("openid");
+		UserEntity user = commonService.getUserByWxid(openid);
+		if(user == null)
+		{
+			return new ModelAndView(new RedirectView("/wxlog"));
+		}
+		else
+		{
+			view.addObject("user",user);
+		}
+		
+		return view;
+	}
+
+	@RequestMapping(value="/wxlog")
+	public ModelAndView wxlog(HttpServletRequest request, HttpServletResponse response) {
+		ModelAndView view = new ModelAndView("wx/wxlog");
+		if(isDoSubmit(request))
+		{
+			
+		}
+		return view;
+	}
+
+	@RequestMapping(value="/wxhandler")
+	public void wxhandler(HttpServletRequest request, HttpServletResponse response) {
+		logger.error("wxhandler:"+request.getParameter("code"));
+	}
+	
+	@RequestMapping(value="/wxreg")
+	public ModelAndView wxreg(HttpServletRequest request, HttpServletResponse response) {
+		ModelAndView view = new ModelAndView("wx/wxreg");
+
 		return view;
 	}
 

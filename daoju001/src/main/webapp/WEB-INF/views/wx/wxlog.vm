@@ -1,0 +1,79 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+    <head>
+        <script type="text/javascript" src="/js/jquery-1.10.2.min.js"></script>
+        <link rel="stylesheet" href="/css/jquery.mobile-1.3.2.min.css">
+        <script src="/js/jquery.mobile-1.3.2.min.js"></script>
+        <script type="text/javascript" src="/js/jquery.form.js"></script>
+        <script type="text/javascript" src="/js/jquery.validate.min.js"></script>
+        <script type="text/javascript" src="/js/additional-methods.js"></script>
+        <link rel="stylesheet" href="/css/wap.css">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+		<script>
+    	$(function() {	
+        	$("#form_log").validate({
+        		ignore:[],
+        		rules:{
+        			mail:{
+						required:true,
+						email:true
+					},
+					password:{
+						required:true
+					}
+        		},
+        		messages:{
+        			mail:{
+						required:"请输入邮箱",
+						email:"邮箱格式不正确"
+					},
+					password:{
+						required:"请输入密码"
+					}
+        		},
+        		errorElement:"em",
+        		submitHandler: function(form) {
+                    $(form).ajaxSubmit();
+                  }
+        
+        	});
+        });
+    	</script>
+	</head>
+    <body>
+		<div data-role="page" data-theme="d" style="max-width:600px;margin: 0 auto;position: inherit;">
+            <div data-role="header">
+                <h1>刀具微名片</h1>
+            </div>
+            <form id="form_log" action="/wxstockadd" method="post">
+			<!-- 隐藏字段，用于标示是表单提交 -->
+    		<input type="hidden" name="do_submit" value="true"/>
+			<div class="part">
+				#springBind("form.mail")
+				<div class="section clearfix">
+					<span>用户名</span>
+					<input data-role="none" type="text" class="dsf-form-text-input" name="$!{status.expression}" placeholder="邮箱" />
+				</div>
+				#springBind("form.password")
+				<div class="section clearfix">
+					<span>密码</span>
+					<input data-role="none" type="password" class="dsf-form-text-input" name="$!{status.expression}" placeholder="密码" />
+				</div>
+			</div>
+			<div class="op">
+				<a id="submit_log">登  录</a>
+			</div>
+			<script>
+    			$(function() {
+    				$("#submit_log").click(function () {
+                    	$(this).submit();
+    				});
+    			});
+    		</script>
+			</form>
+            <div data-role="footer">
+                <h1>更多内容，请登陆<a target="_blank" href="http://www.daoshifu.com/">刀师傅</a></h1>
+            </div>
+		</div>
+    </body>
+</html>

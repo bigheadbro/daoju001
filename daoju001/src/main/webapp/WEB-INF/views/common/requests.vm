@@ -82,24 +82,24 @@ $(function() {
 		#parse("/common/page.vm")
 	</div>
 	<div class="product-side">
-    		<div class="product-side-items">
-        		#foreach($item in $items)
-    				#if($velocityCount < 5)
-    					<div class="item clearfix">
-    						<div class="left">
-    							<a href="/item/${item.id}"><img src="/item/${item.cover}" data-original="/item/${item.cover}" /></a>
-    						</div>
-    						<div class="right">
-    							<a href="/item/${item.id}">${item.brand}${item.type}${item.version} ${item.material}</a>
-    							<p><span>￥${item.price}0 </span><em>包邮</em></p>
-    						</div>
-    					</div>
-    				#end
-    			#end
-        	</div>
-    		<div class="advert">
-        		<a href="/items"><img src="/img/ctshop.png" data-original /></a>
-        	</div>
-		</div>
+		<div class="product-side-items">
+    		#foreach($item in $items)
+				#if($velocityCount < 5)
+					<div class="item clearfix">
+						<div class="left">
+							<a href="/item/${item.id}"><img src="/item/${item.cover}" data-original="/item/${item.cover}" /></a>
+						</div>
+						<div class="right">
+							<a href="/item/${item.id}">${item.brand}${item.type}${item.version} ${item.material}</a>
+							<p><span>￥${item.price}0 </span><em>包邮</em></p>
+						</div>
+					</div>
+				#end
+			#end
+    	</div>
+		<div class="advert">
+    		<a href="/items"><img src="/img/ctshop.png" data-original /></a>
+    	</div>
+	</div>
 </div>
 #parse("/common/quickrequest.vm")

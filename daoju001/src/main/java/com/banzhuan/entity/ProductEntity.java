@@ -30,6 +30,7 @@ public class ProductEntity implements Serializable {
 	private String picture;
 	private String cover;
 	private int state;
+	private String videolink;
 	private int count;
 
 	/**
@@ -273,6 +274,20 @@ public class ProductEntity implements Serializable {
 
 	public void setCount(int count) {
 		this.count = count;
+	}
+
+	/**
+	 * @return the videolink
+	 */
+	public String getVideolink() {
+		return videolink;
+	}
+
+	/**
+	 * @param videolink the videolink to set
+	 */
+	public void setVideolink(String videolink) {
+		this.videolink = videolink;
 	}
 	
 }

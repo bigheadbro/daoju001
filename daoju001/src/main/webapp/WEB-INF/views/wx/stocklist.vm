@@ -7,12 +7,13 @@
         <script type="text/javascript" src="/js/jquery.form.js"></script>
         <script type="text/javascript" src="/js/jquery.validate.min.js"></script>
         <script type="text/javascript" src="/js/additional-methods.js"></script>
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-</head>
+        <link rel="stylesheet" href="/css/wap.css">
+		<title>清仓拍 by刀师傅</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    </head>
 <body>
-    <div data-role="page" id="pageone" data-theme="d" width="700px">
+    <div data-role="page" data-theme="d" style="max-width:600px;margin: 0 auto;position: inherit;">
 		<div data-role="header">
-            <h1>清仓拍 by刀师傅</h1>
             <div data-role="navbar">
                 <ul>
                     <li>
@@ -22,19 +23,20 @@
                         <a href="/wxstockadd" data-icon="arrow-r">发布库存</a>
                     </li>
                     <li>
-                        <a href="/wxstocklist" data-icon="search">库存列表</a>
+                        <a class="ui-btn-active" href="/wxstocklist" data-icon="search">库存列表</a>
                     </li>
                 </ul>
             </div>
         </div>
         <div data-role="content">
-            <ol data-filter="true">
-                <ul data-role="listview" data-inset="true" data-filter="true">
+            <ol data-filter="true" style="padding:0">
+                <ul data-role="listview" data-inset="true" data-filter="true" data-filter-placeholder="搜索关键字，品牌，型号等">
 					#foreach($stock in $stocks)
                     <li>
                         <h2>${stock.company}</h2>
 						<h3>${stock.phone}</h3>
 						<p>${stock.content}</p>
+						<span style="font-weight: 100;font-size: 13px;">$stringUtil.formatDate($!{stock.gmtCreate})</span>
                     </li>
 					#end
                 </ul>

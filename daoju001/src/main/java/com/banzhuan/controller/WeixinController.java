@@ -7,6 +7,8 @@ import javax.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,13 +24,10 @@ import com.banzhuan.util.StringUtil;
 @SessionAttributes({ "account" })
 public class WeixinController {
 	private Logger logger = LoggerFactory.getLogger(WeixinController.class);
-
-	private WeixinService weixinService;
 	
 	public WeixinController()
 	{
 		super();
-		weixinService = new WeixinService();
 	}
 	
 	@RequestMapping(value = "/weixin")
@@ -38,11 +37,11 @@ public class WeixinController {
 		logger.error("enter validate\n");
 		if(StringUtil.isEqual(request.getMethod(), "GET"))
 		{
-			weixinService.doGet(request, response);
+			WeixinService.getInstance().doGet(request, response);
 		}
 		else if(StringUtil.isEqual(request.getMethod(), "POST"))
 		{
-			weixinService.doPost(request, response);
+			WeixinService.getInstance().doPost(request, response);
 		}
 	}
 	

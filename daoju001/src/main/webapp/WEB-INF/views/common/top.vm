@@ -13,13 +13,13 @@
         	<div class="welcome">
         		欢迎来到刀师傅，
 				#if(!$!session.getAttribute("account"))  
-					请您<a href="/user/reg">注册</a>或<a href="/log">登录</a>
+					请您<a rel="external" rel="external" href="/user/reg">注册</a>或<a rel="external" rel="external" href="/log">登录</a>
 				#else
-					${account.userName}. <a href="/user/logoff">退出</a>
+					${account.userName}. <a rel="external" rel="external" href="/user/logoff">退出</a>
 				#end
         	</div>
     		<div class="right">
-        		<a href="/user/main">我的刀师傅</a>
+        		<a rel="external" rel="external" href="/user/main">我的刀师傅</a>
     			<a class="complain">网站建议</a>
         	</div>
     	</div>
@@ -27,53 +27,69 @@
     <div class="main-head-container">
         <div class="main-head-content clearfix">
             <div class="main-logo">
-                <a href="http://www.daoshifu.com"><img src="/img/logo-blue.png" /></a>
+                <a rel="external" rel="external" href="http://www.daoshifu.com"><img src="/img/logo-blue.png" /></a>
             </div>
             <div class="nav">
                 <ul class="clearfix">
     				#if($!stringUtil.isContains($request.getServletPath(),"/index"))
                     <li class="current">
-                        <a href="/index">首页</a>
+                        <a rel="external" href="/index">首页</a>
                     </li>
     				#else
     				<li>
-                        <a href="/index">首页</a>
+                        <a rel="external" href="/index">首页</a>
                     </li>
     				#end
-    				#if($!stringUtil.isContains($request.getServletPath(),"/items") )
-                    <li class="current">
-                        <a href="/items">刀具商城</a>
+					#if($!stringUtil.isContains($request.getServletPath(),"/items") || $!stringUtil.isContains($request.getServletPath(),"/stocks"))
+                    <li class="current ctshop">
+                        <a>刀具商城</a>
+						<ul class="ctshop-dropdown">
+                            <li>
+                                <a rel="external" href="/items">平价刀具</a>
+                            </li>
+                            <li>
+                                <a rel="external" href="/stocks">清仓拍</a>
+                            </li>
+                        </ul>
                     </li>
     				#else
-    				<li>
-                        <a href="/items">刀具商城</a>
+    				<li class="ctshop">
+                        <a>刀具商城</a>
+						<ul class="ctshop-dropdown">
+                            <li>
+                                <a rel="external" href="/items">平价刀具</a>
+                            </li>
+                            <li>
+                                <a rel="external" href="/stocks">清仓拍</a>
+                            </li>
+                        </ul>
                     </li>
     				#end
     				#if($!stringUtil.isContains($request.getServletPath(),"/products") )
                     <li class="current">
-                        <a href="/products">线上展会</a>
+                        <a rel="external" href="/products">线上展会</a>
                     </li>
     				#else
     				<li>
-                        <a href="/products">线上展会</a>
+                        <a rel="external" href="/products">线上展会</a>
                     </li>
     				#end
     				#if($!stringUtil.isContains($request.getServletPath(),"/questions"))
                     <li class="current">
-                        <a href="/questions">刀具咨询</a>
+                        <a rel="external" href="/questions">刀具咨询</a>
                     </li>
     				#else
     				<li>
-                        <a href="/questions">刀具咨询</a>
+                        <a rel="external" href="/questions">刀具咨询</a>
                     </li>
     				#end
     				#if($!stringUtil.isContains($request.getServletPath(),"/agents"))
                     <li class="current">
-                        <a href="/agents">代理商</a>
+                        <a rel="external" href="/agents">代理商</a>
                     </li>
     				#else
     				<li>
-                        <a href="/agents">代理商</a>
+                        <a rel="external" href="/agents">代理商</a>
                     </li>
     				#end
     				#if($!stringUtil.isContains($request.getServletPath(),"/articles") || $!stringUtil.isContains($request.getServletPath(),"/samples"))
@@ -81,10 +97,10 @@
                         <a>刀具资料</a>
 						<ul class="top-dropdown">
                             <li>
-                                <a href="/samples">刀具样本</a>
+                                <a rel="external" href="/samples">刀具样本</a>
                             </li>
                             <li>
-                                <a href="/articles">刀具小百科</a>
+                                <a rel="external" href="/articles">刀具小百科</a>
                             </li>
                         </ul>
                     </li>
@@ -93,10 +109,10 @@
                         <a>刀具资料</a>
 						<ul class="top-dropdown">
                             <li>
-                                <a href="/samples">刀具样本</a>
+                                <a rel="external" href="/samples">刀具样本</a>
                             </li>
                             <li>
-                                <a href="/articles">刀具小百科</a>
+                                <a rel="external" href="/articles">刀具小百科</a>
                             </li>
                         </ul>
                     </li>

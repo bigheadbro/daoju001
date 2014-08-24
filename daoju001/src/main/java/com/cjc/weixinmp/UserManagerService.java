@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.cjc.weixinmp.bean.GlobalError;
 import com.cjc.weixinmp.bean.GroupInfo;
+import com.cjc.weixinmp.bean.Openid;
 import com.cjc.weixinmp.bean.Users;
 import com.cjc.weixinmp.bean.WeixinmpUser;
 import com.cjc.weixinmp.bean.GroupInfo.Group;
@@ -81,10 +82,12 @@ public class UserManagerService {
     public Integer getGroupIdByUser(String openId) throws WeixinException {
         controller.logInfo("查询用过所在分组：" + openId);
         String url = controller.getProperty("groups_getid_url", null, false);
+        String appid = controller.getProperty("appid", null, false);
+        String secret = controller.getProperty("appsecret", null, false);
         try {
             UserGroup ug = new UserGroup();
             ug.openid = openId;
-            UserGroup result = controller.postWithJson(url, ug, UserGroup.class, "getGroupByUser");
+            UserGroup result = controller.postWithJson(url, appid, secret, ug, UserGroup.class, "getGroupByUser");
             controller.logInfo("查询用过所在分组结果：" + result);
             return result.groupid;
         } catch (WeixinException e) {
@@ -176,6 +179,35 @@ public class UserManagerService {
         }
     }
 
+    /**
+     * 查询一个用户的openid
+     * @author jianqing.cai@qq.com, https://github.com/caijianqing/weixinmp4java/, 2014-2-25 下午4:57:50
+     * @param openId 用户OpenId
+     * @return 这个用户的详细信息，null为找不到
+     * @throws WeixinException 如果发生错误
+     * @throws IOException 
+     */
+    public Openid getUserOpenid(String code) throws WeixinException, IOException {
+        controller.logInfo("获取用户基本信息：code=" + code);
+        String url = controller.getProperty("user_openid", null, false);
+        String appid = controller.getProperty("appid", null, false);
+        String secret = controller.getProperty("appsecret", null, false);
+        try {
+            url = url.replaceFirst("CODE", code);
+            url = url.replaceFirst("APPID", appid);
+            url = url.replaceFirst("SECRET", secret);
+            Openid result = controller.postWithJson(url, code, Openid.class, "getUserOpenid");
+            controller.logInfo("获取用户基本信息结果：" + result);
+            return result;
+        } catch (WeixinException e) {
+            controller.logError(e.getMessage());
+            if (e.isNeedLog()) {
+                controller.saveToFile(e.getLogFilename(), e.getLogContent());
+            }
+            throw e;
+        }
+    }
+    
     /**
      * 查询关注者列表
      * @author jianqing.cai@qq.com, https://github.com/caijianqing/weixinmp4java/, 2014-2-25 下午4:58:17

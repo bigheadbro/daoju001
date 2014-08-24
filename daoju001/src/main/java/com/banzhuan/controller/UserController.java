@@ -993,11 +993,6 @@ public class UserController extends BaseController{
 				JsonUtil.showAlert(response, "新建刀具失败", "上传失败，刀具名称太长~", "确定", "", "#");
 				return mv;
 			}
-			if(form.getProcessMethod() == 0)
-			{
-				JsonUtil.showAlert(response, "新建刀具失败", "上传失败，请选择加工方式~", "确定", "", "#");
-				return mv;
-			}
 			if(StringUtil.isEmpty(form.getPicture()))
 			{
 				JsonUtil.showAlert(response, "新建刀具失败", "上传失败，请选择刀具配图~", "确定", "", "#");

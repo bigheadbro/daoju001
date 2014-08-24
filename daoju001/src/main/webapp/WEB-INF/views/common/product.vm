@@ -51,7 +51,7 @@
     			<div class="detail">
     				<ul>
     					<li>
-    						<span><i class="key">供应商：</i><em><a targt="_blank" href="/users/${user.id}">${user.nick}</a></em></span>
+    						<span><i class="key">供应商：</i><em><a targt="_blank" href="/users/${user.id}">${user.companyName}</a></em></span>
     					</li>
     					<li>
     						<span><i class="key">地址：</i>${user.address}</span>
@@ -71,9 +71,16 @@
 				<img src="/img/product-des.png" />
     		</div>
     		<p>${product.description}</p>
+			#if($stringUtil.isNotEmpty(${product.videolink}) && $stringUtil.isContains(${product.videolink},"youku"))
+				$stringUtil.convertYoukulink(${product.videolink})
+			#end
     	</div>
 	</div>
 	<div class="product-side">
+		<div class="qrcode">
+			<img src="/qrcode/$qrcode" />
+			<p>扫描二维码，将本页产品分享到微信</p>
+		</div>
 		<div class="goask">
 			<h1>还是没找到合适的刀具？<br/><span>秀出你的需求，刀师傅和你一起解决！</span></h1>
 			<a href="/user/newquestion">马上提问</a>

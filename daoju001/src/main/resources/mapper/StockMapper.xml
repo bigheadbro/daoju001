@@ -25,7 +25,7 @@
 	<select id="queryAllStock" parameterType="int"
 			resultMap="StockResultMap">
 		<![CDATA[
-			SELECT * from t_stock t
+			SELECT * from t_stock t order by gmt_create desc
 		]]>
 	</select>
 	<!-- 新代理商信息 -->

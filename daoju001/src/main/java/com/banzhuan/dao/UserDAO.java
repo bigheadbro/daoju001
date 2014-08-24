@@ -15,6 +15,8 @@ public interface UserDAO {
 	 */
 	UserEntity queryUserEntityById(int id);
 	
+	UserEntity queryUserEntityByWxid(String wxid);
+	
 	UserEntity queryUserEntityByMail(String mail);
 	
 	UserEntity queryUserEntityByName(String name);

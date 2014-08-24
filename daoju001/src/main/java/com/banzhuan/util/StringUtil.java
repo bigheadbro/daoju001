@@ -503,11 +503,6 @@ public class StringUtil {
 		return diffTimeYear(dateStr, "yyyy-MM-dd HH:mm:ss");
 	}
 	
-	public static void main(String[] args)
-	{
-		System.out.print(isIlegal("daoshifu"));
-	}
-	
 	public static boolean isProperImageFile(String type)
 	{
 		if(isEqual(type,".jpg") || isEqual(type , ".jpeg") || isEqual(type , ".gif") || isEqual(type , ".png"))
@@ -690,6 +685,7 @@ public class StringUtil {
 		processMethodMap.put(11, "车削(槽加工）");
 		processMethodMap.put(12, "车削(螺纹加工）");
 		processMethodMap.put(13, "去毛刺");
+		processMethodMap.put(14, "攻丝");
 		
 		wpMaterialMap.put(0, "不限");
 		wpMaterialMap.put(1, "钢");
@@ -764,10 +760,26 @@ public class StringUtil {
 		return new TreeMap<String, String>();
 	}
 	
+	public static String convertYoukulink(String link)
+	{
+		int begin = link.indexOf("id_") + 3;
+		int end = link.indexOf(".html");
+		String tmp = "<object id=\"\" height=\"500\" style=\"visibility:visible;\" width=\"630\" classid=\"clsid:D27CDB6E-AE6D-11cf-96B8-444553540000\"><param value=http://player.youku.com/player.php/sid/\""+link.substring(begin, end)
+		+"/v.swf\" name=\"movie\"><param value=\"high\" name=\"quality\"><param value=\"never\" name=\"allowScriptAccess\"><param value=\"true\" name=\"allowFullScreen\">"
+		+"<param value=\"playMovie=true&amp;auto=1&amp;adss=0\" name=\"flashvars\"><param value=\"transparent\" name=\"wmode\">"
+		+"<embed id=\"\" height=\"500\" allowscriptaccess=\"never\" style=\"visibility:visible;\" pluginspage=\"http://get.adobe.com/cn/flashplayer/\" flashvars=\"playMovie=true&amp;auto=1&amp;autostart=true\" width=\"630\" allowfullscreen=\"true\" quality=\"high\" src=\"http://player.youku.com/player.php/sid/"
+		+link.substring(begin, end)+"/v.swf\" type=\"application/x-shockwave-flash\" wmode=\"transparent\"></object>";
+		return tmp;
+	}
+	
 	public static void test(boolean b)
 	{
 		boolean a = b;
 		String.valueOf(a);
+	}
+	
+	public static void main(String[] args) {
+		System.out.print(convertYoukulink("http://v.youku.com/v_show/id_XMjUwMTU3NTA4.html"));
 	}
 	
 }

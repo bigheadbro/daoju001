@@ -720,6 +720,11 @@ public class CommonService {
 		return userDAO.queryUserEntityById(id);
 	}
 	
+	public UserEntity getUserByWxid(String wxid)
+	{
+		return userDAO.queryUserEntityByWxid(wxid);
+	}
+	
 	public QuestionEntity getQuestion(int id)
 	{
 		return questionDAO.queryQuestionEntityById(id);

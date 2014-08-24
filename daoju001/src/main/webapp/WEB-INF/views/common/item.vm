@@ -62,6 +62,7 @@
 				<li><span>商品价格：</span><em class="price">￥${item.price}0</em></li>
 				<li><span>配送：</span><i>全国顺丰包邮</i></li>
 				<li><span>销量：</span>30天内售出<em>#if(${item.quantity})${item.quantity}#else 0 #end</em>件</li>
+				<li><span>供应商：</span>${item.provider}</li>
 			</ul>
 			<div class="buy clearfix">
 				<div class="left">

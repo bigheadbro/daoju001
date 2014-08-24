@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Service;
 
 import com.cjc.weixinmp.AbstractUserOperate;
 import com.cjc.weixinmp.AbstractWeixinmpController;
@@ -14,7 +15,15 @@ public class WeixinService extends AbstractWeixinmpController {
 	private Logger logger = LoggerFactory.getLogger(WeixinService.class);
 	final protected Map<String, AbstractUserOperate> userOperateMap = new HashMap<String, AbstractUserOperate>();
 
-	public WeixinService() {
+	private static WeixinService wxService;  
+
+    public static WeixinService getInstance() {  
+        if (wxService == null) {  
+        	wxService = new WeixinService();  
+        }  
+        return wxService;  
+    }  
+	private WeixinService() {
         // 必须调用super进行初始化
         super();
         // 如果多公众号，请多开几个实例，编写不同的配置文件并且调用这个方法

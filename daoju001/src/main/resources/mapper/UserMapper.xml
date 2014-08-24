@@ -4,6 +4,7 @@
 	<resultMap type="UserEntity" id="UserResultMap">
     <!---->
 		<id property="id" column="id" />
+		<id property="wxid" column="wxid" />
 		<!--QQ connect 昵称 -->
 		<id property="nick" column="nick" />
 		<!--登录密码 -->
@@ -63,6 +64,13 @@
 		resultMap="UserResultMap">
 	<![CDATA[
 		SELECT * from t_user t WHERE t.id = #{id}
+	]]>
+	</select>
+	
+	<select id="queryUserEntityByWxid" parameterType="int"
+		resultMap="UserResultMap">
+	<![CDATA[
+		SELECT * from t_user t WHERE t.wxid = #{wxid}
 	]]>
 	</select>
 	

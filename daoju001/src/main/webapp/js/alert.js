@@ -4,6 +4,7 @@ var complainshow = false;
 var side_show = false;
 var complainshow = false;
 var requestshow = false;
+var stockshow = false;
 function hidecomplain() {
 	$(".complain-win").hide();
 	$("#pagemask-complain").hide();
@@ -36,6 +37,23 @@ function showrequest() {
 	if (!requestshow) {
 		$(".quickrequest-win").show();
 		requestshow = true;
+	}
+}
+function hidestock() {
+	$(".addstock-win").hide();
+	$("#pagemask-addstock").hide();
+	stockshow = false;
+}
+function showstock() {
+	$("#pagemask-addstock").css("width", $(document).width());
+	$("#pagemask-addstock").css("height", $(document).height());
+	$("#pagemask-addstock").show();
+	$(".addstock-win").css("top",
+			$(window).height() / 2 + $(document).scrollTop() - 220);
+	$(".addstock-win").css("left", $(document).width() / 2 - 300);
+	if (!stockshow) {
+		$(".addstock-win").show();
+		stockshow = true;
 	}
 }
 $(function() {
@@ -173,6 +191,9 @@ $(function() {
 	});
 	$(".close-complain").on("click", function() {
 		hidecomplain();
+	});
+	$(".close-addstock").on("click", function() {
+		hidestock();
 	});
 	$(".close-quickrequest").on("click", function() {
 		hiderequest();

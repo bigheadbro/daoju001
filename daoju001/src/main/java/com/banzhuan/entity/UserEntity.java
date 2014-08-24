@@ -9,6 +9,8 @@ public class UserEntity implements Serializable {
 	private static final long serialVersionUID = -1111949594820636928L;
 	//
 	private int id;
+	
+	private String wxid;
 	// QQ connect 昵称
 	private String nick;
 	// 登录密码
@@ -500,6 +502,20 @@ public class UserEntity implements Serializable {
 	 */
 	public void setGmtAuth(String gmtAuth) {
 		this.gmtAuth = gmtAuth;
+	}
+
+	/**
+	 * @return the wxid
+	 */
+	public String getWxid() {
+		return wxid;
+	}
+
+	/**
+	 * @param wxid the wxid to set
+	 */
+	public void setWxid(String wxid) {
+		this.wxid = wxid;
 	}
 
 	

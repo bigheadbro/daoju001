@@ -29,6 +29,8 @@ public class ItemEntity implements Serializable {
 	private int limitq;
 	private int quantity;
 	
+	private String provider;
+	
 	private int order;
 	private String gmtCreate;
 	// 
@@ -225,5 +227,17 @@ public class ItemEntity implements Serializable {
 	 */
 	public void setOrder(int order) {
 		this.order = order;
+	}
+	/**
+	 * @return the provider
+	 */
+	public String getProvider() {
+		return provider;
+	}
+	/**
+	 * @param provider the provider to set
+	 */
+	public void setProvider(String provider) {
+		this.provider = provider;
 	}
    }

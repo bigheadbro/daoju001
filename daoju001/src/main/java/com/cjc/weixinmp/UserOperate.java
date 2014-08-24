@@ -30,7 +30,7 @@ public class UserOperate extends AbstractUserOperate {
     public AbstractResponse onTextMessage(TextRequest text) throws WeixinException {
 		TextResponse tr = new TextResponse();
     	tr.ToUserName = text.ToUserName;
-    	if(StringUtil.isEqual(text.Content.substring(0,2), "材料"))
+    	if(StringUtil.isEqual(text.Content.substring(0,2), "材质"))
     	{
     		tr.Content =  Util.queryMaterial(text.Content);
     	}
@@ -44,12 +44,13 @@ public class UserOperate extends AbstractUserOperate {
 	@Override
 	public AbstractResponse onSubscribeEvent(SubscribeEventRequest event) throws WeixinException {
 		CustomButton button = new CustomButton();
-		button.addButton(CustomMenu.TYPE.click, "小刀消息", "message", null)
-				.addSubButton(CustomMenu.TYPE.click, "最近文章", "latestarticle", null) 
-		        .addSubButton(CustomMenu.TYPE.click, "关于我们", "aboutus", null) ;
+		button.addButton(CustomMenu.TYPE.click, "刀具名片", "message", null)
+		        .addSubButton(CustomMenu.TYPE.click, "进入微名片", "card", null);
 		button.addButton(CustomMenu.TYPE.click, "小刀发布", "request", null)
-				.addSubButton(CustomMenu.TYPE.view, "我要发布", null, "http://www.daoshifu.com/wxnewrequest")
-				.addSubButton(CustomMenu.TYPE.click, "今日发布", "todayrequest", null);
+				.addSubButton(CustomMenu.TYPE.view, "刀具需求发布", null, "http://www.daoshifu.com/wxnewrequest")
+				.addSubButton(CustomMenu.TYPE.click, "查看今日需求", "todayrequest", null)
+				.addSubButton(CustomMenu.TYPE.view, "清仓产品发布", null, "http://www.daoshifu.com/wxstockadd")
+				.addSubButton(CustomMenu.TYPE.view, "清仓产品列表", null, "http://www.daoshifu.com/wxstocklist");
 		button.addButton(CustomMenu.TYPE.click, "小刀工具", "tools", null) 
 		        .addSubButton(CustomMenu.TYPE.click, "材质查询", "material", null) 
 		        .addSubButton(CustomMenu.TYPE.click, "钢材查询", "steel", null) 
@@ -65,6 +66,10 @@ public class UserOperate extends AbstractUserOperate {
 	public AbstractResponse onClickEvent(ClickEventRequest click) throws WeixinException {
 		TextResponse tr = new TextResponse();
     	tr.ToUserName = click.ToUserName;
+    	if(StringUtil.isEqual(click.EventKey, "card"))
+        {
+        	tr.Content =  "点击链接马上进入微名片 http://115017.ichengyun.net/wxcard?openid=" + click.ToUserName;
+        }
     	if(StringUtil.isEqual(click.EventKey, "latestarticle"))
         {
         	tr.Content =  "还不知道怎么弄，呜呜呜";

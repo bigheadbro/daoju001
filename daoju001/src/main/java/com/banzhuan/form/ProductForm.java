@@ -21,6 +21,7 @@ public class ProductForm implements Serializable {
 	private String cover;
 	private int isEdit;
 	private int brandid;
+	private String videolink;
 
 	public int getProcessMethod() {
 		return processMethod;
@@ -147,5 +148,17 @@ public class ProductForm implements Serializable {
 	 */
 	public void setBrandid(int brandid) {
 		this.brandid = brandid;
+	}
+	/**
+	 * @return the videolink
+	 */
+	public String getVideolink() {
+		return videolink;
+	}
+	/**
+	 * @param videolink the videolink to set
+	 */
+	public void setVideolink(String videolink) {
+		this.videolink = videolink;
 	}
 }

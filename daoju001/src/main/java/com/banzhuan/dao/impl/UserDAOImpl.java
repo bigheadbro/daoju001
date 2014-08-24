@@ -24,6 +24,12 @@ public class UserDAOImpl extends SqlSessionDaoSupport implements UserDAO {
 	}
 	
 	@Override
+	public UserEntity queryUserEntityByWxid(String wxid) {
+		return this.getSqlSession().selectOne("queryUserEntityByWxid", wxid);
+	}
+
+	
+	@Override
 	public UserEntity queryUserEntityByName(String name)
 	{
 		return this.getSqlSession().selectOne("queryUserEntityByName", name);

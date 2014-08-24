@@ -452,6 +452,10 @@ public class UserService {
     	{
     		product.setPicture(form.getPicture());
     	}
+    	if(StringUtil.isNotEmpty(form.getVideolink()))
+    	{
+    		product.setVideolink(form.getVideolink());
+    	}
     	if(StringUtil.isNotEmpty(form.getCover()))
     	{
     		product.setCover(form.getCover());
@@ -901,7 +905,10 @@ public class UserService {
 		{
 			form.setDescription(product.getDescription());
 		}
-
+		if(StringUtil.isNotEmpty(product.getVideolink()))
+		{
+			form.setVideolink(product.getVideolink());
+		}
 	}
     
     public void setProductFormWithProduct(ProductForm form, ProductEntity product)

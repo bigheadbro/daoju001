@@ -171,6 +171,7 @@ public abstract class AbstractWeixinmpController {
             in.close();
             // 加载用户配置文件
             url = this.getClass().getResource(propertiesPath);
+            
             if (url == null) {
                 throw new RuntimeException("缺少配置文件：" + propertiesPath);
             }
@@ -397,9 +398,11 @@ public abstract class AbstractWeixinmpController {
         response.setCharacterEncoding(encoding);
         // 收集参数
         SignatureInfo sign = getSignatureInfo(request);
+        logger.error(sign.toString());
         // 接入
         try {
             String result = baseSupportService.onAccess(sign, timestampLimit);
+            logger.error(result);
             // 返回接入结果
             PrintWriter out = response.getWriter();
             out.print(result);

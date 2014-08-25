@@ -14,6 +14,7 @@ import com.cjc.weixinmp.bean.AbstractResponse;
 import com.cjc.weixinmp.bean.CustomMenu;
 import com.cjc.weixinmp.bean.CustomMenu.CustomButton;
 import com.cjc.weixinmp.bean.ClickEventRequest;
+import com.cjc.weixinmp.bean.NewsResponse;
 import com.cjc.weixinmp.bean.SubscribeEventRequest;
 import com.cjc.weixinmp.bean.TextRequest;
 import com.cjc.weixinmp.bean.TextResponse;
@@ -44,21 +45,38 @@ public class UserOperate extends AbstractUserOperate {
 	@Override
 	public AbstractResponse onSubscribeEvent(SubscribeEventRequest event) throws WeixinException {
 		CustomButton button = new CustomButton();
-		button.addButton(CustomMenu.TYPE.click, "刀具名片", "message", null)
-		        .addSubButton(CustomMenu.TYPE.click, "进入微名片", "card", null);
-		button.addButton(CustomMenu.TYPE.click, "小刀发布", "request", null)
-				.addSubButton(CustomMenu.TYPE.view, "刀具需求发布", null, "http://www.daoshifu.com/wxnewrequest")
-				.addSubButton(CustomMenu.TYPE.click, "查看今日需求", "todayrequest", null)
-				.addSubButton(CustomMenu.TYPE.view, "清仓产品发布", null, "http://www.daoshifu.com/wxstockadd")
-				.addSubButton(CustomMenu.TYPE.view, "清仓产品列表", null, "http://www.daoshifu.com/wxstocklist");
-		button.addButton(CustomMenu.TYPE.click, "小刀工具", "tools", null) 
-		        .addSubButton(CustomMenu.TYPE.click, "材质查询", "material", null) 
-		        .addSubButton(CustomMenu.TYPE.click, "钢材查询", "steel", null) 
-		        .addSubButton(CustomMenu.TYPE.click, "螺纹查询","luowen", null);
-		this.controller.getCustomMenuService().updateMenu(button);
 		TextResponse tr = new TextResponse();
-    	tr.ToUserName = event.FromUserName;
-    	tr.Content =  "欢迎关注刀师傅！\n\n刀师傅是刀具行业的新兵，希望借助互联网和移动互联网的力量，帮助大家高效快捷的解决问题。\n\n如果你有行业的困惑，如果你有改良的创意，如果你有棘手的问题，都欢迎和我们交流。让我们一起，每天进步一点！";
+		logger.error(event.ToUserName);
+		if(StringUtil.isEqual(event.ToUserName, "gh_62d1696b4731"))
+		{
+			button.addButton(CustomMenu.TYPE.click, "刀具名片", "message", null)
+			        .addSubButton(CustomMenu.TYPE.click, "进入微名片", "card", null);
+			button.addButton(CustomMenu.TYPE.click, "小刀发布", "request", null)
+					.addSubButton(CustomMenu.TYPE.view, "刀具需求发布", null, "http://www.daoshifu.com/wxnewrequest")
+					.addSubButton(CustomMenu.TYPE.click, "查看今日需求", "todayrequest", null)
+					.addSubButton(CustomMenu.TYPE.view, "清仓产品发布", null, "http://www.daoshifu.com/wxstockadd")
+					.addSubButton(CustomMenu.TYPE.view, "清仓产品列表", null, "http://www.daoshifu.com/wxstocklist");
+			button.addButton(CustomMenu.TYPE.click, "小刀工具", "tools", null) 
+			        .addSubButton(CustomMenu.TYPE.click, "材质查询", "material", null) 
+			        .addSubButton(CustomMenu.TYPE.click, "钢材查询", "steel", null) 
+			        .addSubButton(CustomMenu.TYPE.click, "螺纹查询","luowen", null);
+			this.controller.getCustomMenuService().updateMenu(button);
+			
+	    	tr.ToUserName = event.FromUserName;
+	    	tr.Content =  "欢迎关注刀师傅！\n\n刀师傅是刀具行业的新兵，希望借助互联网和移动互联网的力量，帮助大家高效快捷的解决问题。\n\n如果你有行业的困惑，如果你有改良的创意，如果你有棘手的问题，都欢迎和我们交流。让我们一起，每天进步一点！";
+		}
+		if(StringUtil.isEqual(event.ToUserName, "gh_47f9da65c103"))
+		{
+			button.addButton(CustomMenu.TYPE.view, "进入微名片", null, "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx23d861802e10c848&redirect_uri=http://115017.ichengyun.net/wxcard&response_type=code&scope=snsapi_base&state=s1#wechat_redirect");
+
+			button.addButton(CustomMenu.TYPE.click, "刀具供应商", "provider", null)
+					.addSubButton(CustomMenu.TYPE.view, "搜索供应商", null, "http://www.baidu.com");
+			button.addButton(CustomMenu.TYPE.click, "问题反馈", "feedback", null);
+			this.controller.getCustomMenuService().updateMenu(button);
+			
+	    	tr.ToUserName = event.FromUserName;
+	    	tr.Content =  "欢迎关注刀师傅！\n\n刀师傅是刀具行业的新兵，希望借助互联网和移动互联网的力量，帮助大家高效快捷的解决问题。\n\n如果你有行业的困惑，如果你有改良的创意，如果你有棘手的问题，都欢迎和我们交流。让我们一起，每天进步一点！";
+		}
 		return tr;
     }
 	
@@ -68,11 +86,18 @@ public class UserOperate extends AbstractUserOperate {
     	tr.ToUserName = click.ToUserName;
     	if(StringUtil.isEqual(click.EventKey, "card"))
         {
-        	tr.Content =  "点击链接马上进入微名片 http://115017.ichengyun.net/wxcard?openid=" + click.ToUserName;
+    		NewsResponse news = new NewsResponse();
+    		news.ToUserName = click.ToUserName;
+    		news.addArticle("点击召唤微名片", "刀师傅为刀具界人士量身打造的微名片，帮助刀具企业与用户更好的连接。", "http://img1.178.com/mm/201205/131677208040/131677329126.jpg", "http://115017.ichengyun.net/wxcard?openid="+ click.FromUserName);
+        	return news;
         }
     	if(StringUtil.isEqual(click.EventKey, "latestarticle"))
         {
         	tr.Content =  "还不知道怎么弄，呜呜呜";
+        }
+    	if(StringUtil.isEqual(click.EventKey, "feedback"))
+        {
+        	tr.Content =  "随便写个放个菜单而已，没什么实际作用";
         }
     	if(StringUtil.isEqual(click.EventKey, "aboutus"))
         {

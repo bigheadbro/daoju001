@@ -1690,8 +1690,11 @@ public class CommonController extends BaseController{
 	@RequestMapping(value="/wxcard")
 	public ModelAndView wxcard(HttpServletRequest request, HttpServletResponse response) throws WeixinException, IOException {
 		ModelAndView view = new ModelAndView("wx/wxcard");
-		String openid = request.getParameter("openid");
-		UserEntity user = commonService.getUserByWxid(openid);
+		
+		String code = request.getParameter("code");
+		Openid openid = WeixinService.getInstance().getUserManagerService().getUserOpenid(code);
+		WeixinmpUser wxuser = WeixinService.getInstance().getUserManagerService().getUser(openid.openid);
+		UserEntity user = commonService.getUserByWxid(openid.openid);
 		if(user == null)
 		{
 			return new ModelAndView(new RedirectView("/wxlog"));
@@ -1699,13 +1702,14 @@ public class CommonController extends BaseController{
 		else
 		{
 			view.addObject("user",user);
+			view.addObject("wxuser",wxuser);
 		}
 		
 		return view;
 	}
 
 	@RequestMapping(value="/wxlog")
-	public ModelAndView wxlog(HttpServletRequest request, HttpServletResponse response) {
+	public ModelAndView wxlog(HttpServletRequest request, HttpServletResponse response, @ModelAttribute("form")LoginForm form, BindingResult result) {
 		ModelAndView view = new ModelAndView("wx/wxlog");
 		if(isDoSubmit(request))
 		{

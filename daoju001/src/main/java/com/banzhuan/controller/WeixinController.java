@@ -45,4 +45,19 @@ public class WeixinController {
 		}
 	}
 	
+	@RequestMapping(value = "/serve")
+	@ResponseBody
+	public void serve(HttpServletRequest request, HttpServletResponse response, ModelMap model) throws Exception {
+		
+		logger.error("enter validate\n");
+		if(StringUtil.isEqual(request.getMethod(), "GET"))
+		{
+			WeixinService.getInstance2().doGet(request, response);
+		}
+		else if(StringUtil.isEqual(request.getMethod(), "POST"))
+		{
+			WeixinService.getInstance2().doPost(request, response);
+		}
+	}
+	
 }

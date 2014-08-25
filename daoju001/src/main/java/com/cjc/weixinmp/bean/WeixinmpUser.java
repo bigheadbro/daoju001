@@ -46,4 +46,18 @@ public class WeixinmpUser implements Serializable {
                 + ", province=" + province + ", language=" + language + ", headimgurl=" + headimgurl + ", subscribe_time=" + subscribe_time + "]";
     }
 
+	/**
+	 * @return the province
+	 */
+	public String getProvince() {
+		return province;
+	}
+
+	/**
+	 * @param province the province to set
+	 */
+	public void setProvince(String province) {
+		this.province = province;
+	}
+
 }

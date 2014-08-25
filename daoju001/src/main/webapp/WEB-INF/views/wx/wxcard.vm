@@ -15,7 +15,7 @@
             <div data-role="header">
                 <h1>刀具微名片</h1>
             </div>
-			<p>${user.nick}<br/>${user.companyName}<br/>${user.phone}</p>
+			<p>${user.nick}<br/>${user.companyName}<br/>${user.phone}<br/>${wxuser.province}</p>
 			<a rel="external" href="http://mp.weixin.qq.com/s?__biz=MzA4MzMxMDQwNg==&mid=201178081&idx=1&sn=bfbea1ae93c5fa07c4a0a7f3e128a795#rd">链接测试</a>
 		</div>
     </body>

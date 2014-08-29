@@ -47,7 +47,7 @@ public class UserOperate extends AbstractUserOperate {
 		CustomButton button = new CustomButton();
 		TextResponse tr = new TextResponse();
 		logger.error(event.ToUserName);
-		if(StringUtil.isEqual(event.ToUserName, "gh_62d1696b4731"))
+		if(StringUtil.isEqual(event.ToUserName, "gh_d8bb68cfc56b"))
 		{
 			button.addButton(CustomMenu.TYPE.click, "刀具名片", "message", null)
 			        .addSubButton(CustomMenu.TYPE.click, "进入微名片", "card", null);
@@ -65,9 +65,9 @@ public class UserOperate extends AbstractUserOperate {
 	    	tr.ToUserName = event.FromUserName;
 	    	tr.Content =  "欢迎关注刀师傅！\n\n刀师傅是刀具行业的新兵，希望借助互联网和移动互联网的力量，帮助大家高效快捷的解决问题。\n\n如果你有行业的困惑，如果你有改良的创意，如果你有棘手的问题，都欢迎和我们交流。让我们一起，每天进步一点！";
 		}
-		if(StringUtil.isEqual(event.ToUserName, "gh_47f9da65c103"))
+		if(StringUtil.isEqual(event.ToUserName, "gh_b8c3f27889ae"))
 		{
-			button.addButton(CustomMenu.TYPE.view, "进入微名片", null, "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx23d861802e10c848&redirect_uri=http://115017.ichengyun.net/wxcard&response_type=code&scope=snsapi_base&state=s1#wechat_redirect");
+			button.addButton(CustomMenu.TYPE.view, "进入微名片", null, "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxb5f0887883f34822&redirect_uri=http://115017.ichengyun.net/wxcard&response_type=code&scope=snsapi_base&state=s1#wechat_redirect");
 
 			button.addButton(CustomMenu.TYPE.click, "刀具供应商", "provider", null)
 					.addSubButton(CustomMenu.TYPE.view, "搜索供应商", null, "http://www.baidu.com");

@@ -14,6 +14,7 @@ public class Account implements Serializable{
 	private boolean isBuyer;
 	private boolean isAgent;
 	private String logo;
+	private String wxlogo;
 	private String mail;
 	private int brandName;
 	private int brandName2;
@@ -29,6 +30,10 @@ public class Account implements Serializable{
 	private String qq;
 	private String area;
 	private String phone;
+	private String mobile;
+	private String wxbrand;
+	private String position;
+	private String wxid;
 	
 	public boolean isAgent() {
 		return isAgent;
@@ -252,6 +257,66 @@ public class Account implements Serializable{
 	 */
 	public void setPhone(String phone) {
 		this.phone = phone;
+	}
+	/**
+	 * @return the mobile
+	 */
+	public String getMobile() {
+		return mobile;
+	}
+	/**
+	 * @param mobile the mobile to set
+	 */
+	public void setMobile(String mobile) {
+		this.mobile = mobile;
+	}
+	/**
+	 * @return the wxbrand
+	 */
+	public String getWxbrand() {
+		return wxbrand;
+	}
+	/**
+	 * @param wxbrand the wxbrand to set
+	 */
+	public void setWxbrand(String wxbrand) {
+		this.wxbrand = wxbrand;
+	}
+	/**
+	 * @return the position
+	 */
+	public String getPosition() {
+		return position;
+	}
+	/**
+	 * @param position the position to set
+	 */
+	public void setPosition(String position) {
+		this.position = position;
+	}
+	/**
+	 * @return the wxid
+	 */
+	public String getWxid() {
+		return wxid;
+	}
+	/**
+	 * @param wxid the wxid to set
+	 */
+	public void setWxid(String wxid) {
+		this.wxid = wxid;
+	}
+	/**
+	 * @return the wxlogo
+	 */
+	public String getWxlogo() {
+		return wxlogo;
+	}
+	/**
+	 * @param wxlogo the wxlogo to set
+	 */
+	public void setWxlogo(String wxlogo) {
+		this.wxlogo = wxlogo;
 	}
 	
 

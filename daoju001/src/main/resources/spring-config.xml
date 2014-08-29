@@ -82,6 +82,7 @@
    			<mvc:mapping path="showanswer" />
    			<mvc:mapping path="/user/main" />
    			<mvc:mapping path="/user/editanswer" />
+   			<mvc:mapping path="/user/uploadsample" />
    			<mvc:mapping path="/user/answered" />
 			<mvc:mapping path="/user/mymsg" />
 			<mvc:mapping path="/user/newquestion" />

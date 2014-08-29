@@ -1,6 +1,7 @@
 #set($layout = "/layout/user_detail_layout.vm")
 <link rel="stylesheet" href="/css/uploadify.css">
 <script type="text/javascript" src="/js/jquery.uploadify.min.js"></script>
+<script type="text/javascript" src="/js/brand.js"></script>
 <ul class="right-tab clearfix">
     <li class="current">上传样本</li>
     <li>
@@ -16,6 +17,9 @@
                     name:{
                     required:true
                     },
+					brandid:{
+    					min:1
+    				},
                     link:{
                     required:true
                     }
@@ -24,6 +28,9 @@
                     name:{
                     required:"请输入样本名称"
                     },
+					brandid:{
+    					min:"请选择刀具品牌"
+    				},
                     link:{
                     required:"请上传文件"
                     }
@@ -109,6 +116,26 @@
             </ul>
         </div>
 		<div class="listitem clearfix">
+			#springBind("form.brandid")
+            <ul class="user-info clearfix">
+                <li class="key">
+					刀具品牌
+                </li>
+                <li class="value">
+                    <a id="selbrand">
+						#if(${status.value} != 0)
+							$stringUtil.getBrand($brandid)
+						#else
+							选择刀具品牌
+						#end
+					</a>
+					<span id="otherbrand">需要添加品牌请联系刀师傅客服</span>
+					<input type="hidden" id="brand" name="${status.expression}" value="${status.value}"/>
+					<em for="$!{status.expression}" generated="true" class="error">$!{status.errorMessage}</em>
+                </li>
+            </ul>
+        </div>
+		<div class="listitem clearfix">
             <ul class="user-info clearfix">
                 <li class="key">
                     样本文件
@@ -126,3 +153,4 @@
         </div>
 	</form>
 </div>
+#parse("/common/brand.vm")

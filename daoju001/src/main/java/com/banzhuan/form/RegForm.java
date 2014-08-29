@@ -20,6 +20,8 @@ public class RegForm implements Serializable {
 	private String phone;
 	private String mobile;
 	private String qq;
+	private String position;
+	private String wxbrand;
 	/**
 	 * @return the userid
 	 */
@@ -175,6 +177,30 @@ public class RegForm implements Serializable {
 	 */
 	public void setUsertype(int usertype) {
 		this.usertype = usertype;
+	}
+	/**
+	 * @return the position
+	 */
+	public String getPosition() {
+		return position;
+	}
+	/**
+	 * @param position the position to set
+	 */
+	public void setPosition(String position) {
+		this.position = position;
+	}
+	/**
+	 * @return the wxbrand
+	 */
+	public String getWxbrand() {
+		return wxbrand;
+	}
+	/**
+	 * @param wxbrand the wxbrand to set
+	 */
+	public void setWxbrand(String wxbrand) {
+		this.wxbrand = wxbrand;
 	}
 
 }

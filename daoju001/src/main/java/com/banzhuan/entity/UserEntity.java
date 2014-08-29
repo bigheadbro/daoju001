@@ -30,6 +30,8 @@ public class UserEntity implements Serializable {
 	private String brandName2;
 	// 品牌logo
 	private String logo;
+	
+	private String wxlogo;
 	// 公司地址
 	private String address;
 	// 公司电话
@@ -50,6 +52,10 @@ public class UserEntity implements Serializable {
 	private String contactQq;
 	// 联系人邮箱
 	private String contactEmail;
+	
+	private String wxbrand;
+	
+	private String position;
 	
 	private int productlimit;
 	
@@ -516,6 +522,48 @@ public class UserEntity implements Serializable {
 	 */
 	public void setWxid(String wxid) {
 		this.wxid = wxid;
+	}
+
+	/**
+	 * @return the wxbrand
+	 */
+	public String getWxbrand() {
+		return wxbrand;
+	}
+
+	/**
+	 * @param wxbrand the wxbrand to set
+	 */
+	public void setWxbrand(String wxbrand) {
+		this.wxbrand = wxbrand;
+	}
+
+	/**
+	 * @return the position
+	 */
+	public String getPosition() {
+		return position;
+	}
+
+	/**
+	 * @param position the position to set
+	 */
+	public void setPosition(String position) {
+		this.position = position;
+	}
+
+	/**
+	 * @return the wxlogo
+	 */
+	public String getWxlogo() {
+		return wxlogo;
+	}
+
+	/**
+	 * @param wxlogo the wxlogo to set
+	 */
+	public void setWxlogo(String wxlogo) {
+		this.wxlogo = wxlogo;
 	}
 
 	

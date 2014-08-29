@@ -76,6 +76,7 @@ import com.banzhuan.form.LoginForm;
 import com.banzhuan.form.ProductForm;
 import com.banzhuan.form.ProfessionalAnswerForm;
 import com.banzhuan.form.QuestionForm;
+import com.banzhuan.form.RegForm;
 import com.banzhuan.form.RequestForm;
 import com.banzhuan.service.CommonService;
 import com.banzhuan.service.UserService;
@@ -1401,12 +1402,11 @@ public class CommonController extends BaseController{
 	{
 		ModelAndView mv = new ModelAndView("/common/samples");
 		
-		Map<Integer,Map<Integer,List<SampleEntity>>> sampleMap = commonService.getAllSamples();
-
+		Map<Integer,Map<Integer,Map<Integer,List<SampleEntity>>>> sampleMap = commonService.getAllSamples();
 		//对key进行排序--字母
-		List<Map.Entry<Integer,Map<Integer,List<SampleEntity>>>> infoIds = new ArrayList<Map.Entry<Integer,Map<Integer,List<SampleEntity>>>>(sampleMap.entrySet());
-		Collections.sort(infoIds, new Comparator<Map.Entry<Integer,Map<Integer,List<SampleEntity>>>>() {   
-		    public int compare(Map.Entry<Integer,Map<Integer,List<SampleEntity>>> o1, Map.Entry<Integer,Map<Integer,List<SampleEntity>>> o2) {      
+		List<Map.Entry<Integer,Map<Integer,Map<Integer,List<SampleEntity>>>>> infoIds = new ArrayList<Map.Entry<Integer,Map<Integer,Map<Integer,List<SampleEntity>>>>>(sampleMap.entrySet());
+		Collections.sort(infoIds, new Comparator<Map.Entry<Integer,Map<Integer,Map<Integer,List<SampleEntity>>>>>() {   
+		    public int compare(Map.Entry<Integer,Map<Integer,Map<Integer,List<SampleEntity>>>> o1, Map.Entry<Integer,Map<Integer,Map<Integer,List<SampleEntity>>>> o2) {      
 		        return (o1.getKey()-o2.getKey());
 		    }
 		}); 
@@ -1692,42 +1692,159 @@ public class CommonController extends BaseController{
 		ModelAndView view = new ModelAndView("wx/wxcard");
 		
 		String code = request.getParameter("code");
-		Openid openid = WeixinService.getInstance().getUserManagerService().getUserOpenid(code);
-		WeixinmpUser wxuser = WeixinService.getInstance().getUserManagerService().getUser(openid.openid);
-		UserEntity user = commonService.getUserByWxid(openid.openid);
-		if(user == null)
-		{
-			return new ModelAndView(new RedirectView("/wxlog"));
-		}
-		else
-		{
+		if(StringUtil.isEmpty(code)){
+			logger.error("test");
+			Account account = (Account) WebUtils.getSessionAttribute(request, "account");
+			logger.error("wxid:" + account.getWxid());
+			UserEntity user = commonService.getUserByWxid(account.getWxid());
 			view.addObject("user",user);
-			view.addObject("wxuser",wxuser);
+			return view;
 		}
+		else//To Do
+		{
+			Account account = (Account) WebUtils.getSessionAttribute(request, "account");
+			if(account == null)
+			{
+				Openid openid = WeixinService.getInstance2().getUserManagerService().getUserOpenid(code);
+				
+				UserEntity user = new UserEntity();
+				account = new Account();
+				account.setWxid(openid.openid);
+				WeixinmpUser wxUser = WeixinService.getInstance2().getUserManagerService().getUser(openid.openid);
+				account.setWxlogo(wxUser.headimgurl);
+				request.getSession().setAttribute("account", account);
+				if(StringUtil.isNotEmpty(openid.openid))
+				{
+					user = commonService.getUserByWxid(openid.openid);
+				}
+				if(user == null)//未绑定微信id
+				{
+					return new ModelAndView(new RedirectView("/wxlog"));
+				}
+				else
+				{
+					view.addObject("user",user);
+					view.addObject("wxid",account.getWxid());
+				}
+			}
+			else
+			{
+				logger.error("test");
+				UserEntity user = commonService.getUserByWxid(account.getWxid());
+				view.addObject("user",user);
+				return view;
+			}
+		}
+		return view;
+	}
+
+	@RequestMapping(value="/wxtest")
+	public ModelAndView wxtest(HttpServletRequest request, HttpServletResponse response) throws WeixinException, IOException {
+		ModelAndView view = new ModelAndView("wx/wxcard");
 		
 		return view;
 	}
-
 	@RequestMapping(value="/wxlog")
 	public ModelAndView wxlog(HttpServletRequest request, HttpServletResponse response, @ModelAttribute("form")LoginForm form, BindingResult result) {
 		ModelAndView view = new ModelAndView("wx/wxlog");
+		Account account = (Account) WebUtils.getSessionAttribute(request, "account");
+		view.addObject("wxid",account.getWxid());
 		if(isDoSubmit(request))
 		{
+			Result re = commonService.checkLogin(form, result);
 			
+			if(!result.hasErrors())
+			{
+				UserEntity user = (UserEntity)re.get("user");
+				//int unreadMsgCount = userService.getUnreadMsgCount(user.getId());
+				//int answerCnt = userService.getAnswerCount(user.getId());
+				//int sampleCnt = userService.getSampleCount(user.getId());
+				//int questionCnt = userService.getUserQuestionCount(user.getId());
+				account.setLogin(true); // 登录成功标识
+				account.setUserName(user.getNick()); // 用户登录名
+				account.setCompanyName(user.getCompanyName());
+				account.setUserId(user.getId()); // 用户ID
+				account.setMail(user.getMail()); // 邮箱
+				account.setBrandName(user.getBrand());
+				account.setAuthority(user.getAuthority());
+				account.setVerifiedLink(user.getVerifiedLink());
+				//account.setUnreadMsgCount(unreadMsgCount);
+				//account.setSampleCnt(sampleCnt);
+				//account.setAnwserCnt(answerCnt);
+				account.setProductlimit(user.getProductlimit());
+				//account.setQuestionCnt(questionCnt);
+				account.setQq(user.getContactQq());
+				account.setPhone(user.getContactPhone());
+				userService.updateUserAccnt(account);
+				request.getSession().setAttribute("account", account);
+				logger.error("go to card");
+				// 登陆成功， 跳转到登陆页面
+				return new ModelAndView(new RedirectView("/wxcard"));
+			}
 		}
 		return view;
 	}
-
-	@RequestMapping(value="/wxhandler")
-	public void wxhandler(HttpServletRequest request, HttpServletResponse response) {
-		logger.error("wxhandler:"+request.getParameter("code"));
-	}
 	
 	@RequestMapping(value="/wxreg")
-	public ModelAndView wxreg(HttpServletRequest request, HttpServletResponse response) {
-		ModelAndView view = new ModelAndView("wx/wxreg");
-
-		return view;
+	public ModelAndView wxreg(HttpServletRequest request, HttpServletResponse response, @ModelAttribute("form")RegForm form, BindingResult result) {
+		
+		if(isDoSubmit(request))
+		{
+			Result re = userService.wxregister(form, result);
+			
+			if(!result.hasErrors())
+			{
+				Account account = (Account) WebUtils.getSessionAttribute(request, "account");
+				UserEntity user = (UserEntity)re.get("user");
+				account.setLogin(true); // 登录成功标识
+				account.setUserName(user.getNick()); // 用户登录名
+				account.setMail(user.getMail());
+				account.setUserId(user.getId()); // 用户ID
+				account.setLogo(user.getLogo());
+				account.setCompanyName(user.getCompanyName());
+				account.setPhone(user.getPhone());
+				account.setMobile(user.getContactPhone());
+				request.getSession().setAttribute("account", account);
+				// 注册成功， 跳转到登陆页面
+				return new ModelAndView(new RedirectView("/wxreg2")); 
+			}
+			else
+			{
+				// 注册失败， 返回注册页面，并显示出错提示信息
+				ModelAndView view = new ModelAndView("wx/wxreg");
+				return view;
+			}
+		}
+		else
+		{
+			ModelAndView view = new ModelAndView("wx/wxreg");
+			return view;
+		}
 	}
 
+	@RequestMapping(value="/wxreg2")
+	public ModelAndView wxreg2(HttpServletRequest request, HttpServletResponse response, @ModelAttribute("form")RegForm form, BindingResult result) {
+		
+		if(isDoSubmit(request))
+		{
+			if(!result.hasErrors())
+			{
+				Account account = (Account) WebUtils.getSessionAttribute(request, "account");
+				userService.updateUserAccnt(form, account);
+				// 注册成功， 跳转到登陆页面
+				return new ModelAndView(new RedirectView("/wxcard")); 
+			}
+			else
+			{
+				// 注册失败， 返回注册页面，并显示出错提示信息
+				ModelAndView view = new ModelAndView("wx/wxreg2");
+				return view;
+			}
+		}
+		else
+		{
+			ModelAndView view = new ModelAndView("wx/wxreg2");
+			return view;
+		}
+	}
 }

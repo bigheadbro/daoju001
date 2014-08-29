@@ -16,6 +16,7 @@
 		<id property="agentName" column="agent_name" />
 		<!--品牌名字 -->
 		<id property="brandName" column="brand_name" />
+		<id property="brandid" column="brandid" />
 		<!--代理商logo -->
 		<id property="agentLogo" column="agent_logo" />
 		<!--认证文件 -->
@@ -72,6 +73,7 @@
 		,agent_id
 		,agent_name
 		,brand_name
+		,brandid
 		,agent_logo
 		,link
 		,count
@@ -85,6 +87,7 @@
 		,#{agentId}
 		,#{agentName}
 		,#{brandName}
+		,#{brandid}
 		,#{agentLogo}
 		,#{link}
 		,#{count}
@@ -95,7 +98,7 @@
 
 	<update id="updateSampleById" parameterType="SampleEntity">
 		update t_sample set
-		name = #{name}, gmt_modified=now() where id=#{id}
+		name = #{name}, brandid=#{brandid},gmt_modified=now() where id=#{id}
 	</update>
 	<update id="updateAgentidById" parameterType="SampleEntity">
 		update t_sample set

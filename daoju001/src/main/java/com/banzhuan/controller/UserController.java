@@ -777,6 +777,26 @@ public class UserController extends BaseController{
 	{
 		ModelAndView mv = new ModelAndView("user/uploadsample");
 		
+		List<BrandEntity> brands = new ArrayList<BrandEntity>();
+		for(int i = 1;i<=Constant.BRAND_CNT;i++)
+		{
+			BrandEntity brand = new BrandEntity();
+			if(StringUtil.isNotEmpty(StringUtil.getBrand(i)))
+			{
+				brand.setKey(i);
+				brand.setName(StringUtil.getBrand(i));
+				brand.setLink(StringUtil.getBrandLogo(i));
+				brand.setCountry(StringUtil.getBrandCountry(i));
+				brands.add(brand);
+			}
+		}
+		Collections.sort(brands,new Comparator<BrandEntity>() {   
+		    public int compare(BrandEntity o1, BrandEntity o2) {      
+		        return (ChineseSpelling.letterToNum(ChineseSpelling.getFirstLetter(o1.getName()))-ChineseSpelling.letterToNum(ChineseSpelling.getFirstLetter(o2.getName())));
+		    }
+		}); 
+		mv.addObject("brands", brands);
+		
 		if(isDoSubmit(request))
 		{
 			SampleEntity sample = new SampleEntity();

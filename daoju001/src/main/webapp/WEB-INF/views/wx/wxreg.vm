@@ -28,28 +28,46 @@
             }
     	</script>
 	</head>
-    <body  style="overflow-x:hidden;overflow-y:auto">
-		<div class="scroll" data-role="page" data-theme="d" >
+    <body>
+		<div data-role="page" data-theme="d">
 			<div class="body">
-				<div class="log-title"></div>
-                <form id="form_log" action="/wxlog" method="post">
+                <div class="reg-title">
+    				<h1>创建您的刀具微名片</h1>
+    			</div>
+                <form id="form_reg" action="/wxreg" method="post">
     			<!-- 隐藏字段，用于标示是表单提交 -->
         		<input type="hidden" name="do_submit" value="true"/>
-    			<div class="log-wrap clearfix">
+    			<div class="reg-wrap clearfix">
     				#springBind("form.mail")
     				<div class="section mail clearfix">
-    					<input data-role="none" type="text" class="dsf-form-text-input" name="$!{status.expression}" placeholder="请输入刀师傅注册邮箱" />
+    					<input data-role="none" type="text" class="dsf-form-text-input" name="$!{status.expression}" placeholder="邮箱。必填" />
     				</div>
-    				#springBind("form.password")
+    				#springBind("form.name")
+    				<div class="section name clearfix">
+    					<input data-role="none" type="text" class="dsf-form-text-input" name="$!{status.expression}" placeholder="用户名。必填" />
+    				</div>
+    				#springBind("form.pwd")
     				<div class="section pwd clearfix">
-    					<input data-role="none" type="password" class="dsf-form-text-input" name="$!{status.expression}" placeholder="请输入密码" />
+    					<input data-role="none" type="password" class="dsf-form-text-input" name="$!{status.expression}" placeholder="请输入密码。必填" />
+    				</div>
+    				#springBind("form.company")
+    				<div class="section company clearfix">
+    					<input data-role="none" type="text" class="dsf-form-text-input" name="$!{status.expression}" placeholder="公司名称。必填" />
+    				</div>
+    				#springBind("form.phone")
+    				<div class="section phone clearfix">
+    					<input data-role="none" type="text" class="dsf-form-text-input" name="$!{status.expression}" placeholder="公司电话。必填" />
+    				</div>
+    				#springBind("form.mobile")
+    				<div class="section mobile clearfix">
+    					<input data-role="none" type="text" class="dsf-form-text-input" name="$!{status.expression}" placeholder="手机。必填" />
     				</div>
     			</div>
     			<div class="op">
-    				<button type="submit" rel="external" id="submit_log" data-role="none">登 录</button>
+    				<button type="submit" id="submit_log" data-role="none">创建刀具微名片</button>
     			</div>
     			<div class="op-reg">
-    				<a data-role="none" rel="external" href="/wxreg">点击创建自己的刀具微名片</a>
+    				<a data-role="none" rel="external" href="/wxlog">使用刀师傅账号直接登录</a>
     			</div>
     			</form>
 			</div>

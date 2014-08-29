@@ -15,6 +15,7 @@
 		<id property="companyName" column="company_name" />
 		<!--头像 -->
 		<id property="logo" column="logo" />
+		<id property="wxlogo" column="wxlogo" />
 		<!--代理品牌名称 -->
 		<id property="brand" column="brand" />
 		<!--代理品牌名称 -->
@@ -43,6 +44,8 @@
 		<id property="contactQq" column="contact_qq" />
 		<!--联系人邮箱 -->
 		<id property="contactEmail" column="contact_email" />
+		<id property="wxbrand" column="wxbrand" />
+		<id property="position" column="position" />
 		<id property="productlimit" column="productlimit" />
 		<id property="pca" column="pca" />
 		<!--注册时间 -->
@@ -122,6 +125,8 @@
 		insert into t_user
 		(
       nick
+      ,wxid
+      ,wxlogo
    	  ,password
    	  ,mail
    	  ,company_name
@@ -146,6 +151,8 @@
       values
    (
    	  #{nick}
+   	  ,#{wxid}
+   	  ,#{wxlogo}
    	  ,#{password}
    	  ,#{mail}
    	  ,#{companyName}
@@ -184,6 +191,7 @@
 		update t_user
 		<set> 
 		  <if test="nick != null">nick=#{nick},</if>
+		  <if test="wxid != null">wxid=#{wxid},</if>
 	      <if test="mail != null">mail=#{mail},</if>
 	      <if test="companyName != null">company_name=#{companyName},</if>
 	      <if test="brand != 0">brand=#{brand},</if>
@@ -199,7 +207,10 @@
 	      <if test="contactPhone != null">contact_phone=#{contactPhone},</if>
 	      <if test="contactQq != null">contact_qq=#{contactQq},</if>
 	      <if test="pca != null">pca=#{pca},</if>
+	      <if test="wxbrand != null">wxbrand=#{wxbrand},</if>
+	      <if test="position != null">position=#{position},</if>
 	      <if test="logo != null">logo=#{logo},</if>
+	      <if test="wxlogo != null">wxlogo=#{wxlogo},</if>
 	      <if test="gmtAuth != null">gmt_auth=#{gmtAuth},</if>
 	   	  gmt_modified=now()
 		</set>

@@ -15,6 +15,7 @@ public class SampleForm implements Serializable {
 	private int size;
 	private int isEdit;
 	private int sid;
+	private int brandid;
 	
 	public String getName() {
 		return name;
@@ -66,6 +67,18 @@ public class SampleForm implements Serializable {
 	 */
 	public void setSize(int size) {
 		this.size = size;
+	}
+	/**
+	 * @return the brandid
+	 */
+	public int getBrandid() {
+		return brandid;
+	}
+	/**
+	 * @param brandid the brandid to set
+	 */
+	public void setBrandid(int brandid) {
+		this.brandid = brandid;
 	}
 	
 

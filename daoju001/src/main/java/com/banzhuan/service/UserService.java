@@ -7,6 +7,8 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.ibatis.session.RowBounds;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -37,6 +39,7 @@ import com.banzhuan.entity.SampleEntity;
 import com.banzhuan.common.Account;
 import com.banzhuan.common.Constant;
 import com.banzhuan.common.Result;
+import com.banzhuan.controller.UserController;
 import com.banzhuan.form.UserProfileForm;
 import com.banzhuan.form.GoodcaseForm;
 import com.banzhuan.form.LoginForm;
@@ -54,6 +57,7 @@ import com.banzhuan.util.Util;
  */
 @Service("userService")
 public class UserService {
+	private Logger logger = LoggerFactory.getLogger(UserService.class);
 	@Autowired
 	@Qualifier("userDAO")
 	private UserDAO userDAO;
@@ -157,6 +161,59 @@ public class UserService {
 		return result;
 	}
 	
+	public Result wxregister(RegForm form, Errors errors)
+	{
+		Result result = new Result();
+		
+		if(StringUtil.isEmpty(form.getName()))// 第一步， 判断注册名是否为空
+		{
+			errors.rejectValue("name", "USER_NAME_IS_NOT_NULL");
+			return result;
+		}
+		else if(StringUtil.isIlegal(form.getName()))
+		{
+			errors.rejectValue("name", "USER_NAME_IS_ILLEGAL");
+			return result;
+		}
+		else if(userDAO.queryUserEntityByName(form.getName().trim()) != null) 
+		{
+			errors.rejectValue("name", "USER_NAME_IS_EXISTS");
+			return result;
+		}
+		else if(userDAO.queryUserEntityByMail(form.getMail()) != null ) // 第二步，判断注册用户名是否存在
+		{
+			errors.rejectValue("mail", "MAIL_IS_EXISTS");
+			return result;
+		}
+		if(StringUtil.isEmpty(form.getPwd())) //  第三步，判断密码不能为空
+		{
+			errors.rejectValue("pwd", "PASSWORD_IS_NOT_NULL");
+			return result;
+		}
+		
+		UserEntity user = new UserEntity();
+		user.setNick(form.getName());
+		user.setPassword(StringUtil.encrypt(form.getPwd())); // 对密码加密
+		user.setMail(form.getMail()); // 设置邮箱地址
+		user.setProductlimit(2);
+		if(StringUtil.isNotEmpty(form.getCompany()))
+		{
+			user.setCompanyName(form.getCompany());
+		}
+		if(StringUtil.isNotEmpty(form.getPhone()))
+		{
+			user.setPhone(form.getPhone());
+		}
+		if(StringUtil.isNotEmpty(form.getMobile()))
+		{
+			user.setContactPhone(form.getMobile());
+		}
+		user.setAuthority(form.getUsertype());
+		userDAO.insertUserEntity(user);
+		result.add("user", user);
+		return result;
+	}
+	
 	public Result checkLogin(LoginForm form, Errors errors)
 	{
 		Result result = new Result();
@@ -225,6 +282,40 @@ public class UserService {
 	public int updateUserReadCountById(int userid)
 	{
 		return userDAO.updateUserReadCountById(userid);
+	}
+	
+	public int updateUserAccnt(Account account)
+	{
+		UserEntity user = (UserEntity)getUserEntity(account.getUserId()).get("user");
+		logger.error("id:" + account.getUserId() );
+		logger.error("nick:" + user.getNick() );
+		if(StringUtil.isNotEmpty(account.getWxid()))
+		{
+			logger.error("wxid:" + account.getWxid() );
+			user.setWxid(account.getWxid());
+		}
+		if(StringUtil.isNotEmpty(account.getWxlogo()))
+		{
+			logger.error("avatar:" + account.getWxlogo() );
+			user.setWxlogo(account.getWxlogo());
+		}
+		return userDAO.updateUserEntityById(user);
+	}
+	
+	public int updateUserAccnt(RegForm form, Account account)
+	{
+		UserEntity user = (UserEntity)getUserEntity(account.getUserId()).get("user");
+		if(StringUtil.isNotEmpty(form.getWxbrand()))
+		{
+			account.setWxbrand(form.getWxbrand());
+			user.setWxbrand(form.getWxbrand());
+		}
+		if(StringUtil.isNotEmpty(form.getPosition()))
+		{
+			account.setPosition(form.getPosition());
+			user.setPosition(form.getPosition());
+		}
+		return userDAO.updateUserEntityById(user);
 	}
 	
 	public int updateUserAccnt(HttpServletRequest request, UserProfileForm form, UserEntity user, Account account, Errors errors)
@@ -655,6 +746,10 @@ public class UserService {
     	{
     		sample.setSize(form.getSize()/1024.00/1024.00);
     	}
+    	if(form.getBrandid() != 0)
+    	{
+    		sample.setBrandid(form.getBrandid());
+    	}
     	sampleDAO.insertSampleEntity(sample);
     	return result;
     	
@@ -706,6 +801,10 @@ public class UserService {
     	if(form.getSize() != 0)
     	{
     		sample.setSize(form.getSize()/1024/1024);
+    	}
+    	if(form.getBrandid() != 0)
+    	{
+    		sample.setBrandid(form.getBrandid());
     	}
     	sampleDAO.updateSampleById(sample);
     	return result;

@@ -20,6 +20,7 @@ public class SampleEntity implements Serializable {
 	// 代理商logo
 	private String agentLogo;
 	private int brandName;
+	private int brandid;
 	//
 	private String verifiedLink;
 	// 下载链接
@@ -215,6 +216,20 @@ public class SampleEntity implements Serializable {
 	 */
 	public void setSize(double size) {
 		this.size = size;
+	}
+
+	/**
+	 * @return the brandid
+	 */
+	public int getBrandid() {
+		return brandid;
+	}
+
+	/**
+	 * @param brandid the brandid to set
+	 */
+	public void setBrandid(int brandid) {
+		this.brandid = brandid;
 	}
 
 	

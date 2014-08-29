@@ -1,6 +1,9 @@
 package com.banzhuan.service;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -395,58 +398,95 @@ public class CommonService {
 		return agentMap;
 	}
 	
-	public Map<Integer,Map<Integer,List<SampleEntity>>> getAllSamples()
+	public Map<Integer,Map<Integer,Map<Integer,List<SampleEntity>>>> getAllSamples()
 	{
 		List<SampleEntity> samples = sampleDAO.getAllsamples();
 		
-		Map<Integer,Map<Integer,List<SampleEntity>>> sampleMap = new HashMap<Integer, Map<Integer,List<SampleEntity>>>();
+		Map<Integer,Map<Integer,Map<Integer,List<SampleEntity>>>> sampleMap = new HashMap<Integer, Map<Integer,Map<Integer,List<SampleEntity>>>>();
 		
 		for(int i = 0;i < samples.size(); i++)
 		{
-			int alpha = ChineseSpelling.letterToNum(ChineseSpelling.getFirstLetter(((SampleEntity)samples.get(i)).getAgentName()));
-			Map<Integer,List<SampleEntity>> tmpMap = sampleMap.get(alpha);
-			//是否存在该字母的代理商案例
-			if(tmpMap == null)
+			int alpha = ChineseSpelling.letterToNum(ChineseSpelling.getFirstLetter(StringUtil.getBrand(((SampleEntity)samples.get(i)).getBrandid())));
+			
+ 			Map<Integer,Map<Integer,List<SampleEntity>>> tmpMap2 = sampleMap.get(alpha);
+			
+			if(tmpMap2 == null )//第一个样本
 			{
-				tmpMap = new HashMap<Integer,List<SampleEntity>>();
+				Map<Integer,List<SampleEntity>> tmpMap = new HashMap<Integer,List<SampleEntity>>();
 				List<SampleEntity> tmp = new ArrayList<SampleEntity>();
 				tmp.add((SampleEntity)samples.get(i));
 				tmpMap.put(samples.get(i).getAgentId(), tmp);
+				tmpMap2 = new HashMap<Integer,Map<Integer,List<SampleEntity>>>();
+				tmpMap2.put(samples.get(i).getBrandid(), tmpMap);
 			}
-			else
+			else//2-n
 			{
 				//是否包含样本的代理商id
-				if(tmpMap.containsKey(samples.get(i).getAgentId()))
+				System.out.println(samples.get(i).getBrandid());
+				if(sampleMap.containsKey(alpha))
 				{
-					Iterator<Integer> iter = tmpMap.keySet().iterator(); 
+					Iterator<Integer> iter = tmpMap2.keySet().iterator(); 
 					while (iter.hasNext()) 
 					{ 
-					    int key = Integer.valueOf(iter.next().toString()); 
-					    List<SampleEntity> val = tmpMap.get(key); 
+						int key = Integer.valueOf(iter.next().toString()); 
+						Map<Integer,List<SampleEntity>> val = tmpMap2.get(key); 
 					    if(val == null)
 						{
-					    	val = new ArrayList<SampleEntity>();
+					    	val = new HashMap<Integer,List<SampleEntity>>();
+							List<SampleEntity> tmp = new ArrayList<SampleEntity>();
+							tmp.add((SampleEntity)samples.get(i));
+							val.put(samples.get(i).getAgentId(), tmp);
+							tmpMap2.put(key, val);
+							break;
 						}
-					    //如果是同一个代理商的样本
-					    if(key == samples.get(i).getAgentId())
-					    {
-						    val.add((SampleEntity)samples.get(i));
-						    tmpMap.put(key, val);
-						    break;
-					    }
+						else
+						{
+							//是否包含样本的代理商id
+							if(val.containsKey(samples.get(i).getAgentId()))
+							{
+								Iterator<Integer> iter1 = val.keySet().iterator(); 
+								while (iter1.hasNext()) 
+								{ 
+								    int key1 = Integer.valueOf(iter1.next().toString()); 
+								    List<SampleEntity> val1 = val.get(key1); 
+								    if(val1 == null)
+									{
+								    	val1 = new ArrayList<SampleEntity>();
+									}
+								    //如果是同一个代理商的样本
+								    if(key1 == samples.get(i).getAgentId())
+								    {
+									    val1.add((SampleEntity)samples.get(i));
+									    val.put(key1, val1);
+									    break;
+								    }
+								} 
+							}
+							else
+							{
+								List<SampleEntity> tmp = new ArrayList<SampleEntity>();
+								tmp.add((SampleEntity)samples.get(i));
+								val.put(samples.get(i).getAgentId(), tmp);
+							}
+						}
+					    tmpMap2.put(key, val);
+					    break;
 					} 
 				}
-				else
+				else//当前字母的一个品牌
 				{
+					Map<Integer,List<SampleEntity>> tmpMap = new HashMap<Integer,List<SampleEntity>>();
 					List<SampleEntity> tmp = new ArrayList<SampleEntity>();
 					tmp.add((SampleEntity)samples.get(i));
 					tmpMap.put(samples.get(i).getAgentId(), tmp);
+					
+					tmpMap2.put(samples.get(i).getBrandid(), tmpMap);
 				}
 			}
-			
-			sampleMap.put(alpha, tmpMap);
-		}
 
+			sampleMap.put(alpha, tmpMap2);
+
+		}
 
 		return sampleMap;
 	}

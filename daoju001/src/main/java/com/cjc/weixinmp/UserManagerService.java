@@ -162,11 +162,11 @@ public class UserManagerService {
      * @return 这个用户的详细信息，null为找不到
      * @throws WeixinException 如果发生错误
      */
-    public WeixinmpUser getUser(String openId) throws WeixinException {
-        controller.logInfo("获取用户基本信息：openId=" + openId);
+    public WeixinmpUser getUser(String openid) throws WeixinException {
+        controller.logInfo("获取用户基本信息：openId=" + openid);
         String url = controller.getProperty("user_info_url", null, false);
         try {
-            url = url.replaceFirst("OPENID", openId);
+            url = url.replaceFirst("OPENID", openid);
             WeixinmpUser result = controller.post(url, null, WeixinmpUser.class, "getUser");
             controller.logInfo("获取用户基本信息结果：" + result);
             return result;
@@ -188,16 +188,16 @@ public class UserManagerService {
      * @throws IOException 
      */
     public Openid getUserOpenid(String code) throws WeixinException, IOException {
-        controller.logInfo("获取用户基本信息：code=" + code);
         String url = controller.getProperty("user_openid", null, false);
         String appid = controller.getProperty("appid", null, false);
         String secret = controller.getProperty("appsecret", null, false);
+        controller.logInfo("获取用户wxid：code=" + code + "appid=" +appid +"secret=" +secret);
         try {
             url = url.replaceFirst("CODE", code);
             url = url.replaceFirst("APPID", appid);
             url = url.replaceFirst("SECRET", secret);
             Openid result = controller.postWithJson(url, code, Openid.class, "getUserOpenid");
-            controller.logInfo("获取用户基本信息结果：" + result);
+            controller.logInfo("获取用户wxid：" + result);
             return result;
         } catch (WeixinException e) {
             controller.logError(e.getMessage());

@@ -1,7 +1,7 @@
 #set($layout = "/layout/index_layout.vm")
 <script type="text/javascript" src="/js/azlist.js"></script>
 <div class="main-content-container clearfix">
-    <div class="main-list-container width630 ml15">
+    <div class="main-list-container width900 ml15">
         <div class="gc-list-header">
             <h1>刀具样本</h1>
             <div class="a-zlist clearfix">
@@ -17,43 +17,50 @@
                         <h1>$stringUtil.convertToChar($mapEntry.key)</h1>
 						#set ($sampleMap2 = $mapEntry.value)
 						#foreach ($mapEntry2 in $sampleMap2.entrySet())
-							#set ($sampleList = $mapEntry2.value)
-                            #foreach($sample in $sampleList)
-								#if($velocityCount == 1)
-									<div class="agent-sample clearfix">
-                                    <div class="agent-info clearfix">
-                                        <div class="agent-logo logo" aid="$!{sample.agentId}">
-                                            <a href="/agents/$!{sample.agentId}">
-    											#if($!{sample.agentLogo})
-    												<img src="/logo/$!{sample.agentLogo}" />
-    											#else
-    												<img src="/img/avatar.png" />
-    											#end
-                                            </a>
+							#set ($sampleMap3 = $mapEntry2.value)
+							#foreach ($mapEntry3 in $sampleMap3.entrySet())
+								#set ($sampleList = $mapEntry3.value)
+                                #foreach($sample in $sampleList)
+    								#if($velocityCount == 1)
+										<div class="brand-logo">
+                						<img src="/img/logo/$stringUtil.getBrandLogo(${sample.brandid})" />
+    									<p>$stringUtil.getBrand(${sample.brandid})-$stringUtil.getBrandCountry(${sample.brandid})</p>
+                					</div>
+    									<div class="agent-sample clearfix">
+                                        <div class="agent-info clearfix">
+                                            <div class="agent-logo logo" aid="$!{sample.agentId}">
+                                                <a href="/agents/$!{sample.agentId}">
+        											#if($!{sample.agentLogo})
+        												<img src="/logo/$!{sample.agentLogo}" />
+        											#else
+        												<img src="/img/avatar.png" />
+        											#end
+                                                </a>
+                                            </div>
+                                            <div class="agent-detail">
+                                                <h2 class="clearfix">
+        											<a class="agent-name" href="/agents/$!{sample.agentId}">$!{sample.agentName}</a>
+        											#if($stringUtil.isNotEmpty(${sample.verifiedLink}))
+        												<a class="fancybox-v" title="$!{sample.agentName}的代理证书" href="$!{sample.verifiedLink}"><img src="/img/v.png" /></a>
+        											#end
+        										</h2>
+                                                <h4>$stringUtil.getBrand($!{sample.brandName})</h4>
+                                            </div>
                                         </div>
-                                        <div class="agent-detail">
-                                            <h2 class="clearfix">
-    											<a class="agent-name" href="/agents/$!{sample.agentId}">$!{sample.agentName}</a>
-    											#if($stringUtil.isNotEmpty(${sample.verifiedLink}))
-    												<a class="fancybox-v" title="$!{sample.agentName}的代理证书" href="$!{sample.verifiedLink}"><img src="/img/v.png" /></a>
-    											#end
-    										</h2>
-                                            <h4>$stringUtil.getBrand($!{sample.brandName})</h4>
-                                        </div>
-                                    </div>
-								<div class="sample-list">
-								#end
-									<div class="sample-wrap clearfix">
-										<div class="detail">
-											<h2>$!{sample.name}</h2>
-											<h4>$stringUtil.fileType($!{sample.type}) 文件  $stringUtil.fileSize($!{sample.size}) MB</h4>
-										</div>
-										<a target="_blank" href="/downloadsample?file=$!{sample.link}">点击下载</a>
-									</div>
-								#if($velocityCount == $sampleList.size())
-									</div>
-								</div>
-								#end
+    								<div class="sample-list">
+    								#end
+    									<div class="sample-wrap clearfix">
+    										<div class="detail">
+    											<h2>$!{sample.name}</h2>
+    											<h4>$stringUtil.fileType($!{sample.type}) 文件  $stringUtil.fileSize($!{sample.size}) MB</h4>
+    										</div>
+    										<a target="_blank" href="/downloadsample?file=$!{sample.link}">点击下载</a>
+    									</div>
+    								#if($velocityCount == $sampleList.size())
+    									</div>
+    								</div>
+    								#end
+    							#end
 							#end
 						#end
                     </div>

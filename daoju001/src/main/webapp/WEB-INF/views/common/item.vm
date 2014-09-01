@@ -57,7 +57,13 @@
 			</div>
 		</div>
 		<div class="description">
-			<h1 class="title">${item.brand}${item.type}${item.version}</h1>
+			<h1 class="title">
+				${item.brand}
+				#if($stringUtil.isNotEquatl(${item.type},"其它"))
+					${item.type}
+				#end
+				${item.version}
+			</h1>
 			<ul class="list">
 				<li><span>商品价格：</span><em class="price">￥${item.price}0</em></li>
 				<li><span>配送：</span><i>全国顺丰包邮</i></li>

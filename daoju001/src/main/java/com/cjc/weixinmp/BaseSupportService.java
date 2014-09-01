@@ -54,6 +54,7 @@ public class BaseSupportService {
         url = url.replaceFirst("APPID", appid).replaceFirst("APPSECRET", secert);
         try {
             AccessToken token = controller.post(url, null, AccessToken.class, "getAccessToken");
+            controller.logError("base support:" + token);
             return token;
         } catch (WeixinException e) {
             controller.logError(e.getMessage());

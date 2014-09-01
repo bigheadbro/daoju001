@@ -50,6 +50,8 @@ import com.banzhuan.form.RegForm;
 import com.banzhuan.form.SampleForm;
 import com.banzhuan.util.StringUtil;
 import com.banzhuan.util.Util;
+import com.cjc.weixinmp.WeixinException;
+import com.cjc.weixinmp.bean.WeixinmpUser;
 
 /**
  * @author guichaoqun
@@ -137,6 +139,7 @@ public class UserService {
 		user.setNick(form.getName());
 		user.setPassword(StringUtil.encrypt(form.getPwd())); // 对密码加密
 		user.setMail(form.getMail()); // 设置邮箱地址
+		user.setContactEmail(form.getMail());
 		user.setLogo(Util.GenAvatar());
 		user.setProductlimit(2);
 		if(StringUtil.isNotEmpty(form.getCompany()))
@@ -193,8 +196,10 @@ public class UserService {
 		
 		UserEntity user = new UserEntity();
 		user.setNick(form.getName());
+		user.setContactName(form.getName());
 		user.setPassword(StringUtil.encrypt(form.getPwd())); // 对密码加密
 		user.setMail(form.getMail()); // 设置邮箱地址
+		user.setContactEmail(form.getMail());
 		user.setProductlimit(2);
 		if(StringUtil.isNotEmpty(form.getCompany()))
 		{
@@ -302,9 +307,19 @@ public class UserService {
 		return userDAO.updateUserEntityById(user);
 	}
 	
-	public int updateUserAccnt(RegForm form, Account account)
+	public int updateUserAccnt(RegForm form, Account account) throws WeixinException
 	{
 		UserEntity user = (UserEntity)getUserEntity(account.getUserId()).get("user");
+		WeixinmpUser wxUser = WeixinService.getInstance2().getUserManagerService().getUser(account.getWxid());
+		if(StringUtil.isEmpty(user.getPca()))
+		{
+			user.setPca(wxUser.province+wxUser.city);
+		}
+		user.setWxlogo(wxUser.headimgurl);
+		if(StringUtil.isNotEmpty(account.getWxid()))
+		{
+			user.setWxid(account.getWxid());
+		}
 		if(StringUtil.isNotEmpty(form.getWxbrand()))
 		{
 			account.setWxbrand(form.getWxbrand());

@@ -406,7 +406,16 @@ public class CommonService {
 		
 		for(int i = 0;i < samples.size(); i++)
 		{
-			int alpha = ChineseSpelling.letterToNum(ChineseSpelling.getFirstLetter(StringUtil.getBrand(((SampleEntity)samples.get(i)).getBrandid())));
+			int alpha = 0;
+			int brandid = ((SampleEntity)samples.get(i)).getBrandid();
+			if(brandid == 100)
+			{
+				alpha = 27;
+			}
+			else
+			{
+				alpha = ChineseSpelling.letterToNum(ChineseSpelling.getFirstLetter(StringUtil.getBrand(brandid)));
+			}
 			
  			Map<Integer,Map<Integer,List<SampleEntity>>> tmpMap2 = sampleMap.get(alpha);
 			

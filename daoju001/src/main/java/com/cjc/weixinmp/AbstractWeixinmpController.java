@@ -662,15 +662,18 @@ public abstract class AbstractWeixinmpController {
      * @return
      */
     public final AccessToken getAccessToken(boolean renew) throws WeixinException {
+    	logger.error("old token:"+lastAccessToken);
         synchronized (lastAccessToken) {
             // 如果上次获取到的token仍然在有效期则直接返回
             long now = new Date().getTime();
-            if (renew || now / 1000 - lastAccessTokenTime >= accessTokenExpiresTime) {
+            logger.error("time:"+String.valueOf((now-lastAccessTokenTime) / 1000) + ":"+ accessTokenExpiresTime);
+            if (renew || (now  - lastAccessTokenTime) / 1000 >= accessTokenExpiresTime) {
                 AccessToken token = baseSupportService.getAccessToken(appid, appsecret);
                 lastAccessTokenTime = now;
                 lastAccessToken.access_token = token.access_token;
                 lastAccessToken.expires_in = token.expires_in;
             }
+            logger.error("new token:"+lastAccessToken);
             return lastAccessToken;
         }
     }

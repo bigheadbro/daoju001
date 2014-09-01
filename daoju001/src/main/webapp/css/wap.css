@@ -45,6 +45,7 @@ word-break: break-all;
 .log-wrap .mail{background:url(../img/wx/wxname.png) no-repeat 0.5em center;background-size: 20px;}
 .log-wrap .pwd{background:url(../img/wx/wxpwd.png) no-repeat 0.5em center;background-size: 20px;}
 .op{margin-top:1.5em;}
+.op a{background-color:#0099cb;color:white;display: block;padding: 0.8em;margin: 0 auto;width: 90%;border-radius: 0.3em;font-size: 1em;border:0;}
 .op button{background-color:#0099cb;color:white;display: block;padding: 0.8em;margin: 0 auto;width: 90%;border-radius: 0.3em;font-size: 1em;border:0;}
 .op-reg{width:100%;height:2em;margin-top:2.5em}
 .op-reg a{color:#8ca6af;}
@@ -52,13 +53,14 @@ word-break: break-all;
 .reg-title h1{color:#0099cb;font-size:1.5em}
 .reg-wrap .section{border:1px solid #bababa;border-radius:3px;margin: 0.5em auto;width: 90%;height:2.5em;background-color: white;}
 .reg-wrap .section input{margin:0.1em 0 0.4em 2em;border:0;font-size:1.1em;height: 1.8em;width: 80%;}
+.reg-wrap .section textarea{margin:0.1em 0 0.4em 2em;border:0;font-size:1.1em;height: 10em;width: 80%;}
 .reg-wrap .mail{background-image:url(../img/wx/wxmail.png);background-repeat: no-repeat;background-position:0.5em center;background-size: 20px;}
 .reg-wrap .name{background-image:url(../img/wx/wxname.png);background-repeat: no-repeat;background-position: 0.5em center;background-size: 20px;}
 .reg-wrap .pwd{background-image:url(../img/wx/wxpwd.png);background-repeat: no-repeat;background-position: 0.5em center;background-size: 20px;}
 .reg-wrap .company{background-image:url(../img/wx/wxcompany.png);background-repeat: no-repeat;background-position: 0.5em center;background-size: 20px;}
 .reg-wrap .phone{background-image:url(../img/wx/wxphone.png);background-repeat: no-repeat;background-position: 0.5em center;background-size: 20px;}
 .reg-wrap .mobile{background-image:url(../img/wx/wxmobile.png);background-repeat: no-repeat;background-position: 0.5em center;background-size: 20px;}
-.reg-wrap .wxbrand{background-image:url(../img/wx/wxbrand.png);background-repeat: no-repeat;background-position: 0.5em center;background-size: 20px;}
+.reg-wrap .wxbrand{background-image:url(../img/wx/wxbrand.png);background-repeat: no-repeat;background-position: 0.5em 0.5em;background-size: 20px;height: 12em;}
 .reg-wrap .position{background-image:url(../img/wx/wxpos.png);background-repeat: no-repeat;background-position: 0.5em center;background-size: 20px;}
 
 .cardview{}
@@ -81,12 +83,17 @@ word-break: break-all;
 .cardview .brand span{color:#a3a3a3;margin-right:1em;}
 .cardview .brand p{float:left;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;width: 100%;}
 .cardview .product{display:block;padding: 1em 0;text-indent:2em;border-bottom:1px solid #c9c9c9;background:url(../img/wx/wxarrow.png) no-repeat 96% center;background-size: 6px;}
+.cardview .relation{padding: 0 1.5em;}
+.cardview .relation h1{text-align:center;color:#b5b5b5;font-size:0.8em;padding-top: 0.5em;}
+.cardview .relation span{display:inline-block;color:#7a7a7a;background-color:#dadada;width:5em;text-align:center;margin-top:0.5em;font-size:1em;border-radius:0.2em;padding:0.2em 0.3em;}
 .bottom-op{}
 .bottom-op p{color:white;}
 .bottom-op .left{float:left;width:50%;background-color:#0099cb;background-image:url(../img/wx/share.png);background-repeat: no-repeat; background-position:1em center;background-size: 22px;}
 .bottom-op .left p{padding:1em 0;border-right: 1px solid #00678a;text-indent:3em}
 .bottom-op .right{position:relative;float:left;width:50%;background-color:#037ea7;background-image:url(../img/wx/more.png);background-repeat: no-repeat; background-position:3em center;background-size: 26px;}
 .bottom-op .right p{padding:1em 0;border-left: 1px solid #1989af;text-indent:5em}
-.bottom-op .right ul{visibility:hidden;display:block;position:absolute;width: 100%;bottom: 53px;left: 0;background-color: #037ea7;color: white;}
+.bottom-op .right ul{display:none;position:absolute;width: 100%;bottom: 50px;left: 0;background-color: #037ea7;color: white;}
 .bottom-op .right ul li{padding:1em 0;border-left: 1px solid #1989af;text-align: center;border-bottom:1px solid #00678a}
 em.error{color:red;}
+.share-mask{visibility:hidden;}
+.share-mask img{width:100%;height:100%;position:absolute;z-index:10000}

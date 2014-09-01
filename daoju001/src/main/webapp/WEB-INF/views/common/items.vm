@@ -92,6 +92,7 @@ $(function() {
 					<a>不限</a>
 					<a>车刀片</a>
 					<a>铣刀片</a>
+					<a>其它</a>
     			</div>
     		</li>
 			<li class="clearfix">
@@ -169,7 +170,13 @@ $(function() {
     							<span>￥${item.price}0 </span><em>包邮</em>
     						</li>
     						<li class="title">
-								<a target="_blank" href="/item/${item.id}">${item.brand}${item.type}${item.version}</a> <br/>${item.material}
+								<a target="_blank" href="/item/${item.id}">
+									${item.brand}
+									#if($stringUtil.isNotEquatl(${item.type},"其它"))
+										${item.type}
+									#end
+									${item.version}</a> 
+									<br/>${item.material}
     						</li>
     						
     					</ul>

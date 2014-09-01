@@ -554,6 +554,10 @@ public class StringUtil {
 	}
 	public static String convertToChar(int i)
 	{
+		if(i==27)
+		{
+			return "其他";
+		}
 		String str = "";
 		char c = (char)(i + 96);
 		str = String.valueOf(c).toUpperCase();
@@ -649,6 +653,7 @@ public class StringUtil {
 		brandMap.put(67, "斯密特,smit.jpg,瑞典");
 		brandMap.put(68, "SNF,SNF.jpg,台湾");
 		brandMap.put(69, "山高,seco.jpg,瑞典");
+		brandMap.put(70, "Haimer,haimer.jpg,德国");
 		brandMap.put(100, "其他,otherbrand.jpg,其他");
 		
 		brandMap.put(10000, "刀师傅,刀师傅.jpg,中国");

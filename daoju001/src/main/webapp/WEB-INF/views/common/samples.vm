@@ -28,7 +28,7 @@
                 					</div>
     									<div class="agent-sample clearfix">
                                         <div class="agent-info clearfix">
-                                            <div class="agent-logo logo" aid="$!{sample.agentId}">
+                                            <!--<div class="agent-logo logo" aid="$!{sample.agentId}">
                                                 <a href="/agents/$!{sample.agentId}">
         											#if($!{sample.agentLogo})
         												<img src="/logo/$!{sample.agentLogo}" />
@@ -36,7 +36,7 @@
         												<img src="/img/avatar.png" />
         											#end
                                                 </a>
-                                            </div>
+											</div>-->
                                             <div class="agent-detail">
                                                 <h2 class="clearfix">
         											<a class="agent-name" href="/agents/$!{sample.agentId}">$!{sample.agentName}</a>

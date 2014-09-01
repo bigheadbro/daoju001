@@ -602,6 +602,7 @@ public class Util {
 		return result;
 	}
 	public static void main(String[] args) {
-		removeMailFromEDM();
+		long now = new Date().getTime();
+		System.out.print(now);
 	}
 }

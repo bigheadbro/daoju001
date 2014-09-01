@@ -1103,7 +1103,7 @@ opacity: .3;
 .gc-list-header h1 a:hover{color:#00c0ff}
 .agent-list-header h1{color: #585858;font-size: 18px;padding-bottom: 5px;border-bottom: 1px solid #0088b5;}
 .a-zlist a.current{background-color:#0088b5;color:white}
-.a-zlist a{color:#0088b5;display:block;float:left;width:30px;height:30px;margin:5px;text-align:center;font-size:24px}
+.a-zlist a{color:#0088b5;display:block;float:left;padding: 0 5px;height:30px;margin:5px;text-align:center;font-size:24px}
 .gc-list-content{}
 .gc-item{margin-top:25px;}
 .gc-item h1{font-size:24px;color:#0088b5;border-bottom:1px solid #0088b5;padding-bottom:5px;margin-bottom: 20px;}

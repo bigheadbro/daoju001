@@ -193,10 +193,10 @@ public class CommonController extends BaseController{
 		mv.addObject("requests", requests);
 		
 		List<ProductEntity> products = new ArrayList<ProductEntity>();
-		products.add(commonService.getProduct(105));
-		products.add(commonService.getProduct(125));
-		products.add(commonService.getProduct(115));
-		products.add(commonService.getProduct(114));
+		products.add(commonService.getProduct(132));
+		products.add(commonService.getProduct(129));
+		products.add(commonService.getProduct(128));
+		products.add(commonService.getProduct(87));
 		mv.addObject("products", products);
 		
 		List<QuestionEntity> questions = new ArrayList<QuestionEntity>();
@@ -224,10 +224,10 @@ public class CommonController extends BaseController{
 		mv.addObject("requests", requests);
 		
 		List<ProductEntity> products = new ArrayList<ProductEntity>();
-		products.add(commonService.getProduct(105));
-		products.add(commonService.getProduct(125));
-		products.add(commonService.getProduct(115));
-		products.add(commonService.getProduct(114));
+		products.add(commonService.getProduct(132));
+		products.add(commonService.getProduct(129));
+		products.add(commonService.getProduct(128));
+		products.add(commonService.getProduct(87));
 		mv.addObject("products", products);
 		
 		List<QuestionEntity> questions = new ArrayList<QuestionEntity>();
@@ -1690,12 +1690,9 @@ public class CommonController extends BaseController{
 	@RequestMapping(value="/wxcard")
 	public ModelAndView wxcard(HttpServletRequest request, HttpServletResponse response) throws WeixinException, IOException {
 		ModelAndView view = new ModelAndView("wx/wxcard");
-		
 		String code = request.getParameter("code");
 		if(StringUtil.isEmpty(code)){
-			logger.error("test");
 			Account account = (Account) WebUtils.getSessionAttribute(request, "account");
-			logger.error("wxid:" + account.getWxid());
 			UserEntity user = commonService.getUserByWxid(account.getWxid());
 			view.addObject("user",user);
 			return view;
@@ -1719,6 +1716,7 @@ public class CommonController extends BaseController{
 				}
 				if(user == null)//未绑定微信id
 				{
+					logger.error("go to log1");
 					return new ModelAndView(new RedirectView("/wxlog"));
 				}
 				else
@@ -1731,13 +1729,75 @@ public class CommonController extends BaseController{
 			{
 				logger.error("test");
 				UserEntity user = commonService.getUserByWxid(account.getWxid());
-				view.addObject("user",user);
-				return view;
+				if(user != null)
+				{
+					view.addObject("user",user);
+					return view;
+				}
+				else
+				{
+					logger.error("go to log2");
+					return new ModelAndView(new RedirectView("/wxlog"));
+				}
 			}
 		}
 		return view;
 	}
 
+	@RequestMapping(value="/wxcard/{id}")
+	public ModelAndView wxothercard(HttpServletRequest request, HttpServletResponse response, @PathVariable String id) throws WeixinException, IOException {
+		int userid = Integer.parseInt(id);
+
+		String code = request.getParameter("code");
+		
+		Account account = (Account) WebUtils.getSessionAttribute(request, "account");
+		if(account == null || StringUtil.isEmpty(account.getWxid()))//第一次进入，从朋友圈看到分享
+		{
+			Openid openid = WeixinService.getInstance2().getUserManagerService().getUserOpenid(code);
+			account = new Account();
+			account.setWxid(openid.openid);
+			request.getSession().setAttribute("account", account);
+			
+			ModelAndView view = new ModelAndView("wx/wxothercard");
+			UserEntity user = commonService.getUser(userid);
+			UserEntity me = commonService.getUserByWxid(openid.openid);
+			if(user.getId() == me.getId())
+			{
+				return new ModelAndView(new RedirectView("/wxcard"));
+			}
+			view.addObject("user",user);
+			view.addObject("wxid",account.getWxid());
+			view.addObject("wxname",account.getUserName());
+			return view;
+		}
+		else//account包含wxid
+		{
+			UserEntity user = commonService.getUserByWxid(account.getWxid());
+			if(user != null)//已经进入微名片，搜索到人
+			{
+				if(user.getId() == userid)
+				{
+					return new ModelAndView(new RedirectView("/wxcard"));
+				}
+				else
+				{
+					ModelAndView view = new ModelAndView("wx/wxothercard");
+					user = commonService.getUser(userid);
+					view.addObject("user",user);
+					return view;
+				}
+			}
+			else
+			{
+				ModelAndView view = new ModelAndView("wx/wxothercard");
+				user = commonService.getUser(userid);
+				view.addObject("user",user);
+				return view;
+			}
+		}
+		
+	}
+	
 	@RequestMapping(value="/wxtest")
 	public ModelAndView wxtest(HttpServletRequest request, HttpServletResponse response) throws WeixinException, IOException {
 		ModelAndView view = new ModelAndView("wx/wxcard");
@@ -1776,12 +1836,14 @@ public class CommonController extends BaseController{
 				account.setQq(user.getContactQq());
 				account.setPhone(user.getContactPhone());
 				userService.updateUserAccnt(account);
+				logger.error("ss");
 				request.getSession().setAttribute("account", account);
 				logger.error("go to card");
 				// 登陆成功， 跳转到登陆页面
 				return new ModelAndView(new RedirectView("/wxcard"));
 			}
 		}
+
 		return view;
 	}
 	
@@ -1823,13 +1885,13 @@ public class CommonController extends BaseController{
 	}
 
 	@RequestMapping(value="/wxreg2")
-	public ModelAndView wxreg2(HttpServletRequest request, HttpServletResponse response, @ModelAttribute("form")RegForm form, BindingResult result) {
-		
+	public ModelAndView wxreg2(HttpServletRequest request, HttpServletResponse response, @ModelAttribute("form")RegForm form, BindingResult result) throws WeixinException {
 		if(isDoSubmit(request))
 		{
 			if(!result.hasErrors())
 			{
 				Account account = (Account) WebUtils.getSessionAttribute(request, "account");
+				logger.error(String.valueOf(account.getUserId()));
 				userService.updateUserAccnt(form, account);
 				// 注册成功， 跳转到登陆页面
 				return new ModelAndView(new RedirectView("/wxcard")); 

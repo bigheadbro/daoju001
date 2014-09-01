@@ -42,6 +42,7 @@
                             				<select class="sel_type">
                                               <option value ="车刀片">车刀片</option>
                                               <option value ="铣刀片">铣刀片</option>
+											  <option value ="其它">其它</option>
                                             </select>
                             			</li>
                             		</ul>
@@ -70,6 +71,8 @@
 											  <option value ="φ12精球">φ12精球</option>
                                               <option value ="φ16精球">φ16精球</option>
 											  <option value ="φ20精球">φ20精球</option>
+											  <option value ="机床附件">机床附件</option>
+											  <option value ="其它">其它</option>
                                             </select>
                             			</li>
                             		</ul>

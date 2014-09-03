@@ -65,6 +65,7 @@ import com.banzhuan.entity.ProductEntity;
 import com.banzhuan.entity.ProfessionalAnswerEntity;
 import com.banzhuan.entity.QuestionEntity;
 import com.banzhuan.entity.QuickrequestEntity;
+import com.banzhuan.entity.RelationEntity;
 import com.banzhuan.entity.SampleEntity;
 import com.banzhuan.entity.StockEntity;
 import com.banzhuan.entity.UserEntity;
@@ -77,6 +78,7 @@ import com.banzhuan.form.ProductForm;
 import com.banzhuan.form.ProfessionalAnswerForm;
 import com.banzhuan.form.QuestionForm;
 import com.banzhuan.form.RegForm;
+import com.banzhuan.form.RelationForm;
 import com.banzhuan.form.RequestForm;
 import com.banzhuan.service.CommonService;
 import com.banzhuan.service.UserService;
@@ -442,37 +444,6 @@ public class CommonController extends BaseController{
 		mv.addObject("pictures",str);
 		mv.addObject("user",user);
 		return mv;
-	}
-	
-	@RequestMapping(value = "/products")
-	public ModelAndView products(final HttpServletRequest request,final HttpServletResponse response, @ModelAttribute("form")ProductForm form) 
-	{
-		ModelAndView mv = new ModelAndView("/common/products");
-		int page = 1;
-		if(request.getParameter("page") != null)
-		{
-			page = Integer.valueOf(request.getParameter("page"));
-		}
-		
-		Result result = commonService.getAllproducts(form,new RowBounds((page-1)*Constant.ALL_PRODUCT_PAGE_SIZE, Constant.ALL_PRODUCT_PAGE_SIZE));
-
-		int total= commonService.getProductsCount();
-		int totalPage=0;
-		if(total % Constant.ALL_PRODUCT_PAGE_SIZE == 0)
-			totalPage=total/Constant.ALL_PRODUCT_PAGE_SIZE;
-		else
-			totalPage=total/Constant.ALL_PRODUCT_PAGE_SIZE+1;
-		totalPage=totalPage==0?1:totalPage;
-		mv.addObject("page", page);
-		mv.addObject("total", total);
-		mv.addObject("totalPage", totalPage);
-		mv.addObject("products", result.get("products"));
-		result = commonService.getMainquestions();
-		mv.addObject("questions", result.get("questions"));
-		
-
-		return mv;
-		
 	}
 	
 	@RequestMapping(value = "/updaterequest")
@@ -1034,6 +1005,37 @@ public class CommonController extends BaseController{
 		return mv;		
 	}
 	
+	@RequestMapping(value = "/products")
+	public ModelAndView products(final HttpServletRequest request,final HttpServletResponse response, @ModelAttribute("form")ProductForm form) 
+	{
+		ModelAndView mv = new ModelAndView("/common/products");
+		int page = 1;
+		if(request.getParameter("page") != null)
+		{
+			page = Integer.valueOf(request.getParameter("page"));
+		}
+		
+		Result result = commonService.getAllproducts(form,new RowBounds((page-1)*Constant.ALL_PRODUCT_PAGE_SIZE, Constant.ALL_PRODUCT_PAGE_SIZE));
+	
+		int total= commonService.getProductsCount();
+		int totalPage=0;
+		if(total % Constant.ALL_PRODUCT_PAGE_SIZE == 0)
+			totalPage=total/Constant.ALL_PRODUCT_PAGE_SIZE;
+		else
+			totalPage=total/Constant.ALL_PRODUCT_PAGE_SIZE+1;
+		totalPage=totalPage==0?1:totalPage;
+		mv.addObject("page", page);
+		mv.addObject("total", total);
+		mv.addObject("totalPage", totalPage);
+		mv.addObject("products", result.get("products"));
+		result = commonService.getMainquestions();
+		mv.addObject("questions", result.get("questions"));
+		
+	
+		return mv;
+		
+	}
+
 	@RequestMapping(value = "/membership_handler/{id}")
 	public ModelAndView membership_handler(final HttpServletRequest request,final HttpServletResponse response, @PathVariable String id, Model model)
 	{
@@ -1693,6 +1695,7 @@ public class CommonController extends BaseController{
 		String code = request.getParameter("code");
 		if(StringUtil.isEmpty(code)){
 			Account account = (Account) WebUtils.getSessionAttribute(request, "account");
+			logger.error(account.getWxid());
 			UserEntity user = commonService.getUserByWxid(account.getWxid());
 			view.addObject("user",user);
 			return view;
@@ -1745,63 +1748,83 @@ public class CommonController extends BaseController{
 	}
 
 	@RequestMapping(value="/wxcard/{id}")
-	public ModelAndView wxothercard(HttpServletRequest request, HttpServletResponse response, @PathVariable String id) throws WeixinException, IOException {
+	public ModelAndView wxothercard(HttpServletRequest request, HttpServletResponse response, @ModelAttribute("form")RelationForm form, @PathVariable String id) throws WeixinException, IOException {
+		ModelAndView view = new ModelAndView("wx/wxothercard");
 		int userid = Integer.parseInt(id);
-
 		String code = request.getParameter("code");
-		
-		Account account = (Account) WebUtils.getSessionAttribute(request, "account");
-		if(account == null || StringUtil.isEmpty(account.getWxid()))//第一次进入，从朋友圈看到分享
+		Openid openid = WeixinService.getInstance2().getUserManagerService().getUserOpenid(code);
+		UserEntity me = commonService.getUserByWxid(openid.openid);
+		if(me != null)//当前进入微名片的人，已经注册微名片
 		{
-			Openid openid = WeixinService.getInstance2().getUserManagerService().getUserOpenid(code);
-			account = new Account();
-			account.setWxid(openid.openid);
+			Account account = (Account) WebUtils.getSessionAttribute(request, "account");
+			account.setWxid(me.getWxid());
 			request.getSession().setAttribute("account", account);
-			
-			ModelAndView view = new ModelAndView("wx/wxothercard");
 			UserEntity user = commonService.getUser(userid);
-			UserEntity me = commonService.getUserByWxid(openid.openid);
-			if(user.getId() == me.getId())
+			if(user.getId() == me.getId())//是自己的名片
 			{
 				return new ModelAndView(new RedirectView("/wxcard"));
 			}
-			view.addObject("user",user);
-			view.addObject("wxid",account.getWxid());
-			view.addObject("wxname",account.getUserName());
-			return view;
-		}
-		else//account包含wxid
-		{
-			UserEntity user = commonService.getUserByWxid(account.getWxid());
-			if(user != null)//已经进入微名片，搜索到人
+			else
 			{
-				if(user.getId() == userid)
+				view.addObject("user",user);
+				//是否已经收藏
+				RelationEntity tmp = new RelationEntity();
+				tmp.setWxid(me.getWxid());
+				tmp.setWxid2(user.getWxid());
+				logger.error(user.getWxid()+","+me.getWxid());
+				RelationEntity relation = commonService.queryRelationByRelation(tmp);
+				if(relation != null)
 				{
-					return new ModelAndView(new RedirectView("/wxcard"));
+					form.setRelation(relation.getRelation());
+					form.setWxid(user.getWxid());
+					form.setWxid2(me.getWxid());
+					form.setWxname(relation.getWxname());
+					form.setWxname2(relation.getWxname2());
+					form.setWxcompany(relation.getWxcompany());
+					form.setWxcompany2(relation.getWxcompany2());
+	
+					if(commonService.isLike(relation))
+					{
+						view.addObject("islike",1);
+					}
 				}
 				else
 				{
-					ModelAndView view = new ModelAndView("wx/wxothercard");
-					user = commonService.getUser(userid);
-					view.addObject("user",user);
-					return view;
+					form.setRelation(0);
+					form.setWxid(me.getWxid());
+					form.setWxid2(user.getWxid());
+					form.setWxname(me.getNick());
+					form.setWxname2(user.getNick());
+					form.setWxcompany(me.getCompanyName());
+					form.setWxcompany2(user.getCompanyName());
 				}
-			}
-			else
-			{
-				ModelAndView view = new ModelAndView("wx/wxothercard");
-				user = commonService.getUser(userid);
-				view.addObject("user",user);
 				return view;
-			}
+			}	
 		}
-		
+		else
+		{
+			UserEntity user = commonService.getUser(userid);
+			view.addObject("user",user);
+			return view;
+		}
+	}
+	
+	@RequestMapping(value="/wxcardcollect")
+	public void wxcardcollect(HttpServletRequest request, HttpServletResponse response, @ModelAttribute("form")RelationForm form) throws WeixinException, IOException {
+		if(form.getIslike() == 1)
+		{
+			commonService.delRelation(form);
+		}
+		else
+		{
+			commonService.addRelation(form);
+		}
 	}
 	
 	@RequestMapping(value="/wxtest")
-	public ModelAndView wxtest(HttpServletRequest request, HttpServletResponse response) throws WeixinException, IOException {
-		ModelAndView view = new ModelAndView("wx/wxcard");
-		
+	public ModelAndView wxtest(HttpServletRequest request, HttpServletResponse response, @ModelAttribute("form")RelationForm form) throws WeixinException, IOException {
+		ModelAndView view = new ModelAndView("wx/wxothercard");
+		form.setRelation(5);
 		return view;
 	}
 	@RequestMapping(value="/wxlog")

@@ -2,7 +2,7 @@
 <div class="main-content-container clearfix">
 	<div class="main-list-container width630 ml15">
 		<div class="gc-list-header">
-			<h1><span><a href="/agents">代理商</a> ></span><span class="regular">$!{agent.companyName}</span></h1>
+			<h1><span><a href="/agents">供应商</a> ></span><span class="regular">$!{agent.companyName}</span></h1>
 		</div>
 		<div class="company-detail clearfix">
 			<div class="left">
@@ -24,7 +24,7 @@
 							<a class="fancybox-v" title="$!{agent.companyName}的代理证书" href="$!{agent.verifiedLink}"><img src="/img/v.png" /></a>
 						#end
 					</h3>
-					<h4>代理刀具品牌：$stringUtil.getBrand($agent.brand)</h4>
+					<h4>供应刀具品牌：$stringUtil.getBrand($agent.brand) $stringUtil.getBrand($!{agent.brand2})</h4>
 					<p>浏览次数(${agent.cntRead})</p>
 				</div>
 				<div class="company-contact-info">

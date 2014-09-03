@@ -21,6 +21,20 @@ $(function() {
     		});   
         }
     });
+	$(".updateuser").click(function()
+    {
+		var str = "/admin/updateuser/" + $(this).attr("data");
+		var type = $(this).attr("type");
+    	if(confirm("确定修改吗？想清楚了？")){
+			$.ajax( {   
+    		    type : "POST",   
+    		    url : str,
+				data : {
+    		      'type' : type
+    		    }
+    		});   
+        }
+    });
 });
 </script>
 #foreach ($agent in $agents)
@@ -28,6 +42,18 @@ $(function() {
 	<a href="/agents/${agent.id}">$!{agent.companyName}</a> 
 	<span>$!{agent.brandName}</span>
 	<span>$!{agent.mail}</span>
+	#if(${agent.authority} == 0)
+		直接用户
+	#elseif(${agent.authority} == 1)
+		普通注册用户
+	#elseif(${agent.authority} == 3)
+		供应商
+	#elseif(${agent.authority} == 4)
+		代理商
+	#end
+	[
+	<a class="updateuser" data="${agent.id}" type=1>变身代理商</a><a class="updateuser" data="${agent.id}" type=2>变身供应商</a><a class="updateuser" data="${agent.id}" type=3>变身普通用户</a>
+	]
 	#if($stringUtil.isNotEmpty($agent.verifiedLink))
 		<a target="_blank" href="${agent.verifiedLink}" />代理证书连接</a>
 	#else

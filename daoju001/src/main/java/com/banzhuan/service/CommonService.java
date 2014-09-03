@@ -31,6 +31,7 @@ import com.banzhuan.dao.ProductDAO;
 import com.banzhuan.dao.ProfessionalAnswerDAO;
 import com.banzhuan.dao.QuestionDAO;
 import com.banzhuan.dao.QuickrequestDAO;
+import com.banzhuan.dao.RelationDAO;
 import com.banzhuan.dao.SampleDAO;
 import com.banzhuan.dao.StockDAO;
 import com.banzhuan.dao.UserDAO;
@@ -49,6 +50,7 @@ import com.banzhuan.entity.ProductEntity;
 import com.banzhuan.entity.ProfessionalAnswerEntity;
 import com.banzhuan.entity.QuestionEntity;
 import com.banzhuan.entity.QuickrequestEntity;
+import com.banzhuan.entity.RelationEntity;
 import com.banzhuan.entity.SampleEntity;
 import com.banzhuan.entity.StockEntity;
 import com.banzhuan.entity.UserEntity;
@@ -60,6 +62,7 @@ import com.banzhuan.form.ItemForm;
 import com.banzhuan.form.LoginForm;
 import com.banzhuan.form.ProductForm;
 import com.banzhuan.form.QuestionForm;
+import com.banzhuan.form.RelationForm;
 import com.banzhuan.form.RequestForm;
 import com.banzhuan.util.ChineseSpelling;
 import com.banzhuan.util.StringUtil;
@@ -135,6 +138,9 @@ public class CommonService {
 	@Qualifier("stockDAO")
 	private StockDAO stockDAO;
 	
+	@Autowired
+	@Qualifier("relationDAO")
+	private RelationDAO relationDAO;
 	
 	public Result checkLogin(LoginForm form, Errors errors)
 	{
@@ -325,23 +331,8 @@ public class CommonService {
 	}
 	public Map<Integer,Map<Integer,List<UserEntity>>> getAllAgents()
 	{
-		List<UserEntity> agents = userDAO.getUsersByAuth(4);
-		
-		//按代理商首字母
-		/*Map<Integer,List<AgentEntity>> agentMap = new HashMap<Integer,List<AgentEntity>>();
+		List<UserEntity> agents = userDAO.getUsersByAuth(3);
 
-		for(int i = 0;i < agents.size(); i++)
-		{
-			List<AgentEntity> tmp = agentMap.get(ChineseSpelling.letterToNum(ChineseSpelling.getFirstLetter(((AgentEntity)agents.get(i)).getCompanyName())));
-			if(tmp == null)
-			{
-				tmp = new ArrayList<AgentEntity>();
-			}
-			tmp.add((AgentEntity)agents.get(i));
-			agentMap.put(ChineseSpelling.letterToNum(ChineseSpelling.getFirstLetter(((AgentEntity)agents.get(i)).getCompanyName())), tmp);
-		}*/
-
-		
 		Map<Integer,Map<Integer,List<UserEntity>>> agentMap = new HashMap<Integer, Map<Integer,List<UserEntity>>>();
 		
 		for(int i = 0;i < agents.size(); i++)
@@ -350,9 +341,11 @@ public class CommonService {
 			{
 				continue;
 			}
-			String aa = StringUtil.getBrand(((UserEntity)agents.get(i)).getBrand());
-			String bb = ChineseSpelling.getFirstLetter(aa);
-			int alpha = ChineseSpelling.letterToNum(bb);
+			int alpha = ChineseSpelling.letterToNum(ChineseSpelling.getFirstLetter(StringUtil.getBrand(((UserEntity)agents.get(i)).getBrand())));
+			if(agents.get(i).getBrand() == 100)
+			{
+				alpha = 27;
+			}
 			Map<Integer,List<UserEntity>> tmpMap = agentMap.get(alpha);
 			//是否存在该字母的代理商
 			if(tmpMap == null)
@@ -392,7 +385,56 @@ public class CommonService {
 					tmpMap.put(agents.get(i).getBrand(), tmp);
 				}
 			}
+			agentMap.put(alpha, tmpMap);
 			
+			if(agents.get(i).getBrand2() == 0 || agents.get(i).getBrand2() == agents.get(i).getBrand())
+			{
+				continue;
+			}
+			alpha = ChineseSpelling.letterToNum(ChineseSpelling.getFirstLetter(StringUtil.getBrand(((UserEntity)agents.get(i)).getBrand2())));
+			if(agents.get(i).getBrand2() == 100)
+			{
+				alpha = 27;
+			}
+			tmpMap = agentMap.get(alpha);
+			//是否存在该字母的代理商
+			if(tmpMap == null)
+			{
+				tmpMap = new HashMap<Integer,List<UserEntity>>();
+				List<UserEntity> tmp = new ArrayList<UserEntity>();
+				tmp.add((UserEntity)agents.get(i));
+				tmpMap.put(agents.get(i).getBrand2(), tmp);
+			}
+			else
+			{
+				//是否包含样本的品牌
+				if(tmpMap.containsKey(agents.get(i).getBrand2()))
+				{
+					Iterator<Integer> iter = tmpMap.keySet().iterator(); 
+					while (iter.hasNext()) 
+					{ 
+					    int key = Integer.valueOf(iter.next().toString()); 
+					    List<UserEntity> val = tmpMap.get(key); 
+					    if(val == null)
+						{
+					    	val = new ArrayList<UserEntity>();
+						}
+					    //如果是同一个品牌
+					    if(key == agents.get(i).getBrand2())
+					    {
+						    val.add((UserEntity)agents.get(i));
+						    tmpMap.put(key, val);
+						    break;
+					    }
+					} 
+				}
+				else
+				{
+					List<UserEntity> tmp = new ArrayList<UserEntity>();
+					tmp.add((UserEntity)agents.get(i));
+					tmpMap.put(agents.get(i).getBrand(), tmp);
+				}
+			}
 			agentMap.put(alpha, tmpMap);
 		}
 		return agentMap;
@@ -858,4 +900,37 @@ public class CommonService {
 	{
 		return stockDAO.insertStockEntity(stock);
 	}
+	
+	public boolean isLike(RelationEntity relation)
+	{
+		return relationDAO.queryRelationByRelation(relation)==null?false:true;
+	}
+	
+	public RelationEntity queryRelationByRelation(RelationEntity relation)
+	{
+		return relationDAO.queryRelationByRelation(relation);
+	}
+	
+	public void delRelation(RelationForm form)
+	{
+		RelationEntity relation = new RelationEntity();
+		relation.setWxid(form.getWxid());
+		relation.setWxid2(form.getWxid2());
+		relationDAO.delRelation(relation);
+	}
+	
+	public void addRelation(RelationForm form)
+	{
+		RelationEntity relation = new RelationEntity();
+		relation.setRelation(form.getRelation());
+		relation.setWxid(form.getWxid());
+		relation.setWxid2(form.getWxid2());
+		relation.setWxname(form.getWxname());
+		relation.setWxname2(form.getWxname2());
+		relation.setWxcompany(form.getWxcompany());
+		relation.setWxcompany2(form.getWxcompany2());
+		relationDAO.insertRelationEntity(relation);
+	}
+	
+	
 }

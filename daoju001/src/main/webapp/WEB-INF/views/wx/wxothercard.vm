@@ -5,13 +5,35 @@
         <link rel="stylesheet" href="/css/jquery.mobile-1.3.2.min.css">
         <script src="/js/jquery.mobile-1.3.2.min.js"></script>
 		<script type="text/javascript" src="/js/jquery-scrolltofixed-min.js"></script>
+		<script type="text/javascript" src="/js/jquery.form.js"></script>
 		<script type="text/javascript" src="/js/iscroll.js"></script>
         <link rel="stylesheet" href="/css/wap.css">
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no" />
 		<script>
+		function onBridgeReady(){
+         WeixinJSBridge.call('hideOptionMenu');
+        }
+        
+        if (typeof WeixinJSBridge == "undefined"){
+            if( document.addEventListener ){
+                document.addEventListener('WeixinJSBridgeReady', onBridgeReady, false);
+            }else if (document.attachEvent){
+                document.attachEvent('WeixinJSBridgeReady', onBridgeReady); 
+                document.attachEvent('onWeixinJSBridgeReady', onBridgeReady);
+            }
+        }else{
+            onBridgeReady();
+        }
 		$(function() {
 			var myscroll;
     		$(function() {
+				if($("#relation").val() > 0){
+					$(".relation span").each(function(){
+						if($(this).attr("data") == $("#relation").val()){
+							$(this).css("color","white").css("background-color","#0099cb");
+						}
+					});
+				}
 				$(".relation span").click(function(){
 					$(this).parent().each(function(){
 						$(this).children("span").removeAttr("style");
@@ -25,6 +47,10 @@
 		</script>
 	</head>
     <body>
+		<div class="like-mask">
+			<img src="/img/wx/likemask-img.png" />
+			<a target="_blank" rel="external" href="http://mp.weixin.qq.com/s?__biz=MzAwNTAyOTg5Ng==&mid=205589420&idx=1&sn=14f7338f51eff94e2a1daa5994d50265#rd">点击创建刀具名片</a>
+		</div>
 		<div data-role="page" data-theme="z" class="scroll">
 			<div class="cardview">
     			<div class="wx-info clearfix">
@@ -39,14 +65,14 @@
     			</div>
     			<div class="range clearfix">
                     <ul>
-                    	<li>
+                    	<a data-role="none">
                     		<h4>全国排名</h4>
                     		<h2>232</h2>
-                    	</li>
-                    	<li>
+                    	</a>
+                    	<a data-role="none">
                     		<h4>人脉</h4>
                     		<h2>2</h2>
-                    	</li>
+                    	</a>
                     	<li>
                     		<h4>被查看</h4>
                     		<h2>13</h2>
@@ -84,17 +110,56 @@
 						<span data=5>同事</span>
 					</div>
 				</div>
-				<form>
+				<form id="form_relation" target="_blank" method="post">
 					<!-- 隐藏字段，用于标示是表单提交 -->
 					<input type="hidden" name="do_submit" value="true"/>
-					<input type="hidden" id="relation" name="relation" />
-					<input type="hidden" name="myid" value="${wxid}"/>
-					<input type="hidden" name="myname" value="${wxname}"/>
-					<input type="hidden" name="userid" value="${user.wxid}"/>
-					<input type="hidden" name="username" value="${user.nick}"/>
-				<div class="op">
-    				<button type="submit" id="submit_like" data-role="none">收藏他的名片</button>
-    			</div>
+					#springBind("form.relation")
+					<input type="hidden" id="relation" name="$!{status.expression}" value="$!{status.value}" />
+					#springBind("form.wxid")
+					<input type="hidden" id="myid" name="$!{status.expression}" value="$!{status.value}"/>
+					#springBind("form.wxname")
+					<input type="hidden" id="myname" name="$!{status.expression}" value="$!{status.value}"/>
+					#springBind("form.wxcompany")
+					<input type="hidden" id="mycompany" name="$!{status.expression}" value="$!{status.value}"/>
+					#springBind("form.wxid2")
+					<input type="hidden" name="$!{status.expression}" value="$!{status.value}"/>
+					#springBind("form.wxname2")
+					<input type="hidden" name="$!{status.expression}" value="$!{status.value}"/>
+					#springBind("form.wxcompany2")
+					<input type="hidden" name="$!{status.expression}" value="$!{status.value}"/>
+    				<div class="op">
+						#if(${islike} == 1)
+							#springBind("form.islike")
+							<input type="hidden" name="$!{status.expression}" value=1 />
+							<a class="islike" type="submit" id="submit_like" data-role="none">取消收藏</a>
+						#else
+							#springBind("form.islike")
+							<input type="hidden" name="$!{status.expression}" value=0 />
+							<a type="submit" id="submit_like" data-role="none">收藏他的名片</a>
+						#end
+        			</div>
+					<script>
+						function process(){
+							$("#submit_like").text("取消收藏").css("background-color","grey");
+						}
+            			$(function() {
+            				$("#submit_like").click(function () {
+								if($("#myid").val()){
+            						$("#form_relation").ajaxSubmit({  
+                                        type: 'post',  
+										url: "/wxcardcollect" ,  
+                                        success: process
+										});
+								}
+								else{
+									$(".like-mask").css("visibility", "visible");
+								}
+            				});
+							$(".like-mask").click(function() {
+                        		$(".like-mask").removeAttr("style");
+                        	});
+            			});
+            		</script>
 				</form>
 			</div>
 		</div>

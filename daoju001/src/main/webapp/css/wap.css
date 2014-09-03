@@ -45,7 +45,8 @@ word-break: break-all;
 .log-wrap .mail{background:url(../img/wx/wxname.png) no-repeat 0.5em center;background-size: 20px;}
 .log-wrap .pwd{background:url(../img/wx/wxpwd.png) no-repeat 0.5em center;background-size: 20px;}
 .op{margin-top:1.5em;}
-.op a{background-color:#0099cb;color:white;display: block;padding: 0.8em;margin: 0 auto;width: 90%;border-radius: 0.3em;font-size: 1em;border:0;}
+.op a{background-color:#0099cb;color:white;display: block;padding: 0.8em;margin: 0 auto;width: 90%;border-radius: 0.3em;font-size: 1em;border:0;text-align: center;}
+.op a.islike{background-color:grey;color:white;display: block;padding: 0.8em;margin: 0 auto;width: 90%;border-radius: 0.3em;font-size: 1em;border:0;text-align: center;}
 .op button{background-color:#0099cb;color:white;display: block;padding: 0.8em;margin: 0 auto;width: 90%;border-radius: 0.3em;font-size: 1em;border:0;}
 .op-reg{width:100%;height:2em;margin-top:2.5em}
 .op-reg a{color:#8ca6af;}
@@ -75,6 +76,9 @@ word-break: break-all;
 .cardview .range li{float:left;width:33%;padding: 0.5em 0;}
 .cardview .range li h4{color:#a3a3a3;}
 .cardview .range li h2{color:black;font-size:1.3em;margin-top:0.2em;}
+.cardview .range a{float:left;width:33%;padding: 0.5em 0;}
+.cardview .range a h4{color:#a3a3a3;}
+.cardview .range a h2{color:black;font-size:1.3em;margin-top:0.2em;}
 .cardview .phone{padding: 1em 0;text-indent:2em;background:url(../img/wx/info-phone.png) no-repeat 2em center;background-size: 18px;border-bottom:1px solid #c9c9c9}
 .cardview .phone p{font-size:1em;margin-left: 2em;}
 .cardview .mail{padding: 1em 0;text-indent:2em;background:url(../img/wx/info-mail.png) no-repeat 2em center;background-size: 18px;border-bottom:1px solid #c9c9c9}
@@ -97,3 +101,6 @@ word-break: break-all;
 em.error{color:red;}
 .share-mask{visibility:hidden;}
 .share-mask img{width:100%;height:100%;position:absolute;z-index:10000}
+.like-mask{visibility:hidden;width:100%;height:100%;background:url(../img/wx/wxmask.png) repeat;position:absolute;z-index:10000;text-align: center;}
+.like-mask img{width:179px;margin-top:8em;}
+.like-mask a{display:block;border-radius:5px;border:1px solid white;color:white;width: 10em;margin: 1em auto;padding: 0.5em;}

@@ -271,9 +271,33 @@ public class AdminController extends BaseController{
 	public ModelAndView agent(final HttpServletResponse response)
 	{
 		ModelAndView mv = new ModelAndView("/admin/admin");
-		List<UserEntity> agents = userDAO.getUsersByAuth(4);
+		List<UserEntity> agents = userDAO.getUsers();
 		mv.addObject("agents", agents);
 		return mv;
+	}
+	
+	@RequestMapping(value="/updateuser/{id}")
+	public void updateuser(HttpServletRequest request, HttpServletResponse response, @PathVariable String id) throws IOException 
+	{
+		int userid = Integer.parseInt(id);
+		String type = request.getParameter("type");
+		UserEntity agent = userDAO.queryUserEntityById(userid);
+		if(StringUtil.isEqual(type, "1"))
+		{
+			agent.setAuthority(4);
+			agent.setProductlimit(10);
+		}
+		else if(StringUtil.isEqual(type, "2"))
+		{
+			agent.setAuthority(3);
+			agent.setProductlimit(2);
+		}
+		else if(StringUtil.isEqual(type, "3"))
+		{
+			agent.setAuthority(1);
+			agent.setProductlimit(2);
+		}
+		userDAO.updateUserEntityById(agent);
 	}
 	
 	@RequestMapping(value="/lghlmclyhblsqtproduct")

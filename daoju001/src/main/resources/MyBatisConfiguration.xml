@@ -19,6 +19,7 @@
 		<typeAlias alias="QuickrequestEntity" type="com.banzhuan.entity.QuickrequestEntity" />
 		<typeAlias alias="ArticleEntity" type="com.banzhuan.entity.ArticleEntity" />
 		<typeAlias alias="StockEntity" type="com.banzhuan.entity.StockEntity" />
+		<typeAlias alias="RelationEntity" type="com.banzhuan.entity.RelationEntity" />
 	</typeAliases>
 
 	<mappers>

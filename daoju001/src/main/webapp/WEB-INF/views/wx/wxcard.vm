@@ -8,6 +8,22 @@
 		<script type="text/javascript" src="/js/iscroll.js"></script>
         <link rel="stylesheet" href="/css/wap.css">
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no" />
+		<script>
+		function onBridgeReady(){
+         WeixinJSBridge.call('showOptionMenu');
+        }
+        
+        if (typeof WeixinJSBridge == "undefined"){
+            if( document.addEventListener ){
+                document.addEventListener('WeixinJSBridgeReady', onBridgeReady, false);
+            }else if (document.attachEvent){
+                document.attachEvent('WeixinJSBridgeReady', onBridgeReady); 
+                document.attachEvent('onWeixinJSBridgeReady', onBridgeReady);
+            }
+        }else{
+            onBridgeReady();
+        }
+		</script>
 	</head>
     <body>
 		<div class="share-mask">
@@ -27,14 +43,14 @@
     			</div>
     			<div class="range clearfix">
                     <ul>
-                    	<li>
+                    	<a>
                     		<h4>全国排名</h4>
                     		<h2>232</h2>
-                    	</li>
-                    	<li>
+                    	</a>
+                    	<a>
                     		<h4>人脉</h4>
                     		<h2>2</h2>
-                    	</li>
+                    	</a>
                     	<li>
                     		<h4>被查看</h4>
                     		<h2>13</h2>

@@ -1091,7 +1091,7 @@ opacity: .3;
 .agent-detail h2{color:#606060;font-size:14px;padding: 5px 5px 3px 0;}
 .agent-detail h2 a.agent-name{overflow:hidden;white-space:nowrap;text-overflow:ellipsis;display:inline-block;max-width:100px;float:left;}
 .agent-detail h4{color:#606060;font-size:12px;font-weight:100;overflow:hidden;white-space:nowrap;}
-.agent-detail h2 a.fancybox-v{padding: 4px 0 0 2px;float:left;}
+.agent-detail h2 a.fancybox-v{float:left;color:#ff9000;margin-left: 3px;font-size: 13px;}
 .agent-detail h2 a.fancybox-v img{width:12px}
 .download{float:right;margin:17px;}
 .download a{background-color: #0088b5;color: white;padding: 10px 30px;border-radius: 5px;}
@@ -1281,7 +1281,7 @@ opacity: .3;
 .brand-list .arrow .agent{color: #828282;background:url(../img/agent-arrow.png) no-repeat 0 0;width: 56px;height: 21px;margin: 0 0 5px 15px;line-height: 21px;padding-left: 4px; }
 .brand-list .arrow .detail{}
 .brand-list .arrow .detail a{display: inline-block;background-color:#63a200;border:1px solid #4a7900;border-radius:4px;padding:5px 10px;color:white;}
-.brand-list .agent-detail{width:145px}
+.brand-list .agent-detail{width:175px}
 .brand-list .agent-detail h5{font-weight:100;margin: 2px 0 2px 0;white-space: nowrap;}
 .brand-list .agent-detail h5 em{color:#0099cb;margin-right:3px;}
 .brand-list .agent-detail h5 i{margin-left:2px;margin-right:2px;color:#828282;}

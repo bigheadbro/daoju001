@@ -32,7 +32,7 @@
 		<id property="fax" column="fax" />
 		<!--公司介绍 -->
 		<id property="description" column="description" />
-		<!--0是买家，1是经销商，4是代理商 -->
+		<!--0是买家，1是普通注册用户，3是供应商，4是代理商 -->
 		<id property="authority" column="authority" />
 		<!--证书链接 -->
 		<id property="verifiedLink" column="verified_link" />
@@ -110,7 +110,7 @@
 
 	<select id="getUsersByAuth" parameterType="int"
 			resultMap="UserResultMap">
-		SELECT * from t_user t where authority = #{type}
+		SELECT * from t_user t where authority >= #{type}
 	</select>
 	<select id="getMainagents" 
 			resultMap="UserResultMap">
@@ -195,6 +195,8 @@
 	      <if test="mail != null">mail=#{mail},</if>
 	      <if test="companyName != null">company_name=#{companyName},</if>
 	      <if test="brand != 0">brand=#{brand},</if>
+	      <if test="authority != 0">authority=#{authority},</if>
+	      <if test="productlimit != 0">productlimit=#{productlimit},</if>
 	      <if test="brandName != null">brand_name=#{brandName},</if>
 	      <if test="brand2 != 0">brand2=#{brand2},</if>
 	      <if test="brandName2 != null">brand_name2=#{brandName2},</if>

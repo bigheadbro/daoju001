@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="relation">
+	<resultMap type="RelationEntity" id="RelationResultMap">
+		<!---->
+		<id property="id" column="id"/>
+			  <!--主动收藏的人-->
+		<id property="wxid" column="wxid"/>
+			  <!--被收藏的id-->
+		<id property="wxid2" column="wxid2"/>
+			  <!---->
+		<id property="wxname" column="wxname"/>
+			  <!---->
+		<id property="wxname2" column="wxname2"/>
+			  <!---->
+		<id property="wxcompany" column="wxcompany"/>
+			  <!---->
+		<id property="wxcompany2" column="wxcompany2"/>
+			  <!---->
+		<id property="relation" column="relation"/>
+	</resultMap>
+	
+	<select id="queryRelationByRelation" parameterType="RelationEntity"
+			resultMap="RelationResultMap">
+		<![CDATA[
+			SELECT * from t_relation t where t.wxid=#{wxid}  and t.wxid2 = #{wxid2};
+		]]>
+	</select>
+
+	<select id="queryRelationById" parameterType="int"
+			resultMap="RelationResultMap">
+		<![CDATA[
+			SELECT * from t_relation t where t.id=#{id}
+		]]>
+	</select>
+	<!-- 新代理商信息 -->
+	<insert id="insertRelationEntity" parameterType="RelationEntity">
+		<selectKey resultType="int" order="AFTER" keyProperty="id">
+			SELECT LAST_INSERT_ID() AS id
+		</selectKey>
+		insert into t_relation
+		(
+	   	  id
+	   	  ,wxid
+	   	  ,wxid2
+	   	  ,wxname
+	   	  ,wxname2
+	   	  ,wxcompany
+	   	  ,wxcompany2
+	   	  ,relation)
+	      values
+	   (
+	   
+	   	  #{id}
+	   	  ,#{wxid}
+	   	  ,#{wxid2}
+	   	  ,#{wxname}
+	   	  ,#{wxname2}
+	   	  ,#{wxcompany}
+	   	  ,#{wxcompany2}
+	   	  ,#{relation}
+	      
+	   )
+	</insert>
+	<delete id="delRelation"  parameterType="RelationEntity">
+		delete from t_relation t where t.wxid=#{wxid}  and t.wxid2 = #{wxid2};
+	</delete>
+</mapper>

@@ -85,11 +85,11 @@
     				#end
     				#if($!stringUtil.isContains($request.getServletPath(),"/agents"))
                     <li class="current">
-                        <a rel="external" href="/agents">代理商</a>
+                        <a rel="external" href="/agents">供应商</a>
                     </li>
     				#else
     				<li>
-                        <a rel="external" href="/agents">代理商</a>
+                        <a rel="external" href="/agents">供应商</a>
                     </li>
     				#end
     				#if($!stringUtil.isContains($request.getServletPath(),"/articles") || $!stringUtil.isContains($request.getServletPath(),"/samples"))

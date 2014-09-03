@@ -1695,6 +1695,7 @@ public class CommonController extends BaseController{
 		String code = request.getParameter("code");
 		if(StringUtil.isEmpty(code)){
 			Account account = (Account) WebUtils.getSessionAttribute(request, "account");
+			logger.error("44");
 			logger.error(account.getWxid());
 			UserEntity user = commonService.getUserByWxid(account.getWxid());
 			view.addObject("user",user);
@@ -1754,14 +1755,21 @@ public class CommonController extends BaseController{
 		String code = request.getParameter("code");
 		Openid openid = WeixinService.getInstance2().getUserManagerService().getUserOpenid(code);
 		UserEntity me = commonService.getUserByWxid(openid.openid);
+		logger.error("11");
 		if(me != null)//当前进入微名片的人，已经注册微名片
 		{
 			Account account = (Account) WebUtils.getSessionAttribute(request, "account");
+			if(account == null)
+			{
+				account = new Account();
+			}
 			account.setWxid(me.getWxid());
 			request.getSession().setAttribute("account", account);
+			logger.error("22");
 			UserEntity user = commonService.getUser(userid);
 			if(user.getId() == me.getId())//是自己的名片
 			{
+				logger.error("33");
 				return new ModelAndView(new RedirectView("/wxcard"));
 			}
 			else

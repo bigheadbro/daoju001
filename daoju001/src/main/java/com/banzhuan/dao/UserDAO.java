@@ -47,5 +47,8 @@ public interface UserDAO {
 	List<UserEntity> getMainagents();
 	
 	int getUsersCount(boolean istoday);
+	
+	List<UserEntity> searchUser(UserEntity user);
 
+	int queryUserEntityOrderByScore(int id);
 }

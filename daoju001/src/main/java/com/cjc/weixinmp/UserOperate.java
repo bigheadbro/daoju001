@@ -47,7 +47,7 @@ public class UserOperate extends AbstractUserOperate {
 		CustomButton button = new CustomButton();
 		TextResponse tr = new TextResponse();
 		logger.error(event.ToUserName);
-		if(StringUtil.isEqual(event.ToUserName, "gh_d8bb68cfc56b"))
+		if(StringUtil.isEqual(event.ToUserName, "gh_62d1696b4731"))
 		{
 			button.addButton(CustomMenu.TYPE.click, "刀具名片", "message", null)
 			        .addSubButton(CustomMenu.TYPE.click, "进入微名片", "card", null);
@@ -86,10 +86,11 @@ public class UserOperate extends AbstractUserOperate {
     	tr.ToUserName = click.ToUserName;
     	if(StringUtil.isEqual(click.EventKey, "card"))
         {
-    		NewsResponse news = new NewsResponse();
-    		news.ToUserName = click.ToUserName;
-    		news.addArticle("点击召唤微名片", "刀师傅为刀具界人士量身打造的微名片，帮助刀具企业与用户更好的连接。", "http://img1.178.com/mm/201205/131677208040/131677329126.jpg", "http://115017.ichengyun.net/wxcard?openid="+ click.FromUserName);
-        	return news;
+    		//NewsResponse news = new NewsResponse();
+    		//news.ToUserName = click.ToUserName;
+    		//news.addArticle("点击召唤微名片", "刀师傅为刀具界人士量身打造的微名片，帮助刀具企业与用户更好的连接。", "http://img1.178.com/mm/201205/131677208040/131677329126.jpg", "http://115017.ichengyun.net/wxcard?openid="+ click.FromUserName);
+        	//return news;
+    		tr.Content =  "紧张制作中，敬请期待哟！";
         }
     	if(StringUtil.isEqual(click.EventKey, "latestarticle"))
         {

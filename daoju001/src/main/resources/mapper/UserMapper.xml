@@ -46,6 +46,7 @@
 		<id property="contactEmail" column="contact_email" />
 		<id property="wxbrand" column="wxbrand" />
 		<id property="position" column="position" />
+		<id property="score" column="score" />
 		<id property="productlimit" column="productlimit" />
 		<id property="pca" column="pca" />
 		<!--注册时间 -->
@@ -70,11 +71,30 @@
 	]]>
 	</select>
 	
+	<select id="queryUserEntityOrderByScore" parameterType="int"
+		resultType="int">
+	<![CDATA[
+		SELECT rank from (SELECT @counter:=@counter+1 as rank, id FROM daoju001.t_user,(Select (@counter :=0) ) b order by score desc, reg_time asc) as tt where id = #{id};
+	]]>
+	</select>
+	
 	<select id="queryUserEntityByWxid" parameterType="int"
 		resultMap="UserResultMap">
 	<![CDATA[
 		SELECT * from t_user t WHERE t.wxid = #{wxid}
 	]]>
+	</select>
+	
+	<select id="searchUser" parameterType="UserEntity"
+		resultMap="UserResultMap">
+		SELECT * from t_user t WHERE 1=1
+		<if test="wxbrand != null">  
+			and t.wxbrand like concat('%', #{wxbrand}, '%')
+		</if> 
+		<if test="pca != null">  
+	        and t.pca like concat('%', #{pca}, '%');
+	    </if>   
+	    order by score desc, reg_time asc
 	</select>
 	
 	<select id="queryUserEntityByMail" parameterType="String" resultMap="UserResultMap">
@@ -126,6 +146,7 @@
 		(
       nick
       ,wxid
+      ,score
       ,wxlogo
    	  ,password
    	  ,mail
@@ -152,6 +173,7 @@
    (
    	  #{nick}
    	  ,#{wxid}
+   	  ,#{score}
    	  ,#{wxlogo}
    	  ,#{password}
    	  ,#{mail}

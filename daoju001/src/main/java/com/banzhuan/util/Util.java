@@ -588,7 +588,12 @@ public class Util {
 		            	{
 		            		if(tmp != k)
 		            		{
-		            			result += sheet.getCell(tmp,0).getContents() + " " + sheet.getCell(tmp,j).getContents().split("[|]")[0]+"\n";
+		            			String content = sheet.getCell(tmp,j).getContents().split("[|]")[0];
+		            			if(StringUtil.isEmpty(content))
+		            			{
+		            				content = "-";
+		            			}
+		            			result += sheet.getCell(tmp,0).getContents() + " " + content +"\n";
 		            		}
 		            	}
 		            	return result;
@@ -602,7 +607,6 @@ public class Util {
 		return result;
 	}
 	public static void main(String[] args) {
-		long now = new Date().getTime();
-		System.out.print(now);
+		System.out.print(querySteel("钢材Q295"));
 	}
 }

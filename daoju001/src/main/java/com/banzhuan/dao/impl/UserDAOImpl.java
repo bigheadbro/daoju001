@@ -87,4 +87,15 @@ public class UserDAOImpl extends SqlSessionDaoSupport implements UserDAO {
 		return this.getSqlSession().selectOne("getUsersCount",istoday);
 	}
 
+	@Override
+	public List<UserEntity> searchUser(UserEntity user)
+	{
+		return this.getSqlSession().selectList("searchUser",user);
+	}
+	
+	@Override
+	public int queryUserEntityOrderByScore(int id)
+	{
+		return this.getSqlSession().selectOne("queryUserEntityOrderByScore", id);
+	}
 }

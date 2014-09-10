@@ -15,10 +15,14 @@ public interface RelationDAO {
 	 */
 	RelationEntity queryRelationByRelation(RelationEntity relation);
 	
-	List<RelationEntity> queryRelationById(int id);
+	List<RelationEntity> queryRelationByWxid(String wxid);
+	
+	List<RelationEntity> queryRelationByWxid2(String wxid2);
 
 	public int insertRelationEntity(RelationEntity relation);
 	
 	void delRelation(RelationEntity relation);
+	
+	int getRelationCount(int userid);
 
 }

@@ -10,6 +10,7 @@ html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abb
 ul, li, ol {list-style: none;}
 .ui-page{background:#f0f0f0;}
 .ui-body-z{background:white;}
+.ui-body-search{background:#006c8f;}
 /* Clear Fix */ 
 .clearfix:after { content:"."; display:block; height:0; clear:both; visibility:hidden; } 
 .clearfix { display:inline-block; } 
@@ -26,7 +27,7 @@ padding-bottom: 10px;
 overflow: hidden;
 word-break: break-all;
 }
-.body{background-color:#f0f0f0;text-align:center;}
+.body{text-align:center;}
 .log-title{width:auto;color:#0099cb;font-weight:bold;line-height:4em;background-color:#f0f0f0;padding:3em 0;height: 128px;background-size: 70px;background-position: center;background-image: url(../img/wx/cardlogo.png);background-repeat: no-repeat;}
 .custom-title .title {margin: 0;font-size: 20px;line-height: 22px;}
 .text-left {text-align: left;}
@@ -47,7 +48,7 @@ word-break: break-all;
 .op{margin-top:1.5em;}
 .op a{background-color:#0099cb;color:white;display: block;padding: 0.8em;margin: 0 auto;width: 90%;border-radius: 0.3em;font-size: 1em;border:0;text-align: center;}
 .op a.islike{background-color:grey;color:white;display: block;padding: 0.8em;margin: 0 auto;width: 90%;border-radius: 0.3em;font-size: 1em;border:0;text-align: center;}
-.op button{background-color:#0099cb;color:white;display: block;padding: 0.8em;margin: 0 auto;width: 90%;border-radius: 0.3em;font-size: 1em;border:0;}
+.op button{background-color:#0099cb;color:white;display: block;padding: 0.8em;margin: 0 auto;width: 90%;border-radius: 0.3em;font-size: 1em;border:0;margin-bottom:1em;}
 .op-reg{width:100%;height:2em;margin-top:2.5em}
 .op-reg a{color:#8ca6af;}
 .reg-title{padding:1.5em 0;background-color:#f0f0f0;}
@@ -97,10 +98,45 @@ word-break: break-all;
 .bottom-op .right{position:relative;float:left;width:50%;background-color:#037ea7;background-image:url(../img/wx/more.png);background-repeat: no-repeat; background-position:3em center;background-size: 26px;}
 .bottom-op .right p{padding:1em 0;border-left: 1px solid #1989af;text-indent:5em}
 .bottom-op .right ul{display:none;position:absolute;width: 100%;bottom: 50px;left: 0;background-color: #037ea7;color: white;}
-.bottom-op .right ul li{padding:1em 0;border-left: 1px solid #1989af;text-align: center;border-bottom:1px solid #00678a}
+.bottom-op .right ul a{display:block;padding:1em 0;border-left: 1px solid #1989af;text-align: center;border-bottom:1px solid #00678a;color: white;}
 em.error{color:red;}
 .share-mask{visibility:hidden;}
 .share-mask img{width:100%;height:100%;position:absolute;z-index:10000}
 .like-mask{visibility:hidden;width:100%;height:100%;background:url(../img/wx/wxmask.png) repeat;position:absolute;z-index:10000;text-align: center;}
 .like-mask img{width:179px;margin-top:8em;}
 .like-mask a{display:block;border-radius:5px;border:1px solid white;color:white;width: 10em;margin: 1em auto;padding: 0.5em;}
+.like-op{background-color:#f7f7f7;color:#858585;font-size:0.8em;padding:1em 0;}
+.like-op .left{float:left;width:50%;background-image:url(../img/wx/wxstargrey.png);background-repeat: no-repeat; background-position:center 0;background-size: 20px;}
+.like-op .currentl{color:#0099cb;background-image:url(../img/wx/wxstarblue.png);}
+.like-op .left a{display:block;text-align:center;padding-top: 1.7em;color:#858585;}
+.like-op .currentl a{color:#0099cb}
+.like-op .right{position:relative;float:left;width:50%;background-image:url(../img/wx/wxchaingrey.png);background-repeat: no-repeat; background-position:center 0;background-size: 20px;}
+.like-op .currentr{color:#0099cb;background-image:url(../img/wx/wxchainblue.png);}
+.like-op .right a{display:block;text-align:center;padding-top: 1.7em;color:#858585;}
+.like-op .currentr a{color:#0099cb}
+.like-op .right ul{display:none;position:absolute;width: 100%;bottom: 50px;left: 0;background-color: #037ea7;color: white;}
+.like-op .right ul li{padding:1em 0;border-left: 1px solid #1989af;text-align: center;border-bottom:1px solid #00678a}
+
+.search-head{margin: 5em 0 3em 0;}
+.search-head h1{color:white;font-size:1.3em;}
+.search-wrap .search{background-color:white;width:18em;margin:auto;border-radius:3em;background-image:url(../img/wx/wxsearch.png);background-repeat: no-repeat; background-position:0.4em center;background-size: 20px;}
+.search-wrap .search input{border:none;line-height:2.5em;width: 17em;font-size: 0.8em;}
+.pca-wrap{margin:2em}
+.pca-wrap select{border: none;color: white;background-color:#006c8f;}
+.search{margin-top:1.5em;}
+.search button{background-color:#0099cb;color:white;display: block;padding: 0.8em;margin: 0 auto;width: 9em;border-radius: 0.3em;font-size: 1em;border:0;margin-bottom:1em;}
+.searchresult-head{background-color:#006c8f;padding:0.5em 0;}
+.searchresult-head .search {text-align:left;margin-right:5em;background-color:white;margin-top:0;border-radius:3em;background-image:url(../img/wx/wxsearch.png);background-repeat: no-repeat; background-position:0.4em center;background-size: 20px;}
+.searchresult-head .con{float:right;width:100%;}
+.searchresult-head .search input{border:none;line-height:2em;margin-left:3em;width: 76%;font-size: 0.8em;}
+.searchresult-head .operation{float:right;margin-right: -100%;width:5em;}
+.searchresult-head button{background-color:#0099cb;color:white;padding:0.3em 1em;border-radius:3px;margin-left: 1em;border:0;font-size:0.9em;height: 31px;}
+.search-list h1{background-color:#e8e8e8;color:#898989;font-size:0.9em;padding:0.5em 0;border-bottom:1px solid #006c8f;}
+.search-list li{}
+.cardview .wx-info{margin: 1em 0;}
+.search-list a{display:block;border-bottom:1px solid #dbdbdb;padding:0.5em 0;text-align:left;}
+.search-list a .avatar{float:left;width:33%}
+.search-list a .avatar img{margin:0 auto;width:4em;height:4em;display:block;border-radius: 4em;}
+.search-list a .content{float:left;width:67%}
+.search-list a .content h2{font-size:1.2em;color:#010101;padding: 0.2em 0 0 0;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;margin-top: 0.5em;}
+.search-list a .content h3{font-size:1em;color:#a1a1a1;padding: 0.1em 0;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;}

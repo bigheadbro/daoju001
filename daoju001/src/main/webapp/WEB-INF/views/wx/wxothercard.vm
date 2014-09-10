@@ -55,32 +55,62 @@
 			<div class="cardview">
     			<div class="wx-info clearfix">
                     <div class="avatar">
-						 <img src="${user.wxlogo}" />
+						 #if($stringUtil.isNotEmpty(${user.wxlogo}))
+							<img src="${user.wxlogo}" />
+						 #else
+							<img src="/img/wx/wxavatar.png" />
+						 #end
                     </div>
                     <div class="content">
-                    	<h1>${user.contactName}</h1>
-                    	<h3>${user.companyName}</h3>
-                    	<h4>${user.pca}</h4>
+                    	<h1>
+							#if($stringUtil.isNotEmpty(${user.contactName}))
+								${user.contactName} 
+							#else
+								${user.nick}
+							#end
+						</h1>
+                    	<h3>
+							#if($stringUtil.isNotEmpty(${user.companyName}))
+								${user.companyName} 
+							#else
+								无公司信息
+							#end
+						</h3>
+						#if($stringUtil.isNotEmpty(${user.position}))
+							<h3>$!{user.position}</h3>
+						#end
+                    	<h4>$!{user.pca}</h4>
                     </div>
     			</div>
     			<div class="range clearfix">
                     <ul>
                     	<a data-role="none">
                     		<h4>全国排名</h4>
-                    		<h2>232</h2>
+                    		<h2>${rank}</h2>
                     	</a>
                     	<a data-role="none">
                     		<h4>人脉</h4>
-                    		<h2>2</h2>
+                    		<h2>${relationcount}</h2>
                     	</a>
                     	<li>
                     		<h4>被查看</h4>
-                    		<h2>13</h2>
+                    		<h2>${user.cntRead}</h2>
                     	</li>
                     </ul>
     			</div>
     			<div class="phone">
-					<p><a>${user.phone}</a>,<a>${user.contactPhone}</a></p>
+					<p>
+						#if($stringUtil.isNotEmpty(${user.phone}))
+							<a href="tel://${user.phone}">${user.phone}</a>
+						#end
+						&nbsp;
+						#if($stringUtil.isNotEmpty(${user.contactPhone}))
+							<a href="tel://${user.contactPhone}">${user.contactPhone}</a>
+						#end
+						#if($stringUtil.isEmpty(${user.phone}) && $stringUtil.isEmpty(${user.contactPhone}))
+							无电话信息
+						#end
+					</p>
     			</div>
 				<div class="brand clearfix">
 					<p>
@@ -123,6 +153,10 @@
 					<input type="hidden" id="mycompany" name="$!{status.expression}" value="$!{status.value}"/>
 					#springBind("form.wxid2")
 					<input type="hidden" name="$!{status.expression}" value="$!{status.value}"/>
+					#springBind("form.userid")
+					<input type="hidden" name="$!{status.expression}" value="$!{status.value}"/>
+					#springBind("form.userid2")
+					<input type="hidden" name="$!{status.expression}" value="$!{status.value}"/>
 					#springBind("form.wxname2")
 					<input type="hidden" name="$!{status.expression}" value="$!{status.value}"/>
 					#springBind("form.wxcompany2")
@@ -140,7 +174,7 @@
         			</div>
 					<script>
 						function process(){
-							$("#submit_like").text("取消收藏").css("background-color","grey");
+							window.location.href="/wxcard/${user.id}";
 						}
             			$(function() {
             				$("#submit_like").click(function () {

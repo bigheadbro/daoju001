@@ -22,6 +22,7 @@ public class RegForm implements Serializable {
 	private String qq;
 	private String position;
 	private String wxbrand;
+	private String pca;
 	/**
 	 * @return the userid
 	 */
@@ -201,6 +202,18 @@ public class RegForm implements Serializable {
 	 */
 	public void setWxbrand(String wxbrand) {
 		this.wxbrand = wxbrand;
+	}
+	/**
+	 * @return the pca
+	 */
+	public String getPca() {
+		return pca;
+	}
+	/**
+	 * @param pca the pca to set
+	 */
+	public void setPca(String pca) {
+		this.pca = pca;
 	}
 
 }

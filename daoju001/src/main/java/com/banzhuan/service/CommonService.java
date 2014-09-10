@@ -916,6 +916,8 @@ public class CommonService {
 		RelationEntity relation = new RelationEntity();
 		relation.setWxid(form.getWxid());
 		relation.setWxid2(form.getWxid2());
+		relation.setUserid(form.getUserid());
+		relation.setUserid2(form.getUserid2());
 		relationDAO.delRelation(relation);
 	}
 	
@@ -925,6 +927,8 @@ public class CommonService {
 		relation.setRelation(form.getRelation());
 		relation.setWxid(form.getWxid());
 		relation.setWxid2(form.getWxid2());
+		relation.setUserid(form.getUserid());
+		relation.setUserid2(form.getUserid2());
 		relation.setWxname(form.getWxname());
 		relation.setWxname2(form.getWxname2());
 		relation.setWxcompany(form.getWxcompany());
@@ -932,5 +936,28 @@ public class CommonService {
 		relationDAO.insertRelationEntity(relation);
 	}
 	
+	public List<RelationEntity> getIlike(String wxid)
+	{
+		return relationDAO.queryRelationByWxid(wxid);
+	}
 	
+	public List<RelationEntity> getLikeme(String wxid)
+	{
+		return relationDAO.queryRelationByWxid2(wxid);
+	}
+	
+	public List<UserEntity> searchUser(UserEntity user)
+	{
+		return userDAO.searchUser(user);
+	}
+	
+	public int getRelationCount(int userid)
+	{
+		return relationDAO.getRelationCount(userid);
+	}
+	
+	public int queryUserEntityOrderByScore(int id)
+	{
+		return userDAO.queryUserEntityOrderByScore(id);
+	}
 }

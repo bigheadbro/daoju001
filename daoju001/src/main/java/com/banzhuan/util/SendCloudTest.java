@@ -41,14 +41,14 @@ public class SendCloudTest {
 	}
 
 	public static void main(String[] args) throws Exception {
-		ArrayList<String> set = readEdmFileByLines("EDM/edm.txt");
+		ArrayList<String> set = readEdmFileByLines("EDM/client.txt");
 
-		for (int i = 22359; i < set.size(); i++) {
+		for (int i = 16482; i < set.size(); i++) {
 			try
 			{
 			while (true) {
 				Calendar time = Calendar.getInstance();
-				if (time.get(Calendar.HOUR_OF_DAY) == 8 ||time.get(Calendar.HOUR_OF_DAY) == 11 ||time.get(Calendar.HOUR_OF_DAY) == 14 ||time.get(Calendar.HOUR_OF_DAY) == 20 ) {
+				if (time.get(Calendar.HOUR_OF_DAY) == 9 ||time.get(Calendar.HOUR_OF_DAY) == 13 ||time.get(Calendar.HOUR_OF_DAY) == 16 ||time.get(Calendar.HOUR_OF_DAY) == 21 ) {
 					if (time.get(Calendar.MINUTE) <= 30) {
 						break;
 					}
@@ -103,7 +103,7 @@ public class SendCloudTest {
 			// 组装消息发送邮件
 			// 不同于登录SendCloud站点的帐号，您需要登录后台创建发信域名，获得对应发信域名下的帐号和密码才可以进行邮件的发送。
 			SendCloud sendCloud = new SendCloud(
-					"postmaster@daoshifu.sendcloud.org", "2nxNPv0q");
+					"postmaster@daoshifu.sendcloud.org", "fFNUbnBnMcr6");
 			sendCloud.setMessage(message);
 			// sendCloud.setDebug(true); //设置调试, 可以看到java mail的调试信息
 			sendCloud.send();

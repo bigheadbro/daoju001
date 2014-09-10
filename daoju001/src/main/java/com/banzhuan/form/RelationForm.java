@@ -22,6 +22,10 @@ public class RelationForm implements Serializable {
 	private int relation;
 	
 	private int islike;
+	
+	private int userid;
+	
+	private int userid2;
 	/**
 	 * @return the wxid
 	 */
@@ -117,5 +121,29 @@ public class RelationForm implements Serializable {
 	 */
 	public void setIslike(int islike) {
 		this.islike = islike;
+	}
+	/**
+	 * @return the userid
+	 */
+	public int getUserid() {
+		return userid;
+	}
+	/**
+	 * @param userid the userid to set
+	 */
+	public void setUserid(int userid) {
+		this.userid = userid;
+	}
+	/**
+	 * @return the userid2
+	 */
+	public int getUserid2() {
+		return userid2;
+	}
+	/**
+	 * @param userid2 the userid2 to set
+	 */
+	public void setUserid2(int userid2) {
+		this.userid2 = userid2;
 	}
 }

@@ -201,6 +201,7 @@ public class UserService {
 		user.setMail(form.getMail()); // 设置邮箱地址
 		user.setContactEmail(form.getMail());
 		user.setProductlimit(2);
+		user.setScore(1);
 		if(StringUtil.isNotEmpty(form.getCompany()))
 		{
 			user.setCompanyName(form.getCompany());
@@ -304,6 +305,7 @@ public class UserService {
 			logger.error("avatar:" + account.getWxlogo() );
 			user.setWxlogo(account.getWxlogo());
 		}
+		user.setScore(1);
 		return userDAO.updateUserEntityById(user);
 	}
 	
@@ -330,6 +332,11 @@ public class UserService {
 			account.setPosition(form.getPosition());
 			user.setPosition(form.getPosition());
 		}
+		return userDAO.updateUserEntityById(user);
+	}
+	
+	public int updateUser(UserEntity user)
+	{
 		return userDAO.updateUserEntityById(user);
 	}
 	

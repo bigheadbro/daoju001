@@ -57,6 +57,8 @@ public class UserEntity implements Serializable {
 	
 	private String position;
 	
+	private int score;
+	
 	private int productlimit;
 	
 	private String pca;
@@ -564,6 +566,20 @@ public class UserEntity implements Serializable {
 	 */
 	public void setWxlogo(String wxlogo) {
 		this.wxlogo = wxlogo;
+	}
+
+	/**
+	 * @return the score
+	 */
+	public int getScore() {
+		return score;
+	}
+
+	/**
+	 * @param score the score to set
+	 */
+	public void setScore(int score) {
+		this.score = score;
 	}
 
 	

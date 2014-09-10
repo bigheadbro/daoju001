@@ -30,24 +30,40 @@
                 <div class="reg-title">
     				<h1>创建您的刀具微名片</h1>
     			</div>
-                <form id="form_reg" action="/wxreg2" method="post">
+                <form id="form_profile" target="_blank" action="/wxprofile" method="post">
     			<!-- 隐藏字段，用于标示是表单提交 -->
         		<input type="hidden" name="do_submit" value="true"/>
     			<div class="reg-wrap clearfix">
+    				#springBind("form.name")
+    				<div class="section name clearfix">
+    					<input data-role="none" type="text" class="dsf-form-text-input" name="$!{status.expression}" value="$!{status.value}" placeholder="用户名。必填" />
+    				</div>
+    				#springBind("form.company")
+    				<div class="section company clearfix">
+    					<input data-role="none" type="text" class="dsf-form-text-input" name="$!{status.expression}" value="$!{status.value}" placeholder="公司名称。必填" />
+    				</div>
+    				#springBind("form.phone")
+    				<div class="section phone clearfix">
+    					<input data-role="none" type="text" class="dsf-form-text-input" name="$!{status.expression}" value="$!{status.value}" placeholder="公司电话。必填" />
+    				</div>
+    				#springBind("form.mobile")
+    				<div class="section mobile clearfix">
+    					<input data-role="none" type="text" class="dsf-form-text-input" name="$!{status.expression}" value="$!{status.value}" placeholder="手机。必填" />
+    				</div>
 					#springBind("form.position")
     				<div class="section position clearfix">
-    					<input data-role="none" type="text" class="dsf-form-text-input" name="$!{status.expression}" placeholder="职位，选填" />
+    					<input data-role="none" type="text" class="dsf-form-text-input" name="$!{status.expression}" value="$!{status.value}" placeholder="职位，选填" />
     				</div>
 					#springBind("form.wxbrand")
     				<div class="section wxbrand clearfix">
-    					<textarea data-role="none" type="text" class="dsf-form-text-input" name="$!{status.expression}" placeholder="选填，供应品牌" ></textarea>
+    					<textarea data-role="none" type="text" class="dsf-form-text-input" name="$!{status.expression}" placeholder="选填，供应品牌以及品牌特点" >$!{status.value}</textarea>
     				</div>
     			</div>
     			<div class="op">
-    				<button type="submit" data-role="none">完 成</button>
+    				<button type="submit" id="submit_profile" data-role="none">更新资料</button>
     			</div>
     			</form>
-				</div
+			</div>
 		</div>
 		<script type="text/javascript" src="/js/wx.js"></script>
     </body>

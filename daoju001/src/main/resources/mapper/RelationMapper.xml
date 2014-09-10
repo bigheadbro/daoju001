@@ -4,7 +4,8 @@
 	<resultMap type="RelationEntity" id="RelationResultMap">
 		<!---->
 		<id property="id" column="id"/>
-			  <!--主动收藏的人-->
+		<id property="userid" column="userid"/>
+		<id property="userid2" column="userid2"/>
 		<id property="wxid" column="wxid"/>
 			  <!--被收藏的id-->
 		<id property="wxid2" column="wxid2"/>
@@ -20,19 +21,34 @@
 		<id property="relation" column="relation"/>
 	</resultMap>
 	
+	<select id="getRelationCount" parameterType="int"
+			resultType="int">
+		<![CDATA[
+			SELECT count(1) from t_relation t where userid=#{userid} or userid2 = #{userid};
+		]]>
+	</select>
+	
 	<select id="queryRelationByRelation" parameterType="RelationEntity"
 			resultMap="RelationResultMap">
 		<![CDATA[
-			SELECT * from t_relation t where t.wxid=#{wxid}  and t.wxid2 = #{wxid2};
+			SELECT * from t_relation t where userid=#{userid} and userid2 = #{userid2};
 		]]>
 	</select>
 
-	<select id="queryRelationById" parameterType="int"
+	<select id="queryRelationByWxid" parameterType="String"
 			resultMap="RelationResultMap">
 		<![CDATA[
-			SELECT * from t_relation t where t.id=#{id}
+			SELECT * from t_relation t where t.wxid=#{wxid}
 		]]>
 	</select>
+	
+	<select id="queryRelationByWxid2" parameterType="String"
+			resultMap="RelationResultMap">
+		<![CDATA[
+			SELECT * from t_relation t where t.wxid2=#{wxid2}
+		]]>
+	</select>
+	
 	<!-- 新代理商信息 -->
 	<insert id="insertRelationEntity" parameterType="RelationEntity">
 		<selectKey resultType="int" order="AFTER" keyProperty="id">
@@ -41,6 +57,8 @@
 		insert into t_relation
 		(
 	   	  id
+	   	  ,userid
+	   	  ,userid2
 	   	  ,wxid
 	   	  ,wxid2
 	   	  ,wxname
@@ -52,6 +70,8 @@
 	   (
 	   
 	   	  #{id}
+	   	  ,#{userid}
+	   	  ,#{userid2}
 	   	  ,#{wxid}
 	   	  ,#{wxid2}
 	   	  ,#{wxname}
@@ -63,6 +83,6 @@
 	   )
 	</insert>
 	<delete id="delRelation"  parameterType="RelationEntity">
-		delete from t_relation t where t.wxid=#{wxid}  and t.wxid2 = #{wxid2};
+		delete from t_relation where userid=#{userid} and userid2 = #{userid2};
 	</delete>
 </mapper>

@@ -17,10 +17,15 @@ public class RelationDAOImpl extends SqlSessionDaoSupport implements RelationDAO
 	}
 
 	@Override
-	public List<RelationEntity> queryRelationById(int id) {
-		return this.getSqlSession().selectList("queryRelationById",id);
+	public List<RelationEntity> queryRelationByWxid(String wxid) {
+		return this.getSqlSession().selectList("queryRelationByWxid",wxid);
 	}
 
+	@Override
+	public List<RelationEntity> queryRelationByWxid2(String wxid2) {
+		return this.getSqlSession().selectList("queryRelationByWxid2",wxid2);
+	}
+	
 	@Override
 	public int insertRelationEntity(RelationEntity relation) {
 		this.getSqlSession().insert("insertRelationEntity", relation);
@@ -33,4 +38,9 @@ public class RelationDAOImpl extends SqlSessionDaoSupport implements RelationDAO
 		this.getSqlSession().delete("delRelation",relation);
 	}
 
+	@Override
+	public int getRelationCount(int userid)
+	{
+		return this.getSqlSession().selectOne("getRelationCount",userid);
+	}
 }

@@ -195,10 +195,10 @@ public class CommonController extends BaseController{
 		mv.addObject("requests", requests);
 		
 		List<ProductEntity> products = new ArrayList<ProductEntity>();
-		products.add(commonService.getProduct(132));
-		products.add(commonService.getProduct(129));
-		products.add(commonService.getProduct(128));
-		products.add(commonService.getProduct(87));
+		products.add(commonService.getProduct(135));
+		products.add(commonService.getProduct(136));
+		products.add(commonService.getProduct(34));
+		products.add(commonService.getProduct(55));
 		mv.addObject("products", products);
 		
 		List<QuestionEntity> questions = new ArrayList<QuestionEntity>();
@@ -226,10 +226,10 @@ public class CommonController extends BaseController{
 		mv.addObject("requests", requests);
 		
 		List<ProductEntity> products = new ArrayList<ProductEntity>();
-		products.add(commonService.getProduct(132));
-		products.add(commonService.getProduct(129));
-		products.add(commonService.getProduct(128));
-		products.add(commonService.getProduct(87));
+		products.add(commonService.getProduct(135));
+		products.add(commonService.getProduct(136));
+		products.add(commonService.getProduct(34));
+		products.add(commonService.getProduct(55));
 		mv.addObject("products", products);
 		
 		List<QuestionEntity> questions = new ArrayList<QuestionEntity>();
@@ -1699,6 +1699,7 @@ public class CommonController extends BaseController{
 			logger.error(account.getWxid());
 			UserEntity user = commonService.getUserByWxid(account.getWxid());
 			view.addObject("user",user);
+			
 			return view;
 		}
 		else//To Do
@@ -1727,6 +1728,11 @@ public class CommonController extends BaseController{
 				{
 					view.addObject("user",user);
 					view.addObject("wxid",account.getWxid());
+					view.addObject("relationcount",commonService.getRelationCount(user.getId()));
+					view.addObject("rank",commonService.queryUserEntityOrderByScore(user.getId()));
+					account.setUserId(user.getId());
+					userService.updateUserAccnt(account);
+					userService.updateUserReadCountById(user.getId());
 				}
 			}
 			else
@@ -1736,6 +1742,9 @@ public class CommonController extends BaseController{
 				if(user != null)
 				{
 					view.addObject("user",user);
+					userService.updateUserReadCountById(user.getId());
+					view.addObject("relationcount",commonService.getRelationCount(user.getId()));
+					view.addObject("rank",commonService.queryUserEntityOrderByScore(user.getId()));
 					return view;
 				}
 				else
@@ -1745,16 +1754,56 @@ public class CommonController extends BaseController{
 				}
 			}
 		}
+		
 		return view;
 	}
 
+	@RequestMapping(value="/wxilike")
+	public ModelAndView wxilike(HttpServletRequest request, HttpServletResponse response) throws WeixinException, IOException {
+		ModelAndView view = new ModelAndView("wx/wxilike");
+		Account account = (Account) WebUtils.getSessionAttribute(request, "account");
+		logger.error("test");
+		List<RelationEntity> relations = commonService.getIlike(account.getWxid());
+		view.addObject("relations",relations);
+		
+		return view;
+	}
+	
+	@RequestMapping(value="/wxlikeme")
+	public ModelAndView wxlikeme(HttpServletRequest request, HttpServletResponse response) throws WeixinException, IOException {
+		ModelAndView view = new ModelAndView("wx/wxlikeme");
+		Account account = (Account) WebUtils.getSessionAttribute(request, "account");
+		logger.error("likeme:"+account.getWxid());
+		List<RelationEntity> relations = commonService.getLikeme(account.getWxid());
+		view.addObject("relations",relations);
+		
+		return view;
+	}
+	
+	@RequestMapping(value="/wxothercard/{wxid}")
+	public ModelAndView wxothercardwxid(HttpServletRequest request, HttpServletResponse response, @PathVariable String wxid) throws WeixinException, IOException {
+		logger.error("sfasfaf");
+		UserEntity user = commonService.getUserByWxid(wxid);
+		logger.error("userid:"+String.valueOf(user.getId()));
+		return new ModelAndView(new RedirectView("/wxcard/"+String.valueOf(user.getId())));
+	}
+		
 	@RequestMapping(value="/wxcard/{id}")
 	public ModelAndView wxothercard(HttpServletRequest request, HttpServletResponse response, @ModelAttribute("form")RelationForm form, @PathVariable String id) throws WeixinException, IOException {
 		ModelAndView view = new ModelAndView("wx/wxothercard");
 		int userid = Integer.parseInt(id);
 		String code = request.getParameter("code");
-		Openid openid = WeixinService.getInstance2().getUserManagerService().getUserOpenid(code);
-		UserEntity me = commonService.getUserByWxid(openid.openid);
+		UserEntity me;
+		if(StringUtil.isNotEmpty(code))
+		{
+			Openid openid = WeixinService.getInstance2().getUserManagerService().getUserOpenid(code);
+			me = commonService.getUserByWxid(openid.openid);
+		}
+		else
+		{
+			Account account = (Account) WebUtils.getSessionAttribute(request, "account");
+			me = commonService.getUserByWxid(account.getWxid());
+		}
 		logger.error("11");
 		if(me != null)//当前进入微名片的人，已经注册微名片
 		{
@@ -1777,35 +1826,38 @@ public class CommonController extends BaseController{
 				view.addObject("user",user);
 				//是否已经收藏
 				RelationEntity tmp = new RelationEntity();
-				tmp.setWxid(me.getWxid());
-				tmp.setWxid2(user.getWxid());
-				logger.error(user.getWxid()+","+me.getWxid());
+				tmp.setUserid(me.getId());
+				tmp.setUserid2(user.getId());
+				logger.error(user.getId()+","+me.getId());
 				RelationEntity relation = commonService.queryRelationByRelation(tmp);
 				if(relation != null)
 				{
 					form.setRelation(relation.getRelation());
-					form.setWxid(user.getWxid());
-					form.setWxid2(me.getWxid());
+					form.setWxid(me.getWxid());
+					form.setWxid2(user.getWxid());
+					form.setUserid(me.getId());
+					form.setUserid2(user.getId());
 					form.setWxname(relation.getWxname());
 					form.setWxname2(relation.getWxname2());
 					form.setWxcompany(relation.getWxcompany());
 					form.setWxcompany2(relation.getWxcompany2());
-	
-					if(commonService.isLike(relation))
-					{
-						view.addObject("islike",1);
-					}
+					view.addObject("islike",1);
 				}
 				else
 				{
 					form.setRelation(0);
 					form.setWxid(me.getWxid());
 					form.setWxid2(user.getWxid());
+					form.setUserid(me.getId());
+					form.setUserid2(user.getId());
 					form.setWxname(me.getNick());
 					form.setWxname2(user.getNick());
 					form.setWxcompany(me.getCompanyName());
 					form.setWxcompany2(user.getCompanyName());
 				}
+				userService.updateUserReadCountById(user.getId());
+				view.addObject("relationcount",commonService.getRelationCount(user.getId()));
+				view.addObject("rank",commonService.queryUserEntityOrderByScore(user.getId()));
 				return view;
 			}	
 		}
@@ -1813,6 +1865,9 @@ public class CommonController extends BaseController{
 		{
 			UserEntity user = commonService.getUser(userid);
 			view.addObject("user",user);
+			userService.updateUserReadCountById(user.getId());
+			view.addObject("relationcount",commonService.getRelationCount(user.getId()));
+			view.addObject("rank",commonService.queryUserEntityOrderByScore(user.getId()));
 			return view;
 		}
 	}
@@ -1821,6 +1876,7 @@ public class CommonController extends BaseController{
 	public void wxcardcollect(HttpServletRequest request, HttpServletResponse response, @ModelAttribute("form")RelationForm form) throws WeixinException, IOException {
 		if(form.getIslike() == 1)
 		{
+			logger.error("delete relation:"+form.getWxid()+":"+form.getWxid2());
 			commonService.delRelation(form);
 		}
 		else
@@ -1830,11 +1886,41 @@ public class CommonController extends BaseController{
 	}
 	
 	@RequestMapping(value="/wxtest")
-	public ModelAndView wxtest(HttpServletRequest request, HttpServletResponse response, @ModelAttribute("form")RelationForm form) throws WeixinException, IOException {
-		ModelAndView view = new ModelAndView("wx/wxothercard");
-		form.setRelation(5);
+	public ModelAndView wxtest(HttpServletRequest request, HttpServletResponse response, @ModelAttribute("form")RegForm form) throws WeixinException, IOException {
+		ModelAndView view = new ModelAndView("wx/wxsearch");
+		int i = commonService.queryUserEntityOrderByScore(332);
 		return view;
 	}
+	
+	@RequestMapping(value="/wxsearch")
+	public ModelAndView wxsearch(HttpServletRequest request, HttpServletResponse response, @ModelAttribute("form")RegForm form) throws WeixinException, IOException {
+		ModelAndView view = new ModelAndView("wx/wxsearch");
+
+		return view;
+	}
+	
+	@RequestMapping(value="/wxsearchresult")
+	public ModelAndView wxsearchresult(HttpServletRequest request, HttpServletResponse response, @ModelAttribute("form")RegForm form) throws WeixinException, IOException {
+		ModelAndView view = new ModelAndView("wx/wxsearchresult");
+		String keyword = request.getParameter("wxbrand");
+		String pca =  request.getParameter("pca");
+		UserEntity user = new UserEntity();
+		if(StringUtil.isNotEmpty(keyword))
+		{
+			user.setWxbrand(keyword);
+		}
+		if(StringUtil.isNotEmpty(pca))
+		{
+			user.setPca(pca);
+		}
+		List<UserEntity> users = commonService.searchUser(user);
+		int count = users.size();
+		view.addObject("count",count);
+		view.addObject("users",users);
+		return view;
+	}
+	
+	
 	@RequestMapping(value="/wxlog")
 	public ModelAndView wxlog(HttpServletRequest request, HttpServletResponse response, @ModelAttribute("form")LoginForm form, BindingResult result) {
 		ModelAndView view = new ModelAndView("wx/wxlog");
@@ -1937,6 +2023,36 @@ public class CommonController extends BaseController{
 		else
 		{
 			ModelAndView view = new ModelAndView("wx/wxreg2");
+			return view;
+		}
+	}
+	
+	@RequestMapping(value="/wxprofile")
+	public ModelAndView wxprofile(HttpServletRequest request, HttpServletResponse response, @ModelAttribute("form")RegForm form, BindingResult result) {
+		ModelAndView view = new ModelAndView("wx/wxprofile");
+		if(isDoSubmit(request))
+		{
+			Account account = (Account) WebUtils.getSessionAttribute(request, "account");
+			UserEntity user = commonService.getUserByWxid(account.getWxid());
+			user.setContactName(form.getName());
+			user.setCompanyName(form.getCompany());
+			user.setPhone(form.getPhone());
+			user.setContactPhone(form.getMobile());
+			user.setPosition(form.getPosition());
+			user.setWxbrand(form.getWxbrand());
+			userService.updateUser(user);
+			return new ModelAndView(new RedirectView("/wxcard")); 
+		}
+		else
+		{
+			Account account = (Account) WebUtils.getSessionAttribute(request, "account");
+			UserEntity user = commonService.getUserByWxid(account.getWxid());
+			form.setName(user.getContactName());
+			form.setCompany(user.getCompanyName());
+			form.setPhone(user.getPhone());
+			form.setMobile(user.getContactPhone());
+			form.setPosition(user.getPosition());
+			form.setWxbrand(user.getWxbrand());
 			return view;
 		}
 	}

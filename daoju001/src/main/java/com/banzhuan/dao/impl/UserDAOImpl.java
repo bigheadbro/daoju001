@@ -5,6 +5,7 @@ package com.banzhuan.dao.impl;
 
 import java.util.List;
 
+import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.support.SqlSessionDaoSupport;
 import org.springframework.stereotype.Repository;
 
@@ -94,8 +95,14 @@ public class UserDAOImpl extends SqlSessionDaoSupport implements UserDAO {
 	}
 	
 	@Override
-	public int queryUserEntityOrderByScore(int id)
+	public int queryUserRank(int id)
 	{
-		return this.getSqlSession().selectOne("queryUserEntityOrderByScore", id);
+		return this.getSqlSession().selectOne("queryUserRank", id);
+	}
+	
+	@Override
+	public List<UserEntity> queryUserEntityOrderByScore(Object bound)
+	{
+		return this.getSqlSession().selectList("queryUserEntityOrderByScore", bound);
 	}
 }

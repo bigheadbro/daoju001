@@ -2,6 +2,8 @@ package com.banzhuan.dao;
 
 import java.util.List;
 
+import org.apache.ibatis.session.RowBounds;
+
 import com.banzhuan.entity.UserEntity;
 /**
  * 代理商DAO
@@ -50,5 +52,7 @@ public interface UserDAO {
 	
 	List<UserEntity> searchUser(UserEntity user);
 
-	int queryUserEntityOrderByScore(int id);
+	int queryUserRank(int id);
+	
+	List<UserEntity> queryUserEntityOrderByScore(Object bound);
 }

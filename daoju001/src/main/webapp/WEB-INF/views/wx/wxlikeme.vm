@@ -41,10 +41,13 @@
 			<div class="cardview">
 				<div data-role="content">
                     <ol data-filter="true" style="padding:0">
-                        <ul data-role="listview" data-inset="true" data-filter="true" data-filter-placeholder="快速查找名片">
+                        <ul data-role="listview" data-filter="true" data-filter-placeholder="快速查找名片">
         					#foreach($relation in $relations)
                             <li>
-                                <a target="_blank" rel="external" href="/wxothercard/${relation.wxid}">${relation.wxname}</a>
+								<a style="border-bottom:1px solid #c2c2c2" data-role="none" target="_blank" rel="external" href="/wxothercard/${relation.wxid}">
+									<em style="color:black;font-size:1.2em;line-height:40px;width:30%;white-space: nowrap;display:block;float:left;text-overflow: ellipsis;overflow: hidden;">${relation.wxname}</em>
+									<em style="margin-left:0.5em;color:#a8a8a8;font-size:1em;line-height:40px;width:60%;display:block;float:left;text-overflow: ellipsis;overflow: hidden;">${relation.wxcompany}</em>
+								</a>
                             </li>
         					#end
                         </ul>

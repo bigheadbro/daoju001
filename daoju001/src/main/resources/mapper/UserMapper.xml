@@ -47,6 +47,7 @@
 		<id property="wxbrand" column="wxbrand" />
 		<id property="position" column="position" />
 		<id property="score" column="score" />
+		<id property="rank" column="rank" />
 		<id property="productlimit" column="productlimit" />
 		<id property="pca" column="pca" />
 		<!--注册时间 -->
@@ -71,10 +72,19 @@
 	]]>
 	</select>
 	
-	<select id="queryUserEntityOrderByScore" parameterType="int"
+	<select id="queryUserRank" parameterType="int"
 		resultType="int">
 	<![CDATA[
 		SELECT rank from (SELECT @counter:=@counter+1 as rank, id FROM daoju001.t_user,(Select (@counter :=0) ) b order by score desc, reg_time asc) as tt where id = #{id};
+	]]>
+	</select>
+	
+	<select id="queryUserEntityOrderByScore" parameterType="map"
+		resultMap="UserResultMap">
+	<![CDATA[
+		SELECT rank,id,nick,position,company_name,contact_name,wxlogo from 
+		(SELECT @counter:=@counter+1 as rank,id,nick,position,company_name,contact_name,wxlogo FROM daoju001.t_user,(Select (@counter :=0) ) b 
+		order by score desc, reg_time asc) as tt limit #{offset},#{limit}
 	]]>
 	</select>
 	

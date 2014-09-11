@@ -59,6 +59,8 @@ public class UserEntity implements Serializable {
 	
 	private int score;
 	
+	private int rank;
+	
 	private int productlimit;
 	
 	private String pca;
@@ -580,6 +582,20 @@ public class UserEntity implements Serializable {
 	 */
 	public void setScore(int score) {
 		this.score = score;
+	}
+
+	/**
+	 * @return the rank
+	 */
+	public int getRank() {
+		return rank;
+	}
+
+	/**
+	 * @param rank the rank to set
+	 */
+	public void setRank(int rank) {
+		this.rank = rank;
 	}
 
 	

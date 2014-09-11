@@ -62,7 +62,7 @@
     			</div>
     			<div class="range clearfix">
                     <ul>
-                    	<a>
+                    	<a target="_blank" rel="external" href="/wxrank" data-role="none">
                     		<h4>全国排名</h4>
                     		<h2>${rank}</h2>
                     	</a>
@@ -111,7 +111,7 @@
 						#end
 					</p>
 				</div>
-				<a class="product">
+				<a class="product" target="_blank" rel="external" href="/wxproducts">
 					<span>我的特色刀具</span>
 				</a>				
 			</div>
@@ -146,6 +146,7 @@
             			$(".more").trigger("click");
             		}
             		$(".share-mask").css("visibility", "visible");
+					$(".share-mask img").css("height",$(".scroll").outerHeight());
             	});
             
             	$(".share-mask").click(function() {

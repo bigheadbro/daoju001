@@ -427,24 +427,6 @@ public class CommonController extends BaseController{
 		return mv;
 	}
 	
-	@RequestMapping(value = "/wxproducts/{id}")
-	public ModelAndView wxproducts(final HttpServletRequest request,final HttpServletResponse response, @PathVariable String id) 
-	{
-		ModelAndView mv = new ModelAndView("/wx/wxproduct");
-		int productid = Integer.parseInt(id);
-		ProductEntity product = commonService.getProduct(productid);
-		if(product == null)
-		{
-			return new ModelAndView(new RedirectView("/products"));  
-		}
-		commonService.addProductCount(product.getId(), product.getCount() + 1);
-		mv.addObject("product", product);
-		String[] str = product.getPicture().substring(1).split("[|]");
-		UserEntity user = commonService.getUser(product.getUserId());
-		mv.addObject("pictures",str);
-		mv.addObject("user",user);
-		return mv;
-	}
 	
 	@RequestMapping(value = "/updaterequest")
 	public void updaterequest(final HttpServletRequest request,final HttpServletResponse response)
@@ -1699,7 +1681,8 @@ public class CommonController extends BaseController{
 			logger.error(account.getWxid());
 			UserEntity user = commonService.getUserByWxid(account.getWxid());
 			view.addObject("user",user);
-			
+			view.addObject("relationcount",commonService.getRelationCount(user.getId()));
+			view.addObject("rank",commonService.queryUserRank(user.getId()));
 			return view;
 		}
 		else//To Do
@@ -1729,7 +1712,7 @@ public class CommonController extends BaseController{
 					view.addObject("user",user);
 					view.addObject("wxid",account.getWxid());
 					view.addObject("relationcount",commonService.getRelationCount(user.getId()));
-					view.addObject("rank",commonService.queryUserEntityOrderByScore(user.getId()));
+					view.addObject("rank",commonService.queryUserRank(user.getId()));
 					account.setUserId(user.getId());
 					userService.updateUserAccnt(account);
 					userService.updateUserReadCountById(user.getId());
@@ -1744,7 +1727,7 @@ public class CommonController extends BaseController{
 					view.addObject("user",user);
 					userService.updateUserReadCountById(user.getId());
 					view.addObject("relationcount",commonService.getRelationCount(user.getId()));
-					view.addObject("rank",commonService.queryUserEntityOrderByScore(user.getId()));
+					view.addObject("rank",commonService.queryUserRank(user.getId()));
 					return view;
 				}
 				else
@@ -1777,6 +1760,33 @@ public class CommonController extends BaseController{
 		List<RelationEntity> relations = commonService.getLikeme(account.getWxid());
 		view.addObject("relations",relations);
 		
+		return view;
+	}
+	
+	@RequestMapping(value="/wxrank")
+	public ModelAndView wxrank(HttpServletRequest request, HttpServletResponse response) throws WeixinException, IOException {
+		ModelAndView view = new ModelAndView("wx/wxrank");
+		Account account = (Account) WebUtils.getSessionAttribute(request, "account");
+		logger.error("enter wxrank");
+		logger.error("wxrank"+account.getUserId());
+		int rank = commonService.queryUserRank(account.getUserId());
+		//通过自己的排名，获取前后几个人
+		Map<String,Object> bound = new HashMap<String,Object>();
+		if(rank<4)
+		{
+			bound.put("offset", 0);
+			bound.put("limit", 5);
+		}
+		else
+		{
+			bound.put("offset", rank-3);
+			bound.put("limit", 5);
+		}
+		UserEntity me = commonService.getUser(account.getUserId());
+		view.addObject("me",me);
+		List<UserEntity> users = commonService.queryUserEntityOrderByScore(bound);
+		view.addObject("users",users);
+		view.addObject("rank",rank);
 		return view;
 	}
 	
@@ -1857,7 +1867,7 @@ public class CommonController extends BaseController{
 				}
 				userService.updateUserReadCountById(user.getId());
 				view.addObject("relationcount",commonService.getRelationCount(user.getId()));
-				view.addObject("rank",commonService.queryUserEntityOrderByScore(user.getId()));
+				view.addObject("rank",commonService.queryUserRank(user.getId()));
 				return view;
 			}	
 		}
@@ -1867,7 +1877,7 @@ public class CommonController extends BaseController{
 			view.addObject("user",user);
 			userService.updateUserReadCountById(user.getId());
 			view.addObject("relationcount",commonService.getRelationCount(user.getId()));
-			view.addObject("rank",commonService.queryUserEntityOrderByScore(user.getId()));
+			view.addObject("rank",commonService.queryUserRank(user.getId()));
 			return view;
 		}
 	}
@@ -1887,8 +1897,71 @@ public class CommonController extends BaseController{
 	
 	@RequestMapping(value="/wxtest")
 	public ModelAndView wxtest(HttpServletRequest request, HttpServletResponse response, @ModelAttribute("form")RegForm form) throws WeixinException, IOException {
-		ModelAndView view = new ModelAndView("wx/wxsearch");
-		int i = commonService.queryUserEntityOrderByScore(332);
+		ModelAndView view = new ModelAndView("wx/wxrank");
+		Account account = (Account) WebUtils.getSessionAttribute(request, "account");
+
+		int rank = commonService.queryUserRank(332);
+		//通过自己的排名，获取前后几个人
+		Map<String,Object> bound = new HashMap<String,Object>();
+		if(rank<4)
+		{
+			bound.put("offset", 0);
+			bound.put("limit", 5);
+		}
+		else
+		{
+			bound.put("offset", rank-3);
+			bound.put("limit", 5);
+		}
+		List<UserEntity> users = commonService.queryUserEntityOrderByScore(bound);
+		view.addObject("users",users);
+		view.addObject("rank",rank);
+		return view;
+	}
+	
+	@RequestMapping(value = "/wxproducts/{id}")
+	public ModelAndView wxproduct(final HttpServletRequest request,final HttpServletResponse response, @PathVariable String id) 
+	{
+		ModelAndView mv = new ModelAndView("/wx/wxproduct");
+		int productid = Integer.parseInt(id);
+		ProductEntity product = commonService.getProduct(productid);
+		if(product == null)
+		{
+			return new ModelAndView(new RedirectView("/products"));  
+		}
+		commonService.addProductCount(product.getId(), product.getCount() + 1);
+		mv.addObject("product", product);
+		String[] str = product.getPicture().substring(1).split("[|]");
+		UserEntity user = commonService.getUser(product.getUserId());
+		mv.addObject("pictures",str);
+		mv.addObject("user",user);
+		return mv;
+	}
+	
+	@RequestMapping(value = "/wxproducts")
+	public ModelAndView wxproducts(final HttpServletRequest request,final HttpServletResponse response) 
+	{
+		ModelAndView mv = new ModelAndView("/wx/wxproducts");
+		Account account = (Account) WebUtils.getSessionAttribute(request, "account");
+		List<ProductEntity> products = commonService.getProductsByUserid(account.getUserId());
+		if(products.isEmpty())
+		{
+			mv.addObject("empty",1);
+			return mv;
+		}
+		mv.addObject("producst", products);
+		return mv;
+	}
+	
+	@RequestMapping(value="/wxrank50")
+	public ModelAndView wxrank50(HttpServletRequest request, HttpServletResponse response) throws WeixinException, IOException {
+		ModelAndView view = new ModelAndView("wx/wxrank50");
+		//通过自己的排名，获取前后几个人
+		Map<String,Object> bound = new HashMap<String,Object>();
+		bound.put("offset", 0);
+		bound.put("limit", 50);
+		List<UserEntity> users = commonService.queryUserEntityOrderByScore(bound);
+		view.addObject("users",users);
 		return view;
 	}
 	

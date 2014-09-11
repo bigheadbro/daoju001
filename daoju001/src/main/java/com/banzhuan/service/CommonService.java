@@ -773,6 +773,11 @@ public class CommonService {
 		return productDAO.queryProductEntityById(id);
 	}
 	
+	public List<ProductEntity> getProductsByUserid(int userid)
+	{
+		return productDAO.queryProductEntityByUserid(userid);
+	}
+	
 	public void addProductCount(int pid, int count)
 	{
 		ProductEntity product = new ProductEntity();
@@ -956,8 +961,13 @@ public class CommonService {
 		return relationDAO.getRelationCount(userid);
 	}
 	
-	public int queryUserEntityOrderByScore(int id)
+	public int queryUserRank(int id)
 	{
-		return userDAO.queryUserEntityOrderByScore(id);
+		return userDAO.queryUserRank(id);
+	}
+	
+	public List<UserEntity> queryUserEntityOrderByScore(Object bound)
+	{
+		return userDAO.queryUserEntityOrderByScore(bound);
 	}
 }

@@ -39,16 +39,16 @@ word-break: break-all;
 .copyright .ft-copyright {text-align: center;margin-top: 10px;font-size: 12px;}
 .copyright .ft-copyright>a {color: #999;}
 
-.log-wrap{border:1px solid #c9c9c9;border-left:none;border-right:none;text-align:left;background: white;}
+.log-wrap{border:1px solid #e6e6e6;border-left:none;border-right:none;text-align:left;background: white;}
 .log-wrap .section{margin:0.5em 1.5em;height:3em;}
-.log-wrap .section:first-child{border-bottom:1px solid #c9c9c9}
+.log-wrap .section:first-child{border-bottom:1px solid #e6e6e6}
 .log-wrap .section input{float:left;margin: 0;margin-left:2em;border:0;font-size:1.2em;line-height: 2em;width: 80%;}
 .log-wrap .mail{background:url(../img/wx/wxname.png) no-repeat 0.5em center;background-size: 20px;}
 .log-wrap .pwd{background:url(../img/wx/wxpwd.png) no-repeat 0.5em center;background-size: 20px;}
 .op{margin-top:1.5em;}
-.op a{background-color:#0099cb;color:white;display: block;padding: 0.8em;margin: 0 auto;width: 90%;border-radius: 0.3em;font-size: 1em;border:0;text-align: center;}
-.op a.islike{background-color:grey;color:white;display: block;padding: 0.8em;margin: 0 auto;width: 90%;border-radius: 0.3em;font-size: 1em;border:0;text-align: center;}
-.op button{background-color:#0099cb;color:white;display: block;padding: 0.8em;margin: 0 auto;width: 90%;border-radius: 0.3em;font-size: 1em;border:0;margin-bottom:1em;}
+.op a{background-color:#0099cb;color:white;display: block;padding: 0.8em;margin: 0 auto;width: 100%;border-radius: 0.3em;font-size: 1em;border:0;text-align: center;}
+.op a.islike{background-color:grey;color:white;display: block;padding: 0.8em;margin: 0 auto;width: 100%;border-radius: 0.3em;font-size: 1em;border:0;text-align: center;}
+.op button{background-color:#0099cb;color:white;display: block;padding: 0.8em;margin: 0 auto;width: 100%;border-radius: 0.3em;font-size: 1em;border:0;margin-bottom:1em;}
 .op-reg{width:100%;height:2em;margin-top:2.5em}
 .op-reg a{color:#8ca6af;}
 .reg-title{padding:1.5em 0;background-color:#f0f0f0;}
@@ -66,42 +66,47 @@ word-break: break-all;
 .reg-wrap .position{background-image:url(../img/wx/wxpos.png);background-repeat: no-repeat;background-position: 0.5em center;background-size: 20px;}
 
 .cardview{}
-.cardview .wx-info{margin: 1em 0;}
+.cardview .wx-info{margin: 2em 0 1.5em 0;}
 .cardview .wx-info .avatar{float:left;width:37%}
 .cardview .wx-info .avatar img{margin:0 auto;width:5.6em;height:5.6em;display:block;border-radius: 5.6em;}
-.cardview .wx-info .content{float:left;}
-.cardview .wx-info .content h1{font-size:1.5em;color:#010101;padding: 0.2em 0;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;}
-.cardview .wx-info .content h3{font-size:0.9em;color:#010101;padding: 0.1em 0;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;}
-.cardview .wx-info .content h4{font-size:0.9em;color:#a3a3a3;padding: 0.1em 0;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;}
-.cardview .range{background-color:#f7f7f7;text-align:center;border-top:1px solid #c9c9c9;border-bottom:1px solid #c9c9c9;}
-.cardview .range li{float:left;width:33%;padding: 0.5em 0;}
-.cardview .range li h4{color:#a3a3a3;}
-.cardview .range li h2{color:black;font-size:1.3em;margin-top:0.2em;}
-.cardview .range a{float:left;width:33%;padding: 0.5em 0;}
-.cardview .range a h4{color:#a3a3a3;}
-.cardview .range a h2{color:black;font-size:1.3em;margin-top:0.2em;}
-.cardview .phone{padding: 1em 0;text-indent:2em;background:url(../img/wx/info-phone.png) no-repeat 2em center;background-size: 18px;border-bottom:1px solid #c9c9c9}
+.cardview .wx-info .content{float:left;width:63%}
+.cardview .wx-info .content h1{font-size:1.5em;color:#010101;margin-top:0.3em;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;}
+.cardview .wx-info .content h3{font-size:0.95em;color:#010101;margin-top:0.4em;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;}
+.cardview .wx-info .content h4{font-size:0.95em;color:#a3a3a3;margin-top:0.4em;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;}
+.cardview .range{background-color:#f7f7f7;text-align:center;border-top:1px solid #e6e6e6;border-bottom:1px solid #e6e6e6;}
+.cardview .range li{float:left;width:33%;padding: 0.85em 0;}
+.cardview .range li h4{color:#a3a3a3;font-size:0.75em;margin-top:0.3em;}
+.cardview .range li h2{color:black;font-size:1.2em;margin-top:0.3em;}
+.cardview .range a{float:left;width:33%;padding: 0.85em 0;}
+.cardview .range a h4{color:#a3a3a3;font-size:0.75em;margin-top:0.3em;}
+.cardview .range a h2{color:black;font-size:1.2em;margin-top:0.3em;}
+.cardview .phone{padding: 1.15em 0;text-indent:2em;background:url(../img/wx/info-phone.png) no-repeat 2em center;background-size: 18px;border-bottom:1px solid #e6e6e6}
 .cardview .phone p{font-size:1em;margin-left: 2em;}
-.cardview .mail{padding: 1em 0;text-indent:2em;background:url(../img/wx/info-mail.png) no-repeat 2em center;background-size: 18px;border-bottom:1px solid #c9c9c9}
+.cardview .phone p a{color:black;}
+.cardview .mail{padding: 1.15em 0;text-indent:2em;background:url(../img/wx/info-mail.png) no-repeat 2em center;background-size: 18px;border-bottom:1px solid #e6e6e6}
 .cardview .mail p{font-size:1em;margin-left: 2em;}
-.cardview .brand{padding: 1em 0;text-indent:2em;border-bottom:1px solid #c9c9c9;}
+.cardview .brand{padding: 1.15em 0;text-indent:2em;border-bottom:1px solid #e6e6e6;}
 .cardview .brand span{color:#a3a3a3;margin-right:1em;}
 .cardview .brand p{float:left;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;width: 100%;}
-.cardview .product{display:block;padding: 1em 0;text-indent:2em;border-bottom:1px solid #c9c9c9;background:url(../img/wx/wxarrow.png) no-repeat 96% center;background-size: 6px;}
-.cardview .relation{padding: 0 1.5em;}
-.cardview .relation h1{text-align:center;color:#b5b5b5;font-size:0.8em;padding-top: 0.5em;}
-.cardview .relation span{display:inline-block;color:#7a7a7a;background-color:#dadada;width:5em;text-align:center;margin-top:0.5em;font-size:1em;border-radius:0.2em;padding:0.2em 0.3em;}
+.cardview .product{display:block;color:black;padding: 1.15em 0;text-indent:2em;border-bottom:1px solid #e6e6e6;background:url(../img/wx/wxarrow.png) no-repeat 96% center;background-size: 6px;}
+.cardview .relation{padding: 0 2em;}
+.cardview .relation h1{text-align:center;color:#b5b5b5;font-size:0.8em;padding-top: 0.7em;}
+.cardview .relation .content{text-align:left}
+.cardview .relation span{display:inline-block;float:left;color:#7a7a7a;background-color:#dadada;width:5em;margin-right:0.5em;text-align:center;margin-top:0.7em;font-size:0.9em;border-radius:0.5em;padding:0.5em 0.2em;}
+.cardview .op{margin:1em 2em;}
+.cardview .op a{background-color:#0099cb;font-size:0.8em;border-radius:0.2em;}
+.cardview .op a.islike{background-color:grey;color:white;}
 .bottom-op{}
 .bottom-op p{color:white;}
 .bottom-op .left{float:left;width:50%;background-color:#0099cb;background-image:url(../img/wx/share.png);background-repeat: no-repeat; background-position:1em center;background-size: 22px;}
-.bottom-op .left p{padding:1em 0;border-right: 1px solid #00678a;text-indent:3em}
-.bottom-op .right{position:relative;float:left;width:50%;background-color:#037ea7;background-image:url(../img/wx/more.png);background-repeat: no-repeat; background-position:3em center;background-size: 26px;}
-.bottom-op .right p{padding:1em 0;border-left: 1px solid #1989af;text-indent:5em}
-.bottom-op .right ul{display:none;position:absolute;width: 100%;bottom: 50px;left: 0;background-color: #037ea7;color: white;}
-.bottom-op .right ul a{display:block;padding:1em 0;border-left: 1px solid #1989af;text-align: center;border-bottom:1px solid #00678a;color: white;}
+.bottom-op .left p{padding:1.5em 0;border-right: 1px solid #1989af;text-indent:3em}
+.bottom-op .right{position:relative;float:left;width:50%;background-color:#0099cb;background-image:url(../img/wx/more.png);background-repeat: no-repeat; background-position:3em center;background-size: 26px;}
+.bottom-op .right p{padding:1.5em 0;text-indent:5em}
+.bottom-op .right ul{display:none;position:absolute;width: 100%;bottom: 4.15em;left: 0;background-color: #037ea7;color: white;}
+.bottom-op .right ul a{display:block;padding:1.5em 0;border-left: 1px solid #1989af;text-align: center;border-bottom:1px solid #00678a;color: white;}
 em.error{color:red;}
 .share-mask{display:none}
-.share-mask img{width:100%;height:100%;position:absolute;z-index:10000}
+.share-mask img{width:100%;height:100%;position:fixed;z-index:10000}
 .like-mask{visibility:hidden;width:100%;height:100%;background:url(../img/wx/wxmask.png) repeat;position:absolute;z-index:10000;text-align: center;}
 .like-mask img{width:179px;margin-top:8em;}
 .like-mask a{display:block;border-radius:5px;border:1px solid white;color:white;width: 10em;margin: 1em auto;padding: 0.5em;}
@@ -133,7 +138,6 @@ em.error{color:red;}
 .searchresult-head button{background-color:#0099cb;color:white;padding:0.3em 1em;border-radius:3px;margin-left: 1em;border:0;font-size:0.9em;height: 31px;}
 .search-list h1{background-color:#e8e8e8;color:#898989;font-size:0.9em;padding:0.5em 0;border-bottom:1px solid #006c8f;}
 .search-list li{}
-.cardview .wx-info{margin: 1em 0;}
 .search-list a{display:block;border-bottom:1px solid #dbdbdb;padding:0.5em 0;text-align:left;}
 .search-list a .avatar{float:left;width:33%}
 .search-list a .avatar img{margin:0 auto;width:4em;height:4em;display:block;border-radius: 4em;}

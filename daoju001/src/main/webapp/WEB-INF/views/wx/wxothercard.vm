@@ -76,9 +76,6 @@
 								无公司信息
 							#end
 						</h3>
-						#if($stringUtil.isNotEmpty(${user.position}))
-							<h3>$!{user.position}</h3>
-						#end
                     	<h4>$!{user.pca}</h4>
                     </div>
     			</div>
@@ -132,7 +129,7 @@
 				</div>	
 				<div class="relation">
 					<h1>我和他的关系</h1>
-					<div class="content">
+					<div class="content clearfix">
 						<span data=1>初次相识</span>
 						<span data=2>略有接触</span>
 						<span data=3>屡次买卖</span>

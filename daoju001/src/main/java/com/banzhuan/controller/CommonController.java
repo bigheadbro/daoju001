@@ -1802,22 +1802,23 @@ public class CommonController extends BaseController{
 	public ModelAndView wxothercard(HttpServletRequest request, HttpServletResponse response, @ModelAttribute("form")RelationForm form, @PathVariable String id) throws WeixinException, IOException {
 		ModelAndView view = new ModelAndView("wx/wxothercard");
 		int userid = Integer.parseInt(id);
-		String code = request.getParameter("code");
+		
+		Account account = (Account) WebUtils.getSessionAttribute(request, "account");
 		UserEntity me;
-		if(StringUtil.isNotEmpty(code))
+		if(account == null)
 		{
+			String code = request.getParameter("code");
 			Openid openid = WeixinService.getInstance2().getUserManagerService().getUserOpenid(code);
 			me = commonService.getUserByWxid(openid.openid);
 		}
 		else
 		{
-			Account account = (Account) WebUtils.getSessionAttribute(request, "account");
 			me = commonService.getUserByWxid(account.getWxid());
 		}
 		logger.error("11");
 		if(me != null)//当前进入微名片的人，已经注册微名片
 		{
-			Account account = (Account) WebUtils.getSessionAttribute(request, "account");
+			account = (Account) WebUtils.getSessionAttribute(request, "account");
 			if(account == null)
 			{
 				account = new Account();
@@ -1884,38 +1885,45 @@ public class CommonController extends BaseController{
 	
 	@RequestMapping(value="/wxcardcollect")
 	public void wxcardcollect(HttpServletRequest request, HttpServletResponse response, @ModelAttribute("form")RelationForm form) throws WeixinException, IOException {
+		logger.error("enter card collect");
 		if(form.getIslike() == 1)
 		{
+			logger.error("before delete");
 			logger.error("delete relation:"+form.getWxid()+":"+form.getWxid2());
 			commonService.delRelation(form);
 		}
 		else
 		{
+			logger.error("before add");
+			logger.error("add relation:"+form.getWxid()+":"+form.getWxid2());
 			commonService.addRelation(form);
 		}
 	}
 	
 	@RequestMapping(value="/wxtest")
 	public ModelAndView wxtest(HttpServletRequest request, HttpServletResponse response, @ModelAttribute("form")RegForm form) throws WeixinException, IOException {
-		ModelAndView view = new ModelAndView("wx/wxrank");
-		Account account = (Account) WebUtils.getSessionAttribute(request, "account");
+		ModelAndView view = new ModelAndView("wx/wxcard");
 
-		int rank = commonService.queryUserRank(332);
-		//通过自己的排名，获取前后几个人
-		Map<String,Object> bound = new HashMap<String,Object>();
-		if(rank<4)
+		Account account = new Account();
+		UserEntity user = new UserEntity();
+		account.setWxid("oCB4ds29h0lB9E5rw7V3d4DFL5Lo");
+		request.getSession().setAttribute("account", account);
+		user = commonService.getUserByWxid("oCB4ds29h0lB9E5rw7V3d4DFL5Lo");
+		if(user == null)//未绑定微信id
 		{
-			bound.put("offset", 0);
-			bound.put("limit", 5);
+			logger.error("go to log1");
+			return new ModelAndView(new RedirectView("/wxlog"));
 		}
 		else
 		{
-			bound.put("offset", rank-3);
-			bound.put("limit", 5);
+			view.addObject("user",user);
+			view.addObject("wxid",account.getWxid());
+			view.addObject("relationcount",commonService.getRelationCount(user.getId()));
+			view.addObject("rank",commonService.queryUserRank(user.getId()));
+			account.setUserId(user.getId());
+			userService.updateUserAccnt(account);
+			userService.updateUserReadCountById(user.getId());
 		}
-		List<UserEntity> users = commonService.queryUserEntityOrderByScore(bound);
-		view.addObject("users",users);
-		view.addObject("rank",rank);
 		return view;
 	}
 	
@@ -1943,13 +1951,15 @@ public class CommonController extends BaseController{
 	{
 		ModelAndView mv = new ModelAndView("/wx/wxproducts");
 		Account account = (Account) WebUtils.getSessionAttribute(request, "account");
+		logger.error("enter products");
+		logger.error("userid:"+account.getUserId());
 		List<ProductEntity> products = commonService.getProductsByUserid(account.getUserId());
 		if(products.isEmpty())
 		{
 			mv.addObject("empty",1);
 			return mv;
 		}
-		mv.addObject("producst", products);
+		mv.addObject("products", products);
 		return mv;
 	}
 	
@@ -1974,6 +1984,7 @@ public class CommonController extends BaseController{
 	
 	@RequestMapping(value="/wxsearchresult")
 	public ModelAndView wxsearchresult(HttpServletRequest request, HttpServletResponse response, @ModelAttribute("form")RegForm form) throws WeixinException, IOException {
+		logger.error("enter search result");
 		ModelAndView view = new ModelAndView("wx/wxsearchresult");
 		String keyword = request.getParameter("wxbrand");
 		String pca =  request.getParameter("pca");

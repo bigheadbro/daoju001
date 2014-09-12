@@ -40,7 +40,7 @@
     				</div>
     				#springBind("form.name")
     				<div class="section name clearfix">
-    					<input data-role="none" type="text" class="dsf-form-text-input" name="$!{status.expression}" placeholder="用户名。必填" />
+    					<input data-role="none" type="text" class="dsf-form-text-input" name="$!{status.expression}" placeholder="姓名。必填" />
     				</div>
     				#springBind("form.pwd")
     				<div class="section pwd clearfix">

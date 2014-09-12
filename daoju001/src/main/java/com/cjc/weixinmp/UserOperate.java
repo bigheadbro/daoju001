@@ -70,7 +70,7 @@ public class UserOperate extends AbstractUserOperate {
 			button.addButton(CustomMenu.TYPE.view, "进入微名片", null, "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxb5f0887883f34822&redirect_uri=http://115017.ichengyun.net/wxcard&response_type=code&scope=snsapi_base&state=s1#wechat_redirect");
 
 			button.addButton(CustomMenu.TYPE.click, "刀具供应商", "provider", null)
-					.addSubButton(CustomMenu.TYPE.view, "搜索供应商", null, "http://www.baidu.com");
+					.addSubButton(CustomMenu.TYPE.view, "搜索供应商", null, "http://115017.ichengyun.net/wxsearch");
 			button.addButton(CustomMenu.TYPE.click, "问题反馈", "feedback", null);
 			this.controller.getCustomMenuService().updateMenu(button);
 			
@@ -98,7 +98,7 @@ public class UserOperate extends AbstractUserOperate {
         }
     	if(StringUtil.isEqual(click.EventKey, "feedback"))
         {
-        	tr.Content =  "随便写个放个菜单而已，没什么实际作用";
+        	tr.Content =  "意见反馈请直接点击左下角的键盘，然后在输入框里给我们留言。我们会尽快回复您。";
         }
     	if(StringUtil.isEqual(click.EventKey, "aboutus"))
         {

@@ -40,7 +40,7 @@
     				</div>
 					#springBind("form.wxbrand")
     				<div class="section wxbrand clearfix">
-    					<textarea data-role="none" type="text" class="dsf-form-text-input" name="$!{status.expression}" placeholder="选填，供应品牌" ></textarea>
+    					<textarea data-role="none" type="text" class="dsf-form-text-input" name="$!{status.expression}" placeholder="选填，供应品牌及产品特色. 例：日本黛杰 模具刀具 高硬度加工 大平面精加工" ></textarea>
     				</div>
     			</div>
     			<div class="op">

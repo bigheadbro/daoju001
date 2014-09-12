@@ -102,7 +102,7 @@
 			and t.wxbrand like concat('%', #{wxbrand}, '%')
 		</if> 
 		<if test="pca != null">  
-	        and t.pca like concat('%', #{pca}, '%');
+	        and t.pca like concat('%', #{pca}, '%')
 	    </if>   
 	    order by score desc, reg_time asc
 	</select>

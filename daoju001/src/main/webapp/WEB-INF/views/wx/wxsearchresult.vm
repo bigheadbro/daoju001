@@ -46,7 +46,7 @@
 					<h1>${count}条结果</h1>
 					<div>
     					#foreach($user in $users)
-                        <a data-role="none" target="_blank" class="clearfix" href="/wxcard/${user.id}">
+                        <a data-role="none" target="_blank" class="clearfix" href="https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxb5f0887883f34822&redirect_uri=http://115017.ichengyun.net/wxcard/${user.id}&response_type=code&scope=snsapi_base&state=s1#wechat_redirect">
 							<div class="avatar">
 								#if($stringUtil.isNotEmpty(${user.wxlogo}))
 									<img src="${user.wxlogo}" />

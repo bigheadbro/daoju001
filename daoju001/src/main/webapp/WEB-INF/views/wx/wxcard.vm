@@ -54,9 +54,6 @@
 								无公司信息
 							#end
 						</h3>
-						#if($stringUtil.isNotEmpty(${user.position}))
-							<h3>${user.position}</h3>
-						#end
                     	<h4>$!{user.pca}</h4>
                     </div>
     			</div>
@@ -122,7 +119,7 @@
 				<div class="right">
 					<ul>
     					<a target="_blank" rel="external" href="/wxsearch" data-role="none">搜索供应商</a>
-    					<a target="_blank" rel="external" href="/wxilike" data-role="none">刀具人脉</a>
+    					<a target="_blank" rel="external" href="/wxilike" data-role="none">名片盒</a>
     					<a target="_blank" rel="external" href="/wxprofile" data-role="none">修改信息</a>
 					</ul>
 					<p class="more">更多</p>
@@ -135,9 +132,11 @@
             	$(".more").click(function() {
             		if (visibleMore) {
             			$(".right ul").fadeOut();//removeAttr("style");
+						$(".right").removeAttr("style");
             			visibleMore = false;
             		} else {
             			$(".right ul").fadeIn();//css("visibility", "visible");
+						$(".right").css("background-color","#037ea7");
             			visibleMore = true;
             		}
             	});
@@ -145,7 +144,7 @@
             		if (visibleMore) {
             			$(".more").trigger("click");
             		}
-            		$(".share-mask").css("visibility", "visible");
+            		$(".share-mask").show();
 					$(".share-mask img").css("height",$(".scroll").outerHeight());
             	});
             
@@ -159,8 +158,8 @@
             });
 			var imgUrl = '${user.wxlogo}';
             var lineLink = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxb5f0887883f34822&redirect_uri=http://115017.ichengyun.net/wxcard/${user.id}&response_type=code&scope=snsapi_base&state=s1#wechat_redirect';
-            var descContent = "${user.contactName}\n${user.companyName}\n${user.pca}\n点击我了解更多信息";
-            var shareTitle = "${user.contactName}的刀具名片";
+            var descContent = "公司：${user.companyName}\n职位：${user.position}\n点击了解我的优势产品";
+            var shareTitle = "${user.contactName}正在使用刀具微名片，刀具人快来加入吧!";
             var appid = 'wxb5f0887883f34822';
             
             function shareFriend() {

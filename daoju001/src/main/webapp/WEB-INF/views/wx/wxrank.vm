@@ -72,7 +72,7 @@
     					</div>
 					</a>
 					#else
-					<a data-role="none" target="_blank" class="clearfix" href="https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxb5f0887883f34822&redirect_uri=http://115017.ichengyun.net/wxcard/${user.id}&response_type=code&scope=snsapi_base&state=s1#wechat_redirect">
+					<a data-role="none" target="_blank" class="clearfix" href="https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxb5f0887883f34822&redirect_uri=http://www.daoshifu.com/wxcard/${user.id}&response_type=code&scope=snsapi_base&state=s1#wechat_redirect">
 						<div class="avatar">
     						#if($stringUtil.isNotEmpty(${user.wxlogo}))
     							<img src="${user.wxlogo}" />
@@ -133,7 +133,7 @@
             	});
             });
 			var imgUrl = '${me.wxlogo}';
-            var lineLink = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxb5f0887883f34822&redirect_uri=http://115017.ichengyun.net/wxcard/${me.id}&response_type=code&scope=snsapi_base&state=s1#wechat_redirect';
+            var lineLink = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxb5f0887883f34822&redirect_uri=http://www.daoshifu.com/wxcard/${me.id}&response_type=code&scope=snsapi_base&state=s1#wechat_redirect';
            var descContent = "公司：${me.companyName}\n职位：${me.position}\n点击了解我的优势产品";
             var shareTitle = "${me.contactName}正在使用刀具微名片，刀具人快来加入吧!";
             var appid = 'wxb5f0887883f34822';

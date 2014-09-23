@@ -110,7 +110,7 @@
 					</p>
     			</div>
 				<div class="brand clearfix">
-					<p>
+					<a data-role="none" rel="external" target="_blank" href="/wxbrand/${user.id}">
 						<span>品牌</span>
 						#if($stringUtil.isEmpty(${user.wxbrand}))
 							#if(${user.brand} > 0)
@@ -125,7 +125,7 @@
 						#else
 							${user.wxbrand}
 						#end
-					</p>
+					</a>
 				</div>	
 				<div class="relation">
 					<h1>我和他的关系</h1>
@@ -171,7 +171,7 @@
         			</div>
 					<script>
 						function process(){
-							window.location.href="/wxcard/${user.id}";
+							//window.location.href="/wxcard/${user.id}";
 						}
             			$(function() {
             				$("#submit_like").click(function () {
@@ -183,7 +183,8 @@
 										});
 								}
 								else{
-									$(".like-mask").css("visibility", "visible");
+									//$(".like-mask").css("visibility", "visible");
+									window.location.href="/wxindex";
 								}
             				});
 							$(".like-mask").click(function() {

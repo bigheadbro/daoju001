@@ -8,7 +8,20 @@
 		<link rel="stylesheet" href="/css/wap.css">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 		<script>
-
+		function onBridgeReady(){
+         WeixinJSBridge.call('showOptionMenu');
+        }
+        
+        if (typeof WeixinJSBridge == "undefined"){
+            if( document.addEventListener ){
+                document.addEventListener('WeixinJSBridgeReady', onBridgeReady, false);
+            }else if (document.attachEvent){
+                document.attachEvent('WeixinJSBridgeReady', onBridgeReady); 
+                document.attachEvent('onWeixinJSBridgeReady', onBridgeReady);
+            }
+        }else{
+            onBridgeReady();
+        }
 		$(function(){
           var mySwiper = $('.swiper-container').swiper({
              mode:'horizontal',
@@ -30,7 +43,7 @@
         var lineLink = 'http://www.daoshifu.com/wxproducts/${product.id}';
         var descContent = "${product.description}";
         var shareTitle = "${product.name}";
-        var appid = 'wx507ba351159acc88';
+        var appid = 'wxb5f0887883f34822';
         
         function shareFriend() {
             WeixinJSBridge.invoke('sendAppMessage',{

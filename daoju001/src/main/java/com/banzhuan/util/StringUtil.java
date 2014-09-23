@@ -564,6 +564,18 @@ public class StringUtil {
 		return str;
 	}
 	
+	public static int firstLetterOfBrand(String s)
+	{
+		String tmp = s.split("[|]")[0];
+		return Integer.parseInt(tmp);
+	}
+	
+	public static String firstLetterToString(String s)
+	{
+		String tmp = s.split("[|]")[0];
+		return convertToChar(Integer.parseInt(tmp));
+	}
+	
 	public static String fileType(String type)
 	{
 		return type.substring(1);
@@ -607,7 +619,7 @@ public class StringUtil {
 		brandMap.put(21, "WIDIA,WIDIA.jpg,德国");
 		brandMap.put(22, "WALTER,瓦尔特.jpg,德国");
 		brandMap.put(23, "SAFETY,SAFETY.jpg,法国");
-		brandMap.put(24, "弗雷萨,弗雷萨.jpg,瑞士");
+		brandMap.put(24, "佛雷萨,弗雷萨.jpg,瑞士");
 		brandMap.put(25, "钴领,钴领.jpg,德国");
 		brandMap.put(26, "肯纳,肯纳.jpg,美国");
 		brandMap.put(27, "绿叶,绿叶.jpg,美国");
@@ -654,6 +666,9 @@ public class StringUtil {
 		brandMap.put(68, "SNF,SNF.jpg,台湾");
 		brandMap.put(69, "山高,seco.jpg,瑞典");
 		brandMap.put(70, "Haimer,haimer.jpg,德国");
+		brandMap.put(71, "富耐克,fnk.jpg,中国");
+		brandMap.put(72, "Palbit,palbit.JPG,葡萄牙");
+		brandMap.put(73, "自产,zichan.jpg,中国");
 		brandMap.put(100, "其他,otherbrand.jpg,其他");
 		
 		brandMap.put(10000, "刀师傅,刀师傅.jpg,中国");

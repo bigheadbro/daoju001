@@ -59,11 +59,11 @@
     					<input data-role="none" type="text" class="dsf-form-text-input" name="$!{status.expression}" placeholder="手机。必填" />
     				</div>
     			</div>
-    			<div class="op">
+    			<div class="op90">
     				<button type="submit" id="submit_log" data-role="none">创建刀具微名片</button>
     			</div>
     			<div class="op-reg">
-    				<a data-role="none" rel="external" href="/wxlog">使用刀师傅账号直接登录</a>
+    				<a data-role="none" rel="external" target="_blank" href="/wxlog">使用刀师傅账号直接登录</a>
     			</div>
     			</form>
 			</div>

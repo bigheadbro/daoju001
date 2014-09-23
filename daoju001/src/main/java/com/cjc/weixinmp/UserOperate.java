@@ -67,10 +67,10 @@ public class UserOperate extends AbstractUserOperate {
 		}
 		if(StringUtil.isEqual(event.ToUserName, "gh_b8c3f27889ae"))
 		{
-			button.addButton(CustomMenu.TYPE.view, "进入微名片", null, "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxb5f0887883f34822&redirect_uri=http://115017.ichengyun.net/wxcard&response_type=code&scope=snsapi_base&state=s1#wechat_redirect");
+			button.addButton(CustomMenu.TYPE.view, "进入微名片", null, "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxb5f0887883f34822&redirect_uri=http://www.daoshifu.com/wxindex&response_type=code&scope=snsapi_base&state=s1#wechat_redirect");
 
 			button.addButton(CustomMenu.TYPE.click, "刀具供应商", "provider", null)
-					.addSubButton(CustomMenu.TYPE.view, "搜索供应商", null, "http://115017.ichengyun.net/wxsearch");
+					.addSubButton(CustomMenu.TYPE.view, "搜索供应商", null, "http://www.daoshifu.com/wxsearch");
 			button.addButton(CustomMenu.TYPE.click, "问题反馈", "feedback", null);
 			this.controller.getCustomMenuService().updateMenu(button);
 			
@@ -88,7 +88,7 @@ public class UserOperate extends AbstractUserOperate {
         {
     		//NewsResponse news = new NewsResponse();
     		//news.ToUserName = click.ToUserName;
-    		//news.addArticle("点击召唤微名片", "刀师傅为刀具界人士量身打造的微名片，帮助刀具企业与用户更好的连接。", "http://img1.178.com/mm/201205/131677208040/131677329126.jpg", "http://115017.ichengyun.net/wxcard?openid="+ click.FromUserName);
+    		//news.addArticle("点击召唤微名片", "刀师傅为刀具界人士量身打造的微名片，帮助刀具企业与用户更好的连接。", "http://img1.178.com/mm/201205/131677208040/131677329126.jpg", "http://www.daoshifu.com/wxcard?openid="+ click.FromUserName);
         	//return news;
     		tr.Content =  "紧张制作中，敬请期待哟！";
         }

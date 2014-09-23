@@ -45,10 +45,12 @@ word-break: break-all;
 .log-wrap .section input{float:left;margin: 0;margin-left:2em;border:0;font-size:1.2em;line-height: 2em;width: 80%;}
 .log-wrap .mail{background:url(../img/wx/wxname.png) no-repeat 0.5em center;background-size: 20px;}
 .log-wrap .pwd{background:url(../img/wx/wxpwd.png) no-repeat 0.5em center;background-size: 20px;}
-.op{margin-top:1.5em;}
-.op a{background-color:#0099cb;color:white;display: block;padding: 0.8em;margin: 0 auto;width: 100%;border-radius: 0.3em;font-size: 1em;border:0;text-align: center;}
-.op a.islike{background-color:grey;color:white;display: block;padding: 0.8em;margin: 0 auto;width: 100%;border-radius: 0.3em;font-size: 1em;border:0;text-align: center;}
-.op button{background-color:#0099cb;color:white;display: block;padding: 0.8em;margin: 0 auto;width: 100%;border-radius: 0.3em;font-size: 1em;border:0;margin-bottom:1em;}
+.op{margin:1.5em 2em;}
+.op a{background-color:#0099cb;color:white;display: block;padding: 0.8em 0;width: 100%;border-radius: 0.3em;font-size: 1em;border:0;text-align: center;text-shadow:none;}
+.op a.islike{background-color:grey;color:white;display: block;padding: 0.8em;width: 100%;border-radius: 0.3em;font-size: 1em;border:0;text-align: center;}
+.op button{background-color:#0099cb;color:white;display: block;padding: 0.8em;width: 100%;border-radius: 0.3em;font-size: 1em;border:0;margin-bottom:1em;}
+.op90{margin:1.5em auto;width: 90%;}
+.op90 button{background-color:#0099cb;color:white;display: block;padding: 0.8em;width: 100%;border-radius: 0.3em;font-size: 1em;border:0;margin-bottom:1em;}
 .op-reg{width:100%;height:2em;margin-top:2.5em}
 .op-reg a{color:#8ca6af;}
 .reg-title{padding:1.5em 0;background-color:#f0f0f0;}
@@ -87,13 +89,13 @@ word-break: break-all;
 .cardview .mail p{font-size:1em;margin-left: 2em;}
 .cardview .brand{padding: 1.15em 0;text-indent:2em;border-bottom:1px solid #e6e6e6;}
 .cardview .brand span{color:#a3a3a3;margin-right:1em;}
-.cardview .brand p{float:left;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;width: 100%;}
+.cardview .brand a{float:left;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;width: 100%;color:black;}
 .cardview .product{display:block;color:black;padding: 1.15em 0;text-indent:2em;border-bottom:1px solid #e6e6e6;background:url(../img/wx/wxarrow.png) no-repeat 96% center;background-size: 6px;}
 .cardview .relation{padding: 0 2em;}
 .cardview .relation h1{text-align:center;color:#b5b5b5;font-size:0.8em;padding-top: 0.7em;}
 .cardview .relation .content{text-align:left}
 .cardview .relation span{display:inline-block;float:left;color:#7a7a7a;background-color:#dadada;width:5em;margin-right:0.5em;text-align:center;margin-top:0.7em;font-size:0.9em;border-radius:0.5em;padding:0.5em 0.2em;}
-.cardview .op{margin:1em 2em;}
+.cardview .op{margin:1em 2em 1em 2em;}
 .cardview .op a{background-color:#0099cb;font-size:0.8em;border-radius:0.2em;}
 .cardview .op a.islike{background-color:grey;color:white;}
 .bottom-op{}
@@ -145,18 +147,18 @@ em.error{color:red;}
 .search-list a .content h2{font-size:1.2em;color:#010101;padding: 0.2em 0 0 0;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;margin-top: 0.5em;}
 .search-list a .content h3{font-size:1em;color:#a1a1a1;padding: 0.1em 0;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;}
 .rank-head{background-color:#006c8f}
-.rank-head .top{text-align:center;padding: 1em;}
+.rank-head .top{text-align:center;padding: 0.65em;}
 .rank-head .left{float:left}
 .rank-head .left h1{color:#57bfe1;font-size:1.5em;font-weight:bold;}
 .rank-head .left h3{color:white;font-size:0.8em;}
 .rank-head .right{float:right;}
-.rank-head h2{text-align:center;color:#898989;font-size:0.8em;padding:0.4em 0;background-color:#e8e8e8;border-bottom:1px solid #006c8f}
-.rank-head .right a{color:white;background-color:#0099cb;border-radius:5px;padding:0.5em 1em;display: inline-block;margin-top: 0.4em;}
+.rank-head h2{text-align:center;color:#898989;font-size:0.7em;padding:1em 0;background-color:#e8e8e8;border-bottom:1px solid #006c8f}
+.rank-head .right a{font-size:0.8em;color:white;background-color:#0099cb;border-radius:5px;padding:0.5em 1em;display: inline-block;margin-top: 0.4em;}
 .rank-list a{display:block;border-bottom:1px solid #dbdbdb;padding:0.5em 0;text-align:left;}
 .rank-list a.me{background-color: #ffd8d8;}
 .rank-list a.me .rank{color:#f03d3d}
 .rank-list a .avatar{float:left;width:25%}
-.rank-list a .avatar img{margin:0 auto;width:4em;height:4em;display:block;border-radius: 4em;}
+.rank-list a .avatar img{margin:0 auto;width:3.6em;height:3.6em;display:block;border-radius: 4em;}
 .rank-list a .content{float:left;width:50%}
 .rank-list a .content h2{font-size:1.2em;color:#010101;padding: 0.2em 0 0 0;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;margin-top: 0.5em;}
 .rank-list a .content h3{font-size:1em;color:#a1a1a1;padding: 0.1em 0;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;}
@@ -164,7 +166,7 @@ em.error{color:red;}
 .rank-op {width:100%;background-color:#0099cb;}
 .rank-op p{padding:1em 0;border-right: 1px solid #00678a;text-align:center}
 
-.product-list h1{font-size:2em;text-align:center;}
+.product-list h1{font-size:1.5em;text-align:center;padding:1em}
 .product-list a{display:block;border-bottom:1px solid #dbdbdb;padding:0.5em 0;text-align:left;}
 .product-list a .avatar{float:left;width:30%}
 .product-list a .avatar img{margin:0 auto;width:5em;height:5em;display:block;}
@@ -172,3 +174,8 @@ em.error{color:red;}
 .product-list a .content h2{font-size:1.4em;color:#0099cb;padding: 0.2em 0 0 0;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;}
 .product-list a .content h3{font-size:0.9em;color:#464646;padding: 0.1em 0;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;}
 .product-list a .content h4{font-size:0.8em;color:#b6b6b6;padding: 0.1em 0;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;}
+.brand-head{background-color:#eaeaea}
+.brand-head h1{font-size:1.2em;padding:1em;}
+.brand-con{margin:2em 1em 2em 1em;}
+.brand-con p{font-size:1em;text-align: left;word-wrap:break-word; word-break:normal;}
+.brand-con h2{font-size:1em;text-align: center;}

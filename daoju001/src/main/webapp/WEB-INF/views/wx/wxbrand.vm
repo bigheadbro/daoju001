@@ -1,10 +1,10 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html>
     <head>
+		<title>品牌特色</title>
         <script type="text/javascript" src="/js/jquery-1.10.2.min.js"></script>
         <link rel="stylesheet" href="/css/jquery.mobile-1.3.2.min.css">
         <script src="/js/jquery.mobile-1.3.2.min.js"></script>
-		<script type="text/javascript" src="/js/jquery-scrolltofixed-min.js"></script>
 		<script type="text/javascript" src="/js/iscroll.js"></script>
         <link rel="stylesheet" href="/css/wap.css">
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no" />
@@ -26,27 +26,18 @@
 		</script>
 	</head>
     <body>
-		<div class="share-mask">
-			<img src="/img/wx/sharecard.png" />
-		</div>
-		<div data-role="page" data-theme="z" class="scroll">
-			<div class="product-list">
-				#if($empty == 1)
-					<h1>请登录刀师傅网添加特色刀具，就可以在微信上分享给您的客户了</h1>
-				#else
-    				#foreach($product in $products)
-                    <a data-role="none" rel="external" target="_blank" class="clearfix" href="/wxproducts/${product.id}">
-    					<div class="avatar">
-    						<img src="/product/${product.cover}" />
-                        </div>
-                        <div class="content">
-                        	<h2>${product.name}</h2>
-                        	<h3>$stringUtil.getBrand(${product.brandId})</h3>
-    						<h4>$stringUtil.formatDate(${product.gmtCreate})</h4>
-    					</div>
-                    </a>
-    				#end
-				#end
+		<div class="scroll" data-role="page" data-theme="z" >
+			<div class="body">
+				<div class="brand-head">
+					<h1>供应的品牌</h1>
+				</div>
+				<div class="brand-con">
+					#if($stringUtil.isNotEmpty(${brand}))
+					<p>${brand}</p>
+					#else
+					<h2>用户没有填写品牌特色信息</h2>
+					#end
+				</div>
 			</div>
 		</div>
 		<script type="text/javascript" src="/js/wx.js"></script>

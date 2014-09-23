@@ -57,6 +57,11 @@
     </bean>  
     
     <mvc:interceptors>
+    	<mvc:interceptor>
+    	<mvc:mapping path="/wxcard" />
+   			<mvc:mapping path="/wxcardcollect" />
+   			<bean class="com.banzhuan.interceptor.WxCardLoginInterceptor" />
+		</mvc:interceptor>
    		<mvc:interceptor>
    			<mvc:mapping path="/*" />
    			<bean class="com.banzhuan.interceptor.AutoLoginInterceptor" />

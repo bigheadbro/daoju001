@@ -44,7 +44,7 @@
                         <ul data-role="listview" data-dividertheme="d"  data-filter="true" data-filter-placeholder="快速查找名片">
         					#foreach($relation in $relations)
                             <li>
-                                <a style="border-bottom:1px solid #c2c2c2" data-role="none" target="_blank" rel="external" href="/wxothercard/${relation.wxid2}">
+                                <a style="border-bottom:1px solid #c2c2c2" data-role="none" target="_blank" rel="external" href="/wxcard/${relation.userid2}">
 									<em style="color:black;font-size:1.2em;line-height:40px;width:30%;white-space: nowrap;display:block;float:left;text-overflow: ellipsis;overflow: hidden;">${relation.wxname2}</em>
 									<em style="margin-left:0.5em;color:#a8a8a8;font-size:1em;line-height:40px;width:60%;display:block;float:left;text-overflow: ellipsis;overflow: hidden;">${relation.wxcompany2}</em>
 								</a>

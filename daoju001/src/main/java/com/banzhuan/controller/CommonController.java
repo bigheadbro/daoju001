@@ -195,10 +195,10 @@ public class CommonController extends BaseController{
 		mv.addObject("requests", requests);
 		
 		List<ProductEntity> products = new ArrayList<ProductEntity>();
-		products.add(commonService.getProduct(135));
-		products.add(commonService.getProduct(136));
-		products.add(commonService.getProduct(34));
-		products.add(commonService.getProduct(55));
+		products.add(commonService.getProduct(70));
+		products.add(commonService.getProduct(138));
+		products.add(commonService.getProduct(141));
+		products.add(commonService.getProduct(79));
 		mv.addObject("products", products);
 		
 		List<QuestionEntity> questions = new ArrayList<QuestionEntity>();
@@ -226,10 +226,10 @@ public class CommonController extends BaseController{
 		mv.addObject("requests", requests);
 		
 		List<ProductEntity> products = new ArrayList<ProductEntity>();
-		products.add(commonService.getProduct(135));
-		products.add(commonService.getProduct(136));
-		products.add(commonService.getProduct(34));
-		products.add(commonService.getProduct(55));
+		products.add(commonService.getProduct(70));
+		products.add(commonService.getProduct(138));
+		products.add(commonService.getProduct(141));
+		products.add(commonService.getProduct(79));
 		mv.addObject("products", products);
 		
 		List<QuestionEntity> questions = new ArrayList<QuestionEntity>();
@@ -1709,13 +1709,13 @@ public class CommonController extends BaseController{
 				}
 				else
 				{
+					account.setUserId(user.getId());
+					userService.updateUserAccnt(account);
+					userService.updateUserReadCountById(user.getId());
 					view.addObject("user",user);
 					view.addObject("wxid",account.getWxid());
 					view.addObject("relationcount",commonService.getRelationCount(user.getId()));
 					view.addObject("rank",commonService.queryUserRank(user.getId()));
-					account.setUserId(user.getId());
-					userService.updateUserAccnt(account);
-					userService.updateUserReadCountById(user.getId());
 				}
 			}
 			else
@@ -1810,6 +1810,9 @@ public class CommonController extends BaseController{
 			String code = request.getParameter("code");
 			Openid openid = WeixinService.getInstance2().getUserManagerService().getUserOpenid(code);
 			me = commonService.getUserByWxid(openid.openid);
+			account = new Account();
+			account.setWxid(openid.openid);
+			request.getSession().setAttribute("account", account);
 		}
 		else
 		{
@@ -1874,11 +1877,16 @@ public class CommonController extends BaseController{
 		}
 		else
 		{
+			logger.error("me is nulL:"+userid);
 			UserEntity user = commonService.getUser(userid);
+			logger.error("22");
 			view.addObject("user",user);
 			userService.updateUserReadCountById(user.getId());
+			logger.error("33");
 			view.addObject("relationcount",commonService.getRelationCount(user.getId()));
+			logger.error("44");
 			view.addObject("rank",commonService.queryUserRank(user.getId()));
+			logger.error("55");
 			return view;
 		}
 	}
@@ -1901,29 +1909,15 @@ public class CommonController extends BaseController{
 	}
 	
 	@RequestMapping(value="/wxtest")
-	public ModelAndView wxtest(HttpServletRequest request, HttpServletResponse response, @ModelAttribute("form")RegForm form) throws WeixinException, IOException {
+	public ModelAndView wxtest(HttpServletRequest request, HttpServletResponse response, @ModelAttribute("form")RelationForm form) throws WeixinException, IOException {
 		ModelAndView view = new ModelAndView("wx/wxcard");
+		logger.error("test");
+		UserEntity user = commonService.getUser(447);
+		view.addObject("user",user);
+		userService.updateUserReadCountById(user.getId());
+		view.addObject("relationcount",commonService.getRelationCount(user.getId()));
+		view.addObject("rank",commonService.queryUserRank(user.getId()));
 
-		Account account = new Account();
-		UserEntity user = new UserEntity();
-		account.setWxid("oCB4ds29h0lB9E5rw7V3d4DFL5Lo");
-		request.getSession().setAttribute("account", account);
-		user = commonService.getUserByWxid("oCB4ds29h0lB9E5rw7V3d4DFL5Lo");
-		if(user == null)//未绑定微信id
-		{
-			logger.error("go to log1");
-			return new ModelAndView(new RedirectView("/wxlog"));
-		}
-		else
-		{
-			view.addObject("user",user);
-			view.addObject("wxid",account.getWxid());
-			view.addObject("relationcount",commonService.getRelationCount(user.getId()));
-			view.addObject("rank",commonService.queryUserRank(user.getId()));
-			account.setUserId(user.getId());
-			userService.updateUserAccnt(account);
-			userService.updateUserReadCountById(user.getId());
-		}
 		return view;
 	}
 	
@@ -1972,6 +1966,70 @@ public class CommonController extends BaseController{
 		bound.put("limit", 50);
 		List<UserEntity> users = commonService.queryUserEntityOrderByScore(bound);
 		view.addObject("users",users);
+		return view;
+	}
+	
+	@RequestMapping(value="/wxindex")
+	public ModelAndView wxindex(HttpServletRequest request, HttpServletResponse response) throws WeixinException, IOException {
+		ModelAndView view = new ModelAndView("wx/wxindex");
+		
+		String code = request.getParameter("code");
+		Account account = (Account) WebUtils.getSessionAttribute(request, "account");
+		if(account == null)
+		{
+			Openid openid = WeixinService.getInstance2().getUserManagerService().getUserOpenid(code);
+			
+			UserEntity user = new UserEntity();
+			account = new Account();
+			account.setWxid(openid.openid);
+			WeixinmpUser wxUser = WeixinService.getInstance2().getUserManagerService().getUser(openid.openid);
+			account.setWxlogo(wxUser.headimgurl);
+			request.getSession().setAttribute("account", account);
+			if(StringUtil.isNotEmpty(openid.openid))
+			{
+				user = commonService.getUserByWxid(openid.openid);
+			}
+			if(user == null)//未绑定微信id
+			{
+				request.getSession().setAttribute("account", account);
+				return view;
+			}
+			else
+			{
+				account.setUserId(user.getId());
+				userService.updateUserAccnt(account);
+				userService.updateUserReadCountById(user.getId());
+				request.getSession().setAttribute("account", account);
+				view.addObject("user",user);
+				view.addObject("relationcount",commonService.getRelationCount(user.getId()));
+				view.addObject("rank",commonService.queryUserRank(user.getId()));
+				return new ModelAndView(new RedirectView("/wxcard"));
+			}
+		}
+		else
+		{
+			UserEntity user = commonService.getUserByWxid(account.getWxid());
+			if(user != null)
+			{
+				view.addObject("user",user);
+				userService.updateUserReadCountById(user.getId());
+				view.addObject("relationcount",commonService.getRelationCount(user.getId()));
+				view.addObject("rank",commonService.queryUserRank(user.getId()));
+				return new ModelAndView(new RedirectView("/wxcard"));
+			}
+			else
+			{
+				return view;
+			}
+		}
+	}
+	
+	@RequestMapping(value="/wxbrand/{userid}")
+	public ModelAndView wxbrand(HttpServletRequest request, HttpServletResponse response, @PathVariable String userid) throws WeixinException, IOException {
+		ModelAndView view = new ModelAndView("wx/wxbrand");
+		int id = Integer.parseInt(userid);
+		UserEntity user = commonService.getUser(id);
+		view.addObject("brand",user.getWxbrand());
 		return view;
 	}
 	

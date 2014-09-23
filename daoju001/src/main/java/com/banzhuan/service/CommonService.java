@@ -432,7 +432,7 @@ public class CommonService {
 				{
 					List<UserEntity> tmp = new ArrayList<UserEntity>();
 					tmp.add((UserEntity)agents.get(i));
-					tmpMap.put(agents.get(i).getBrand(), tmp);
+					tmpMap.put(agents.get(i).getBrand2(), tmp);
 				}
 			}
 			agentMap.put(alpha, tmpMap);

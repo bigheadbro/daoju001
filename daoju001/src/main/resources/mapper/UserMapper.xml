@@ -75,7 +75,7 @@
 	<select id="queryUserRank" parameterType="int"
 		resultType="int">
 	<![CDATA[
-		SELECT rank from (SELECT @counter:=@counter+1 as rank, id FROM daoju001.t_user,(Select (@counter :=0) ) b order by score desc, reg_time asc) as tt where id = #{id};
+		SELECT rank from (SELECT @counter:=@counter+1 as rank, id FROM t_user,(Select (@counter :=0) ) b order by score desc, reg_time asc) as tt where id = #{id};
 	]]>
 	</select>
 	
@@ -83,7 +83,7 @@
 		resultMap="UserResultMap">
 	<![CDATA[
 		SELECT rank,id,nick,position,company_name,contact_name,wxlogo from 
-		(SELECT @counter:=@counter+1 as rank,id,nick,position,company_name,contact_name,wxlogo FROM daoju001.t_user,(Select (@counter :=0) ) b 
+		(SELECT @counter:=@counter+1 as rank,id,nick,position,company_name,contact_name,wxlogo FROM t_user,(Select (@counter :=0) ) b 
 		order by score desc, reg_time asc) as tt limit #{offset},#{limit}
 	]]>
 	</select>

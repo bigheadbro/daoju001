@@ -45,10 +45,7 @@ $(function() {
 	<div class="flexslider">
       <ul class="slides">
     	<li>
-    	    <a href="products"><img src="/img/banner/banner11.jpg" /></a>
-    	</li>
-    	<li>
-    		<a href="items"><img src="/img/banner/banner10.jpg" /></a>
+    	    <a><img src="/img/banner/banner12.jpg" /></a>
     	</li>
       </ul>
     </div>

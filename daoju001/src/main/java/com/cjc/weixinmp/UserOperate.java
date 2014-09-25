@@ -75,7 +75,7 @@ public class UserOperate extends AbstractUserOperate {
 			this.controller.getCustomMenuService().updateMenu(button);
 			
 	    	tr.ToUserName = event.FromUserName;
-	    	tr.Content =  "欢迎关注刀师傅！\n\n刀师傅是刀具行业的新兵，希望借助互联网和移动互联网的力量，帮助大家高效快捷的解决问题。\n\n如果你有行业的困惑，如果你有改良的创意，如果你有棘手的问题，都欢迎和我们交流。让我们一起，每天进步一点！";
+			tr.Content =  "欢迎关注麦辛刀具名片!\n\n麦辛刀具名片由刀师傅网IT团队开发，是唯一专注于刀具行业信息传播、技术沟通的微名片工具。不仅可以在这里搜索到您需要的品牌代理商信息，更能介绍和推广自己的品牌及特点。\n\n您可以从下方菜单中查看自己的微名片，并发给同行的朋友们，从而提升人脉和全国排名。而完善代理品牌和特色信息后，更将使有需要的用户/经销商找到您。让我们紧紧相拥，度过这个刀具界的寒冬！";
 		}
 		return tr;
     }

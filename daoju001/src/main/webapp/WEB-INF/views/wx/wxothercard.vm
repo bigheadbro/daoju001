@@ -52,6 +52,7 @@
 			<a target="_blank" rel="external" href="http://mp.weixin.qq.com/s?__biz=MzAwNTAyOTg5Ng==&mid=205589420&idx=1&sn=14f7338f51eff94e2a1daa5994d50265#rd">点击创建刀具名片</a>
 		</div>
 		<div data-role="page" data-theme="z" class="scroll">
+			<a data-role="header" data-position="fixed" data-tap-toggle="false" rel="external" target="_blank" class="return" href="https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxb5f0887883f34822&redirect_uri=http://www.daoshifu.com/wxcard&response_type=code&scope=snsapi_base&state=s1#wechat_redirect">返回我的名片</a>
 			<div class="cardview">
     			<div class="wx-info clearfix">
                     <div class="avatar">
@@ -161,17 +162,28 @@
     				<div class="op">
 						#if(${islike} == 1)
 							#springBind("form.islike")
-							<input type="hidden" name="$!{status.expression}" value=1 />
+							<input type="hidden" id="likevalue" name="$!{status.expression}" value=1 />
 							<a class="islike" type="submit" id="submit_like" data-role="none">取消收藏</a>
 						#else
 							#springBind("form.islike")
-							<input type="hidden" name="$!{status.expression}" value=0 />
+							<input type="hidden" id="likevalue" name="$!{status.expression}" value=0 />
 							<a type="submit" id="submit_like" data-role="none">收藏他的名片</a>
 						#end
         			</div>
 					<script>
 						function process(){
-							//window.location.href="/wxcard/${user.id}";
+							if($("#likevalue").val() == 0){
+								$("#submit_like").text("取消收藏");
+								$("#likevalue").val(1);
+								$("#submit_like").css("background-color","grey");
+							}else{
+								$("#submit_like").text("收藏他的名片");
+								$("#likevalue").val(0);
+								$("#submit_like").css("background-color","#0099cb");
+								$(".relation span").each(function(){
+            						$(this).removeAttr("style");
+            					});
+							}
 						}
             			$(function() {
             				$("#submit_like").click(function () {

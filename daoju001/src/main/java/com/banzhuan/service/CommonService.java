@@ -11,6 +11,8 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.session.RowBounds;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -56,6 +58,7 @@ import com.banzhuan.entity.StockEntity;
 import com.banzhuan.entity.UserEntity;
 import com.banzhuan.common.Account;
 import com.banzhuan.common.Result;
+import com.banzhuan.controller.CommonController;
 import com.banzhuan.form.CommentForm;
 import com.banzhuan.form.GoodcaseForm;
 import com.banzhuan.form.ItemForm;
@@ -66,6 +69,8 @@ import com.banzhuan.form.RelationForm;
 import com.banzhuan.form.RequestForm;
 import com.banzhuan.util.ChineseSpelling;
 import com.banzhuan.util.StringUtil;
+import com.cjc.weixinmp.WeixinException;
+import com.cjc.weixinmp.bean.Users;
 
 /**
  * @author guichaoqun
@@ -74,6 +79,7 @@ import com.banzhuan.util.StringUtil;
 @Service("commonService")
 public class CommonService {
 
+	private Logger logger = LoggerFactory.getLogger(CommonService.class);
 	@Autowired
 	@Qualifier("questionDAO")
 	private QuestionDAO questionDAO;
@@ -969,5 +975,16 @@ public class CommonService {
 	public List<UserEntity> queryUserEntityOrderByScore(Object bound)
 	{
 		return userDAO.queryUserEntityOrderByScore(bound);
+	}
+	
+	public boolean isFeed(String mywxid)
+	{
+		try {
+			Users users = WeixinService.getInstance2().getUserManagerService().getUserList(null);
+			return users.data.openid.contains(mywxid);
+		} catch (WeixinException e) {
+			logger.error("isFeed error:"+e.toString());
+		}
+		return false;
 	}
 }

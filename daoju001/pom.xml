@@ -277,14 +277,24 @@
 			<artifactId>gson</artifactId>
 			<version>2.2.4</version>
 		</dependency>
+		<dependency> 
+			<groupId>QRCODE</groupId> 
+			<artifactId>QRCode</artifactId> 
+			<version>1.0</version>
+		</dependency>
+		<dependency> 
+			<groupId>com.sohu.sendcloud</groupId>
+			<artifactId>sendcloud-sdk</artifactId>
+			<version>1.0.7</version>
+		</dependency> 
 	</dependencies>
 	<build>
 		<plugins>
 			<plugin>
 				<artifactId>maven-compiler-plugin</artifactId>
 				<configuration>
-					<source>1.6</source>
-					<target>1.6</target>
+					<source>1.7</source>
+					<target>1.7</target>
 					<encoding>UTF-8</encoding>
 				</configuration>
 			</plugin>

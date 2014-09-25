@@ -13,6 +13,10 @@
 		<div class="share-mask">
 			<img src="/img/wx/sharecard.png" />
 		</div>
+		<div class="like-mask">
+			<img src="/img/wx/likemask-img.png" />
+			<a target="_blank" rel="external" href="http://mp.weixin.qq.com/s?__biz=MzAwNTAyOTg5Ng==&mid=205688315&idx=1&sn=41606c69afcd36a7d4f551c486f8dbaa#rd">点击关注麦辛刀具名片</a>
+		</div>
 		<div data-role="page" data-theme="z" class="scroll">
 			<div class="cardview">
     			<div class="wx-info clearfix">
@@ -96,7 +100,7 @@
 					<span>我的特色刀具</span>
 				</a>				
 			</div>
-			<div data-role="footer" data-position="fixed" data-theme="z" class="bottom-op">
+			<div data-role="footer" data-position="fixed" data-tap-toggle="false" data-theme="z" class="bottom-op">
 				<div class="left">
 					<p class="share">分享我的名片</p>
 				</div>
@@ -112,6 +116,7 @@
 		</div>
 		<script>
 			var visibleMore = false;
+			var isFeed = ${isFeed};
 			$(function() {
             	$(".more").click(function() {
             		if (visibleMore) {
@@ -135,7 +140,10 @@
             	$(".share-mask").click(function() {
             		$(".share-mask").removeAttr("style");
             	});
-            	
+            	if(!isFeed){
+					$(".like-mask").css("visibility", "visible");
+					$(".like-mask").css("height",$(".scroll").outerHeight());
+				}
             });
 			function onBridgeReady(){
          WeixinJSBridge.call('showOptionMenu');

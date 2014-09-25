@@ -45,10 +45,12 @@ word-break: break-all;
 .log-wrap .section input{float:left;margin: 0;margin-left:2em;border:0;font-size:1.2em;line-height: 2em;width: 80%;}
 .log-wrap .mail{background:url(../img/wx/wxname.png) no-repeat 0.5em center;background-size: 20px;}
 .log-wrap .pwd{background:url(../img/wx/wxpwd.png) no-repeat 0.5em center;background-size: 20px;}
-.op{margin:1.5em 2em;}
-.op a{background-color:#0099cb;color:white;display: block;padding: 0.8em 0;width: 100%;border-radius: 0.3em;font-size: 1em;border:0;text-align: center;text-shadow:none;}
-.op a.islike{background-color:grey;color:white;display: block;padding: 0.8em;width: 100%;border-radius: 0.3em;font-size: 1em;border:0;text-align: center;}
-.op button{background-color:#0099cb;color:white;display: block;padding: 0.8em;width: 100%;border-radius: 0.3em;font-size: 1em;border:0;margin-bottom:1em;}
+.log-wrap em.error{color:red;text-align: left;display: block;margin: 0.5em 4em;}
+.op{margin:1.5em 0;}
+.op a{background-color:#0099cb;color:white;display: block;padding: 0.8em 0;width: 90%;margin:0 auto;border-radius: 0.3em;font-size: 1em;border:0;text-align: center;text-shadow:none;}
+.op a#submit_like{background-color:#0099cb;color:white;display: block;padding: 0.8em 0;width: 100%;margin:0 auto;border-radius: 0.3em;font-size: 1em;border:0;text-align: center;text-shadow:none;}
+.op a#submit_like.islike{background-color:grey;color:white;display: block;padding: 0.8em;width: 90%;margin:0 auto;border-radius: 0.3em;font-size: 1em;border:0;text-align: center;}
+.op button{background-color:#0099cb;color:white;display: block;padding: 0.8em;width: 90%;margin:0 auto;border-radius: 0.3em;font-size: 1em;border:0;margin-bottom:1em;}
 .op90{margin:1.5em auto;width: 90%;}
 .op90 button{background-color:#0099cb;color:white;display: block;padding: 0.8em;width: 100%;border-radius: 0.3em;font-size: 1em;border:0;margin-bottom:1em;}
 .op-reg{width:100%;height:2em;margin-top:2.5em}
@@ -56,7 +58,7 @@ word-break: break-all;
 .reg-title{padding:1.5em 0;background-color:#f0f0f0;}
 .reg-title h1{color:#0099cb;font-size:1.5em}
 .reg-wrap .section{border:1px solid #bababa;border-radius:3px;margin: 0.5em auto;width: 90%;height:2.5em;background-color: white;}
-.reg-wrap .section input{margin:0.1em 0 0.4em 2em;border:0;font-size:1.1em;height: 1.8em;width: 80%;}
+.reg-wrap .section input{margin:0.15em 0 0.15em 2em;border:0;font-size:1.1em;height: 1.6em;width: 80%;}
 .reg-wrap .section textarea{margin:0.1em 0 0.4em 2em;border:0;font-size:1.1em;height: 10em;width: 80%;}
 .reg-wrap .mail{background-image:url(../img/wx/wxmail.png);background-repeat: no-repeat;background-position:0.5em center;background-size: 20px;}
 .reg-wrap .name{background-image:url(../img/wx/wxname.png);background-repeat: no-repeat;background-position: 0.5em center;background-size: 20px;}
@@ -98,6 +100,8 @@ word-break: break-all;
 .cardview .op{margin:1em 2em 1em 2em;}
 .cardview .op a{background-color:#0099cb;font-size:0.8em;border-radius:0.2em;}
 .cardview .op a.islike{background-color:grey;color:white;}
+a.return{display:block;background-color:#0099cb;color:white;text-align: center;height:3em;line-height:3em;font-size: 1em;text-shadow: none;
+background-image:url(../img/wx/wxback.png); background-position:0.5em center;background-repeat: no-repeat;background-size: 10px;}
 .bottom-op{}
 .bottom-op p{color:white;}
 .bottom-op .left{float:left;width:50%;background-color:#0099cb;background-image:url(../img/wx/share.png);background-repeat: no-repeat; background-position:1em center;background-size: 22px;}
@@ -106,7 +110,8 @@ word-break: break-all;
 .bottom-op .right p{padding:1.5em 0;text-indent:5em}
 .bottom-op .right ul{display:none;position:absolute;width: 100%;bottom: 4.15em;left: 0;background-color: #037ea7;color: white;}
 .bottom-op .right ul a{display:block;padding:1.5em 0;border-left: 1px solid #1989af;text-align: center;border-bottom:1px solid #00678a;color: white;}
-em.error{color:red;}
+em.error{color:red;text-align: left;display: block;width: 90%;margin: 0.5em auto;}
+
 .share-mask{display:none}
 .share-mask img{width:100%;height:100%;position:fixed;z-index:10000}
 .like-mask{visibility:hidden;width:100%;height:100%;background:url(../img/wx/wxmask.png) repeat;position:absolute;z-index:10000;text-align: center;}

@@ -30,7 +30,7 @@
                 <div class="reg-title">
     				<h1>创建您的刀具微名片</h1>
     			</div>
-                <form id="form_reg" action="/wxreg2" method="post">
+                <form id="form_reg" target="_blank" action="/wxreg2" method="post">
     			<!-- 隐藏字段，用于标示是表单提交 -->
         		<input type="hidden" name="do_submit" value="true"/>
     			<div class="reg-wrap clearfix">

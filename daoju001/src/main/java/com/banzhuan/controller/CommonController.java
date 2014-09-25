@@ -89,6 +89,7 @@ import com.banzhuan.util.TwoDimensionCode;
 import com.banzhuan.util.Util;
 import com.cjc.weixinmp.WeixinException;
 import com.cjc.weixinmp.bean.Openid;
+import com.cjc.weixinmp.bean.Users;
 import com.cjc.weixinmp.bean.WeixinmpUser;
 
 @Controller
@@ -1675,14 +1676,21 @@ public class CommonController extends BaseController{
 	public ModelAndView wxcard(HttpServletRequest request, HttpServletResponse response) throws WeixinException, IOException {
 		ModelAndView view = new ModelAndView("wx/wxcard");
 		String code = request.getParameter("code");
+		
 		if(StringUtil.isEmpty(code)){
 			Account account = (Account) WebUtils.getSessionAttribute(request, "account");
+			if(account == null)
+			{
+				return new ModelAndView(new RedirectView("/wxindex"));
+			}
 			logger.error("44");
 			logger.error(account.getWxid());
 			UserEntity user = commonService.getUserByWxid(account.getWxid());
 			view.addObject("user",user);
 			view.addObject("relationcount",commonService.getRelationCount(user.getId()));
 			view.addObject("rank",commonService.queryUserRank(user.getId()));
+			view.addObject("isFeed",commonService.isFeed(account.getWxid()));
+			
 			return view;
 		}
 		else//To Do
@@ -1705,7 +1713,7 @@ public class CommonController extends BaseController{
 				if(user == null)//未绑定微信id
 				{
 					logger.error("go to log1");
-					return new ModelAndView(new RedirectView("/wxlog"));
+					return new ModelAndView(new RedirectView("/wxindex"));
 				}
 				else
 				{
@@ -1716,6 +1724,8 @@ public class CommonController extends BaseController{
 					view.addObject("wxid",account.getWxid());
 					view.addObject("relationcount",commonService.getRelationCount(user.getId()));
 					view.addObject("rank",commonService.queryUserRank(user.getId()));
+					view.addObject("isFeed",commonService.isFeed(account.getWxid()));
+					return view;
 				}
 			}
 			else
@@ -1728,17 +1738,18 @@ public class CommonController extends BaseController{
 					userService.updateUserReadCountById(user.getId());
 					view.addObject("relationcount",commonService.getRelationCount(user.getId()));
 					view.addObject("rank",commonService.queryUserRank(user.getId()));
+					view.addObject("isFeed",commonService.isFeed(account.getWxid()));
 					return view;
 				}
 				else
 				{
 					logger.error("go to log2");
-					return new ModelAndView(new RedirectView("/wxlog"));
+					return new ModelAndView(new RedirectView("/wxindex"));
 				}
 			}
 		}
 		
-		return view;
+		
 	}
 
 	@RequestMapping(value="/wxilike")
@@ -1864,8 +1875,8 @@ public class CommonController extends BaseController{
 					form.setWxid2(user.getWxid());
 					form.setUserid(me.getId());
 					form.setUserid2(user.getId());
-					form.setWxname(me.getNick());
-					form.setWxname2(user.getNick());
+					form.setWxname(StringUtil.isEmpty(me.getContactName())?me.getNick():me.getContactName());
+					form.setWxname2(StringUtil.isEmpty(user.getContactName())?user.getNick():user.getContactName());
 					form.setWxcompany(me.getCompanyName());
 					form.setWxcompany2(user.getCompanyName());
 				}
@@ -1910,15 +1921,28 @@ public class CommonController extends BaseController{
 	
 	@RequestMapping(value="/wxtest")
 	public ModelAndView wxtest(HttpServletRequest request, HttpServletResponse response, @ModelAttribute("form")RelationForm form) throws WeixinException, IOException {
-		ModelAndView view = new ModelAndView("wx/wxcard");
+		/*ModelAndView view = new ModelAndView("wx/wxcard");
 		logger.error("test");
-		UserEntity user = commonService.getUser(447);
+		UserEntity user = commonService.getUser(332);
 		view.addObject("user",user);
 		userService.updateUserReadCountById(user.getId());
 		view.addObject("relationcount",commonService.getRelationCount(user.getId()));
 		view.addObject("rank",commonService.queryUserRank(user.getId()));
-
+		view.addObject("isFeed",commonService.isFeed(user.getWxid()));*/
+		
+		ModelAndView view = new ModelAndView("wx/wxothercard");
+		UserEntity user = commonService.getUser(447);
+		logger.error("22");
+		view.addObject("user",user);
+		userService.updateUserReadCountById(user.getId());
+		logger.error("33");
+		view.addObject("relationcount",commonService.getRelationCount(user.getId()));
+		logger.error("44");
+		view.addObject("rank",commonService.queryUserRank(user.getId()));
+		logger.error("55");
+		//ModelAndView view = new ModelAndView("wx/wxindex");
 		return view;
+		//return new ModelAndView(new RedirectView("http://www.baidu.com")); 
 	}
 	
 	@RequestMapping(value = "/wxproducts/{id}")
@@ -1972,8 +1996,9 @@ public class CommonController extends BaseController{
 	@RequestMapping(value="/wxindex")
 	public ModelAndView wxindex(HttpServletRequest request, HttpServletResponse response) throws WeixinException, IOException {
 		ModelAndView view = new ModelAndView("wx/wxindex");
-		
 		String code = request.getParameter("code");
+		Object target = request.getParameter("target");
+		request.getSession().setAttribute("target", target);
 		Account account = (Account) WebUtils.getSessionAttribute(request, "account");
 		if(account == null)
 		{
@@ -2098,6 +2123,11 @@ public class CommonController extends BaseController{
 				logger.error("ss");
 				request.getSession().setAttribute("account", account);
 				logger.error("go to card");
+				Object target = WebUtils.getSessionAttribute(request, "target");
+				if(target!=null)
+				{
+					return new ModelAndView(new RedirectView(target.toString())); 
+				}
 				// 登陆成功， 跳转到登陆页面
 				return new ModelAndView(new RedirectView("/wxcard"));
 			}
@@ -2111,11 +2141,17 @@ public class CommonController extends BaseController{
 		
 		if(isDoSubmit(request))
 		{
+			logger.error("wxreg:before wxregister");
 			Result re = userService.wxregister(form, result);
-			
+			logger.error("wxreg:after wxregister");
 			if(!result.hasErrors())
 			{
+				logger.error("wxreg:go to reg2");
 				Account account = (Account) WebUtils.getSessionAttribute(request, "account");
+				if(account == null)
+				{
+					account = new Account();
+				}
 				UserEntity user = (UserEntity)re.get("user");
 				account.setLogin(true); // 登录成功标识
 				account.setUserName(user.getNick()); // 用户登录名
@@ -2131,6 +2167,7 @@ public class CommonController extends BaseController{
 			}
 			else
 			{
+				logger.error("wxreg:reg fail");
 				// 注册失败， 返回注册页面，并显示出错提示信息
 				ModelAndView view = new ModelAndView("wx/wxreg");
 				return view;
@@ -2138,6 +2175,7 @@ public class CommonController extends BaseController{
 		}
 		else
 		{
+			logger.error("wxreg:common page");
 			ModelAndView view = new ModelAndView("wx/wxreg");
 			return view;
 		}
@@ -2153,6 +2191,11 @@ public class CommonController extends BaseController{
 				logger.error(String.valueOf(account.getUserId()));
 				userService.updateUserAccnt(form, account);
 				// 注册成功， 跳转到登陆页面
+				Object target = WebUtils.getSessionAttribute(request, "target");
+				if(target!=null)
+				{
+					return new ModelAndView(new RedirectView(target.toString())); 
+				}
 				return new ModelAndView(new RedirectView("/wxcard")); 
 			}
 			else

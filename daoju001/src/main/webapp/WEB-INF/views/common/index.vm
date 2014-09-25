@@ -93,10 +93,7 @@ $(function() {
 <div class="flexslider">
   <ul class="slides">
 	<li>
-	    <a><img src="/img/banner/banner2.jpg" /></a>
-	</li>
-	<li>
-			<a><img src="/img/banner/banner3.jpg" /></a>
+	    <a><img src="/img/banner/banner12.jpg" /></a>
 	</li>
   </ul>
 </div>

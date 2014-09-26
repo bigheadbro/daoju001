@@ -56,11 +56,13 @@
 			<div class="cardview">
     			<div class="wx-info clearfix">
                     <div class="avatar">
-						 #if($stringUtil.isNotEmpty(${user.wxlogo}))
+						#if($stringUtil.isNotEmpty(${user.wxlogo}))
 							<img src="${user.wxlogo}" />
-						 #else
+						#elseif($stringUtil.isNotEmpty(${user.logo}))
+							<img src="/logo/${user.logo}"/>
+						#else
 							<img src="/img/wx/wxavatar.png" />
-						 #end
+						#end
                     </div>
                     <div class="content">
                     	<h1>
@@ -196,7 +198,7 @@
 								}
 								else{
 									//$(".like-mask").css("visibility", "visible");
-									window.location.href="/wxindex";
+									window.location.href="/wxindex?target="+window.location.href;
 								}
             				});
 							$(".like-mask").click(function() {

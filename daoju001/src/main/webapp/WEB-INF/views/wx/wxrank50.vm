@@ -36,6 +36,8 @@
 					<div class="avatar">
 						#if($stringUtil.isNotEmpty(${user.wxlogo}))
 							<img src="${user.wxlogo}" />
+						#elseif($stringUtil.isNotEmpty(${user.logo}))
+							<img src="/logo/${user.logo}"/>
 						#else
 							<img src="/img/wx/wxavatar.png" />
 						#end

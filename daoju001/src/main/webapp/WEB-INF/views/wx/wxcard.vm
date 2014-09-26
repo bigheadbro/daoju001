@@ -82,15 +82,7 @@
 					<a data-role="none" rel="external" target="_blank" href="/wxbrand/${user.id}">
 						<span>品牌</span>
 						#if($stringUtil.isEmpty(${user.wxbrand}))
-							#if(${user.brand} > 0)
-								$stringUtil.getBrand(${user.brand})
-							#end
-							#if(${user.brand2} > 0)
-								,$stringUtil.getBrand(${user.brand2})
-							#end
-							#if(${user.brand} == 0  && ${user.brand2} == 0)
-								无品牌信息
-							#end
+							无品牌信息
 						#else
 							${user.wxbrand}
 						#end

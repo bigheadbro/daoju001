@@ -1998,6 +1998,10 @@ public class CommonController extends BaseController{
 		ModelAndView view = new ModelAndView("wx/wxindex");
 		String code = request.getParameter("code");
 		Object target = request.getParameter("target");
+		if(target != null)
+		{
+			logger.error(target.toString());
+		}
 		request.getSession().setAttribute("target", target);
 		Account account = (Account) WebUtils.getSessionAttribute(request, "account");
 		if(account == null)

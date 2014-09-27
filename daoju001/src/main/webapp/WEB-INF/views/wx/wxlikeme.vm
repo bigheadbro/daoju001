@@ -55,7 +55,11 @@
                 </div>
 				<div data-role="footer" data-position="fixed" data-theme="z" class="like-op">
     				<div class="left">
-    					<a class="ilike" target="_blank" rel="external" href="/wxilike">我收藏的名片</a>
+						#if($stringUtil.isNotEmpty(${id}))
+							<a class="ilike" target="_blank" rel="external" href="/wxilike/${id}">我收藏的名片</a>
+						#else
+							<a class="ilike" target="_blank" rel="external" href="/wxilike">我收藏的名片</a>
+						#end
     				</div>
     				<div class="right currentr">
     					<a class="likeme">收藏我的人</a>

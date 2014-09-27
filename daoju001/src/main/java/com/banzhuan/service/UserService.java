@@ -302,8 +302,13 @@ public class UserService {
 		}
 		if(StringUtil.isNotEmpty(account.getWxlogo()))
 		{
-			logger.error("avatar:" + account.getWxlogo() );
+			logger.error("wxlogo:" + account.getWxlogo() );
 			user.setWxlogo(account.getWxlogo());
+		}
+		if(StringUtil.isNotEmpty(account.getArea()))
+		{
+			logger.error("pca:" + account.getArea() );
+			user.setPca(account.getWxlogo());
 		}
 		user.setScore(1);
 		return userDAO.updateUserEntityById(user);

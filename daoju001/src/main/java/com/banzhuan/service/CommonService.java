@@ -71,6 +71,7 @@ import com.banzhuan.util.ChineseSpelling;
 import com.banzhuan.util.StringUtil;
 import com.cjc.weixinmp.WeixinException;
 import com.cjc.weixinmp.bean.Users;
+import com.cjc.weixinmp.bean.WeixinmpUser;
 
 /**
  * @author guichaoqun
@@ -947,14 +948,14 @@ public class CommonService {
 		relationDAO.insertRelationEntity(relation);
 	}
 	
-	public List<RelationEntity> getIlike(String wxid)
+	public List<RelationEntity> getIlike(int userid)
 	{
-		return relationDAO.queryRelationByWxid(wxid);
+		return relationDAO.queryRelationByUserid(userid);
 	}
 	
-	public List<RelationEntity> getLikeme(String wxid)
+	public List<RelationEntity> getLikeme(int userid2)
 	{
-		return relationDAO.queryRelationByWxid2(wxid);
+		return relationDAO.queryRelationByUserid2(userid2);
 	}
 	
 	public List<UserEntity> searchUser(UserEntity user)
@@ -980,8 +981,8 @@ public class CommonService {
 	public boolean isFeed(String mywxid)
 	{
 		try {
-			Users users = WeixinService.getInstance2().getUserManagerService().getUserList(null);
-			return users.data.openid.contains(mywxid);
+			WeixinmpUser user = WeixinService.getInstance2().getUserManagerService().getUser(mywxid);
+			return user.subscribe==1?true:false;
 		} catch (WeixinException e) {
 			logger.error("isFeed error:"+e.toString());
 		}

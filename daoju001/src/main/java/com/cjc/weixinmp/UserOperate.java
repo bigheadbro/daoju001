@@ -49,8 +49,7 @@ public class UserOperate extends AbstractUserOperate {
 		logger.error(event.ToUserName);
 		if(StringUtil.isEqual(event.ToUserName, "gh_62d1696b4731"))
 		{
-			button.addButton(CustomMenu.TYPE.click, "刀具名片", "message", null)
-			        .addSubButton(CustomMenu.TYPE.click, "进入微名片", "card", null);
+			button.addButton(CustomMenu.TYPE.view, "刀具名片", null,"http://mp.weixin.qq.com/s?__biz=MzAwNTAyOTg5Ng==&mid=205688315&idx=1&sn=41606c69afcd36a7d4f551c486f8dbaa#rd");
 			button.addButton(CustomMenu.TYPE.click, "小刀发布", "request", null)
 					.addSubButton(CustomMenu.TYPE.view, "刀具需求发布", null, "http://www.daoshifu.com/wxnewrequest")
 					.addSubButton(CustomMenu.TYPE.click, "查看今日需求", "todayrequest", null)

@@ -37,7 +37,7 @@
 						<a data-role="none" target="_blank" href="/wxrank50">查看前50名</a>
 					</div>
 				</div>
-				<h2>更多好友收藏您的名片，可以提升全国排名</h2>
+				<h2>更多好友收藏您的名片，可以提升全国排名${me.id}</h2>
 			</div>
 			<div class="rank-list">
 				#foreach($user in $users)

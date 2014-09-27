@@ -84,11 +84,11 @@
     			</div>
     			<div class="range clearfix">
                     <ul>
-                    	<a data-role="none">
+                    	<a target="_blank" rel="external" href="/wxrank" data-role="none">
                     		<h4>全国排名</h4>
                     		<h2>${rank}</h2>
                     	</a>
-                    	<a data-role="none">
+                    	<a target="_blank" rel="external" href="/wxilike/${user.id}" data-role="none">
                     		<h4>人脉</h4>
                     		<h2>${relationcount}</h2>
                     	</a>

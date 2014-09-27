@@ -215,7 +215,15 @@ public class UserController extends BaseController{
 			}
 		}
 		Collections.sort(brands,new Comparator<BrandEntity>() {   
-		    public int compare(BrandEntity o1, BrandEntity o2) {      
+		    public int compare(BrandEntity o1, BrandEntity o2) {   
+		    	if(o1.getKey() == 73)
+		    	{
+		    		return -1;
+		    	}
+		    	if(o2.getKey() == 73)
+		    	{
+		    		return 1;
+		    	}
 		        return (ChineseSpelling.letterToNum(ChineseSpelling.getFirstLetter(o1.getName()))-ChineseSpelling.letterToNum(ChineseSpelling.getFirstLetter(o2.getName())));
 		    }
 		}); 
@@ -946,7 +954,15 @@ public class UserController extends BaseController{
 			}
 		}
 		Collections.sort(brands,new Comparator<BrandEntity>() {   
-		    public int compare(BrandEntity o1, BrandEntity o2) {      
+		    public int compare(BrandEntity o1, BrandEntity o2) {    
+		    	if(o1.getKey() == 73)
+		    	{
+		    		return -1;
+		    	}
+		    	if(o2.getKey() == 73)
+		    	{
+		    		return 1;
+		    	}
 		        return (ChineseSpelling.letterToNum(ChineseSpelling.getFirstLetter(o1.getName()))-ChineseSpelling.letterToNum(ChineseSpelling.getFirstLetter(o2.getName())));
 		    }
 		}); 

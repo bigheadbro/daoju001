@@ -35,17 +35,17 @@
 		]]>
 	</select>
 
-	<select id="queryRelationByWxid" parameterType="String"
+	<select id="queryRelationByUserid" parameterType="int"
 			resultMap="RelationResultMap">
 		<![CDATA[
-			SELECT * from t_relation t where t.wxid=#{wxid}
+			SELECT * from t_relation t where t.userid=#{userid}
 		]]>
 	</select>
 	
-	<select id="queryRelationByWxid2" parameterType="String"
+	<select id="queryRelationByUserid2" parameterType="int"
 			resultMap="RelationResultMap">
 		<![CDATA[
-			SELECT * from t_relation t where t.wxid2=#{wxid2}
+			SELECT * from t_relation t where t.userid2=#{userid2}
 		]]>
 	</select>
 	

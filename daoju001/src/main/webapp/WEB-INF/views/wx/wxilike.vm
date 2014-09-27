@@ -58,7 +58,11 @@
     					<a class="ilike">我收藏的名片</a>
     				</div>
     				<div class="right">
-    					<a class="likeme"target="_blank" rel="external" href="/wxlikeme">收藏我的人</a>
+						#if($stringUtil.isNotEmpty(${id}))
+							<a class="likeme"target="_blank" rel="external" href="/wxlikeme/${id}">收藏我的人</a>
+						#else
+							<a class="likeme"target="_blank" rel="external" href="/wxlikeme">收藏我的人</a>
+						#end
     				</div>
     			</div>
 			</div>

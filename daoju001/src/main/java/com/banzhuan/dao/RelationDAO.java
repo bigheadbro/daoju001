@@ -15,9 +15,9 @@ public interface RelationDAO {
 	 */
 	RelationEntity queryRelationByRelation(RelationEntity relation);
 	
-	List<RelationEntity> queryRelationByWxid(String wxid);
+	List<RelationEntity> queryRelationByUserid(int userid);
 	
-	List<RelationEntity> queryRelationByWxid2(String wxid2);
+	List<RelationEntity> queryRelationByUserid2(int userid2);
 
 	public int insertRelationEntity(RelationEntity relation);
 	

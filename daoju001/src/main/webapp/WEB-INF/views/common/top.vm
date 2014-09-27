@@ -42,27 +42,27 @@
     				#end
 					#if($!stringUtil.isContains($request.getServletPath(),"/items") || $!stringUtil.isContains($request.getServletPath(),"/stocks"))
                     <li class="current ctshop">
-                        <a>刀具商城</a>
-						<ul class="ctshop-dropdown">
+                        <a rel="external" href="/items">刀具商城</a>
+						<!--<ul class="ctshop-dropdown">
                             <li>
                                 <a rel="external" href="/items">平价刀具</a>
                             </li>
                             <li>
                                 <a rel="external" href="/stocks">清仓拍</a>
                             </li>
-                        </ul>
+                        </ul>-->
                     </li>
     				#else
     				<li class="ctshop">
-                        <a>刀具商城</a>
-						<ul class="ctshop-dropdown">
+                        <a rel="external" href="/items">刀具商城</a>
+						<!--<ul class="ctshop-dropdown">
                             <li>
                                 <a rel="external" href="/items">平价刀具</a>
                             </li>
                             <li>
                                 <a rel="external" href="/stocks">清仓拍</a>
                             </li>
-                        </ul>
+						</ul>-->
                     </li>
     				#end
     				#if($!stringUtil.isContains($request.getServletPath(),"/products") )

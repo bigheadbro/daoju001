@@ -22,6 +22,7 @@ import java.util.Map.Entry;
 import java.util.Set;
 import java.util.UUID;
 
+import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -196,10 +197,10 @@ public class CommonController extends BaseController{
 		mv.addObject("requests", requests);
 		
 		List<ProductEntity> products = new ArrayList<ProductEntity>();
-		products.add(commonService.getProduct(70));
-		products.add(commonService.getProduct(138));
-		products.add(commonService.getProduct(141));
-		products.add(commonService.getProduct(79));
+		products.add(commonService.getProduct(144));
+		products.add(commonService.getProduct(145));
+		products.add(commonService.getProduct(38));
+		products.add(commonService.getProduct(116));
 		mv.addObject("products", products);
 		
 		List<QuestionEntity> questions = new ArrayList<QuestionEntity>();
@@ -227,10 +228,10 @@ public class CommonController extends BaseController{
 		mv.addObject("requests", requests);
 		
 		List<ProductEntity> products = new ArrayList<ProductEntity>();
-		products.add(commonService.getProduct(70));
-		products.add(commonService.getProduct(138));
-		products.add(commonService.getProduct(141));
-		products.add(commonService.getProduct(79));
+		products.add(commonService.getProduct(144));
+		products.add(commonService.getProduct(145));
+		products.add(commonService.getProduct(38));
+		products.add(commonService.getProduct(116));
 		mv.addObject("products", products);
 		
 		List<QuestionEntity> questions = new ArrayList<QuestionEntity>();
@@ -1705,6 +1706,15 @@ public class CommonController extends BaseController{
 				account.setWxid(openid.openid);
 				WeixinmpUser wxUser = WeixinService.getInstance2().getUserManagerService().getUser(openid.openid);
 				account.setWxlogo(wxUser.headimgurl);
+				if(wxUser.province == null)
+				{
+					wxUser.province="";
+				}
+				if(wxUser.city == null)
+				{
+					wxUser.city="";
+				}
+				account.setArea(wxUser.province+wxUser.city);
 				request.getSession().setAttribute("account", account);
 				if(StringUtil.isNotEmpty(openid.openid))
 				{
@@ -1757,7 +1767,7 @@ public class CommonController extends BaseController{
 		ModelAndView view = new ModelAndView("wx/wxilike");
 		Account account = (Account) WebUtils.getSessionAttribute(request, "account");
 		logger.error("test");
-		List<RelationEntity> relations = commonService.getIlike(account.getWxid());
+		List<RelationEntity> relations = commonService.getIlike(account.getUserId());
 		view.addObject("relations",relations);
 		
 		return view;
@@ -1768,9 +1778,29 @@ public class CommonController extends BaseController{
 		ModelAndView view = new ModelAndView("wx/wxlikeme");
 		Account account = (Account) WebUtils.getSessionAttribute(request, "account");
 		logger.error("likeme:"+account.getWxid());
-		List<RelationEntity> relations = commonService.getLikeme(account.getWxid());
+		List<RelationEntity> relations = commonService.getLikeme(account.getUserId());
 		view.addObject("relations",relations);
 		
+		return view;
+	}
+	
+	@RequestMapping(value="/wxilike/{id}")
+	public ModelAndView wxilike(HttpServletRequest request, HttpServletResponse response, @PathVariable String id) throws WeixinException, IOException {
+		ModelAndView view = new ModelAndView("wx/wxilike");
+		int userid = Integer.valueOf(id);
+		List<RelationEntity> relations = commonService.getIlike(userid);
+		view.addObject("relations",relations);
+		view.addObject("id",id);
+		return view;
+	}
+	
+	@RequestMapping(value="/wxlikeme/{id}")
+	public ModelAndView wxlikeme(HttpServletRequest request, HttpServletResponse response, @PathVariable String id) throws WeixinException, IOException {
+		ModelAndView view = new ModelAndView("wx/wxlikeme");
+		int userid = Integer.valueOf(id);
+		List<RelationEntity> relations = commonService.getLikeme(userid);
+		view.addObject("relations",relations);
+		view.addObject("id",id);
 		return view;
 	}
 	
@@ -1841,6 +1871,7 @@ public class CommonController extends BaseController{
 			request.getSession().setAttribute("account", account);
 			logger.error("22");
 			UserEntity user = commonService.getUser(userid);
+
 			if(user.getId() == me.getId())//是自己的名片
 			{
 				logger.error("33");

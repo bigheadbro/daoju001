@@ -240,9 +240,15 @@ public class UserController extends BaseController{
 			{
 				return mv;
 			}
-			if(userService.updateUserAccnt(request, form, user, account, result) == 0)
+			int aa = userService.updateUserAccnt(request, form, user, account, result);
+			if(aa == 0)
 			{
 				JsonUtil.showAlert(response, "更新资料失败", "公司名已存在，请重新输入！", "确定", "", "#");
+				return mv;
+			}
+			else if(aa == 2)
+			{
+				JsonUtil.showAlert(response, "更新资料失败", "用户名已存在，请重新输入！", "确定", "", "#");
 				return mv;
 			}
 			JsonUtil.showAlert(response, "更新资料", "公司资料更新成功~~", "确定", "", "#");

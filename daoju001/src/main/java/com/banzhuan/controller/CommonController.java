@@ -1959,12 +1959,15 @@ public class CommonController extends BaseController{
 			relation.setUserid2(form.getUserid2());
 			if(commonService.queryRelationByRelation(relation) == null)
 			{
-				WeixinService.getInstance2().getMessageService().sendTemplate(
-						form.getWxid(), 
+				if(form.getWxid2() != null)
+				{
+					WeixinService.getInstance2().getMessageService().sendTemplate(
+						form.getWxid2(), 
 						"t8UeZw6qUAKTDNgPlvMS01g9HhraLhkBQ4aZCuK3jUc", 
-						"您好，有一位用户收藏了您的名片", form.getWxname2()+","+form.getWxname()+"刚刚收藏了您的麦辛刀具名片", StringUtil.getCurrentTime(), "点击查看他的名片", 
+						"您好，有一位用户收藏了您的名片", form.getWxname2()+", "+form.getWxname()+"刚刚收藏了您的麦辛刀具名片", StringUtil.getCurrentTime(), "点击查看他的名片", 
 						"https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxb5f0887883f34822&redirect_uri=http://www.daoshifu.com/wxcard/"
 						+ form.getUserid() +"&response_type=code&scope=snsapi_base&state=s1#wechat_redirect");
+				}
 				commonService.addRelation(form);
 			}
 		}

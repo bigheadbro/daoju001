@@ -73,7 +73,7 @@ public class MessageService {
     	msg.template_id = templateid;
     	msg.url = url;
     	msg.topcolor = "#aaaaaa";
-    	msg.addFirst(first, "#0099cb");
+    	msg.addFirst(first, "#aaaaaa");
     	msg.addKeyword1(keyword1, "#0099cb");
     	msg.addKeyword2(keyword2, "#0099cb");
     	msg.addRemark(remark, "#aaaaaa");

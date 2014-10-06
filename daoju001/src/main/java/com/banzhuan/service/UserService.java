@@ -361,6 +361,10 @@ public class UserService {
 				user.setCompanyName(form.getCompanyName());
 				account.setCompanyName(form.getCompanyName());
 			}
+			if(userDAO.queryUserEntityByName(form.getNick().trim()) != null && StringUtil.isNotEqual(form.getNick().trim(),account.getUserName().trim())) 
+			{
+				return 2;
+			}
 			if(StringUtil.isNotEmpty(form.getNick()))
 			{
 				user.setNick(form.getNick());

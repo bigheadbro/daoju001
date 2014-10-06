@@ -13,6 +13,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -55,6 +57,8 @@ import org.slf4j.LoggerFactory;
 
 import com.banzhuan.common.Constant;
 import com.banzhuan.controller.CommonController;
+import com.banzhuan.entity.BrandEntity;
+import com.banzhuan.entity.UserEntity;
 
 public class Util {
 
@@ -605,6 +609,16 @@ public class Util {
             System.out.println(e);
         }
 		return result;
+	}
+	
+	public List<UserEntity> sortProviders(List<UserEntity> providers)
+	{
+		Collections.sort(providers,new Comparator<UserEntity>() {   
+		    public int compare(UserEntity o1, UserEntity o2) {   
+				return o2.getAuthority() - o1.getAuthority();
+		    }
+		}); 
+		return providers;
 	}
 	public static void main(String[] args) {
 		System.out.print(querySteel("钢材Q295"));

@@ -1091,7 +1091,9 @@ opacity: .3;
 .agent-detail h2{color:#606060;font-size:14px;padding: 5px 5px 3px 0;}
 .agent-detail h2 a.agent-name{overflow:hidden;white-space:nowrap;text-overflow:ellipsis;display:inline-block;max-width:100px;float:left;}
 .agent-detail h4{color:#606060;font-size:12px;font-weight:100;overflow:hidden;white-space:nowrap;}
-.agent-detail h2 a.fancybox-v{float:left;color:#ff9000;margin-left: 3px;font-size: 13px;margin-top: 4px;}
+.agent-detail h2 a.fancybox-v.red{float:left;color:red;margin-left: 3px;font-size: 13px;}
+.agent-detail h2 a.red{float:left;color:red;margin-left: 3px;font-size: 13px;}
+.agent-detail h2 a.fancybox-v{float:left;color:#ff9000;margin-left: 3px;font-size: 13px;}
 .agent-detail h2 a.fancybox-v img{width:12px}
 .download{float:right;margin:17px;}
 .download a{background-color: #0088b5;color: white;padding: 10px 30px;border-radius: 5px;}

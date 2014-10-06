@@ -33,7 +33,9 @@ public abstract class AbstractEventRequest extends AbstractRequest {
         /** 点击菜单跳转链接时的事件推送  */
         VIEW,
         /** “小店”订单支付完成的事件推送（不知是否为这个字符窜，从文档的数据样例中得到） */
-        merchant_order;
+        merchant_order,
+        /** 模板信息 */
+        template;
     }
 
 }

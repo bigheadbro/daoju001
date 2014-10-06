@@ -66,6 +66,7 @@ import com.cjc.weixinmp.bean.RequestHead;
 import com.cjc.weixinmp.bean.ScanEventRequest;
 import com.cjc.weixinmp.bean.SignatureInfo;
 import com.cjc.weixinmp.bean.SubscribeEventRequest;
+import com.cjc.weixinmp.bean.TemplateRequest;
 import com.cjc.weixinmp.bean.TextRequest;
 import com.cjc.weixinmp.bean.TextResponse;
 import com.cjc.weixinmp.bean.VideoRequest;
@@ -511,7 +512,11 @@ public abstract class AbstractWeixinmpController {
                 operate.setController(this);
                 // 调用处理器
                 try {
-                    if (req instanceof TextRequest) { // 用户发送文本信息事件
+                	if (req instanceof TemplateRequest) { // 用户发送文本信息事件
+                        logWarn("before:"+req.toString());
+                        resp = operate.onTemplateMessage((TemplateRequest) req);
+                        logWarn("after:"+resp.toString());
+                    } else if (req instanceof TextRequest) { // 用户发送文本信息事件
                         logWarn("before:"+req.toString());
                         resp = operate.onTextMessage((TextRequest) req);
                         logWarn("after:"+resp.toString());
@@ -565,6 +570,12 @@ public abstract class AbstractWeixinmpController {
                             resp = operate.onClickEvent(clickEvent);
                             break;
                         case VIEW: // 点击菜单跳转链接时的事件推送 
+                        	TemplateRequest templateEvent = (TemplateRequest) unMarshallerJAXBContexts. //
+                        			get("event_" + EventRequest.EventType.template).createUnmarshaller().unmarshal(reader);
+                        	logInfo(templateEvent.toString());
+                        	resp = operate.onTemplateMessage(templateEvent);
+                        	break;
+                        case template: 
                         	ClickEventRequest viewEvent = (ClickEventRequest) unMarshallerJAXBContexts. //
                         			get("event_" + EventRequest.EventType.VIEW).createUnmarshaller().unmarshal(reader);
                         	logInfo(viewEvent.toString());

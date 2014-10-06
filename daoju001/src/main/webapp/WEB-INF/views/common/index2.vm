@@ -44,6 +44,9 @@ $(function() {
 <div class="main-content-wrap clearfix">
 	<div class="flexslider">
       <ul class="slides">
+		<li>
+    	    <a><img src="/img/banner/banner13.jpg" /></a>
+    	</li>
     	<li>
     	    <a><img src="/img/banner/banner12.jpg" /></a>
     	</li>

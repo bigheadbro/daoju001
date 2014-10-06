@@ -297,6 +297,11 @@ public class AdminController extends BaseController{
 			agent.setAuthority(1);
 			agent.setProductlimit(2);
 		}
+		else if(StringUtil.isEqual(type, "4"))
+		{
+			agent.setAuthority(5);
+			agent.setProductlimit(10);
+		}
 		userDAO.updateUserEntityById(agent);
 	}
 	

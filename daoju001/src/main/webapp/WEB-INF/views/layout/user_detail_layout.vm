@@ -48,7 +48,7 @@
 											</a>
                                         </li>
 									#end
-									#if($!{account.authority} != 1)
+									#if($!{account.authority} != 0)
 									<li class="nosidepadding">
 										<span class="item">我的上传<i></i></span>
 										<ul class="subitem">
@@ -61,7 +61,7 @@
                                                     <a href="newproduct">我的展会</a>
                                                 </li>
         									#end
-        									#if($!{account.authority} == 4)
+        									#if($!{account.authority} >= 4)
                                                 #if($!stringUtil.isContains($request.getServletPath(),"/mysample") || $!stringUtil.isContains($request.getServletPath(),"/uploadsample"))
                                                     <li class="current">
                                                         <a href="uploadsample">我的样本</a>
@@ -75,7 +75,7 @@
 										</ul>
 									</li>
 									#end
-									#if($!{account.authority} == 1)
+									#if($!{account.authority} == 0)
 										#if($!stringUtil.isContains($request.getServletPath(),"/newquestion") || $!stringUtil.isContains($request.getServletPath(),"/oldquestion") ||$!stringUtil.isContains($request.getServletPath(),"/draft"))
                                             <li class="current">
                                                 <a href="newquestion">我的问题</a>

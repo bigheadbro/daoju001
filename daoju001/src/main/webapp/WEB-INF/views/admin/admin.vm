@@ -50,9 +50,11 @@ $(function() {
 		供应商
 	#elseif(${agent.authority} == 4)
 		代理商
+	#elseif(${agent.authority} == 5)
+		厂商
 	#end
 	[
-	<a class="updateuser" data="${agent.id}" type=1>变身代理商</a><a class="updateuser" data="${agent.id}" type=2>变身供应商</a><a class="updateuser" data="${agent.id}" type=3>变身普通用户</a>
+	<a class="updateuser" data="${agent.id}" type=4>变身厂商</a><a class="updateuser" data="${agent.id}" type=1>变身代理商</a><a class="updateuser" data="${agent.id}" type=2>变身供应商</a><a class="updateuser" data="${agent.id}" type=3>变身普通用户</a>
 	]
 	#if($stringUtil.isNotEmpty($agent.verifiedLink))
 		<a target="_blank" href="${agent.verifiedLink}" />代理证书连接</a>

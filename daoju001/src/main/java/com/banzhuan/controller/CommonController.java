@@ -1853,6 +1853,10 @@ public class CommonController extends BaseController{
 			me = commonService.getUserByWxid(openid.openid);
 			account = new Account();
 			account.setWxid(openid.openid);
+			if(me!=null)
+			{
+				account.setUserId(me.getId());
+			}
 			request.getSession().setAttribute("account", account);
 		}
 		else
@@ -1868,6 +1872,10 @@ public class CommonController extends BaseController{
 				account = new Account();
 			}
 			account.setWxid(me.getWxid());
+			if(me!=null)
+			{
+				account.setUserId(me.getId());
+			}
 			request.getSession().setAttribute("account", account);
 			logger.error("22");
 			UserEntity user = commonService.getUser(userid);
@@ -1946,7 +1954,19 @@ public class CommonController extends BaseController{
 		{
 			logger.error("before add");
 			logger.error("add relation:"+form.getWxid()+":"+form.getWxid2());
-			commonService.addRelation(form);
+			RelationEntity relation = new RelationEntity();
+			relation.setUserid(form.getUserid());
+			relation.setUserid2(form.getUserid2());
+			if(commonService.queryRelationByRelation(relation) == null)
+			{
+				WeixinService.getInstance2().getMessageService().sendTemplate(
+						form.getWxid(), 
+						"t8UeZw6qUAKTDNgPlvMS01g9HhraLhkBQ4aZCuK3jUc", 
+						"您好，有一位用户收藏了您的名片", form.getWxname2()+","+form.getWxname()+"刚刚收藏了您的麦辛刀具名片", StringUtil.getCurrentTime(), "点击查看他的名片", 
+						"https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxb5f0887883f34822&redirect_uri=http://www.daoshifu.com/wxcard/"
+						+ form.getUserid() +"&response_type=code&scope=snsapi_base&state=s1#wechat_redirect");
+				commonService.addRelation(form);
+			}
 		}
 	}
 	
@@ -1959,7 +1979,7 @@ public class CommonController extends BaseController{
 		userService.updateUserReadCountById(user.getId());
 		view.addObject("relationcount",commonService.getRelationCount(user.getId()));
 		view.addObject("rank",commonService.queryUserRank(user.getId()));
-		view.addObject("isFeed",commonService.isFeed(user.getWxid()));*/
+		view.addObject("isFeed",commonService.isFeed(user.getWxid()));
 		
 		ModelAndView view = new ModelAndView("wx/wxothercard");
 		UserEntity user = commonService.getUser(447);
@@ -1972,8 +1992,10 @@ public class CommonController extends BaseController{
 		view.addObject("rank",commonService.queryUserRank(user.getId()));
 		logger.error("55");
 		//ModelAndView view = new ModelAndView("wx/wxindex");
-		return view;
-		//return new ModelAndView(new RedirectView("http://www.baidu.com")); 
+		
+		return view;*/
+		WeixinService.getInstance2().getMessageService().sendTemplate("oCB4ds29h0lB9E5rw7V3d4DFL5Lo", "t8UeZw6qUAKTDNgPlvMS01g9HhraLhkBQ4aZCuK3jUc", "有一位新用户收藏了您的名片", "时寅超刚刚收藏了您的名片", StringUtil.getCurrentTime(), "点击查看详情", "http://www.daoshifu.com");
+		return new ModelAndView(new RedirectView("http://www.baidu.com")); 
 	}
 	
 	@RequestMapping(value = "/wxproducts/{id}")

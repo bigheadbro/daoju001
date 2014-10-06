@@ -7,9 +7,11 @@ import com.cjc.weixinmp.bean.GlobalError;
 import com.cjc.weixinmp.bean.ImageMessage;
 import com.cjc.weixinmp.bean.MusicMessage;
 import com.cjc.weixinmp.bean.NewsMessage;
+import com.cjc.weixinmp.bean.TemplateMessage;
 import com.cjc.weixinmp.bean.TextMessage;
 import com.cjc.weixinmp.bean.VideoMessage;
 import com.cjc.weixinmp.bean.VoiceMessage;
+import com.cjc.weixinmp.bean.TemplateMessage.TemplateItem;
 
 
 /**
@@ -48,6 +50,38 @@ public class MessageService {
         }
     }
 
+    private void sendTemplateMessae(AbstractMessage message) throws WeixinException {
+        String url = controller.getProperty("template_msg_url", null, false);
+        try {
+            GlobalError error = controller.postWithJson(url, message, GlobalError.class, "sendTemplateMessae");
+            controller.logInfo("发送主动消息结果：" + error);
+        } catch (WeixinException e) {
+            controller.logError("sendTemplateMessae"+e.getMessage());
+            if (e.isNeedLog()) {
+                controller.saveToFile(e.getLogFilename(), e.getLogContent());
+            }
+            throw e;
+        } catch (IOException e) {
+            throw new WeixinException(CommonUtils.getNextId() + "_SendMessageError(" + message.msgtype + ")", e.getMessage(), e);
+        }
+    }
+    
+    public void sendTemplate(String toUser, String templateid, String first, String keyword1, String keyword2, String remark, String url) throws WeixinException
+    {
+    	TemplateMessage msg = new TemplateMessage();
+    	msg.touser = toUser;
+    	msg.template_id = templateid;
+    	msg.url = url;
+    	msg.topcolor = "#aaaaaa";
+    	msg.addFirst(first, "#0099cb");
+    	msg.addKeyword1(keyword1, "#0099cb");
+    	msg.addKeyword2(keyword2, "#0099cb");
+    	msg.addRemark(remark, "#aaaaaa");
+    	msg.fillData();
+    	controller.logWarn("发送模板消息：" + msg);
+    	sendTemplateMessae(msg);
+    }
+    
     /**
      * 主动发送一个文本消息
      * @param toUser

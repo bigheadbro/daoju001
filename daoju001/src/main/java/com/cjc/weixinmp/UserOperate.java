@@ -6,6 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+
 import com.banzhuan.entity.QuickrequestEntity;
 import com.banzhuan.service.CommonService;
 import com.banzhuan.util.StringUtil;
@@ -16,6 +17,8 @@ import com.cjc.weixinmp.bean.CustomMenu.CustomButton;
 import com.cjc.weixinmp.bean.ClickEventRequest;
 import com.cjc.weixinmp.bean.NewsResponse;
 import com.cjc.weixinmp.bean.SubscribeEventRequest;
+import com.cjc.weixinmp.bean.TemplateRequest;
+import com.cjc.weixinmp.bean.TemplateResponse;
 import com.cjc.weixinmp.bean.TextRequest;
 import com.cjc.weixinmp.bean.TextResponse;
 
@@ -39,6 +42,13 @@ public class UserOperate extends AbstractUserOperate {
     	{
     		tr.Content =  Util.querySteel(text.Content);
     	}
+		return tr;
+    }
+	
+	@Override
+    public AbstractResponse onTemplateMessage(TemplateRequest template) throws WeixinException {
+		logger.error("template message");
+		TemplateResponse tr = new TemplateResponse();
 		return tr;
     }
 	

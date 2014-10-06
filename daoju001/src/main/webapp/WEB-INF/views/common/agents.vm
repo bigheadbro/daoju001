@@ -17,7 +17,7 @@
                         <h1>$stringUtil.convertToChar($mapEntry.key)</h1>
 						#set ($agentMap2 = $mapEntry.value)
 						#foreach ($mapEntry2 in $agentMap2.entrySet())
-							#set ($agentList = $mapEntry2.value)
+							#set ($agentList = $util.sortProviders($mapEntry2.value))
                             #foreach($agent in $agentList)							
 								#if($velocityCount == 1)
 								<div class="brand-list clearfix">
@@ -47,8 +47,16 @@
                                     <div class="agent-detail">
                                         <h2 class="clearfix">
 											<a class="agent-name" href="/agents/$!{agent.id}">$!{agent.companyName}</a>
-											#if($stringUtil.isNotEmpty(${agent.verifiedLink}))
-												<a class="fancybox-v" title="$!{agent.companyName}的代理证书" href="$!{agent.verifiedLink}"><代理></a>
+											#if(${agent.authority} == 5)
+												#if($stringUtil.isNotEmpty(${agent.verifiedLink}))
+													<a class="fancybox-v red" title="$!{agent.companyName}的代理证书" href="$!{agent.verifiedLink}"><厂商></a>
+												#else
+													<a class="red"><厂商></a>
+												#end
+											#else
+    											#if($stringUtil.isNotEmpty(${agent.verifiedLink}))
+    												<a class="fancybox-v" title="$!{agent.companyName}的代理证书" href="$!{agent.verifiedLink}"><代理></a>
+    											#end
 											#end
 										</h2>
                                         <h4>$stringUtil.getBrand($!{agent.brand}) $stringUtil.getBrand($!{agent.brand2})</h4>

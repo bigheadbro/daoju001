@@ -12,6 +12,7 @@ import com.cjc.weixinmp.bean.LocationEventRequest;
 import com.cjc.weixinmp.bean.LocationRequest;
 import com.cjc.weixinmp.bean.ScanEventRequest;
 import com.cjc.weixinmp.bean.SubscribeEventRequest;
+import com.cjc.weixinmp.bean.TemplateRequest;
 import com.cjc.weixinmp.bean.TextRequest;
 import com.cjc.weixinmp.bean.TextResponse;
 import com.cjc.weixinmp.bean.VideoRequest;
@@ -213,6 +214,11 @@ public class AbstractUserOperate {
      *             参见 {@link #onSubscribeEvent(SubscribeEventRequest)}
      */
     protected AbstractResponse onMerchantOrderPayEvent(OrderPayEventRequest orderPayEvent) throws WeixinException {
+    	throw new NotImplException();
+    }
+    
+    //template message 
+    protected AbstractResponse onTemplateMessage(TemplateRequest template) throws WeixinException {
     	throw new NotImplException();
     }
 

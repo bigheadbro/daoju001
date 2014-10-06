@@ -78,8 +78,8 @@
 				  用户类型
 				</li>
 			  <li class="value">
-				  <input type="radio" name="$!{status.expression}" id="user" value=1 /><label for="user">我是直接用户</label>
-				  <input type="radio" name="$!{status.expression}" id="provider" checked value=0 /><label for="provider">我是刀具供应商</label>
+				  <input type="radio" name="$!{status.expression}" id="user" value=0 /><label for="user">我是直接用户</label>
+				  <input type="radio" name="$!{status.expression}" id="provider" checked value=1 /><label for="provider">我是刀具供应商</label>
 				</li>
 			</ul>
 			#springBind("form.mail")

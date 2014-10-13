@@ -24,35 +24,9 @@
 									required:"请输入密码"
 								}
 							},
-    						errorPlacement: function(error, element) {   
-								$(".error-msg").show();
-    							var hasError = true;
-    							$(".error-msg label").each(function(){
-    								if($(this).attr("for") == error.attr("for")){
-    									hasError = false;
-    								}
-    							});
-    							if(hasError)
-    							{
-                                	error.appendTo($(".error-msg"));     
-    							}
-								else
-								{
-									$(".error-msg label").each(function(){
-    									if($(this).attr("for") == error.attr("for")){
-    										$(this).text(error.text());
-    									}
-    								});
-								}
-                            },
-    						success:function(label){
-								$(".error-msg").hide();
-								$(".error-msg label").each(function(){
-									if($(this).attr("for") == $(label).attr("for")){
-										$(this).text("");
-									}
-								}); 
-    						}
+							errorContainer:".error-msg",
+    						errorLabelContainer: ".error-msg",
+							errorElement:"em"
 						});
 					});
 			</script>
@@ -134,7 +108,7 @@
     		<div class="seperation">&nbsp;</div>
     		<div class="verified">
     		  <h2>官方认证</h2>
-    			<p>各品牌一级代理商二十余家，彻底杜绝假货,<br/>建立诚信刀具咨询平台。</p>
+    			<p>各品牌一级代理商四十余家，彻底杜绝假货,<br/>建立诚信刀具咨询平台。</p>
     		</div>
     		<div class="goodservice">
     		  <h2>专业服务</h2>

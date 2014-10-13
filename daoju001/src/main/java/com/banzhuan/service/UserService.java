@@ -853,6 +853,10 @@ public class UserService {
     	{
     		form.setLink(sample.getLink());
     	}
+		if(sample.getBrandid()>0)
+		{
+			form.setBrandid(sample.getBrandid());
+		}
     }
     
     public Result queryQuestionById(int id)

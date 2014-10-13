@@ -672,7 +672,7 @@ public class StringUtil {
 		brandMap.put(74, "WIDIN,widin.jpg,韩国");
 		brandMap.put(75, "YESTOOL,YESTOOL.jpg,韩国");
 		brandMap.put(76, "威士,weishi.jpg,中国");
-		brandMap.put(77, "厦门金鹭,jinlu.jpg,中国");
+		brandMap.put(77, "金鹭,jinlu.jpg,中国");
 		brandMap.put(100, "其他,otherbrand.jpg,其他");
 		
 		brandMap.put(10000, "刀师傅,刀师傅.jpg,中国");

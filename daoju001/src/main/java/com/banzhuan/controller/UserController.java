@@ -873,6 +873,10 @@ public class UserController extends BaseController{
 					form.setIsEdit(1);
 					form.setSid(id);
 					userService.setSampleFormBySid(form, id);
+					if(form.getBrandid()>0)
+					{
+						mv.addObject("brandid",form.getBrandid());
+					}
 				}
 			}
 			return mv;

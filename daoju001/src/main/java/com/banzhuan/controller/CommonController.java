@@ -197,10 +197,10 @@ public class CommonController extends BaseController{
 		mv.addObject("requests", requests);
 		
 		List<ProductEntity> products = new ArrayList<ProductEntity>();
-		products.add(commonService.getProduct(144));
-		products.add(commonService.getProduct(145));
-		products.add(commonService.getProduct(38));
-		products.add(commonService.getProduct(116));
+		products.add(commonService.getProduct(140));
+		products.add(commonService.getProduct(71));
+		products.add(commonService.getProduct(129));
+		products.add(commonService.getProduct(128));
 		mv.addObject("products", products);
 		
 		List<QuestionEntity> questions = new ArrayList<QuestionEntity>();
@@ -228,10 +228,10 @@ public class CommonController extends BaseController{
 		mv.addObject("requests", requests);
 		
 		List<ProductEntity> products = new ArrayList<ProductEntity>();
-		products.add(commonService.getProduct(144));
-		products.add(commonService.getProduct(145));
-		products.add(commonService.getProduct(38));
-		products.add(commonService.getProduct(116));
+		products.add(commonService.getProduct(140));
+		products.add(commonService.getProduct(71));
+		products.add(commonService.getProduct(129));
+		products.add(commonService.getProduct(128));
 		mv.addObject("products", products);
 		
 		List<QuestionEntity> questions = new ArrayList<QuestionEntity>();

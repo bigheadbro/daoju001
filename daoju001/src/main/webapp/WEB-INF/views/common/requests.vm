@@ -61,7 +61,7 @@ $(function() {
 									#if($stringUtil.isNotEmpty(${request.brand}))
 										${request.brand}
 									#else
-										无
+										无要求
 									#end</span>
 								<span><em>地区</em>${request.area}</span>
 								<span><em>时间</em>$stringUtil.formatDate(${request.gmtCreate})</span>
@@ -82,7 +82,7 @@ $(function() {
 		#parse("/common/page.vm")
 	</div>
 	<div class="product-side">
-		<div class="product-side-items">
+		<!--<div class="product-side-items">
     		#foreach($item in $items)
 				#if($velocityCount < 5)
 					<div class="item clearfix">
@@ -96,10 +96,10 @@ $(function() {
 					</div>
 				#end
 			#end
-    	</div>
+		</div>
 		<div class="advert">
     		<a href="/items"><img src="/img/ctshop.png" data-original /></a>
-    	</div>
+		</div>-->
 	</div>
 </div>
 #parse("/common/quickrequest.vm")

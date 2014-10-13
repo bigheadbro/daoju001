@@ -40,7 +40,7 @@
                         <a rel="external" href="/index">首页</a>
                     </li>
     				#end
-					#if($!stringUtil.isContains($request.getServletPath(),"/items") || $!stringUtil.isContains($request.getServletPath(),"/stocks"))
+					<!--#if($!stringUtil.isContains($request.getServletPath(),"/items") || $!stringUtil.isContains($request.getServletPath(),"/stocks"))
                     <li class="current ctshop">
                         <a rel="external" href="/items">刀具商城</a>
 						<!--<ul class="ctshop-dropdown">
@@ -51,7 +51,7 @@
                                 <a rel="external" href="/stocks">清仓拍</a>
                             </li>
                         </ul>-->
-                    </li>
+                    <!--</li>
     				#else
     				<li class="ctshop">
                         <a rel="external" href="/items">刀具商城</a>
@@ -63,8 +63,8 @@
                                 <a rel="external" href="/stocks">清仓拍</a>
                             </li>
 						</ul>-->
-                    </li>
-    				#end
+                   <!-- </li>
+    				#end-->
     				#if($!stringUtil.isContains($request.getServletPath(),"/products") )
                     <li class="current">
                         <a rel="external" href="/products">线上展会</a>

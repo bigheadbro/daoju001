@@ -947,7 +947,7 @@ opacity: .3;
 .uploadlogo-win .content .left .upload input[type="file"]{display: block;width: 104px;height: 41px;top: 0;left: 0;position: absolute;opacity:0;}
 .uploadlogo-win .content .right{float:left;margin-top:100px;}
 .uploadlogo-win .content .right .save{display:block;background-color:#63a200;color:white;border-radius:4px;text-align:center;padding:10px 20px;margin-top:20px;font-size:16px}
-.uploadlogo-win .content .thumb-container{background-color: #E0E0E0;border-radius: 8px;}
+.uploadlogo-win .content .thumb-container{background-color: #fafafa;border-radius: 8px;}
 .uploadlogo-win .content .preview-wrap{min-height: 200px;width: 310px;background-color: #E0E0E0;border-radius: 8px;overflow:hidden;text-align:center;display:table;}
 .uploadlogo-win .content .preview-out{display:table-cell;vertical-align:middle;} 
 .uploadlogo-win .content .preview{height:200px;width:310px;}
@@ -1094,7 +1094,7 @@ opacity: .3;
 .agent-detail h2 a.fancybox-v.red{float:left;color:red;margin-left: 3px;font-size: 13px;}
 .agent-detail h2 a.red{float:left;color:red;margin-left: 3px;font-size: 13px;}
 .agent-detail h2 a.fancybox-v{float:left;color:#ff9000;margin-left: 3px;font-size: 13px;}
-.agent-detail h2 a.fancybox-v img{width:12px}
+.agent-detail h2 a.fancybox-v img{width:12px;margin-top: 3px;}
 .download{float:right;margin:17px;}
 .download a{background-color: #0088b5;color: white;padding: 10px 30px;border-radius: 5px;}
 .gc-param{margin-top:10px;}

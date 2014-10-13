@@ -1,0 +1,1 @@
+update t_user user set cnt_sample = (select count(*) from t_sample sample where sample.agent_id = user.id)//更新脚本数量

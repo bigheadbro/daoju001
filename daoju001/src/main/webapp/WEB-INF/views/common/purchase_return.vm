@@ -6,7 +6,7 @@
 	<div class="order-state">
 		<div class="key">
 			<span class="state1">提交订单</span>
-			<span class="state2">付款到支付宝</span>
+			<span class="state2">付款到刀师傅</span>
 			<span class="state3">刀师傅发货</span>
 			<span class="state4">确认收货</span>
 		</div>

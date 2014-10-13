@@ -44,9 +44,6 @@ $(function() {
 <div class="main-content-wrap clearfix">
 	<div class="flexslider">
       <ul class="slides">
-		<li>
-    	    <a><img src="/img/banner/banner13.jpg" /></a>
-    	</li>
     	<li>
     	    <a><img src="/img/banner/banner12.jpg" /></a>
     	</li>
@@ -72,7 +69,7 @@ $(function() {
 									#if($stringUtil.isNotEmpty(${request.brand}))
 										${request.brand}
 									#else
-										无
+										无要求
 									#end</span>
 								<span><em>地区</em>${request.area}</span>
 								<span><em>时间</em>$stringUtil.formatDate(${request.gmtCreate})</span>
@@ -106,16 +103,16 @@ $(function() {
                 				<h5 class="name"><a href="/products/${product.id}">${product.name}</a></h5>
                 				<div class="param">
                 					$stringUtil.getBrand(${product.brandId})
-    								#if(${product.processMethod} > 0)
+    								#if(${product.processMethod} && ${product.processMethod} > 0)
 											$stringUtil.getMethod(${product.processMethod})
 										#end
-    								#if(${product.industry} > 0)
+    								#if(${product.industry} && ${product.industry} > 0)
 											$stringUtil.getIndustry(${product.industry})
 										#end
-    								#if(${product.wpMaterial} > 0)
+    								#if(${product.wpMaterial} && ${product.wpMaterial} > 0)
 											$stringUtil.getMaterial(${product.wpMaterial})
 										#end
-    								#if(${product.wpHardness} > 0)
+    								#if(${product.wpHardness} && ${product.wpHardness} > 0)
 											$stringUtil.getHardness(${product.wpHardness})
 										#end
                 				</div>
@@ -132,10 +129,10 @@ $(function() {
                 				<h5 class="name"><a href="/products/${product.id}">${product.name}</a></h5>
                 				<div class="param">
                 					$stringUtil.getBrand(${product.brandId})
-    								#if(${product.processMethod} > 0)$stringUtil.getMethod(${product.processMethod})#end
-    								#if(${product.industry} > 0)$stringUtil.getIndustry(${product.industry})#end
-    								#if(${product.wpMaterial} > 0)$stringUtil.getMaterial(${product.wpMaterial})#end
-    								#if(${product.wpHardness} > 0)$stringUtil.getHardness(${product.wpHardness})#end
+    								#if(${product.processMethod} && ${product.processMethod} > 0)$stringUtil.getMethod(${product.processMethod})#end
+    								#if(${product.industry} && ${product.industry} > 0)$stringUtil.getIndustry(${product.industry})#end
+    								#if(${product.wpMaterial} && ${product.wpMaterial} > 0)$stringUtil.getMaterial(${product.wpMaterial})#end
+    								#if(${product.wpHardness} && ${product.wpHardness} > 0)$stringUtil.getHardness(${product.wpHardness})#end
                 				</div>
     							<p>${product.description}</p>
     							<span>$stringUtil.formatDate(${product.gmtCreate})</span>

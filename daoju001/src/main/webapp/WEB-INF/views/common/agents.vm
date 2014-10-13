@@ -54,7 +54,7 @@
 													<a class="red"><厂商></a>
 												#end
 											#else
-    											#if($stringUtil.isNotEmpty(${agent.verifiedLink}))
+    											#if($stringUtil.isNotEmpty(${agent.verifiedLink}) && ${agent.authority} >= 4)
     												<a class="fancybox-v" title="$!{agent.companyName}的代理证书" href="$!{agent.verifiedLink}"><代理></a>
     											#end
 											#end

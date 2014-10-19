@@ -1997,8 +1997,28 @@ public class CommonController extends BaseController{
 		//ModelAndView view = new ModelAndView("wx/wxindex");
 		
 		return view;*/
-		WeixinService.getInstance2().getMessageService().sendTemplate("oCB4ds29h0lB9E5rw7V3d4DFL5Lo", "t8UeZw6qUAKTDNgPlvMS01g9HhraLhkBQ4aZCuK3jUc", "有一位新用户收藏了您的名片", "时寅超刚刚收藏了您的名片", StringUtil.getCurrentTime(), "点击查看详情", "http://www.daoshifu.com");
-		return new ModelAndView(new RedirectView("http://www.baidu.com")); 
+		//WeixinService.getInstance2().getMessageService().sendTemplate("oCB4ds29h0lB9E5rw7V3d4DFL5Lo", "t8UeZw6qUAKTDNgPlvMS01g9HhraLhkBQ4aZCuK3jUc", "有一位新用户收藏了您的名片", "时寅超刚刚收藏了您的名片", StringUtil.getCurrentTime(), "点击查看详情", "http://www.daoshifu.com");
+		//return new ModelAndView(new RedirectView("http://www.baidu.com")); 
+		ModelAndView view = new ModelAndView("wx/wxrank");
+		int rank = 332;
+		//通过自己的排名，获取前后几个人
+		Map<String,Object> bound = new HashMap<String,Object>();
+		if(rank<4)
+		{
+			bound.put("offset", 0);
+			bound.put("limit", 5);
+		}
+		else
+		{
+			bound.put("offset", rank-3);
+			bound.put("limit", 5);
+		}
+		UserEntity me = commonService.getUser(332);
+		view.addObject("me",me);
+		List<UserEntity> users = commonService.queryUserEntityOrderByScore(bound);
+		view.addObject("users",users);
+		view.addObject("rank",rank);
+		return view;
 	}
 	
 	@RequestMapping(value = "/wxproducts/{id}")

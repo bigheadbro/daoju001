@@ -621,6 +621,6 @@ public class Util {
 		return providers;
 	}
 	public static void main(String[] args) {
-		System.out.print(querySteel("钢材Q295"));
+		TwoDimensionCode.encoderQRCode("https://daoshifu.com/v/435","D:/hahaha/ccc.png");
 	}
 }

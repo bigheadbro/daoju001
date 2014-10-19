@@ -222,30 +222,30 @@
 			<version>2.4.2</version>
 		</dependency>
 		<!-- 页面装饰器组件 -->
-		
-		 <dependency>    
-          <groupId>net.sf.json-lib</groupId>    
-          <artifactId>json-lib</artifactId>    
-          <version>2.4</version>    
-          <classifier>jdk15</classifier>    
-      </dependency> 
-      
-      <dependency>
-		 <groupId>javax.mail</groupId>
-		 <artifactId>mail</artifactId>
-		 <version>1.4.3</version>
-	    </dependency>
-	    
-	    <dependency>
+
+		<dependency>
+			<groupId>net.sf.json-lib</groupId>
+			<artifactId>json-lib</artifactId>
+			<version>2.4</version>
+			<classifier>jdk15</classifier>
+		</dependency>
+
+		<dependency>
+			<groupId>javax.mail</groupId>
+			<artifactId>mail</artifactId>
+			<version>1.4.3</version>
+		</dependency>
+
+		<dependency>
 			<groupId>com.belerweb</groupId>
 			<artifactId>pinyin4j</artifactId>
 			<version>2.5.0</version>
 		</dependency>
-		
+
 		<dependency>
-			 <groupId>org.apache.sanselan</groupId>
-       <artifactId>sanselan</artifactId>
-       <version>0.97-incubator</version>
+			<groupId>org.apache.sanselan</groupId>
+			<artifactId>sanselan</artifactId>
+			<version>0.97-incubator</version>
 		</dependency>
 		<dependency>
 			<groupId>xerces</groupId>
@@ -253,19 +253,19 @@
 			<version>2.9.1</version>
 		</dependency>
 		<dependency>
-		    <groupId>org.glassfish.jersey.core</groupId>
-		    <artifactId>jersey-client</artifactId>
-		    <version>2.6</version>
+			<groupId>org.glassfish.jersey.core</groupId>
+			<artifactId>jersey-client</artifactId>
+			<version>2.6</version>
 		</dependency>
 		<dependency>
-		    <groupId>commons-codec</groupId>
-		    <artifactId>commons-codec</artifactId>
-		    <version>1.6</version>
+			<groupId>commons-codec</groupId>
+			<artifactId>commons-codec</artifactId>
+			<version>1.6</version>
 		</dependency>
 		<dependency>
 			<groupId>commons-httpclient</groupId>
 			<artifactId>commons-httpclient</artifactId>
-			<version>3.1</version> 
+			<version>3.1</version>
 		</dependency>
 		<dependency>
 			<groupId>net.sourceforge.jexcelapi</groupId>
@@ -277,16 +277,58 @@
 			<artifactId>gson</artifactId>
 			<version>2.2.4</version>
 		</dependency>
-		<dependency> 
-			<groupId>QRCODE</groupId> 
-			<artifactId>QRCode</artifactId> 
+		<dependency>
+			<groupId>QRCODE</groupId>
+			<artifactId>QRCode</artifactId>
 			<version>1.0</version>
 		</dependency>
-		<dependency> 
+		<dependency>
 			<groupId>com.sohu.sendcloud</groupId>
 			<artifactId>sendcloud-sdk</artifactId>
 			<version>1.0.7</version>
-		</dependency> 
+		</dependency>
+		<dependency>
+			<artifactId>lucene-core</artifactId>
+			<groupId>org.apache.lucene</groupId>
+			<type>jar</type>
+			<version>3.5.0</version>
+		</dependency>
+
+		<dependency>
+			<artifactId>lucene-queries</artifactId>
+			<groupId>org.apache.lucene</groupId>
+			<type>jar</type>
+			<version>3.5.0</version>
+		</dependency>
+
+		<dependency>
+			<artifactId>lucene-analyzers-common</artifactId>
+			<groupId>org.apache.lucene</groupId>
+			<type>jar</type>
+			<version>3.5.0</version>
+		</dependency>
+
+		<dependency>
+			<artifactId>lucene-facet</artifactId>
+			<groupId>org.apache.lucene</groupId>
+			<type>jar</type>
+			<version>3.5.0</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.lucene</groupId>
+			<artifactId>lucene-queryparser</artifactId>
+			<version>3.5.0</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.lucene</groupId>
+			<artifactId>lucene-highlighter</artifactId>
+			<version>3.5.0</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.lucene</groupId>
+			<artifactId>lucene-memory</artifactId>
+			<version>3.5.0</version>
+		</dependency>
 	</dependencies>
 	<build>
 		<plugins>

@@ -126,7 +126,7 @@
             			$(".more").trigger("click");
             		}
             		$(".share-mask").show();
-					$(".share-mask img").css("height",$(".scroll").outerHeight());
+					$(".share-mask").css("height",$(".scroll").outerHeight());
             	});
             
             	$(".share-mask").click(function() {
@@ -158,7 +158,16 @@
 			position = "未填写";
 		}
 		var descContent = "公司：${user.companyName}\n职位："+position+"\n点击了解我的优势产品";
-        var shareTitle = "${user.contactName}正在使用刀具微名片，刀具人快来加入吧!";
+        var companyname = "$!{user.companyName}";
+		if(companyname == ""){
+			companyname = "未填写";
+		}
+		var descContent = "公司："+companyname+"\n职位："+position+"\n点击了解我的优势产品";
+		var contactname = "$!{user.contactName}";
+		if(contactname == ""){
+			contactname = "$!{user.nick}";
+		}
+        var shareTitle = contactname+"正在使用刀具微名片，刀具人快来加入吧!";
         var appid = 'wxb5f0887883f34822';
         
         function shareFriend() {

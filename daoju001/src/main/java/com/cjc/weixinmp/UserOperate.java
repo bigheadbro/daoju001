@@ -33,6 +33,7 @@ public class UserOperate extends AbstractUserOperate {
 	@Override
     public AbstractResponse onTextMessage(TextRequest text) throws WeixinException {
 		TextResponse tr = new TextResponse();
+		logger.error("aaa:"+text.ToUserName);
     	tr.ToUserName = text.ToUserName;
     	if(StringUtil.isEqual(text.Content.substring(0,2), "材质"))
     	{
@@ -42,6 +43,16 @@ public class UserOperate extends AbstractUserOperate {
     	{
     		tr.Content =  Util.querySteel(text.Content);
     	}
+    	else if(StringUtil.isEqual(text.Content.substring(0,4), "我要名片") && StringUtil.isEqual(text.ToUserName, "gh_b8c3f27889ae"))
+    	{
+    		logger.error("bbbb");
+    		NewsResponse news = new NewsResponse();
+    		news.ToUserName = text.ToUserName;
+    		news.FromUserName = text.FromUserName;
+    		news.addArticle("二维码名片来了！", "你是否有担心过自己的名片被遗忘在角落？产品有特色,无奈同行太多，如何让自己的名片脱颖而出呢？", "https://mmbiz.qlogo.cn/mmbiz/0icHn6Syic8bica2R8nUia7WRH7ILXQy4zibxib9RmTcic5t4j7YmAsvjEuIicKun7FAcTV1ICuLaedF5ibIic3FybGLdvlw/0", "http://mp.weixin.qq.com/s?__biz=MzAwNTAyOTg5Ng==&mid=205863905&idx=1&sn=6d96888d7c26e5ea9401d28153608b32#rd");
+        	return news;
+    	}
+    	logger.error("ccccc");
 		return tr;
     }
 	

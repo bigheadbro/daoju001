@@ -594,8 +594,51 @@ public class StringUtil {
 	private static Map<Integer, String> msgTypeMap = new HashMap<Integer, String>();
 	private static Map<Integer, String> brandMap = new HashMap<Integer, String>();
 	
+	//特色产品
+	private static Map<Integer, String> typeMap = new HashMap<Integer, String>();
+	private static Map<Integer, String> pAdMap = new HashMap<Integer, String>();
+	private static Map<Integer, String> sHardnessMap = new HashMap<Integer, String>();
+	private static Map<Integer, String> wpAdMap = new HashMap<Integer, String>();
+	
 	static
 	{
+		typeMap.put(1, "机夹铣刀");
+		typeMap.put(2, "车刀片");
+		typeMap.put(3, "整体铣刀");
+		typeMap.put(4, "机夹钻头");
+		typeMap.put(5, "钻头");
+		typeMap.put(6, "镗刀");
+		typeMap.put(7, "刀柄");
+		typeMap.put(8, "刀体");
+		typeMap.put(9, "铰刀");
+		typeMap.put(10, "丝锥");
+		typeMap.put(11, "螺纹刀片");
+		typeMap.put(12, "螺纹铣刀");
+		typeMap.put(13, "机床附件");
+		typeMap.put(14, "其他刀具");
+		
+		pAdMap.put(1, "精密");
+		pAdMap.put(2, "高效率");
+		pAdMap.put(3, "光洁度好");
+		pAdMap.put(4, "寿命好");
+		pAdMap.put(5, "经济性好");
+		
+		sHardnessMap.put(1, "无硬度");
+		sHardnessMap.put(2, "HRC40以下");
+		sHardnessMap.put(3, "HRC40-60");
+		sHardnessMap.put(4, "HRC60以上");
+		sHardnessMap.put(5, "皆可对应");
+		
+		wpAdMap.put(1, "磨具行业");
+		wpAdMap.put(2, "航空/医疗/电子");
+		wpAdMap.put(3, "重工行业");
+		wpAdMap.put(4, "铸铁用");
+		wpAdMap.put(5, "钢用");
+		wpAdMap.put(6, "不锈钢用");
+		wpAdMap.put(7, "有色金属用");
+		wpAdMap.put(8, "石墨用");
+		wpAdMap.put(9, "树脂用");
+		
 		brandMap.put(1, "EMUGE,EMUGE.jpg,德国");
 		brandMap.put(2, "日立,HITACHI.jpg,日本");
 		brandMap.put(3, "INGERSOLL,INGERSOLL.jpg,德国");

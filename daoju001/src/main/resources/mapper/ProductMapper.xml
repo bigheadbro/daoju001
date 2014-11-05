@@ -122,6 +122,7 @@
 		      <if test="wpHardness != null">work_material=#{wpMaterial},</if>
 		      <if test="picture != null">picture=#{picture},</if>
 		      <if test="cover != null">cover=#{cover},</if>
+		      <if test="videolink != null">videolink=#{videolink},</if>
 		      <if test="description != null">description=#{description},</if>
 		       <if test="brandId != 0">brandId=#{brandId},</if>
 		      <if test="state != 0">state=#{state},</if>

@@ -9,17 +9,34 @@ public class ItemForm implements Serializable {
 	 */
 	private static final long serialVersionUID = 8173699714632893504L;
 	
+	// 
+	private int id;
+	// 
 	private String type;
-	
+	// 
 	private String detailtype;
-	
-	private String brand;
-	
+	// 
 	private String material;
-	
+	// 
 	private String workmaterial;
 	
-	private int order;//1是价格升序，2是时间降序
+	private String version;
+
+	// 
+	private String brand;
+	// 
+	private double price;
+	private String picture;
+	private String cover;
+	private String description;
+	private String feature;
+	
+	private int limitq;
+	private int quantity;
+	
+	private String provider;
+	
+	private int order;
 
 	/**
 	 * @return the type
@@ -103,6 +120,86 @@ public class ItemForm implements Serializable {
 	 */
 	public void setOrder(int order) {
 		this.order = order;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public String getVersion() {
+		return version;
+	}
+
+	public void setVersion(String version) {
+		this.version = version;
+	}
+	
+	public double getPrice() {
+		return price;
+	}
+
+	public void setPrice(double price) {
+		this.price = price;
+	}
+
+	public String getPicture() {
+		return picture;
+	}
+
+	public void setPicture(String picture) {
+		this.picture = picture;
+	}
+
+	public String getCover() {
+		return cover;
+	}
+
+	public void setCover(String cover) {
+		this.cover = cover;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public String getFeature() {
+		return feature;
+	}
+
+	public void setFeature(String feature) {
+		this.feature = feature;
+	}
+
+	public int getLimitq() {
+		return limitq;
+	}
+
+	public void setLimitq(int limitq) {
+		this.limitq = limitq;
+	}
+
+	public int getQuantity() {
+		return quantity;
+	}
+
+	public void setQuantity(int quantity) {
+		this.quantity = quantity;
+	}
+
+	public String getProvider() {
+		return provider;
+	}
+
+	public void setProvider(String provider) {
+		this.provider = provider;
 	}
 	
 }

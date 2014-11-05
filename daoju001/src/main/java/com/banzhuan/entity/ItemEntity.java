@@ -25,6 +25,7 @@ public class ItemEntity implements Serializable {
 	private String picture;
 	private String cover;
 	private String description;
+	private String feature;
 	
 	private int limitq;
 	private int quantity;
@@ -239,5 +240,11 @@ public class ItemEntity implements Serializable {
 	 */
 	public void setProvider(String provider) {
 		this.provider = provider;
+	}
+	public String getFeature() {
+		return feature;
+	}
+	public void setFeature(String feature) {
+		this.feature = feature;
 	}
    }

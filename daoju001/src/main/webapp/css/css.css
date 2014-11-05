@@ -61,7 +61,7 @@ a.common:hover{text-decoration:underline;color:#00c0ff}
 .item-list-wrapper .item .info li.quatity span{color:#2a93ff}
 .item-list-wrapper .item .info li.comment{float:right;font-size:13px;}
 .item-list-wrapper .item .info li.comment span{color:#2a93ff}
-
+.item-list-wrapper .item .info li.feature{color:red;font-size:12px;}
 /*item*/
 .item-container{margin:0 auto;width:960px;background-color: #fff;}
 .item-detail{}
@@ -76,6 +76,7 @@ a.common:hover{text-decoration:underline;color:#00c0ff}
 .item-detail .image .list a:hover{border:2px solid #0099cb}
 .item-detail .description{float:left;margin-left:10px;font-size:15px;}
 .item-detail .description h1.title{font-size:16px;padding-bottom:10px;border-bottom:1px solid #d2d2d2}
+.item-detail .description h1.title p{font-size:16px;color:#e4393c;}
 .item-detail .description ul.list{padding-bottom:10px;border-bottom:1px solid #d2d2d2;margin-top:10px;font-size:14px;}
 .item-detail .description ul.list li{padding:5px 0}
 .item-detail .description ul.list em{color:#ff3000;}
@@ -93,7 +94,7 @@ a.common:hover{text-decoration:underline;color:#00c0ff}
 .item-detail .description .buy .right{float:left;padding: 15px;}
 .item-detail .description .buy .right img{float:left;margin-top: 5px;}
 .item-detail .description .buy .right .alipay{float:left;color:#e56b15;margin-left: 10px;}
-.item-detail .description .buy .right .alipay h1{font-size:20px;margin-bottom:5px;}
+.item-detail .description .buy .right .alipay h1{font-size:18px;margin-bottom:5px;}
 .item-detail .description .buy .right .alipay p{font-size:13px;line-height: 22px;}
 .item-detail .description .contact{color:#5592c5;}
 .item-detail .description .contact p.info{font-size:13px;margin: 10px 0 15px;text-align: center;}
@@ -1364,6 +1365,19 @@ p.forget{font-size: 12px;margin: 10px;color: #707070;}
 .mainpage .right{float:left;width:400px;margin: 30px;}
 .mainpage .right h3{background-color:#6f6f6f;color:white;font-size:13px;padding:2px 5px;border-radius:3px;display:inline-block}
 .mainpage .right p{font-size:12px;color:#595959;margin-top: 10px;}
+
+/*pay*/
+.payorder-container{margin:0 auto;width:960px;margin-top:30px;}
+.pay-head h1{font-size:18px;}
+.pay-head p{background-color:#f1ffdd;border-top:2px solid #83cf21;padding: 10px;font-size:14px;}
+.pay-head p span{color:#ff6600}
+.pay-head p em{font-size: 18px;font-weight:bold;color: #83cf21;}
+.item-detail .description .buy .right{float:left;padding: 15px;}
+.item-detail .description .buy .right img{float:left;margin-top: 5px;}
+.alipay{float:left;color:#e56b15;margin-left: 10px;}
+.alipay h1{font-size:18px;margin-bottom:5px;}
+.alipay p{font-size:13px;line-height: 22px;}
+
 /*common style*/
 .fr{float:right;}
 .fl{float:left;}

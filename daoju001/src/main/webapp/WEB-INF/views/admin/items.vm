@@ -1,0 +1,11 @@
+#set($layout = "/layout/admin_layout.vm")
+<script>
+$(function() {
+});
+</script>
+#foreach ($item in $items)
+<p class="admin">
+	<a target="_blank" href="/item/${item.id}">${item.brand}${item.type}${item.version}</a> 
+	<a href="lghlmclyhblsqtitem/${item.id}">修改商品</a>
+</p>
+#end

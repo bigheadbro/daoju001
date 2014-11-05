@@ -10,6 +10,11 @@
                         <script type="text/javascript" src="/js/jquery.uploadify.min.js"></script>
 						<script>
                         $(function() {	
+							//设置初始option值 
+							$(".sel_type option[value="+$("#type").val()+"]").attr("selected","selected");
+							$(".sel_detailtype option[value="+$("#detailtype").val()+"]").attr("selected","selected");
+							$(".sel_brand option[value="+$("#brand").val()+"]").attr("selected","selected");
+							$(".sel_workmaterial option[value="+$("#workmaterial").val()+"]").attr("selected","selected");
                         	$(".sel_type").change(function(){
 								$("#type").val($(".sel_type").find("option:selected").text());
 							});
@@ -33,7 +38,8 @@
                                 <input type="hidden" name="do_submit" value="true"/>
 								<input type="hidden" name="cover" id="productCover" />
 								<div class="listitem clearfix">
-									<input type="hidden" id="type" name="type" value="车刀片"/>
+									#springBind("form.type")
+									<input type="hidden" id="type" name="${status.expression}" value="$!{status.value}"/>
 									<ul class="user-info clearfix">
                             			<li class="key">
                             				刀片类型
@@ -42,6 +48,7 @@
                             				<select class="sel_type">
                                               <option value ="车刀片">车刀片</option>
                                               <option value ="铣刀片">铣刀片</option>
+											  <option value ="丝锥">丝锥</option>
 											  <option value ="其它">其它</option>
                                             </select>
                             			</li>
@@ -49,7 +56,8 @@
                             	</div>
 								<div class="listitem clearfix">
 									<ul class="user-info clearfix">
-										<input type="hidden" id="detailtype" name="detailtype" value="CN"/>
+										#springBind("form.detailtype")
+										<input type="hidden" id="detailtype" name="${status.expression}" value="$!{status.value}"/>
                             			<li class="key">
                             				详细类型
                             			</li>
@@ -72,6 +80,7 @@
                                               <option value ="φ16精球">φ16精球</option>
 											  <option value ="φ20精球">φ20精球</option>
 											  <option value ="机床附件">机床附件</option>
+											  <option value ="螺旋丝锥">螺旋丝锥</option>
 											  <option value ="其它">其它</option>
                                             </select>
                             			</li>
@@ -83,12 +92,14 @@
 											刀片型号
                                         </li>
                                         <li class="value">
-                                            <input type="text" class="dsf-form-text-input" name="version"  />
+											#springBind("form.version")
+                                            <input type="text" class="dsf-form-text-input" name="${status.expression}" value="$!{status.value}" />
                                         </li>
                                     </ul>
                                 </div>
 								<div class="listitem clearfix">
-									<input type="hidden" id="brand" name="brand" value="EMUGE" />
+									#springBind("form.brand")
+									<input type="hidden" id="brand" name="${status.expression}" value="$!{status.value}" />
                                     <ul class="user-info clearfix">
                                         <li class="key">
 												代理刀具品牌
@@ -96,14 +107,15 @@
                                         <li class="value">
                                             <select class="sel_brand">
                                               #foreach( $brand in $brands )
-                                                <option>${brand.name}</option>
+                                                <option value="${brand.name}">${brand.name}</option>
                                               #end
                                             </select>
                                         </li>
                                     </ul>
                                 </div>
 								<div class="listitem clearfix">
-									<input type="hidden" id="workmaterial" name="workmaterial" value="钢件"/>
+									#springBind("form.workmaterial")
+									<input type="hidden" id="workmaterial" name="${status.expression}" value="$!{status.value}"/>
 									<ul class="user-info clearfix">
                             			<li class="key">
                             				加工材质
@@ -124,7 +136,8 @@
 												刀片材质
                                         </li>
                                         <li class="value">
-                                            <input type="text" class="dsf-form-text-input" name="material" value="$!{status.value}" />
+											#springBind("form.material")
+                                            <input type="text" class="dsf-form-text-input" name="${status.expression}" value="$!{status.value}" />
                                         </li>
                                     </ul>
                                 </div>
@@ -134,7 +147,8 @@
 												供应商
                                         </li>
                                         <li class="value">
-                                            <input type="text" class="dsf-form-text-input" name="provider" value="$!{status.value}" />
+											#springBind("form.provider")
+                                            <input type="text" class="dsf-form-text-input" name="${status.expression}" value="$!{status.value}" />
                                         </li>
                                     </ul>
                                 </div>
@@ -144,7 +158,8 @@
 												最低起卖数量
                                         </li>
                                         <li class="value">
-                                            <input type="text" class="dsf-form-text-input" name="limit" value="$!{status.value}" />
+											#springBind("form.limitq")
+                                            <input type="text" class="dsf-form-text-input" name="${status.expression}" value="$!{status.value}" />
                                         </li>
                                     </ul>
                                 </div>
@@ -154,12 +169,14 @@
 												单价
                                         </li>
                                         <li class="value">
-                                            <input type="text" class="dsf-form-text-input" name="price" value="$!{status.value}" />
+											#springBind("form.price")
+                                            <input type="text" class="dsf-form-text-input" name="${status.expression}" value="$!{status.value}" />
                                         </li>
                                     </ul>
                                 </div>
                             	<div class="listitem clearfix">
-									<input type="hidden" name="picture" id="product_pic" />
+									#springBind("form.picture")
+									<input type="hidden" name="${status.expression}" id="product_pic" />
                             		<ul class="user-info clearfix">
                             			<li class="key">
                             				图片上传
@@ -167,6 +184,7 @@
                             			<li class="value">
                             				<input type="file" name="productlink" id="file_upload"/>
                         					<div>
+												
                         						<input type="hidden" name="${status.expression}" value="$!{status.value}" id="product_pic" />
                         						<em for="$!{status.expression}" generated="true" class="error">$!{status.errorMessage}</em>
                         					</div>
@@ -176,10 +194,22 @@
 								<div class="listitem clearfix">
                                     <ul class="user-info clearfix">
                                         <li class="key">
+												特点（红字）
+                                        </li>
+                                        <li class="value">
+											#springBind("form.feature")
+                                            <textarea class="dsf-form-text-input" name="${status.expression}" >$!{status.value}</textarea>
+                                        </li>
+                                    </ul>
+                                </div>
+								<div class="listitem clearfix">
+                                    <ul class="user-info clearfix">
+                                        <li class="key">
 												产品描述
                                         </li>
                                         <li class="value">
-                                            <textarea class="dsf-form-text-input" name="description"></textarea>
+											#springBind("form.description")
+                                            <textarea class="dsf-form-text-input" name="${status.expression}" >$!{status.value}</textarea>
                                         </li>
                                     </ul>
                                 </div>

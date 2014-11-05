@@ -70,6 +70,7 @@
 					${item.type}
 				#end
 				${item.version}
+				<p>$!{item.feature}</p>
 			</h1>
 			<ul class="list">
 				<li><span>商品价格：</span><em class="price">￥${item.price}0</em></li>

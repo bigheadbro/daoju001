@@ -287,48 +287,6 @@
 			<artifactId>sendcloud-sdk</artifactId>
 			<version>1.0.7</version>
 		</dependency>
-		<dependency>
-			<artifactId>lucene-core</artifactId>
-			<groupId>org.apache.lucene</groupId>
-			<type>jar</type>
-			<version>3.5.0</version>
-		</dependency>
-
-		<dependency>
-			<artifactId>lucene-queries</artifactId>
-			<groupId>org.apache.lucene</groupId>
-			<type>jar</type>
-			<version>3.5.0</version>
-		</dependency>
-
-		<dependency>
-			<artifactId>lucene-analyzers-common</artifactId>
-			<groupId>org.apache.lucene</groupId>
-			<type>jar</type>
-			<version>3.5.0</version>
-		</dependency>
-
-		<dependency>
-			<artifactId>lucene-facet</artifactId>
-			<groupId>org.apache.lucene</groupId>
-			<type>jar</type>
-			<version>3.5.0</version>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.lucene</groupId>
-			<artifactId>lucene-queryparser</artifactId>
-			<version>3.5.0</version>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.lucene</groupId>
-			<artifactId>lucene-highlighter</artifactId>
-			<version>3.5.0</version>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.lucene</groupId>
-			<artifactId>lucene-memory</artifactId>
-			<version>3.5.0</version>
-		</dependency>
 	</dependencies>
 	<build>
 		<plugins>

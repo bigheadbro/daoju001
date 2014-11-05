@@ -20,6 +20,7 @@
 	  <id property="picture" column="picture" />
 	  <id property="provider" column="provider" />
 	  <id property="cover" column="cover" />
+	  <id property="feature" column="feature" />
 	  <id property="description" column="description" />
 	  <id property="limitq" column="limitq" />
 	  <id property="quantity" column="quantity" />
@@ -69,6 +70,7 @@
 	   	  ,picture
 	   	  ,provider
 	   	  ,cover
+	   	  ,feature
 	   	  ,description
 	   	  ,limitq
 	   	  ,gmt_create
@@ -87,6 +89,7 @@
 	   	  ,#{picture}
 	   	  ,#{provider}
 	   	  ,#{cover}
+	   	  ,#{feature}
 	   	  ,#{description}
 	   	  ,#{limitq}
 	   	  ,now()
@@ -94,6 +97,27 @@
 	   )
 	</insert>
 	
+	<update id="updateItemById" parameterType="ItemEntity">
+		update t_item
+		<set> 
+			<if test="type != null">type=#{type},</if>
+			<if test="detailtype != null">detailtype=#{detailtype},</if>
+			<if test="version != null">version=#{version},</if>
+			<if test="material != null">material=#{material},</if>
+			<if test="workmaterial != null">workmaterial=#{workmaterial},</if>
+			<if test="brand != null">brand=#{brand},</if>
+			<if test="price != 0">price=#{price},</if>
+			<if test="picture != null">picture=#{picture},</if>
+			<if test="provider != null">provider=#{provider},</if>
+			<if test="cover != null">cover=#{cover},</if>
+			<if test="feature != null">feature=#{feature},</if>
+			<if test="description != null">description=#{description},</if>
+			<if test="quantity != null">quantity=#{quantity},</if>
+			<if test="limitq != 0">limitq=#{limitq},</if>
+			gmt_modify=now()
+	   	  </set>
+	   where id=#{id}
+	</update>
 	<select id="getItemCountByType" parameterType="ItemEntity"
 			resultType="int">
 			SELECT count(1) from t_item t 

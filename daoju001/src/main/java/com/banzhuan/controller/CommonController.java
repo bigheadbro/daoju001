@@ -208,7 +208,15 @@ public class CommonController extends BaseController{
 		questions.add(commonService.getQuestion(161));
 		questions.add(commonService.getQuestion(160));
 		mv.addObject("questions", questions);
-
+		
+		List<ItemEntity> items = new ArrayList<ItemEntity>();
+		items.add(commonService.getItem(48));
+		items.add(commonService.getItem(18));
+		items.add(commonService.getItem(19));
+		items.add(commonService.getItem(22));
+		items.add(commonService.getItem(27));
+		items.add(commonService.getItem(54));
+		mv.addObject("items", items);
 		return mv;
 	}
 	
@@ -240,6 +248,15 @@ public class CommonController extends BaseController{
 		questions.add(commonService.getQuestion(160));
 		mv.addObject("questions", questions);
 
+		List<ItemEntity> items = new ArrayList<ItemEntity>();
+		items.add(commonService.getItem(48));
+		items.add(commonService.getItem(18));
+		items.add(commonService.getItem(19));
+		items.add(commonService.getItem(22));
+		items.add(commonService.getItem(27));
+		items.add(commonService.getItem(54));
+		mv.addObject("items", items);
+		
 		return mv;
 	}
 	
@@ -626,6 +643,13 @@ public class CommonController extends BaseController{
 		mv.addObject("total", price*quatity);
 		mv.addObject("cover", cover);
 		mv.addObject("itemid", itemid);
+		return mv;
+	}
+	
+	@RequestMapping(value = "/payorder")
+	public ModelAndView payorder(HttpServletRequest request,final HttpServletResponse response)
+	{
+		ModelAndView mv = new ModelAndView("/common/payorder");
 		return mv;
 	}
 	

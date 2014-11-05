@@ -22,7 +22,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
-
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
@@ -50,6 +49,8 @@ import com.banzhuan.entity.QuestionEntity;
 import com.banzhuan.entity.QuickrequestEntity;
 import com.banzhuan.entity.SampleEntity;
 import com.banzhuan.entity.UserEntity;
+import com.banzhuan.form.ItemForm;
+import com.banzhuan.form.RegForm;
 import com.banzhuan.util.StringUtil;
 import com.banzhuan.util.Util;
 
@@ -144,11 +145,15 @@ public class AdminController extends BaseController{
 		mv.addObject("productcount",productcount);
 		mv.addObject("productcounttoday",productcounttoday);
 		
+		//items
+		int itemcount = itemDAO.getItemCountByType(null);
+		mv.addObject("itemcount",itemcount);
+		
 		return mv;
 	}
 	
 	@RequestMapping(value="/lghlmclyhblsqtitem")
-	public ModelAndView item(final HttpServletRequest request, final HttpServletResponse response)
+	public ModelAndView item(final HttpServletRequest request, final HttpServletResponse response,@ModelAttribute("form")ItemForm form)
 	{
 		ModelAndView mv = new ModelAndView("/admin/newitem");
 		List<BrandEntity> brands = new ArrayList<BrandEntity>();
@@ -166,21 +171,92 @@ public class AdminController extends BaseController{
 		if(isDoSubmit(request))
 		{
 			ItemEntity item = new ItemEntity();
-			item.setBrand(request.getParameter("brand"));
-			item.setType(request.getParameter("type"));
-			item.setDetailtype(request.getParameter("detailtype"));
-			item.setWorkmaterial(request.getParameter("workmaterial"));
-			item.setMaterial(request.getParameter("material"));
-			item.setVersion(request.getParameter("version"));
-			item.setPrice(Double.parseDouble(request.getParameter("price")));
-			item.setPicture(request.getParameter("picture"));
-			item.setCover(request.getParameter("cover"));
-			item.setDescription(request.getParameter("description"));
-			item.setLimitq(Integer.parseInt(request.getParameter("limit")));
-			item.setBrand(request.getParameter("provider"));
+			item.setProvider(form.getProvider());
+			item.setBrand(form.getBrand());
+			item.setType(form.getType());
+			item.setDetailtype(form.getDetailtype());
+			item.setWorkmaterial(form.getWorkmaterial());
+			item.setMaterial(form.getMaterial());
+			item.setVersion(form.getVersion());
+			item.setPrice(form.getPrice());
+			item.setPicture(form.getPicture());
+			item.setCover(form.getCover());
+			item.setFeature(form.getFeature());
+			item.setDescription(form.getDescription());
+			item.setLimitq(form.getLimitq());
+			item.setBrand(form.getBrand());
 			itemDAO.insertItemEntity(item);
 			return mv;
 		}
+		return mv;
+	}
+	
+	@RequestMapping(value="/lghlmclyhblsqtitem/{id}")
+	public ModelAndView updateItem(final HttpServletRequest request, final HttpServletResponse response,@PathVariable String id, @ModelAttribute("form")ItemForm form)
+	{
+		ModelAndView mv = new ModelAndView("/admin/newitem");
+		int itemid = Integer.parseInt(id);
+		List<BrandEntity> brands = new ArrayList<BrandEntity>();
+		for(int i = 1;i<=Constant.BRAND_CNT;i++)
+		{
+			BrandEntity brand = new BrandEntity();
+			brand.setKey(i);
+			brand.setName(StringUtil.getBrand(i));
+			brand.setLink(StringUtil.getBrandLogo(i));
+			brand.setCountry(StringUtil.getBrandCountry(i));
+			brands.add(brand);
+		}
+		mv.addObject("brands", brands);
+		
+		if(isDoSubmit(request))
+		{
+			ItemEntity item = new ItemEntity();
+			item.setId(itemid);
+			item.setProvider(form.getProvider());
+			item.setBrand(form.getBrand());
+			item.setType(form.getType());
+			item.setDetailtype(form.getDetailtype());
+			item.setWorkmaterial(form.getWorkmaterial());
+			item.setMaterial(form.getMaterial());
+			item.setVersion(form.getVersion());
+			item.setPrice(form.getPrice());
+			item.setPicture(form.getPicture());
+			item.setCover(form.getCover());
+			item.setFeature(form.getFeature());
+			item.setDescription(form.getDescription());
+			item.setLimitq(form.getLimitq());
+			item.setBrand(form.getBrand());
+			itemDAO.updateItemById(item);
+			return new ModelAndView(new RedirectView("/admin/lghlmclyhblsqtitems"));
+		}
+		else
+		{
+			//set form
+			ItemEntity oldone = itemDAO.queryItemEntityById(itemid);
+			form.setProvider(oldone.getProvider());
+			form.setBrand(oldone.getBrand());
+			form.setType(oldone.getType());
+			form.setDetailtype(oldone.getDetailtype());
+			form.setWorkmaterial(oldone.getWorkmaterial());
+			form.setMaterial(oldone.getMaterial());
+			form.setVersion(oldone.getVersion());
+			form.setPrice(oldone.getPrice());
+			form.setPicture(oldone.getPicture());
+			form.setCover(oldone.getCover());
+			form.setFeature(oldone.getFeature());
+			form.setDescription(oldone.getDescription());
+			form.setLimitq(oldone.getLimitq());
+			form.setBrand(oldone.getBrand());
+		}
+		return mv;
+	}
+	
+	@RequestMapping(value="/lghlmclyhblsqtitems")
+	public ModelAndView items(final HttpServletRequest request, final HttpServletResponse response)
+	{
+		ModelAndView mv = new ModelAndView("/admin/items");
+		List<ItemEntity> items = itemDAO.getAllItemsByType(null);
+		mv.addObject("items", items);
 		return mv;
 	}
 	

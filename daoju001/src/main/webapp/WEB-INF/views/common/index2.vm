@@ -51,40 +51,33 @@ $(function() {
     </div>
 	<div class="main-items-wrap">
     	<div class="main-items">
-    		<div class="head quickrequests clearfix">
-    			<h5>每日需求<a id="showrequest">一键发布</a></h5><span><a href="/requests">点击查看更多</a></span>
+    		<div class="head items">
+    			刀具商城<span><a href="/items">想看更多低价？马上点击</a></span>
     		</div>
     		<div class="content clearfix">
-				#foreach($request in $requests)
-    			<div class="qr-item clearfix">
-					#if(${request.type} == 1)
-						<h3>方案</h3>
-					#else
-						<h3 class="zhaohuo">求购</h3>
-					#end
-					  <div class="qr-content">
-						    <h1>${request.content}</h1>
-    						<div class="detail">
-								<span><em>品牌</em>
-									#if($stringUtil.isNotEmpty(${request.brand}))
-										${request.brand}
-									#else
-										无要求
-									#end</span>
-								<span><em>地区</em>${request.area}</span>
-								<span><em>时间</em>$stringUtil.formatDate(${request.gmtCreate})</span>
-    						</div>
-					  </div>
-					  <div class="contact">
-							#if($stringUtil.isNotEmpty(${request.qq}))
-							<a class="qq" rid="${request.id}" target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=${request.qq}&site=qq&menu=yes">QQ</a>
-							#end
-							#if($stringUtil.isNotEmpty(${request.phone}))
-							<a class="phone" rid="${request.id}"><span>${request.phone}</span><b></b></a>
-							#end
-					  </div>
-  				</div>
-				#end
+    			#foreach($item in $items)
+        			#if($velocityCount == 3 || $velocityCount == 6)
+        			<div class="item br clearfix">
+        				<a href="/item/${item.id}"><img src="/item/${item.cover}" /></a>
+        				<p>
+        					${item.brand}<br/>
+        					${item.version}<br/>
+        					${item.material}<br/>
+        					<span>￥${item.price}0</span>
+        				</p>
+        			</div>
+        			#else
+        			<div class="item clearfix">
+        				<a href="/item/${item.id}"><img src="/item/${item.cover}" /></a>
+        				<p>
+        					${item.brand}<br/>
+        					${item.version}<br/>
+        					${item.material}<br/>
+        					<span>￥${item.price}0</span>
+        				</p>
+        			</div>
+        			#end
+    			#end
     		</div>
     	</div>
     	<div class="main-items mt50">

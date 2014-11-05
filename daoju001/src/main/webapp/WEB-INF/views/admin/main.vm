@@ -18,6 +18,11 @@
 		<a target="_blank" href="/admin/lghlmclyhblsqtproduct">特色刀具</a>
 	</fieldset>
 	<fieldset>
+		<legend>商城刀具</legend>
+		<p>商城SKU：<span>${itemcount}</span></p>
+		<a target="_blank" href="/admin/lghlmclyhblsqtitems">商城刀具</a>
+	</fieldset>
+	<fieldset>
 		<legend>小百科情况</legend>
 		<a target="_blank" href="/admin/lghlmclyhblsqtarticle">添加文章</a>
 	</fieldset>

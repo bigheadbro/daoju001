@@ -616,6 +616,7 @@ public class UserService {
 		product.setWpMaterial(form.getWpMaterial());
 		product.setPicture(form.getPicture());
 		product.setCover(form.getCover());
+		product.setVideolink(form.getVideolink());
 		if(StringUtil.isEmpty(product.getCover()))
     	{
     		product.setCover(product.getPicture().split("[|]")[1]);

@@ -178,7 +178,9 @@ $(function() {
 									${item.version}</a> 
 									<br/>${item.material}
     						</li>
-    						
+    						<li class="feature">
+								$!{item.feature}
+							</li>
     					</ul>
     				</div>
     			</div>

@@ -268,7 +268,10 @@ public class AdminController extends BaseController{
 	{
 		ModelAndView mv = new ModelAndView("/admin/orders");
 		List<OrderEntity> orders = orderDAO.getAllOrders(null);
-		
+		for(int i = 0; i< orders.size(); i++)
+		{
+			orders.get(i).setItem(itemDAO.queryItemEntityById(orders.get(i).getItemid()));
+		}
 		mv.addObject("orders", orders);
 		return mv;
 	}

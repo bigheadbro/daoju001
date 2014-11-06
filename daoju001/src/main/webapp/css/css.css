@@ -352,6 +352,7 @@ border: 2px solid #B1B1B1;
 .adminorder .order-list  .time span{display: block;overflow:hidden;text-overflow:ellipsis;white-space: normal;margin-top:15px;}
 .adminorder .order-list .state{width:145px;border-right: 1px solid #d2d2d2;}
 .adminorder .order-list .operation{width:134px;}
+.adminorder .order-list .operation input{margin-top: 20px;}
 .adminorder .order-list .operation div{float:none;margin-top: 2px;}
 .adminorder .order-list .operation em{display:inline-block;margin:0 2px;color:#4289f3;}
 .adminorder .order-list .operation a{color:#4289f3}

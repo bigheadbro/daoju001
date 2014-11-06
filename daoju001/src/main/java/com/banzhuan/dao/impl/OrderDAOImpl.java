@@ -41,4 +41,9 @@ public class OrderDAOImpl extends SqlSessionDaoSupport implements OrderDAO {
 		return this.getSqlSession().selectOne("getOrdersCount",uid);
 	}
 	
+	@Override
+	public List<OrderEntity> getAllOrders(OrderEntity order)
+	{
+		return this.getSqlSession().selectList("getAllOrders", order);
+	}
 }

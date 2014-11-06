@@ -229,6 +229,7 @@ a.common:hover{text-decoration:underline;color:#00c0ff}
 .rigth-content2 .order-list-head{background-color:#eeeeee;border-bottom:1px solid #d2d2d2;font-size: 14px;padding: 5px;font-weight: 700;}
 .rigth-content2 .order-list{font-size: 13px;border-bottom: 1px dotted #1ca4d1;}
 .rigth-content2 .order-list div{float:left;margin-right:5px;text-align:center;height: 75px;}
+.rigth-content2 .order-list .buyer{width:95px;text-align:left;border-right: 1px solid #d2d2d2;}
 .rigth-content2 .order-list .name{padding-left:80px;width:95px;text-align:left;border-right: 1px solid #d2d2d2;}
 .rigth-content2 .order-list .member{width:175px;text-align:center;border-right: 1px solid #d2d2d2;line-height:75px;font-size:18px;}
 .rigth-content2 .order-list .name img{float:left;margin-left: -70px;border: 1px solid #d4d4d4;width: 60px;height: 60px;margin-top: 7px;}
@@ -332,6 +333,36 @@ top: 12px;
 margin-left: 15px;
 border: 2px solid #B1B1B1;
 }
+
+.adminorder .order-item{border:1px solid #d2d2d2;margin: 10px 15px 0 0;}
+.adminorder .order-list-head{background-color:#eeeeee;border-bottom:1px solid #d2d2d2;font-size: 14px;padding: 5px;font-weight: 700;}
+.adminorder .order-list{font-size: 13px;border-bottom: 1px dotted #1ca4d1;}
+.adminorder .order-list div{float:left;margin-right:5px;text-align:center;height: 75px;}
+.adminorder .order-list .buyer{width:95px;text-align:center;border-right: 1px solid #d2d2d2;}
+.adminorder .order-list .buyer a{display: block;margin-top:25px;}
+.adminorder .order-list .buyer a:hover{color:red;}
+.adminorder .order-list .name{padding-left:80px;width:95px;text-align:left;border-right: 1px solid #d2d2d2;}
+.adminorder .order-list .member{width:175px;text-align:center;border-right: 1px solid #d2d2d2;line-height:75px;font-size:18px;}
+.adminorder .order-list .name img{float:left;margin-left: -70px;border: 1px solid #d4d4d4;width: 60px;height: 60px;margin-top: 7px;}
+.adminorder .order-list  span{margin-top: 25px;display: block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.adminorder .order-list  .name span{margin-top: 18px;display: block;overflow:hidden;text-overflow:ellipsis;white-space: normal;color:#0071f1;height: 40px;}
+.adminorder .order-list .price{width:95px;border-right: 1px solid #d2d2d2;}
+.adminorder .order-list .price span{font-weight:700}
+.adminorder .order-list .time{width:95px;border-right: 1px solid #d2d2d2;}
+.adminorder .order-list  .time span{display: block;overflow:hidden;text-overflow:ellipsis;white-space: normal;margin-top:15px;}
+.adminorder .order-list .state{width:145px;border-right: 1px solid #d2d2d2;}
+.adminorder .order-list .operation{width:134px;}
+.adminorder .order-list .operation div{float:none;margin-top: 2px;}
+.adminorder .order-list .operation em{display:inline-block;margin:0 2px;color:#4289f3;}
+.adminorder .order-list .operation a{color:#4289f3}
+.adminorder .order-list .operation .op{display:inline-block;}
+.adminorder .order-list .operation .red{background-color:#ff3c00;color:white;padding:2px 5px;border-radius:4px;margin-top: 15px;}
+.adminorder .order-list .operation .blue{background-color:#0099cb;color:white;padding:2px 5px;border-radius:4px;margin-top: 15px;}
+.adminorder .order-list  span.green{color:#74bd00}
+.adminorder .order-list  span.red{color:#ff3c00}
+.adminorder .order-list  span.blue{color:#0099cb}
+.adminorder .order-list  span.grey{color:#7a7a7a}
+
 .zg-top{top:7px;left: 13px;}
 .company-info{width:400px;height:35px;resize:none;}
 .qr-cont{resize:none;}
@@ -1381,7 +1412,7 @@ p.forget{font-size: 12px;margin: 10px;color: #707070;}
 .pay-content .alipay-content .left h1{font-size:12px;font-weight:normal;color:#828282}
 .pay-content .alipay-content .left p{font-size:14px;color:#828282;margin: 20px 0 20px 0;}
 .pay-content .alipay-content .left p span{color:#ff6600;font-size:30px;margin: 0 5px;}
-.pay-content .alipay-content .left a{display: block;color:white;background-color:#83cf21;border-radius:4px;padding:10px 40px;}
+.pay-content .alipay-content .left a{color:white;background-color:#83cf21;border-radius:4px;padding:10px 40px;}
 .pay-content .alipay-content .right{float:left;margin: 60px;}
 .pay-content .alipay-content .right img{float:left;margin-right:5px;}
 .item-detail .description .buy .right{float:left;padding: 15px;}
@@ -1397,7 +1428,8 @@ p.forget{font-size: 12px;margin: 10px;color: #707070;}
 .pay-content .banktransfer-content h2 em{display:block;float:left;}
 .pay-content .banktransfer-content h2 span{display:block;color:black;float:left;line-height: 24px;margin-left: 10px;}
 .pay-content .banktransfer-content h3{font-size:14px;color:#ff6600;margin: 20px 0 20px 0;}
-.pay-content .banktransfer-content a{display: block;color:white;background-color:#83cf21;border-radius:4px;padding:10px 0px;width: 130px;text-align: center;}
+.pay-content .banktransfer-content a{display: inline-block;color:white;background-color:#83cf21;border-radius:4px;padding:10px 40px;text-align: center;}
+.pay-content .banktransfer-content a.later{display: inline-block;color:white;background-color:#d2d2d2;border-radius:4px;padding:10px 40px;text-align: center;margin-right: 20px;}
 /*common style*/
 .fr{float:right;}
 .fl{float:left;}

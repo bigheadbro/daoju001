@@ -1,7 +1,4 @@
 package com.banzhuan.controller;
-
-
-
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -34,6 +31,7 @@ import com.banzhuan.dao.AgentDAO;
 import com.banzhuan.dao.ArticleDAO;
 import com.banzhuan.dao.EventDAO;
 import com.banzhuan.dao.ItemDAO;
+import com.banzhuan.dao.OrderDAO;
 import com.banzhuan.dao.ProductDAO;
 import com.banzhuan.dao.QuestionDAO;
 import com.banzhuan.dao.QuickrequestDAO;
@@ -44,6 +42,7 @@ import com.banzhuan.entity.ArticleEntity;
 import com.banzhuan.entity.BrandEntity;
 import com.banzhuan.entity.EventEntity;
 import com.banzhuan.entity.ItemEntity;
+import com.banzhuan.entity.OrderEntity;
 import com.banzhuan.entity.ProductEntity;
 import com.banzhuan.entity.QuestionEntity;
 import com.banzhuan.entity.QuickrequestEntity;
@@ -90,6 +89,10 @@ public class AdminController extends BaseController{
 	@Autowired
 	@Qualifier("articleDAO")
 	private ArticleDAO articleDAO;
+	
+	@Autowired
+	@Qualifier("orderDAO")
+	private OrderDAO orderDAO;
 	
 	@RequestMapping(value="/log")
 	public ModelAndView log(final HttpServletRequest request, final HttpServletResponse response)
@@ -258,6 +261,29 @@ public class AdminController extends BaseController{
 		List<ItemEntity> items = itemDAO.getAllItemsByType(null);
 		mv.addObject("items", items);
 		return mv;
+	}
+	
+	@RequestMapping(value="/lghlmclyhblsqtorder")
+	public ModelAndView orders(final HttpServletRequest request, final HttpServletResponse response)
+	{
+		ModelAndView mv = new ModelAndView("/admin/orders");
+		List<OrderEntity> orders = orderDAO.getAllOrders(null);
+		
+		mv.addObject("orders", orders);
+		return mv;
+	}
+	
+	@RequestMapping(value="/updateorder")
+	public ModelAndView updateorder(final HttpServletRequest request, final HttpServletResponse response)
+	{
+		String lognumber = request.getParameter("lognumber");
+		int orderid = Integer.valueOf(request.getParameter("orderid"));
+		OrderEntity order = orderDAO.queryOrderEntityById(orderid);
+		order.setState(3);
+		order.setLogNumber(lognumber);
+		order.setGmtSell(StringUtil.getCurrentTime());
+		orderDAO.updateOrder(order);
+		return new ModelAndView(new RedirectView("/admin/lghlmclyhblsqtorder"));
 	}
 	
 	@RequestMapping(value = "uploadfile_item", produces="text/plain;charset=UTF-8")  

@@ -13,6 +13,16 @@ $(function() {
     		});   
         }
     });
+	$(".assure").click(function()
+    {
+		$.ajax( {   
+		    type : "POST",   
+			url : $(this).attr("orderid"),
+			success: function(){
+				window.location.href='/user/myorder';
+			}
+		});   
+    });
 });
 </script>
 <ul class="right-tab clearfix">
@@ -73,7 +83,11 @@ $(function() {
 				<div class="time"><span>$stringUtil.convertDate(${order.gmtSell})</span></div>
 				<div class="state"><span class="blue">刀师傅已发货</span></div>
 				<div class="operation">
-					<a class="op blue" target="_blank" href="http://www.alipay.com">确认收货</a>
+					#if(${order.type} == 1)
+						<a class="op blue" target="_blank" href="http://www.alipay.com">确认收货</a>
+					#else
+						<a class="op blue assure" orderid="/assureorder/${order.id}">确认收货</a>
+					#end
 					<div>
 						#if(${order.itemid} != 1 && ${order.itemid} != 2)<a class="db" target="_blank" href="order/${order.id}">查看详情</a>#end
 					</div>

@@ -29,11 +29,17 @@
 	  <id property="gmtCancel" column="gmtCancel"/>
 	</resultMap>
 
+	
 	<select id="queryOrderEntityById" parameterType="int"
 			resultMap="OrderResultMap">
 		<![CDATA[
 			SELECT * from t_order t where t.id=#{id}
 		]]>
+	</select>
+	
+	<select id="getAllOrders" parameterType="OrderEntity"
+			resultMap="OrderResultMap">
+		SELECT * from t_order t order by gmt_create desc
 	</select>
 	
 	<select id="queryOrdersByUserid" parameterType="int"
@@ -86,6 +92,8 @@
 		update t_order
 		<set> 
 		  <if test="type != 0">type=#{type},</if>
+		  <if test="state != 0">state=#{state},</if>
+		  <if test="logNumber != 0">log_number=#{logNumber},</if>
 		  <if test="gmtPay != null">gmtPay=#{gmtPay},</if>
 	      <if test="gmtSell != null">gmtSell=#{gmtSell},</if>
 	      <if test="gmtAssure != null">gmtAssure=#{gmtAssure},</if>

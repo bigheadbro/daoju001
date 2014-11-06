@@ -815,9 +815,17 @@ public class CommonController extends BaseController{
 		order.setQuantity(form.getQuantity());
 		order.setType(form.getType());
 		order.setId(form.getId());
-		commonService.updateOrder(order);
+		
 		if(form.getType() == 2)
 		{
+			commonService.updateOrder(order);
+			return new ModelAndView(new RedirectView("/user/order/"+order.getId()));  
+		}
+		else if(form.getType() == 3)
+		{
+			order.setState(2);
+			order.setGmtPay(StringUtil.getCurrentTime());
+			commonService.updateOrder(order);
 			return new ModelAndView(new RedirectView("/user/order/"+order.getId()));  
 		}
 		AddressEntity addr = commonService.getAddressById(form.getAddressid());
@@ -1190,14 +1198,22 @@ public class CommonController extends BaseController{
 	@RequestMapping(value = "/cancelorder/{id}")
 	public void cancelorder(final HttpServletRequest request,final HttpServletResponse response, @PathVariable String id,Model model)
 	{
-		ModelAndView mv = new ModelAndView("/common/purchase_handler");
 		int orderid = Integer.parseInt(id);
-		Account account = (Account) WebUtils.getSessionAttribute(request, "account");
 		OrderEntity order = commonService.getOrder(orderid);
 		order.setState(5);
 		order.setGmtCancel(StringUtil.getCurrentTime());
 		commonService.updateOrder(order);
 		
+	}
+	
+	@RequestMapping(value="/assureorder/{id}")
+	public void assureorder(HttpServletRequest request, HttpServletResponse response, @PathVariable String id)
+	{
+		int orderid = Integer.parseInt(id);
+		OrderEntity order = commonService.getOrder(orderid);
+		order.setState(4);
+		order.setGmtAssure(StringUtil.getCurrentTime());
+		commonService.updateOrder(order);
 	}
 	
 	@RequestMapping(value = "/purchase_handler/{id}")
@@ -1208,8 +1224,6 @@ public class CommonController extends BaseController{
 		Account account = (Account) WebUtils.getSessionAttribute(request, "account");
 
 		OrderEntity order = commonService.getOrder(orderid);
-		AddressEntity addr = commonService.getAddressById(order.getAddressid());
-		ItemEntity item = commonService.getItem(order.getItemid());
 
 		form.setItemAddr("http://www.daoshifu.com/item/"+order.getItemid());
 		form.setItemid(order.getItemid());

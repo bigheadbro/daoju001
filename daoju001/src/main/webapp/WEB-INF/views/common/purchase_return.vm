@@ -1,4 +1,19 @@
 #set($layout = "/layout/item_layout.vm")
+<script>
+$(function() {
+	var returnurl = $(".assure").attr("returnurl");
+	$(".assure").click(function()
+    {
+		$.ajax( {   
+		    type : "POST",   
+			url : $(this).attr("orderid"),
+			success: function(){
+				window.location.href=returnurl;
+			}
+		});   
+    });
+});
+</script>
 <div class="purchase-content-container clearfix">
 	<div class="head">
 		您的位置：<a href="http://www.daoshifu.com">首页</a>><a href="/user/main">我的刀师傅</a>><a href="/user/myorder">我的订单</a>
@@ -55,7 +70,13 @@
         		#elseif($state == 2)
         			<h1>订单状态：付款已完成，刀师傅会尽快为您发货</h1>
         		#elseif($state == 3)
-        			<h1>订单状态：刀师傅已经发货，请确认收货<br/>您可以<a href="http://www.alipay.com">确认收货</a></h1>
+        			<h1>订单状态：刀师傅已经发货，请确认收货<br/>
+					您可以
+					#if(${type} == 1)
+						<a href="http://www.alipay.com">确认收货</a>
+					#else
+						<a class="assure" orderid="/assureorder/${orderid}" returnurl="/user/order/${orderid}">确认收货</a>
+					#end
         		#elseif($state == 4)
         			<h1>订单状态：交易已经完成</h1>
         		#else

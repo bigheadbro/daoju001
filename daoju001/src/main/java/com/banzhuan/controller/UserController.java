@@ -1139,6 +1139,7 @@ public class UserController extends BaseController{
 			
 			mv.addObject("state", order.getState());
 			mv.addObject("orderno", order.getLogNumber());
+			mv.addObject("type",order.getType());
 			return mv;
 		}
 		else
@@ -1146,5 +1147,4 @@ public class UserController extends BaseController{
 			return new ModelAndView("buyer/mainpage");
 		}
 	}
-
 }

@@ -81,7 +81,7 @@
     				</span>
     			</h2>
     			<h3>请注意！请您在提交订单后48小时内完成支付，否则订单会自动取消。</h3>
-        		<a class="submit_pay">确认</a>
+        		<a class="submit_pay later">稍后付款</a><a class="pay">已完成打款</a>
     		</div>
 			<script>
             $(function() {	
@@ -91,6 +91,10 @@
 					}else{
 						$("#type").val(2);
 					}
+            		$("#form_pay").submit();
+            	});
+				$(".pay").click(function(){
+					$("#type").val(3);
             		$("#form_pay").submit();
             	});
             });

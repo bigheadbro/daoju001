@@ -1,0 +1,6 @@
+1. Install JDK
+2. download eclipse
+3. github
+4. path M2_HOME JAVA_HOME
+5. eclipse plugin(jetty)
+6. download project

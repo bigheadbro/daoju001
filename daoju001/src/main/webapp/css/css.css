@@ -1368,16 +1368,36 @@ p.forget{font-size: 12px;margin: 10px;color: #707070;}
 
 /*pay*/
 .payorder-container{margin:0 auto;width:960px;margin-top:30px;}
-.pay-head h1{font-size:18px;}
+.pay-head h1{font-size:18px;margin-bottom:10px;}
 .pay-head p{background-color:#f1ffdd;border-top:2px solid #83cf21;padding: 10px;font-size:14px;}
 .pay-head p span{color:#ff6600}
-.pay-head p em{font-size: 18px;font-weight:bold;color: #83cf21;}
+.pay-head p em{font-size: 18px;font-weight:bold;color: #83cf21;background:url(../img/payok.png) no-repeat 0 center;text-indent: 38px;display: block;line-height: 32px;}
+.pay-content{margin-top:30px;}
+.pay-content ul.pay-tab{background-color:#f3f3f3;border-top:1px solid #acacac;border-right:1px solid #acacac;border-left:1px solid #acacac}
+.pay-content ul.pay-tab li{float:left;font-size:18px;color:#828282;cursor:pointer;padding:10px 40px;}
+.pay-content ul.pay-tab li.current{background-color:white;color:#ff6600;border:3px solid #d0e788;margin-top:-1px;margin-left: -1px;border-bottom:3px solid white;position: relative;z-index: 101;}
+.pay-content .alipay-content{margin-top:-3px;border:3px solid #d0e788;position: relative;z-index: 100;}
+.pay-content .alipay-content .left{float:left;margin:40px;}
+.pay-content .alipay-content .left h1{font-size:12px;font-weight:normal;color:#828282}
+.pay-content .alipay-content .left p{font-size:14px;color:#828282;margin: 20px 0 20px 0;}
+.pay-content .alipay-content .left p span{color:#ff6600;font-size:30px;margin: 0 5px;}
+.pay-content .alipay-content .left a{display: block;color:white;background-color:#83cf21;border-radius:4px;padding:10px 40px;}
+.pay-content .alipay-content .right{float:left;margin: 60px;}
+.pay-content .alipay-content .right img{float:left;margin-right:5px;}
 .item-detail .description .buy .right{float:left;padding: 15px;}
 .item-detail .description .buy .right img{float:left;margin-top: 5px;}
 .alipay{float:left;color:#e56b15;margin-left: 10px;}
 .alipay h1{font-size:18px;margin-bottom:5px;}
-.alipay p{font-size:13px;line-height: 22px;}
-
+.alipay p{font-size:13px;line-height: 18px;}
+.pay-content .banktransfer-content{display:none;margin-top:-3px;border:3px solid #d0e788;position: relative;z-index: 100;padding:40px;}
+.pay-content .banktransfer-content h1{font-size:12px;font-weight:normal;color:#828282}
+.pay-content .banktransfer-content p{font-size:14px;color:#828282;margin: 20px 0 20px 0;}
+.pay-content .banktransfer-content p span{color:#ff6600;font-size:30px;margin: 0 5px;}
+.pay-content .banktransfer-content h2{color:#8e8e8e;font-size:14px;}
+.pay-content .banktransfer-content h2 em{display:block;float:left;}
+.pay-content .banktransfer-content h2 span{display:block;color:black;float:left;line-height: 24px;margin-left: 10px;}
+.pay-content .banktransfer-content h3{font-size:14px;color:#ff6600;margin: 20px 0 20px 0;}
+.pay-content .banktransfer-content a{display: block;color:white;background-color:#83cf21;border-radius:4px;padding:10px 0px;width: 130px;text-align: center;}
 /*common style*/
 .fr{float:right;}
 .fl{float:left;}

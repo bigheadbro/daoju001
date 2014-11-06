@@ -66,7 +66,7 @@
 </script>
 <div class="purchase-content-container clearfix">
 	<h1>确认收货信息</h1>
-	<form id="form_purchase" method="post" action="/purchase_handler">
+	<form id="form_purchase" method="post" action="/payorder">
 		<input type="hidden" name="itemid" value="$itemid" />
 		<input type="hidden" name="itemname" value="$itemName" />
 		<input type="hidden" name="price" value="${total}" />

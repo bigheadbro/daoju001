@@ -1,8 +1,10 @@
-package com.banzhuan.entity;
+package com.banzhuan.form;
 
 import java.io.Serializable;
 
-public class OrderEntity implements Serializable {
+import com.banzhuan.entity.ItemEntity;
+
+public class OrderForm implements Serializable {
 	/**
 	 * 
 	 */
@@ -11,6 +13,8 @@ public class OrderEntity implements Serializable {
 	private int id;
 	
 	private int type;
+	
+	private String tradeNumber;
 	//
 	private int userid;
 	//
@@ -281,6 +285,14 @@ public class OrderEntity implements Serializable {
 
 	public void setType(int type) {
 		this.type = type;
+	}
+
+	public String getTradeNumber() {
+		return tradeNumber;
+	}
+
+	public void setTradeNumber(String tradeNumber) {
+		this.tradeNumber = tradeNumber;
 	}
 
 }

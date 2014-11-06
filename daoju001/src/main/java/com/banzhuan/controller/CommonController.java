@@ -75,6 +75,7 @@ import com.banzhuan.form.CommentForm;
 import com.banzhuan.form.GoodcaseForm;
 import com.banzhuan.form.ItemForm;
 import com.banzhuan.form.LoginForm;
+import com.banzhuan.form.OrderForm;
 import com.banzhuan.form.ProductForm;
 import com.banzhuan.form.ProfessionalAnswerForm;
 import com.banzhuan.form.QuestionForm;
@@ -647,9 +648,34 @@ public class CommonController extends BaseController{
 	}
 	
 	@RequestMapping(value = "/payorder")
-	public ModelAndView payorder(HttpServletRequest request,final HttpServletResponse response)
+	public ModelAndView payorder(HttpServletRequest request,final HttpServletResponse response, @ModelAttribute("form")OrderForm form, Model model)
 	{
 		ModelAndView mv = new ModelAndView("/common/payorder");
+		Account account = (Account) WebUtils.getSessionAttribute(request, "account");
+
+		//插入订单
+		OrderEntity order = new OrderEntity();
+		order.setItemAddr(form.getItemAddr());
+		order.setItemid(form.getItemid());
+		order.setPrice(form.getPrice());
+		order.setState(1);
+		order.setUserid(account.getUserId());
+		order.setAddressid(form.getAddressid());
+		order.setQuantity(form.getQuantity());
+		order.setItemAddr("http://www.daoshifu.com/item/"+request.getParameter("itemid"));
+		int id = commonService.insertOrder(order);
+		
+		form.setItemAddr("http://www.daoshifu.com/item/"+request.getParameter("itemid"));
+		form.setItemid(Integer.parseInt(request.getParameter("itemid")));
+		form.setPrice(Double.parseDouble(request.getParameter("price")));
+		form.setState(1);
+		form.setUserid(account.getUserId());
+		form.setAddressid(Integer.parseInt(request.getParameter("addressid")));
+		form.setQuantity(Integer.parseInt(request.getParameter("quantity")));
+		form.setId(id);
+		form.setTradeNumber("DSF" + String.valueOf(id));
+		mv.addObject("price",form.getPrice());
+		mv.addObject("number","DSF" + String.valueOf(id));
 		return mv;
 	}
 	
@@ -773,12 +799,29 @@ public class CommonController extends BaseController{
 	}
 	
 	@RequestMapping(value = "/purchase_handler")
-	public ModelAndView purchase_handler(final HttpServletRequest request,final HttpServletResponse response, Model model)
+	public ModelAndView purchase_handler(final HttpServletRequest request,final HttpServletResponse response, Model model, @ModelAttribute("form")OrderForm form)
 	{
 		ModelAndView mv = new ModelAndView("/common/purchase_handler");
 
 		Account account = (Account) WebUtils.getSessionAttribute(request, "account");
-		
+
+		OrderEntity order = new OrderEntity();
+		order.setItemAddr(form.getItemAddr());
+		order.setItemid(form.getItemid());
+		order.setPrice(form.getPrice());
+		order.setState(1);
+		order.setUserid(account.getUserId());
+		order.setAddressid(form.getAddressid());
+		order.setQuantity(form.getQuantity());
+		order.setType(form.getType());
+		order.setId(form.getId());
+		commonService.updateOrder(order);
+		if(form.getType() == 2)
+		{
+			return new ModelAndView(new RedirectView("/user/order/"+order.getId()));  
+		}
+		AddressEntity addr = commonService.getAddressById(form.getAddressid());
+		ItemEntity item = commonService.getItem(form.getItemid());
 		//支付类型
 		String payment_type = "1";
 		//必填，不能修改
@@ -793,27 +836,18 @@ public class CommonController extends BaseController{
 		//卖家支付宝帐户
 		String seller_email = new String("salyncious@aliyun.com");
 		//必填
-
-		OrderEntity order = new OrderEntity();
-		order.setItemAddr("http://www.daoshifu.com/item/"+request.getParameter("itemid"));
-		order.setItemid(Integer.parseInt(request.getParameter("itemid")));
-		order.setPrice(Double.parseDouble(request.getParameter("price")));
-		order.setState(1);
-		order.setUserid(account.getUserId());
-		order.setAddressid(Integer.parseInt(request.getParameter("addressid")));
-		order.setQuantity(Integer.parseInt(request.getParameter("quantity")));
-		int id = commonService.insertOrder(order);
+		
 		//商户订单号
-		String out_trade_no = "DSF" + String.valueOf(id);
+		String out_trade_no = form.getTradeNumber();
 		//商户网站订单系统中唯一订单号，必填
 
 		//订单名称
-		String subject = new String(request.getParameter("itemname"));
+		String subject = new String(item.getBrand()+item.getType()+item.getVersion());
 		//必填
 
 		//付款金额
 		//String price = new String("0.01");
-		String price = new String(request.getParameter("price"));
+		String price = new String(String.valueOf(order.getPrice()));
 		//必填
 
 		//商品数量
@@ -832,19 +866,19 @@ public class CommonController extends BaseController{
 
 		String body = new String("no description");
 		//商品展示地址
-		String show_url = new String("http://www.daoshifu.com/item/"+request.getParameter("itemid"));
+		String show_url = new String("http://www.daoshifu.com/item/"+ String.valueOf(order.getItemid()));
 		//需以http://开头的完整路径，如：http://www.xxx.com/myorder.html
 
 		//收货人姓名
-		String receive_name = new String(request.getParameter("name"));
+		String receive_name = new String(addr.getName());
 		//如：张三
 
 		//收货人地址
-		String receive_address = new String(request.getParameter("address"));
+		String receive_address = new String(addr.getAddr());
 		//如：XX省XXX市XXX区XXX路XXX小区XXX栋XXX单元XXX号
 
 		//收货人邮编
-		String receive_zip = new String(request.getParameter("zip"));
+		String receive_zip = new String(addr.getZip());
 		//如：123456
 
 		//收货人电话号码
@@ -852,7 +886,7 @@ public class CommonController extends BaseController{
 		//如：0571-88158090
 
 		//收货人手机号码
-		String receive_mobile = new String(request.getParameter("phone"));
+		String receive_mobile = new String(addr.getPhone());
 		//如：13312341234
 		
 		
@@ -1167,115 +1201,28 @@ public class CommonController extends BaseController{
 	}
 	
 	@RequestMapping(value = "/purchase_handler/{id}")
-	public ModelAndView purchase_handler_by_id(final HttpServletRequest request,final HttpServletResponse response, @PathVariable String id,Model model)
+	public ModelAndView purchase_handler_by_id(final HttpServletRequest request,final HttpServletResponse response, @PathVariable String id,Model model, @ModelAttribute("form")OrderForm form)
 	{
-		ModelAndView mv = new ModelAndView("/common/purchase_handler");
+		ModelAndView mv = new ModelAndView("/common/payorder");
 		int orderid = Integer.parseInt(id);
 		Account account = (Account) WebUtils.getSessionAttribute(request, "account");
-		
-		//支付类型
-		String payment_type = "1";
-		//必填，不能修改
-		//服务器异步通知页面路径
-		String notify_url = "http://www.daoshifu.com/notify_url";
-		//需http://格式的完整路径，不能加?id=123这类自定义参数
-
-		//页面跳转同步通知页面路径
-		String return_url = "http://www.daoshifu.com/purchase_return";
-		//需http://格式的完整路径，不能加?id=123这类自定义参数，不能写成http://localhost/
-
-		//卖家支付宝帐户
-		String seller_email = new String("salyncious@aliyun.com");
-		//必填
 
 		OrderEntity order = commonService.getOrder(orderid);
 		AddressEntity addr = commonService.getAddressById(order.getAddressid());
 		ItemEntity item = commonService.getItem(order.getItemid());
 
-		//商户订单号
-		String out_trade_no = "DSF" + String.valueOf(order.getId());
-		//商户网站订单系统中唯一订单号，必填
-
-		//订单名称
-		String subject = new String(item.getBrand()+item.getType() +item.getVersion());
-		//必填
-
-		//付款金额
-		//String price = "0.01";
-		String price = String.valueOf(order.getPrice());
-		//必填
-
-		//商品数量
-		String quantity = "1";
-		//必填，建议默认为1，不改变值，把一次交易看成是一次下订单而非购买一件商品
-		//物流费用
-		String logistics_fee = "0.00";
-		//必填，即运费
-		//物流类型
-		String logistics_type = "EXPRESS";
-		//必填，三个值可选：EXPRESS（快递）、POST（平邮）、EMS（EMS）
-		//物流支付方式
-		String logistics_payment = "SELLER_PAY";
-		//必填，两个值可选：SELLER_PAY（卖家承担运费）、BUYER_PAY（买家承担运费）
-		//订单描述
-
-		String body = new String("no description");
-		//商品展示地址
-		String show_url = new String("http://www.daoshifu.com/item/"+order.getItemid());
-		//需以http://开头的完整路径，如：http://www.xxx.com/myorder.html
-
-		//收货人姓名
-		String receive_name = new String(addr.getName());
-		//如：张三
-
-		//收货人地址
-		String receive_address = new String(addr.getAddr());
-		//如：XX省XXX市XXX区XXX路XXX小区XXX栋XXX单元XXX号
-
-		//收货人邮编
-		String receive_zip = new String(addr.getZip());
-		//如：123456
-
-		//收货人电话号码
-		String receive_phone = new String("");
-		//如：0571-88158090
-
-		//收货人手机号码
-		String receive_mobile = new String(addr.getPhone());
-		//如：13312341234
-		
-		
-		//////////////////////////////////////////////////////////////////////////////////
-		
-		//把请求参数打包成数组
-		Map<String, String> sParaTemp = new HashMap<String, String>();
-		sParaTemp.put("service", "create_partner_trade_by_buyer");
-        sParaTemp.put("partner", AlipayConfig.partner);
-        sParaTemp.put("_input_charset", AlipayConfig.input_charset);
-		sParaTemp.put("payment_type", payment_type);
-		sParaTemp.put("notify_url", notify_url);
-		sParaTemp.put("return_url", return_url);
-		sParaTemp.put("seller_email", seller_email);
-		sParaTemp.put("out_trade_no", out_trade_no);
-		sParaTemp.put("subject", subject);
-		sParaTemp.put("price", price);
-		sParaTemp.put("quantity", quantity);
-		sParaTemp.put("logistics_fee", logistics_fee);
-		sParaTemp.put("logistics_type", logistics_type);
-		sParaTemp.put("logistics_payment", logistics_payment);
-		sParaTemp.put("body", body);
-		sParaTemp.put("show_url", show_url);
-		sParaTemp.put("receive_name", receive_name);
-		sParaTemp.put("receive_address", receive_address);
-		sParaTemp.put("receive_zip", receive_zip);
-		sParaTemp.put("receive_phone", receive_phone);
-		sParaTemp.put("receive_mobile", receive_mobile);
-		 
-		//建立请求
-		String sHtmlText = AlipaySubmit.buildRequest(sParaTemp,"get","确认");
-		model.addAttribute(sHtmlText);
-		mv.addObject("alipay",sHtmlText);
-		return mv;		
+		form.setItemAddr("http://www.daoshifu.com/item/"+order.getItemid());
+		form.setItemid(order.getItemid());
+		form.setPrice(order.getPrice());
+		form.setState(1);
+		form.setUserid(account.getUserId());
+		form.setAddressid(order.getAddressid());
+		form.setQuantity(order.getQuantity());
+		form.setId(orderid);
+		form.setTradeNumber("DSF" + String.valueOf(orderid));
+		mv.addObject("price",form.getPrice());
+		mv.addObject("number","DSF" + String.valueOf(orderid));
+		return mv;	
 	}
 	
 	@RequestMapping(value = "questions/{qid}")

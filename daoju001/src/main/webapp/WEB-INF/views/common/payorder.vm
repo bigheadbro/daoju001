@@ -1,47 +1,100 @@
 #set($layout = "/layout/item_layout.vm")
 <div class="payorder-container clearfix">
-	<form id="form_purchase" method="post" action="/purchase_handler">
-		<input type="hidden" name="itemid" value="$itemid" />
-		<input type="hidden" name="itemname" value="$itemName" />
-		<input type="hidden" name="price" value="${total}" />
-		<input type="hidden" name="quatity" value="${quatity}" />
-		<input type="hidden" id="username" name="name"  />
-		<input type="hidden" id="useraddress" name="address" />
-		<input type="hidden" id="userzip" name="zip" />
-		<input type="hidden" id="userphone" name="phone" />
-	</form>
 	<div class="pay-head">
     	<h1>收银台</h1>
     	<p>
 			<em>订单提交成功，请您尽快付款！</em>
-			订单号：$!{} | 应付金额：<span>$!{}</span>元
+			订单号：$!{number} | 应付金额：<span>$!{price}</span>元
 		</p>
     </div>
-	<div class="pay-content">
-		<ul class="pay-tab clearfix">
-            <li class="current">
-				支付宝
-            </li>
-        	<li>
-        		 银行转账
-            </li>
-        </ul>
-		<div class="alipay-content">
-			<div class="left">
+	<script>
+	$(function() {
+		$("ul.pay-tab li").click(function(){
+			$("ul.pay-tab li").each(function(){
+				$(this).removeClass("current");
+			});
+			$(this).addClass("current");
+			if($(this).attr("alipay") == 1)
+			{
+				$(".alipay-content").show();
+				$(".banktransfer-content").hide();
+			}
+			else
+			{
+				$(".alipay-content").hide();
+				$(".banktransfer-content").show();
+			}
+		});
+	});
+	</script>
+	<form id="form_pay" method="post" action="/purchase_handler">
+		<!-- 隐藏字段，用于标示是表单提交 -->
+		<input type="hidden" name="do_submit" value="true"/>
+		#springBind("form.id")
+		<input type="hidden" name="${status.expression}" value="${status.value}"/>
+		#springBind("form.addressid")
+		<input type="hidden" name="${status.expression}" value="${status.value}"/>
+		#springBind("form.itemid")
+		<input type="hidden" name="${status.expression}" value="${status.value}"/>
+		#springBind("form.itemAddr")
+		<input type="hidden" name="${status.expression}" value="${status.value}"/>
+		#springBind("form.price")
+		<input type="hidden" name="${status.expression}" value="${status.value}"/>
+		#springBind("form.quantity")
+		<input type="hidden" name="${status.expression}" value="${status.value}"/>
+		#springBind("form.type")
+		<input type="hidden" id="type" name="${status.expression}" value="${status.value}"/>
+		#springBind("form.tradeNumber")
+		<input type="hidden" id="type" name="${status.expression}" value="${status.value}"/>
+    	<div class="pay-content">
+    		<ul class="pay-tab clearfix">
+                <li alipay=1 class="current">
+    				支付宝
+                </li>
+            	<li>
+            		 银行转账
+                </li>
+            </ul>
+    		<div class="alipay-content clearfix">
+    			<div class="left">
+        			<h1>选择支付宝付款</h1>
+        			<p>金额：<span>$!{price}</span>元</p>
+        			<a class="submit_pay" alipay=1>下一步</a>
+    			</div>
+    			<div class="right clearfix">
+    				<img src="/img/alipay.png" />
+    				<div class="alipay">
+    					<h1>支付宝担保交易</h1>
+    					<p>刀师傅使用支付宝担保交易服务。<br/>保障买卖双方货款安全，防范欺诈。</p>
+    				</div>
+    			</div>
+    		</div>
+    		<div class="banktransfer-content">
     			<h1>选择支付宝付款</h1>
-    			<p>金额：<span>$!{}</span>元</p>
-    			<a>下一步</a>
-			</div>
-			<div class="right clearfix">
-				<img src="/img/alipay.png" />
-				<div class="alipay">
-					<h1>支付宝担保交易</h1>
-					<p>刀师傅使用支付宝担保交易服务。<br/>保障买卖双方货款安全，防范欺诈。</p>
-				</div>
-			</div>
-		</div>
-		<div class="banktransfer-content">
-			
-		</div>
-	</div>
+        		<p>金额：<span>$!{price}</span>元</p>
+    			<h2 class="clearfix">
+    				<em>收款人信息：</em>
+    				<span>
+    					收款人：时寅超<br/>
+    					开户行：招商银行外高桥支行<br/>
+    					账号：6225882111453061
+    				</span>
+    			</h2>
+    			<h3>请注意！请您在提交订单后48小时内完成支付，否则订单会自动取消。</h3>
+        		<a class="submit_pay">确认</a>
+    		</div>
+			<script>
+            $(function() {	
+        		$(".submit_pay").click(function(){
+					if($(this).attr("alipay") == 1){
+						$("#type").val(1);
+					}else{
+						$("#type").val(2);
+					}
+            		$("#form_pay").submit();
+            	});
+            });
+            </script>
+    	</div>
+	</form>
 </div>

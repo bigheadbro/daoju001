@@ -5,6 +5,7 @@
 	  <!---->
 	  <id property="id" column="id"/>
 
+	  <id property="type" column="type"/>
 	  <id property="userid" column="userid"/>
    	  <!---->
 	  <id property="addressid" column="addressid"/>
@@ -55,7 +56,8 @@
 		</selectKey>
 		insert into t_order
 		(
-		  userid
+		  type
+		  ,userid
 	   	  ,addressid
 	   	  ,itemid
 	   	  ,item_addr
@@ -67,7 +69,8 @@
 	   )
 	      values
 	   (
-	   	  #{userid}
+	      #{type}
+	   	  ,#{userid}
 	   	  ,#{addressid}
 	   	  ,#{itemid}
 	   	  ,#{itemAddr}
@@ -82,6 +85,7 @@
 	<update id="updateOrder" parameterType="OrderEntity">
 		update t_order
 		<set> 
+		  <if test="type != 0">type=#{type},</if>
 		  <if test="gmtPay != null">gmtPay=#{gmtPay},</if>
 	      <if test="gmtSell != null">gmtSell=#{gmtSell},</if>
 	      <if test="gmtAssure != null">gmtAssure=#{gmtAssure},</if>

@@ -36,13 +36,16 @@
         		</div>
 				<ul class="order-detail">
 					<li>
-						订单编号：${orderid}
+						订单编号：DSF${orderid}
 					</li>
 					<li>
 						收货信息：${receiverinfo}
 					</li>
 					<li>
-						配送方式：顺丰包邮#if(${orderno})(${orderno})#end
+						配送方式：顺丰包邮
+						#if($stringUtil.isNotEmpty(${orderno}))
+							(${orderno})
+						#end
 					</li>
 				</ul>
 			</div>

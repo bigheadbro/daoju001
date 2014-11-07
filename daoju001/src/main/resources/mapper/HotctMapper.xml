@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="hotct">
+	<resultMap type="HotctEntity" id="HotctResultMap">
+      <!---->
+	  <id property="id" column="id"/>
+   	  <!---->
+	  <id property="code" column="code"/>
+   	  <!---->
+	  <id property="brand" column="brand"/>
+   	  <!---->
+	  <id property="seriesname" column="seriesname"/>
+   	  <!---->
+	  <id property="version" column="version"/>
+   	  <!---->
+	  <id property="material" column="material"/>
+   	  <!---->
+	  <id property="angle" column="angle"/>
+   	  <!---->
+	  <id property="diameter" column="diameter"/>
+   	  <!---->
+	  <id property="usage" column="usage"/>
+   	  <!---->
+	  <id property="cujing" column="cujing"/>
+   	  <!---->
+	  <id property="usefullength" column="usefullength"/>
+   	  <!---->
+	  <id property="pipesize" column="pipesize"/>
+   	  <!---->
+	  <id property="shank" column="shank"/>
+   	  <!---->
+	  <id property="shape" column="shape"/>
+   	  <!---->
+	  <id property="backangle" column="backangle"/>
+   	  <!---->
+	  <id property="workingtool" column="workingtool"/>
+   	  <!---->
+	  <id property="edgeno" column="edgeno"/>
+   	  <!---->
+	  <id property="edgelength" column="edgelength"/>
+   	  <!---->
+	  <id property="totallength" column="totallength"/>
+   	  <!---->
+	  <id property="screwangle" column="screwangle"/>
+   	  <!---->
+	  <id property="coatingtype" column="coatingtype"/>
+   	  <!---->
+	  <id property="rangle" column="rangle"/>
+   	  <!---->
+	  <id property="direction" column="direction"/>
+   	  <!---->
+	  <id property="minworkdiameter" column="minworkdiameter"/>
+   	  <!---->
+	  <id property="innercooling" column="innercooling"/>
+   	  <!---->
+	  <id property="slotshape" column="slotshape"/>
+   	  <!---->
+	  <id property="handlenorm" column="handlenorm"/>
+   	  <!---->
+	  <id property="taptype" column="taptype"/>
+   	  <!---->
+	  <id property="screwtype" column="screwtype"/>
+   	  <!---->
+	  <id property="axistype" column="axistype"/>
+   	  <!---->
+	  <id property="axisdetail" column="axisdetail"/>
+	</resultMap>
+
+	<select id="queryHotctById" parameterType="int"
+			resultMap="HotctResultMap">
+		<![CDATA[
+			SELECT * from t_hotct t where t.id=#{id}
+		]]>
+	</select>
+	
+	<!-- 新代理商信息 -->
+	<insert id="insertHotctEntity" parameterType="HotctEntity">
+		<selectKey resultType="int" order="AFTER" keyProperty="id">
+			SELECT LAST_INSERT_ID() AS id
+		</selectKey>
+		insert into t_hotct
+		(
+	   	  code
+	   	  ,brand
+	   	  ,seriesname
+	   	  ,version
+	   	  ,material
+	   	  ,angle
+	   	  ,diameter
+	   	  ,usage
+	   	  ,cujing
+	   	  ,usefullength
+	   	  ,pipesize
+	   	  ,shank
+	   	  ,shape
+	   	  ,backangle
+	   	  ,workingtool
+	   	  ,edgeno
+	   	  ,edgelength
+	   	  ,totallength
+	   	  ,screwangle
+	   	  ,coatingtype
+	   	  ,rangle
+	   	  ,direction
+	   	  ,minworkdiameter
+	   	  ,innercooling
+	   	  ,slotshape
+	   	  ,handlenorm
+	   	  ,taptype
+	   	  ,screwtype
+	   	  ,axistype
+	   	  ,axisdetail)
+	      values
+	   (
+	   	  #{code}
+	   	  ,#{brand}
+	   	  ,#{seriesname}
+	   	  ,#{version}
+	   	  ,#{material}
+	   	  ,#{angle}
+	   	  ,#{diameter}
+	   	  ,#{usage}
+	   	  ,#{cujing}
+	   	  ,#{usefullength}
+	   	  ,#{pipesize}
+	   	  ,#{shank}
+	   	  ,#{shape}
+	   	  ,#{backangle}
+	   	  ,#{workingtool}
+	   	  ,#{edgeno}
+	   	  ,#{edgelength}
+	   	  ,#{totallength}
+	   	  ,#{screwangle}
+	   	  ,#{coatingtype}
+	   	  ,#{rangle}
+	   	  ,#{direction}
+	   	  ,#{minworkdiameter}
+	   	  ,#{innercooling}
+	   	  ,#{slotshape}
+	   	  ,#{handlenorm}
+	   	  ,#{taptype}
+	   	  ,#{screwtype}
+	   	  ,#{axistype}
+	   	  ,#{axisdetail}
+	   )
+	</insert>
+</mapper>

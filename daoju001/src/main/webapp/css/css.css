@@ -363,7 +363,11 @@ border: 2px solid #B1B1B1;
 .adminorder .order-list  span.red{color:#ff3c00}
 .adminorder .order-list  span.blue{color:#0099cb}
 .adminorder .order-list  span.grey{color:#7a7a7a}
-
+.adminitems{white-space: nowrap;}
+.adminitems .head{border: 1px solid #ff6600;border-bottom: none;}
+.adminitems .content{border: 1px solid #ff6600;border-bottom: none;}
+.adminitems .content span{width: 100px;display: inline-block;height:150px;border-right:1px solid #ff6600;overflow: hidden;white-space: normal;}
+.adminitems .head span{width: 100px;display: inline-block;height:150px;border-right:1px solid #ff6600;overflow: hidden;white-space: normal;text-align:center;height:20px;}
 .zg-top{top:7px;left: 13px;}
 .company-info{width:400px;height:35px;resize:none;}
 .qr-cont{resize:none;}

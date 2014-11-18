@@ -20,8 +20,8 @@
 		<typeAlias alias="ArticleEntity" type="com.banzhuan.entity.ArticleEntity" />
 		<typeAlias alias="StockEntity" type="com.banzhuan.entity.StockEntity" />
 		<typeAlias alias="RelationEntity" type="com.banzhuan.entity.RelationEntity" />
-		<typeAlias alias="HotctEntity" type="com.banzhuan.entity.HotctEntity" />
-		<typeAlias alias="NormalctEntity" type="com.banzhuan.entity.NormalctEntity" />
+		<typeAlias alias="CuttingToolEntity" type="com.banzhuan.entity.CuttingToolEntity" />
+		<typeAlias alias="StatisticsEntity" type="com.banzhuan.entity.StatisticsEntity" />
 	</typeAliases>
 
 	<mappers>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Statistics">
+	<resultMap type="StatisticsEntity" id="StatisticsResultMap">
+	  <!---->
+	  <id property="id" column="id"/>
+   	  <!---->
+	  <id property="type" column="type"/>
+   	  <!---->
+	  <id property="info" column="info"/>
+   	  <!---->
+	  <id property="gmtCreate" column="gmt_create"/>
+	</resultMap>
+	
+	
+	<insert id="insertStatisticsEntity" parameterType="StatisticsEntity">
+		<selectKey resultType="int" order="AFTER" keyProperty="id">
+			SELECT LAST_INSERT_ID() AS id
+		</selectKey>
+		insert into t_statistics
+		(
+	   	  type
+	   	  ,info
+	   	  ,gmt_create)
+	      values
+	   (
+	   
+	   	  #{type}
+	   	  ,#{info}
+	   	  ,now()
+	   )
+	</insert>
+</mapper>

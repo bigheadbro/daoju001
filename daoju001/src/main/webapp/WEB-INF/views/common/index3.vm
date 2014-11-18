@@ -1,0 +1,36 @@
+#set($layout = "/layout/item_layout.vm")
+<script>
+$(function() {
+	$("#query").click(function(){
+		$.ajax( {   
+		    type : "POST",   
+		    url : "/addvote"
+		});   
+	});
+});
+</script>
+<div class="main-content-wrap clearfix">
+	<div class="">
+		<img style="width:960px;display:block;" src="/img/sys.png" />
+		<h1 style="text-align:center;font-size:24px;color:#8d8d8d;font-weight:normal;margin-top:70px;">花一分钟，与我们共建全品牌选刀系统</h1>
+		<a id="query" target="__blank" href="http://www.wenjuan.com/s/3QfaQns/" style="display:block;text-align: center;margin: 30px auto;background-color: #44bde5;color: white;font-size: 30px;border-radius: 7px;padding: 10px;width: 160px;">填写问卷</a>
+	</div>
+	<ul class="clearfix" style="border-top:1px solid #eaeaea;margin-top:50px;padding-top: 40px;">
+		<li style="float:left;">
+			<h1 style="font-size:26px;color:#8d8d8d;margin-bottom: 15px;">更直观</h1>
+			<p style="font-size:18px;color:#cecece;line-height:28px;">数千款热销品<br/>产品特性一目了然</p>
+		</li>
+		<li style="float:left;margin-left:133px">
+			<h1 style="font-size:26px;color:#8d8d8d;margin-bottom: 15px;">更准确</h1>
+			<p style="font-size:18px;color:#cecece;line-height:28px;">70余个参数<br/>准确匹配方案</p>
+		</li>
+		<li style="float:left;margin-left:133px">
+			<h1 style="font-size:26px;color:#8d8d8d;margin-bottom: 15px;">更安全</h1>
+			<p style="font-size:18px;color:#cecece;line-height:28px;">供应商经过刀师傅认证<br/>货源严格保证</p>
+		</li>
+		<li style="float:left;margin-left:133px">
+			<h1 style="font-size:26px;color:#8d8d8d;margin-bottom: 15px;">更全面</h1>
+			<p style="font-size:18px;color:#cecece;line-height:28px;">目标覆盖市场<br/>90%以上的品牌</p>
+		</li>
+	</ul>
+</div>

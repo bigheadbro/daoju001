@@ -456,8 +456,6 @@ public class StringUtil {
         return result;
 
     }
-
-
 	
 	/**
 	 * 获取格式化后的日期字符串(默认原始串格式化表达式为yyyy-MM-dd HH:mm:ss 默认目标串格式化表达式为yyyy-MM-dd)
@@ -533,6 +531,14 @@ public class StringUtil {
 	{
 		Date currentTime = new Date();
 	    SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+	    String dateString = formatter.format(currentTime);
+		return dateString;
+	}
+	
+	public static String getCurrentSec()
+	{
+		Date currentTime = new Date();
+	    SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 	    String dateString = formatter.format(currentTime);
 		return dateString;
 	}
@@ -716,6 +722,8 @@ public class StringUtil {
 		brandMap.put(75, "YESTOOL,YESTOOL.jpg,韩国");
 		brandMap.put(76, "威士,weishi.jpg,中国");
 		brandMap.put(77, "金鹭,jinlu.jpg,中国");
+		brandMap.put(78, "JEIL,JEIL.jpg,韩国");
+		brandMap.put(79, "慧德,慧德.png,台湾");
 		brandMap.put(100, "其他,otherbrand.jpg,其他");
 		
 		brandMap.put(10000, "刀师傅,刀师傅.jpg,中国");
@@ -845,6 +853,28 @@ public class StringUtil {
 		String.valueOf(a);
 	}
 	
+	//预处理搜索参数
+	public static String prehandleParam(String str)
+	{
+		String ret = "";
+		String[] tmp = str.split(" ");
+		for(int i = 0;i<tmp.length;i++)
+		{
+			if(tmp[i].contains("-"))
+			{
+				tmp[i] = "\"" + tmp[i] + "\"";
+			}
+			if(i == 0)
+			{
+				ret = tmp[i];
+			}
+			else
+			{
+				ret = ret + " " + tmp[i];
+			}
+		}
+		return ret;
+	}
 	public static void main(String[] args) {
 		System.out.print(convertYoukulink("http://v.youku.com/v_show/id_XMjUwMTU3NTA4.html"));
 	}

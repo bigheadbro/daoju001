@@ -228,10 +228,10 @@ public class Util {
 		return array;
 	}
 
-	public static void addmailToEDM(String fileName) {
+	public static void addmailToEDM() {
 		HashSet<String> array = new HashSet<String>();
 		// 先读取edm邮箱
-		File file = new File("EDM/client.txt");
+		File file = new File("EDM/edm.txt");
 		BufferedReader reader = null;
 		try {
 			reader = new BufferedReader(new FileReader(file));
@@ -252,9 +252,7 @@ public class Util {
 			}
 		}
 
-		// 添加新邮箱
-		file = new File(fileName);
-		reader = null;
+		file = new File("EDM/client.txt");
 		try {
 			reader = new BufferedReader(new FileReader(file));
 			String tempString = null;
@@ -273,11 +271,16 @@ public class Util {
 				}
 			}
 		}
+		
 		try {
-			FileWriter writer = new FileWriter("EDM/edm.txt");
+			FileWriter writer = new FileWriter("EDM/notqq.txt");
 			Iterator it = array.iterator();
 			while (it.hasNext()) {
-				writer.write(it.next() + "\n");
+				String tmp = it.next().toString();
+				if(!tmp.contains("qq"))
+				{
+					writer.write(tmp + "\n");
+				}
 			}
 			writer.close();
 		} catch (IOException e) {
@@ -288,7 +291,7 @@ public class Util {
 	public static void removeMailFromEDM() {
 		HashSet<String> array = new HashSet<String>();
 		// 先读取edm邮箱
-		File file = new File("EDM/client.txt");
+		File file = new File("EDM/notqq.txt");
 		BufferedReader reader = null;
 		try {
 			reader = new BufferedReader(new FileReader(file));
@@ -620,7 +623,8 @@ public class Util {
 		}); 
 		return providers;
 	}
+	
 	public static void main(String[] args) {
-		TwoDimensionCode.encoderQRCode("https://daoshifu.com/v/435","D:/hahaha/ccc.png");
+		removeMailFromEDM();
 	}
 }

@@ -5,14 +5,18 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
 
+import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import com.banzhuan.entity.CuttingToolEntity;
 
 public class JsonUtil {
 	private static Logger logger = LoggerFactory.getLogger(JsonUtil.class);
@@ -411,4 +415,24 @@ public class JsonUtil {
             out.close();  
         }  
 	}
+	
+	public static void sendCts(HttpServletResponse response, List<CuttingToolEntity> list)
+	{
+		JSONArray jsonArray = JSONArray.fromObject(list);
+		JSONObject object = new JSONObject();  
+        response.setContentType("text/Xml;charset=gbk");  
+        object.element("cts", jsonArray);
+        PrintWriter out = null;  
+        try {  
+            out = response.getWriter();  
+            out.println(object.toString());  
+        }  
+        catch (IOException ex1) {  
+            ex1.printStackTrace();  
+        }  
+        finally {  
+            out.close();  
+        }  
+	}
+
 }

@@ -25,7 +25,7 @@ public class OrderEntity implements Serializable {
 	private int quantity;
 	//
 	private double price;
-	//1已购买，2已付款，3已发货，4已收货，0已取消
+	//1已购买，2已付款，3已发货，4已收货，5已取消
 	private int state;
 	//
 	private String gmtCreate;

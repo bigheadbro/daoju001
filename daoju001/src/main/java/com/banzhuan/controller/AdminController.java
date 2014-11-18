@@ -2,12 +2,17 @@ package com.banzhuan.controller;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import jxl.Cell;
+import jxl.Sheet;
+import jxl.Workbook;
 
 import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +35,7 @@ import com.banzhuan.common.Constant;
 import com.banzhuan.dao.AgentDAO;
 import com.banzhuan.dao.ArticleDAO;
 import com.banzhuan.dao.EventDAO;
+import com.banzhuan.dao.CuttingToolDAO;
 import com.banzhuan.dao.ItemDAO;
 import com.banzhuan.dao.OrderDAO;
 import com.banzhuan.dao.ProductDAO;
@@ -41,15 +47,18 @@ import com.banzhuan.entity.AgentEntity;
 import com.banzhuan.entity.ArticleEntity;
 import com.banzhuan.entity.BrandEntity;
 import com.banzhuan.entity.EventEntity;
+import com.banzhuan.entity.CuttingToolEntity;
 import com.banzhuan.entity.ItemEntity;
 import com.banzhuan.entity.OrderEntity;
 import com.banzhuan.entity.ProductEntity;
 import com.banzhuan.entity.QuestionEntity;
 import com.banzhuan.entity.QuickrequestEntity;
 import com.banzhuan.entity.SampleEntity;
+import com.banzhuan.entity.TempEntity;
 import com.banzhuan.entity.UserEntity;
 import com.banzhuan.form.ItemForm;
 import com.banzhuan.form.RegForm;
+import com.banzhuan.util.CuttingToolsConfiguration;
 import com.banzhuan.util.StringUtil;
 import com.banzhuan.util.Util;
 
@@ -93,6 +102,250 @@ public class AdminController extends BaseController{
 	@Autowired
 	@Qualifier("orderDAO")
 	private OrderDAO orderDAO;
+	
+	@Autowired
+	@Qualifier("ctDAO")
+	private CuttingToolDAO ctDAO;
+	
+	@RequestMapping(value="/test")
+	public ModelAndView test(final HttpServletRequest request, final HttpServletResponse response)
+	{
+		ModelAndView mv = new ModelAndView("/admin/test");
+		try {
+            Workbook book = Workbook.getWorkbook(new File("D:/data/product.xls"));
+            Sheet sheet2= book.getSheet(2);
+            Map<String, TempEntity> seriesMap = new HashMap<String, TempEntity>();
+            for(int j = 2; j < sheet2.getRows(); j++)
+            {
+            	String sn = sheet2.getCell(1, j).getContents();
+            	if(StringUtil.isEmpty(sn))
+            	{
+            		break;
+            	}
+            	TempEntity tmp = new TempEntity();
+            	tmp.outline = sheet2.getCell(2, j).getContents();
+            	tmp.info = sheet2.getCell(3, j).getContents();
+            	tmp.suitcase = sheet2.getCell(4, j).getContents();
+            	tmp.cover = "/img/series/" + sn + ".png";
+            	if(StringUtil.isEmpty(sheet2.getCell(5, j).getContents()))
+            	{
+            		tmp.pic = "/img/sample/" + sn + ".jpg";
+            	}
+            	else
+            	{
+            		if(StringUtil.isEqual(sheet2.getCell(5, j).getContents(), "2"))
+            		{
+            			tmp.pic = "/img/sample/" + sn + "-1.jpg|" + "/img/series/" + sn + "-2.jpg";;
+            		}
+            		if(StringUtil.isEqual(sheet2.getCell(5, j).getContents(), "3"))
+            		{
+            			tmp.pic = "/img/sample/" + sn + "-1.jpg|" + "/img/series/" + sn + "-2.jpg|" + "/img/series/" + sn + "-3.jpg";;
+            		}
+            		if(StringUtil.isEqual(sheet2.getCell(5, j).getContents(), "4"))
+            		{
+            			tmp.pic = "/img/sample/" + sn + "-1.jpg|" + "/img/series/" + sn + "-2.jpg|" + "/img/series/" + sn + "-3.jpg|" + "/img/series/" + sn + "-4.jpg";
+            		}
+            	}
+            	seriesMap.put(sn, tmp);
+            }
+            // 获得第一个工作表对象
+            Sheet sheet= book.getSheet(1);
+            
+            for(int j = 0; j < 0; j++)
+            {
+            	CuttingToolEntity ct = new CuttingToolEntity();
+            	String tmp = sheet.getCell(0, j).getContents();
+            	tmp = sheet.getCell(0, j).getContents();
+            	if(StringUtil.isNotEmpty(tmp))
+            	{
+            		ct.setCode(CuttingToolsConfiguration.getCodeValue(tmp));
+            	}
+            	tmp = sheet.getCell(1, j).getContents();
+            	if(StringUtil.isNotEmpty(tmp))
+            	{
+            		ct.setBrand(tmp);
+            	}
+            	tmp = sheet.getCell(2, j).getContents();
+            	if(StringUtil.isNotEmpty(tmp))
+            	{
+            		ct.setSeriesname(tmp);
+            	}
+            	tmp = sheet.getCell(3, j).getContents();
+            	if(StringUtil.isNotEmpty(tmp))
+            	{
+            		ct.setVersion(tmp);
+            	}
+            	tmp = sheet.getCell(4, j).getContents();
+            	if(StringUtil.isNotEmpty(tmp))
+            	{
+            		ct.setMaterial(tmp);
+            	}
+            	tmp = sheet.getCell(5, j).getContents();
+            	if(StringUtil.isNotEmpty(tmp))
+            	{
+            		ct.setAngle(Integer.valueOf(tmp));
+            	}
+            	tmp = sheet.getCell(6, j).getContents();
+            	if(StringUtil.isNotEmpty(tmp))
+            	{
+            		ct.setCtcount(Integer.valueOf(tmp));
+            	}
+            	tmp = sheet.getCell(7, j).getContents();
+            	if(StringUtil.isNotEmpty(tmp))
+            	{
+            		ct.setDiameter(Double.valueOf(tmp));
+            	}
+            	tmp = sheet.getCell(8, j).getContents();
+            	if(StringUtil.isNotEmpty(tmp))
+            	{
+            		ct.setUsage(tmp.replace("；", ";"));
+            	}
+            	tmp = sheet.getCell(9, j).getContents();
+            	if(StringUtil.isNotEmpty(tmp))
+            	{
+            		ct.setCujing(Integer.valueOf(tmp));
+            	}
+            	tmp = sheet.getCell(10, j).getContents();
+            	if(StringUtil.isNotEmpty(tmp))
+            	{
+            		ct.setUsefullength(Integer.valueOf(tmp));
+            	}
+            	tmp = sheet.getCell(11, j).getContents();
+            	if(StringUtil.isNotEmpty(tmp))
+            	{
+            		ct.setPipesize(Double.valueOf(tmp));
+            	}
+            	tmp = sheet.getCell(12, j).getContents();
+            	if(StringUtil.isNotEmpty(tmp))
+            	{
+            		ct.setShank(tmp);
+            	}
+            	tmp = sheet.getCell(13, j).getContents();
+            	if(StringUtil.isNotEmpty(tmp))
+            	{
+            		ct.setShanktype(tmp);
+            	}
+            	tmp = sheet.getCell(14, j).getContents();
+            	if(StringUtil.isNotEmpty(tmp))
+            	{
+            		ct.setShape(tmp);
+            	}
+            	
+            	tmp = sheet.getCell(15, j).getContents();
+            	if(StringUtil.isNotEmpty(tmp))
+            	{
+            		ct.setBackangle(Integer.valueOf(tmp));
+            	}
+            	tmp = sheet.getCell(16, j).getContents();
+            	if(StringUtil.isNotEmpty(tmp))
+            	{
+            		ct.setWorkingtool(tmp);
+            	}
+            	tmp = sheet.getCell(17, j).getContents();
+            	if(StringUtil.isNotEmpty(tmp))
+            	{
+            		ct.setEdgeno(Integer.valueOf(tmp));
+            	}
+            	tmp = sheet.getCell(18, j).getContents();
+            	if(StringUtil.isNotEmpty(tmp))
+            	{
+            		ct.setEdgelength(Double.valueOf(tmp));
+            	}
+            	tmp = sheet.getCell(19, j).getContents();
+            	if(StringUtil.isNotEmpty(tmp))
+            	{
+            		ct.setTotallength(Double.valueOf(tmp));
+            	}
+            	tmp = sheet.getCell(20, j).getContents();
+            	if(StringUtil.isNotEmpty(tmp))
+            	{
+            		ct.setScrewangle(Double.valueOf(tmp));
+            	}
+            	tmp = sheet.getCell(21, j).getContents();
+            	if(StringUtil.isNotEmpty(tmp))
+            	{
+            		ct.setCoatingtype(tmp);
+            	}
+            	tmp = sheet.getCell(22, j).getContents();
+            	if(StringUtil.isNotEmpty(tmp))
+            	{
+            		ct.setRangle(Double.valueOf(tmp));
+            	}
+            	tmp = sheet.getCell(23, j).getContents();
+            	if(StringUtil.isNotEmpty(tmp))
+            	{
+            		ct.setDirection(Integer.valueOf(tmp));
+            	}
+            	tmp = sheet.getCell(24, j).getContents();
+            	if(StringUtil.isNotEmpty(tmp))
+            	{
+            		ct.setMinworkdiameter(Double.valueOf(tmp));
+            	}
+            	tmp = sheet.getCell(25, j).getContents();
+            	if(StringUtil.isNotEmpty(tmp))
+            	{
+            		ct.setInnercooling(Integer.valueOf(tmp));
+            	}
+            	tmp = sheet.getCell(26, j).getContents();
+            	if(StringUtil.isNotEmpty(tmp))
+            	{
+            		ct.setDiameterratio(tmp);
+            	}
+            	tmp = sheet.getCell(27, j).getContents();
+            	if(StringUtil.isNotEmpty(tmp))
+            	{
+            		ct.setSlotshape(tmp);
+            	}
+            	tmp = sheet.getCell(28, j).getContents();
+            	if(StringUtil.isNotEmpty(tmp))
+            	{
+            		ct.setHandlenorm(tmp);
+            	}
+            	tmp = sheet.getCell(29, j).getContents();
+            	if(StringUtil.isNotEmpty(tmp))
+            	{
+            		ct.setTaptype(tmp);
+            	}
+            	tmp = sheet.getCell(30, j).getContents();
+            	if(StringUtil.isNotEmpty(tmp))
+            	{
+            		ct.setScrewtype(tmp);
+            	}
+            	tmp = sheet.getCell(31, j).getContents();
+            	if(StringUtil.isNotEmpty(tmp))
+            	{
+            		ct.setAxistype(tmp);
+            	}
+            	tmp = sheet.getCell(32, j).getContents();
+            	if(StringUtil.isNotEmpty(tmp))
+            	{
+            		ct.setAxisdetail(tmp);
+            	}
+            	ct.setIshot(1);
+            	if(seriesMap.get(ct.getSeriesname()) != null)
+            	{
+	            	ct.setInfo(seriesMap.get(ct.getSeriesname()).info);
+	            	ct.setOutline(seriesMap.get(ct.getSeriesname()).outline);
+	            	ct.setCover(seriesMap.get(ct.getSeriesname()).cover);
+	            	ct.setPic(seriesMap.get(ct.getSeriesname()).pic);
+            	}
+            	ctDAO.insertCuttingToolEntity(ct);
+            }
+            book.close();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+		return mv;
+	}
+	
+	@RequestMapping(value="/allitems")
+	public ModelAndView allitems(final HttpServletRequest request, final HttpServletResponse response)
+	{
+		ModelAndView mv = new ModelAndView("/admin/allitems");
+		List<CuttingToolEntity> cts = ctDAO.getAllItems();
+		mv.addObject("cts",cts);
+		return mv;
+	}
 	
 	@RequestMapping(value="/log")
 	public ModelAndView log(final HttpServletRequest request, final HttpServletResponse response)

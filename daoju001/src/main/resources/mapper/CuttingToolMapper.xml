@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cuttingtool">
+	<resultMap type="CuttingToolEntity" id="CuttingToolResultMap">
+      <!---->
+		<id property="id" column="id" />
+		<!---->
+		<id property="ishot" column="ishot" />
+   	  <!---->
+		<id property="code" column="code" />
+   	  <!---->
+		<id property="brand" column="brand" />
+   	  <!---->
+		<id property="seriesname" column="seriesname" />
+   	  <!---->
+		<id property="version" column="version" />
+   	  <!---->
+		<id property="material" column="material" />
+	  <!---->
+		<id property="ctcount" column="ctcount" />
+   	  <!---->
+		<id property="angle" column="angle" />
+   	  <!---->
+		<id property="diameter" column="diameter" />
+   	  <!---->
+		<id property="usage" column="usage" />
+   	  <!---->
+		<id property="cujing" column="cujing" />
+   	  <!---->
+		<id property="usefullength" column="usefullength" />
+   	  <!---->
+		<id property="pipesize" column="pipesize" />
+   	  <!---->
+		<id property="shank" column="shank" />
+		<id property="shanktype" column="shanktype" />
+   	  <!---->
+		<id property="shape" column="shape" />
+   	  <!---->
+		<id property="backangle" column="backangle" />
+   	  <!---->
+		<id property="workingtool" column="workingtool" />
+   	  <!---->
+		<id property="edgeno" column="edgeno" />
+   	  <!---->
+		<id property="edgelength" column="edgelength" />
+   	  <!---->
+		<id property="totallength" column="totallength" />
+   	  <!---->
+		<id property="screwangle" column="screwangle" />
+   	  <!---->
+		<id property="coatingtype" column="coatingtype" />
+   	  <!---->
+		<id property="rangle" column="rangle" />
+   	  <!---->
+		<id property="direction" column="direction" />
+   	  <!---->
+		<id property="minworkdiameter" column="minworkdiameter" />
+   	  <!---->
+		<id property="innercooling" column="innercooling" />
+		<id property="diameterratio" column="diameterratio" />
+   	  <!---->
+		<id property="slotshape" column="slotshape" />
+   	  <!---->
+		<id property="handlenorm" column="handlenorm" />
+   	  <!---->
+		<id property="taptype" column="taptype" />
+   	  <!---->
+		<id property="screwtype" column="screwtype" />
+   	  <!---->
+		<id property="axistype" column="axistype" />
+   	  <!---->
+		<id property="axisdetail" column="axisdetail" />
+	<!---->
+		<id property="info" column="info" />
+		<id property="outline" column="outline" />
+		<id property="cover" column="cover" />
+		<id property="pic" column="pic" />
+	</resultMap>
+
+	<select id="searchCuttingTool" resultMap="CuttingToolResultMap" statementType="CALLABLE">
+		{call searchCuttingTool(#{searchParam,mode=IN,jdbcType=VARCHAR})}
+	</select>
+	<select id="queryCuttingToolById" parameterType="int" resultMap="CuttingToolResultMap">
+		<![CDATA[
+			SELECT * from t_cuttingtool t where t.id=#{id}
+		]]>
+	</select>
+	<select id="getAllItems" parameterType="int" resultMap="CuttingToolResultMap">
+		<![CDATA[
+			SELECT * from t_cuttingtool t limit 0,50;
+		]]>
+	</select>
+	<!-- 新代理商信息 -->
+	<insert id="insertCuttingToolEntity" parameterType="CuttingToolEntity">
+		<selectKey resultType="int" order="AFTER" keyProperty="id">
+			SELECT LAST_INSERT_ID() AS id
+		</selectKey>
+		insert into t_cuttingtool
+		(
+		ishot
+		,code
+		,brand
+		,seriesname
+		,version
+		,material
+		,ctcount
+		,angle
+		,diameter
+		,`usage`
+		,cujing
+		,usefullength
+		,pipesize
+		,shank
+		,shanktype
+		,shape
+		,backangle
+		,workingtool
+		,edgeno
+		,edgelength
+		,totallength
+		,screwangle
+		,coatingtype
+		,rangle
+		,direction
+		,minworkdiameter
+		,innercooling
+		,diameterratio
+		,slotshape
+		,handlenorm
+		,taptype
+		,screwtype
+		,axistype
+		,axisdetail
+		,info
+		,outline
+		,cover
+		,pic)
+		values
+		(
+		#{ishot}
+		,#{code}
+		,#{brand}
+		,#{seriesname}
+		,#{version}
+		,#{material}
+		,#{ctcount}
+		,#{angle}
+		,#{diameter}
+		,#{usage}
+		,#{cujing}
+		,#{usefullength}
+		,#{pipesize}
+		,#{shank}
+		,#{shanktype}
+		,#{shape}
+		,#{backangle}
+		,#{workingtool}
+		,#{edgeno}
+		,#{edgelength}
+		,#{totallength}
+		,#{screwangle}
+		,#{coatingtype}
+		,#{rangle}
+		,#{direction}
+		,#{minworkdiameter}
+		,#{innercooling}
+		,#{diameterratio}
+		,#{slotshape}
+		,#{handlenorm}
+		,#{taptype}
+		,#{screwtype}
+		,#{axistype}
+		,#{axisdetail}
+		,#{info}
+		,#{outline}
+		,#{cover}
+		,#{pic}
+		)
+	</insert>
+</mapper>

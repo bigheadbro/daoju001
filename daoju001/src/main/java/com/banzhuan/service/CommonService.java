@@ -24,6 +24,7 @@ import com.banzhuan.dao.ArticleDAO;
 import com.banzhuan.dao.BuyerDAO;
 import com.banzhuan.dao.CommentDAO;
 import com.banzhuan.dao.ComplainDAO;
+import com.banzhuan.dao.CuttingToolDAO;
 import com.banzhuan.dao.EventDAO;
 import com.banzhuan.dao.GoodcaseDAO;
 import com.banzhuan.dao.ItemDAO;
@@ -35,6 +36,7 @@ import com.banzhuan.dao.QuestionDAO;
 import com.banzhuan.dao.QuickrequestDAO;
 import com.banzhuan.dao.RelationDAO;
 import com.banzhuan.dao.SampleDAO;
+import com.banzhuan.dao.StatisticsDAO;
 import com.banzhuan.dao.StockDAO;
 import com.banzhuan.dao.UserDAO;
 import com.banzhuan.entity.AddressEntity;
@@ -43,6 +45,7 @@ import com.banzhuan.entity.ArticleEntity;
 import com.banzhuan.entity.BuyerEntity;
 import com.banzhuan.entity.CommentEntity;
 import com.banzhuan.entity.ComplainEntity;
+import com.banzhuan.entity.CuttingToolEntity;
 import com.banzhuan.entity.EventEntity;
 import com.banzhuan.entity.GoodcaseEntity;
 import com.banzhuan.entity.ItemEntity;
@@ -54,6 +57,7 @@ import com.banzhuan.entity.QuestionEntity;
 import com.banzhuan.entity.QuickrequestEntity;
 import com.banzhuan.entity.RelationEntity;
 import com.banzhuan.entity.SampleEntity;
+import com.banzhuan.entity.StatisticsEntity;
 import com.banzhuan.entity.StockEntity;
 import com.banzhuan.entity.UserEntity;
 import com.banzhuan.common.Account;
@@ -148,6 +152,14 @@ public class CommonService {
 	@Autowired
 	@Qualifier("relationDAO")
 	private RelationDAO relationDAO;
+	
+	@Autowired
+	@Qualifier("ctDAO")
+	private CuttingToolDAO ctDAO;
+	
+	@Autowired
+	@Qualifier("stDAO")
+	private StatisticsDAO stDAO;
 	
 	public Result checkLogin(LoginForm form, Errors errors)
 	{
@@ -987,5 +999,17 @@ public class CommonService {
 			logger.error("isFeed error:"+e.toString());
 		}
 		return false;
+	}
+	
+	public List<CuttingToolEntity> searchCuttingTool(String searchParam)
+	{
+		Map<String, String> param = new HashMap<String, String>();
+		param.put("searchParam", searchParam);
+		return ctDAO.searchCuttingTool(param);
+	}
+	
+	public void addstatistics(StatisticsEntity st)
+	{
+		stDAO.insertStatisticsEntity(st);
 	}
 }

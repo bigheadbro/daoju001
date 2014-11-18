@@ -59,6 +59,7 @@ import com.banzhuan.common.Result;
 import com.banzhuan.entity.AddressEntity;
 import com.banzhuan.entity.ArticleEntity;
 import com.banzhuan.entity.ComplainEntity;
+import com.banzhuan.entity.CuttingToolEntity;
 import com.banzhuan.entity.EventEntity;
 import com.banzhuan.entity.ItemEntity;
 import com.banzhuan.entity.OrderEntity;
@@ -68,6 +69,7 @@ import com.banzhuan.entity.QuestionEntity;
 import com.banzhuan.entity.QuickrequestEntity;
 import com.banzhuan.entity.RelationEntity;
 import com.banzhuan.entity.SampleEntity;
+import com.banzhuan.entity.StatisticsEntity;
 import com.banzhuan.entity.StockEntity;
 import com.banzhuan.entity.UserEntity;
 import com.banzhuan.form.AddressForm;
@@ -185,6 +187,14 @@ public class CommonController extends BaseController{
             e.printStackTrace();  
         }  
     }  
+	@RequestMapping(value="/addvote")
+	public void addvote(final HttpServletRequest request,final HttpServletResponse response)
+	{
+		StatisticsEntity st = new StatisticsEntity();
+		st.setType(1);
+		st.setInfo("点击进入问卷");
+		commonService.addstatistics(st);
+	}
 	
 	@RequestMapping(value="/index")
 	public ModelAndView index(final HttpServletRequest request,final HttpServletResponse response,@ModelAttribute("form")RequestForm form)
@@ -192,7 +202,7 @@ public class CommonController extends BaseController{
 		Account account = (Account) WebUtils.getSessionAttribute(request, "account");
 		if(account != null)
 			commonService.setRequestFormWithAccount(form, account);
-		ModelAndView mv = new ModelAndView("/common/index2");
+		ModelAndView mv = new ModelAndView("/common/index3");
 		
 		List<QuickrequestEntity> requests = commonService.getMainRequests();
 		mv.addObject("requests", requests);
@@ -231,7 +241,7 @@ public class CommonController extends BaseController{
 		Account account = (Account) WebUtils.getSessionAttribute(request, "account");
 		if(account != null)
 			commonService.setRequestFormWithAccount(form, account);
-		ModelAndView mv = new ModelAndView("/common/index2");
+		ModelAndView mv = new ModelAndView("/common/index3");
 		
 		List<QuickrequestEntity> requests = commonService.getMainRequests();
 		mv.addObject("requests", requests);
@@ -1628,6 +1638,22 @@ public class CommonController extends BaseController{
 		return view;
 	}
 
+	@RequestMapping(value="/searchresult")
+	public ModelAndView searchresult(HttpServletRequest request, HttpServletResponse response)
+	{
+		ModelAndView view = new ModelAndView("common/searchresult");
+		
+		return view;
+	}
+	
+	@RequestMapping(value="/getsearch")
+	public void getsearch(HttpServletRequest request, HttpServletResponse response)
+	{
+		String param = request.getParameter("searchparam");
+		List<CuttingToolEntity> cts = commonService.searchCuttingTool(StringUtil.prehandleParam(param));
+		JsonUtil.sendCts(response, cts);
+	}
+	
 	
 	@RequestMapping(value="/wxstocklist")
 	public ModelAndView wxstocklist(HttpServletRequest request, HttpServletResponse response,@ModelAttribute("form")RequestForm form) {
@@ -2306,4 +2332,5 @@ public class CommonController extends BaseController{
 			return view;
 		}
 	}
+	
 }

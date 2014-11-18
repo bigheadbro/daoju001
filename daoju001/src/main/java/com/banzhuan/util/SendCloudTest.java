@@ -41,65 +41,52 @@ public class SendCloudTest {
 	}
 
 	public static void main(String[] args) throws Exception {
-		ArrayList<String> set = readEdmFileByLines("EDM/client.txt");
+		ArrayList<String> set = readEdmFileByLines("EDM/notqq.txt");
 
-		for (int i = 16482; i < set.size(); i++) {
+		for (int i = 4444; i < 9544; i++) {
 			try
 			{
-			while (true) {
+			/*while (true) {
 				Calendar time = Calendar.getInstance();
-				if (time.get(Calendar.HOUR_OF_DAY) == 9 ||time.get(Calendar.HOUR_OF_DAY) == 13 ||time.get(Calendar.HOUR_OF_DAY) == 16 ||time.get(Calendar.HOUR_OF_DAY) == 21 ) {
+				if (time.get(Calendar.HOUR_OF_DAY) == 9 ||time.get(Calendar.HOUR_OF_DAY) == 14 ||time.get(Calendar.HOUR_OF_DAY) == 16 ||time.get(Calendar.HOUR_OF_DAY) == 21 ) {
 					if (time.get(Calendar.MINUTE) <= 30) {
 						break;
 					}
 				}
-			}
-			Message message = new Message("client@daoshifu.com", "刀师傅");
+			}*/
+			Message message = new Message("client@sends.daoshifu.com", "刀师傅");
 			// 正文， 使用html形式，或者纯文本形式
-			message.setBody("<div style=\"font-family:'楷体';text-align: center;\">"
-					+"<div style=\"width: 832px;background-color:#7d7d7d;display:inline-block;\">"
-					+"<div style=\"text-align: center;width: 832px;background: url(http://www.daoshifu.com/img/edm4.png) repeat-x 0 0;\">"
-						+"	<h1 style=\"color:white;padding-top:900px;font-size:100px;font-weight:100;margin-bottom:20px;margin-top:0\">全新改版</h1>"
-							+"<p style=\"color:white;font-size:28px;line-height:40px;\">三大功能重装上阵！<br/>2014年7月,我们期待您的光临！</p>"
-							+"<div style=\"margin-top: 60px;\">"
-								+"<div style=\"margin-left:10px;width:230px;border-right: 1px solid white;display:inline-block;\">"
-									+"<h2 style=\"font-weight:100;display:inline-block;color:white;border:2px solid white;padding:10px 30px;border-radius:10px;margin-top: 0;\"><a style=\"color:white\" href=\"http://www.daoshifu.com/items\">刀具商城</a></h2>"
-									+"<div style=\"width:160px;display:inline-block;\">"
-										+"<p style=\"text-align:left;color:white;font-size: 14px;\">?刀师傅网精选认证卖家，支付宝担保交易，网上买刀具再无后顾之忧。"
-										+"<br/><br/>?双向免费，价格优惠，全部顺丰包邮，货源不断更新。"
-										+"</p>"
-									+"</div>"
-								+"</div>"
-								+"<div style=\"width:230px;border-right: 1px solid white;display:inline-block;\">"
-									+"<h2 style=\"font-weight:100;display:inline-block;color:white;border:2px solid white;padding:10px 30px;border-radius:10px;margin-top: 0;\"><a style=\"color:white\" href=\"http://www.daoshifu.com/products\">线上展会</a></h2>"
-									+"<div style=\"width:160px;display:inline-block;\">"
-										+"<p style=\"text-align:left;color:white;font-size: 14px;\">?刀师傅网精选特色刀具，足不出户看24小时在线刀具展会。"
-										+"<br/><br/>?免费发布，有效展示，直接沟通，打造刀具界O2O平台。"
-										+"</p>"
-									+"</div>"
-								+"</div>"
-								+"<div style=\"width:230px;display:inline-block;\">"
-									+"<h2 style=\"font-weight:100;display:inline-block;color:white;border:2px solid white;padding:10px 30px;border-radius:10px;margin-top: 0;\"><a style=\"color:white\" href=\"http://www.daoshifu.com/questions\">刀具咨询</a></h2>"
-									+"<div style=\"width:160px;display:inline-block;\">"
-										+"<p style=\"text-align:left;color:white;font-size: 14px;\">?找不到合适的刀具？来刀师傅提问！资深刀具专家为你解答！"
-										+"<br/><br/>?免费提问！高质量解答！打造最专业刀具咨询平台！"
-										+"</p>"
-									+"</div>"
-								+"</div>"
+			message.setBody("<div  style=\"margin: 10px auto;width: 700px;\">"
+							+"<div class=\"\">"
+							+"<img style=\"width:700px;display:block;\" src=\"http://www.daoshifu.com/img/sys.png\" />"
+							+"<h1 style=\"text-align:center;font-size:24px;color:#8d8d8d;font-weight:normal;margin-top:70px;\">花一分钟，与我们共建全品牌选刀系统</h1>"
+							+"<a id=\"query\" target=\"__blank\" href=\"http://www.wenjuan.com/s/3QfaQns/\" style=\"display:block;text-decoration: none;text-align: center;margin: 30px auto;background-color: #44bde5;color: white;font-size: 30px;border-radius: 7px;padding: 10px;width: 160px;\">填写问卷</a>"
 							+"</div>"
-							+"<div style=\"margin-top: 70px;padding-bottom: 100px;\">"
-							+"<img src=\"http://www.daoshifu.com/img/edm41.png\" />"
+							+"<ul style=\"border-top:1px solid #eaeaea;margin-top:50px;padding-top: 40px;\">"
+							+"<li style=\"list-style: none;text-align: left;display: inline-block;\">"
+							+"<h1 style=\"font-size:22px;color:#8d8d8d;margin-bottom: 15px;\">更直观</h1>"
+							+"<p style=\"font-size:14px;color:#cecece;line-height:28px;\">数千款热销品<br/>产品特性一目了然</p>"
+							+"</li>"
+							+"<li style=\"list-style: none;text-align: left;display: inline-block;margin-left:63px\">"
+							+"<h1 style=\"font-size:22px;color:#8d8d8d;margin-bottom: 15px;\">更准确</h1>"
+							+"<p style=\"font-size:14px;color:#cecece;line-height:28px;\">70余个参数<br/>准确匹配方案</p>"
+							+"</li>"
+							+"<li style=\"list-style: none;text-align: left;display: inline-block;margin-left:63px\">"
+							+"<h1 style=\"font-size:22px;color:#8d8d8d;margin-bottom: 15px;\">更安全</h1>"
+							+"<p style=\"font-size:14px;color:#cecece;line-height:28px;\">供应商经过刀师傅认证<br/>货源严格保证</p>"
+							+"</li>"
+							+"<li style=\"list-style: none;text-align: left;display: inline-block;margin-left:63px\">"
+							+"<h1 style=\"font-size:22px;color:#8d8d8d;margin-bottom: 15px;\">更全面</h1>"
+							+"<p style=\"font-size:14px;color:#cecece;line-height:28px;\">目标覆盖市场<br/>90%以上的品牌</p>"
+							+"</li>"
+							+"</ul>"
 							+"</div>"
-							+"<p style=\"text-align: center;font-size:12px;font-family:'微软雅黑';color:white\">如果您不愿意继续接受此类邮件,可点此<a href=\"https://sendcloud.sohu.com/webapi/unsubscribes.get.xml?api_user=yourusername\">退订此类邮件</a></p>"
-						+"</div>"
-					+"</div>"
-				+"</div>");
+							+"<p style=\"text-align: center;font-size:12px;font-family:'微软雅黑';\">如果您不愿意继续接受此类邮件,可点此<a href=\"https://sendcloud.sohu.com/webapi/unsubscribes.get.xml?api_user=yourusername\">退订此类邮件</a></p>");
 			// 添加to, cc, bcc replyto
-			message.setSubject("刀师傅 全新改版 重装上阵");
+			message.setSubject("刀师傅全品牌选刀系统即将上线");
 
 			message.addRecipient(set.get(i));
-
-			// message.addRecipient("346938819@qq.com").addRecipient("123576884@qq.com");
+			//message.addRecipient("346938819@qq.com");
 			// 组装消息发送邮件
 			// 不同于登录SendCloud站点的帐号，您需要登录后台创建发信域名，获得对应发信域名下的帐号和密码才可以进行邮件的发送。
 			SendCloud sendCloud = new SendCloud(
@@ -110,8 +97,6 @@ public class SendCloudTest {
 
 			// 获取emailId列表
 			System.out.println(sendCloud.getEmailIdList());
-
-			Thread.sleep(5500);
 			}
 			catch(Exception ex){
 				System.out.println(ex.toString());

@@ -1642,7 +1642,12 @@ public class CommonController extends BaseController{
 	public ModelAndView searchresult(HttpServletRequest request, HttpServletResponse response)
 	{
 		ModelAndView view = new ModelAndView("common/searchresult");
-		
+		if(isDoSubmit(request))
+		{
+			String param = request.getParameter("searchparam");
+			List<CuttingToolEntity> cts = commonService.searchCuttingTool(StringUtil.prehandleParam(param));
+			view.addObject("cts",cts);
+		}
 		return view;
 	}
 	
@@ -1654,6 +1659,15 @@ public class CommonController extends BaseController{
 		JsonUtil.sendCts(response, cts);
 	}
 	
+	@RequestMapping(value="/detail/{id}")
+	public ModelAndView detail(HttpServletRequest request, HttpServletResponse response, @PathVariable String id)
+	{
+		int detailid = Integer.valueOf(id);
+		ModelAndView view = new ModelAndView("common/detail");
+		CuttingToolEntity ct = commonService.getCuttingToolByid(detailid);
+		view.addObject("ct",ct);
+		return view;
+	}
 	
 	@RequestMapping(value="/wxstocklist")
 	public ModelAndView wxstocklist(HttpServletRequest request, HttpServletResponse response,@ModelAttribute("form")RequestForm form) {

@@ -13,8 +13,8 @@ import com.banzhuan.entity.CuttingToolEntity;
 public class CuttingToolDAOImpl extends SqlSessionDaoSupport implements CuttingToolDAO {
 
 	@Override
-	public CuttingToolEntity queryHotctById(int id) {
-		return this.getSqlSession().selectOne("queryHotctById", id);
+	public CuttingToolEntity queryCuttingToolById(int id) {
+		return this.getSqlSession().selectOne("queryCuttingToolById", id);
 	}
 
 	@Override

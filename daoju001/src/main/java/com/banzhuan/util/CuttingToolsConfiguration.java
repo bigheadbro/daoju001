@@ -12,81 +12,142 @@ public class CuttingToolsConfiguration {
 	private static Map<String, String> level1Map = new HashMap<String, String>();
 	private static Map<String, String> level2Map = new HashMap<String, String>();
 	private static Map<String, String> level3Map = new HashMap<String, String>();
+	private static Map<String, String> level4Map = new HashMap<String, String>();
 	private static Map<String, String> codeMap = new HashMap<String, String>();
 	static 
 	{
-		level1Map.put("铣削刀具", "01");
-		level1Map.put("车削刀具", "02");
-		level1Map.put("孔加工刀具", "03");
-		level1Map.put("刀柄", "04");
-		level1Map.put("螺纹刀具", "05");
-		level1Map.put("其它", "99");
+		level1Map.put("01","机夹铣刀");
+		level1Map.put("02","整体铣刀");
+		level1Map.put("03","车削刀具");
+		level1Map.put("04","孔加工刀具");
+		level1Map.put("05","刀柄");
+		level1Map.put("06","螺纹刀具");
+		level1Map.put("99","其他");
 		
-		level2Map.put("铣槽刀盘", "0106");
-		level2Map.put("整体铣刀", "0107");
-		level2Map.put("车刀杆", "0201");
-		level2Map.put("超大加持力刀柄", "0406");
-		level2Map.put("丝锥", "0506");
+		level2Map.put("0101","面铣刀盘");
+		level2Map.put("0102","铣刀杆");
+		level2Map.put("0103","螺纹接头");
+		level2Map.put("0104","合金接杆");
+		level2Map.put("0105","玉米铣刀");
+		level2Map.put("0106","三面刃铣刀");
+		level2Map.put("0107","T型槽刀");
+		level2Map.put("0108","铣刀片");
+		level2Map.put("0201","平头铣刀");
+		level2Map.put("0202","球头铣刀");
+		level2Map.put("0203","圆角铣刀");
+		level2Map.put("0204","锥形铣刀");
+		level2Map.put("0205","V尖刀");
+		level2Map.put("0206","倒角刀");
+		level2Map.put("0207","T槽刀");
+		level2Map.put("0301","车刀杆");
+		level2Map.put("0401","整体合金钻");
+		level2Map.put("0402","焊接合金钻");
+		level2Map.put("0403","机夹式钻头");
+		level2Map.put("0404","机夹式钻头刀片");
+		level2Map.put("0405","铲钻");
+		level2Map.put("0406","铲钻刀片");
+		level2Map.put("0407","U钻");
+		level2Map.put("0408","U钻刀片");
+		level2Map.put("0409","铰刀");
+		level2Map.put("0410","镗刀");
+		level2Map.put("0501","热胀刀柄");
+		level2Map.put("0502","液压刀柄");
+		level2Map.put("0503","面铣刀柄");
+		level2Map.put("0504","丝锥刀柄");
+		level2Map.put("0505","ER刀柄");
+		level2Map.put("0506","筒夹");
+		level2Map.put("0507","超大加持力刀柄");
+		level2Map.put("0601","螺纹铣刀");
+		level2Map.put("0602","螺纹铣刀杆");
+		level2Map.put("0603","螺纹铣刀片");
+		level2Map.put("0604","螺纹车刀杆");
+		level2Map.put("0605","螺纹车刀片");
+		level2Map.put("0606","丝锥");
+		level2Map.put("0607","板牙");
+		level2Map.put("9901","对刀仪");
+		level2Map.put("9902","寻边器");
+		
+		level3Map.put("020101","标准平头铣刀");
+		level3Map.put("020102","波纹平头铣刀");
+		level3Map.put("020103","长颈平头铣刀");
+		level3Map.put("020201","标准球头铣刀");
+		level3Map.put("020202","长颈球头铣刀");
+		level3Map.put("020301","标准圆角铣刀");
+		level3Map.put("020302","长颈圆角铣刀");
+		level3Map.put("020401","锥形平头铣刀");
+		level3Map.put("020402","锥形圆角铣刀");
+		level3Map.put("020403","锥形球头铣刀");
+		level3Map.put("030101","外圆车刀杆");
+		level3Map.put("030102","内圆车刀杆");
+		level3Map.put("030103","切断/切槽刀杆");
+		level3Map.put("030104","普通车刀片");
+		level3Map.put("030105","精磨车刀片");
+		level3Map.put("030106","切槽/切断");
+		level3Map.put("050701","冷压刀柄");
+		level3Map.put("050702","蜗杆刀柄");
+		level3Map.put("060601","手用丝锥");
+		level3Map.put("060602","挤压丝锥");
+		level3Map.put("060603","先端丝锥");
+		level3Map.put("060604","螺旋丝锥");
+		
+		codeMap.put("1","010100");
+		codeMap.put("2","010200");
+		codeMap.put("3","010300");
+		codeMap.put("4","010400");
+		codeMap.put("5","010500");
+		codeMap.put("6","010600");
+		codeMap.put("7","010700");
+		codeMap.put("8","010800");
+		codeMap.put("9","020101");
+		codeMap.put("10","020102");
+		codeMap.put("11","020103");
+		codeMap.put("12","020201");
+		codeMap.put("13","020202");
+		codeMap.put("14","020301");
+		codeMap.put("15","020302");
+		codeMap.put("16","020401");
+		codeMap.put("17","020402");
+		codeMap.put("18","020403");
+		codeMap.put("19","020500");
+		codeMap.put("20","020600");
+		codeMap.put("21","020700");
+		codeMap.put("22","030101");
+		codeMap.put("23","030102");
+		codeMap.put("24","030103");
+		codeMap.put("25","030104");
+		codeMap.put("26","030105");
+		codeMap.put("27","030106");
+		codeMap.put("28","040100");
+		codeMap.put("29","040200");
+		codeMap.put("30","040300");
+		codeMap.put("31","040400");
+		codeMap.put("32","040500");
+		codeMap.put("33","040600");
+		codeMap.put("34","040700");
+		codeMap.put("35","040800");
+		codeMap.put("36","040900");
+		codeMap.put("37","041000");
+		codeMap.put("38","050100");
+		codeMap.put("39","050200");
+		codeMap.put("40","050300");
+		codeMap.put("41","050400");
+		codeMap.put("42","050500");
+		codeMap.put("43","050600");
+		codeMap.put("44","050701");
+		codeMap.put("45","050702");
+		codeMap.put("46","060100");
+		codeMap.put("47","060200");
+		codeMap.put("48","060300");
+		codeMap.put("49","060400");
+		codeMap.put("50","060500");
+		codeMap.put("51","060601");
+		codeMap.put("52","060602");
+		codeMap.put("53","060603");
+		codeMap.put("54","060604");
+		codeMap.put("56","060700");
+		codeMap.put("57","990100");
+		codeMap.put("58","990200");
 
-		level3Map.put("平头铣刀", "010701");
-		level3Map.put("球头铣刀", "010702");
-		level3Map.put("圆角铣刀", "010703");
-		level3Map.put("锥形铣刀", "010704");
-
-		codeMap.put("1","01010000");
-		codeMap.put("2","01020000");
-		codeMap.put("3","01030000");
-		codeMap.put("4","01040000");
-		codeMap.put("5","01050000");
-		codeMap.put("6","01060100");
-		codeMap.put("7","01060200");
-		codeMap.put("8","01070101");
-		codeMap.put("9","01070102");
-		codeMap.put("10","01070103");
-		codeMap.put("11","01070201");
-		codeMap.put("12","01070202");
-		codeMap.put("13","01070301");
-		codeMap.put("14","01070302");
-		codeMap.put("15","01070401");
-		codeMap.put("16","01070402");
-		codeMap.put("17","01070403");
-		codeMap.put("18","01070500");
-		codeMap.put("19","01070600");
-		codeMap.put("20","01070700");
-		codeMap.put("21","01080000");
-		codeMap.put("22","02010100");
-		codeMap.put("23","02010200");
-		codeMap.put("24","02010300");
-		codeMap.put("25","02010400");
-		codeMap.put("26","02010500");
-		codeMap.put("27","03010000");
-		codeMap.put("28","03020000");
-		codeMap.put("29","03030000");
-		codeMap.put("30","03040000");
-		codeMap.put("31","03050000");
-		codeMap.put("32","03060000");
-		codeMap.put("33","03070000");
-		codeMap.put("34","03080000");
-		codeMap.put("35","03090000");
-		codeMap.put("36","04010000");
-		codeMap.put("37","04020000");
-		codeMap.put("38","04030000");
-		codeMap.put("39","04040000");
-		codeMap.put("40","04050000");
-		codeMap.put("41","04060100");
-		codeMap.put("42","04060200");
-		codeMap.put("43","05010000");
-		codeMap.put("44","05020000");
-		codeMap.put("45","05030000");
-		codeMap.put("46","05040000");
-		codeMap.put("47","05050000");
-		codeMap.put("48","05060100");
-		codeMap.put("49","05060200");
-		codeMap.put("50","05060300");
-		codeMap.put("51","05060400");
-		codeMap.put("52","05070000");
-		codeMap.put("53","99010000");
-		codeMap.put("54","99020000");
 	}
 	public static String getCodeValue(String order)
 	{
@@ -94,42 +155,25 @@ public class CuttingToolsConfiguration {
 	}
 	public static void analyze()
 	{
-		String name = "";
-		String code = "";
 		try {
-            Workbook book = Workbook.getWorkbook(new File("D:/Data/type.xls"));
+            Workbook book = Workbook.getWorkbook(new File("D:/data/type.xls"));
             // 获得第一个工作表对象
             Sheet sheet= book.getSheet(0);
             for(int j = 1; j < sheet.getRows(); j++)
             {
-            	Cell cell = sheet.getCell(7, j);
-            	name = cell.getContents();
-            	if(StringUtil.isEmpty(name))
-            	{
-            		code = "00";
-            		cell = sheet.getCell(5, j);
-            		name = cell.getContents();
-            		if(StringUtil.isEmpty(name))
-                	{
-            			cell = sheet.getCell(3, j);
-                		name = cell.getContents();
-                		code = sheet.getCell(2,j).getContents() +  sheet.getCell(4,j).getContents() +"0000";
-                	}
-            		else
-            		{
-            			code = "00";
-            			code = sheet.getCell(2,j).getContents() +  sheet.getCell(4,j).getContents() + sheet.getCell(6,j).getContents() + "00";
-            		}
-            	}
-            	else
-            	{
-            		code = sheet.getCell(2,j).getContents() +  sheet.getCell(4,j).getContents() + sheet.getCell(6,j).getContents() + sheet.getCell(8,j).getContents();
-            		System.out.println("level2Map.put(\"" + sheet.getCell(5, j).getContents() + "\", \"" + sheet.getCell(2,j).getContents() +  sheet.getCell(4,j).getContents()+ sheet.getCell(6,j).getContents() + "\");");
-        		}
-            	if(StringUtil.isNotEmpty(name))
-            	{
-            		//System.out.println(name + "," + code);
-            	}
+            	if(StringUtil.isNotEmpty((sheet.getCell(2, j).getContents())))
+    			{
+            		System.out.println("level1Map.put(\""+sheet.getCell(3, j).getContents()+"\",\""+ sheet.getCell(2, j).getContents() + "\");");
+    			}
+            	if(StringUtil.isNotEmpty((sheet.getCell(4, j).getContents())))
+    			{
+            		System.out.println("level2Map.put(\""+sheet.getCell(3, j).getContents()+sheet.getCell(5, j).getContents()+"\",\""+ sheet.getCell(4, j).getContents() + "\");");
+    			}
+            	if(StringUtil.isNotEmpty((sheet.getCell(6, j).getContents())))
+    			{
+            		System.out.println("level3Map.put(\""+sheet.getCell(3, j).getContents()+sheet.getCell(5, j).getContents()+sheet.getCell(7, j).getContents()+"\",\""+ sheet.getCell(6, j).getContents() + "\");");
+    			}
+            	
             }
             book.close();
         } catch (Exception e) {
@@ -154,6 +198,25 @@ public class CuttingToolsConfiguration {
         }
 	}
 	
+	public static String getType(String code)
+	{
+		String ret = level1Map.get(code.substring(0, 2));
+		if(StringUtil.isNotEmpty(level2Map.get(code.substring(0, 4))))
+		{
+			ret += " -> " +level2Map.get(code.substring(0, 4));
+			if(StringUtil.isNotEmpty(level3Map.get(code.substring(0, 6))))
+			{
+				ret += " -> " +level3Map.get(code.substring(0, 6));
+				if(StringUtil.isNotEmpty(level4Map.get(code.substring(0, 8))))
+				{
+					ret += " -> " +level4Map.get(code.substring(0, 8));
+					
+				}
+			}
+		}
+		return ret;
+	}
+	
 	public static void sortProductCode()
 	{
 		try {
@@ -172,6 +235,6 @@ public class CuttingToolsConfiguration {
         }
 	}
 	public static void main(String[] args) {
-		sortProductCode();
+		analyze();
 	}
 }

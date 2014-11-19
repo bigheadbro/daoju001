@@ -70,11 +70,22 @@
 		<id property="axistype" column="axistype" />
    	  <!---->
 		<id property="axisdetail" column="axisdetail" />
+		
+		<id property="provider" column="provider" />
 	<!---->
 		<id property="info" column="info" />
 		<id property="outline" column="outline" />
 		<id property="cover" column="cover" />
 		<id property="pic" column="pic" />
+		<id property="thickness" column="thickness" />
+		<id property="maxslotdepth" column="maxslotdepth" />
+		<id property="taper" column="taper" />
+		<id property="slotwidth" column="slotwidth" />
+		<id property="pointdiameter" column="pointdiameter" />
+		<id property="handledsize" column="handledsize" />
+		<id property="screwsize" column="screwsize" />
+		<id property="screwdistance" column="screwdistance" />
+		<id property="accuracy" column="accuracy" />
 	</resultMap>
 
 	<select id="searchCuttingTool" resultMap="CuttingToolResultMap" statementType="CALLABLE">
@@ -134,7 +145,17 @@
 		,info
 		,outline
 		,cover
-		,pic)
+		,pic
+		,provider
+		,thickness
+		,maxslotdepth
+		,taper
+		,slotwidth
+		,pointdiameter
+		,handledsize
+		,screwsize
+		,screwdistance
+		,accuracy)
 		values
 		(
 		#{ishot}
@@ -175,6 +196,16 @@
 		,#{outline}
 		,#{cover}
 		,#{pic}
+		,#{provider}
+		,#{thickness}
+		,#{maxslotdepth}
+		,#{taper}
+		,#{slotwidth}
+		,#{pointdiameter}
+		,#{handledsize}
+		,#{screwsize}
+		,#{screwdistance}
+		,#{accuracy}
 		)
 	</insert>
 </mapper>

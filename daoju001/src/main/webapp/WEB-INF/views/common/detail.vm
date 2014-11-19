@@ -1,0 +1,57 @@
+#set($layout = "/layout/item_layout.vm")
+<script>
+$(function() {
+	$("#searchct").click(function(){
+		$("#form_search").ajaxSubmit({
+			dataType:'json',
+			success:processJson
+		});
+		$("#loading").append("Loading....");
+	});
+	function processJson(jsons) { 
+		 var data= eval(jsons); 
+		 var cts = data.cts;
+		 $("#loading").empty();
+		 $("#con").empty();
+		 $("#renshu").empty();
+		 $("#diameter").empty();
+		 $("#pipesize").empty();
+		 for(var i = 0;i<cts.length;i++){
+		 	$("#con").append(cts[i].version+"  "+cts[i].seriescode  +"<br>");
+			$("#renshu").append("<span style=\"margin-right: 5px;background-color: yellow;\">"+cts[i].ctcount+"</span>");
+			$("#diameter").append("<span style=\"margin-right: 5px;background-color: yellow;\">"+cts[i].diameter+"</span>");
+			$("#pipesize").append("<span style=\"margin-right: 5px;background-color: yellow;\">"+cts[i].pipesize+"</span>");
+		 }
+	}
+});
+</script>
+<div class="main-content-wrap clearfix">
+	<div style="">
+		<form id="form_search" method="post" action="/getsearch">
+    		<input name="searchparam" /> 
+    		<a id="searchct">搜索</a>
+			<span id="loading" style="color:red;font-size:20px;font-weight:bold;"></span>
+		</form>
+	</div>
+	<div class="clearfix" style="margin-top:20px;">
+		<div style="float:left;width:280px;min-height:600px;">
+			<div style="border:1px solid blue;margin-bottom:10px;">
+				<h5>刃数</h5>
+				<div id="renshu">
+				</div>
+			</div>
+			<div style="border:1px solid blue;margin-bottom:10px;">
+				<h5>直径</h5>
+				<div id="diameter">
+				</div>
+			</div>
+			<div style="border:1px solid blue;margin-bottom:10px;">
+				<h5>接口尺寸</h5>
+				<div id="pipesize">
+				</div>
+			</div>
+		</div>
+		<div id="con" style"float:left;">
+		</div>
+	</div>
+</div>

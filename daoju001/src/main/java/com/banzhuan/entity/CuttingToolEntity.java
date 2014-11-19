@@ -87,6 +87,26 @@ public class CuttingToolEntity implements Serializable {
 	private String cover;
 	
 	private String pic;
+	
+	private double thickness;
+	
+	private double maxslotdepth;
+	
+	private double taper;
+	
+	private double slotwidth;
+	
+	private double pointdiameter;
+	
+	private double handledsize;
+	
+	private String screwsize;
+	
+	private String screwdistance;
+	
+	private String accuracy;
+	
+	private String provider;
 
 	public int getId() {
 		return id;
@@ -406,5 +426,85 @@ public class CuttingToolEntity implements Serializable {
 
 	public void setSuitcase(String suitcase) {
 		this.suitcase = suitcase;
+	}
+
+	public String getProvider() {
+		return provider;
+	}
+
+	public void setProvider(String provider) {
+		this.provider = provider;
+	}
+
+	public double getThickness() {
+		return thickness;
+	}
+
+	public void setThickness(double thickness) {
+		this.thickness = thickness;
+	}
+
+	public double getMaxslotdepth() {
+		return maxslotdepth;
+	}
+
+	public void setMaxslotdepth(double maxslotdepth) {
+		this.maxslotdepth = maxslotdepth;
+	}
+
+	public double getTaper() {
+		return taper;
+	}
+
+	public void setTaper(double taper) {
+		this.taper = taper;
+	}
+
+	public double getSlotwidth() {
+		return slotwidth;
+	}
+
+	public void setSlotwidth(double slotwidth) {
+		this.slotwidth = slotwidth;
+	}
+
+	public double getPointdiameter() {
+		return pointdiameter;
+	}
+
+	public void setPointdiameter(double pointdiameter) {
+		this.pointdiameter = pointdiameter;
+	}
+
+	public String getScrewsize() {
+		return screwsize;
+	}
+
+	public void setScrewsize(String screwsize) {
+		this.screwsize = screwsize;
+	}
+
+	public String getScrewdistance() {
+		return screwdistance;
+	}
+
+	public void setScrewdistance(String screwdistance) {
+		this.screwdistance = screwdistance;
+	}
+
+	public double getHandledsize() {
+		return handledsize;
+	}
+
+	public void setHandledsize(double handledsize) {
+		this.handledsize = handledsize;
+	}
+
+	public String getAccuracy() {
+		return accuracy;
+	}
+
+	public void setAccuracy(String accuracy) {
+		this.accuracy = accuracy;
 	}
 }

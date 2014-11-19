@@ -1012,4 +1012,9 @@ public class CommonService {
 	{
 		stDAO.insertStatisticsEntity(st);
 	}
+	
+	public CuttingToolEntity getCuttingToolByid(int id)
+	{
+		return ctDAO.queryCuttingToolById(id);
+	}
 }

@@ -43,7 +43,7 @@ public class SendCloudTest {
 	public static void main(String[] args) throws Exception {
 		ArrayList<String> set = readEdmFileByLines("EDM/notqq.txt");
 
-		for (int i = 4444; i < 9544; i++) {
+		for (int i = 9212; i < 14311; i++) {
 			try
 			{
 			/*while (true) {

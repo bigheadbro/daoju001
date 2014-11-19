@@ -27,6 +27,7 @@
     <data key="bar">this is bar.</data>
     <toolbox scope="application">
         <tool key="stringUtil" class="com.banzhuan.util.StringUtil"/>
+        <tool key="ctConfig" class="com.banzhuan.util.CuttingToolsConfiguration"/>
         <tool key="util" class="com.banzhuan.util.Util"/>
         <tool key="stringEscapeUtils" class="org.apache.commons.lang.StringEscapeUtils"/>
     </toolbox>

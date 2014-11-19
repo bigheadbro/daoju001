@@ -14,7 +14,7 @@ public interface CuttingToolDAO {
 	 * @param id
 	 * @return
 	 */
-	CuttingToolEntity queryHotctById(int id);
+	CuttingToolEntity queryCuttingToolById(int id);
 	
 	public int insertCuttingToolEntity(CuttingToolEntity hotct);
 	

@@ -113,7 +113,7 @@ public class AdminController extends BaseController{
 		ModelAndView mv = new ModelAndView("/admin/test");
 		try {
             Workbook book = Workbook.getWorkbook(new File("D:/data/products.xls"));
-            Sheet sheet2= book.getSheet(2);
+            Sheet sheet2= book.getSheet(1);
             Map<String, TempEntity> seriesMap = new HashMap<String, TempEntity>();
             for(int j = 2; j < sheet2.getRows(); j++)
             {
@@ -123,15 +123,16 @@ public class AdminController extends BaseController{
             		break;
             	}
             	TempEntity tmp = new TempEntity();
-            	tmp.outline = sheet2.getCell(2, j).getContents();
-            	tmp.info = sheet2.getCell(3, j).getContents();
-            	tmp.suitcase = sheet2.getCell(4, j).getContents(); 
-            	tmp.cover = "/img/series/" + sn + ".png";
+            	tmp.outline = (sheet2.getCell(2, j)!=null)?sheet2.getCell(2, j).getContents():""; 
+            	tmp.info = (sheet2.getCell(3, j)!=null)?sheet2.getCell(3, j).getContents():""; 
+            	//tmp.suitcase = (sheet2.getCell(4, j)==null)?sheet2.getCell(4, j).getContents():""; 
+            	//tmp.cover = "/img/series/" + sn + ".png";
             	File root = new File("D:/workspace/daoju001/daoju001/src/main/webapp/img/series");
                 File[] files = root.listFiles();
 				for (File file : files) {
 					if (file.getName().contains(sn)) {
 						tmp.cover = "/img/series/" + file.getName();
+						break;
 					}
 					else
 					{
@@ -171,14 +172,13 @@ public class AdminController extends BaseController{
 							tmp.pic = "/img/sample/" + file.getName();
 						}
 					}
-
 				}         
             	seriesMap.put(sn, tmp);
             }
             // 获得第一个工作表对象
-            Sheet sheet= book.getSheet(1);
+            Sheet sheet= book.getSheet(0);
             
-            for(int j = 1; j <= 1; j++)
+            for(int j = 15; j < sheet.getRows(); j++)
             {
             	CuttingToolEntity ct = new CuttingToolEntity();
             	String tmp = sheet.getCell(0, j).getContents();
@@ -235,7 +235,7 @@ public class AdminController extends BaseController{
             	tmp = sheet.getCell(10, j).getContents();
             	if(StringUtil.isNotEmpty(tmp))
             	{
-            		ct.setUsefullength(Integer.valueOf(tmp));
+            		ct.setUsefullength(Double.valueOf(tmp));
             	}
             	tmp = sheet.getCell(11, j).getContents();
             	if(StringUtil.isNotEmpty(tmp))
@@ -351,17 +351,67 @@ public class AdminController extends BaseController{
             	tmp = sheet.getCell(33, j).getContents();
             	if(StringUtil.isNotEmpty(tmp))
             	{
-            		ct.setScrewsize(tmp);
+            		ct.setInterfacesize(tmp);
             	}
             	tmp = sheet.getCell(34, j).getContents();
             	if(StringUtil.isNotEmpty(tmp))
             	{
-            		ct.setScrewdistance(tmp);
+            		ct.setNecklength(Double.parseDouble(tmp));
             	}
             	tmp = sheet.getCell(35, j).getContents();
             	if(StringUtil.isNotEmpty(tmp))
             	{
+            		ct.setThickness(Double.parseDouble(tmp));
+            	}
+            	tmp = sheet.getCell(36, j).getContents();
+            	if(StringUtil.isNotEmpty(tmp))
+            	{
+            		ct.setTaper(Double.parseDouble(tmp));
+            	}
+            	tmp = sheet.getCell(37, j).getContents();
+            	if(StringUtil.isNotEmpty(tmp))
+            	{
+            		ct.setPointdiameter((Double.parseDouble(tmp)));
+            	}
+            	tmp = sheet.getCell(38, j).getContents();
+            	if(StringUtil.isNotEmpty(tmp))
+            	{
+            		ct.setSlotwidth(Double.parseDouble(tmp));
+            	}
+            	tmp = sheet.getCell(39, j).getContents();
+            	if(StringUtil.isNotEmpty(tmp))
+            	{
+            		ct.setMaxslotdepth(Double.parseDouble(tmp));
+            	}
+            	tmp = sheet.getCell(40, j).getContents();
+            	if(StringUtil.isNotEmpty(tmp))
+            	{
+            		ct.setMaxbore(Double.parseDouble(tmp));
+            	}
+            	tmp = sheet.getCell(41, j).getContents();
+            	if(StringUtil.isNotEmpty(tmp))
+            	{
+            		ct.setMinbore(Double.parseDouble(tmp));
+            	}
+            	tmp = sheet.getCell(42, j).getContents();
+            	if(StringUtil.isNotEmpty(tmp))
+            	{
+            		ct.setScrewsize(tmp);
+            	}
+            	tmp = sheet.getCell(43, j).getContents();
+            	if(StringUtil.isNotEmpty(tmp))
+            	{
+            		ct.setScrewdistance(tmp);
+            	}
+            	tmp = sheet.getCell(44, j).getContents();
+            	if(StringUtil.isNotEmpty(tmp))
+            	{
             		ct.setAccuracy(tmp);
+            	}
+            	tmp = sheet.getCell(45, j).getContents();
+            	if(StringUtil.isNotEmpty(tmp))
+            	{
+            		ct.setHandledsize(tmp);
             	}
             	ct.setIshot(1);
             	if(seriesMap.get(ct.getSeriesname()) != null)

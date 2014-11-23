@@ -23,4 +23,8 @@ public interface CuttingToolDAO {
 	public List<CuttingToolEntity> searchCuttingTool(Map<String, String> map);
 
 	public List<CuttingToolEntity> getAllItems();
+	
+	public List<CuttingToolEntity> queryCuttingToolByCode(String code);
+	
+	public List<CuttingToolEntity> getVersionsBySeries(String sn);
 }

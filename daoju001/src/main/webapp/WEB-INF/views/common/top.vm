@@ -1,127 +1,354 @@
-<script type="text/javascript" src="/js/top-nav.js"></script>
 <script type="text/javascript" src="/js/stickUp.min.js"></script>
 <script type="text/javascript">
-  jQuery(function($) {
-    $(document).ready( function() {
-      $('.main-head-wrap').stickUp();
+    jQuery(function($) {
+        $(document).ready( function() {
+          $('.main-head-wrap').stickUp();
+        });
+        $(".indexmenu").mouseover(function(){
+        	$(this).children("li.item").show();
+        }).mouseleave(function(){
+        	$(this).children("li.item").hide();
+        });
+        $(".indexmenu li.item").mouseover(function(){
+        	$(this).addClass("current");
+        	$(this).children(".menutab").show();
+        }).mouseleave(function(){
+        	$(this).children(".menutab").hide();
+        	$(this).removeClass("current");
+        });
+        $("#searchct").click(function(){
+        	$("#form_search").submit();
+        });
     });
-  });
 </script>
 <div class="main-head-wrap">
     <div class="main-head-container2">
-    	<div class="main-head-content clearfix">
-        	<div class="welcome">
-        		欢迎来到刀师傅，
-				#if(!$!session.getAttribute("account"))  
-					请您<a rel="external" rel="external" href="/user/reg">注册</a>或<a rel="external" rel="external" href="/log">登录</a>
-				#else
-					${account.userName}. <a rel="external" rel="external" href="/user/logoff">退出</a>
-				#end
-        	</div>
-    		<div class="right">
-        		<a rel="external" rel="external" href="/user/main">我的刀师傅</a>
-    			<a class="complain">网站建议</a>
-        	</div>
-    	</div>
-    </div>
-    <div class="main-head-container">
         <div class="main-head-content clearfix">
-            <div class="main-logo">
-                <a rel="external" rel="external" href="http://www.daoshifu.com"><img src="/img/logo-blue.png" /></a>
+            <div class="welcome">
+                欢迎来到刀师傅，
+                #if(!$!session.getAttribute("account"))  
+                    请您<a rel="external" rel="external" href="/user/reg">注册</a>
+                    或<a rel="external" rel="external" href="/log">登录</a>
+                    #else
+                        ${account.userName}. <a rel="external" rel="external" href="/user/logoff">退出</a>
+                #end
             </div>
-            <div class="nav">
-                <ul class="clearfix">
-    				#if($!stringUtil.isContains($request.getServletPath(),"/index"))
-                    <li class="current">
-                        <a rel="external" href="/index">首页</a>
-                    </li>
-    				#else
-    				<li>
-                        <a rel="external" href="/index">首页</a>
-                    </li>
-    				#end
-					#if($!stringUtil.isContains($request.getServletPath(),"/items") || $!stringUtil.isContains($request.getServletPath(),"/stocks"))
-                    <li class="current ctshop">
-                        <a rel="external" href="/items">刀具商城</a>
-						<!--<ul class="ctshop-dropdown">
-                            <li>
-                                <a rel="external" href="/items">平价刀具</a>
-                            </li>
-                            <li>
-                                <a rel="external" href="/stocks">清仓拍</a>
-                            </li>
-                        </ul>-->
-                    </li>
-    				#else
-    				<li class="ctshop">
-                        <a rel="external" href="/items">刀具商城</a>
-						<ul class="ctshop-dropdown">
-                            <li>
-                                <a rel="external" href="/items">平价刀具</a>
-                            </li>
-                            <li>
-                                <a rel="external" href="/stocks">清仓拍</a>
-                            </li>
-						</ul>
-                   </li>
-    				#end
-    				#if($!stringUtil.isContains($request.getServletPath(),"/products") )
-                    <li class="current">
-                        <a rel="external" href="/products">线上展会</a>
-                    </li>
-    				#else
-    				<li>
-                        <a rel="external" href="/products">线上展会</a>
-                    </li>
-    				#end
-    				#if($!stringUtil.isContains($request.getServletPath(),"/questions"))
-                    <li class="current">
-                        <a rel="external" href="/questions">刀具咨询</a>
-                    </li>
-    				#else
-    				<li>
-                        <a rel="external" href="/questions">刀具咨询</a>
-                    </li>
-    				#end
-    				#if($!stringUtil.isContains($request.getServletPath(),"/agents"))
-                    <li class="current">
-                        <a rel="external" href="/agents">供应商</a>
-                    </li>
-    				#else
-    				<li>
-                        <a rel="external" href="/agents">供应商</a>
-                    </li>
-    				#end
-    				#if($!stringUtil.isContains($request.getServletPath(),"/articles") || $!stringUtil.isContains($request.getServletPath(),"/samples"))
-                    <li class="current ctinfo">
-                        <a>刀具资料</a>
-						<ul class="top-dropdown">
-                            <li>
-                                <a rel="external" href="/samples">刀具样本</a>
-                            </li>
-                            <li>
-                                <a rel="external" href="/articles">刀具小百科</a>
-                            </li>
-                        </ul>
-                    </li>
-    				#else
-    				<li class="ctinfo">
-                        <a>刀具资料</a>
-						<ul class="top-dropdown">
-                            <li>
-                                <a rel="external" href="/samples">刀具样本</a>
-                            </li>
-                            <li>
-                                <a rel="external" href="/articles">刀具小百科</a>
-                            </li>
-                        </ul>
-                    </li>
-    				#end
-                </ul>
+            <div class="right">
+                <a rel="external" rel="external" href="/user/main">我的刀师傅</a>|
+                <a class="complain">客服热线 4000-421-145</a>
             </div>
-    		<h4 class="phone">
-    			客服热线 4000-421-145
-    		</h4>
+        </div>
+    </div>
+</div>
+<div class="main-content-wrap clearfix">
+    <div class="indexhead clearfix">
+		<div class="logo clearfix">
+            <a href="http://www.daoshifu.com">
+                <img src="/img/newlogo.png" />
+            </a>
+			<p>买卖刀具更轻松</p>
+		</div>
+        <div class="search">
+			<div class="search-box">
+                <form id="form_search" method="post" action="/searchresult">
+                    <!-- 隐藏字段，用于标示是表单提交 -->
+                    <input type="hidden" name="do_submit" value="true"/>
+                    <input name="searchparam" />
+                    <a id="searchct">搜索</a>
+                    <span id="loading" style="color:red;font-size:20px;font-weight:bold;"></span>
+                </form>
+			</div>
+        </div>
+    </div>
+    <div class="indexmenu-wrap clearfix">
+        <ul class="indexmenu">
+            <li class="top">
+                全部刀具分类
+            </li>
+            <li class="item">
+                <a href="/category/01">机夹铣刀</a>
+                <s></s>
+                <div class="menutab1 menutab">
+                    <ul class="level2 clearfix">
+                        <li class="clearfix">
+                            <a class="second" href="/category/0101">面铣刀盘</a>
+                        </li>
+                        <li class="clearfix">
+                            <a class="second" href="/category/0102">铣刀杆</a>
+                        </li>
+                        <li class="clearfix">
+                            <a class="second" href="/category/0103">螺纹接头</a>
+                        </li>
+                        <li class="clearfix">
+                            <a class="second" href="/category/0104">合金接杆</a>
+                        </li>
+                        <li class="clearfix">
+                            <a class="second" href="/category/0105">玉米铣刀</a>
+                        </li>
+                        <li class="clearfix">
+                            <a class="second" href="/category/0106">三面刃铣刀</a>
+                        </li>
+                        <li class="clearfix">
+                            <a class="second" href="/category/0107">T型槽刀</a>
+                        </li>
+                        <li class="clearfix">
+                            <a class="second" href="/category/0108">铣刀片</a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+            <li class="item">
+                <a href="/category/02">整体铣刀</a>
+                <s></s>
+                <div class="menutab2 menutab">
+                    <ul class="level2 clearfix">
+                        <li class="clearfix">
+                            <a class="second" href="/category/0201">平头铣刀</a>
+							<div class="level3 clearfix">
+								<span>
+									<a href="/category/020101">标准平头铣刀</a>
+								</span>
+								<span>
+									<a href="/category/020102">波纹平头铣刀</a>
+								</span>
+								<span>
+									<a href="/category/020103">长颈平头铣刀</a>
+								</span>
+							</div>
+                        </li>
+                        <li class="clearfix">
+                            <a class="second" href="/category/0202">球头铣刀</a>
+							<div class="level3 clearfix">
+								<span>
+									<a href="/category/020201">标准球头铣刀</a>
+								</span>
+								<span>
+									<a href="/category/020202">长颈球头铣刀</a>
+								</span>
+							</div>
+                        </li>
+                        <li class="clearfix">
+                            <a class="second" href="/category/0203">圆角铣刀</a>
+							<div class="level3 clearfix">
+								<span>
+									<a href="/category/020301">标准圆角铣刀</a>
+								</span>
+								<span>
+									<a href="/category/020302">长颈圆角铣刀</a>
+								</span>
+							</div>
+                        </li>
+                        <li class="clearfix">
+                            <a class="second" href="/category/0204">锥形铣刀</a>
+							<div class="level3 clearfix">
+								<span>
+									<a href="/category/020401">锥形平头铣刀</a>
+								</span>
+								<span>
+									<a href="/category/020402">锥形圆角铣刀</a>
+								</span>
+								<span>
+									<a href="/category/020403">锥形球头铣刀</a>
+								</span>
+							</div>
+                        </li>
+                        <li class="clearfix">
+                            <a class="second" href="/category/0205">V尖刀</a>
+                        </li>
+                        <li class="clearfix">
+                            <a class="second" href="/category/0206">倒角刀</a>
+                        </li>
+                        <li class="clearfix">
+                            <a class="second" href="/category/0207">T槽刀</a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+            <li class="item">
+                <a href="/category/03">车削铣刀</a>
+                <s></s>
+                <div class="menutab3 menutab">
+                    <ul class="level2 clearfix">
+                        <li class="clearfix">
+                            <a href class="second"="/category/0301">车刀杆</a>
+							<div class="level3 clearfix">
+								<span>
+									<a href="/category/030101">外圆车刀杆</a>
+								</span>
+								<span>
+									<a href="/category/030102">内圆车刀杆</a>
+								</span>
+								<span>
+									<a href="/category/030103">切槽/切断刀杆</a>
+								</span>
+								<span>
+									<a href="/category/030104">普通车刀片</a>
+								</span>
+								<span>
+									<a href="/category/030105">精磨车刀片</a>
+								</span>
+								<span>
+									<a href="/category/030106">切槽/切断刀片</a>
+								</span>
+							</div>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+            <li class="item">
+                <a href="/category/04">孔加工刀具</a>
+                <s></s>
+                <div class="menutab4 menutab">
+                    <ul class="level2 clearfix">
+                        <li class="clearfix">
+                            <a href class="second"="/category/0401">整体合金钻</a>
+                        </li>
+                        <li class="clearfix">
+                            <a href class="second"="/category/0402">焊接合金钻</a>
+                        </li>
+                        <li class="clearfix">
+                            <a href class="second"="/category/0403">机夹式钻头</a>
+                        </li>
+                        <li class="clearfix">
+                            <a href class="second"="/category/0404">机夹式钻头刀片</a>
+                        </li>
+                        <li class="clearfix">
+                            <a href class="second"="/category/0405">铲钻</a>
+                        </li>
+                        <li class="clearfix">
+                            <a href class="second"="/category/0406">铲钻刀片</a>
+                        </li>
+                        <li class="clearfix">
+                            <a href class="second"="/category/0407">U钻</a>
+                        </li>
+                        <li class="clearfix">
+                            <a href class="second"="/category/0408">U钻刀片</a>
+                        </li>
+                        <li class="clearfix">
+                            <a href class="second"="/category/0409">铰刀</a>
+                        </li>
+                        <li class="clearfix">
+                            <a href class="second"="/category/0410">镗刀</a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+            <li class="item">
+                <a href="/category/05">刀柄</a>
+                <s></s>
+                <div class="menutab5 menutab">
+                    <ul class="level2 clearfix">
+                        <li class="clearfix">
+                            <a href class="second"="/category/0501">热胀刀柄</a>
+                        </li>
+                        <li class="clearfix">
+                            <a href class="second"="/category/0502">液压刀柄</a>
+                        </li>
+                        <li class="clearfix">
+                            <a href class="second"="/category/0503">面铣刀柄</a>
+                        </li>
+                        <li class="clearfix">
+                            <a href class="second"="/category/0504">丝锥刀柄</a>
+                        </li>
+                        <li class="clearfix">
+                            <a href class="second"="/category/0505">ER刀柄</a>
+                        </li>
+                        <li class="clearfix">
+                            <a href class="second"="/category/0506">筒夹</a>
+                        </li>
+                        <li class="clearfix">
+                            <a href class="second"="/category/0507">超大加持力刀柄</a>
+							<div class="level3 clearfix">
+								<span>
+									<a href="/category/050701">冷压刀柄</a>
+								</span>
+								<span>
+									<a href="/category/050702">蜗杆刀柄</a>
+								</span>
+							</div>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+            <li class="item">
+                <a href="/category/06">螺纹刀具</a>
+                <s></s>
+                <div class="menutab7 menutab">
+                    <ul class="level2 clearfix">
+                        <li class="clearfix">
+                            <a href class="second"="/category/0601">螺纹铣刀</a>
+                        </li>
+                        <li class="clearfix">
+                            <a href class="second"="/category/0602">螺纹铣刀杆</a>
+                        </li>
+                        <li class="clearfix">
+                            <a href class="second"="/category/0603">螺纹铣刀片</a>
+                        </li>
+                        <li class="clearfix">
+                            <a href class="second"="/category/0604">螺纹车刀杆</a>
+                        </li>
+                        <li class="clearfix">
+                            <a href class="second"="/category/0605">螺纹车刀片</a>
+                        </li>
+                        <li class="clearfix">
+                            <a href class="second"="/category/0606">丝锥</a>
+							<div class="level3 clearfix">
+								<span>
+									<a href="/category/060601">手用丝锥</a>
+								</span>
+								<span>
+									<a href="/category/060602">挤压丝锥</a>
+								</span>
+								<span>
+									<a href="/category/060603">先端丝锥</a>
+								</span>
+								<span>
+									<a href="/category/060604">螺旋丝锥</a>
+								</span>
+							</div>
+                        </li>
+                        <li class="clearfix">
+                            <a href class="second"="/category/0607">板牙</a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+            <li class="item">
+                <a href="/category/99">其它</a>
+                <s></s>
+                <div class="menutab7 menutab">
+                    <ul class="level2 clearfix">
+                        <li class="clearfix">
+                            <a href class="second"="/category/9901">对刀仪</a>
+                        </li>
+                        <li class="clearfix">
+                            <a href class="second"="/category/9902">寻边器</a>
+                        </li>
+                        <li class="clearfix">
+                            <a href class="second"="/category/9903">滚压头</a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+        </ul>
+        <div class="main-menu">
+            <ul class="index-tab clearfix">
+                <li class="current">
+                    <a href="/index">首页</a>
+                </li>
+                <li>
+                    <a href="/items">标价商城</a>
+                </li>
+                <li>
+                    <a href="/questions">供应商问答</a>
+                </li>
+                <li>
+                    <a href="/agents">全国供应商</a>
+                </li>
+                <li>
+                    <a href="">刀具资料</a>
+                </li>
+            </ul>
         </div>
     </div>
 </div>

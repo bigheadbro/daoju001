@@ -18,20 +18,20 @@ import sun.misc.BASE64Encoder;
 
 public class StringUtil {
 	/**
-	 * 是否空字符串 null OR "" 都认为是空字符串 返回true. 其他返回 false
+	 * 是否空字符串 null OR "" OR 0都认为是空字符串 返回true. 其他返回 false
 	 * 
 	 * @param str
 	 * @return
 	 */
 	public static boolean isEmpty(String str)
 	{
-		if(str == null || "".equals(str.trim()))
+		if(str == null || "".equals(str.trim()) || "0".equals(str.trim()))
 			return true;
 		return false;
 	}
 	
 	/**
-	 * 是否空字符串 null OR "" 都认为是空字符串 返回false. 其他返回 true
+	 * 是否空字符串 null OR "" OR 0都认为是空字符串 返回false. 其他返回 true
 	 * 
 	 * @param str
 	 * @return

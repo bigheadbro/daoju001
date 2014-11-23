@@ -39,4 +39,17 @@ public class CuttingToolDAOImpl extends SqlSessionDaoSupport implements CuttingT
 	{
 		return this.getSqlSession().selectList("getAllItems");
 	}
+	
+	@Override
+	public List<CuttingToolEntity> queryCuttingToolByCode(String code)
+	{
+		return this.getSqlSession().selectList("queryCuttingToolByCode", code);
+	}
+	
+	@Override
+	public List<CuttingToolEntity> getVersionsBySeries(String sn)
+	{
+		return this.getSqlSession().selectList("getVersionsBySeries", sn);
+	}
+	
 }

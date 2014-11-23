@@ -86,8 +86,20 @@
 		<id property="screwsize" column="screwsize" />
 		<id property="screwdistance" column="screwdistance" />
 		<id property="accuracy" column="accuracy" />
+		<id property="interfacesize" column="interfacesize" />
+		<id property="maxbore" column="maxbore" />
+		<id property="minbore" column="minbore" />
+		<id property="necklength" column="necklength" />
 	</resultMap>
 
+	<select id="queryCuttingToolByCode" parameterType="String" resultMap="CuttingToolResultMap">
+		SELECT * from t_cuttingtool where match(code) against(#{code} in boolean mode) group by seriesname
+	</select>
+	
+	<select id="getVersionsBySeries" parameterType="String" resultMap="CuttingToolResultMap">
+		SELECT * from t_cuttingtool where match(seriesname) against(#{sn} in boolean mode)
+	</select>
+	
 	<select id="searchCuttingTool" resultMap="CuttingToolResultMap" statementType="CALLABLE">
 		{call searchCuttingTool(#{searchParam,mode=IN,jdbcType=VARCHAR})}
 	</select>
@@ -155,7 +167,11 @@
 		,handledsize
 		,screwsize
 		,screwdistance
-		,accuracy)
+		,accuracy
+		,interfacesize
+		,maxbore
+		,minbore
+		,necklength)
 		values
 		(
 		#{ishot}
@@ -206,6 +222,10 @@
 		,#{screwsize}
 		,#{screwdistance}
 		,#{accuracy}
+		,#{interfacesize}
+		,#{maxbore}
+		,#{minbore}
+		,#{necklength}
 		)
 	</insert>
 </mapper>

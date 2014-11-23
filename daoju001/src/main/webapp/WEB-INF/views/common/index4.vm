@@ -1,0 +1,4 @@
+#set($layout = "/layout/index_layout.vm")
+<div class="main-content-wrap clearfix">
+
+</div>

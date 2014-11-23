@@ -1,0 +1,83 @@
+#set($layout = "/layout/admin_layout.vm")
+<div class="adminitems">
+	<div class="head clearfix">
+		<span>分类</span>
+		<span>品牌</span>
+		<span>系列标题</span>
+		<span>型号</span>
+		<span style="width:130px;">系列图片</span>
+		<span style="width:150px;">简述</span>
+		<span style="width:200px;">详细说明</span>
+		<span>目录图片</span>
+		<span>材质</span>
+		<span>主偏角</span>
+		<span>刀片个数</span>			
+		<span>直径</span>
+		<span>加工用途</span>
+		<span>粗/精</span>
+		<span>有效长</span>
+		<span>接口尺寸</span>
+		<span>柄径</span>
+		<span>柄部类型</span>
+		<span>形状</span>
+		<span>后角</span>
+		<span>适用工件</span>
+		<span>刃数</span>
+		<span>刃长</span>
+		<span>总长</span>
+		<span>螺旋角</span>
+		<span>涂层种类</span>
+		<span>R角</span>
+		<span>方向</span>
+		<span>最小加工直径</span>
+		<span>内冷</span>
+		<span>倍径比</span>
+		<span>槽形状</span>
+		<span>柄部规格</span>
+		<span>丝锥种类</span>
+		<span>螺纹种类</span>
+		<span>主轴种类</span>
+		<span>主轴细分</span>
+	</div>
+    #foreach ($ct in $cts)
+    <div class="content clearfix">
+    	<span>$!{ct.code}</span>
+		<span>$!{ct.brand}</span>
+		<span>$!{ct.seriesname}</span>
+		<span>$!{ct.version}</span>
+		<span style="width:130px;"><img src="$!{ct.cover}" /></span>
+		<span style="width:150px;">$!{ct.outline}</span>
+		<span style="width:200px;">$!{ct.info}</span>
+		<span>$!{ct.pic}</span>
+		<span>$!{ct.material}</span>
+		<span>$!{ct.angle}</span>
+		<span>$!{ct.ctcount}</span>			
+		<span>$!{ct.diameter}</span>
+		<span>$!{ct.usage}</span>
+		<span>$!{ct.cujing}</span>
+		<span>$!{ct.usefullength}</span>
+		<span>$!{ct.pipesize}</span>
+		<span>$!{ct.shank}</span>
+		<span>$!{ct.shanktype}</span>
+		<span>$!{ct.type}</span>
+		<span>$!{ct.bankangle}</span>
+		<span>$!{ct.workingtool}</span>
+		<span>$!{ct.edgeno}</span>
+		<span>$!{ct.edgelenght}</span>
+		<span>$!{ct.totallength}</span>
+		<span>$!{ct.screwangle}</span>
+		<span>$!{ct.coatingtype}</span>
+		<span>$!{ct.rangle}</span>
+		<span>$!{ct.direction}</span>
+		<span>$!{ct.minworkdiameter}</span>
+		<span>$!{ct.innercooling}</span>
+		<span>$!{ct.diameterratio}</span>
+		<span>$!{ct.slotshape}</span>
+		<span>$!{ct.handlenorm}</span>
+		<span>$!{ct.taptype}</span>
+		<span>$!{ct.screwtype}</span>
+		<span>$!{ct.axistype}</span>
+		<span>$!{ct.axisdetail}</span>
+    </div>
+	#end
+</div>

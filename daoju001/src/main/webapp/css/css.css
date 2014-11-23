@@ -7,7 +7,7 @@ body,h1,h2,h3,h4,h5,h6,hr,p,blockquote,dl,dt,dd,ul,ol,li,pre,form,fieldset,legen
 i{font-style: normal;}
 body{position: relative;height: 100%;}
 img{border:none;}
-html{flow-y:scroll;height:100%;background: url(../img/bk.jpg) repeat-x 0 0;background-color:#e6e6e6}  
+html{flow-y:scroll;height:100%;}  
 table{border-collapse: collapse;border-spacing: 0;}
 em{font-style:normal}
 ul, li, ol {
@@ -388,14 +388,14 @@ div[contentEditable]{outline:0}
 /*main head*/
 .main-head-wrap{width:100%;z-index:10000}
 .main-head-container{background: url(../img/bg.jpg) repeat-x 0 0;width:100%;box-shadow: 0 1px 2px rgba(0,0,0,0.5);}
-.main-head-container2{background-color:#515151;height:24px;width:100%;line-height:24px;}
-.main-head-container2 .main-head-content .welcome{float:left;color:white;font-size:12px;font-weight:100}
+.main-head-container2{background-color:#fafafa;height:24px;width:100%;line-height:24px;border-bottom:1px solid #e8e8e8}
+.main-head-container2 .main-head-content .welcome{float:left;color:#575757;font-size:12px;font-weight:100}
 .main-head-container2 .main-head-content .welcome a{color:#0099cb;padding:0 5px;}
-.main-head-container2 .main-head-content .right{float:right;}
-.main-head-container2 .main-head-content .right a{font-size:13px;font-weight:100;color:white}
-.main-head-container2 .main-head-content .right a.complain{width: 93px;display: inline-block;text-align: right;}
+.main-head-container2 .main-head-content .right{float:right;color:#dfdfdf;}
+.main-head-container2 .main-head-content .right a{font-size:13px;font-weight:100;color:#575757;color: #575757;width: 78px;display: inline-block;}
+.main-head-container2 .main-head-content .right a.complain{width: 150px;display: inline-block;text-align: right;color:#575757}
 
-.main-head-content{margin:0 auto;width:960px;color:#868686;font-weight:700;height: 43px;}
+.main-head-content{margin:0 auto;width:960px;color:#868686;font-weight:700;}
 .main-head-container .main-head-content .main-logo{float:left;padding-top: 8px;border-right:1px solid #c9c9c9;width: 196px;height: 35px;}
 .main-logo img{width: 81px;}
 .main-head-container .main-head-content .main-logo h2{font-family:"幼圆";font-size:34px;padding:10px;padding-top:9px;}
@@ -473,6 +473,57 @@ div[contentEditable]{outline:0}
 .main-list-header{color:#6c6c6c;font-weight:700;font-size:14px;padding-bottom:5px;border-bottom: 1px solid #0088b5;}
 .ff7e00{color:#ff7e00;border-bottom: 2px solid #ff7e00;}
 .ff002a{color:#ff002a;border-bottom: 2px solid #ff002a;}
+
+/*新版banner*/
+.indexmenu-wrap{}
+.indexmenu{float:left;border-bottom: 1px solid #d3d3d3;width: 182px;position: absolute;background-color: white;z-index: 1000000;}
+.indexmenu li.top{line-height:40px;background-color:#ff8f17;color:white;font-size:15px;text-indent: 15px;background-image: url(../img/indexmenu.png);background-position:center -5px;}
+.indexmenu li.item{display:none;position:relative;width: 180px;line-height: 40px;font-size:14px;border-left: 1px solid #d3d3d3;border-right: 1px solid #d3d3d3;text-indent: 15px;}
+.showmenu li.item{display:block;}
+.indexmenu li.current{box-shadow: 0 0 8px #DDD;border-left: 2px solid #ff8f17;text-indent: 14px;color:#ff8f17}
+.indexmenu li.item s{position:absolute;top: 15px;right: 15px;background:url(../img/arrow.png) no-repeat 0 0;width:5px;height:10px;}
+.indexmenu li.item .menutab .level2{font-size:12px;font-weight:bold;color:#ff8f17;}
+.indexmenu li.current s{right: -5px;height: 40px;top: 0;background: white;width: 10px;z-index: 1;}
+.menutab{display:none;position:absolute;left:180px;top:0;border-left: 1px solid #cfcfcf;box-shadow: 0 0 8px #ccc;background: #fff;color: black;width:440px;}
+.menutab2,.menutab7{top:-40px;}
+.menutab4{top:-120px;}
+.menutab5{top:-160px;}
+.menutab6{top:-160px;}
+.indexmenu li.item ul.level2 li{font-size: 13px;border-bottom:1px solid #f6f6f6;margin: 0 10px;}
+.indexmenu li.item ul.level2 li a.second{padding:0 5px;white-space: nowrap;float:left;}
+.indexmenu li.item ul.level2 li .level3{float:left;color:black;width:300px}
+.indexmenu li.item ul.level2 li .level3 span{font-weight:normal;white-space: nowrap;float:left;}
+.indexmenu li.item ul.level2 li .level3 span a:hover{text-decoration:underline;color:#ff8f17}
+.indexhead{margin:20px 0;}
+.indexhead .logo{float:left;width:480px;}
+.indexhead .logo a{display:block;float:left}
+.indexhead .logo p{float:left;color:#0099cb;font-size:20px;line-height:57px;text-indent: 50px;}
+.indexhead .search{float:right;margin-top: 9px;}
+.indexhead .search .search-box{border:3px solid #0099cb;height: 32px;}
+.indexhead .search .search-box input{border:none;padding: 5px;font-size；14px;width:360px;line-height:22px;float:left;}
+.indexhead .search .search-box a{width:100px;background: #0099cb;font-size: 18px;font-weight: 700;color: #fff;height: 34px;display: inline-block;float: left;text-align: center;line-height: 32px;}
+
+.main-menu{margin-left:182px;}
+ul.index-tab{background-color:#0099cb;height: 40px;}
+ul.index-tab li{float:left;background-color:#0099cb;line-height:40px;color:white;width:100px;text-align:center;}
+ul.index-tab li a{display:block;}
+ul.index-tab li.current{background-color:#006181;}
+
+/*category页面*/
+h1.category-level{color:#606060;font-size:14px;}
+h1.category-level a{font-size:18px;}
+h1.category-level a:hover{text-decoration:underline;color:#ff8f17}
+/*detail型号tab*/
+.series-content{margin-top:30px;}
+.series-content ul.series-tab{background-color:#f3f3f3;border-top:1px solid #acacac;border-right:1px solid #acacac;border-left:1px solid #acacac}
+.series-content ul.series-tab li{float:left;font-size:18px;color:#828282;cursor:pointer;padding:10px 40px;}
+.series-content ul.series-tab li.current{background-color:white;color:#ff6600;border:3px solid #d0e788;margin-top:-1px;margin-left: -1px;border-bottom:3px solid white;position: relative;z-index: 101;}
+.series-content .version-content{margin-top:-3px;border:3px solid #d0e788;position: relative;z-index: 100;padding: 20px;width: 100%;overflow-x: auto;overflow-y: hidden;}
+.series-content .version-content .content{width:3000px;font-size:0;letter-spacing: -4px; }
+.series-content .version-content .head{letter-spacing: -4px;}
+.series-content .category-content{display:none;margin-top:-3px;border:3px solid #d0e788;position: relative;z-index: 100;padding:40px;}
+.series-content .version-content .head span{width:200px;display:inline-block;text-align:center;font-size:13px;letter-spacing: normal;  word-spacing: normal;}
+.series-content .version-content .content span{width:200px;display:inline-block;text-align:center;font-size:13px;letter-spacing: normal;  word-spacing: normal;}
 /*首页，低价刀具*/
 .main-content-wrap{margin:10px auto;width:960px;}
 .main-content-wrap .main-items-wrap{float:left;margin-top: 20px;}

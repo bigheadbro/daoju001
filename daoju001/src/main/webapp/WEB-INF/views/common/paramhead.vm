@@ -1,0 +1,130 @@
+#if($!{cut.version} and $!{cut.version} != 0)
+    <span>型号</span>
+#end
+#if($!{cut.material} and $!{cut.material} != 0)
+    <span>材质</span>
+#end
+#if($!{cut.angle} and $!{cut.angle} != 0)
+    <span>主偏角</span>
+#end
+#if($!{cut.ctcount} and $!{cut.ctcount} != 0)
+    <span>刀片个数</span>
+#end
+#if($!{cut.diameter} and $!{cut.diameter} != 0)
+    <span>直径</span>
+#end
+#if($!{cut.usage} and $!{cut.usage} != 0)
+    <span>加工用途</span>
+#end
+#if($!{cut.cujing} and $!{cut.cujing} != 0)
+    <span>光洁度</span>
+#end
+#if($!{cut.usefullength} and $!{cut.usefullength} != 0)
+    <span>有效长</span>
+#end
+#if($!{cut.pipesize} and $!{cut.pipesize} != 0)
+    <span>安装孔尺寸</span>
+#end
+#if($!{cut.shank} and $!{cut.shank} != 0)
+    <span>柄径</span>
+#end
+#if($!{cut.shanktype} and $!{cut.shanktype} != 0)
+    <span>柄部类型</span>
+#end
+#if($!{cut.shape} and $!{cut.shape} != 0)
+    <span>形状</span>
+#end
+#if($!{cut.backangle} and $!{cut.backangle} != 0)
+    <span>后角</span>
+#end
+#if($!{cut.workingtool} and $!{cut.workingtool} != 0)
+    <span>适用工件</span>
+#end
+#if($!{cut.edgeno} and $!{cut.edgeno} != 0)
+    <span>刃数</span>
+#end
+#if($!{cut.edgelength} and $!{cut.edgelength} != 0)
+    <span>刃长</span>
+#end
+#if($!{cut.totallength} and $!{cut.totallength} != 0)
+    <span>总长</span>
+#end
+#if($!{cut.screwangle} and $!{cut.screwangle} != 0)
+   <span>螺旋角</span>
+#end
+#if($!{cut.coatingtype} and $!{cut.coatingtype} != 0)
+    <span>涂层种类</span>
+#end
+#if($!{cut.rangle} and $!{cut.rangle} != 0)
+   <span>R角</span>
+#end
+#if($!{cut.direction} and $!{cut.direction} != 0)
+    <span>方向</span>
+#end
+#if($!{cut.minworkdiameter} and $!{cut.minworkdiameter} != 0)
+   <span>最小加工直径</span>
+#end
+#if($!{cut.innercooling} and $!{cut.innercooling} != 0)
+    <span>冷却方式</span>
+#end
+#if($!{cut.diameterratio} and $!{cut.diameterratio} != 0)
+    <span>倍径比</span>
+#end
+#if($!{cut.slotshape} and $!{cut.slotshape} != 0)
+   <span>槽形状</span>
+#end
+#if($!{cut.handlenorm} and $!{cut.handlenorm} != 0)
+   <span>柄部规格</span>
+#end
+#if($!{cut.taptype} and $!{cut.taptype} != 0)
+    <span>丝锥种类</span>
+#end
+#if($!{cut.screwtype} and $!{cut.screwtype} != 0)
+   <span>螺纹种类</span>
+#end
+#if($!{cut.axistype} and $!{cut.axistype} != 0)
+    <span>主轴种类</span>
+#end
+#if($!{cut.axisdetail} and $!{cut.axisdetail} != 0)
+    <span>主轴细分</span>
+#end
+#if($!{cut.thickness} and $!{cut.thickness} != 0)
+    <span>厚度</span>
+#end
+#if($!{cut.taper} and $!{cut.taper} != 0)
+    <span>锥度</span>
+#end
+#if($!{cut.maxslotdepth} and $!{cut.maxslotdepth} != 0)
+    <span>最大槽深</span>
+#end
+#if($!{cut.slotwidth} and $!{cut.slotwidth} != 0)
+   <span>槽宽</span>
+#end
+#if($!{cut.pointdiameter} and $!{cut.pointdiameter} != 0)
+    <span>刀尖直径</span>
+#end
+#if($!{cut.handledsize} and $!{cut.handledsize} != 0)
+    <span>可加持尺寸</span>
+#end
+#if($!{cut.screwsize} and $!{cut.screwsize} != 0)
+    <span>螺纹尺寸</span>
+#end
+#if($!{cut.screwdistance} and $!{cut.screwdistance} != 0)
+    <span>螺距</span>
+#end
+#if($!{cut.accuracy} and $!{cut.accuracy} != 0)
+    <span>精度</span>
+#end
+#if($!{cut.interfacesize} and $!{cut.interfacesize} != 0)
+    <span>接口尺寸</span>
+#end
+#if($!{cut.maxbore} and $!{cut.maxbore} != 0)
+    <span>镗孔上限</span>
+#end
+#if($!{cut.minbore} and $!{cut.minbore} != 0)
+    <span>镗孔下限</span>
+#end
+#if($!{cut.necklength} and $!{cut.necklength} != 0)
+    <span>颈长</span>
+#end
+    

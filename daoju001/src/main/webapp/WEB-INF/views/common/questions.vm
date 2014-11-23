@@ -1,4 +1,4 @@
-#set($layout = "/layout/index_layout.vm")
+#set($layout = "/layout/item_layout.vm")
 <script type="text/javascript" src="/js/ques-handler.js"></script>
 <script type="text/javascript" src="/js/questions.js"></script>
 <script type="text/javascript" src="/js/answer.js"></script>

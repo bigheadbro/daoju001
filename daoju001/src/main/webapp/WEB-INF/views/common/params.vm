@@ -1,0 +1,130 @@
+#if($!{cut.version} and $!{cut.version} != 0)
+    <span>$!{cut.version}</span>
+#end
+#if($!{cut.material} and $!{cut.material} != 0)
+    <span>$!{cut.material}</span>
+#end
+#if($!{cut.angle} and $!{cut.angle} != 0)
+    <span>$!{cut.angle}</span>
+#end
+#if($!{cut.ctcount} and $!{cut.ctcount} != 0)
+    <span>$!{cut.ctcount}</span>
+#end
+#if($!{cut.diameter} and $!{cut.diameter} != 0)
+    <span>$!{cut.diameter}</span>
+#end
+#if($!{cut.usage} and $!{cut.usage} != 0)
+    <span>$!{cut.usage}</span>
+#end
+#if($!{cut.cujing} and $!{cut.cujing} != 0)
+    <span>$!{cut.cujing}</span>
+#end
+#if($!{cut.usefullength} and $!{cut.usefullength} != 0)
+    <span>$!{cut.usefullength}</span>
+#end
+#if($!{cut.pipesize} and $!{cut.pipesize} != 0)
+    <span>$!{cut.pipesize}</span>
+#end
+#if($!{cut.shank} and $!{cut.shank} != 0)
+    <span>$!{cut.shank}</span>
+#end
+#if($!{cut.shanktype} and $!{cut.shanktype} != 0)
+    <span>$!{cut.shanktype}</span>
+#end
+#if($!{cut.shape} and $!{cut.shape} != 0)
+    <span>$!{cut.shape}</span>
+#end
+#if($!{cut.backangle} and $!{cut.backangle} != 0)
+    <span>$!{cut.backangle}</span>
+#end
+#if($!{cut.workingtool} and $!{cut.workingtool} != 0)
+    <span>$!{cut.workingtool}</span>
+#end
+#if($!{cut.edgeno} and $!{cut.edgeno} != 0)
+    <span>$!{cut.edgeno}</span>
+#end
+#if($!{cut.edgelength} and $!{cut.edgelength} != 0)
+    <span>$!{cut.edgelength}</span>
+#end
+#if($!{cut.totallength} and $!{cut.totallength} != 0)
+    <span>$!{cut.totallength}</span>
+#end
+#if($!{cut.screwangle} and $!{cut.screwangle} != 0)
+    <span>$!{cut.screwangle}</span>
+#end
+#if($!{cut.coatingtype} and $!{cut.coatingtype} != 0)
+    <span>$!{cut.coatingtype}</span>
+#end
+#if($!{cut.rangle} and $!{cut.rangle} != 0)
+    <span>$!{cut.rangle}</span>
+#end
+#if($!{cut.direction} and $!{cut.direction} != 0)
+    <span>$!{cut.direction}</span>
+#end
+#if($!{cut.minworkdiameter} and $!{cut.minworkdiameter} != 0)
+    <span>$!{cut.minworkdiameter}</span>
+#end
+#if($!{cut.innercooling} and $!{cut.innercooling} != 0)
+    <span>$!{cut.innercooling}</span>
+#end
+#if($!{cut.diameterratio} and $!{cut.diameterratio} != 0)
+    <span>$!{cut.diameterratio}</span>
+#end
+#if($!{cut.slotshape} and $!{cut.slotshape} != 0)
+    <span>$!{cut.slotshape}</span>
+#end
+#if($!{cut.handlenorm} and $!{cut.handlenorm} != 0)
+    <span>$!{cut.handlenorm}</span>
+#end
+#if($!{cut.taptype} and $!{cut.taptype} != 0)
+    <span>$!{cut.taptype}</span>
+#end
+#if($!{cut.screwtype} and $!{cut.screwtype} != 0)
+    <span>$!{cut.screwtype}</span>
+#end
+#if($!{cut.axistype} and $!{cut.axistype} != 0)
+    <span>$!{cut.axistype}</span>
+#end
+#if($!{cut.axisdetail} and $!{cut.axisdetail} != 0)
+    <span>$!{cut.axisdetail}</span>
+#end
+#if($!{cut.thickness} and $!{cut.thickness} != 0)
+    <span>$!{cut.thickness}</span>
+#end
+#if($!{cut.taper} and $!{cut.taper} != 0)
+    <span>$!{cut.taper}</span>
+#end
+#if($!{cut.maxslotdepth} and $!{cut.maxslotdepth} != 0)
+    <span>$!{cut.maxslotdepth}</span>
+#end
+#if($!{cut.slotwidth} and $!{cut.slotwidth} != 0)
+    <span>$!{cut.slotwidth}</span>
+#end
+#if($!{cut.pointdiameter} and $!{cut.pointdiameter} != 0)
+    <span>$!{cut.pointdiameter}</span>
+#end
+#if($!{cut.handledsize} and $!{cut.handledsize} != 0)
+    <span>$!{cut.handledsize}</span>
+#end
+#if($!{cut.screwsize} and $!{cut.screwsize} != 0)
+    <span>$!{cut.screwsize}</span>
+#end
+#if($!{cut.screwdistance} and $!{cut.screwdistance} != 0)
+    <span>$!{cut.screwdistance}</span>
+#end
+#if($!{cut.accuracy} and $!{cut.accuracy} != 0)
+    <span>$!{cut.accuracy}</span>
+#end
+#if($!{cut.interfacesize} and $!{cut.interfacesize} != 0)
+    <span>$!{cut.interfacesize}</span>
+#end
+#if($!{cut.maxbore} and $!{cut.maxbore} != 0)
+    <span>$!{cut.maxbore}</span>
+#end
+#if($!{cut.minbore} and $!{cut.minbore} != 0)
+    <span>$!{cut.minbore}</span>
+#end
+#if($!{cut.necklength} and $!{cut.necklength} != 0)
+    <span>$!{cut.necklength}</span>
+#end
+    

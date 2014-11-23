@@ -72,6 +72,7 @@ import com.banzhuan.form.QuestionForm;
 import com.banzhuan.form.RelationForm;
 import com.banzhuan.form.RequestForm;
 import com.banzhuan.util.ChineseSpelling;
+import com.banzhuan.util.CuttingToolsConfiguration;
 import com.banzhuan.util.StringUtil;
 import com.cjc.weixinmp.WeixinException;
 import com.cjc.weixinmp.bean.Users;
@@ -1016,5 +1017,15 @@ public class CommonService {
 	public CuttingToolEntity getCuttingToolByid(int id)
 	{
 		return ctDAO.queryCuttingToolById(id);
+	}
+	
+	public List<CuttingToolEntity> getVersionsBySeries(String sn)
+	{
+		return ctDAO.getVersionsBySeries(sn);
+	}
+	
+	public List<CuttingToolEntity> getCategorySeries(String code)
+	{
+		return ctDAO.queryCuttingToolByCode(CuttingToolsConfiguration.prehandleCode(code));
 	}
 }

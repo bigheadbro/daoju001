@@ -27,4 +27,13 @@
    -------------------------------------------------
     #foreach( $field in $entity.columns )
 	  ${field.fieldName};
-   #end
+	#end
+	
+-------------------------------------------------
+    #foreach( $field in $entity.columns )
+		if(StringUtil.isNotEmpty(cts.get(i).get${field.fieldName}()))
+		{
+			ret += "<span>${field.fieldName}</span>";
+		}
+	#end
+	

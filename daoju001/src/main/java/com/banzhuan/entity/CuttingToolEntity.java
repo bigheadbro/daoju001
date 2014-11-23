@@ -92,14 +92,23 @@ public class CuttingToolEntity implements Serializable {
 	
 	private double maxslotdepth;
 	
+	private String interfacesize;
+	
+	private double maxbore;
+	
+	private double minbore;
+	
+	private double necklength;
+	
+	//锥度
 	private double taper;
 	
 	private double slotwidth;
 	
 	private double pointdiameter;
 	
-	private double handledsize;
-	
+	private String handledsize;
+
 	private String screwsize;
 	
 	private String screwdistance;
@@ -492,11 +501,11 @@ public class CuttingToolEntity implements Serializable {
 		this.screwdistance = screwdistance;
 	}
 
-	public double getHandledsize() {
+	public String getHandledsize() {
 		return handledsize;
 	}
 
-	public void setHandledsize(double handledsize) {
+	public void setHandledsize(String handledsize) {
 		this.handledsize = handledsize;
 	}
 
@@ -506,5 +515,37 @@ public class CuttingToolEntity implements Serializable {
 
 	public void setAccuracy(String accuracy) {
 		this.accuracy = accuracy;
+	}
+
+	public String getInterfacesize() {
+		return interfacesize;
+	}
+
+	public void setInterfacesize(String interfacesize) {
+		this.interfacesize = interfacesize;
+	}
+
+	public double getMaxbore() {
+		return maxbore;
+	}
+
+	public void setMaxbore(double maxbore) {
+		this.maxbore = maxbore;
+	}
+
+	public double getMinbore() {
+		return minbore;
+	}
+
+	public void setMinbore(double minbore) {
+		this.minbore = minbore;
+	}
+
+	public double getNecklength() {
+		return necklength;
+	}
+
+	public void setNecklength(double necklength) {
+		this.necklength = necklength;
 	}
 }

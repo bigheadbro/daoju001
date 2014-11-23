@@ -816,7 +816,7 @@ public class UserController extends BaseController{
 			SampleEntity sample = new SampleEntity();
  			sample.setAgentId(account.getUserId());
 			sample.setAgentLogo(account.getLogo());
-			sample.setAgentName(account.getUserName());
+			sample.setAgentName(account.getCompanyName());
 			sample.setBrandName(account.getBrandName());
 			sample.setVerifiedLink(account.getVerifiedLink());
 			

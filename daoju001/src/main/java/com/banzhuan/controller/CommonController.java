@@ -58,6 +58,7 @@ import com.banzhuan.common.Constant;
 import com.banzhuan.common.Result;
 import com.banzhuan.entity.AddressEntity;
 import com.banzhuan.entity.ArticleEntity;
+import com.banzhuan.entity.CategoryEntity;
 import com.banzhuan.entity.ComplainEntity;
 import com.banzhuan.entity.CuttingToolEntity;
 import com.banzhuan.entity.EventEntity;
@@ -87,6 +88,7 @@ import com.banzhuan.form.RequestForm;
 import com.banzhuan.service.CommonService;
 import com.banzhuan.service.UserService;
 import com.banzhuan.service.WeixinService;
+import com.banzhuan.util.CuttingToolsConfiguration;
 import com.banzhuan.util.JsonUtil;
 import com.banzhuan.util.StringUtil;
 import com.banzhuan.util.TwoDimensionCode;
@@ -197,37 +199,10 @@ public class CommonController extends BaseController{
 	}
 	
 	@RequestMapping(value="/index")
-	public ModelAndView index(final HttpServletRequest request,final HttpServletResponse response,@ModelAttribute("form")RequestForm form)
+	public ModelAndView index(final HttpServletRequest request,final HttpServletResponse response)
 	{
-		Account account = (Account) WebUtils.getSessionAttribute(request, "account");
-		if(account != null)
-			commonService.setRequestFormWithAccount(form, account);
-		ModelAndView mv = new ModelAndView("/common/index3");
-		
-		List<QuickrequestEntity> requests = commonService.getMainRequests();
-		mv.addObject("requests", requests);
-		
-		List<ProductEntity> products = new ArrayList<ProductEntity>();
-		products.add(commonService.getProduct(150));
-		products.add(commonService.getProduct(149));
-		products.add(commonService.getProduct(151));
-		products.add(commonService.getProduct(148));
-		mv.addObject("products", products);
-		
-		List<QuestionEntity> questions = new ArrayList<QuestionEntity>();
-		questions.add(commonService.getQuestion(165));
-		questions.add(commonService.getQuestion(161));
-		questions.add(commonService.getQuestion(160));
-		mv.addObject("questions", questions);
-		
-		List<ItemEntity> items = new ArrayList<ItemEntity>();
-		items.add(commonService.getItem(48));
-		items.add(commonService.getItem(18));
-		items.add(commonService.getItem(19));
-		items.add(commonService.getItem(22));
-		items.add(commonService.getItem(27));
-		items.add(commonService.getItem(54));
-		mv.addObject("items", items);
+		ModelAndView mv = new ModelAndView("/common/index4");
+
 		return mv;
 	}
 	
@@ -1641,7 +1616,7 @@ public class CommonController extends BaseController{
 	@RequestMapping(value="/searchresult")
 	public ModelAndView searchresult(HttpServletRequest request, HttpServletResponse response)
 	{
-		ModelAndView view = new ModelAndView("common/searchresult");
+		ModelAndView view = new ModelAndView("common/series");
 		if(isDoSubmit(request))
 		{
 			String param = request.getParameter("searchparam");
@@ -1649,6 +1624,28 @@ public class CommonController extends BaseController{
 			view.addObject("cts",cts);
 		}
 		return view;
+	}
+	
+	@RequestMapping(value = "category/{pid}")
+	public ModelAndView category(final HttpServletRequest request,final HttpServletResponse response, @PathVariable String pid)
+	{
+		ModelAndView view = new ModelAndView("/common/categories");
+		//末端分类
+		if(CuttingToolsConfiguration.isLeaf(pid))
+		{
+			view = new ModelAndView("/common/series");
+			List<CuttingToolEntity> cts = commonService.getCategorySeries(pid);
+			view.addObject("cts",cts);
+			return view;
+		}
+		else
+		{
+			List<CategoryEntity> categories = CuttingToolsConfiguration.getNextCategories(pid);
+			view.addObject("category", CuttingToolsConfiguration.getCategoryHtml(pid,false));
+			view.addObject("categories", categories);
+		}
+		return view;
+		
 	}
 	
 	@RequestMapping(value="/getsearch")
@@ -1665,7 +1662,9 @@ public class CommonController extends BaseController{
 		int detailid = Integer.valueOf(id);
 		ModelAndView view = new ModelAndView("common/detail");
 		CuttingToolEntity ct = commonService.getCuttingToolByid(detailid);
+		List<CuttingToolEntity> cts = commonService.getVersionsBySeries(ct.getSeriesname());
 		view.addObject("ct",ct);
+		view.addObject("cts",cts);
 		return view;
 	}
 	

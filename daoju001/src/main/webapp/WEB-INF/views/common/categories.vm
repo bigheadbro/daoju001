@@ -1,12 +1,16 @@
 #set($layout = "/layout/item_layout.vm")
 <div class="main-content-wrap clearfix">
 	<h1 class="category-level">${category}</h1>
-	<div class="clearfix" style="margin-top:20px;">
+	<div class="category-content clearfix">
+		<div class="left">
+		</div>
+		<div class="right clearfix">
 		#foreach ($cat in $categories)
             <a href="/category/${cat.code}" style="display:inline-block;text-align:center;">
 				<img src="/img/category/${cat.pic}.jpg" />
 				<p>${cat.name}</p>
 			</a>
-        #end
+		#end
+		</div>
 	</div>
 </div>

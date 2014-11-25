@@ -27,61 +27,83 @@ $(function() {
 });
 </script>
 <div class="main-content-wrap clearfix">
-	<h3>
-		$ctConfig.getCategoryHtml(${ct.code},true)
-	</h3>
-	<div class="content clearfix" style="margin-bottom:10px;margin-top:20px;">
-		<div style="float:left;">
-			#if($stringUtil.isNotEmpty(${ct.cover}))
-				<a style="width:130px;display: block;text-align: center;border:1px solid grey"><img src="$!{ct.cover}" /></a>
-			#else
-				<a style="width:130px;display: block;text-align: center;border:1px solid grey"><img src="/img/series/nopic.gif" /></a>
-			#end
+	<h1 class="category-level">$ctConfig.getCategoryHtml(${ct.code},true) > 系列详情</h1>
+	<div class="detail-content clearfix" style="margin-bottom:10px;margin-top:20px;">
+		<div class="left">
 		</div>
-		<div style="float:left;width: 700px;margin-left:10px;">
-			<h3>$!{ct.seriesname}</h3>
-			<h4>$!{ct.brand}</h4>
-    		<p >$!{ct.outline}</p>
-    		<p >$!{ct.info}</p>
+		<div class="right">
+			<div class="series-item clearfix" href="/detail/${ct.id}">
+				<div class="series-pic">
+					#if($stringUtil.isNotEmpty(${ct.cover}))
+						<img src="$!{ct.cover}" />
+					#else
+						<img src="/img/series/seriespic.png" />
+					#end
+				</div>
+				<div class="series-params">
+					<h3>$!{ct.seriesname}</h3>
+					<h4>$ctConfig.getSeriesParamSpan($ct,$!{ct.samecolume})</h4>
+            		<h5>$!{ct.outline}</h5>
+					<p>$!{ct.info}</p>
+				</div>
+            </div>
+			<div class="provider">
+				<h1>供应商</h1>
+				#foreach($user in $users)
+				<div class="provider-item clearfix">
+					<div class="clearfix">
+    					<div class="name">${user.companyName}</div>
+    					<div class="area"><span>地区</span>$stringUtil.getCityFromPca(${user.pca})</div>
+    					<div class="contact"><span>联系人</span>${user.contactName}</div>
+    					<div class="operation">查看联系方式</div>
+					</div>
+					<div class="contactway clearfix">
+						<div class="name">&nbsp;</div>
+    					<div class="phone"><span>手机</span>${user.contactPhone}</div>
+    					<div class="qq"><span>QQ</span>${user.contactQq}</div>
+					</div>
+				</div>
+				#end
+			</div>
+			<div class="series-content">
+        		<ul class="series-tab clearfix">
+                    <li alipay=1 class="current">
+        				型号列表
+                    </li>
+                	<li>
+                		 产品目录
+                    </li>
+                </ul>
+        		<div class="version-content clearfix">
+        			<div class="content">
+        			#foreach($cut in $cts)
+        				#if($velocityCount == 1)
+        					<div class="head">
+        						$ctConfig.getParamsHtml($cts)
+        					</div>
+        					<div class="content">
+        						#parse("/common/params.vm")
+        					</div>
+        				#else
+        					<div class="content">
+        						#parse("/common/params.vm")
+        					</div>
+        				#end
+					#end
+        			</div>
+        		</div>
+        		<div class="category-content" style="width:700px;">
+        			#if($!ctConfig.getCategoryPic($!{ct.pic}))
+        			<div class="flexslider">
+            			<ul class="slides">
+            				$ctConfig.getCategoryPic($!{ct.pic})
+            			</ul>
+                    </div>
+        			#else
+        				无目录图片
+        			#end
+        		</div>
+        	</div>
 		</div>
     </div>
-	<div class="series-content">
-		<ul class="series-tab clearfix">
-            <li alipay=1 class="current">
-				型号
-            </li>
-        	<li>
-        		 产品目录
-            </li>
-        </ul>
-		<div class="version-content clearfix">
-			<div class="content">
-			#foreach($cut in $cts)
-				#if($velocityCount == 1)
-					<div class="head">
-						$ctConfig.getParamsHtml($cts)
-					</div>
-					<div class="content">
-						#parse("/common/params.vm")
-					</div>
-				#else
-					<div class="content">
-						#parse("/common/params.vm")
-					</div>
-				#end
-			#end
-			</div>
-		</div>
-		<div class="category-content" style="width:700px;">
-			#if($!ctConfig.getCategoryPic($!{ct.pic}))
-			<div class="flexslider">
-    			<ul class="slides">
-    				$ctConfig.getCategoryPic($!{ct.pic})
-    			</ul>
-            </div>
-			#else
-				无目录图片
-			#end
-		</div>
-	</div>
 </div>

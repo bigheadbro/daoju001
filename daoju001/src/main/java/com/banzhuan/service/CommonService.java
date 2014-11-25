@@ -1028,4 +1028,15 @@ public class CommonService {
 	{
 		return ctDAO.queryCuttingToolByCode(CuttingToolsConfiguration.prehandleCode(code));
 	}
+	
+	public List<UserEntity> getProviders(String providers)
+	{
+		String[] str = providers.split(",");
+		List<UserEntity> users = new ArrayList<UserEntity>();
+		for(int i = 0;i<str.length;i++)
+		{
+			users.add(userDAO.queryUserEntityById(Integer.valueOf(str[i])));
+		}
+		return users;
+	}
 }

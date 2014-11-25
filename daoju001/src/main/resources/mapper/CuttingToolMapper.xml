@@ -10,6 +10,7 @@
 		<id property="code" column="code" />
    	  <!---->
 		<id property="brand" column="brand" />
+		<id property="samecolume" column="samecolume" />
    	  <!---->
 		<id property="seriesname" column="seriesname" />
    	  <!---->
@@ -96,6 +97,10 @@
 		SELECT * from t_cuttingtool where match(code) against(#{code} in boolean mode) group by seriesname
 	</select>
 	
+	<select id="getAllSeries" resultMap="CuttingToolResultMap">
+		SELECT * from t_cuttingtool group by seriesname
+	</select>
+	
 	<select id="getVersionsBySeries" parameterType="String" resultMap="CuttingToolResultMap">
 		SELECT * from t_cuttingtool where match(seriesname) against(#{sn} in boolean mode)
 	</select>
@@ -113,6 +118,14 @@
 			SELECT * from t_cuttingtool t limit 0,50;
 		]]>
 	</select>
+	
+	<update id="updateCuttingToolById" parameterType="CuttingToolEntity">
+		update t_cuttingtool
+		<set>
+		  <if test="samecolume != null">samecolume=#{samecolume},</if>
+		</set>
+	   where seriesname=#{seriesname}
+	</update>
 	<!-- 新代理商信息 -->
 	<insert id="insertCuttingToolEntity" parameterType="CuttingToolEntity">
 		<selectKey resultType="int" order="AFTER" keyProperty="id">

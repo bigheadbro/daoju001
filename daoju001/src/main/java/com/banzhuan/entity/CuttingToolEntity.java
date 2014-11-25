@@ -117,6 +117,8 @@ public class CuttingToolEntity implements Serializable {
 	
 	private String provider;
 
+	private String samecolume;
+	
 	public int getId() {
 		return id;
 	}
@@ -547,5 +549,15 @@ public class CuttingToolEntity implements Serializable {
 
 	public void setNecklength(double necklength) {
 		this.necklength = necklength;
+	}
+
+	public String getSamecolume()
+	{
+		return samecolume;
+	}
+
+	public void setSamecolume(String samecolume)
+	{
+		this.samecolume = samecolume;
 	}
 }

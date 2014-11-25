@@ -7,6 +7,7 @@ import org.mybatis.spring.support.SqlSessionDaoSupport;
 import org.springframework.stereotype.Repository;
 
 import com.banzhuan.dao.CuttingToolDAO;
+import com.banzhuan.entity.AddressEntity;
 import com.banzhuan.entity.CuttingToolEntity;
 
 @Repository("ctDAO")
@@ -52,4 +53,14 @@ public class CuttingToolDAOImpl extends SqlSessionDaoSupport implements CuttingT
 		return this.getSqlSession().selectList("getVersionsBySeries", sn);
 	}
 	
+	@Override
+	public List<CuttingToolEntity> getAllSeries()
+	{
+		return this.getSqlSession().selectList("getAllSeries");
+	}
+	
+	@Override
+	public int updateCuttingToolById(CuttingToolEntity ct) {
+		return this.getSqlSession().update("updateCuttingToolById", ct);
+	}
 }

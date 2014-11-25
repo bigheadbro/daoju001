@@ -40,6 +40,9 @@ public class CuttingToolsConfiguration
 		level2Map.put("0106", "三面刃铣刀");
 		level2Map.put("0107", "T型槽刀");
 		level2Map.put("0108", "铣刀片");
+		//level2Map.put("0109", "普通铣刀");
+		//level2Map.put("0110", "组合刀体");
+		
 		level2Map.put("0201", "平头铣刀");
 		level2Map.put("0202", "球头铣刀");
 		level2Map.put("0203", "圆角铣刀");
@@ -414,6 +417,206 @@ public class CuttingToolsConfiguration
 		return ret;
 	}
 
+	public static String getSeriesParamSpan(CuttingToolEntity ct, String ret)
+	{
+		String tmp = "";
+		if (ret.contains("material"))
+		{
+			tmp += "<span>" + ct.getMaterial() + "</span>";
+		}
+		if (ret.contains(",angle"))
+		{
+			tmp += "<span>主偏角"+ct.getAngle()+"</span>";
+		}
+		if (ret.contains("ctcount"))
+		{
+			tmp += "<span>刀片个数"+ct.getCtcount()+"</span>";
+		}
+		if (ret.contains(",diameter,"))
+		{
+			tmp += "<span>直径"+ct.getDiameter()+"</span>";
+		}
+		if (ret.contains("usage"))
+		{
+			tmp += "<span>"+ct.getUsage()+"</span>";
+		}
+		if (ret.contains("<span>光洁度</span>"))
+		{
+			if(ct.getCujing() == 2)
+			{
+				tmp += "<span>粗加工</span>";
+			}
+			else if(ct.getCujing() == 3)
+			{
+				tmp += "<span>精加工</span>";
+			}
+		}
+		if (ret.contains("usefullength"))
+		{
+			tmp += "<span>有效长"+ct.getUsefullength()+"</span>";
+		}
+		if (ret.contains("pipesize"))
+		{
+			tmp += "<span>安装孔接口"+ct.getPipesize()+"</span>";
+		}
+		if (ret.contains(",shank"))
+		{
+			tmp += "<span>柄径"+ct.getShank()+"</span>";
+		}
+		if (ret.contains("shanktype"))
+		{
+			tmp += "<span>柄部类型"+ct.getShanktype()+"</span>";
+		}
+		if (ret.contains(",shape"))
+		{
+			tmp += "<span>"+ct.getShape()+"</span>";
+		}
+		if (ret.contains("<span>后角</span>"))
+		{
+			tmp += "<span>后角"+ct.getRangle()+"</span>";
+		}
+		if (ret.contains("workingtool"))
+		{
+			tmp += "<span>"+ct.getWorkingtool()+"</span>";
+		}
+		if (ret.contains("edgeno"))
+		{
+			tmp += "<span>刃数"+ct.getEdgeno()+"</span>";
+		}
+		if (ret.contains("edgelength"))
+		{
+			tmp += "<span>刃长"+ct.getEdgelength()+"</span>";
+		}
+		if (ret.contains("totallength"))
+		{
+			tmp += "<span>总长"+ct.getTotallength()+"</span>";
+		}
+		if (ret.contains("screwangle"))
+		{
+			tmp += "<span>螺旋角"+ct.getScrewangle()+"</span>";
+		}
+		if (ret.contains("coatingtype"))
+		{
+			tmp += "<span>涂层种类"+ct.getCoatingtype()+"</span>";
+		}
+		if (ret.contains("rangle"))
+		{
+			tmp += "<span>R角"+ct.getRangle()+"</span>";
+		}
+		if (ret.contains("direction"))
+		{
+			if(ct.getDirection() == 2)
+			{
+				tmp += "<span>左手</span>";
+			}
+			else if(ct.getDirection() == 3)
+			{
+				tmp += "<span>右手</span>";
+			}
+			else
+			{
+				tmp += "<span>方向普通</span>";
+			}
+			
+		}
+		if (ret.contains("minworkdiamter"))
+		{
+			tmp += "<span>最小加工直径"+ct.getMinworkdiameter()+"</span>";
+		}
+		if (ret.contains("innercooling"))
+		{
+			if(ct.getInnercooling() == 2)
+			{
+				tmp += "<span>内冷</span>";
+			}
+			else
+			{
+				tmp += "<span>外冷</span>";
+			}
+		}
+		if (ret.contains(",diameterratio"))
+		{
+			tmp += "<span>倍径比"+ct.getDiameterratio()+"</span>";
+		}
+		if (ret.contains("slotshape"))
+		{
+			tmp += "<span>槽型状"+ct.getSlotshape()+"</span>";
+		}
+		if (ret.contains("shanktype"))
+		{
+			tmp += "<span>柄部规格"+ct.getShanktype()+"</span>";
+		}
+		if (ret.contains("taptype"))
+		{
+			tmp += "<span>丝锥种类"+ct.getTaptype()+"</span>";
+		}
+		if (ret.contains("screwtype"))
+		{
+			tmp += "<span>螺纹种类"+ct.getScrewtype()+"</span>";
+		}
+		if (ret.contains("axistype"))
+		{
+			tmp += "<span>主轴种类"+ct.getAxistype()+"</span>";
+		}
+		if (ret.contains("axisdetail"))
+		{
+			tmp += "<span>主轴细分"+ct.getAxisdetail()+"</span>";
+		}
+		if (ret.contains("thickness"))
+		{
+			tmp += "<span>厚度"+ct.getThickness()+"</span>";
+		}
+		if (ret.contains("maxslotdepth"))
+		{
+			tmp += "<span>"+ct.getMaxslotdepth()+"</span>";
+		}
+		if (ret.contains(",taper"))
+		{
+			tmp += "<span>锥度"+ct.getTaper()+"</span>";
+		}
+		if (ret.contains("slotwidth"))
+		{
+			tmp += "<span>槽宽"+ct.getSlotwidth()+"</span>";
+		}
+		if (ret.contains("pointdiameter"))
+		{
+			tmp += "<span>刀尖直径"+ct.getPointdiameter()+"</span>";
+		}
+		if (ret.contains("handledsize"))
+		{
+			tmp += "<span>可加持尺寸"+ct.getHandledsize()+"</span>";
+		}
+		if (ret.contains("screwsize"))
+		{
+			tmp += "<span>螺纹尺寸"+ct.getScrewsize()+"</span>";
+		}
+		if (ret.contains("screwdistance"))
+		{
+			tmp += "<span>螺距"+ct.getScrewdistance()+"</span>";
+		}
+		if (ret.contains("accuracy"))
+		{
+			tmp += "<span>精度"+ct.getAccuracy()+"</span>";
+		}
+		if (ret.contains("interfacesize"))
+		{
+			tmp += "<span>接口尺寸"+ct.getInterfacesize()+"</span>";
+		}
+		if (ret.contains("maxbore"))
+		{
+			tmp += "<span>镗孔上限"+ct.getMaxbore()+"</span>";
+		}
+		if (ret.contains("minbore"))
+		{
+			tmp += "<span>镗孔下限"+ct.getMinbore()+"</span>";
+		}
+		if (ret.contains("necklength"))
+		{
+			tmp += "<span>颈长"+ct.getNecklength()+"</span>";
+		}
+		return tmp;
+	}
+	
 	public static String getCategoryPic(String pic)
 	{
 		if (StringUtil.isEmpty(pic))
@@ -447,17 +650,17 @@ public class CuttingToolsConfiguration
 			}
 			if (Integer.valueOf(code.substring(2, 4)) != 0)
 			{
-				ret += "-><a href=\"/category/" + code.substring(0, 4) + "\">"
+				ret += " > <a href=\"/category/" + code.substring(0, 4) + "\">"
 						+ level2Map.get(code.substring(0, 4)) + "</a>";
 			}
 			if (Integer.valueOf(code.substring(4, 6)) != 0)
 			{
 				if (lastislink)
-					ret += "-><a href=\"/category/" + code.substring(0, 6)
+					ret += " > <a href=\"/category/" + code.substring(0, 6)
 							+ "\">" + level3Map.get(code.substring(0, 6))
 							+ "</a>";
 				else
-					ret += "->" + level3Map.get(code.substring(0, 6));
+					ret += " > " + level3Map.get(code.substring(0, 6));
 			}
 			return ret;
 		} else if (code.length() == 4)

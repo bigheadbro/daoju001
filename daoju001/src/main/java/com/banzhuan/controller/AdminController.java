@@ -107,6 +107,450 @@ public class AdminController extends BaseController{
 	@Qualifier("ctDAO")
 	private CuttingToolDAO ctDAO;
 	
+	@RequestMapping(value="/generateSameColume")
+	public ModelAndView generateSameColume(final HttpServletRequest request, final HttpServletResponse response)
+	{
+		ModelAndView mv = new ModelAndView("/admin/test");
+		List<CuttingToolEntity> series = ctDAO.getAllSeries();
+		for(int i = 0; i < series.size(); i++)
+		{
+			List<CuttingToolEntity> versions = ctDAO.getVersionsBySeries(series.get(i).getSeriesname()); 
+			HashSet<String> brand= new HashSet<String>();
+			HashSet<String> material= new HashSet<String>();
+			HashSet<String> usage= new HashSet<String>();
+			HashSet<String> shank= new HashSet<String>();
+			HashSet<String> shanktype= new HashSet<String>();
+			HashSet<String> shape= new HashSet<String>();
+			HashSet<String> workingtool= new HashSet<String>();
+			HashSet<String> coatingtype= new HashSet<String>();
+			HashSet<String> diameterratio= new HashSet<String>();
+			HashSet<String> slotshape= new HashSet<String>();
+			HashSet<String> handlenorm= new HashSet<String>();
+			HashSet<String> taptype= new HashSet<String>();
+			HashSet<String> screwtype= new HashSet<String>();
+			HashSet<String> axistype= new HashSet<String>();
+			HashSet<String> axisdetail= new HashSet<String>();
+			HashSet<String> interfacesize= new HashSet<String>();
+			HashSet<String> handledsize= new HashSet<String>();
+			HashSet<String> screwsize= new HashSet<String>();
+			HashSet<String> screwdistance= new HashSet<String>();
+			HashSet<String> accuracy= new HashSet<String>();
+			
+			HashSet<Integer> ctcount= new HashSet<Integer>();
+			HashSet<Integer>angle= new HashSet<Integer>();
+			HashSet<Integer>backangle= new HashSet<Integer>();
+			HashSet<Integer>edgeno= new HashSet<Integer>();
+			HashSet<Integer>cujing= new HashSet<Integer>();
+			HashSet<Integer>direction= new HashSet<Integer>();
+			HashSet<Integer>innercooling= new HashSet<Integer>();
+			
+			HashSet<Double> usefullength= new HashSet<Double>();
+			HashSet<Double>pipesize= new HashSet<Double>();
+			HashSet<Double> diameter= new HashSet<Double>();
+			HashSet<Double> edgelength= new HashSet<Double>();
+			HashSet<Double> totallength= new HashSet<Double>();
+			HashSet<Double> screwangle= new HashSet<Double>();
+			HashSet<Double> rangle= new HashSet<Double>();
+			HashSet<Double> minworkdiameter= new HashSet<Double>();
+			HashSet<Double> thickness= new HashSet<Double>();
+			HashSet<Double> maxslotdepth= new HashSet<Double>();
+			HashSet<Double> maxbore= new HashSet<Double>();
+			HashSet<Double> minbore= new HashSet<Double>();
+			HashSet<Double> necklength= new HashSet<Double>();
+			HashSet<Double> taper= new HashSet<Double>();
+			HashSet<Double> slotwidth= new HashSet<Double>();
+			HashSet<Double> pointdiameter= new HashSet<Double>();
+			String ret = "";
+			
+			for(int j = 0; j < versions.size(); j++)
+			{
+				if(StringUtil.isNotEmpty(versions.get(j).getBrand()))
+				{
+					brand.add(versions.get(j).getBrand());
+				}
+				if(StringUtil.isNotEmpty(versions.get(j).getMaterial()))
+				{
+					material.add(versions.get(j).getMaterial());
+				}
+				if(StringUtil.isNotEmpty(versions.get(j).getUsage()))
+				{
+					usage.add(versions.get(j).getUsage());
+				}
+				if(StringUtil.isNotEmpty(versions.get(j).getShank()))
+				{
+					shank.add(versions.get(j).getShank());
+				}
+				if(StringUtil.isNotEmpty(versions.get(j).getShanktype()))
+				{
+					 shanktype.add(versions.get(j).getShanktype());
+				}
+
+				if(StringUtil.isNotEmpty(versions.get(j).getShape()))
+				{
+					 shape.add(versions.get(j).getShape());
+				}
+
+				if(StringUtil.isNotEmpty(versions.get(j).getWorkingtool()))
+				{
+					 workingtool.add(versions.get(j).getWorkingtool());
+				}
+
+				if(StringUtil.isNotEmpty(versions.get(j).getCoatingtype()))
+				{
+					 coatingtype.add(versions.get(j).getCoatingtype());
+				}
+
+				if(StringUtil.isNotEmpty(versions.get(j).getDiameterratio()))
+				{
+					 diameterratio.add(versions.get(j).getDiameterratio());
+				}
+
+				if(StringUtil.isNotEmpty(versions.get(j).getSlotshape()))
+				{
+					 slotshape.add(versions.get(j).getSlotshape());
+				}
+
+				if(StringUtil.isNotEmpty(versions.get(j).getHandlenorm()))
+				{
+					 handlenorm.add(versions.get(j).getHandlenorm());
+				}
+
+				if(StringUtil.isNotEmpty(versions.get(j).getTaptype()))
+				{
+					 taptype.add(versions.get(j).getTaptype());
+				}
+
+				if(StringUtil.isNotEmpty(versions.get(j).getScrewtype()))
+				{
+					 screwtype.add(versions.get(j).getScrewtype());
+				}
+
+				if(StringUtil.isNotEmpty(versions.get(j).getAxistype()))
+				{
+					 axistype.add(versions.get(j).getAxistype());
+				}
+				if(StringUtil.isNotEmpty(versions.get(j).getAxisdetail()))
+				{
+					 axisdetail.add(versions.get(j).getAxisdetail());
+				}
+
+				if(StringUtil.isNotEmpty(versions.get(j).getInterfacesize()))
+				{
+					 interfacesize.add(versions.get(j).getInterfacesize());
+				}
+
+				if(StringUtil.isNotEmpty(versions.get(j).getHandledsize()))
+				{
+					 handledsize.add(versions.get(j).getHandledsize());
+				}
+
+				if(StringUtil.isNotEmpty(versions.get(j).getScrewsize()))
+				{
+					 screwsize.add(versions.get(j).getScrewsize());
+				}
+
+				if(StringUtil.isNotEmpty(versions.get(j).getScrewdistance()))
+				{
+					 screwdistance.add(versions.get(j).getScrewdistance());
+				}
+
+				if(StringUtil.isNotEmpty(versions.get(j).getAccuracy()))
+				{
+					 accuracy.add(versions.get(j).getAccuracy());
+				}
+				
+				if(versions.get(j).getCtcount() != 0)
+				{
+					ctcount.add(versions.get(j).getCtcount());
+				}
+				if(versions.get(j).getAngle() != 0)
+				{
+					angle.add(versions.get(j).getAngle());
+				}
+
+				if(versions.get(j).getBackangle() != 0)
+				{
+					backangle.add(versions.get(j).getBackangle());
+				}
+
+				if(versions.get(j).getEdgeno() != 0)
+				{
+					edgeno.add(versions.get(j).getEdgeno());
+				}
+				if(versions.get(j).getCujing() != 0)
+				{
+					cujing.add(versions.get(j).getCujing());
+				}
+				if(versions.get(j).getDirection() != 0)
+				{
+					direction.add(versions.get(j).getDirection());
+				}
+
+				if(versions.get(j).getInnercooling() != 0)
+				{
+					innercooling.add(versions.get(j).getInnercooling());
+				}
+			
+				if(versions.get(j).getUsefullength() != 0)
+				{
+					usefullength.add(versions.get(j).getUsefullength());
+				}
+
+				if(versions.get(j).getPipesize() != 0)
+				{
+					pipesize.add(versions.get(j).getPipesize());
+				}
+
+				if(versions.get(j).getDiameter() != 0)
+				{
+					diameter.add(versions.get(j).getDiameter());
+				}
+
+				if(versions.get(j).getEdgelength() != 0)
+				{
+					edgelength.add(versions.get(j).getEdgelength());
+				}
+
+				if(versions.get(j).getTotallength() != 0)
+				{
+					totallength.add(versions.get(j).getTotallength());
+				}
+
+				if(versions.get(j).getScrewangle() != 0)
+				{
+					screwangle.add(versions.get(j).getScrewangle());
+				}
+
+				if(versions.get(j).getRangle() != 0)
+				{
+					rangle.add(versions.get(j).getRangle());
+				}
+
+				if(versions.get(j).getMinworkdiameter() != 0)
+				{
+					minworkdiameter.add(versions.get(j).getMinworkdiameter());
+				}
+	
+				if(versions.get(j).getThickness() != 0)
+				{
+					thickness.add(versions.get(j).getThickness());
+				}
+
+				if(versions.get(j).getMaxslotdepth() != 0)
+				{
+					maxslotdepth.add(versions.get(j).getMaxslotdepth());
+				}
+
+				if(versions.get(j).getMaxbore() != 0)
+				{
+					maxbore.add(versions.get(j).getMaxbore());
+				}
+
+				if(versions.get(j).getMinbore() != 0)
+				{
+					minbore.add(versions.get(j).getMinbore());
+				}
+
+				if(versions.get(j).getNecklength() != 0)
+				{
+					necklength.add(versions.get(j).getNecklength());
+				}
+
+				if(versions.get(j).getTaper() != 0)
+				{
+					taper.add(versions.get(j).getTaper());
+				}
+
+				if(versions.get(j).getSlotwidth() != 0)
+				{
+					slotwidth.add(versions.get(j).getSlotwidth());
+				}
+
+				if(versions.get(j).getPointdiameter() != 0)
+				{
+					pointdiameter.add(versions.get(j).getPointdiameter());
+				}
+
+			}
+			if(brand.size() > 0)
+			{
+				ret = "brand";
+			}
+			if(angle.size() > 0)
+			{
+				ret += ",angle";
+			}
+			if(ctcount.size() > 0)
+			{
+				ret += ",ctcount";
+			}
+			if(material.size() > 0)
+			{
+				ret += ",material";
+			}
+			if(diameter.size() > 0)
+			{
+				ret += ",diameter";
+			}
+			if(usage.size() > 0)
+			{
+				ret += ",usage";
+			}
+			if(cujing.size() > 0)
+			{
+				ret += ",cujing";
+			}
+			if(usefullength.size() > 0)
+			{
+				ret += ",usefullength";
+			}
+			if(pipesize.size() > 0)
+			{
+				ret += ",pipesize";
+			}
+			if(shank.size() > 0)
+			{
+				ret += ",shank";
+			}
+			if(shanktype.size() > 0)
+			{
+				ret += ",shanktype";
+			}
+			if(shape.size() > 0)
+			{
+				ret += ",shape";
+			}
+			if(backangle.size() > 0)
+			{
+				ret += ",backangle";
+			}
+			if(workingtool.size() > 0)
+			{
+				ret += ",workingtool";
+			}
+			if(edgeno.size() > 0)
+			{
+				ret += ",edgeno";
+			}
+			if(edgelength.size() > 0)
+			{
+				ret += ",edgelength";
+			}
+			if(totallength.size() > 0)
+			{
+				ret += ",totallength";
+			}
+			if(screwangle.size() > 0)
+			{
+				ret += ",screwangle";
+			}
+			if(coatingtype.size() > 0)
+			{
+				ret += ",coatingtype";
+			}
+			if(rangle.size() > 0)
+			{
+				ret += ",rangle";
+			}
+			if(direction.size() > 0)
+			{
+				ret += ",direction";
+			}
+			if(minworkdiameter.size() > 0)
+			{
+				ret += ",minworkdiameter";
+			}
+			if(innercooling.size() > 0)
+			{
+				ret += ",innercooling";
+			}
+			if(diameterratio.size() > 0)
+			{
+				ret += ",diameterratio";
+			}
+			if(slotshape.size() > 0)
+			{
+				ret += ",slotshape";
+			}
+			if(handlenorm.size() > 0)
+			{
+				ret += ",handlenorm";
+			}
+			if(taptype.size() > 0)
+			{
+				ret += ",taptype";
+			}
+			if(screwtype.size() > 0)
+			{
+				ret += ",screwtype";
+			}
+			if(axistype.size() > 0)
+			{
+				ret += ",axistype";
+			}
+			if(axisdetail.size() > 0)
+			{
+				ret += ",axisdetail";
+			}
+			if(thickness.size() > 0)
+			{
+				ret += ",thickness";
+			}
+			if(maxslotdepth.size() > 0)
+			{
+				ret += ",maxslotdepth";
+			}
+			if(taper.size() > 0)
+			{
+				ret += ",taper";
+			}
+			if(slotwidth.size() > 0)
+			{
+				ret += ",slotwidth";
+			}
+			if(pointdiameter.size() > 0)
+			{
+				ret += ",pointdiameter";
+			}
+			if(handledsize.size() > 0)
+			{
+				ret += ",handledsize";
+			}
+			if(screwsize.size() > 0)
+			{
+				ret += ",screwsize";
+			}
+			if(screwdistance.size() > 0)
+			{
+				ret += ",screwdistance";
+			}
+			if(accuracy.size() > 0)
+			{
+				ret += ",accuracy";
+			}
+			if(interfacesize.size() > 0)
+			{
+				ret += ",interfacesize";
+			}
+			if(maxbore.size() > 0)
+			{
+				ret += ",maxbore";
+			}
+			if(minbore.size() > 0)
+			{
+				ret += ",minbore";
+			}
+			if(necklength.size() > 0)
+			{
+				ret += ",necklength";
+			}
+			CuttingToolEntity update = new CuttingToolEntity();
+			update.setSeriesname(series.get(i).getSeriesname());
+			update.setSamecolume(ret);
+			ctDAO.updateCuttingToolById(update);
+		}
+		return mv;
+	}
 	@RequestMapping(value="/test")
 	public ModelAndView test(final HttpServletRequest request, final HttpServletResponse response)
 	{
@@ -178,7 +622,7 @@ public class AdminController extends BaseController{
             // 获得第一个工作表对象
             Sheet sheet= book.getSheet(0);
             
-            for(int j = 15; j < sheet.getRows(); j++)
+            for(int j = 433; j < sheet.getRows(); j++)
             {
             	CuttingToolEntity ct = new CuttingToolEntity();
             	String tmp = sheet.getCell(0, j).getContents();

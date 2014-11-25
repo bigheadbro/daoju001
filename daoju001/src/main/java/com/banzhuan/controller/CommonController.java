@@ -1635,6 +1635,7 @@ public class CommonController extends BaseController{
 		{
 			view = new ModelAndView("/common/series");
 			List<CuttingToolEntity> cts = commonService.getCategorySeries(pid);
+			view.addObject("category", CuttingToolsConfiguration.getCategoryHtml(pid,false));
 			view.addObject("cts",cts);
 			return view;
 		}
@@ -1663,6 +1664,8 @@ public class CommonController extends BaseController{
 		ModelAndView view = new ModelAndView("common/detail");
 		CuttingToolEntity ct = commonService.getCuttingToolByid(detailid);
 		List<CuttingToolEntity> cts = commonService.getVersionsBySeries(ct.getSeriesname());
+		List<UserEntity> users = commonService.getProviders(ct.getProvider());
+		view.addObject("users",users);
 		view.addObject("ct",ct);
 		view.addObject("cts",cts);
 		return view;

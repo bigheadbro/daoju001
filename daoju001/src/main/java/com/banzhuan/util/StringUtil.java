@@ -875,6 +875,24 @@ public class StringUtil {
 		}
 		return ret;
 	}
+	
+	public static String getCityFromPca(String pca)
+	{
+		if(isEmpty(pca))
+		{
+			return "未填写";
+		}
+		int size = pca.split("-").length;
+		if(size > 2)
+		{
+			return pca.split("-")[1];
+		}
+		else
+		{
+			return pca.split("-")[0];
+		}
+	}
+	
 	public static void main(String[] args) {
 		System.out.print(convertYoukulink("http://v.youku.com/v_show/id_XMjUwMTU3NTA4.html"));
 	}

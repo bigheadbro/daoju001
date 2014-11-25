@@ -1,23 +1,29 @@
 #set($layout = "/layout/item_layout.vm")
 <div class="main-content-wrap clearfix">
-	<div class="clearfix" style="margin-top:20px;">
+	<h1 class="category-level">$!{category}</h1>
+	<div class="series-content clearfix"">
+		<div class="left">
+		</div>
+		<div class="right">
+		#if(${cts.size()} == 0)
+			没有找到该产品
+		#end
 		#foreach ($ct in $cts)
-            <div class="content clearfix" style="margin-bottom:10px;">
-				<div style="float:left;">
+            <a class="series-item clearfix" href="/detail/${ct.id}">
+				<div class="series-pic">
 					#if($stringUtil.isNotEmpty(${ct.cover}))
-						<a style="width:130px;display: block;text-align: center;border:1px solid grey" href="/detail/${ct.id}"><img src="$!{ct.cover}" /></a>
+						<img src="$!{ct.cover}" />
 					#else
-						<a style="width:130px;display: block;text-align: center;border:1px solid grey" href="/detail/${ct.id}"><img src="/img/series/nopic.gif" /></a>
+						<img src="/img/series/seriespic.png" />
 					#end
 				</div>
-				<div style="float:left;width: 700px;margin-left:10px;">
+				<div class="series-params">
 					<h3>$!{ct.seriesname}</h3>
-					<h4>$!{ct.brand}</h4>
-                	<h3>$ctConfig.getType($!{ct.code})</h3>
-            		<p >$!{ct.outline}</p>
-            		<p >$!{ct.info}</p>
+					<h4>$ctConfig.getSeriesParamSpan($ct,$!{ct.samecolume})</h4>
+            		<p>$!{ct.outline}</p>
 				</div>
-            </div>
-        #end
+            </a>
+		#end
+		</div>
 	</div>
 </div>

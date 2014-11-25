@@ -27,4 +27,8 @@ public interface CuttingToolDAO {
 	public List<CuttingToolEntity> queryCuttingToolByCode(String code);
 	
 	public List<CuttingToolEntity> getVersionsBySeries(String sn);
+	
+	public List<CuttingToolEntity> getAllSeries();
+	
+	public int updateCuttingToolById(CuttingToolEntity ct);
 }

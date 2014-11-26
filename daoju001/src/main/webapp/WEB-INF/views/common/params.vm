@@ -1,130 +1,130 @@
 #if($!{cut.version} and $!{cut.version} != 0)
-    <span>$!{cut.version}</span>
+    <td>$!{cut.version}</td>
 #end
 #if($!{cut.material} and $!{cut.material} != 0)
-    <span>$!{cut.material}</span>
+    <td>$!{cut.material}</td>
 #end
 #if($!{cut.angle} and $!{cut.angle} != 0)
-    <span>$!{cut.angle}</span>
+    <td>$!{cut.angle}</td>
 #end
 #if($!{cut.ctcount} and $!{cut.ctcount} != 0)
-    <span>$!{cut.ctcount}</span>
+    <td>$!{cut.ctcount}</td>
 #end
 #if($!{cut.diameter} and $!{cut.diameter} != 0)
-    <span>$!{cut.diameter}</span>
+    <td>$!{cut.diameter}</td>
 #end
 #if($!{cut.usage} and $!{cut.usage} != 0)
-    <span>$!{cut.usage}</span>
+    <td>$!{cut.usage}</td>
 #end
 #if($!{cut.cujing} and $!{cut.cujing} != 0)
-    <span>$!{cut.cujing}</span>
+    <td>$!{cut.cujing}</td>
 #end
 #if($!{cut.usefullength} and $!{cut.usefullength} != 0)
-    <span>$!{cut.usefullength}</span>
+    <td>$!{cut.usefullength}</td>
 #end
 #if($!{cut.pipesize} and $!{cut.pipesize} != 0)
-    <span>$!{cut.pipesize}</span>
+    <td>$!{cut.pipesize}</td>
 #end
 #if($!{cut.shank} and $!{cut.shank} != 0)
-    <span>$!{cut.shank}</span>
+    <td>$!{cut.shank}</td>
 #end
 #if($!{cut.shanktype} and $!{cut.shanktype} != 0)
-    <span>$!{cut.shanktype}</span>
+    <td>$!{cut.shanktype}</td>
 #end
 #if($!{cut.shape} and $!{cut.shape} != 0)
-    <span>$!{cut.shape}</span>
+    <td>$!{cut.shape}</td>
 #end
 #if($!{cut.backangle} and $!{cut.backangle} != 0)
-    <span>$!{cut.backangle}</span>
+    <td>$!{cut.backangle}</td>
 #end
 #if($!{cut.workingtool} and $!{cut.workingtool} != 0)
-    <span>$!{cut.workingtool}</span>
+    <td>$!{cut.workingtool}</td>
 #end
 #if($!{cut.edgeno} and $!{cut.edgeno} != 0)
-    <span>$!{cut.edgeno}</span>
+    <td>$!{cut.edgeno}</td>
 #end
 #if($!{cut.edgelength} and $!{cut.edgelength} != 0)
-    <span>$!{cut.edgelength}</span>
+    <td>$!{cut.edgelength}</td>
 #end
 #if($!{cut.totallength} and $!{cut.totallength} != 0)
-    <span>$!{cut.totallength}</span>
+    <td>$!{cut.totallength}</td>
 #end
 #if($!{cut.screwangle} and $!{cut.screwangle} != 0)
-    <span>$!{cut.screwangle}</span>
+    <td>$!{cut.screwangle}</td>
 #end
 #if($!{cut.coatingtype} and $!{cut.coatingtype} != 0)
-    <span>$!{cut.coatingtype}</span>
+    <td>$!{cut.coatingtype}</td>
 #end
 #if($!{cut.rangle} and $!{cut.rangle} != 0)
-    <span>$!{cut.rangle}</span>
+    <td>$!{cut.rangle}</td>
 #end
 #if($!{cut.direction} and $!{cut.direction} != 0)
-    <span>$!{cut.direction}</span>
+    <td>$!{cut.direction}</td>
 #end
 #if($!{cut.minworkdiameter} and $!{cut.minworkdiameter} != 0)
-    <span>$!{cut.minworkdiameter}</span>
+    <td>$!{cut.minworkdiameter}</td>
 #end
 #if($!{cut.innercooling} and $!{cut.innercooling} != 0)
-    <span>$!{cut.innercooling}</span>
+    <td>$!{cut.innercooling}</td>
 #end
 #if($!{cut.diameterratio} and $!{cut.diameterratio} != 0)
-    <span>$!{cut.diameterratio}</span>
+    <td>$!{cut.diameterratio}</td>
 #end
 #if($!{cut.slotshape} and $!{cut.slotshape} != 0)
-    <span>$!{cut.slotshape}</span>
+    <td>$!{cut.slotshape}</td>
 #end
 #if($!{cut.handlenorm} and $!{cut.handlenorm} != 0)
-    <span>$!{cut.handlenorm}</span>
+    <td>$!{cut.handlenorm}</td>
 #end
 #if($!{cut.taptype} and $!{cut.taptype} != 0)
-    <span>$!{cut.taptype}</span>
+    <td>$!{cut.taptype}</td>
 #end
 #if($!{cut.screwtype} and $!{cut.screwtype} != 0)
-    <span>$!{cut.screwtype}</span>
+    <td>$!{cut.screwtype}</td>
 #end
 #if($!{cut.axistype} and $!{cut.axistype} != 0)
-    <span>$!{cut.axistype}</span>
+    <td>$!{cut.axistype}</td>
 #end
 #if($!{cut.axisdetail} and $!{cut.axisdetail} != 0)
-    <span>$!{cut.axisdetail}</span>
+    <td>$!{cut.axisdetail}</td>
 #end
 #if($!{cut.thickness} and $!{cut.thickness} != 0)
-    <span>$!{cut.thickness}</span>
+    <td>$!{cut.thickness}</td>
 #end
 #if($!{cut.taper} and $!{cut.taper} != 0)
-    <span>$!{cut.taper}</span>
+    <td>$!{cut.taper}</td>
 #end
 #if($!{cut.maxslotdepth} and $!{cut.maxslotdepth} != 0)
-    <span>$!{cut.maxslotdepth}</span>
+    <td>$!{cut.maxslotdepth}</td>
 #end
 #if($!{cut.slotwidth} and $!{cut.slotwidth} != 0)
-    <span>$!{cut.slotwidth}</span>
+    <td>$!{cut.slotwidth}</td>
 #end
 #if($!{cut.pointdiameter} and $!{cut.pointdiameter} != 0)
-    <span>$!{cut.pointdiameter}</span>
+    <td>$!{cut.pointdiameter}</td>
 #end
 #if($!{cut.handledsize} and $!{cut.handledsize} != 0)
-    <span>$!{cut.handledsize}</span>
+    <td>$!{cut.handledsize}</td>
 #end
 #if($!{cut.screwsize} and $!{cut.screwsize} != 0)
-    <span>$!{cut.screwsize}</span>
+    <td>$!{cut.screwsize}</td>
 #end
 #if($!{cut.screwdistance} and $!{cut.screwdistance} != 0)
-    <span>$!{cut.screwdistance}</span>
+    <td>$!{cut.screwdistance}</td>
 #end
 #if($!{cut.accuracy} and $!{cut.accuracy} != 0)
-    <span>$!{cut.accuracy}</span>
+    <td>$!{cut.accuracy}</td>
 #end
 #if($!{cut.interfacesize} and $!{cut.interfacesize} != 0)
-    <span>$!{cut.interfacesize}</span>
+    <td>$!{cut.interfacesize}</td>
 #end
 #if($!{cut.maxbore} and $!{cut.maxbore} != 0)
-    <span>$!{cut.maxbore}</span>
+    <td>$!{cut.maxbore}</td>
 #end
 #if($!{cut.minbore} and $!{cut.minbore} != 0)
-    <span>$!{cut.minbore}</span>
+    <td>$!{cut.minbore}</td>
 #end
 #if($!{cut.necklength} and $!{cut.necklength} != 0)
-    <span>$!{cut.necklength}</span>
+    <td>$!{cut.necklength}</td>
 #end
     

@@ -26,7 +26,7 @@ public class CuttingToolEntity implements Serializable {
 	//
 	private int angle;
 	//
-	private double diameter;
+	private String diameter;
 	//
 	private String usage;
 	//
@@ -48,15 +48,15 @@ public class CuttingToolEntity implements Serializable {
 	//
 	private int edgeno;
 	//
-	private double edgelength;
+	private String edgelength;
 	//
-	private double totallength;
+	private String totallength;
 	//
-	private double screwangle;
+	private String screwangle;
 	//
 	private String coatingtype;
 	//
-	private double rangle;
+	private String rangle;
 	//
 	private int direction;
 	//
@@ -98,7 +98,7 @@ public class CuttingToolEntity implements Serializable {
 	
 	private double minbore;
 	
-	private double necklength;
+	private String necklength;
 	
 	//锥度
 	private double taper;
@@ -118,6 +118,8 @@ public class CuttingToolEntity implements Serializable {
 	private String provider;
 
 	private String samecolume;
+	
+	private String relativecollet;
 	
 	public int getId() {
 		return id;
@@ -191,11 +193,11 @@ public class CuttingToolEntity implements Serializable {
 		this.angle = angle;
 	}
 
-	public double getDiameter() {
+	public String getDiameter() {
 		return diameter;
 	}
 
-	public void setDiameter(double diameter) {
+	public void setDiameter(String diameter) {
 		this.diameter = diameter;
 	}
 
@@ -271,27 +273,27 @@ public class CuttingToolEntity implements Serializable {
 		this.edgeno = edgeno;
 	}
 
-	public double getEdgelength() {
+	public String getEdgelength() {
 		return edgelength;
 	}
 
-	public void setEdgelength(double edgelength) {
+	public void setEdgelength(String edgelength) {
 		this.edgelength = edgelength;
 	}
 
-	public double getTotallength() {
+	public String getTotallength() {
 		return totallength;
 	}
 
-	public void setTotallength(double totallength) {
+	public void setTotallength(String totallength) {
 		this.totallength = totallength;
 	}
 
-	public double getScrewangle() {
+	public String getScrewangle() {
 		return screwangle;
 	}
 
-	public void setScrewangle(double screwangle) {
+	public void setScrewangle(String screwangle) {
 		this.screwangle = screwangle;
 	}
 
@@ -303,11 +305,11 @@ public class CuttingToolEntity implements Serializable {
 		this.coatingtype = coatingtype;
 	}
 
-	public double getRangle() {
+	public String getRangle() {
 		return rangle;
 	}
 
-	public void setRangle(double rangle) {
+	public void setRangle(String rangle) {
 		this.rangle = rangle;
 	}
 
@@ -543,11 +545,11 @@ public class CuttingToolEntity implements Serializable {
 		this.minbore = minbore;
 	}
 
-	public double getNecklength() {
+	public String getNecklength() {
 		return necklength;
 	}
 
-	public void setNecklength(double necklength) {
+	public void setNecklength(String necklength) {
 		this.necklength = necklength;
 	}
 
@@ -559,5 +561,15 @@ public class CuttingToolEntity implements Serializable {
 	public void setSamecolume(String samecolume)
 	{
 		this.samecolume = samecolume;
+	}
+
+	public String getRelativecollet()
+	{
+		return relativecollet;
+	}
+
+	public void setRelativecollet(String relativecollet)
+	{
+		this.relativecollet = relativecollet;
 	}
 }

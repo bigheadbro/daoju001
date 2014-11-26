@@ -189,6 +189,25 @@ public class CommonController extends BaseController{
             e.printStackTrace();  
         }  
     }  
+	
+	@RequestMapping(value="/getProviderInfo")
+	public void getProviderInfo(final HttpServletRequest request,final HttpServletResponse response)
+	{
+		int userid = Integer.parseInt(request.getParameter("userid"));
+		StatisticsEntity st = new StatisticsEntity();
+		st.setType(2);
+		Account account = (Account) WebUtils.getSessionAttribute(request, "account");
+		if(account != null)
+		{
+			st.setInfo("["+account.getUserName()+","+account.getCompanyName()+","+account.getUserId()+"]查看" + String.valueOf(userid)+"的联系方式");
+		}
+		else
+		{
+			st.setInfo("[未登录用户]查看" + String.valueOf(userid)+"的联系方式");
+		}
+		commonService.addstatistics(st);
+	}
+	
 	@RequestMapping(value="/addvote")
 	public void addvote(final HttpServletRequest request,final HttpServletResponse response)
 	{

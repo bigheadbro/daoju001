@@ -1026,7 +1026,15 @@ public class CommonService {
 	
 	public List<CuttingToolEntity> getCategorySeries(String code)
 	{
-		return ctDAO.queryCuttingToolByCode(CuttingToolsConfiguration.prehandleCode(code));
+		if(CuttingToolsConfiguration.isLeaf(code))
+		{
+			return ctDAO.queryCuttingToolByCode(code, true);
+		}
+		else
+		{
+			return ctDAO.queryCuttingToolByCode(code, false);
+		}
+		
 	}
 	
 	public List<UserEntity> getProviders(String providers)

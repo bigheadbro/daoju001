@@ -25,7 +25,7 @@ public class StringUtil {
 	 */
 	public static boolean isEmpty(String str)
 	{
-		if(str == null || "".equals(str.trim()) || "0".equals(str.trim()))
+		if(str == null || "".equals(str.trim()) || "0".equals(str.trim()) || "0.0".equals(str.trim()))
 			return true;
 		return false;
 	}
@@ -58,6 +58,14 @@ public class StringUtil {
 		return true;
 	}
 	
+	public static String replaceBackspace(String str)
+	{
+		if(str == null)
+		{
+			return "";
+		}
+		return str.replace("\n", "<br/>");
+	}
 	/**
 	 * 判断一个字符串数组里面的字符串是否都为空 是:返回false, 否: 返回 true
 	 * @param args

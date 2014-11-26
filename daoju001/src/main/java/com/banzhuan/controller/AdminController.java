@@ -114,6 +114,10 @@ public class AdminController extends BaseController{
 		List<CuttingToolEntity> series = ctDAO.getAllSeries();
 		for(int i = 0; i < series.size(); i++)
 		{
+			if(StringUtil.isNotEqual(series.get(i).getSeriesname(), "VRX圆角"))
+			{
+				continue;
+			}
 			List<CuttingToolEntity> versions = ctDAO.getVersionsBySeries(series.get(i).getSeriesname()); 
 			HashSet<String> brand= new HashSet<String>();
 			HashSet<String> material= new HashSet<String>();
@@ -135,6 +139,7 @@ public class AdminController extends BaseController{
 			HashSet<String> screwsize= new HashSet<String>();
 			HashSet<String> screwdistance= new HashSet<String>();
 			HashSet<String> accuracy= new HashSet<String>();
+			HashSet<String> collet= new HashSet<String>();
 			
 			HashSet<Integer> ctcount= new HashSet<Integer>();
 			HashSet<Integer>angle= new HashSet<Integer>();
@@ -146,17 +151,17 @@ public class AdminController extends BaseController{
 			
 			HashSet<Double> usefullength= new HashSet<Double>();
 			HashSet<Double>pipesize= new HashSet<Double>();
-			HashSet<Double> diameter= new HashSet<Double>();
-			HashSet<Double> edgelength= new HashSet<Double>();
-			HashSet<Double> totallength= new HashSet<Double>();
-			HashSet<Double> screwangle= new HashSet<Double>();
-			HashSet<Double> rangle= new HashSet<Double>();
+			HashSet<String> diameter= new HashSet<String>();
+			HashSet<String> edgelength= new HashSet<String>();
+			HashSet<String> totallength= new HashSet<String>();
+			HashSet<String> screwangle= new HashSet<String>();
+			HashSet<String> rangle= new HashSet<String>();
 			HashSet<Double> minworkdiameter= new HashSet<Double>();
 			HashSet<Double> thickness= new HashSet<Double>();
 			HashSet<Double> maxslotdepth= new HashSet<Double>();
 			HashSet<Double> maxbore= new HashSet<Double>();
 			HashSet<Double> minbore= new HashSet<Double>();
-			HashSet<Double> necklength= new HashSet<Double>();
+			HashSet<String> necklength= new HashSet<String>();
 			HashSet<Double> taper= new HashSet<Double>();
 			HashSet<Double> slotwidth= new HashSet<Double>();
 			HashSet<Double> pointdiameter= new HashSet<Double>();
@@ -164,383 +169,225 @@ public class AdminController extends BaseController{
 			
 			for(int j = 0; j < versions.size(); j++)
 			{
-				if(StringUtil.isNotEmpty(versions.get(j).getBrand()))
-				{
-					brand.add(versions.get(j).getBrand());
-				}
-				if(StringUtil.isNotEmpty(versions.get(j).getMaterial()))
-				{
-					material.add(versions.get(j).getMaterial());
-				}
-				if(StringUtil.isNotEmpty(versions.get(j).getUsage()))
-				{
-					usage.add(versions.get(j).getUsage());
-				}
-				if(StringUtil.isNotEmpty(versions.get(j).getShank()))
-				{
-					shank.add(versions.get(j).getShank());
-				}
-				if(StringUtil.isNotEmpty(versions.get(j).getShanktype()))
-				{
-					 shanktype.add(versions.get(j).getShanktype());
-				}
-
-				if(StringUtil.isNotEmpty(versions.get(j).getShape()))
-				{
-					 shape.add(versions.get(j).getShape());
-				}
-
-				if(StringUtil.isNotEmpty(versions.get(j).getWorkingtool()))
-				{
-					 workingtool.add(versions.get(j).getWorkingtool());
-				}
-
-				if(StringUtil.isNotEmpty(versions.get(j).getCoatingtype()))
-				{
-					 coatingtype.add(versions.get(j).getCoatingtype());
-				}
-
-				if(StringUtil.isNotEmpty(versions.get(j).getDiameterratio()))
-				{
-					 diameterratio.add(versions.get(j).getDiameterratio());
-				}
-
-				if(StringUtil.isNotEmpty(versions.get(j).getSlotshape()))
-				{
-					 slotshape.add(versions.get(j).getSlotshape());
-				}
-
-				if(StringUtil.isNotEmpty(versions.get(j).getHandlenorm()))
-				{
-					 handlenorm.add(versions.get(j).getHandlenorm());
-				}
-
-				if(StringUtil.isNotEmpty(versions.get(j).getTaptype()))
-				{
-					 taptype.add(versions.get(j).getTaptype());
-				}
-
-				if(StringUtil.isNotEmpty(versions.get(j).getScrewtype()))
-				{
-					 screwtype.add(versions.get(j).getScrewtype());
-				}
-
-				if(StringUtil.isNotEmpty(versions.get(j).getAxistype()))
-				{
-					 axistype.add(versions.get(j).getAxistype());
-				}
-				if(StringUtil.isNotEmpty(versions.get(j).getAxisdetail()))
-				{
-					 axisdetail.add(versions.get(j).getAxisdetail());
-				}
-
-				if(StringUtil.isNotEmpty(versions.get(j).getInterfacesize()))
-				{
-					 interfacesize.add(versions.get(j).getInterfacesize());
-				}
-
-				if(StringUtil.isNotEmpty(versions.get(j).getHandledsize()))
-				{
-					 handledsize.add(versions.get(j).getHandledsize());
-				}
-
-				if(StringUtil.isNotEmpty(versions.get(j).getScrewsize()))
-				{
-					 screwsize.add(versions.get(j).getScrewsize());
-				}
-
-				if(StringUtil.isNotEmpty(versions.get(j).getScrewdistance()))
-				{
-					 screwdistance.add(versions.get(j).getScrewdistance());
-				}
-
-				if(StringUtil.isNotEmpty(versions.get(j).getAccuracy()))
-				{
-					 accuracy.add(versions.get(j).getAccuracy());
-				}
-				
-				if(versions.get(j).getCtcount() != 0)
-				{
-					ctcount.add(versions.get(j).getCtcount());
-				}
-				if(versions.get(j).getAngle() != 0)
-				{
-					angle.add(versions.get(j).getAngle());
-				}
-
-				if(versions.get(j).getBackangle() != 0)
-				{
-					backangle.add(versions.get(j).getBackangle());
-				}
-
-				if(versions.get(j).getEdgeno() != 0)
-				{
-					edgeno.add(versions.get(j).getEdgeno());
-				}
-				if(versions.get(j).getCujing() != 0)
-				{
-					cujing.add(versions.get(j).getCujing());
-				}
-				if(versions.get(j).getDirection() != 0)
-				{
-					direction.add(versions.get(j).getDirection());
-				}
-
-				if(versions.get(j).getInnercooling() != 0)
-				{
-					innercooling.add(versions.get(j).getInnercooling());
-				}
-			
-				if(versions.get(j).getUsefullength() != 0)
-				{
-					usefullength.add(versions.get(j).getUsefullength());
-				}
-
-				if(versions.get(j).getPipesize() != 0)
-				{
-					pipesize.add(versions.get(j).getPipesize());
-				}
-
-				if(versions.get(j).getDiameter() != 0)
-				{
-					diameter.add(versions.get(j).getDiameter());
-				}
-
-				if(versions.get(j).getEdgelength() != 0)
-				{
-					edgelength.add(versions.get(j).getEdgelength());
-				}
-
-				if(versions.get(j).getTotallength() != 0)
-				{
-					totallength.add(versions.get(j).getTotallength());
-				}
-
-				if(versions.get(j).getScrewangle() != 0)
-				{
-					screwangle.add(versions.get(j).getScrewangle());
-				}
-
-				if(versions.get(j).getRangle() != 0)
-				{
-					rangle.add(versions.get(j).getRangle());
-				}
-
-				if(versions.get(j).getMinworkdiameter() != 0)
-				{
-					minworkdiameter.add(versions.get(j).getMinworkdiameter());
-				}
-	
-				if(versions.get(j).getThickness() != 0)
-				{
-					thickness.add(versions.get(j).getThickness());
-				}
-
-				if(versions.get(j).getMaxslotdepth() != 0)
-				{
-					maxslotdepth.add(versions.get(j).getMaxslotdepth());
-				}
-
-				if(versions.get(j).getMaxbore() != 0)
-				{
-					maxbore.add(versions.get(j).getMaxbore());
-				}
-
-				if(versions.get(j).getMinbore() != 0)
-				{
-					minbore.add(versions.get(j).getMinbore());
-				}
-
-				if(versions.get(j).getNecklength() != 0)
-				{
-					necklength.add(versions.get(j).getNecklength());
-				}
-
-				if(versions.get(j).getTaper() != 0)
-				{
-					taper.add(versions.get(j).getTaper());
-				}
-
-				if(versions.get(j).getSlotwidth() != 0)
-				{
-					slotwidth.add(versions.get(j).getSlotwidth());
-				}
-
-				if(versions.get(j).getPointdiameter() != 0)
-				{
-					pointdiameter.add(versions.get(j).getPointdiameter());
-				}
+				brand.add(versions.get(j).getBrand());
+				material.add(versions.get(j).getMaterial());
+				usage.add(versions.get(j).getUsage());
+				shank.add(versions.get(j).getShank());
+				shanktype.add(versions.get(j).getShanktype());
+				shape.add(versions.get(j).getShape());
+				workingtool.add(versions.get(j).getWorkingtool());
+				coatingtype.add(versions.get(j).getCoatingtype());
+				diameterratio.add(versions.get(j).getDiameterratio());
+				slotshape.add(versions.get(j).getSlotshape());
+				handlenorm.add(versions.get(j).getHandlenorm());
+				taptype.add(versions.get(j).getTaptype());
+				screwtype.add(versions.get(j).getScrewtype());
+				axistype.add(versions.get(j).getAxistype());
+				axisdetail.add(versions.get(j).getAxisdetail());
+				interfacesize.add(versions.get(j).getInterfacesize());
+				handledsize.add(versions.get(j).getHandledsize());
+				screwsize.add(versions.get(j).getScrewsize());
+				screwdistance.add(versions.get(j).getScrewdistance());
+				accuracy.add(versions.get(j).getAccuracy());
+				collet.add(versions.get(j).getRelativecollet());
+				ctcount.add(versions.get(j).getCtcount());
+				angle.add(versions.get(j).getAngle());
+				backangle.add(versions.get(j).getBackangle());
+				edgeno.add(versions.get(j).getEdgeno());
+				cujing.add(versions.get(j).getCujing());
+				direction.add(versions.get(j).getDirection());
+				innercooling.add(versions.get(j).getInnercooling());
+				usefullength.add(versions.get(j).getUsefullength());
+				pipesize.add(versions.get(j).getPipesize());
+				diameter.add(versions.get(j).getDiameter());
+				edgelength.add(versions.get(j).getEdgelength());
+				totallength.add(versions.get(j).getTotallength());
+				screwangle.add(versions.get(j).getScrewangle());
+				rangle.add(versions.get(j).getRangle());
+				minworkdiameter.add(versions.get(j).getMinworkdiameter());
+				thickness.add(versions.get(j).getThickness());
+				maxslotdepth.add(versions.get(j).getMaxslotdepth());
+				maxbore.add(versions.get(j).getMaxbore());
+				minbore.add(versions.get(j).getMinbore());
+				necklength.add(versions.get(j).getNecklength());
+				taper.add(versions.get(j).getTaper());
+				slotwidth.add(versions.get(j).getSlotwidth());
+				pointdiameter.add(versions.get(j).getPointdiameter());
 
 			}
-			if(brand.size() > 0)
+			if(brand.size() == 1 && brand.toArray()[0] != null)
 			{
 				ret = "brand";
 			}
-			if(angle.size() > 0)
+			if(angle.size() == 1 && StringUtil.isNotEmpty(angle.toArray()[0].toString()))
 			{
 				ret += ",angle";
 			}
-			if(ctcount.size() > 0)
+			if(ctcount.size() == 1 && StringUtil.isNotEmpty(ctcount.toArray()[0].toString()))
 			{
 				ret += ",ctcount";
 			}
-			if(material.size() > 0)
+			if(material.size() == 1 && material.toArray()[0] != null)
 			{
 				ret += ",material";
 			}
-			if(diameter.size() > 0)
+			if(diameter.size() == 1 &&diameter.toArray()[0] != null)
 			{
 				ret += ",diameter";
 			}
-			if(usage.size() > 0)
+			if(usage.size() == 1 && usage.toArray()[0] != null)
 			{
 				ret += ",usage";
 			}
-			if(cujing.size() > 0)
+			if(cujing.size() == 1 && StringUtil.isNotEmpty(cujing.toArray()[0].toString()))
 			{
 				ret += ",cujing";
 			}
-			if(usefullength.size() > 0)
+			if(usefullength.size() == 1 && StringUtil.isNotEmpty(usefullength.toArray()[0].toString()))
 			{
 				ret += ",usefullength";
 			}
-			if(pipesize.size() > 0)
+			if(pipesize.size() == 1 && StringUtil.isNotEmpty(pipesize.toArray()[0].toString()))
 			{
 				ret += ",pipesize";
 			}
-			if(shank.size() > 0)
+			if(shank.size() == 1 && shank.toArray()[0] != null)
 			{
 				ret += ",shank";
 			}
-			if(shanktype.size() > 0)
+			if(shanktype.size() == 1 && shanktype.toArray()[0] != null)
 			{
 				ret += ",shanktype";
 			}
-			if(shape.size() > 0)
+			if(shape.size() == 1 && shape.toArray()[0] != null)
 			{
 				ret += ",shape";
 			}
-			if(backangle.size() > 0)
+			if(backangle.size() == 1 && StringUtil.isNotEmpty(backangle.toArray()[0].toString()))
 			{
 				ret += ",backangle";
 			}
-			if(workingtool.size() > 0)
+			if(workingtool.size() == 1 && workingtool.toArray()[0] != null)
 			{
 				ret += ",workingtool";
 			}
-			if(edgeno.size() > 0)
+			if(edgeno.size() == 1 && StringUtil.isNotEmpty(edgeno.toArray()[0].toString()))
 			{
 				ret += ",edgeno";
 			}
-			if(edgelength.size() > 0)
+			if(edgelength.size() == 1 && edgelength.toArray()[0] != null)
 			{
 				ret += ",edgelength";
 			}
-			if(totallength.size() > 0)
+			if(totallength.size() == 1 && totallength.toArray()[0] != null)
 			{
 				ret += ",totallength";
 			}
-			if(screwangle.size() > 0)
+			if(screwangle.size() == 1 && StringUtil.isNotEmpty(screwangle.toArray()[0].toString()))
 			{
 				ret += ",screwangle";
 			}
-			if(coatingtype.size() > 0)
+			if(coatingtype.size() == 1 && coatingtype.toArray()[0] != null)
 			{
 				ret += ",coatingtype";
 			}
-			if(rangle.size() > 0)
+			if(rangle.size() == 1 && rangle.toArray()[0] != null)
 			{
 				ret += ",rangle";
 			}
-			if(direction.size() > 0)
+			if(direction.size() == 1 && StringUtil.isNotEmpty(direction.toArray()[0].toString()))
 			{
 				ret += ",direction";
 			}
-			if(minworkdiameter.size() > 0)
+			if(minworkdiameter.size() == 1 && StringUtil.isNotEmpty(minworkdiameter.toArray()[0].toString()))
 			{
 				ret += ",minworkdiameter";
 			}
-			if(innercooling.size() > 0)
+			if(innercooling.size() == 1 && StringUtil.isNotEmpty(innercooling.toArray()[0].toString()))
 			{
 				ret += ",innercooling";
 			}
-			if(diameterratio.size() > 0)
+			if(diameterratio.size() == 1 && diameterratio.toArray()[0] != null)
 			{
 				ret += ",diameterratio";
 			}
-			if(slotshape.size() > 0)
+			if(slotshape.size() == 1 && slotshape.toArray()[0] != null)
 			{
 				ret += ",slotshape";
 			}
-			if(handlenorm.size() > 0)
+			if(handlenorm.size() == 1 && handlenorm.toArray()[0] != null)
 			{
 				ret += ",handlenorm";
 			}
-			if(taptype.size() > 0)
+			if(taptype.size() == 1 && taptype.toArray()[0] != null)
 			{
 				ret += ",taptype";
 			}
-			if(screwtype.size() > 0)
+			if(screwtype.size() == 1 && screwtype.toArray()[0] != null)
 			{
 				ret += ",screwtype";
 			}
-			if(axistype.size() > 0)
+			if(axistype.size() == 1 && axistype.toArray()[0] != null)
 			{
 				ret += ",axistype";
 			}
-			if(axisdetail.size() > 0)
+			if(axisdetail.size() == 1 && axisdetail.toArray()[0] != null)
 			{
 				ret += ",axisdetail";
 			}
-			if(thickness.size() > 0)
+			if(thickness.size() == 1 && StringUtil.isNotEmpty(thickness.toArray()[0].toString()))
 			{
 				ret += ",thickness";
 			}
-			if(maxslotdepth.size() > 0)
+			if(maxslotdepth.size() == 1 && StringUtil.isNotEmpty(maxslotdepth.toArray()[0].toString()))
 			{
 				ret += ",maxslotdepth";
 			}
-			if(taper.size() > 0)
+			if(taper.size() == 1 && StringUtil.isNotEmpty(taper.toArray()[0].toString()))
 			{
 				ret += ",taper";
 			}
-			if(slotwidth.size() > 0)
+			if(slotwidth.size() == 1 && StringUtil.isNotEmpty(slotwidth.toArray()[0].toString()))
 			{
 				ret += ",slotwidth";
 			}
-			if(pointdiameter.size() > 0)
+			if(pointdiameter.size() == 1 && StringUtil.isNotEmpty(pointdiameter.toArray()[0].toString()))
 			{
 				ret += ",pointdiameter";
 			}
-			if(handledsize.size() > 0)
+			if(handledsize.size() == 1 && handledsize.toArray()[0] != null)
 			{
 				ret += ",handledsize";
 			}
-			if(screwsize.size() > 0)
+			if(screwsize.size() == 1 && screwsize.toArray()[0] != null)
 			{
 				ret += ",screwsize";
 			}
-			if(screwdistance.size() > 0)
+			if(screwdistance.size() == 1 && screwdistance.toArray()[0] != null)
 			{
 				ret += ",screwdistance";
 			}
-			if(accuracy.size() > 0)
+			if(accuracy.size() == 1 && accuracy.toArray()[0] != null)
 			{
 				ret += ",accuracy";
 			}
-			if(interfacesize.size() > 0)
+			if(collet.size() == 1 && collet.toArray()[0] != null)
+			{
+				ret += ",relativecollet";
+			}
+			if(interfacesize.size() == 1 && interfacesize.toArray()[0] != null)
 			{
 				ret += ",interfacesize";
 			}
-			if(maxbore.size() > 0)
+			if(maxbore.size() == 1 && StringUtil.isNotEmpty(maxbore.toArray()[0].toString()))
 			{
 				ret += ",maxbore";
 			}
-			if(minbore.size() > 0)
+			if(minbore.size() == 1 && StringUtil.isNotEmpty(minbore.toArray()[0].toString()))
 			{
 				ret += ",minbore";
 			}
-			if(necklength.size() > 0)
+			if(necklength.size() == 1 && necklength.toArray()[0] != null)
 			{
 				ret += ",necklength";
 			}
@@ -575,7 +422,7 @@ public class AdminController extends BaseController{
                 File[] files = root.listFiles();
 				for (File file : files) {
 					if (file.getName().contains(sn)) {
-						tmp.cover = "/img/series/" + file.getName();
+						tmp.cover = "" + file.getName();
 						break;
 					}
 					else
@@ -594,26 +441,64 @@ public class AdminController extends BaseController{
 						}
 						else if (file.getName().contains("-2")) 
 						{
-							tmp.pic = "/img/sample/" + sn + "-1.jpg|"
-									+ "/img/sample/" + sn + "-2.jpg";
+							tmp.pic = "" + sn + "-1.jpg|"
+									+ "" + sn + "-2.jpg";
 							;
 						}
 						else if (file.getName().contains("-3")) 
 						{
-							tmp.pic = "/img/sample/" + sn + "-1.jpg|"
-									+ "/img/sample/" + sn + "-2.jpg|"
-									+ "/img/sample/" + sn + "-3.jpg";
+							tmp.pic = "" + sn + "-1.jpg|"
+									+ "" + sn + "-2.jpg|"
+									+ "" + sn + "-3.jpg";
 						}
 						else if (file.getName().contains("-4")) 
 						{
-							tmp.pic = "/img/sample/" + sn + "-1.jpg|"
-									+ "/img/sample/" + sn + "-2.jpg|"
-									+ "/img/sample/" + sn + "-3.jpg|"
-									+ "/img/sample/" + sn + "-4.jpg";
+							tmp.pic = "" + sn + "-1.jpg|"
+									+ "" + sn + "-2.jpg|"
+									+ "" + sn + "-3.jpg|"
+									+ "" + sn + "-4.jpg";
+						}
+						else if (file.getName().contains("-5")) 
+						{
+							tmp.pic = "" + sn + "-1.jpg|"
+									+ "" + sn + "-2.jpg|"
+									+ "" + sn + "-3.jpg|"
+									+ "" + sn + "-4.jpg|"
+									+ "" + sn + "-5.jpg";
+						}
+						else if (file.getName().contains("-6")) 
+						{
+							tmp.pic = "" + sn + "-1.jpg|"
+									+ "" + sn + "-2.jpg|"
+									+ "" + sn + "-3.jpg|"
+									+ "" + sn + "-4.jpg|"
+									+ "" + sn + "-5.jpg|"
+									+ "" + sn + "-6.jpg";
+						}
+						else if (file.getName().contains("-7")) 
+						{
+							tmp.pic = "" + sn + "-1.jpg|"
+									+ "" + sn + "-2.jpg|"
+									+ "" + sn + "-3.jpg|"
+									+ "" + sn + "-4.jpg|"
+									+ "" + sn + "-5.jpg|"
+									+ "" + sn + "-6.jpg|"
+									+ "" + sn + "-7.jpg";
+						}
+						else if (file.getName().contains("-8")) 
+						{
+							tmp.pic = "" + sn + "-1.jpg|"
+									+ "" + sn + "-2.jpg|"
+									+ "" + sn + "-3.jpg|"
+									+ "" + sn + "-4.jpg|"
+									+ "" + sn + "-5.jpg|"
+									+ "" + sn + "-6.jpg|"
+									+ "" + sn + "-7.jpg|"
+									+ "" + sn + "-8.jpg";
 						}
 						else
 						{
-							tmp.pic = "/img/sample/" + file.getName();
+							tmp.pic = "" + file.getName();
 						}
 					}
 				}         
@@ -622,7 +507,7 @@ public class AdminController extends BaseController{
             // 获得第一个工作表对象
             Sheet sheet= book.getSheet(0);
             
-            for(int j = 433; j < sheet.getRows(); j++)
+            for(int j = 1; j < sheet.getRows(); j++)
             {
             	CuttingToolEntity ct = new CuttingToolEntity();
             	String tmp = sheet.getCell(0, j).getContents();
@@ -664,7 +549,7 @@ public class AdminController extends BaseController{
             	tmp = sheet.getCell(7, j).getContents();
             	if(StringUtil.isNotEmpty(tmp))
             	{
-            		ct.setDiameter(Double.valueOf(tmp));
+            		ct.setDiameter(tmp);
             	}
             	tmp = sheet.getCell(8, j).getContents();
             	if(StringUtil.isNotEmpty(tmp))
@@ -720,17 +605,17 @@ public class AdminController extends BaseController{
             	tmp = sheet.getCell(18, j).getContents();
             	if(StringUtil.isNotEmpty(tmp))
             	{
-            		ct.setEdgelength(Double.valueOf(tmp));
+            		ct.setEdgelength(tmp);
             	}
             	tmp = sheet.getCell(19, j).getContents();
             	if(StringUtil.isNotEmpty(tmp))
             	{
-            		ct.setTotallength(Double.valueOf(tmp));
+            		ct.setTotallength(tmp);
             	}
             	tmp = sheet.getCell(20, j).getContents();
             	if(StringUtil.isNotEmpty(tmp))
             	{
-            		ct.setScrewangle(Double.valueOf(tmp));
+            		ct.setScrewangle(tmp);
             	}
             	tmp = sheet.getCell(21, j).getContents();
             	if(StringUtil.isNotEmpty(tmp))
@@ -740,7 +625,7 @@ public class AdminController extends BaseController{
             	tmp = sheet.getCell(22, j).getContents();
             	if(StringUtil.isNotEmpty(tmp))
             	{
-            		ct.setRangle(Double.valueOf(tmp));
+            		ct.setRangle(tmp);
             	}
             	tmp = sheet.getCell(23, j).getContents();
             	if(StringUtil.isNotEmpty(tmp))
@@ -800,7 +685,7 @@ public class AdminController extends BaseController{
             	tmp = sheet.getCell(34, j).getContents();
             	if(StringUtil.isNotEmpty(tmp))
             	{
-            		ct.setNecklength(Double.parseDouble(tmp));
+            		ct.setNecklength(tmp);
             	}
             	tmp = sheet.getCell(35, j).getContents();
             	if(StringUtil.isNotEmpty(tmp))

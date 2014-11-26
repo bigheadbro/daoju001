@@ -1,5 +1,7 @@
 #set($layout = "/layout/item_layout.vm")
 <link rel="stylesheet" href="/css/flexslider.css">
+<link rel="stylesheet" href="/css/flexigrid.pack.css">
+<script type="text/javascript" src="/js/flexigrid.pack.js"></script>
 <script type="text/javascript" src="/js/jquery.flexslider-min.js"></script>
 <script>
 $(function() {
@@ -24,6 +26,29 @@ $(function() {
 			$(".category-content").show();
 		}
 	});
+	$('.version-table').flexigrid();
+	$(".operation").click(function(){
+		if($(this).attr("show") == 1)
+		{
+			var userid = parseInt($(this).attr("userid"));
+    		$.ajax( {   
+    		    type : "POST",   
+    		    url : "/getProviderInfo", 
+    		    data : {
+    		      'userid' : userid,
+    		    }
+    		});   
+			$(this).parent().parent().children(".contactway").animate({height:"34px"});
+			$(this).attr("show",0).css("color","#0099cb").html("收起<em></em>");
+			$(this).children("em").css("background-position","0 -8px");
+		}
+		else
+		{
+			$(this).parent().parent().children(".contactway").animate({height:"0"});
+			$(this).attr("show",1).css("color","#7b7b7b").html("查看联系方式<em></em>");
+			$(this).children("em").css("background-position","0 0");
+		}
+	});
 });
 </script>
 <div class="main-content-wrap clearfix">
@@ -35,7 +60,7 @@ $(function() {
 			<div class="series-item clearfix" href="/detail/${ct.id}">
 				<div class="series-pic">
 					#if($stringUtil.isNotEmpty(${ct.cover}))
-						<img src="$!{ct.cover}" />
+						<img src="/img/series/$!{ct.cover}" />
 					#else
 						<img src="/img/series/seriespic.png" />
 					#end
@@ -44,7 +69,7 @@ $(function() {
 					<h3>$!{ct.seriesname}</h3>
 					<h4>$ctConfig.getSeriesParamSpan($ct,$!{ct.samecolume})</h4>
             		<h5>$!{ct.outline}</h5>
-					<p>$!{ct.info}</p>
+					<p>$stringUtil.replaceBackspace($!{ct.info})</p>
 				</div>
             </div>
 			<div class="provider">
@@ -55,7 +80,7 @@ $(function() {
     					<div class="name">${user.companyName}</div>
     					<div class="area"><span>地区</span>$stringUtil.getCityFromPca(${user.pca})</div>
     					<div class="contact"><span>联系人</span>${user.contactName}</div>
-    					<div class="operation">查看联系方式</div>
+    					<div class="operation" show=1 userid=${user.id}>查看联系方式<em></em></div>
 					</div>
 					<div class="contactway clearfix">
 						<div class="name">&nbsp;</div>
@@ -75,24 +100,28 @@ $(function() {
                     </li>
                 </ul>
         		<div class="version-content clearfix">
-        			<div class="content">
+					<table class="version-table">
         			#foreach($cut in $cts)
         				#if($velocityCount == 1)
-        					<div class="head">
+        					<thead>
+								<tr>
         						$ctConfig.getParamsHtml($cts)
-        					</div>
-        					<div class="content">
+								</tr>
+        					</thead>
+							<tbody>
+        					<tr>
         						#parse("/common/params.vm")
-        					</div>
+        					</tr>
         				#else
-        					<div class="content">
+        					<tr class="content">
         						#parse("/common/params.vm")
-        					</div>
+        					</tr>
         				#end
 					#end
-        			</div>
+							</tbody>
+					</table>
         		</div>
-        		<div class="category-content" style="width:700px;">
+        		<div class="category-content">
         			#if($!ctConfig.getCategoryPic($!{ct.pic}))
         			<div class="flexslider">
             			<ul class="slides">

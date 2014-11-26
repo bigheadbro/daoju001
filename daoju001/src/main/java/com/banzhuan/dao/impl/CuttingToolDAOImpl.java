@@ -42,9 +42,12 @@ public class CuttingToolDAOImpl extends SqlSessionDaoSupport implements CuttingT
 	}
 	
 	@Override
-	public List<CuttingToolEntity> queryCuttingToolByCode(String code)
+	public List<CuttingToolEntity> queryCuttingToolByCode(String code, boolean isLeaf)
 	{
-		return this.getSqlSession().selectList("queryCuttingToolByCode", code);
+		if(isLeaf)
+			return this.getSqlSession().selectList("queryCuttingToolByCode", code+"*");
+		else
+			return this.getSqlSession().selectList("queryCuttingToolByCode", code);
 	}
 	
 	@Override

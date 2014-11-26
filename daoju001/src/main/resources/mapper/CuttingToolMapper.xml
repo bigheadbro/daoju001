@@ -91,8 +91,10 @@
 		<id property="maxbore" column="maxbore" />
 		<id property="minbore" column="minbore" />
 		<id property="necklength" column="necklength" />
+		<id property="relativecollet" column="relativecollet" />
+		
 	</resultMap>
-
+	
 	<select id="queryCuttingToolByCode" parameterType="String" resultMap="CuttingToolResultMap">
 		SELECT * from t_cuttingtool where match(code) against(#{code} in boolean mode) group by seriesname
 	</select>
@@ -102,7 +104,7 @@
 	</select>
 	
 	<select id="getVersionsBySeries" parameterType="String" resultMap="CuttingToolResultMap">
-		SELECT * from t_cuttingtool where match(seriesname) against(#{sn} in boolean mode)
+		SELECT * from t_cuttingtool where seriesname=#{sn}
 	</select>
 	
 	<select id="searchCuttingTool" resultMap="CuttingToolResultMap" statementType="CALLABLE">
@@ -184,7 +186,8 @@
 		,interfacesize
 		,maxbore
 		,minbore
-		,necklength)
+		,necklength
+		,relativecollet)
 		values
 		(
 		#{ishot}
@@ -239,6 +242,7 @@
 		,#{maxbore}
 		,#{minbore}
 		,#{necklength}
+		,#{relativecollet}
 		)
 	</insert>
 </mapper>

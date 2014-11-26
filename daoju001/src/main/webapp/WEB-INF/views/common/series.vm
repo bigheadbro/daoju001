@@ -12,7 +12,7 @@
             <a class="series-item clearfix" href="/detail/${ct.id}">
 				<div class="series-pic">
 					#if($stringUtil.isNotEmpty(${ct.cover}))
-						<img src="$!{ct.cover}" />
+						<img src="/img/series/$!{ct.cover}" />
 					#else
 						<img src="/img/series/seriespic.png" />
 					#end

@@ -1,4 +1,4 @@
-#set($layout = "/layout/index_layout.vm")
+#set($layout = "/layout/item_layout.vm")
 <script type="text/javascript" src="/js/azlist.js"></script>
 <div class="main-content-container clearfix">
     <div class="main-list-container width900 ml15">

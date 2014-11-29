@@ -24,11 +24,22 @@ public interface CuttingToolDAO {
 
 	public List<CuttingToolEntity> getAllItems();
 	
-	public List<CuttingToolEntity> queryCuttingToolByCode(String code, boolean isLeaf);
+	public List<CuttingToolEntity> querySeriesByCode(String code, boolean isLeaf);
 	
 	public List<CuttingToolEntity> getVersionsBySeries(String sn);
 	
 	public List<CuttingToolEntity> getAllSeries();
 	
 	public int updateCuttingToolById(CuttingToolEntity ct);
+	
+	public int getBrandCountByCode(String code);
+	
+	public int getSeriesnameCountByCode(String code);
+	
+	public List<CuttingToolEntity> queryCuttingToolByCode(String code);
+	
+	public List<CuttingToolEntity> getSeriesByParam(CuttingToolEntity ct);
+	
+	public List<CuttingToolEntity> queryCuttingToolByCt(CuttingToolEntity ct);
+	
 }

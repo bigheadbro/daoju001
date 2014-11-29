@@ -2,7 +2,10 @@ package com.banzhuan.util;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -50,6 +53,7 @@ public class CuttingToolsConfiguration
 		level2Map.put("0204", "锥形铣刀");
 		level2Map.put("0205", "其他铣刀");
 		level2Map.put("0301", "车刀杆");
+		level2Map.put("0302", "车刀片");
 		level2Map.put("0401", "整体钻头");
 		level2Map.put("0402", "机夹式钻头");
 		level2Map.put("0403", "铲钻");
@@ -103,6 +107,7 @@ public class CuttingToolsConfiguration
 		level3Map.put("050102", "液压刀柄");
 		level3Map.put("050103", "冷压刀柄");
 		level3Map.put("050104", "ER刀柄");
+		level3Map.put("050105", "蜗杆刀柄");
 		level3Map.put("060101", "整体螺纹铣刀");
 		level3Map.put("060102", "螺纹铣刀杆");
 		level3Map.put("060103", "螺纹铣刀片");
@@ -122,9 +127,9 @@ public class CuttingToolsConfiguration
 		level3Map.put("030101", "外圆车刀杆");
 		level3Map.put("030102", "内圆车刀杆");
 		level3Map.put("030103", "切槽/切断刀杆");
-		level3Map.put("030104", "普通车刀片");
-		level3Map.put("030105", "精磨车刀片");
-		level3Map.put("030106", "切槽/切断刀片");
+		level3Map.put("030201", "普通车刀片");
+		level3Map.put("030202", "精磨车刀片");
+		level3Map.put("030203", "切槽/切断刀片");
 		level3Map.put("060601", "手用丝锥");
 		level3Map.put("060602", "挤压丝锥");
 		level3Map.put("060603", "先端丝锥");
@@ -154,9 +159,11 @@ public class CuttingToolsConfiguration
 		codeMap.put("22", "030101");
 		codeMap.put("23", "030102");
 		codeMap.put("24", "030103");
-		codeMap.put("25", "030104");
-		codeMap.put("26", "030105");
-		codeMap.put("27", "030106");
+		
+		codeMap.put("25", "030201");
+		codeMap.put("26", "030202");
+		codeMap.put("27", "030203");
+		
 		codeMap.put("28", "040101");
 		codeMap.put("29", "040102");
 		codeMap.put("30", "040201");
@@ -171,21 +178,23 @@ public class CuttingToolsConfiguration
 		codeMap.put("39", "050102");
 		codeMap.put("40", "050103");
 		codeMap.put("41", "050104");
-		codeMap.put("42", "050400");
-		codeMap.put("43", "050600");
-		codeMap.put("45", "060101");
-		codeMap.put("46", "060102");
-		codeMap.put("47", "060103");
-		codeMap.put("48", "060104");
-		codeMap.put("49", "060105");
-		codeMap.put("50", "060601");
-		codeMap.put("51", "060602");
-		codeMap.put("52", "060603");
-		codeMap.put("53", "060604");
-		codeMap.put("54", "060700");
-		codeMap.put("55", "990100");
-		codeMap.put("56", "990200");
-		codeMap.put("57", "990300");
+		codeMap.put("42", "050105");
+		codeMap.put("43", "050300");
+		codeMap.put("44", "050400");
+		codeMap.put("45", "050600");
+		codeMap.put("46", "060101");
+		codeMap.put("47", "060102");
+		codeMap.put("48", "060103");
+		codeMap.put("49", "060104");
+		codeMap.put("50", "060105");
+		codeMap.put("51", "060601");
+		codeMap.put("52", "060602");
+		codeMap.put("53", "060603");
+		codeMap.put("54", "060604");
+		codeMap.put("55", "060700");
+		codeMap.put("56", "990100");
+		codeMap.put("57", "990200");
+		codeMap.put("58", "990300");
 
 	}
 
@@ -443,6 +452,22 @@ public class CuttingToolsConfiguration
 			{
 				ret += "<th>对应筒夹</th>";
 			}
+			if (cts.get(i).getHeight() != 0 && !ret.contains("<th>高度</th>"))
+			{
+				ret += "<th>高度</th>";
+			}
+			if (cts.get(i).getWidth() != 0 && !ret.contains("<th>宽度</th>"))
+			{
+				ret += "<th>宽度</th>";
+			}
+			if (StringUtil.isNotEmpty(cts.get(i).getGrooverange()) && !ret.contains("<th>切槽范围</th>"))
+			{
+				ret += "<th>切槽范围</th>";
+			}
+			if (StringUtil.isNotEmpty(cts.get(i).getDrillrange()) && !ret.contains("<th>钻孔范围</th>"))
+			{
+				ret += "<th>钻孔范围</th>";
+			}
 		}
 		return ret;
 	}
@@ -470,11 +495,11 @@ public class CuttingToolsConfiguration
 		{
 			if(ct.getCujing() == 2)
 			{
-				tmp += "<span>粗加工用</span>";
+				tmp += "<span>精加工用</span>";
 			}
 			else if(ct.getCujing() == 3)
 			{
-				tmp += "<span>精加工用</span>";
+				tmp += "<span>粗加工用</span>";
 			}
 			else
 			{
@@ -608,7 +633,7 @@ public class CuttingToolsConfiguration
 		}
 		if (ret.contains("innercooling"))
 		{
-			if(ct.getInnercooling() == 2)
+			if(ct.getInnercooling() == 1)
 			{
 				tmp += "<span>内冷</span>";
 			}
@@ -693,7 +718,233 @@ public class CuttingToolsConfiguration
 		{
 			tmp += "<span>"+ct.getNecklength()+"</span>";
 		}
+		if (ret.contains("<span>height</span>"))
+		{
+			tmp += "<span>"+ct.getHeight()+"</span>";
+		}
+		if (ret.contains("<span>宽度</span>"))
+		{
+			tmp += "<span>"+ct.getWidth()+"</span>";
+		}
+		if (ret.contains("<span>切槽范围</span>"))
+		{
+			tmp += "<span>"+ct.getGrooverange()+"</span>";
+		}
+		if (ret.contains("<span>钻孔范围</span>"))
+		{
+			tmp += "<span>"+ct.getDrillrange()+"</span>";
+		}
 		return tmp;
+	}
+	
+	public static String formatDirection(String direction)
+	{
+		
+		if(StringUtil.isEqual(direction, "左手"))
+		{
+			return "2";
+		}
+		else if(StringUtil.isEqual(direction, "右手"))
+		{
+			return "3";
+		}
+		else if(StringUtil.isEqual(direction, "通用槽"))
+		{
+			return "1";
+		}
+		else
+		{
+			return "0";
+		}
+	}
+	
+	public static List<String> convertSetToList(HashSet<String> param)
+	{
+		Iterator<String> iter = param.iterator();
+		List<String> list = new ArrayList<String>();
+		while(iter.hasNext())
+		{
+			String str = iter.next();
+			if(StringUtil.isNotEmpty(str))
+				list.add(str);
+		}
+		return list;
+	}
+	
+	public static List<String> mergeList(HashSet<String> param)
+	{
+		List<List<String>> list = CuttingToolsConfiguration.sortSize(param);
+		List<String> list1 = list.get(0);
+		List<String> list2 = list.get(1);
+		list1.addAll(list2);
+		return list1;
+	}
+	
+	//公制英寸分离，返回两种结果
+	public static List<List<String>> sortSize(HashSet<String> list)
+	{
+		List<String> list1 = new ArrayList<String>();  
+		List<String> list2 = new ArrayList<String>();  
+		List<String> list3 = new ArrayList<String>();  
+		Map<String, Double> map1 = new HashMap<String, Double>();
+		Map<String, Double> map2 = new HashMap<String, Double>();
+        for(final String value : list){  
+        	if(StringUtil.isEmpty(value))
+        	{
+        		continue;
+        	}
+        	if(StringUtil.isContansLetter(value))
+        	{
+        		list3.add(value);
+        		continue;
+        	}
+            if(!value.contains("\""))//不是英制
+            	map1.put(value, Double.valueOf(value));
+            else//英制
+            {
+            	double big = 0;
+            	double small = 0;
+            	String size = value.replace("\"", "");
+            	if(size.contains("."))
+            	{
+            		map2.put(value,Double.valueOf(size));
+            		continue;
+            	}
+            	if(size.contains("-"))
+            	{
+            		big = Double.valueOf(size.split("-")[0]);
+            		double fenmu = Double.valueOf(size.split("-")[1].split("/")[0]);
+            		double fenzi = Double.valueOf(size.split("-")[1].split("/")[1]);
+            		small = fenmu/fenzi;
+            		map2.put(value, big+small);
+            		continue;
+            	}
+            	if(size.contains("/"))
+            	{
+            		double fenmu = Double.valueOf(size.split("/")[0]);
+            		double fenzi = Double.valueOf(size.split("/")[1]);
+            		map2.put(value, fenmu/fenzi);
+            	}
+            }
+        }  
+        List<Map.Entry<String, Double>> infoIds1 =
+        	    new ArrayList<Map.Entry<String, Double>>(map1.entrySet());
+        List<Map.Entry<String, Double>> infoIds2 =
+        	    new ArrayList<Map.Entry<String, Double>>(map2.entrySet());
+        Collections.sort(infoIds1, new Comparator<Map.Entry<String, Double>>() {   
+            public int compare(Map.Entry<String, Double> o1, Map.Entry<String, Double> o2) {      
+                return (o1.getValue()-o2.getValue() > 0)?1:-1;
+            }
+        }); 
+        Collections.sort(infoIds2, new Comparator<Map.Entry<String, Double>>() {   
+            public int compare(Map.Entry<String, Double> o1, Map.Entry<String, Double> o2) {      
+                return (o1.getValue()-o2.getValue() > 0)?1:-1;
+            }
+        }); 
+        List<List<String>> ret = new ArrayList<List<String>>();
+        for (int i = 0; i < infoIds1.size(); i++) 
+       	{
+        	list1.add(infoIds1.get(i).getKey());
+       	}
+        for (int i = 0; i < infoIds2.size(); i++) 
+       	{
+        	list2.add(infoIds2.get(i).getKey());
+       	}
+        ret.add(list1);
+        ret.add(list2);
+        ret.add(list3);
+        return ret;
+	}
+	
+	public static List<String> splitWorkingtoolOrUsage(HashSet<String> set)
+	{
+		HashSet<String> list = new HashSet<String>();
+		List<String> ret = new ArrayList<String>();
+		for(final String value : set){  
+			if(StringUtil.isEmpty(value))
+				continue;
+			String[] tmp = value.contains("/")?value.split("/"):value.split(";");
+			for(int i = 0;i<tmp.length;i++)
+				list.add(tmp[i]);
+			
+		}
+		for(final String value : list){  
+			ret.add(value);
+		}
+		return ret;
+	}
+	
+	public static List<String> sortIntegerList(HashSet<Integer> param)
+	{
+		List<Integer> list = new ArrayList<Integer>();
+		for(final Integer value : param){  
+        	if(value != 0)
+        		list.add(value);  
+        }  
+        Collections.sort(list);  
+        List<String> ret = new ArrayList<String>();  
+        for(final Integer value : list){  
+            ret.add(String.valueOf(value));  
+        }  
+        return ret;
+	}
+	
+	public static List<String> sortDoubleList(HashSet<Double> param)
+	{
+		List<Double> list = new ArrayList<Double>();
+		for(final Double value : param){  
+        	if(value != 0)
+        		list.add(value);  
+        }  
+        Collections.sort(list);  
+        List<String> ret = new ArrayList<String>();  
+        for(final Double value : list){  
+            ret.add(String.valueOf(value));  
+        }  
+        return ret;
+	}
+	
+	public static String formatCujing(String direction)
+	{
+		
+		if(StringUtil.isEqual(direction, "粗加工"))
+		{
+			return "3";
+		}
+		else if(StringUtil.isEqual(direction, "粗加工"))
+		{
+			return "2";
+		}
+		else if(StringUtil.isEqual(direction, "一般加工"))
+		{
+			return "1";
+		}
+		else
+		{
+			return "0";
+		}
+	}
+	
+	
+	public static String formatCooling(String cooling)
+	{
+		
+		if(StringUtil.isEqual(cooling, "内冷"))
+		{
+			return "2";
+		}
+		else if(StringUtil.isEqual(cooling, "外冷"))
+		{
+			return "3";
+		}
+		else if(StringUtil.isEqual(cooling, "一般"))
+		{
+			return "1";
+		}
+		else
+		{
+			return "0";
+		}
 	}
 	
 	public static String getCategoryPic(String pic)
@@ -825,16 +1076,22 @@ public class CuttingToolsConfiguration
 
 	public static String getType(String code)
 	{
-		String ret = level1Map.get(code.substring(0, 2));
-		if (StringUtil.isNotEmpty(level2Map.get(code.substring(0, 4))))
+		if(code == null)
 		{
-			ret += " -> " + level2Map.get(code.substring(0, 4));
-			if (StringUtil.isNotEmpty(level3Map.get(code.substring(0, 6))))
-			{
-				ret += " -> " + level3Map.get(code.substring(0, 6));
-			}
+			return "";
 		}
-		return ret;
+		if(StringUtil.isEqual(code.substring(2, 6), "0000"))
+		{
+			return level1Map.get(code.substring(0, 2));
+		}
+		else if(StringUtil.isEqual(code.substring(4, 6), "00"))
+		{
+			return level2Map.get(code.substring(0, 4));
+		}
+		else
+		{
+			return level3Map.get(code);
+		}
 	}
 
 	public static void sortProductCode()

@@ -434,5 +434,38 @@ public class JsonUtil {
             out.close();  
         }  
 	}
+	
+	public static void sendSeriesList(HttpServletResponse response, List<CuttingToolEntity> list, Map<String,List<String>> map)
+	{
+		JSONObject object = new JSONObject();  
+		String str = "";
+		for(int i = 0;i < list.size();i++)
+		{
+			str += "<a class=\"series-item clearfix\" href=\"/detail/"+list.get(i).getId()+"\">"
+					+"<div class=\"series-pic\">"
+					+"<img src=\"/img/series/"+list.get(i).getCover()+"\" />"
+					+"</div>"
+					+"<div class=\"series-params\">"
+					+"<h3>"+list.get(i).getSeriesname()+"</h3>"
+					+"<h4>"+CuttingToolsConfiguration.getSeriesParamSpan(list.get(i), list.get(i).getSamecolume())+"</h4>"
+					+"<p>"+list.get(i).getOutline()+"</p>"
+					+"</div>"
+					+"</a>";
+		}
+        response.setContentType("text/Xml;charset=gbk");  
+        object.element("cts", str);
+        object.element("map",map);
+        PrintWriter out = null;  
+        try {  
+            out = response.getWriter();  
+            out.println(object.toString());  
+        }  
+        catch (IOException ex1) {  
+            ex1.printStackTrace();  
+        }  
+        finally {  
+            out.close();  
+        }  
+	}
 
 }

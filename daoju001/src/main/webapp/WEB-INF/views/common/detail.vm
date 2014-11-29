@@ -62,7 +62,7 @@ $(function() {
 					#if($stringUtil.isNotEmpty(${ct.cover}))
 						<img src="/img/series/$!{ct.cover}" />
 					#else
-						<img src="/img/series/seriespic.png" />
+						<img src="/img/series/seriespic.jpg" />
 					#end
 				</div>
 				<div class="series-params">
@@ -74,20 +74,30 @@ $(function() {
             </div>
 			<div class="provider">
 				<h1>供应商</h1>
-				#foreach($user in $users)
-				<div class="provider-item clearfix">
-					<div class="clearfix">
-    					<div class="name">${user.companyName}</div>
-    					<div class="area"><span>地区</span>$stringUtil.getCityFromPca(${user.pca})</div>
-    					<div class="contact"><span>联系人</span>${user.contactName}</div>
-    					<div class="operation" show=1 userid=${user.id}>查看联系方式<em></em></div>
-					</div>
-					<div class="contactway clearfix">
-						<div class="name">&nbsp;</div>
-    					<div class="phone"><span>手机</span>${user.contactPhone}</div>
-    					<div class="qq"><span>QQ</span>${user.contactQq}</div>
-					</div>
-				</div>
+				#if($users.size()==0)
+					暂无供应商
+				#else
+    				#foreach($user in $users)
+    				<div class="provider-item clearfix">
+    					<div class="clearfix">
+        					<div class="name">${user.companyName}</div>
+        					<div class="area"><span>地区</span>$stringUtil.getCityFromPca(${user.pca})</div>
+        					<div class="contact"><span>联系人</span>
+    							#if($stringUtil.isEmpty(${user.contactName}))
+    								未填写
+    							#else
+    								${user.contactName}
+    							#end
+    						</div>
+        					<div class="operation" show=1 userid=${user.id}>查看联系方式<em></em></div>
+    					</div>
+    					<div class="contactway clearfix">
+    						<div class="name">&nbsp;</div>
+        					<div class="phone"><span>手机</span>${user.contactPhone}</div>
+        					<div class="qq"><span>QQ</span>${user.contactQq}</div>
+    					</div>
+    				</div>
+    				#end
 				#end
 			</div>
 			<div class="series-content">
@@ -109,6 +119,7 @@ $(function() {
 								</tr>
         					</thead>
 							<tbody>
+							#set($param = $ctConfig.getParamsHtml($cts))
         					<tr>
         						#parse("/common/params.vm")
         					</tr>

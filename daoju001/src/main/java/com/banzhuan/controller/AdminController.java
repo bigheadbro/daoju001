@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -106,15 +107,15 @@ public class AdminController extends BaseController{
 	@Autowired
 	@Qualifier("ctDAO")
 	private CuttingToolDAO ctDAO;
-	
-	@RequestMapping(value="/generateSameColume")
-	public ModelAndView generateSameColume(final HttpServletRequest request, final HttpServletResponse response)
+
+	@RequestMapping(value="/generateSameColume/{id}")
+	public ModelAndView generateSameColume(final HttpServletRequest request, final HttpServletResponse response, @PathVariable String id)
 	{
 		ModelAndView mv = new ModelAndView("/admin/test");
 		List<CuttingToolEntity> series = ctDAO.getAllSeries();
 		for(int i = 0; i < series.size(); i++)
 		{
-			if(StringUtil.isNotEqual(series.get(i).getSeriesname(), "VRX圆角"))
+			if(StringUtil.isNotEqual(series.get(i).getBrand(),id))
 			{
 				continue;
 			}
@@ -150,7 +151,7 @@ public class AdminController extends BaseController{
 			HashSet<Integer>innercooling= new HashSet<Integer>();
 			
 			HashSet<Double> usefullength= new HashSet<Double>();
-			HashSet<Double>pipesize= new HashSet<Double>();
+			HashSet<Double> pipesize= new HashSet<Double>();
 			HashSet<String> diameter= new HashSet<String>();
 			HashSet<String> edgelength= new HashSet<String>();
 			HashSet<String> totallength= new HashSet<String>();
@@ -165,6 +166,10 @@ public class AdminController extends BaseController{
 			HashSet<Double> taper= new HashSet<Double>();
 			HashSet<Double> slotwidth= new HashSet<Double>();
 			HashSet<Double> pointdiameter= new HashSet<Double>();
+			HashSet<Double> width= new HashSet<Double>();
+			HashSet<Double> height= new HashSet<Double>();
+			HashSet<String> grooverange= new HashSet<String>();
+			HashSet<String> drillrange= new HashSet<String>();
 			String ret = "";
 			
 			for(int j = 0; j < versions.size(); j++)
@@ -213,7 +218,10 @@ public class AdminController extends BaseController{
 				taper.add(versions.get(j).getTaper());
 				slotwidth.add(versions.get(j).getSlotwidth());
 				pointdiameter.add(versions.get(j).getPointdiameter());
-
+				width.add(versions.get(j).getWidth());
+				height.add(versions.get(j).getHeight());
+				grooverange.add(versions.get(j).getGrooverange());
+				drillrange.add(versions.get(j).getDrillrange());
 			}
 			if(brand.size() == 1 && brand.toArray()[0] != null)
 			{
@@ -283,7 +291,7 @@ public class AdminController extends BaseController{
 			{
 				ret += ",totallength";
 			}
-			if(screwangle.size() == 1 && StringUtil.isNotEmpty(screwangle.toArray()[0].toString()))
+			if(screwangle.size() == 1 && screwangle.toArray()[0] != null)
 			{
 				ret += ",screwangle";
 			}
@@ -391,6 +399,22 @@ public class AdminController extends BaseController{
 			{
 				ret += ",necklength";
 			}
+			if(width.size() == 1 && StringUtil.isNotEmpty(width.toArray()[0].toString()))
+			{
+				ret += ",width";
+			}
+			if(height.size() == 1 && StringUtil.isNotEmpty(height.toArray()[0].toString()))
+			{
+				ret += ",height";
+			}
+			if(grooverange.size() == 1 && grooverange.toArray()[0] != null)
+			{
+				ret += ",grooverange";
+			}
+			if(drillrange.size() == 1 && drillrange.toArray()[0] != null)
+			{
+				ret += ",drillrange";
+			}
 			CuttingToolEntity update = new CuttingToolEntity();
 			update.setSeriesname(series.get(i).getSeriesname());
 			update.setSamecolume(ret);
@@ -403,20 +427,20 @@ public class AdminController extends BaseController{
 	{
 		ModelAndView mv = new ModelAndView("/admin/test");
 		try {
-            Workbook book = Workbook.getWorkbook(new File("D:/data/products.xls"));
+            Workbook book = Workbook.getWorkbook(new File("D:/data/z.xls"));
             Sheet sheet2= book.getSheet(1);
             Map<String, TempEntity> seriesMap = new HashMap<String, TempEntity>();
             for(int j = 2; j < sheet2.getRows(); j++)
             {
-            	String sn = sheet2.getCell(1, j).getContents();
+            	String sn = sheet2.getCell(1, j).getContents().trim().replace("；", ";").replace("（", "(").replace("）", ")");
             	if(StringUtil.isEmpty(sn))
             	{
             		break;
             	}
             	TempEntity tmp = new TempEntity();
-            	tmp.outline = (sheet2.getCell(2, j)!=null)?sheet2.getCell(2, j).getContents():""; 
-            	tmp.info = (sheet2.getCell(3, j)!=null)?sheet2.getCell(3, j).getContents():""; 
-            	//tmp.suitcase = (sheet2.getCell(4, j)==null)?sheet2.getCell(4, j).getContents():""; 
+            	tmp.outline = (sheet2.getCell(2, j)!=null)?sheet2.getCell(2, j).getContents().trim().replace("；", ";").replace("（", "(").replace("）", ")"):""; 
+            	tmp.info = (sheet2.getCell(3, j)!=null)?sheet2.getCell(3, j).getContents().trim().replace("；", ";").replace("（", "(").replace("）", ")"):""; 
+            	//tmp.suitcase = (sheet2.getCell(4, j)==null)?sheet2.getCell(4, j).getContents().trim().replace("；", ";").replace("（", "(").replace("）", ")"):""; 
             	//tmp.cover = "/img/series/" + sn + ".png";
             	File root = new File("D:/workspace/daoju001/daoju001/src/main/webapp/img/series");
                 File[] files = root.listFiles();
@@ -504,243 +528,290 @@ public class AdminController extends BaseController{
 				}         
             	seriesMap.put(sn, tmp);
             }
+            
+           
+            if(book.getNumberOfSheets()==3)
+            {
+            	 Sheet sheet3= book.getSheet(2);
+	            for(int j = 1; j < sheet3.getRows(); j++)
+	            {
+	            	String sn = sheet3.getCell(0, j).getContents().trim().replace("；", ";").replace("（", "(").replace("）", ")");
+	            	Iterator it = seriesMap.entrySet().iterator();  
+            	    while (it.hasNext()) {  
+            	  
+            	        Map.Entry entry = (Map.Entry) it.next();  
+            	  
+            	        String key = entry.getKey().toString();
+            	        if(StringUtil.isEqual(key, sn))
+            	        {
+            	        	seriesMap.get(sn).videolink = sheet3.getCell(1, j).getContents().trim().replace("；", ";").replace("（", "(").replace("）", ")");
+            	        	seriesMap.get(sn).videoinfo = sheet3.getCell(2, j).getContents().trim().replace("；", ";").replace("（", "(").replace("）", ")");
+            	        }
+            	    }
+	            }
+            }
             // 获得第一个工作表对象
             Sheet sheet= book.getSheet(0);
             
             for(int j = 1; j < sheet.getRows(); j++)
             {
             	CuttingToolEntity ct = new CuttingToolEntity();
-            	String tmp = sheet.getCell(0, j).getContents();
-            	tmp = sheet.getCell(0, j).getContents();
+            	String tmp = sheet.getCell(0, j).getContents().trim().replace("；", ";").replace("（", "(").replace("）", ")");
+            	tmp = sheet.getCell(0, j).getContents().trim().replace("；", ";").replace("（", "(").replace("）", ")");
             	if(StringUtil.isNotEmpty(tmp))
             	{
             		ct.setCode(CuttingToolsConfiguration.getCodeValue(tmp));
             	}
-            	tmp = sheet.getCell(1, j).getContents();
+            	tmp = sheet.getCell(1, j).getContents().trim().replace("；", ";").replace("（", "(").replace("）", ")");
             	if(StringUtil.isNotEmpty(tmp))
             	{
             		ct.setBrand(tmp);
             	}
-            	tmp = sheet.getCell(2, j).getContents();
+            	tmp = sheet.getCell(2, j).getContents().trim().replace("；", ";").replace("（", "(").replace("）", ")");
             	if(StringUtil.isNotEmpty(tmp))
             	{
             		ct.setSeriesname(tmp);
             	}
-            	tmp = sheet.getCell(3, j).getContents();
+            	tmp = sheet.getCell(3, j).getContents().trim().replace("；", ";").replace("（", "(").replace("）", ")");
             	if(StringUtil.isNotEmpty(tmp))
             	{
             		ct.setVersion(tmp);
             	}
-            	tmp = sheet.getCell(4, j).getContents();
+            	tmp = sheet.getCell(4, j).getContents().trim().replace("；", ";").replace("（", "(").replace("）", ")");
             	if(StringUtil.isNotEmpty(tmp))
             	{
             		ct.setMaterial(tmp);
             	}
-            	tmp = sheet.getCell(5, j).getContents();
+            	tmp = sheet.getCell(5, j).getContents().trim().replace("；", ";").replace("（", "(").replace("）", ")");
             	if(StringUtil.isNotEmpty(tmp))
             	{
             		ct.setAngle(Integer.valueOf(tmp));
             	}
-            	tmp = sheet.getCell(6, j).getContents();
+            	tmp = sheet.getCell(6, j).getContents().trim().replace("；", ";").replace("（", "(").replace("）", ")");
             	if(StringUtil.isNotEmpty(tmp))
             	{
             		ct.setCtcount(Integer.valueOf(tmp));
             	}
-            	tmp = sheet.getCell(7, j).getContents();
+            	tmp = sheet.getCell(7, j).getContents().trim().replace("；", ";").replace("（", "(").replace("）", ")");
             	if(StringUtil.isNotEmpty(tmp))
             	{
             		ct.setDiameter(tmp);
             	}
-            	tmp = sheet.getCell(8, j).getContents();
+            	tmp = sheet.getCell(8, j).getContents().trim().replace("；", ";").replace("（", "(").replace("）", ")");
             	if(StringUtil.isNotEmpty(tmp))
             	{
             		ct.setUsage(tmp.replace("；", ";"));
             	}
-            	tmp = sheet.getCell(9, j).getContents();
+            	tmp = sheet.getCell(9, j).getContents().trim().replace("；", ";").replace("（", "(").replace("）", ")");
             	if(StringUtil.isNotEmpty(tmp))
             	{
             		ct.setCujing(Integer.valueOf(tmp));
             	}
-            	tmp = sheet.getCell(10, j).getContents();
+            	tmp = sheet.getCell(10, j).getContents().trim().replace("；", ";").replace("（", "(").replace("）", ")");
             	if(StringUtil.isNotEmpty(tmp))
             	{
             		ct.setUsefullength(Double.valueOf(tmp));
             	}
-            	tmp = sheet.getCell(11, j).getContents();
+            	tmp = sheet.getCell(11, j).getContents().trim().replace("；", ";").replace("（", "(").replace("）", ")");
             	if(StringUtil.isNotEmpty(tmp))
             	{
             		ct.setPipesize(Double.valueOf(tmp));
             	}
-            	tmp = sheet.getCell(12, j).getContents();
+            	tmp = sheet.getCell(12, j).getContents().trim().replace("；", ";").replace("（", "(").replace("）", ")");
             	if(StringUtil.isNotEmpty(tmp))
             	{
             		ct.setShank(tmp);
             	}
-            	tmp = sheet.getCell(13, j).getContents();
+            	tmp = sheet.getCell(13, j).getContents().trim().replace("；", ";").replace("（", "(").replace("）", ")");
             	if(StringUtil.isNotEmpty(tmp))
             	{
             		ct.setShanktype(tmp);
             	}
-            	tmp = sheet.getCell(14, j).getContents();
+            	tmp = sheet.getCell(14, j).getContents().trim().replace("；", ";").replace("（", "(").replace("）", ")");
             	if(StringUtil.isNotEmpty(tmp))
             	{
             		ct.setShape(tmp);
             	}
             	
-            	tmp = sheet.getCell(15, j).getContents();
+            	tmp = sheet.getCell(15, j).getContents().trim().replace("；", ";").replace("（", "(").replace("）", ")");
             	if(StringUtil.isNotEmpty(tmp))
             	{
             		ct.setBackangle(Integer.valueOf(tmp));
             	}
-            	tmp = sheet.getCell(16, j).getContents();
+            	tmp = sheet.getCell(16, j).getContents().trim().replace("；", ";").replace("（", "(").replace("）", ")");
             	if(StringUtil.isNotEmpty(tmp))
             	{
             		ct.setWorkingtool(tmp);
             	}
-            	tmp = sheet.getCell(17, j).getContents();
+            	tmp = sheet.getCell(17, j).getContents().trim().replace("；", ";").replace("（", "(").replace("）", ")");
             	if(StringUtil.isNotEmpty(tmp))
             	{
             		ct.setEdgeno(Integer.valueOf(tmp));
             	}
-            	tmp = sheet.getCell(18, j).getContents();
+            	tmp = sheet.getCell(18, j).getContents().trim().replace("；", ";").replace("（", "(").replace("）", ")");
             	if(StringUtil.isNotEmpty(tmp))
             	{
             		ct.setEdgelength(tmp);
             	}
-            	tmp = sheet.getCell(19, j).getContents();
+            	tmp = sheet.getCell(19, j).getContents().trim().replace("；", ";").replace("（", "(").replace("）", ")");
             	if(StringUtil.isNotEmpty(tmp))
             	{
             		ct.setTotallength(tmp);
             	}
-            	tmp = sheet.getCell(20, j).getContents();
+            	tmp = sheet.getCell(20, j).getContents().trim().replace("；", ";").replace("（", "(").replace("）", ")");
             	if(StringUtil.isNotEmpty(tmp))
             	{
             		ct.setScrewangle(tmp);
             	}
-            	tmp = sheet.getCell(21, j).getContents();
+            	tmp = sheet.getCell(21, j).getContents().trim().replace("；", ";").replace("（", "(").replace("）", ")");
             	if(StringUtil.isNotEmpty(tmp))
             	{
             		ct.setCoatingtype(tmp);
             	}
-            	tmp = sheet.getCell(22, j).getContents();
+            	tmp = sheet.getCell(22, j).getContents().trim().replace("；", ";").replace("（", "(").replace("）", ")");
             	if(StringUtil.isNotEmpty(tmp))
             	{
             		ct.setRangle(tmp);
             	}
-            	tmp = sheet.getCell(23, j).getContents();
+            	tmp = sheet.getCell(23, j).getContents().trim().replace("；", ";").replace("（", "(").replace("）", ")");
             	if(StringUtil.isNotEmpty(tmp))
             	{
             		ct.setDirection(Integer.valueOf(tmp));
             	}
-            	tmp = sheet.getCell(24, j).getContents();
+            	tmp = sheet.getCell(24, j).getContents().trim().replace("；", ";").replace("（", "(").replace("）", ")");
             	if(StringUtil.isNotEmpty(tmp))
             	{
             		ct.setMinworkdiameter(Double.valueOf(tmp));
             	}
-            	tmp = sheet.getCell(25, j).getContents();
+            	tmp = sheet.getCell(25, j).getContents().trim().replace("；", ";").replace("（", "(").replace("）", ")");
             	if(StringUtil.isNotEmpty(tmp))
             	{
             		ct.setInnercooling(Integer.valueOf(tmp));
             	}
-            	tmp = sheet.getCell(26, j).getContents();
+            	tmp = sheet.getCell(26, j).getContents().trim().replace("；", ";").replace("（", "(").replace("）", ")");
             	if(StringUtil.isNotEmpty(tmp))
             	{
             		ct.setDiameterratio(tmp);
             	}
-            	tmp = sheet.getCell(27, j).getContents();
+            	tmp = sheet.getCell(27, j).getContents().trim().replace("；", ";").replace("（", "(").replace("）", ")");
             	if(StringUtil.isNotEmpty(tmp))
             	{
             		ct.setSlotshape(tmp);
             	}
-            	tmp = sheet.getCell(28, j).getContents();
+            	tmp = sheet.getCell(28, j).getContents().trim().replace("；", ";").replace("（", "(").replace("）", ")");
             	if(StringUtil.isNotEmpty(tmp))
             	{
             		ct.setHandlenorm(tmp);
             	}
-            	tmp = sheet.getCell(29, j).getContents();
+            	tmp = sheet.getCell(29, j).getContents().trim().replace("；", ";").replace("（", "(").replace("）", ")");
             	if(StringUtil.isNotEmpty(tmp))
             	{
             		ct.setTaptype(tmp);
             	}
-            	tmp = sheet.getCell(30, j).getContents();
+            	tmp = sheet.getCell(30, j).getContents().trim().replace("；", ";").replace("（", "(").replace("）", ")");
             	if(StringUtil.isNotEmpty(tmp))
             	{
             		ct.setScrewtype(tmp);
             	}
-            	tmp = sheet.getCell(31, j).getContents();
+            	tmp = sheet.getCell(31, j).getContents().trim().replace("；", ";").replace("（", "(").replace("）", ")");
             	if(StringUtil.isNotEmpty(tmp))
             	{
             		ct.setAxistype(tmp);
             	}
-            	tmp = sheet.getCell(32, j).getContents();
+            	tmp = sheet.getCell(32, j).getContents().trim().replace("；", ";").replace("（", "(").replace("）", ")");
             	if(StringUtil.isNotEmpty(tmp))
             	{
             		ct.setAxisdetail(tmp);
             	}
-            	tmp = sheet.getCell(33, j).getContents();
+            	tmp = sheet.getCell(33, j).getContents().trim().replace("；", ";").replace("（", "(").replace("）", ")");
             	if(StringUtil.isNotEmpty(tmp))
             	{
             		ct.setInterfacesize(tmp);
             	}
-            	tmp = sheet.getCell(34, j).getContents();
+            	tmp = sheet.getCell(34, j).getContents().trim().replace("；", ";").replace("（", "(").replace("）", ")");
             	if(StringUtil.isNotEmpty(tmp))
             	{
             		ct.setNecklength(tmp);
             	}
-            	tmp = sheet.getCell(35, j).getContents();
+            	tmp = sheet.getCell(35, j).getContents().trim().replace("；", ";").replace("（", "(").replace("）", ")");
             	if(StringUtil.isNotEmpty(tmp))
             	{
             		ct.setThickness(Double.parseDouble(tmp));
             	}
-            	tmp = sheet.getCell(36, j).getContents();
+            	tmp = sheet.getCell(36, j).getContents().trim().replace("；", ";").replace("（", "(").replace("）", ")");
             	if(StringUtil.isNotEmpty(tmp))
             	{
             		ct.setTaper(Double.parseDouble(tmp));
             	}
-            	tmp = sheet.getCell(37, j).getContents();
+            	tmp = sheet.getCell(37, j).getContents().trim().replace("；", ";").replace("（", "(").replace("）", ")");
             	if(StringUtil.isNotEmpty(tmp))
             	{
             		ct.setPointdiameter((Double.parseDouble(tmp)));
             	}
-            	tmp = sheet.getCell(38, j).getContents();
+            	tmp = sheet.getCell(38, j).getContents().trim().replace("；", ";").replace("（", "(").replace("）", ")");
             	if(StringUtil.isNotEmpty(tmp))
             	{
             		ct.setSlotwidth(Double.parseDouble(tmp));
             	}
-            	tmp = sheet.getCell(39, j).getContents();
+            	tmp = sheet.getCell(39, j).getContents().trim().replace("；", ";").replace("（", "(").replace("）", ")");
             	if(StringUtil.isNotEmpty(tmp))
             	{
             		ct.setMaxslotdepth(Double.parseDouble(tmp));
             	}
-            	tmp = sheet.getCell(40, j).getContents();
+            	tmp = sheet.getCell(41, j).getContents().trim().replace("；", ";").replace("（", "(").replace("）", ")");
             	if(StringUtil.isNotEmpty(tmp))
             	{
             		ct.setMaxbore(Double.parseDouble(tmp));
             	}
-            	tmp = sheet.getCell(41, j).getContents();
+            	tmp = sheet.getCell(40, j).getContents().trim().replace("；", ";").replace("（", "(").replace("）", ")");
             	if(StringUtil.isNotEmpty(tmp))
             	{
             		ct.setMinbore(Double.parseDouble(tmp));
             	}
-            	tmp = sheet.getCell(42, j).getContents();
+            	tmp = sheet.getCell(42, j).getContents().trim().replace("；", ";").replace("（", "(").replace("）", ")");
             	if(StringUtil.isNotEmpty(tmp))
             	{
             		ct.setScrewsize(tmp);
             	}
-            	tmp = sheet.getCell(43, j).getContents();
+            	tmp = sheet.getCell(43, j).getContents().trim().replace("；", ";").replace("（", "(").replace("）", ")");
             	if(StringUtil.isNotEmpty(tmp))
             	{
             		ct.setScrewdistance(tmp);
             	}
-            	tmp = sheet.getCell(44, j).getContents();
+            	tmp = sheet.getCell(44, j).getContents().trim().replace("；", ";").replace("（", "(").replace("）", ")");
             	if(StringUtil.isNotEmpty(tmp))
             	{
             		ct.setAccuracy(tmp);
             	}
-            	tmp = sheet.getCell(45, j).getContents();
+            	tmp = sheet.getCell(45, j).getContents().trim().replace("；", ";").replace("（", "(").replace("）", ")");
             	if(StringUtil.isNotEmpty(tmp))
             	{
             		ct.setHandledsize(tmp);
+            	}
+            	tmp = sheet.getCell(46, j).getContents().trim().replace("；", ";").replace("（", "(").replace("）", ")");
+            	if(StringUtil.isNotEmpty(tmp))
+            	{
+            		ct.setRelativecollet(tmp);
+            	}
+            	tmp = sheet.getCell(47, j).getContents().trim().replace("；", ";").replace("（", "(").replace("）", ")");
+            	if(StringUtil.isNotEmpty(tmp))
+            	{
+            		ct.setHeight(Double.parseDouble(tmp));
+            	}
+            	tmp = sheet.getCell(48, j).getContents().trim().replace("；", ";").replace("（", "(").replace("）", ")");
+            	if(StringUtil.isNotEmpty(tmp))
+            	{
+            		ct.setWidth(Double.parseDouble(tmp));
+            	}
+            	tmp = sheet.getCell(49, j).getContents().trim().replace("；", ";").replace("（", "(").replace("）", ")");
+            	if(StringUtil.isNotEmpty(tmp))
+            	{
+            		ct.setGrooverange(tmp);
+            	}
+            	tmp = sheet.getCell(50, j).getContents().trim().replace("；", ";").replace("（", "(").replace("）", ")");
+            	if(StringUtil.isNotEmpty(tmp))
+            	{
+            		ct.setDrillrange(tmp);
             	}
             	ct.setIshot(1);
             	if(seriesMap.get(ct.getSeriesname()) != null)
@@ -749,6 +820,8 @@ public class AdminController extends BaseController{
 	            	ct.setOutline(seriesMap.get(ct.getSeriesname()).outline);
 	            	ct.setCover(seriesMap.get(ct.getSeriesname()).cover);
 	            	ct.setPic(seriesMap.get(ct.getSeriesname()).pic);
+	            	ct.setVideolink(seriesMap.get(ct.getSeriesname()).videolink);
+	            	ct.setVideoinfo(seriesMap.get(ct.getSeriesname()).videoinfo);
             	}
             	ctDAO.insertCuttingToolEntity(ct);
             }

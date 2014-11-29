@@ -1,8 +1,101 @@
 #set($layout = "/layout/item_layout.vm")
+<script>
+	$(function(){
+		$("body").on("click",".params-list span",function(){
+			$(this).parent().parent().children("input").val($(this).text());
+			$(this).parent().parent().attr("set","1");
+			$(this).parent().hide();
+			$(this).parent().parent().children("h1").children("a").append($(this).text());
+			$(".series-content .right").empty();
+			$(".series-content .right").html("loading...");
+			$("#form_param").ajaxSubmit({  
+                dataType:"json", //数据类型  
+                url:"/changeparam",
+                success:function(data){ //提交成功的回调函数  
+                    $(".series-content .right").empty().append(data.cts);
+					$(".series-content .left ul.params-list li").each(function(){
+						if($(this).attr("set") == "0")
+						{
+							for(var x in data.map){
+            					if($(this).attr("param")==x)
+								{
+									$(this).children(".param").empty();
+									for(var y in data.map[x]){
+										$(this).children(".param").append("<span>" + data.map[x][y] + "</span>");
+									}
+								}
+            				}
+						}
+					});
+                }  
+            });   
+		});
+		$("body").on("click",".params-list a",function(){
+			$(this).parent().parent().children("input").val("");
+			$(this).parent().parent().attr("set","0");
+			$(this).empty();
+			$(this).parent().parent().children(".param").show();
+			$(".series-content .right").empty();
+			$(".series-content .right").html("loading...");
+			$("#form_param").ajaxSubmit({  
+                dataType:"json", //数据类型  
+                url:"/changeparam",
+                success:function(data){ //提交成功的回调函数  
+                    $(".series-content .right").empty().append(data.cts);
+					$(".series-content .left ul.params-list li").each(function(){
+						if($(this).attr("set") == "0")
+						{
+							for(var x in data.map){
+            					if($(this).attr("param")==x)
+								{
+									$(this).children(".param").empty();
+									for(var y in data.map[x]){
+										if(x=="direction"){
+											if(data.map[x][y]==1)
+												$(this).children(".param").append("<span>通用槽</span>");
+											else if(data.map[x][y]==2)
+												$(this).children(".param").append("<span>左手</span>");
+											else
+												$(this).children(".param").append("<span>右手</span>");
+										}
+										else if(x=="innercooling"){
+											if(data.map[x][y]==1)
+												$(this).children(".param").append("<span>一般</span>");
+											else if(data.map[x][y]==2)
+												$(this).children(".param").append("<span>内冷</span>");
+											else
+												$(this).children(".param").append("<span>外冷</span>");
+										} 
+										else if(x=="cujing"){
+											if(data.map[x][y]==1)
+												$(this).children(".param").append("<span>一般</span>");
+											else if(data.map[x][y]==2)
+												$(this).children(".param").append("<span>粗加工</span>");
+											else
+												$(this).children(".param").append("<span>精加工</span>");
+										} 
+										else
+											$(this).children(".param").append("<span>" + data.map[x][y] + "</span>");
+									}
+								}
+            				}
+						}
+					});
+                }  
+            });   
+		});
+	});
+</script>
 <div class="main-content-wrap clearfix">
 	<h1 class="category-level">$!{category}</h1>
 	<div class="series-content clearfix"">
-		<div class="left">
+		<div class="left" data="">
+			<form id="form_param" method="post">
+			<input type="hidden" name="code" value="${code}" />
+			<ul class="params-list">
+				$!{param}
+			</ul>
+			</form>
 		</div>
 		<div class="right">
 		#if(${cts.size()} == 0)
@@ -11,11 +104,13 @@
 		#foreach ($ct in $cts)
             <a class="series-item clearfix" href="/detail/${ct.id}">
 				<div class="series-pic">
-					#if($stringUtil.isNotEmpty(${ct.cover}))
-						<img src="/img/series/$!{ct.cover}" />
-					#else
-						<img src="/img/series/seriespic.png" />
-					#end
+					<span>
+    					#if($stringUtil.isNotEmpty(${ct.cover}))
+    						<img src="/img/series/$!{ct.cover}" />
+    					#else
+    						<img src="/img/series/seriespic.jpg" />
+    					#end
+					</span>
 				</div>
 				<div class="series-params">
 					<h3>$!{ct.seriesname}</h3>

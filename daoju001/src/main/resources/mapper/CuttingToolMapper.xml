@@ -15,6 +15,8 @@
 		<id property="seriesname" column="seriesname" />
    	  <!---->
 		<id property="version" column="version" />
+		<id property="videolink" column="videolink" />
+		<id property="videoinfo" column="videoinfo" />
    	  <!---->
 		<id property="material" column="material" />
 	  <!---->
@@ -92,13 +94,24 @@
 		<id property="minbore" column="minbore" />
 		<id property="necklength" column="necklength" />
 		<id property="relativecollet" column="relativecollet" />
+		<id property="width" column="width" />
+		<id property="height" column="height" />
+		<id property="grooverange" column="grooverange" />
+		<id property="drillrange" column="drillrange" />
 		
 	</resultMap>
-	
-	<select id="queryCuttingToolByCode" parameterType="String" resultMap="CuttingToolResultMap">
+	<select id="getBrandCountByCode" parameterType="String" resultType="int">
+		select count(1) from (select id,code,brand from (select id,code,brand from t_cuttingtool group by seriesname) as series  where left(`code`,2)=#{code} group by brand) as brand
+	</select>
+	<select id="getSeriesnameCountByCode" parameterType="String" resultType="int">
+		select count(1) from (select id,code,seriesname from (select id,code,seriesname from t_cuttingtool group by seriesname) as series  where left(`code`,2)=#{code} group by seriesname) as sn
+	</select>
+	<select id="querySeriesByCode" parameterType="String" resultMap="CuttingToolResultMap">
 		SELECT * from t_cuttingtool where match(code) against(#{code} in boolean mode) group by seriesname
 	</select>
-	
+	<select id="queryCuttingToolByCode" parameterType="String" resultMap="CuttingToolResultMap">
+		SELECT * from t_cuttingtool where match(code) against(#{code} in boolean mode)
+	</select>
 	<select id="getAllSeries" resultMap="CuttingToolResultMap">
 		SELECT * from t_cuttingtool group by seriesname
 	</select>
@@ -121,6 +134,303 @@
 		]]>
 	</select>
 	
+	<select id="getSeriesByParam" parameterType="CuttingToolEntity" resultMap="CuttingToolResultMap">
+		SELECT * from t_cuttingtool t where 1=1 
+		<if test="code != null and code != '' ">
+        	and code = #{code}
+		</if>
+		<if test="brand != null and brand != ''">
+        	and brand = #{brand}
+		</if>
+		<if test="material != null and material != ''">
+        	and material = #{material}
+		</if>
+		<if test="angle != 0">
+        	and angle = #{angle}
+		</if>
+		<if test="ctcount != 0">
+        	and ctcount = #{ctcount}
+		</if>
+		<if test="diameter != null and diameter != ''">
+        	and diameter = #{diameter}
+		</if>
+		<if test="cujing != 0">
+        	and cujing = #{cujing}
+		</if>
+		<if test="usefullength != 0">
+        	and usefullength = #{usefullength}
+		</if>
+		<if test="pipesize != 0">
+ 			and pipesize = #{pipesize}
+		</if>
+		<if test="shank != null and shank != ''">
+ 	        and shank = #{shank}
+		</if>
+		<if test="shanktype != null and shanktype != ''">
+ 	        and shanktype = #{shanktype}
+		</if>
+		<if test="shape != null and shape != ''">
+ 	        and shape = #{shape}
+		</if>
+		<if test="backangle != 0">
+ 	        and backangle = #{backangle}
+		</if>
+		<if test="edgeno != 0">
+ 	        and edgeno = #{edgeno}
+		</if>
+		<if test="edgelength != null and edgelength != ''">
+ 	        and edgelength = #{edgelength}
+		</if>
+		<if test="totallength != null and totallength != ''">
+ 	        and totallength = #{totallength}
+		</if>
+		<if test="screwangle != null and screwangle != ''">
+ 	        and screwangle = #{screwangle}
+		</if>
+		<if test="coatingtype != null and coatingtype != ''">
+ 	        and coatingtype = #{coatingtype}
+		</if>
+		<if test="rangle != null and rangle != ''">
+ 	        and rangle = #{rangle}
+		</if>
+		<if test="direction != 0">
+ 	        and direction = #{direction}
+		</if>
+		<if test="minworkdiameter != 0">
+ 	        and minworkdiameter = #{minworkdiameter}
+		</if>
+		<if test="innercooling != 0">
+ 	        and innercooling = #{innercooling}
+		</if>
+		<if test="diameterratio != null and diameterratio != ''">
+ 	        and diameterratio = #{diameterratio}
+		</if>
+		<if test="slotshape != null and slotshape != ''">
+ 	        and slotshape = #{slotshape}
+		</if>
+		<if test="handlenorm != null and handlenorm != ''">
+ 	        and handlenorm = #{handlenorm}
+		</if>
+		<if test="taptype != null and taptype != ''">
+ 	        and taptype = #{taptype}
+		</if>
+		<if test="screwtype != null and screwtype != ''">
+ 	        and screwtype = #{screwtype}
+		</if>
+		<if test="axistype != null and axistype != ''">
+ 	        and axistype = #{axistype}
+		</if>
+		<if test="axisdetail != null and axisdetail != ''">
+ 	        and axisdetail = #{axisdetail}
+		</if>
+		<if test="provider != null and provider != ''">
+    	   and provider = #{provider}
+		</if>
+		<if test="thickness != 0">
+ 	        and thickness = #{thickness}
+		</if>
+		<if test="maxslotdepth != 0">
+ 	        and maxslotdepth = #{maxslotdepth}
+		</if>
+		<if test="taper != 0">
+ 	        and taper = #{taper}
+		</if>
+		<if test="slotwidth != 0">
+ 	        and slotwidth = #{slotwidth}
+		</if>
+		<if test="pointdiameter != 0">
+ 	        and pointdiameter = #{pointdiameter}
+		</if>
+		<if test="handledsize != null and handledsize != ''">
+ 	        and handledsize = #{handledsize}
+		</if>
+		<if test="screwsize != null and screwsize != ''">
+ 	        and screwsize = #{screwsize}
+		</if>
+		<if test="screwdistance != null and screwdistance != ''">
+ 	        and screwdistance = #{screwdistance}
+		</if>
+		<if test="accuracy != null and accuracy != ''">
+ 	        and accuracy = #{accuracy}
+		</if>
+		<if test="interfacesize != null and interfacesize != ''">
+ 	        and interfacesize = #{interfacesize}
+		</if>
+		<if test="maxbore != 0">
+ 	        and maxbore = #{maxbore}
+		</if>
+		<if test="minbore != 0">
+ 	        and minbore = #{minbore}
+		</if>
+		<if test="necklength != null and necklength != ''">
+ 	        and necklength = #{necklength}
+		</if>
+		<if test="relativecollet != null and relativecollet != ''">
+ 	        and relativecollet = #{relativecollet}
+		</if>
+		<if test="usage != null and usage != ''">
+       		and locate(#{usage},`usage`) > 0
+		</if>
+		<if test="workingtool != null and workingtool != ''">
+ 	        and locate(#{workingtool},`workingtool`) > 0
+		</if>
+		 group by seriesname	
+	</select>
+	
+	
+	<select id="queryCuttingToolByCt" parameterType="CuttingToolEntity" resultMap="CuttingToolResultMap">
+		SELECT * from t_cuttingtool t where 1=1 
+		<if test="code != null and code != '' ">
+        	and code = #{code}
+		</if>
+		<if test="brand != null and brand != ''">
+        	and brand = #{brand}
+		</if>
+		<if test="material != null and material != ''">
+        	and material = #{material}
+		</if>
+		<if test="angle != 0">
+        	and angle = #{angle}
+		</if>
+		<if test="ctcount != 0">
+        	and ctcount = #{ctcount}
+		</if>
+		<if test="diameter != null and diameter != ''">
+        	and diameter = #{diameter}
+		</if>
+		<if test="cujing != 0">
+        	and cujing = #{cujing}
+		</if>
+		<if test="usefullength != 0">
+        	and usefullength = #{usefullength}
+		</if>
+		<if test="pipesize != 0">
+ 			and pipesize = #{pipesize}
+		</if>
+		<if test="shank != null and shank != ''">
+ 	        and shank = #{shank}
+		</if>
+		<if test="shanktype != null and shanktype != ''">
+ 	        and shanktype = #{shanktype}
+		</if>
+		<if test="shape != null and shape != ''">
+ 	        and shape = #{shape}
+		</if>
+		<if test="backangle != 0">
+ 	        and backangle = #{backangle}
+		</if>
+		<if test="edgeno != 0">
+ 	        and edgeno = #{edgeno}
+		</if>
+		<if test="edgelength != null and edgelength != ''">
+ 	        and edgelength = #{edgelength}
+		</if>
+		<if test="totallength != null and totallength != ''">
+ 	        and totallength = #{totallength}
+		</if>
+		<if test="screwangle != null and screwangle != ''">
+ 	        and screwangle = #{screwangle}
+		</if>
+		<if test="coatingtype != null and coatingtype != ''">
+ 	        and coatingtype = #{coatingtype}
+		</if>
+		<if test="rangle != null and rangle != ''">
+ 	        and rangle = #{rangle}
+		</if>
+		<if test="direction != 0">
+ 	        and direction = #{direction}
+		</if>
+		<if test="minworkdiameter != 0">
+ 	        and minworkdiameter = #{minworkdiameter}
+		</if>
+		<if test="innercooling != 0">
+ 	        and innercooling = #{innercooling}
+		</if>
+		<if test="diameterratio != null and diameterratio != ''">
+ 	        and diameterratio = #{diameterratio}
+		</if>
+		<if test="slotshape != null and slotshape != ''">
+ 	        and slotshape = #{slotshape}
+		</if>
+		<if test="handlenorm != null and handlenorm != ''">
+ 	        and handlenorm = #{handlenorm}
+		</if>
+		<if test="taptype != null and taptype != ''">
+ 	        and taptype = #{taptype}
+		</if>
+		<if test="screwtype != null and screwtype != ''">
+ 	        and screwtype = #{screwtype}
+		</if>
+		<if test="axistype != null and axistype != ''">
+ 	        and axistype = #{axistype}
+		</if>
+		<if test="axisdetail != null and axisdetail != ''">
+ 	        and axisdetail = #{axisdetail}
+		</if>
+		<if test="provider != null and provider != ''">
+    	   and provider = #{provider}
+		</if>
+		<if test="thickness != 0">
+ 	        and thickness = #{thickness}
+		</if>
+		<if test="maxslotdepth != 0">
+ 	        and maxslotdepth = #{maxslotdepth}
+		</if>
+		<if test="taper != 0">
+ 	        and taper = #{taper}
+		</if>
+		<if test="slotwidth != 0">
+ 	        and slotwidth = #{slotwidth}
+		</if>
+		<if test="pointdiameter != 0">
+ 	        and pointdiameter = #{pointdiameter}
+		</if>
+		<if test="handledsize != null and handledsize != ''">
+ 	        and handledsize = #{handledsize}
+		</if>
+		<if test="screwsize != null and screwsize != ''">
+ 	        and screwsize = #{screwsize}
+		</if>
+		<if test="screwdistance != null and screwdistance != ''">
+ 	        and screwdistance = #{screwdistance}
+		</if>
+		<if test="accuracy != null and accuracy != ''">
+ 	        and accuracy = #{accuracy}
+		</if>
+		<if test="interfacesize != null and interfacesize != ''">
+ 	        and interfacesize = #{interfacesize}
+		</if>
+		<if test="maxbore != 0">
+ 	        and maxbore = #{maxbore}
+		</if>
+		<if test="minbore != 0">
+ 	        and minbore = #{minbore}
+		</if>
+		<if test="necklength != null and necklength != ''">
+ 	        and necklength = #{necklength}
+		</if>
+		<if test="width != null and width != 0">
+ 	        and width = #{width}
+		</if>
+		<if test="height != null and height != 0">
+ 	        and height = #{height}
+		</if>
+		<if test="grooverange != null and grooverange != ''">
+ 	        and grooverange = #{grooverange}
+		</if>
+		<if test="drillrange != null and drillrange != ''">
+ 	        and drillrange = #{drillrange}
+		</if>
+		<if test="relativecollet != null and relativecollet != ''">
+ 	        and relativecollet = #{relativecollet}
+		</if>
+		<if test="usage != null and usage != ''">
+       		and locate(#{usage},`usage`) > 0
+		</if>
+		<if test="workingtool != null and workingtool != ''">
+ 	        and locate(#{workingtool},`workingtool`) > 0
+		</if>
+	</select>
 	<update id="updateCuttingToolById" parameterType="CuttingToolEntity">
 		update t_cuttingtool
 		<set>
@@ -187,7 +497,13 @@
 		,maxbore
 		,minbore
 		,necklength
-		,relativecollet)
+		,relativecollet
+		,videolink
+		,videoinfo
+		,width
+		,height
+		,grooverange
+		,drillrange)
 		values
 		(
 		#{ishot}
@@ -243,6 +559,12 @@
 		,#{minbore}
 		,#{necklength}
 		,#{relativecollet}
+		,#{videolink}
+		,#{videoinfo}
+		,#{width}
+		,#{height}
+		,#{grooverange}
+		,#{drillrange}
 		)
 	</insert>
 </mapper>

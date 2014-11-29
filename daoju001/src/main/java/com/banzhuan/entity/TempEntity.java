@@ -6,4 +6,6 @@ public class TempEntity {
 	public String pic;
 	public String cover;
 	public String suitcase;
+	public String videolink;
+	public String videoinfo;
 }

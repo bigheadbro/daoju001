@@ -185,7 +185,7 @@
                         </div>
                     </li>
                     <li class="item">
-                        <a href="/category/03">车削铣刀</a>
+                        <a href="/category/03">车削刀具</a>
                         <s></s>
                         <div class="menutab3 menutab">
                             <ul class="level2 clearfix">
@@ -201,14 +201,19 @@
         								<span>
         									<a href="/category/030103">切槽/切断刀杆</a>
         								</span>
+        							</div>
+                                </li>
+								<li class="clearfix">
+                                    <a class="second" href="/category/0302">车刀片</a>
+        							<div class="level3 clearfix">
         								<span>
-        									<a href="/category/030104">普通车刀片</a>
+        									<a href="/category/030201">普通车刀片</a>
         								</span>
         								<span>
-        									<a href="/category/030105">精磨车刀片</a>
+        									<a href="/category/030202">精磨车刀片</a>
         								</span>
         								<span>
-        									<a href="/category/030106">切槽/切断刀片</a>
+        									<a href="/category/030203">切槽/切断刀片</a>
         								</span>
         							</div>
                                 </li>
@@ -292,6 +297,9 @@
         								</span>
         								<span>
         									<a href="/category/050104">ER刀柄</a>
+        								</span>
+										<span>
+        									<a href="/category/050105">蜗杆刀柄</a>
         								</span>
         							</div>
                                 </li>
@@ -389,15 +397,6 @@
                             <a href="/index">首页</a>
                         </li>
         				#end
-        				#if($!stringUtil.isContains($request.getServletPath(),"/items"))
-                        <li class="current">
-                            <a href="/items">标价商城</a>
-                        </li>
-        				#else
-        				<li>
-                            <a href="/items">标价商城</a>
-                        </li>
-        				#end
         				#if($!stringUtil.isContains($request.getServletPath(),"/questions"))
                         <li class="current">
                             <a href="/questions">供应商问答</a>
@@ -426,9 +425,25 @@
                         </li>
         				#end
                     </ul>
-					<div>
-        				<img src="/img/sys.png" />
-        			</div>
+					<div class="content clearfix">
+    					<div class="banner">
+    						
+            			</div>
+    					<div class="side">
+							<div class="query">
+								<input type="text" placeholder="输入你需要查询的材质" />
+								<div class="operation">
+									<a>材质查询</a>
+									<span>材质查询小工具</span>
+								</div>
+							</div>
+							<div class="question">
+								<h1>最新问题</h1>
+								<p></p>
+								<a>我要提问</a>
+							</div>
+    					</div>
+					</div>
                 </div>
             </div>
 		</div>

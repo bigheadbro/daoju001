@@ -221,7 +221,40 @@ public class CommonController extends BaseController{
 	public ModelAndView index(final HttpServletRequest request,final HttpServletResponse response)
 	{
 		ModelAndView mv = new ModelAndView("/common/index4");
-
+		System.out.println(StringUtil.getCurrentSec());
+		//row1
+		CuttingToolEntity a1 = commonService.getCuttingToolByid(13);
+		int jijiabrand = commonService.getBrandCountByCode("01");
+		int jijiaseries = commonService.getSeriesnameCountByCode("01");
+		mv.addObject("a1",a1);
+		mv.addObject("jijiabrand", jijiabrand);
+		mv.addObject("jijiaseries",jijiaseries);
+		//row2
+		CuttingToolEntity b1 = commonService.getCuttingToolByid(3056);
+		int zhengtibrand = commonService.getBrandCountByCode("02");
+		int zhengtiseries = commonService.getSeriesnameCountByCode("02");
+		mv.addObject("b1",b1);
+		mv.addObject("zhengtibrand", zhengtibrand);
+		mv.addObject("zhengtiseries",zhengtiseries);
+		//row3
+		CuttingToolEntity c1 = commonService.getCuttingToolByid(1203);
+		int kongbrand = commonService.getBrandCountByCode("04");
+		int kongseries = commonService.getSeriesnameCountByCode("04");
+		mv.addObject("c1",c1);
+		mv.addObject("kongbrand", kongbrand);
+		mv.addObject("kongseries",kongseries);
+		//row4
+		CuttingToolEntity d1 = commonService.getCuttingToolByid(3440);
+		CuttingToolEntity d2 = commonService.getCuttingToolByid(5205);
+		CuttingToolEntity d3 = commonService.getCuttingToolByid(2179);
+		int daobingbrand = commonService.getBrandCountByCode("05");
+		int daobingseries = commonService.getSeriesnameCountByCode("05");
+		mv.addObject("d1",d1);
+		mv.addObject("d2",d2);
+		mv.addObject("d3",d3);
+		mv.addObject("daobingbrand", daobingbrand);
+		mv.addObject("daobingseries",daobingseries);
+		System.out.println(StringUtil.getCurrentSec());	
 		return mv;
 	}
 	
@@ -1645,6 +1678,110 @@ public class CommonController extends BaseController{
 		return view;
 	}
 	
+	@RequestMapping(value = "changeparam")
+	public void changeparam(final HttpServletRequest request,final HttpServletResponse response)
+	{
+		CuttingToolEntity ct = new CuttingToolEntity();
+		String code = request.getParameter("code");
+		int ctcount = Integer.valueOf(StringUtil.isEmpty(request.getParameter("ctcount"))?"0":request.getParameter("ctcount"));
+		String brand = request.getParameter("brand");
+		String seriesname = request.getParameter("seriesname");
+		String version = request.getParameter("version");
+		String material = request.getParameter("material");
+		int angle = Integer.valueOf(StringUtil.isEmpty(request.getParameter("angle"))?"0":request.getParameter("angle"));
+		String diameter = request.getParameter("diameter");
+		String usage = request.getParameter("usage");
+		int cujing = Integer.valueOf(CuttingToolsConfiguration.formatCujing(request.getParameter("cujing")));
+		double usefullength = Double.valueOf(StringUtil.isEmpty(request.getParameter("usefullength"))?"0":request.getParameter("usefullength"));
+		double pipesize = Double.valueOf(StringUtil.isEmpty(request.getParameter("pipesize"))?"0":request.getParameter("ctcount"));
+		String shank = request.getParameter("shank");
+		String shanktype = request.getParameter("shanktype");
+		String shape = request.getParameter("shape");
+		int backangle = Integer.valueOf(StringUtil.isEmpty(request.getParameter("backangle"))?"0":request.getParameter("backangle"));
+		String workingtool = request.getParameter("workingtool");
+		int edgeno = Integer.valueOf(StringUtil.isEmpty(request.getParameter("edgeno"))?"0":request.getParameter("edgeno"));
+		String edgelength = request.getParameter("edgelength");
+		String totallength = request.getParameter("totallength");
+		String screwangle = request.getParameter("screwangle");
+		String coatingtype = request.getParameter("coatingtype");
+		String rangle = request.getParameter("rangle");
+		int direction = Integer.valueOf(CuttingToolsConfiguration.formatDirection(request.getParameter("direction")));
+		double minworkdiameter = Double.valueOf(StringUtil.isEmpty(request.getParameter("minworkdiameter"))?"0":request.getParameter("minworkdiameter"));
+		int innercooling = Integer.valueOf(CuttingToolsConfiguration.formatCooling(request.getParameter("innercooling")));
+		String diameterratio = request.getParameter("diameterratio");
+		String slotshape = request.getParameter("slotshape");
+		String handlenorm = request.getParameter("handlenorm");
+		String taptype = request.getParameter("taptype");
+		String screwtype = request.getParameter("screwtype");
+		String axistype = request.getParameter("axistype");
+		String axisdetail = request.getParameter("axisdetail");
+		String provider = request.getParameter("provider");
+		double thickness = Double.valueOf(StringUtil.isEmpty(request.getParameter("thickness"))?"0":request.getParameter("thickness"));
+		double maxslotdepth = Double.valueOf(StringUtil.isEmpty(request.getParameter("maxslotdepth"))?"0":request.getParameter("maxslotdepth"));
+		double taper = Double.valueOf(StringUtil.isEmpty(request.getParameter("taper"))?"0":request.getParameter("taper"));
+		double slotwidth = Double.valueOf(StringUtil.isEmpty(request.getParameter("slotwidth"))?"0":request.getParameter("slotwidth"));
+		double pointdiameter = Double.valueOf(StringUtil.isEmpty(request.getParameter("pointdiameter"))?"0":request.getParameter("pointdiameter"));
+		String handledsize = request.getParameter("handledsize");
+		String screwsize = request.getParameter("screwsize");
+		String screwdistance = request.getParameter("screwdistance");
+		String accuracy = request.getParameter("accuracy");
+		String interfacesize = request.getParameter("interfacesize");
+		double maxbore = Double.valueOf(StringUtil.isEmpty(request.getParameter("maxbore"))?"0":request.getParameter("maxbore"));
+		double minbore = Double.valueOf(StringUtil.isEmpty(request.getParameter("minbore"))?"0":request.getParameter("minbore"));
+		String necklength = request.getParameter("necklength");
+		String relativecollet = request.getParameter("relativecollet");
+		ct.setCode(code);
+		ct.setBrand(brand);
+		ct.setSeriesname(seriesname);
+		ct.setVersion(version);
+		ct.setMaterial(material);
+		ct.setAngle(angle);
+		ct.setCtcount(ctcount);
+		ct.setDiameter(diameter);
+		ct.setUsage(usage);
+		ct.setCujing(cujing);
+		ct.setUsefullength(usefullength);
+		ct.setPipesize(pipesize);
+		ct.setShank(shank);
+		ct.setShanktype(shanktype);
+		ct.setShape(shape);
+		ct.setBackangle(backangle);
+		ct.setWorkingtool(workingtool);
+		ct.setEdgeno(edgeno);
+		ct.setEdgelength(edgelength);
+		ct.setTotallength(totallength);
+		ct.setScrewangle(screwangle);
+		ct.setCoatingtype(coatingtype);
+		ct.setRangle(rangle);
+		ct.setDirection(direction);
+		ct.setMinworkdiameter(minworkdiameter);
+		ct.setInnercooling(innercooling);
+		ct.setDiameterratio(diameterratio);
+		ct.setSlotshape(slotshape);
+		ct.setHandlenorm(handlenorm);
+		ct.setTaptype(taptype);
+		ct.setScrewtype(screwtype);
+		ct.setAxistype(axistype);
+		ct.setAxisdetail(axisdetail);
+		ct.setProvider(provider);
+		ct.setThickness(thickness);
+		ct.setMaxslotdepth(maxslotdepth);
+		ct.setTaper(taper);
+		ct.setSlotwidth(slotwidth);
+		ct.setPointdiameter(pointdiameter);
+		ct.setHandledsize(handledsize);
+		ct.setScrewsize(screwsize);
+		ct.setScrewdistance(screwdistance);
+		ct.setAccuracy(accuracy);
+		ct.setInterfacesize(interfacesize);
+		ct.setMaxbore(maxbore);
+		ct.setMinbore(minbore);
+		ct.setNecklength(necklength);
+		ct.setRelativecollet(relativecollet);
+		List<CuttingToolEntity> cts = commonService.getSeriesByParam(ct);
+		Map<String,List<String>> map = commonService.getSearchParamMap(ct);
+		JsonUtil.sendSeriesList(response, cts,map);
+	}
 	@RequestMapping(value = "category/{pid}")
 	public ModelAndView category(final HttpServletRequest request,final HttpServletResponse response, @PathVariable String pid)
 	{
@@ -1654,8 +1791,11 @@ public class CommonController extends BaseController{
 		{
 			view = new ModelAndView("/common/series");
 			List<CuttingToolEntity> cts = commonService.getCategorySeries(pid);
+			String param = commonService.queryCuttingToolsByCode(pid);
+			view.addObject("code",pid);
 			view.addObject("category", CuttingToolsConfiguration.getCategoryHtml(pid,false));
 			view.addObject("cts",cts);
+			view.addObject("param",param);
 			return view;
 		}
 		else

@@ -2,6 +2,8 @@ package com.banzhuan.entity;
 
 import java.io.Serializable;
 
+import com.banzhuan.util.StringUtil;
+
 public class CuttingToolEntity implements Serializable {
 	/**
 	 * 
@@ -19,6 +21,10 @@ public class CuttingToolEntity implements Serializable {
 	private String seriesname;
 	//
 	private String version;
+	
+	private String videoinfo;
+	
+	private String videolink;
 	//
 	private String material;
 	//
@@ -120,6 +126,14 @@ public class CuttingToolEntity implements Serializable {
 	private String samecolume;
 	
 	private String relativecollet;
+
+	private double width;
+	
+	private double height;
+	
+	private String grooverange;
+	
+	private String drillrange;
 	
 	public int getId() {
 		return id;
@@ -410,6 +424,8 @@ public class CuttingToolEntity implements Serializable {
 	}
 
 	public String getOutline() {
+		if(StringUtil.isEmpty(outline))
+			return "";
 		return outline;
 	}
 
@@ -571,5 +587,65 @@ public class CuttingToolEntity implements Serializable {
 	public void setRelativecollet(String relativecollet)
 	{
 		this.relativecollet = relativecollet;
+	}
+
+	public String getVideoinfo()
+	{
+		return videoinfo;
+	}
+
+	public void setVideoinfo(String videoinfo)
+	{
+		this.videoinfo = videoinfo;
+	}
+
+	public String getVideolink()
+	{
+		return videolink;
+	}
+
+	public void setVideolink(String videolink)
+	{
+		this.videolink = videolink;
+	}
+
+	public double getWidth()
+	{
+		return width;
+	}
+
+	public void setWidth(double width)
+	{
+		this.width = width;
+	}
+
+	public double getHeight()
+	{
+		return height;
+	}
+
+	public void setHeight(double heigth)
+	{
+		this.height = heigth;
+	}
+
+	public String getGrooverange()
+	{
+		return grooverange;
+	}
+
+	public void setGrooverange(String grooverange)
+	{
+		this.grooverange = grooverange;
+	}
+
+	public String getDrillrange()
+	{
+		return drillrange;
+	}
+
+	public void setDrillrange(String drillrange)
+	{
+		this.drillrange = drillrange;
 	}
 }

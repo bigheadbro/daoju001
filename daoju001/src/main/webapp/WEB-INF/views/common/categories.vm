@@ -6,7 +6,7 @@
 		</div>
 		<div class="right clearfix">
 		#foreach ($cat in $categories)
-            <a href="/category/${cat.code}" style="display:inline-block;text-align:center;">
+            <a href="/category/${cat.code}">
 				<img src="/img/category/${cat.pic}.jpg" />
 				<p>${cat.name}</p>
 			</a>

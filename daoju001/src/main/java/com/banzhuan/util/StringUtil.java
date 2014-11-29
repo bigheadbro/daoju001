@@ -584,6 +584,15 @@ public class StringUtil {
 		return Integer.parseInt(tmp);
 	}
 	
+	public static boolean isContansLetter(String str)
+	{
+		try {   
+            double num=Double.valueOf(str);//把字符串强制转换为数字   
+            return false;//如果是数字，返回True   
+        } catch (Exception e) {   
+            return true;//如果抛出异常，返回False   
+        } 
+	}
 	public static String firstLetterToString(String s)
 	{
 		String tmp = s.split("[|]")[0];

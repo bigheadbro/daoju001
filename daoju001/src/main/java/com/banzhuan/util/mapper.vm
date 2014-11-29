@@ -31,6 +31,6 @@
 	
 -------------------------------------------------
     #foreach( $field in $entity.columns )
-		${field.fieldName}Bool,
+		ct.set${field.fieldName}(${field.fieldName});
 	#end
 	

@@ -846,6 +846,11 @@ public class CommonService {
 		return questionDAO.queryQuestionEntityById(id);
 	}
 	
+	public QuestionEntity getLatestQuestion()
+	{
+		return questionDAO.getLatestQuestion();
+	}
+	
 	public void setRequestFormWithAccount(RequestForm form, Account accnt)
 	{
 		if(accnt.isLogin())

@@ -1,4 +1,4 @@
-﻿#set($layout = "/layout/index_layout.vm")
+﻿#set($layout = "/layout/item_layout.vm")
 <script>
 	$(function() {
 	  $(".client a").mouseenter(function () {

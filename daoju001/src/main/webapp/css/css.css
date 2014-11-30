@@ -156,7 +156,7 @@ a.common:hover{text-decoration:underline;color:#00c0ff}
 .purchase-content-container .operation p{clear:both;color:#525252;font-size:12px;margin-top:60px;}
 
 /*newaddr*/
-.newaddr-win{display:none;position:absolute;top:50px;right:400px;z-index:10002;width:740px;border:1px solid #0099cb;font-size:13px;}
+.newaddr-win{display:none;position:absolute;top:50px;right:400px;z-index:1000002;width:740px;border:1px solid #0099cb;font-size:13px;}
 .newaddr-win-content{background-color:white;padding: 15px;}
 .newaddr-win h2{font-size:18px;color:#8b8b8b;font-weight: 100;}
 .newaddr-win h2 a{float:right;color:black;margin-top: -10px;}
@@ -530,10 +530,11 @@ div[contentEditable]{outline:0}
 .main-menu .content .side .query input{width: 167px;border: 1px solid #ddd;padding: 3px;text-indent: 3px;}
 .main-menu .content .side .query .operation{margin-top:10px;}
 .main-menu .content .side .query a{background-color:#ff8f17;font-size:14px;color:white;padding:2px 6px;border:1px solid #ea7900;}
+.main-menu .content .side .query a:hover{background-color:#fda240;}
 .main-menu .content .side .query span{font-size:12px;color:#ff8f17}
 .main-menu .content .side .question{border:1px solid #d8d8d8;margin-top:10px;padding:10px;height: 161px;}
 .main-menu .content .side .question h1{font-size:14px;color:#636363}
-.main-menu .content .side .question p{color:#636363;font-size:12px;}
+.main-menu .content .side .question p{color:#636363;font-size:12px;margin: 5px 0;}
 .main-menu .content .side .question a{color:#ff8f17;font-size:12px;}
 .main-menu .content .side .question a:hover{text-decoration:underline;}
 ul.index-tab{background-color:#0099cb;height: 40px;}
@@ -1039,14 +1040,14 @@ label em.error{float:right}
 #uploadsample{color:white;background-color:#ff9000;border-radius:5px;padding:3px;display: inline-block;}
 .uploadv{width:62px;height:26px;opacity:0;position:absolute;left: 0;top: 10px;}
 
-#pagemask, #pagemask-complain,#pagemask-brand, #pagemask-answer,#pagemask-card,#pagemask-newaddr,#pagemask-newaddr,#pagemask-pca,#pagemask-addstock,#pagemask-addstock{
+#pagemask, #pagemask-complain, #pagemask-searchmaterial, #pagemask-brand, #pagemask-answer,#pagemask-card,#pagemask-newaddr,#pagemask-newaddr,#pagemask-pca,#pagemask-addstock,#pagemask-addstock{
 position: absolute;
 display: none;
 top: 0;
 left: 0;
 width: 100%;
 background: #333;
-z-index: 10001;
+z-index: 1000001;
 filter: alpha(opacity=30);
 opacity: .3;
 }
@@ -1058,7 +1059,7 @@ top: 0;
 left: 0;
 width: 100%;
 background: #333;
-z-index: 10002;
+z-index: 1000002;
 filter: alpha(opacity=30);
 opacity: .3;
 }
@@ -1090,7 +1091,7 @@ opacity: .3;
 .card-win .bottom .listitem.mid{border-left: 1px solid #dadada;border-right: 1px solid #dadada;}
 
 /*系统提示框*/
-.log-win{display:none;position:absolute;top:50px;right:400px;z-index:10002;width:400px;padding: 5px;border-radius: 5px;background:url(../img/transGray.png);font-size:13px;}
+.log-win{display:none;position:absolute;top:50px;right:400px;z-index:1000002;width:400px;padding: 5px;border-radius: 5px;background:url(../img/transGray.png);font-size:13px;}
 .log-layer{background:white;padding-bottom: 10px;}
 .log-layer h3{background:#0099cb;color:white;padding:15px;padding-left:20px;margin:0;font-size: 14px}
 .log-con{}
@@ -1109,7 +1110,7 @@ opacity: .3;
 .log-con .left a.reg{float:right;color:#6f8fa1;}
 
 /*系统提示框*/
-.alert-wrapper{position:absolute;display:none;z-index:10002;width:480px;padding: 5px;border-radius: 5px;background:url(../img/transGray.png);font-size:13px;}
+.alert-wrapper{position:absolute;display:none;z-index:1000002;width:480px;padding: 5px;border-radius: 5px;background:url(../img/transGray.png);font-size:13px;}
 .alert-layer{background:white;padding-bottom: 10px;}
 .alert-layer h3{background:#0088b5;color:white;padding:5px;padding-left:20px;margin:0;font-size: 14px}
 .closealert{float:right;display:block;margin-right: 5px;cursor:pointer;font-size:15px;}
@@ -1121,7 +1122,7 @@ opacity: .3;
 .alert-btn{display: block;color: white;font-size: 24px;text-align: center;line-height: 35px;padding: 0 10px;height:41px;background-color:#63a200;border-radius:4px;cursor:pointer}
 .alert-footer{margin: 0 35px 20px 35px;float:right;color:#d2d2d2}
 /*上传头像*/
-.uploadlogo-win{display:none;position:absolute;top:50px;right:400px;z-index:10002;width:600px;padding: 5px;border-radius: 5px;background:url(../img/transGray.png);font-size:13px;}
+.uploadlogo-win{display:none;position:absolute;top:50px;right:400px;z-index:1000002;width:600px;padding: 5px;border-radius: 5px;background:url(../img/transGray.png);font-size:13px;}
 .uploadlog-win-content{background-color:white}
 .uploadlogo-win h2{background-color:#0099cb;color:white;font-size:14px;padding:3px 10px;font-weight: 100;}
 .uploadlogo-win h2 a{float:right;}
@@ -1141,7 +1142,7 @@ opacity: .3;
 .uploadlogo-win .content .thumb-out{display:table-cell;vertical-align:middle;}
 
 /*插入图片*/
-.addimg-win{display:none;position:absolute;top:50px;right:400px;z-index:10002;width:450px;padding: 5px;border-radius: 5px;background:url(../img/transGray.png);font-size:13px;}
+.addimg-win{display:none;position:absolute;top:50px;right:400px;z-index:1000002;width:450px;padding: 5px;border-radius: 5px;background:url(../img/transGray.png);font-size:13px;}
 .addimg-cont{background-color:white;height:230px;}
 .mainpage-container .main-right .addimg-cont h2{color:white;}
 .addimg-cont h3{color:#323232;font-size:18px;margin: 25px;margin-bottom: 15px;}
@@ -1157,7 +1158,7 @@ opacity: .3;
 .addimg-win h2 a{float:right;}
 
 /*专业回答*/
-.answer-win{display:none;position:absolute;top:50px;right:400px;z-index:10002;width:600px;padding: 5px;border-radius: 5px;background:url(../img/transGray.png);font-size:13px;}
+.answer-win{display:none;position:absolute;top:50px;right:400px;z-index:1000002;width:600px;padding: 5px;border-radius: 5px;background:url(../img/transGray.png);font-size:13px;}
 .answer-win-content{background-color:white;padding-bottom:5px;}
 .answer-win h2{background-color:#0099cb;color:white;font-size:14px;padding:3px 10px;}
 .answer-win h2 a{float:right;}
@@ -1193,7 +1194,7 @@ opacity: .3;
 .addstock-win-content .content .op{text-align:center;margin: 40px 0;}
 .addstock-win-content .content .op a{background-color:#0099CB;color:white;width:280px;line-height:35px;font-size:18px;display: inline-block;}
 /*快速发布*/
-.quickrequest-win{display:none;position:absolute;top:50px;right:400px;z-index:10002;width:636px;padding: 5px;border-radius: 5px;background:url(../img/transGray.png);font-size:13px;}
+.quickrequest-win{display:none;position:absolute;top:50px;right:400px;z-index:1000002;width:636px;padding: 5px;border-radius: 5px;background:url(../img/transGray.png);font-size:13px;}
 .quickrequest-win-content{background-color:white;padding-bottom:5px;}
 .quickrequest-win-content h2{background-color:#0099cb;color:white;font-size:14px;padding:3px 10px;}
 .quickrequest-win-content h2 a{float:right;}
@@ -1235,8 +1236,16 @@ opacity: .3;
 .wxquickrequest-win-content .content .part .section textarea.qr-cont{width:600px;}
 .wxquickrequest-win-content .request-cont em.error {display: block;margin-left: 120px;font-size:36px;}
 .wxquickrequest-win-content  em.error {font-size:36px;}
+/*材质*/
+.searchmaterial-win{display:none;position:absolute;top:50px;right:400px;z-index:1000002;width:600px;padding: 5px;border-radius: 5px;background:url(../img/transGray.png);font-size:13px;}
+.searchmaterial-win-content{background-color:white;padding-bottom:5px;}
+.searchmaterial-win h2{background-color:#0099cb;color:white;font-size:14px;padding:3px 10px;}
+.searchmaterial-win h2 span{line-height:25px;display:inline-block;}
+.searchmaterial-win h2 span img{float:left;}
+.searchmaterial-win h2 a{float:right;}
+.searchmaterial-win .content{margin: 10px 30px;}
 /*投诉*/
-.complain-win{display:none;position:absolute;top:50px;right:400px;z-index:10002;width:600px;padding: 5px;border-radius: 5px;background:url(../img/transGray.png);font-size:13px;}
+.complain-win{display:none;position:absolute;top:50px;right:400px;z-index:1000002;width:600px;padding: 5px;border-radius: 5px;background:url(../img/transGray.png);font-size:13px;}
 .complain-win-content{background-color:white;padding-bottom:5px;}
 .complain-win h2{background-color:#0099cb;color:white;font-size:14px;padding:3px 10px;}
 .complain-win h2 a{float:right;}
@@ -1253,7 +1262,7 @@ opacity: .3;
 .complain-op .savedraft{background-color:#dd5a5a;color:white;border-radius:4px;display: block;float: left;width: 100px;text-align: center;padding: 10px;}
 
 /*品牌*/
-.brand-win{display:none;position:absolute;top:50px;right:400px;z-index:10002;width:784px;padding: 5px;border-radius: 5px;background:url(../img/transGray.png);font-size:13px;}
+.brand-win{display:none;position:absolute;top:50px;right:400px;z-index:1000002;width:784px;padding: 5px;border-radius: 5px;background:url(../img/transGray.png);font-size:13px;}
 .brand-win-content{background-color:white;}
 .mainpage-container .main-right .brand-win h2{background-color:#0099cb;color:white;font-size:14px;padding:3px 10px;}
 .brand-win h2 a{float:right;}

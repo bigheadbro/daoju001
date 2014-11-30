@@ -176,6 +176,10 @@
 			order by gmt_create desc
 	</select>
 	
+	<select id="getLatestQuestion" resultMap="QuestionResultMap">
+		SELECT * from t_question t order by gmt_create desc limit 1
+	</select>
+	
 	<select id="getMainquestions" parameterType="QuestionEntity"
 			resultMap="QuestionResultMap">
 		SELECT * from t_question t where state = 1 and cnt_PA > 0 order by gmt_create desc limit 3

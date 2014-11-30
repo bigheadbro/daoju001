@@ -1,0 +1,28 @@
+<div id="pagemask-searchmaterial"></div>
+<div class="searchmaterial-win">
+    <div class="searchmaterial-win-content">
+        <h2>
+            <a class="close-searchmaterial">x</a>
+			<span><img src="/img/daoshifu_w.png" />	| 材质查询</span>
+		</h2>
+		<form id="form_searchmaterial" action="/searchmaterialt" method="post">
+            <div class="content">
+                <div class="searchmaterial-container">
+					<textarea id="bargin" class="dsf-form-text-input bargin"  name="content" placeholder="请填写您对于刀师傅的意见，我们针对您的意见进行改进" ></textarea></li>	
+                </div>
+				<div class="searchmaterial-op clearfix">
+                    <a class="publish" id="submit_searchmaterial">提 交</a>
+                </div>
+            </div>
+			<script>
+			$(function() {
+                $("#submit_searchmaterial").click(function () {
+                    $("#form_searchmaterial").ajaxSubmit();
+					$("#form_searchmaterial")[0].reset();
+					hidesearchmaterial();
+            	});
+            });
+			</script>
+		</form>
+    </div>
+</div>

@@ -1,4 +1,4 @@
-﻿#set($layout = "/layout/index_layout.vm")
+﻿#set($layout = "/layout/item_layout.vm")
 <div class="main-bk-wrapper">
   <div class="mainpage-container clearfix">
 	  <div class="reg-left">

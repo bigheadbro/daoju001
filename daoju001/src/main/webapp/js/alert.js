@@ -5,6 +5,8 @@ var side_show = false;
 var complainshow = false;
 var requestshow = false;
 var stockshow = false;
+var searchmaterialshow = false;
+
 function hidecomplain() {
 	$(".complain-win").hide();
 	$("#pagemask-complain").hide();
@@ -22,6 +24,25 @@ function showcomplain() {
 		complainshow = true;
 	}
 }
+
+function hidesearchmaterial() {
+	$(".searchmaterial-win").hide();
+	$("#pagemask-searchmaterial").hide();
+	searchmaterialshow = false;
+}
+function showsearchmaterial() {
+	$("#pagemask-searchmaterial").css("width", $(document).width());
+	$("#pagemask-searchmaterial").css("height", $(document).height());
+	$("#pagemask-searchmaterial").show();
+	$(".searchmaterial-win").css("top",
+			$(window).height() / 2 + $(document).scrollTop() - 220);
+	$(".searchmaterial-win").css("left", $(document).width() / 2 - 300);
+	if (!searchmaterialshow) {
+		$(".searchmaterial-win").show();
+		searchmaterialshow = true;
+	}
+}
+
 function hiderequest() {
 	$(".quickrequest-win").hide();
 	$("#pagemask-quickrequest").hide();
@@ -80,6 +101,9 @@ $(function() {
 	});
 	$("a.complain").click(function(){
 		showcomplain();
+	});
+	$("a.searchmaterial").click(function(){
+		showsearchmaterial();
 	});
 	$(".code").mouseenter(function(){
 		$(this).children("i").show();

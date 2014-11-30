@@ -433,13 +433,13 @@
 							<div class="query">
 								<input type="text" placeholder="输入你需要查询的材质" />
 								<div class="operation">
-									<a>材质查询</a>
+									<a class="searchmaterial">材质查询</a>
 									<span>材质查询小工具</span>
 								</div>
 							</div>
 							<div class="question">
 								<h1>最新问题</h1>
-								<p></p>
+								<p>${question.content}</p>
 								<a>我要提问</a>
 							</div>
     					</div>
@@ -448,6 +448,7 @@
             </div>
 		</div>
 		<div class="main-bk-wrapper pt0">$screen_content</div>
+		#parse("/popup/searchmaterial.vm")
 		#parse("/common/connectus.vm")
 		#parse("/common/complain.vm")
         #parse("/common/footer.vm")

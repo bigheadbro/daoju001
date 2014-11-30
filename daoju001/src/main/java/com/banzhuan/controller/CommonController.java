@@ -254,6 +254,8 @@ public class CommonController extends BaseController{
 		mv.addObject("d3",d3);
 		mv.addObject("daobingbrand", daobingbrand);
 		mv.addObject("daobingseries",daobingseries);
+		
+		mv.addObject("question",commonService.getLatestQuestion());
 		System.out.println(StringUtil.getCurrentSec());	
 		return mv;
 	}

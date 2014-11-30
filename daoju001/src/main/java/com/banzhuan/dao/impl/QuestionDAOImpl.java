@@ -106,5 +106,10 @@ public class QuestionDAOImpl extends SqlSessionDaoSupport implements QuestionDAO
 		return this.getSqlSession().selectOne("getQuestionCount",istoday); 
 	}
 
+	@Override
+	public QuestionEntity getLatestQuestion()
+	{
+		return this.getSqlSession().selectOne("getLatestQuestion"); 
+	}
 	
 }

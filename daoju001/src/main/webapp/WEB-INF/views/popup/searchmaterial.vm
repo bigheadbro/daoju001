@@ -5,24 +5,40 @@
             <a class="close-searchmaterial">x</a>
 			<span><img src="/img/daoshifu_w.png" />	| 材质查询</span>
 		</h2>
-		<form id="form_searchmaterial" action="/searchmaterialt" method="post">
-            <div class="content">
-                <div class="searchmaterial-container">
-					<textarea id="bargin" class="dsf-form-text-input bargin"  name="content" placeholder="请填写您对于刀师傅的意见，我们针对您的意见进行改进" ></textarea></li>	
-                </div>
-				<div class="searchmaterial-op clearfix">
-                    <a class="publish" id="submit_searchmaterial">提 交</a>
-                </div>
-            </div>
+        <div class="content">
+            <div class="material-box clearfix">
+                <form id="form_sm" method="post" action="/sm">
+                    <!-- 隐藏字段，用于标示是表单提交 -->
+                    <input type="hidden" name="do_submit" value="true"/>
+                    <input id="materialinput" type="text" name="searchmaterial" placeholder="请输入你需要查询的材质" />
+                    <a id="searchmaterial">材质查询</a>
+                </form>
+			</div>
 			<script>
-			$(function() {
-                $("#submit_searchmaterial").click(function () {
-                    $("#form_searchmaterial").ajaxSubmit();
-					$("#form_searchmaterial")[0].reset();
-					hidesearchmaterial();
-            	});
-            });
-			</script>
-		</form>
+    		$(function(){
+    			$("#searchmaterial").click(function(){
+    				$("#form_sm").ajaxSubmit({
+    					dataType:"json", //数据类型  
+                        url:"/searchmaterial",
+                        success:function(data){
+    						if(data.str != ""){
+    							$(".result h1").empty();
+    							$(".result p").text(data.str);
+    						}
+							else{
+								$(".result h1").text("对不起！");
+    							$(".result p").html("没有查询到您输入的材质哦~<br/>请核对您输入的材质后，再次查询");
+							}
+    					}
+    				});
+    			});
+    		});
+    		</script>
+			<div class="result">
+                <h1></h1>
+				<p></p>
+            </div>
+			<a class="close-searchmaterial close">关  闭</a>
+        </div>
     </div>
 </div>

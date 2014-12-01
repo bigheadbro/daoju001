@@ -128,4 +128,18 @@
 #if($stringUtil.isContains($param,">对应筒夹"))
     <td>$!{cut.relativecollet}</td>
 #end
-    
+#if($stringUtil.isContains($param,">宽度"))
+    <td>$!{cut.width}</td>
+#end
+#if($stringUtil.isContains($param,">高度"))
+    <td>$!{cut.height}</td>
+#end
+#if($stringUtil.isContains($param,">切槽范围"))
+    <td>$!{cut.grooverange}</td>
+#end
+#if($stringUtil.isContains($param,">钻孔范围"))
+    <td>$!{cut.drillrange}</td>
+#end
+#if($stringUtil.isContains($param,">螺纹方向"))
+    <td>$!{cut.screwdirection}</td>
+#end    

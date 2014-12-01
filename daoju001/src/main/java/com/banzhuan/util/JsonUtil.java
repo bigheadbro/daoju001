@@ -416,6 +416,43 @@ public class JsonUtil {
         }  
 	}
 	
+	public static void sendSingleString(HttpServletResponse response, String str)
+	{
+		JSONObject object = new JSONObject();  
+        response.setContentType("text/Xml;charset=gbk");  
+        object.element("str", str);
+        PrintWriter out = null;  
+        try {  
+            out = response.getWriter();  
+            out.println(object.toString());  
+        }  
+        catch (IOException ex1) {  
+            ex1.printStackTrace();  
+        }  
+        finally {  
+            out.close();  
+        }  
+	}
+	
+	public static void sendTwoString(HttpServletResponse response, String str1, String str2)
+	{
+		JSONObject object = new JSONObject();  
+        response.setContentType("text/Xml;charset=gbk");  
+        object.element("str1", str1);
+        object.element("str2", str2);
+        PrintWriter out = null;  
+        try {  
+            out = response.getWriter();  
+            out.println(object.toString());  
+        }  
+        catch (IOException ex1) {  
+            ex1.printStackTrace();  
+        }  
+        finally {  
+            out.close();  
+        }  
+	}
+	
 	public static void sendCts(HttpServletResponse response, List<CuttingToolEntity> list)
 	{
 		JSONArray jsonArray = JSONArray.fromObject(list);

@@ -185,8 +185,8 @@ public class CuttingToolsConfiguration
 		codeMap.put("46", "060101");
 		codeMap.put("47", "060102");
 		codeMap.put("48", "060103");
-		codeMap.put("49", "060104");
-		codeMap.put("50", "060105");
+		codeMap.put("49", "060201");
+		codeMap.put("50", "060202");
 		codeMap.put("51", "060601");
 		codeMap.put("52", "060602");
 		codeMap.put("53", "060603");
@@ -468,6 +468,10 @@ public class CuttingToolsConfiguration
 			{
 				ret += "<th>钻孔范围</th>";
 			}
+			if (StringUtil.isNotEmpty(cts.get(i).getScrewdirection()) && !ret.contains("<th>螺纹方向</th>"))
+			{
+				ret += "<th>螺纹方向</th>";
+			}
 		}
 		return ret;
 	}
@@ -733,6 +737,10 @@ public class CuttingToolsConfiguration
 		if (ret.contains("<span>钻孔范围</span>"))
 		{
 			tmp += "<span>"+ct.getDrillrange()+"</span>";
+		}
+		if (ret.contains("<span>螺纹方向</span>"))
+		{
+			tmp += "<span>"+ct.getScrewdirection()+"</span>";
 		}
 		return tmp;
 	}

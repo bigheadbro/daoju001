@@ -216,6 +216,9 @@ $(function() {
 	$(".close-complain").on("click", function() {
 		hidecomplain();
 	});
+	$(".close-searchmaterial").on("click", function() {
+		hidesearchmaterial();
+	});
 	$(".close-addstock").on("click", function() {
 		hidestock();
 	});

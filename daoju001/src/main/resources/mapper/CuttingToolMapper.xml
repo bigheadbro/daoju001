@@ -98,7 +98,7 @@
 		<id property="height" column="height" />
 		<id property="grooverange" column="grooverange" />
 		<id property="drillrange" column="drillrange" />
-		
+		<id property="screwdirection" column="screwdirection" />
 	</resultMap>
 	<select id="getBrandCountByCode" parameterType="String" resultType="int">
 		select count(1) from (select id,code,brand from (select id,code,brand from t_cuttingtool group by seriesname) as series  where left(`code`,2)=#{code} group by brand) as brand
@@ -267,6 +267,21 @@
 		</if>
 		<if test="relativecollet != null and relativecollet != ''">
  	        and relativecollet = #{relativecollet}
+		</if>
+		<if test="width != null and width != 0">
+ 	        and width = #{width}
+		</if>
+		<if test="height != null and height != 0">
+ 	        and height = #{height}
+		</if>
+		<if test="grooverange != null and grooverange != ''">
+ 	        and grooverange = #{grooverange}
+		</if>
+		<if test="drillrange != null and drillrange != ''">
+ 	        and drillrange = #{drillrange}
+		</if>
+		<if test="screwdirection != null and screwdirection != ''">
+ 	        and screwdirection = #{screwdirection}
 		</if>
 		<if test="usage != null and usage != ''">
        		and locate(#{usage},`usage`) > 0

@@ -1237,13 +1237,20 @@ opacity: .3;
 .wxquickrequest-win-content .request-cont em.error {display: block;margin-left: 120px;font-size:36px;}
 .wxquickrequest-win-content  em.error {font-size:36px;}
 /*材质*/
-.searchmaterial-win{display:none;position:absolute;top:50px;right:400px;z-index:1000002;width:600px;padding: 5px;border-radius: 5px;background:url(../img/transGray.png);font-size:13px;}
+.searchmaterial-win{display:none;position:absolute;top:50px;right:400px;z-index:1000002;width:380px;padding: 5px;border-radius: 5px;background:url(../img/transGray.png);font-size:13px;}
 .searchmaterial-win-content{background-color:white;padding-bottom:5px;}
-.searchmaterial-win h2{background-color:#0099cb;color:white;font-size:14px;padding:3px 10px;}
-.searchmaterial-win h2 span{line-height:25px;display:inline-block;}
+.searchmaterial-win h2{background-color:#0099cb;color:white;font-size:18px;padding:10px;font-weight:normal}
+.searchmaterial-win h2 span{line-height:25px;display:inline-block;text-indent:6px;}
 .searchmaterial-win h2 span img{float:left;}
-.searchmaterial-win h2 a{float:right;}
-.searchmaterial-win .content{margin: 10px 30px;}
+.searchmaterial-win h2 a{float:right;font-size: 16px;}
+.searchmaterial-win .content{padding:30px;}
+.searchmaterial-win .content .material-box{}
+.searchmaterial-win .content .material-box input{padding: 5px;float: left;width: 218px;}
+.searchmaterial-win .content .material-box a{border:1px solid #ea7900;color:white;background-color:#ff8f17;font-size:14px;font-weight:normal;padding: 5px 15px;float: left;}
+.searchmaterial-win .content .result{color:#0099cb;text-align:center;margin-top:25px;}
+.searchmaterial-win .content .result h1{font-size:30px;font-weight:normal}
+.searchmaterial-win .content .result p{font-size:14px;margin-top: 10px;line-height: 22px;}
+.searchmaterial-win .content a.close{background-color:#cecece;color:white;border:1px solid #b3b3b3;font-size:14px;margin: 30px auto 0;display: block;width: 70px;text-align: center;padding: 5px;}
 /*投诉*/
 .complain-win{display:none;position:absolute;top:50px;right:400px;z-index:1000002;width:600px;padding: 5px;border-radius: 5px;background:url(../img/transGray.png);font-size:13px;}
 .complain-win-content{background-color:white;padding-bottom:5px;}

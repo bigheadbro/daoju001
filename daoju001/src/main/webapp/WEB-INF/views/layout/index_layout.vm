@@ -77,7 +77,7 @@
         									<a href="/category/010101">面铣刀盘</a>
         								</span>
         								<span>
-        									<a href="/category/010102">合金接杆</a>
+        									<a href="/category/010102">铣刀杆</a>
         								</span>
         							</div>
                                 </li>
@@ -429,13 +429,36 @@
     					<div class="banner">
     						
             			</div>
+						<script>
+						$(function(){
+							$("a.searchmaterial").click(function(){
+								$("#materialinput").val($("#index-material").val());
+								$("#form_material").ajaxSubmit({
+									 dataType:"json", //数据类型  
+                                    url:"/searchmaterial",
+                                    success:function(data){
+    									if(data.str != ""){
+                							$(".result h1").empty();
+                							$(".result p").text(data.str);
+                						}
+										else{
+            								$(".result h1").text("对不起！");
+                							$(".result p").html("没有查询到您输入的材质哦~<br/>请核对您输入的材质后，再次查询");
+            							}
+									}
+								});
+							});
+						});
+						</script>
     					<div class="side">
 							<div class="query">
-								<input type="text" placeholder="输入你需要查询的材质" />
+								<form id="form_material" method="post">
+								<input type="text" id="index-material" name="material" placeholder="输入你需要查询的材质" />
 								<div class="operation">
 									<a class="searchmaterial">材质查询</a>
 									<span>材质查询小工具</span>
 								</div>
+								</form>
 							</div>
 							<div class="question">
 								<h1>最新问题</h1>

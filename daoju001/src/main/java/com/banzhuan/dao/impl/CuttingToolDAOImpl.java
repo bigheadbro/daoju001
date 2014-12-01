@@ -80,6 +80,10 @@ public class CuttingToolDAOImpl extends SqlSessionDaoSupport implements CuttingT
 	@Override
 	public List<CuttingToolEntity> queryCuttingToolByCode(String code)
 	{
+		if(code.length() < 6)
+		{
+			code = code + "*";
+		}
 		return this.getSqlSession().selectList("queryCuttingToolByCode", code);
 	}
 	

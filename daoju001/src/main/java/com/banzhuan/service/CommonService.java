@@ -1818,6 +1818,12 @@ public class CommonService {
 		HashSet<Double> slotwidth= new HashSet<Double>();
 		HashSet<Double> pointdiameter= new HashSet<Double>();
 		
+		HashSet<Double> width= new HashSet<Double>();
+		HashSet<Double> height= new HashSet<Double>();
+		HashSet<String> grooverange= new HashSet<String>();
+		HashSet<String> drillrange= new HashSet<String>();
+		HashSet<String> screwdirection= new HashSet<String>();
+		
 		for(int j = 0; j < cts.size(); j++)
 		{
 			brand.add(cts.get(j).getBrand());
@@ -1864,185 +1870,210 @@ public class CommonService {
 			taper.add(cts.get(j).getTaper());
 			slotwidth.add(cts.get(j).getSlotwidth());
 			pointdiameter.add(cts.get(j).getPointdiameter());
+			width.add(cts.get(j).getWidth());
+			height.add(cts.get(j).getHeight());
+			grooverange.add(cts.get(j).getGrooverange());
+			drillrange.add(cts.get(j).getDrillrange());
+			screwdirection.add(cts.get(j).getScrewdirection());
 		}
 		Map<String,List<String>> map = new HashMap<String, List<String>>();
-		if(brand.size() > 0)
+		if(brand.size() > 1 || (!brand.contains(null) && brand.size() == 1))
 		{
 			map.put("brand", CuttingToolsConfiguration.convertSetToList(brand));
 		}
-		if(angle.size() > 0)
+		if(angle.size() > 1 || (!angle.contains(0) && angle.size() == 1))
 		{
 			map.put("angle", CuttingToolsConfiguration.sortIntegerList(angle));
 		}
-		if(ctcount.size() > 0)
+		if(ctcount.size() > 1 || (!ctcount.contains(0) && ctcount.size() == 1))
 		{
 			map.put("ctcount", CuttingToolsConfiguration.sortIntegerList(ctcount));
 		}
-		if(material.size() > 0)
+		if(material.size() > 1 || (!material.contains(null) && material.size() == 1))
 		{
 			map.put("material", CuttingToolsConfiguration.convertSetToList(material));
 		}
-		if(diameter.size() > 0)
+		if(diameter.size() > 1 || (!diameter.contains(null) && diameter.size() == 1))
 		{
 			map.put("diameter", CuttingToolsConfiguration.mergeList(diameter));
 		}
-		if(usefullength.size() > 0)
+		if(usefullength.size() > 1 || (!usefullength.contains(0d) && usefullength.size() == 1))
 		{
 			map.put("usefullength", CuttingToolsConfiguration.sortDoubleList(usefullength));
 		}
-		if(usage.size() > 0)
+		if(usage.size() > 1 || (!usage.contains(null) && usage.size() == 1))
 		{
 			List<String> list = CuttingToolsConfiguration.splitWorkingtoolOrUsage(usage);
 			map.put("usage", list);
 		}
-		if(cujing.size() > 0)
+		if(cujing.size() > 1 || (!cujing.contains(0) && cujing.size() == 1))
 		{
 			map.put("cujing", CuttingToolsConfiguration.sortIntegerList(cujing));
 		}
-		if(pipesize.size() > 0)
+		if(pipesize.size() > 1 || (!pipesize.contains(0d) && pipesize.size() == 1))
 		{
 			map.put("pipesize", CuttingToolsConfiguration.sortDoubleList(pipesize));
 		}
-		if(shank.size() > 0)
+		if(shank.size() > 1 || (!shank.contains(null) && shank.size() == 1))
 		{
 			map.put("shank", CuttingToolsConfiguration.mergeList(shank));
 		}
-		if(shanktype.size() > 0)
+		if(shanktype.size() > 1 || (!shanktype.contains(null) && shanktype.size() == 1))
 		{
 			map.put("shanktype", CuttingToolsConfiguration.convertSetToList(shanktype));
 		}
-		if(shape.size() > 0)
+		if(shape.size() > 1 || (!shape.contains(null) && shape.size() == 1))
 		{
 			map.put("shape", CuttingToolsConfiguration.convertSetToList(shape));
 		}
-		if(backangle.size() > 0)
+		if(backangle.size() > 1 || (!backangle.contains(0) && backangle.size() == 1))
 		{
 			map.put("backangle", CuttingToolsConfiguration.sortIntegerList(backangle));
 		}
-		if(workingtool.size() > 0)
+		if(workingtool.size() > 1 || (!workingtool.contains(null) && workingtool.size() == 1))
 		{
 			List<String> list = CuttingToolsConfiguration.splitWorkingtoolOrUsage(workingtool);
 			map.put("workingtool", list);
 		}
-		if(edgeno.size() > 0)
+		if(edgeno.size() > 1 || (!edgeno.contains(0) && edgeno.size() == 1))
 		{
 			map.put("edgeno", CuttingToolsConfiguration.sortIntegerList(edgeno));
 		}
-		if(edgelength.size() > 0)
+		if(edgelength.size() > 1 || (!edgelength.contains(null) && edgelength.size() == 1))
 		{
 			map.put("edgelength", CuttingToolsConfiguration.mergeList(edgelength));
 		}
-		if(totallength.size() > 0)
+		if(totallength.size() > 1 || (!totallength.contains(null) && totallength.size() == 1))
 		{
 			map.put("totallength", CuttingToolsConfiguration.mergeList(totallength));
 		}
-		if(screwangle.size() > 0)
+		if(screwangle.size() > 1 || (!screwangle.contains(null) && screwangle.size() == 1))
 		{
 			map.put("screwangle", CuttingToolsConfiguration.convertSetToList(screwangle));
 		}
-		if(coatingtype.size() > 0)
+		if(coatingtype.size() > 1 || (!coatingtype.contains(null) && coatingtype.size() == 1))
 		{
 			map.put("coatingtype", CuttingToolsConfiguration.convertSetToList(coatingtype));
 		}
-		if(rangle.size() > 0)
+		if(rangle.size() > 1 || (!rangle.contains(null) && rangle.size() == 1))
 		{
 			map.put("rangle", CuttingToolsConfiguration.mergeList(rangle));
 		}
-		if(direction.size() > 0)
+		if(direction.size() > 1 || (!direction.contains(0) && direction.size() == 1))
 		{
 			map.put("direction", CuttingToolsConfiguration.sortIntegerList(direction));
 		}
-		if(minworkdiameter.size() > 0)
+		if(minworkdiameter.size() > 1 || (!minworkdiameter.contains(width) && minworkdiameter.size() == 1))
 		{
 			map.put("minworkdiameter", CuttingToolsConfiguration.sortDoubleList(minworkdiameter));
 		}
-		if(innercooling.size() > 0)
+		if(innercooling.size() > 1 || (!innercooling.contains(0) && innercooling.size() == 1))
 		{
 			map.put("innercooling", CuttingToolsConfiguration.sortIntegerList(innercooling));
 		}
-		if(diameterratio.size() > 0)
+		if(diameterratio.size() > 1 || (!diameterratio.contains(null) && diameterratio.size() == 1))
 		{
 			map.put("diameterratio", CuttingToolsConfiguration.convertSetToList(diameterratio));
 		}
-		if(slotshape.size() > 0)
+		if(slotshape.size() > 1 || (!slotshape.contains(null) && slotshape.size() == 1))
 		{
 			map.put("slotshape", CuttingToolsConfiguration.convertSetToList(slotshape));
 		}
-		if(handlenorm.size() > 0)
+		if(handlenorm.size() > 1 || (!handlenorm.contains(null) && handlenorm.size() == 1))
 		{
 			map.put("handlenorm", CuttingToolsConfiguration.convertSetToList(handlenorm));
 		}
-		if(taptype.size() > 0)
+		if(taptype.size() > 1 || (!taptype.contains(null) && taptype.size() == 1))
 		{
 			map.put("taptype", CuttingToolsConfiguration.convertSetToList(taptype));
 		}
-		if(screwtype.size() > 0)
+		if(screwtype.size() > 1 || (!screwtype.contains(null) && screwtype.size() == 1))
 		{
 			map.put("screwtype", CuttingToolsConfiguration.convertSetToList(screwtype));
 		}
-		if(axistype.size() > 0)
+		if(axistype.size() > 1 || (!axistype.contains(null) && axistype.size() == 1))
 		{
 			map.put("axistype", CuttingToolsConfiguration.convertSetToList(axistype));
 		}
-		if(axisdetail.size() > 0)
+		if(axisdetail.size() > 1 || (!axisdetail.contains(null) && axisdetail.size() == 1))
 		{
 			map.put("axisdetail", CuttingToolsConfiguration.convertSetToList(axisdetail));
 		}
-		if(thickness.size() > 0)
+		if(thickness.size() > 1 || (!thickness.contains(0d) && thickness.size() == 1))
 		{
 			map.put("thickness", CuttingToolsConfiguration.sortDoubleList(thickness));
 		}
-		if(maxslotdepth.size() > 0)
+		if(maxslotdepth.size() > 1 || (!maxslotdepth.contains(0d) && maxslotdepth.size() == 1))
 		{
 			map.put("maxslotdepth", CuttingToolsConfiguration.sortDoubleList(maxslotdepth));
 		}
-		if(taper.size() > 0)
+		if(taper.size() > 1 || (!taper.contains(0d) && taper.size() == 1))
 		{
 			map.put("taper", CuttingToolsConfiguration.sortDoubleList(taper));
 		}
-		if(slotwidth.size() > 0)
+		if(slotwidth.size() > 1 || (!slotwidth.contains(0d) && slotwidth.size() == 1))
 		{
 			map.put("slotwidth", CuttingToolsConfiguration.sortDoubleList(slotwidth));
 		}
-		if(pointdiameter.size() > 0)
+		if(pointdiameter.size() > 1 || (!pointdiameter.contains(0d) && pointdiameter.size() == 1))
 		{
 			map.put("pointdiameter", CuttingToolsConfiguration.sortDoubleList(pointdiameter));
 		}
-		if(handledsize.size() > 0)
+		if(handledsize.size() > 1 || (!handledsize.contains(null) && handledsize.size() == 1))
 		{
 			map.put("handledsize", CuttingToolsConfiguration.convertSetToList(handledsize));
 		}
-		if(screwsize.size() > 0)
+		if(screwsize.size() > 1 || (!screwsize.contains(null) && screwsize.size() == 1))
 		{
 			map.put("screwsize", CuttingToolsConfiguration.convertSetToList(screwsize));
 		}
-		if(screwdistance.size() > 0)
+		if(screwdistance.size() > 1 || (!screwdistance.contains(null) && screwdistance.size() == 1))
 		{
 			map.put("screwdistance", CuttingToolsConfiguration.convertSetToList(screwdistance));
 		}
-		if(accuracy.size() > 0)
+		if(accuracy.size() > 1 || (!accuracy.contains(null) && accuracy.size() == 1))
 		{
 			map.put("accuracy", CuttingToolsConfiguration.convertSetToList(accuracy));
 		}
-		if(collet.size() > 0)
+		if(collet.size() > 1 || (!collet.contains(null) && collet.size() == 1))
 		{
 			map.put("collet", CuttingToolsConfiguration.convertSetToList(collet));
 		}
-		if(interfacesize.size() > 0)
+		if(interfacesize.size() > 1 || (!interfacesize.contains(null) && interfacesize.size() == 1))
 		{
 			map.put("interfacesize", CuttingToolsConfiguration.convertSetToList(interfacesize));
 		}
-		if(maxbore.size() > 0)
+		if(maxbore.size() > 1 || (!maxbore.contains(0d) && maxbore.size() == 1))
 		{
 			map.put("maxbore", CuttingToolsConfiguration.sortDoubleList(maxbore));
 		}
-		if(minbore.size() > 0)
+		if(minbore.size() > 1 || (!minbore.contains(0d) && minbore.size() == 1))
 		{
 			map.put("minbore", CuttingToolsConfiguration.sortDoubleList(minbore));
 		}
-		if(necklength.size() > 0)
+		if(necklength.size() > 1 || (!necklength.contains(null) && necklength.size() == 1))
 		{
 			map.put("necklength", CuttingToolsConfiguration.mergeList(necklength));
+		}
+		if(width.size() > 1 || (!width.contains(0d) && width.size() == 1))
+		{
+			map.put("width", CuttingToolsConfiguration.sortDoubleList(width));
+		}
+		if(height.size() > 1 || (!height.contains(0d) && height.size() == 1))
+		{
+			map.put("height", CuttingToolsConfiguration.sortDoubleList(height));
+		}
+		if(screwdirection.size() > 1 || (!screwdirection.contains(null) && screwdirection.size() == 1))
+		{
+			map.put("screwdirection", CuttingToolsConfiguration.convertSetToList(screwdirection));
+		}
+		if(grooverange.size() > 1 || (!grooverange.contains(null) && grooverange.size() == 1))
+		{
+			map.put("grooverange", CuttingToolsConfiguration.convertSetToList(grooverange));
+		}
+		if(drillrange.size() > 1 || (!drillrange.contains(null) && drillrange.size() == 1))
+		{
+			map.put("drillrange", CuttingToolsConfiguration.convertSetToList(drillrange));
 		}
 		return map;
 	}

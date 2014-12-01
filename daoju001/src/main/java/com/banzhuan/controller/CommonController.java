@@ -1680,6 +1680,22 @@ public class CommonController extends BaseController{
 		return view;
 	}
 	
+	@RequestMapping(value = "/searchmaterial")
+	public void searchmaterial(final HttpServletRequest request,final HttpServletResponse response)
+	{
+		String material = request.getParameter("material");
+		if(StringUtil.isEmpty(material))
+		{
+			material = request.getParameter("searchmaterial");
+		}
+		String result = Util.queryMaterial("材质"+material);
+		if(StringUtil.isEqual(result, "该材质不在查询范围"))
+		{
+			result="";
+		}
+		JsonUtil.sendSingleString(response, result);
+	}
+	
 	@RequestMapping(value = "changeparam")
 	public void changeparam(final HttpServletRequest request,final HttpServletResponse response)
 	{
@@ -1732,6 +1748,11 @@ public class CommonController extends BaseController{
 		double minbore = Double.valueOf(StringUtil.isEmpty(request.getParameter("minbore"))?"0":request.getParameter("minbore"));
 		String necklength = request.getParameter("necklength");
 		String relativecollet = request.getParameter("relativecollet");
+		double width = Double.valueOf(StringUtil.isEmpty(request.getParameter("width"))?"0":request.getParameter("width"));
+		double height = Double.valueOf(StringUtil.isEmpty(request.getParameter("height"))?"0":request.getParameter("height"));
+		String grooverange = request.getParameter("grooverange");
+		String drillrange = request.getParameter("drillrange");
+		String screwdirection = request.getParameter("screwdirection");
 		ct.setCode(code);
 		ct.setBrand(brand);
 		ct.setSeriesname(seriesname);
@@ -1780,6 +1801,11 @@ public class CommonController extends BaseController{
 		ct.setMinbore(minbore);
 		ct.setNecklength(necklength);
 		ct.setRelativecollet(relativecollet);
+		ct.setWidth(width);
+		ct.setHeight(height);
+		ct.setGrooverange(grooverange);
+		ct.setDrillrange(drillrange);
+		ct.setScrewdirection(screwdirection);
 		List<CuttingToolEntity> cts = commonService.getSeriesByParam(ct);
 		Map<String,List<String>> map = commonService.getSearchParamMap(ct);
 		JsonUtil.sendSeriesList(response, cts,map);

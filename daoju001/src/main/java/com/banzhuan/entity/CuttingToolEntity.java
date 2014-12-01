@@ -135,6 +135,8 @@ public class CuttingToolEntity implements Serializable {
 	
 	private String drillrange;
 	
+	private String screwdirection;
+	
 	public int getId() {
 		return id;
 	}
@@ -647,5 +649,15 @@ public class CuttingToolEntity implements Serializable {
 	public void setDrillrange(String drillrange)
 	{
 		this.drillrange = drillrange;
+	}
+
+	public String getScrewdirection()
+	{
+		return screwdirection;
+	}
+
+	public void setScrewdirection(String screwdirection)
+	{
+		this.screwdirection = screwdirection;
 	}
 }

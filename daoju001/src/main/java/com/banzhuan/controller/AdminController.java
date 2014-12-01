@@ -605,7 +605,7 @@ public class AdminController extends BaseController{
             	tmp = sheet.getCell(9, j).getContents().trim().replace("；", ";").replace("（", "(").replace("）", ")");
             	if(StringUtil.isNotEmpty(tmp))
             	{
-            		ct.setCujing(Integer.valueOf(tmp));
+            		ct.setCujing(Integer.valueOf(tmp.replace("粗", "3").replace("精", "2").replace("一般", "1")));
             	}
             	tmp = sheet.getCell(10, j).getContents().trim().replace("；", ";").replace("（", "(").replace("）", ")");
             	if(StringUtil.isNotEmpty(tmp))
@@ -676,7 +676,7 @@ public class AdminController extends BaseController{
             	tmp = sheet.getCell(23, j).getContents().trim().replace("；", ";").replace("（", "(").replace("）", ")");
             	if(StringUtil.isNotEmpty(tmp))
             	{
-            		ct.setDirection(Integer.valueOf(tmp));
+            		ct.setDirection(Integer.valueOf(tmp.replace("右手", "3").replace("左手", "2").replace("通用", "1")));
             	}
             	tmp = sheet.getCell(24, j).getContents().trim().replace("；", ";").replace("（", "(").replace("）", ")");
             	if(StringUtil.isNotEmpty(tmp))
@@ -686,7 +686,7 @@ public class AdminController extends BaseController{
             	tmp = sheet.getCell(25, j).getContents().trim().replace("；", ";").replace("（", "(").replace("）", ")");
             	if(StringUtil.isNotEmpty(tmp))
             	{
-            		ct.setInnercooling(Integer.valueOf(tmp));
+            		ct.setInnercooling(Integer.valueOf(tmp.replace("外冷", "3").replace("内冷", "2").replace("一般", "1")));
             	}
             	tmp = sheet.getCell(26, j).getContents().trim().replace("；", ";").replace("（", "(").replace("）", ")");
             	if(StringUtil.isNotEmpty(tmp))
@@ -812,6 +812,11 @@ public class AdminController extends BaseController{
             	if(StringUtil.isNotEmpty(tmp))
             	{
             		ct.setDrillrange(tmp);
+            	}
+            	tmp = sheet.getCell(51, j).getContents().trim().replace("；", ";").replace("（", "(").replace("）", ")");
+            	if(StringUtil.isNotEmpty(tmp))
+            	{
+            		ct.setScrewdirection(tmp);
             	}
             	ct.setIshot(1);
             	if(seriesMap.get(ct.getSeriesname()) != null)

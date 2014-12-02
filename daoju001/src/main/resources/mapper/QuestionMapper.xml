@@ -177,7 +177,7 @@
 	</select>
 	
 	<select id="getLatestQuestion" resultMap="QuestionResultMap">
-		SELECT * from t_question t order by gmt_create desc limit 1
+		SELECT * from t_question t order by gmt_create desc limit 2
 	</select>
 	
 	<select id="getMainquestions" parameterType="QuestionEntity"

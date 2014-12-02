@@ -39,5 +39,5 @@ public interface QuestionDAO {
 	
 	int getQuestionCount(boolean istoday);
 	
-	QuestionEntity getLatestQuestion();
+	List<QuestionEntity> getLatestQuestion();
 }

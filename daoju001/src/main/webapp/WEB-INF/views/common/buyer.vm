@@ -1,4 +1,4 @@
-#set($layout = "/layout/index_layout.vm")
+#set($layout = "/layout/item_layout.vm")
 <div class="main-content-container clearfix">
 	<div class="main-list-container width630">
 		<div class="gc-list-header">

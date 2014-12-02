@@ -58,6 +58,15 @@ public class StringUtil {
 		return true;
 	}
 	
+	public static String replaceSemicolon(String str)
+	{
+		if(str == null)
+		{
+			return "";
+		}
+		return str.replace(";", "/");
+	}
+	
 	public static String replaceBackspace(String str)
 	{
 		if(str == null)

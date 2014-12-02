@@ -107,9 +107,9 @@ public class QuestionDAOImpl extends SqlSessionDaoSupport implements QuestionDAO
 	}
 
 	@Override
-	public QuestionEntity getLatestQuestion()
+	public List<QuestionEntity> getLatestQuestion()
 	{
-		return this.getSqlSession().selectOne("getLatestQuestion"); 
+		return this.getSqlSession().selectList("getLatestQuestion"); 
 	}
 	
 }

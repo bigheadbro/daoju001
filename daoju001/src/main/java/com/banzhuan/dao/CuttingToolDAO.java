@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.banzhuan.entity.CuttingToolEntity;
+import com.banzhuan.entity.IndexEntity;
 /**
  * 代理商DAO
  * @author guichaoqun
@@ -41,5 +42,9 @@ public interface CuttingToolDAO {
 	public List<CuttingToolEntity> getSeriesByParam(CuttingToolEntity ct);
 	
 	public List<CuttingToolEntity> queryCuttingToolByCt(CuttingToolEntity ct);
+
+	IndexEntity getIndexEntity();
+	
+	public List<CuttingToolEntity> getIndexCts(List<Integer> id);
 	
 }

@@ -493,7 +493,7 @@ public class CuttingToolsConfiguration
 		}
 		if (ret.contains("usage"))
 		{
-			tmp += "<span>"+ct.getUsage()+"</span>";
+			tmp += "<span>"+ct.getUsage().replace(";", "/")+"</span>";
 		}
 		if (ret.contains("<span>光洁度</span>"))
 		{
@@ -967,12 +967,12 @@ public class CuttingToolsConfiguration
 			String[] pics = pic.split("[|]");
 			for (int i = 0; i < pics.length; i++)
 			{
-				ret += "<li><img src=\"/img/sample/" + pics[i] + "\" /></li>";
+				ret += "<li><a target=\"__blank\" href=\"/img/sample/"+ pics[i] + "\"><img src=\"/img/sample/" + pics[i] + "\" /></a></li>";
 			}
 			return ret;
 		} else
 		{
-			return "<li><img src=\"/img/sample/" + pic + "\" /></li>";
+			return "<li><a target=\"__blank\" href=\"/img/sample/"+ pic + "\"><img src=\"/img/sample/" + pic + "\" /></a></li>";
 		}
 	}
 
@@ -1102,6 +1102,19 @@ public class CuttingToolsConfiguration
 		}
 	}
 
+	public static List<CuttingToolEntity> getCtsByType(List<CuttingToolEntity> cts, String code)
+	{
+		List<CuttingToolEntity> ret = new ArrayList<CuttingToolEntity>();
+		for(int i = 0;i<cts.size();i++)
+		{
+			if(StringUtil.isEqual(cts.get(i).getCode().substring(0, 2),code))
+			{
+				ret.add(cts.get(i));
+			}
+		}
+		return ret;
+	}
+	
 	public static void sortProductCode()
 	{
 		try

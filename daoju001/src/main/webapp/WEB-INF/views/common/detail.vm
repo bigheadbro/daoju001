@@ -15,15 +15,23 @@ $(function() {
 			$(this).removeClass("current");
 		});
 		$(this).addClass("current");
-		if($(this).attr("alipay") == 1)
+		if($(this).attr("tabno") == 1)
 		{
 			$(".version-content").show();
 			$(".category-content").hide();
+			$(".video-content").hide();
+		}
+		else if($(this).attr("tabno") == 2)
+		{
+			$(".version-content").hide();
+			$(".category-content").show();
+			$(".video-content").hide();
 		}
 		else
 		{
 			$(".version-content").hide();
-			$(".category-content").show();
+			$(".category-content").hide();
+			$(".video-content").show();
 		}
 	});
 	$('.version-table').flexigrid();
@@ -53,8 +61,14 @@ $(function() {
 </script>
 <div class="main-content-wrap clearfix">
 	<h1 class="category-level">$ctConfig.getCategoryHtml(${ct.code},true) > 系列详情</h1>
-	<div class="detail-content clearfix" style="margin-bottom:10px;margin-top:20px;">
+	<div class="detail-content clearfix">
 		<div class="left">
+			<form id="form_param" method="post">
+        	<input type="hidden" name="code" value="${code}" />
+        	<ul class="params-list">
+        		$!{param}
+        	</ul>
+        	</form>
 		</div>
 		<div class="right">
 			<div class="series-item clearfix" href="/detail/${ct.id}">
@@ -102,12 +116,17 @@ $(function() {
 			</div>
 			<div class="series-content">
         		<ul class="series-tab clearfix">
-                    <li alipay=1 class="current">
+                    <li tabno=1 class="current">
         				型号列表
                     </li>
-                	<li>
+                	<li tabno=2>
                 		 产品目录
                     </li>
+					#if($!{ct.videolink})
+					<li>
+                		 视频介绍
+                    </li>
+					#end
                 </ul>
         		<div class="version-content clearfix">
 					<table class="version-table">
@@ -141,6 +160,12 @@ $(function() {
                     </div>
         			#else
         				无目录图片
+        			#end
+        		</div>
+				<div class="video-content">
+					<p>${ct.videoinfo}</p>
+        			#if($stringUtil.isNotEmpty(${ct.videolink}) && $stringUtil.isContains(${ct.videolink},"youku"))
+        				$stringUtil.convertYoukulink(${ct.videolink})
         			#end
         		</div>
         	</div>

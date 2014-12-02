@@ -16,9 +16,12 @@ import java.util.Calendar;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Properties;
 import java.util.Random;
 import java.util.UUID;
@@ -203,6 +206,34 @@ public class Util {
 		return array;
 	}
 
+	public static Map<Integer,String> getIndexInfo() {
+		Map<Integer,String> array = new LinkedHashMap<Integer,String>();
+		File file = new File("C:/index/index.txt");
+		BufferedReader reader = null;
+		try {
+			reader = new BufferedReader(new FileReader(file));
+			String tempString = null;
+			// 一次读入一行，直到读入null为文件结束
+			while ((tempString = reader.readLine()) != null) {
+				// 显示行号
+				int number = Integer.valueOf(tempString.split(",")[0]);
+				String sr = tempString.split(",")[1];
+				array.put(number, sr);
+			}
+			reader.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} finally {
+			if (reader != null) {
+				try {
+					reader.close();
+				} catch (IOException e1) {
+				}
+			}
+		}
+		return array;
+	}
+	
 	public static ArrayList<String> readEdmFileByLines(String fileName) {
 		ArrayList<String> array = new ArrayList<String>();
 		File file = new File(fileName);

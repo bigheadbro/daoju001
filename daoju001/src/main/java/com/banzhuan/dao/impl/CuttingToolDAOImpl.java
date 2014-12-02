@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 import com.banzhuan.dao.CuttingToolDAO;
 import com.banzhuan.entity.AddressEntity;
 import com.banzhuan.entity.CuttingToolEntity;
+import com.banzhuan.entity.IndexEntity;
 
 @Repository("ctDAO")
 public class CuttingToolDAOImpl extends SqlSessionDaoSupport implements CuttingToolDAO {
@@ -96,6 +97,18 @@ public class CuttingToolDAOImpl extends SqlSessionDaoSupport implements CuttingT
 	public List<CuttingToolEntity> queryCuttingToolByCt(CuttingToolEntity ct)
 	{
 		return this.getSqlSession().selectList("queryCuttingToolByCt",ct);
+	}
+	
+	@Override
+	public IndexEntity getIndexEntity()
+	{
+		return this.getSqlSession().selectOne("getIndexCount");
+	}
+	
+	@Override
+	public List<CuttingToolEntity> getIndexCts(List<Integer> id)
+	{
+		return this.getSqlSession().selectList("getIndexCts",id);
 	}
 	
 }

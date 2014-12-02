@@ -1,6 +1,8 @@
 #set($layout = "/layout/item_layout.vm")
+<script type="text/javascript" src="/js/scrollFix.js"></script>
 <script>
-	$(function(){
+	jQuery(function($){
+		$(".series-left").scrollFix(40);
 		$("body").on("click",".params-list span",function(){
 			$(this).parent().parent().children("input").val($(this).text());
 			$(this).parent().parent().attr("set","1");
@@ -13,7 +15,7 @@
                 url:"/changeparam",
                 success:function(data){ //提交成功的回调函数  
                     $(".series-content .right").empty().append(data.cts);
-					$(".series-content .left ul.params-list li").each(function(){
+					$(".series-content .series-left ul.params-list li").each(function(){
 						var count =0;
 						if($(this).attr("set") == "0")
 						{
@@ -48,7 +50,7 @@
                 url:"/changeparam",
                 success:function(data){ //提交成功的回调函数  
                     $(".series-content .right").empty().append(data.cts);
-					$(".series-content .left ul.params-list li").each(function(){
+					$(".series-content .series-left ul.params-list li").each(function(){
 						if($(this).attr("set") == "0")
 						{
 							for(var x in data.map){
@@ -94,15 +96,15 @@
 </script>
 <div class="main-content-wrap clearfix">
 	<h1 class="category-level">$!{category}</h1>
-	<div class="series-content clearfix"">
-		<div class="left" data="">
-			<form id="form_param" method="post">
-			<input type="hidden" name="code" value="${code}" />
-			<ul class="params-list">
-				$!{param}
-			</ul>
-			</form>
-		</div>
+	<div class="series-content clearfix">
+		<div class="series-left">
+        	<form id="form_param" method="post">
+        	<input type="hidden" name="code" value="${code}" />
+        	<ul class="params-list">
+        		$!{param}
+        	</ul>
+        	</form>
+        </div>
 		<div class="right">
 		#if(${cts.size()} == 0)
 			没有找到该产品

@@ -3,6 +3,13 @@
 	<h1 class="category-level">${category}</h1>
 	<div class="category-content clearfix">
 		<div class="left">
+			<h1>分类不够准确？<br/>图片、内容有误？<br/>想成为我们的供应商？</h1>
+			<p>
+				请将您的宝贵意见发送至
+				<span>plan@daoshifu.com</span>
+				或者与我们的客服联系
+				<span>4000-421-145</span>
+			</p>
 		</div>
 		<div class="right clearfix">
 		#foreach ($cat in $categories)

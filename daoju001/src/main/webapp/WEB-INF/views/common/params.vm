@@ -12,7 +12,7 @@
     <td>$!{cut.diameter}</td>
 #end
 #if($stringUtil.isContains($param,">加工用途<"))
-    <td>$!{cut.usage}</td>
+    <td>$stringUtil.replaceSemicolon($!{cut.usage})</td>
 #end
 #if($stringUtil.isContains($param,">光洁度<"))
     <td>$!{cut.cujing}</td>
@@ -36,7 +36,7 @@
     <td>$!{cut.backangle}</td>
 #end
 #if($stringUtil.isContains($param,">适用工件<"))
-    <td>$!{cut.workingtool}</td>
+    <td>$stringUtil.replaceSemicolon($!{cut.workingtool})</td>
 #end
 #if($stringUtil.isContains($param,">刃数<"))
     <td>$!{cut.edgeno}</td>

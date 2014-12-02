@@ -462,7 +462,13 @@
 							</div>
 							<div class="question">
 								<h1>最新问题</h1>
-								<p>${question.content}</p>
+								#foreach($ques in $queses)
+								<p>
+									
+										${ques.content}
+									
+								</p>
+								#end
 								<a>我要提问</a>
 							</div>
     					</div>

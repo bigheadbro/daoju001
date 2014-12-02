@@ -62,6 +62,7 @@ import com.banzhuan.entity.CategoryEntity;
 import com.banzhuan.entity.ComplainEntity;
 import com.banzhuan.entity.CuttingToolEntity;
 import com.banzhuan.entity.EventEntity;
+import com.banzhuan.entity.IndexEntity;
 import com.banzhuan.entity.ItemEntity;
 import com.banzhuan.entity.OrderEntity;
 import com.banzhuan.entity.ProductEntity;
@@ -222,40 +223,11 @@ public class CommonController extends BaseController{
 	{
 		ModelAndView mv = new ModelAndView("/common/index4");
 		System.out.println(StringUtil.getCurrentSec());
-		//row1
-		CuttingToolEntity a1 = commonService.getCuttingToolByid(13);
-		int jijiabrand = commonService.getBrandCountByCode("01");
-		int jijiaseries = commonService.getSeriesnameCountByCode("01");
-		mv.addObject("a1",a1);
-		mv.addObject("jijiabrand", jijiabrand);
-		mv.addObject("jijiaseries",jijiaseries);
-		//row2
-		CuttingToolEntity b1 = commonService.getCuttingToolByid(3056);
-		int zhengtibrand = commonService.getBrandCountByCode("02");
-		int zhengtiseries = commonService.getSeriesnameCountByCode("02");
-		mv.addObject("b1",b1);
-		mv.addObject("zhengtibrand", zhengtibrand);
-		mv.addObject("zhengtiseries",zhengtiseries);
-		//row3
-		CuttingToolEntity c1 = commonService.getCuttingToolByid(1203);
-		int kongbrand = commonService.getBrandCountByCode("04");
-		int kongseries = commonService.getSeriesnameCountByCode("04");
-		mv.addObject("c1",c1);
-		mv.addObject("kongbrand", kongbrand);
-		mv.addObject("kongseries",kongseries);
-		//row4
-		CuttingToolEntity d1 = commonService.getCuttingToolByid(3440);
-		CuttingToolEntity d2 = commonService.getCuttingToolByid(5205);
-		CuttingToolEntity d3 = commonService.getCuttingToolByid(2179);
-		int daobingbrand = commonService.getBrandCountByCode("05");
-		int daobingseries = commonService.getSeriesnameCountByCode("05");
-		mv.addObject("d1",d1);
-		mv.addObject("d2",d2);
-		mv.addObject("d3",d3);
-		mv.addObject("daobingbrand", daobingbrand);
-		mv.addObject("daobingseries",daobingseries);
-		
-		mv.addObject("question",commonService.getLatestQuestion());
+		IndexEntity index = commonService.getIndex();
+		List<CuttingToolEntity> cts = commonService.getIndexItems();
+		mv.addObject("count",index);
+		mv.addObject("cts",cts);
+		mv.addObject("queses",commonService.getLatestQuestion());
 		System.out.println(StringUtil.getCurrentSec());	
 		return mv;
 	}
@@ -1852,6 +1824,8 @@ public class CommonController extends BaseController{
 		CuttingToolEntity ct = commonService.getCuttingToolByid(detailid);
 		List<CuttingToolEntity> cts = commonService.getVersionsBySeries(ct.getSeriesname());
 		List<UserEntity> users = commonService.getProviders(ct.getProvider());
+		String param = commonService.queryCuttingToolsByCode(ct.getCode());
+		view.addObject("param",param);
 		view.addObject("users",users);
 		view.addObject("ct",ct);
 		view.addObject("cts",cts);

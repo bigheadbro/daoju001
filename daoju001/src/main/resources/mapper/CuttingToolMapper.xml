@@ -100,12 +100,44 @@
 		<id property="drillrange" column="drillrange" />
 		<id property="screwdirection" column="screwdirection" />
 	</resultMap>
+	
+	<resultMap type="com.banzhuan.entity.IndexEntity" id="IndexResultMap">
+		<result  property="b1" column="b1" />
+		<result  property="b2" column="b2" />
+		<result  property="b3" column="b3" />
+		<result  property="b4" column="b4" />
+		<result  property="sn1" column="sn1" />
+		<result  property="sn2" column="sn2" />
+		<result  property="sn3" column="sn3" />
+		<result  property="sn4" column="sn4" />	
+	</resultMap>
 	<select id="getBrandCountByCode" parameterType="String" resultType="int">
 		select count(1) from (select id,code,brand from (select id,code,brand from t_cuttingtool group by seriesname) as series  where left(`code`,2)=#{code} group by brand) as brand
 	</select>
 	<select id="getSeriesnameCountByCode" parameterType="String" resultType="int">
 		select count(1) from (select id,code,seriesname from (select id,code,seriesname from t_cuttingtool group by seriesname) as series  where left(`code`,2)=#{code} group by seriesname) as sn
 	</select>
+	<select  id="getIndexCount" resultMap="IndexResultMap">
+		select * from (
+			(select count(1) as b1 from (select id,code,brand from (select id,code,brand from t_cuttingtool group by seriesname) as series  where left(`code`,2)="01" group by brand) as brand) brand1,
+			(select count(1) as b2 from (select id,code,brand from (select id,code,brand from t_cuttingtool group by seriesname) as series  where left(`code`,2)="02" group by brand) as brand) brand2,
+			(select count(1) as b3 from (select id,code,brand from (select id,code,brand from t_cuttingtool group by seriesname) as series  where left(`code`,2)="04" group by brand) as brand) brand3,
+			(select count(1) as b4 from (select id,code,brand from (select id,code,brand from t_cuttingtool group by seriesname) as series  where left(`code`,2)="05" group by brand) as brand) brand4,
+			(select count(1) as sn1 from (select id,code,seriesname from (select id,code,seriesname from t_cuttingtool group by seriesname) as series  where left(`code`,2)="01" group by seriesname) as sn) sn1,
+			(select count(1) as sn2 from (select id,code,seriesname from (select id,code,seriesname from t_cuttingtool group by seriesname) as series  where left(`code`,2)="02" group by seriesname) as sn) sn2,
+			(select count(1) as sn3 from (select id,code,seriesname from (select id,code,seriesname from t_cuttingtool group by seriesname) as series  where left(`code`,2)="04" group by seriesname) as sn) sn3,
+			(select count(1) as sn4 from (select id,code,seriesname from (select id,code,seriesname from t_cuttingtool group by seriesname) as series  where left(`code`,2)="05" group by seriesname) as sn) sn4
+			)
+	</select>
+	<select id="getIndexCts" resultMap="CuttingToolResultMap">
+        select *
+        from t_cuttingtool
+        where id=0 
+        <foreach collection="list" item="id" >
+            or id = #{id}
+        </foreach>
+    </select>
+	
 	<select id="querySeriesByCode" parameterType="String" resultMap="CuttingToolResultMap">
 		SELECT * from t_cuttingtool where match(code) against(#{code} in boolean mode) group by seriesname
 	</select>

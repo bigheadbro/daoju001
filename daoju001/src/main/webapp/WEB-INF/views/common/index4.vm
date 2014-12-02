@@ -5,164 +5,104 @@
     		<ul class="clearfix">
     			<li class="title">
     				<h1>机夹铣刀</h1>
-    				<p>${jijiabrand}个品牌<br/>${jijiaseries}个系列</p>
+					<a href="/category/010101">面铣大盘</a>
+					<a href="/category/010102">铣刀杆</a>
+					<a href="/category/0105">玉米铣刀</a>
+					<a href="/category/010201">螺纹接头</a>
+					<a href="/category/0108">铣刀片</a>
+    				<p>${count.b1}个品牌<br/>${count.sn1}个系列</p>
     			</li>
+				#foreach($ct in $ctConfig.getCtsByType($cts,"01"))
     			<li class="item">
-    				 <a href="/detail/${a1.id}">
+    				 <a href="/detail/$ct.id">
 						<div class="img-wrap">
 							<span>
-								<img src="/img/series/${a1.cover}" />
+								<img src="/img/series/$ct.cover" />
 							</span>
 						</div>
-    					<h1>${a1.seriesname}</h1>
-        				<p>${a1.brand} $ctConfig.getType(${a1.code})<br/>${a1.outline}</p>
+    					<h1>$ct.seriesname</h1>
+        				<p>$ct.brand $ctConfig.getType($ct.code)<br/>$ct.outline</p>
         			</a>
     			</li>
-    			<li class="item">
-    				 <a href="/detail/${a1.id}" >
-						<div class="img-wrap">
-							<span>
-								<img src="/img/series/${a1.cover}" />
-							</span>
-						</div>
-    					<h1>${a1.seriesname}</h1>
-        				<p>${a1.brand} $ctConfig.getType(${a1.code})<br/>${a1.outline}</p>
-        			</a>
-    			</li>
-    			<li class="item">
-    				 <a href="/detail/${a1.id}">
-						<div class="img-wrap">
-							<span>
-								<img src="/img/series/${a1.cover}" />
-							</span>
-						</div>
-    					<h1>${a1.seriesname}</h1>
-        				<p>${a1.brand} $ctConfig.getType(${a1.code})<br/>${a1.outline}</p>
-        			</a>
-    			</li>
+				#end
     		</ul>
     	</div>
-    	<div class="index-item">
+		<div class="index-item">
     		<ul class="clearfix">
     			<li class="title">
     				<h1>整体铣刀</h1>
-    				<p>${zhengtibrand}个品牌<br/>${zhengtiseries}个系列</p>
+					<a href="/category/020201">标准平头铣刀</a>
+					<a href="/category/020301">标准圆角铣刀</a>
+					<a href="/category/020201">标准球头铣刀</a>
+					<a href="/category/020202">长颈球头铣刀</a>
+					<a href="/category/020103">长颈平头铣刀</a>
+    				<p>${count.b2}个品牌<br/>${count.sn2}个系列</p>
     			</li>
+    			#foreach($ct in $ctConfig.getCtsByType($cts,"02"))
     			<li class="item">
-    				 <a href="/detail/${b1.id}">
+    				 <a href="/detail/$ct.id">
 						<div class="img-wrap">
 							<span>
-								<img src="/img/series/${b1.cover}" />
+								<img src="/img/series/$ct.cover" />
 							</span>
 						</div>
-    					<h1>${b1.seriesname}</h1>
-        				<p>${b1.brand} $ctConfig.getType(${b1.code})<br/>${b1.outline}</p>
+    					<h1>$ct.seriesname</h1>
+        				<p>$ct.brand $ctConfig.getType($ct.code)<br/>$ct.outline</p>
         			</a>
     			</li>
-    			<li class="item">
-    				 <a href="/detail/${b1.id}" >
-						<div class="img-wrap">
-							<span>
-								<img src="/img/series/${b1.cover}" />
-							</span>
-						</div>
-    					<h1>${b1.seriesname}</h1>
-        				<p>${b1.brand} $ctConfig.getType(${b1.code})<br/>${b1.outline}</p>
-        			</a>
-    			</li>
-    			<li class="item">
-    				 <a href="/detail/${b1.id}">
-						<div class="img-wrap">
-							<span>
-								<img src="/img/series/${b1.cover}" />
-							</span>
-						</div>
-    					<h1>${b1.seriesname}</h1>
-        				<p>${b1.brand} $ctConfig.getType(${b1.code})<br/>${b1.outline}</p>
-        			</a>
-    			</li>
+				#end
     		</ul>
     	</div>
-    	<div class="index-item">
+		<div class="index-item">
     		<ul class="clearfix">
     			<li class="title">
     				<h1>孔加工工具</h1>
-    				<p>${kongbrand}个品牌<br/>${kongseries}个系列</p>
+					<a href="/category/040101">整体合金钻</a>
+					<a href="/category/040102">焊接合金钻</a>
+					<a href="/category/0410">镗刀</a>
+					<a href="/category/040401">U钻</a>
+					<a href="/category/040201">机夹式钻头</a>
+    				<p>${count.b3}个品牌<br/>${count.sn3}个系列</p>
     			</li>
+    			#foreach($ct in $ctConfig.getCtsByType($cts,"04"))
     			<li class="item">
-    				 <a href="/detail/${c1.id}">
+    				 <a href="/detail/$ct.id">
 						<div class="img-wrap">
 							<span>
-								<img src="/img/series/${c1.cover}" />
+								<img src="/img/series/$ct.cover" />
 							</span>
 						</div>
-    					<h1>${c1.seriesname}</h1>
-        				<p>${c1.brand} $ctConfig.getType(${c1.code})<br/>${c1.outline}</p>
+    					<h1>$ct.seriesname</h1>
+        				<p>$ct.brand $ctConfig.getType($ct.code)<br/>$ct.outline</p>
         			</a>
     			</li>
-    			<li class="item">
-    				 <a href="/detail/${c1.id}" >
-						<div class="img-wrap">
-							<span>
-								<img src="/img/series/${c1.cover}" />
-							</span>
-						</div>
-    					<h1>${c1.seriesname}</h1>
-        				<p>${c1.brand} $ctConfig.getType(${c1.code})<br/>${c1.outline}</p>
-        			</a>
-    			</li>
-    			<li class="item">
-    				 <a href="/detail/${c1.id}">
-						<div class="img-wrap">
-							<span>
-								<img src="/img/series/${c1.cover}" />
-							</span>
-						</div>
-    					<h1>${c1.seriesname}</h1>
-        				<p>${c1.brand} $ctConfig.getType(${c1.code})<br/>${c1.outline}</p>
-        			</a>
-    			</li>
+				#end
     		</ul>
     	</div>
-    	<div class="index-item">
+		<div class="index-item">
     		<ul class="clearfix">
     			<li class="title">
     				<h1>刀柄</h1>
-    				<p>${daobingbrand}个品牌<br/>${daobingseries}个系列</p>
+					<a href="/category/050103">冷压刀柄</a>
+					<a href="/category/050104">ER刀柄</a>
+					<a href="/category/0503">面铣刀柄</a>
+					<a href="/category/0504">丝锥刀柄</a>
+					<a href="/category/0506">筒夹</a>
+    				<p>${count.b4}个品牌<br/>${count.sn4}个系列</p>
     			</li>
+    			#foreach($ct in $ctConfig.getCtsByType($cts,"05"))
     			<li class="item">
-    				 <a href="/detail/${d1.id}">
+    				 <a href="/detail/$ct.id">
 						<div class="img-wrap">
 							<span>
-								<img src="/img/series/${d1.cover}" />
+								<img src="/img/series/$ct.cover" />
 							</span>
 						</div>
-    					<h1>${d1.seriesname}</h1>
-        				<p>${d1.brand} $ctConfig.getType(${d1.code})<br/>${d1.outline}</p>
+    					<h1>$ct.seriesname</h1>
+        				<p>$ct.brand $ctConfig.getType($ct.code)<br/>$ct.outline</p>
         			</a>
     			</li>
-    			<li class="item">
-    				 <a href="/detail/${d2.id}" >
-						<div class="img-wrap">
-							<span>
-								<img src="/img/series/${d2.cover}" />
-							</span>
-						</div>
-    					<h1>${d2.seriesname}</h1>
-        				<p>${d2.brand} $ctConfig.getType(${d2.code})<br/>${d2.outline}</p>
-        			</a>
-    			</li>
-    			<li class="item">
-    				 <a href="/detail/${d3.id}">
-						<div class="img-wrap">
-							<span>
-								<img src="/img/series/${d3.cover}" />
-							</span>
-						</div>
-    					<h1>${d3.seriesname}</h1>
-        				<p>${d3.brand} $ctConfig.getType(${d3.code})<br/>${d3.outline}</p>
-        			</a>
-    			</li>
+				#end
     		</ul>
     	</div>
 	</div>

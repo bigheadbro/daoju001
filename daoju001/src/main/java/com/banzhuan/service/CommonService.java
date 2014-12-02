@@ -48,6 +48,7 @@ import com.banzhuan.entity.ComplainEntity;
 import com.banzhuan.entity.CuttingToolEntity;
 import com.banzhuan.entity.EventEntity;
 import com.banzhuan.entity.GoodcaseEntity;
+import com.banzhuan.entity.IndexEntity;
 import com.banzhuan.entity.ItemEntity;
 import com.banzhuan.entity.MessageEntity;
 import com.banzhuan.entity.OrderEntity;
@@ -74,6 +75,7 @@ import com.banzhuan.form.RequestForm;
 import com.banzhuan.util.ChineseSpelling;
 import com.banzhuan.util.CuttingToolsConfiguration;
 import com.banzhuan.util.StringUtil;
+import com.banzhuan.util.Util;
 import com.cjc.weixinmp.WeixinException;
 import com.cjc.weixinmp.bean.Users;
 import com.cjc.weixinmp.bean.WeixinmpUser;
@@ -846,7 +848,7 @@ public class CommonService {
 		return questionDAO.queryQuestionEntityById(id);
 	}
 	
-	public QuestionEntity getLatestQuestion()
+	public List<QuestionEntity> getLatestQuestion()
 	{
 		return questionDAO.getLatestQuestion();
 	}
@@ -1093,6 +1095,11 @@ public class CommonService {
 		HashSet<Double> slotwidth= new HashSet<Double>();
 		HashSet<Double> pointdiameter= new HashSet<Double>();
 		
+		HashSet<Double> width= new HashSet<Double>();
+		HashSet<Double> height= new HashSet<Double>();
+		HashSet<String> grooverange= new HashSet<String>();
+		HashSet<String> drillrange= new HashSet<String>();
+		HashSet<String> screwdirection= new HashSet<String>();
 		for(int j = 0; j < cts.size(); j++)
 		{
 			brand.add(cts.get(j).getBrand());
@@ -1139,9 +1146,14 @@ public class CommonService {
 			taper.add(cts.get(j).getTaper());
 			slotwidth.add(cts.get(j).getSlotwidth());
 			pointdiameter.add(cts.get(j).getPointdiameter());
+			width.add(cts.get(j).getWidth());
+			height.add(cts.get(j).getHeight());
+			grooverange.add(cts.get(j).getGrooverange());
+			drillrange.add(cts.get(j).getDrillrange());
+			screwdirection.add(cts.get(j).getScrewdirection());
 		}
 		String ret = "";
-		if(brand.size() > 2)
+		if(brand.size() > 1 || (!brand.contains(null) && brand.size() == 1))
 		{
 			ret += "<li set=0 param=\"brand\"><input type=\"hidden\" name=\"brand\" /><h1>品牌<a></a></h1><div class=\"param clearfix\" >";
 			Iterator<String> iter = brand.iterator();
@@ -1151,7 +1163,7 @@ public class CommonService {
 			}
 			ret += "</div></li>";
 		}
-		if(angle.size() > 2)
+		if(angle.size() > 1 || (!angle.contains(0) && angle.size() == 1))
 		{
 			ret += "<li set=0 param=\"angle\"><input type=\"hidden\" name=\"angle\" /><h1>主偏角<a></a></h1><div class=\"param clearfix\" >";
 			final List<Integer> list = new ArrayList<Integer>();  
@@ -1167,7 +1179,7 @@ public class CommonService {
 	        }
 			ret += "</div></li>";
 		}
-		if(ctcount.size() > 2)
+		if(ctcount.size() > 1 || (!brand.contains(0) && brand.size() == 1))
 		{
 			ret += "<li set=0 param=\"ctcount\"><input type=\"hidden\" name=\"ctcount\"  /><h1>刀片个数<a></a></h1><div class=\"param clearfix\" >";
 			final List<Integer> list = new ArrayList<Integer>();  
@@ -1183,7 +1195,7 @@ public class CommonService {
 	        }
 			ret += "</div></li>";
 		}
-		if(material.size() > 2)
+		if(material.size() > 1 || (!brand.contains(null) && brand.size() == 1))
 		{
 			ret += "<li set=0 param=\"material\"><input type=\"hidden\" name=\"material\" /><h1>材质<a></a></h1><div class=\"param clearfix\" >";
 			Iterator<String> iter = material.iterator();
@@ -1195,7 +1207,7 @@ public class CommonService {
 			}
 			ret += "</div></li>";
 		}
-		if(diameter.size() > 2)
+		if(diameter.size() > 1 || (!brand.contains(null) && brand.size() == 1))
 		{
 			ret += "<li set=0 param=\"diameter\"><input type=\"hidden\" name=\"diameter\" /><h1>直径<a></a></h1><div class=\"param clearfix\" >";
 			List<List<String>> list = CuttingToolsConfiguration.sortSize(diameter);
@@ -1215,7 +1227,7 @@ public class CommonService {
 	        }
 			ret += "</div></li>";
 		}
-		if(usefullength.size() > 2)
+		if(usefullength.size() > 1 || (!brand.contains(0d) && brand.size() == 1))
 		{
 			ret += "<li set=0 param=\"usefullength\"><input type=\"hidden\" name=\"usefullength\" /><h1>有效长<a></a></h1><div class=\"param clearfix\" >";
 			final List<Double> list = new ArrayList<Double>();  
@@ -1230,7 +1242,7 @@ public class CommonService {
 	        }
 			ret += "</div></li>";
 		}
-		if(usage.size() > 2)
+		if(usage.size() > 1 || (!brand.contains(null) && brand.size() == 1))
 		{
 			ret += "<li set=0 param=\"usage\"><input type=\"hidden\" name=\"usage\" /><h1>加工用途<a></a></h1><div class=\"param clearfix\" >";
 			List<String> list = CuttingToolsConfiguration.splitWorkingtoolOrUsage(usage);
@@ -1240,7 +1252,7 @@ public class CommonService {
 			}
 			ret += "</div></li>";
 		}
-		if(cujing.size() > 2)
+		if(cujing.size() > 1 || (!brand.contains(0) && brand.size() == 1))
 		{
 			ret += "<li set=0 param=\"cujing\"><input type=\"hidden\" name=\"cujing\" /><h1>光洁度<a></a></h1><div class=\"param clearfix\" >";
 			Iterator<Integer> iter = cujing.iterator();
@@ -1262,7 +1274,7 @@ public class CommonService {
 			}
 			ret += "</div></li>";
 		}
-		if(pipesize.size() > 2)
+		if(pipesize.size() > 1 || (!brand.contains(0d) && brand.size() == 1))
 		{
 			ret += "<li set=0 param=\"pipesize\"><input type=\"hidden\" name=\"pipesize\" /><h1>安装孔尺寸<a></a></h1><div class=\"param clearfix\" >";
 			final List<Double> list = new ArrayList<Double>();  
@@ -1277,7 +1289,7 @@ public class CommonService {
 	        }
 			ret += "</div></li>";
 		}
-		if(shank.size() > 2)
+		if(shank.size() > 1 || (!brand.contains(null) && brand.size() == 1))
 		{
 			ret += "<li set=0 param=\"shank\"><input type=\"hidden\" name=\"shank\" /><h1>柄径<a></a></h1><div class=\"param clearfix\" >";
 			List<List<String>> list = CuttingToolsConfiguration.sortSize(shank);
@@ -1306,7 +1318,7 @@ public class CommonService {
 	        }
 			ret += "</div></li>";
 		}
-		if(shanktype.size() > 2)
+		if(shanktype.size() > 1 || (!brand.contains(null) && brand.size() == 1))
 		{
 			ret += "<li set=0 param=\"shanktype\"><input type=\"hidden\" name=\"shanktype\" /><h1>柄部类型<a></a></h1><div class=\"param clearfix\" >";
 			Iterator<String> iter = shanktype.iterator();
@@ -1318,7 +1330,7 @@ public class CommonService {
 			}
 			ret += "</div></li>";
 		}
-		if(shape.size() > 2)
+		if(shape.size() > 1 || (!brand.contains(null) && brand.size() == 1))
 		{
 			ret += "<li set=0 param=\"shape\"><input type=\"hidden\" name=\"shape\" /><h1>形状<a></a></h1><div class=\"param clearfix\" >";
 			Iterator<String> iter = shape.iterator();
@@ -1330,7 +1342,7 @@ public class CommonService {
 			}
 			ret += "</div></li>";
 		}
-		if(backangle.size() > 2)
+		if(backangle.size() > 1 || (!brand.contains(0) && brand.size() == 1))
 		{
 			ret += "<li set=0 param=\"backangle\"><input type=\"hidden\" name=\"backangle\" /><h1>后角<a></a></h1><div class=\"param clearfix\" >";
 			final List<Integer> list = new ArrayList<Integer>();  
@@ -1345,7 +1357,7 @@ public class CommonService {
 	        }
 			ret += "</div></li>";
 		}
-		if(workingtool.size() > 2)
+		if(workingtool.size() > 1 || (!brand.contains(null) && brand.size() == 1))
 		{
 			ret += "<li set=0 param=\"workingtool\"><input type=\"hidden\" name=\"workingtool\" /><h1>适用工件<a></a></h1><div class=\"param clearfix\" >";
 			List<String> list = CuttingToolsConfiguration.splitWorkingtoolOrUsage(workingtool);
@@ -1355,7 +1367,7 @@ public class CommonService {
 			}
 			ret += "</div></li>";
 		}
-		if(edgeno.size() > 2)
+		if(edgeno.size() > 1 || (!brand.contains(0) && brand.size() == 1))
 		{
 			ret += "<li set=0 param=\"edgeno\"><input type=\"hidden\" name=\"edgeno\" /><h1>刃数<a></a></h1><div class=\"param clearfix\" >";
 			final List<Integer> list = new ArrayList<Integer>();  
@@ -1370,7 +1382,7 @@ public class CommonService {
 	        }
 			ret += "</div></li>";
 		}
-		if(edgelength.size() > 2)
+		if(edgelength.size() > 1 || (!brand.contains(null) && brand.size() == 1))
 		{
 			ret += "<li set=0 param=\"edgelength\"><input type=\"hidden\" name=\"edgelength\" /><h1>刃长<a></a></h1><div class=\"param clearfix\" >";
 			List<List<String>> list = CuttingToolsConfiguration.sortSize(edgelength);
@@ -1390,7 +1402,7 @@ public class CommonService {
 	        }
 			ret += "</div></li>";
 		}
-		if(totallength.size() > 2)
+		if(totallength.size() > 1 || (!brand.contains(null) && brand.size() == 1))
 		{
 			ret += "<li set=0 param=\"totallength\"><input type=\"hidden\" name=\"totallength\" /><h1>总长<a></a></h1><div class=\"param clearfix\" >";
 			List<List<String>> list = CuttingToolsConfiguration.sortSize(totallength);
@@ -1410,7 +1422,7 @@ public class CommonService {
 	        }
 			ret += "</div></li>";
 		}
-		if(screwangle.size() > 2)
+		if(screwangle.size() > 1 || (!brand.contains(null) && brand.size() == 1))
 		{
 			ret += "<li set=0 param=\"screwangle\"><input type=\"hidden\" name=\"screwangle\" /><h1>螺旋角<a></a></h1><div class=\"param clearfix\" >";
 			Iterator<String> iter = screwangle.iterator();
@@ -1420,7 +1432,7 @@ public class CommonService {
 			}
 			ret += "</div></li>";
 		}
-		if(coatingtype.size() >2)
+		if(coatingtype.size() >1 || (!brand.contains(null) && brand.size() == 1))
 		{
 			ret += "<li set=0 param=\"coatingtype\"><input type=\"hidden\" name=\"coatingtype\" /><h1>涂层种类<a></a></h1><div class=\"param clearfix\" >";
 			Iterator<String> iter = coatingtype.iterator();
@@ -1430,7 +1442,7 @@ public class CommonService {
 			}
 			ret += "</div></li>";
 		}
-		if(rangle.size() >2)
+		if(rangle.size() >1 || (!brand.contains(null) && brand.size() == 1))
 		{
 			ret += "<li set=0 param=\"rangle\"><input type=\"hidden\" name=\"rangle\" /><h1>R角<a></a></h1><div class=\"param clearfix\" >";
 			List<List<String>> list = CuttingToolsConfiguration.sortSize(rangle);
@@ -1450,7 +1462,7 @@ public class CommonService {
 	        }
 			ret += "</div></li>";
 		}
-		if(direction.size() > 2)
+		if(direction.size() > 1 || (!brand.contains(0) && brand.size() == 1))
 		{
 			ret += "<li set=0 param=\"direction\"><input type=\"hidden\" name=\"direction\" /><h1>方向<a></a></h1><div class=\"param clearfix\" >";
 			Iterator<Integer> iter = direction.iterator();
@@ -1472,7 +1484,7 @@ public class CommonService {
 			}
 			ret += "</div></li>";
 		}
-		if(minworkdiameter.size() > 2)
+		if(minworkdiameter.size() > 1 || (!brand.contains(0d) && brand.size() == 1))
 		{
 			ret += "<li set=0 param=\"minworkdiameter\"><input type=\"hidden\" name=\"minworkdiameter\" /><h1>最小加工直径<a></a></h1><div class=\"param clearfix\" >";
 			final List<Double> list = new ArrayList<Double>();  
@@ -1487,7 +1499,7 @@ public class CommonService {
 	        }
 			ret += "</div></li>";
 		}
-		if(innercooling.size() >2)
+		if(innercooling.size() >1 || (!brand.contains(0) && brand.size() == 1))
 		{
 			ret += "<li set=0 param=\"innercooling\"><input type=\"hidden\" name=\"innercooling\" /><h1>冷却方式<a></a></h1><div class=\"param clearfix\" >";
 			Iterator<Integer> iter = innercooling.iterator();
@@ -1505,7 +1517,7 @@ public class CommonService {
 			}
 			ret += "</div></li>";
 		}
-		if(diameterratio.size() >2)
+		if(diameterratio.size() >1 || (!brand.contains(null) && brand.size() == 1))
 		{
 			ret += "<li set=0 param=\"diameterratio\"><input type=\"hidden\" name=\"diameterratio\" /><h1>倍径比<a></a></h1><div class=\"param clearfix\" >";
 			Iterator<String> iter = diameterratio.iterator();
@@ -1515,7 +1527,7 @@ public class CommonService {
 			}
 			ret += "</div></li>";
 		}
-		if(slotshape.size() >2)
+		if(slotshape.size() >1 || (!brand.contains(null) && brand.size() == 1))
 		{
 			ret += "<li set=0 param=\"slotshape\"><input type=\"hidden\" name=\"slotshape\" /><h1>槽型状<a></a></h1><div class=\"param clearfix\" >";
 			Iterator<String> iter = slotshape.iterator();
@@ -1525,7 +1537,7 @@ public class CommonService {
 			}
 			ret += "</div></li>";
 		}
-		if(handlenorm.size() >2)
+		if(handlenorm.size() >1 || (!brand.contains(null) && brand.size() == 1))
 		{
 			ret += "<li set=0 param=\"handlenorm\"><input type=\"hidden\" name=\"handlenorm\" /><h1>柄部规格<a></a></h1><div class=\"param clearfix\" >";
 			Iterator<String> iter = handlenorm.iterator();
@@ -1535,7 +1547,7 @@ public class CommonService {
 			}
 			ret += "</div></li>";
 		}
-		if(taptype.size() >2)
+		if(taptype.size() >1 || (!brand.contains(null) && brand.size() == 1))
 		{
 			ret += "<li set=0 param=\"taptype\"><input type=\"hidden\" name=\"taptype\" /><h1>丝锥类型<a></a></h1><div class=\"param clearfix\" >";
 			Iterator<String> iter = taptype.iterator();
@@ -1545,7 +1557,7 @@ public class CommonService {
 			}
 			ret += "</div></li>";
 		}
-		if(screwtype.size() >2)
+		if(screwtype.size() >1 || (!brand.contains(null) && brand.size() == 1))
 		{
 			ret += "<li set=0 param=\"screwtype\"><input type=\"hidden\" name=\"screwtype\" /><h1>螺纹类型<a></a></h1><div class=\"param clearfix\" >";
 			Iterator<String> iter = screwtype.iterator();
@@ -1555,7 +1567,7 @@ public class CommonService {
 			}
 			ret += "</div></li>";
 		}
-		if(axistype.size() >2)
+		if(axistype.size() >1 || (!brand.contains(null) && brand.size() == 1))
 		{
 			ret += "<li set=0 param=\"axistype\"><input type=\"hidden\" name=\"axistype\" /><h1>主轴类型<a></a></h1><div class=\"param clearfix\" >";
 			Iterator<String> iter = axistype.iterator();
@@ -1565,7 +1577,7 @@ public class CommonService {
 			}
 			ret += "</div></li>";
 		}
-		if(axisdetail.size() >2)
+		if(axisdetail.size() >1 || (!brand.contains(null) && brand.size() == 1))
 		{
 			ret += "<li set=0 param=\"axisdetail\"><input type=\"hidden\" name=\"axisdetail\" /><h1>主轴细分<a></a></h1><div class=\"param clearfix\" >";
 			Iterator<String> iter = axisdetail.iterator();
@@ -1575,7 +1587,7 @@ public class CommonService {
 			}
 			ret += "</div></li>";
 		}
-		if(thickness.size() >2)
+		if(thickness.size() >1 || (!brand.contains(0d) && brand.size() == 1))
 		{
 			ret += "<li set=0 param=\"thickness\"><input type=\"hidden\" name=\"thickness\" /><h1>厚度<a></a></h1><div class=\"param clearfix\" >";
 			final List<Double> list = new ArrayList<Double>();  
@@ -1590,7 +1602,7 @@ public class CommonService {
 	        }
 			ret += "</div></li>";
 		}
-		if(maxslotdepth.size() >2)
+		if(maxslotdepth.size() >1 || (!brand.contains(0d) && brand.size() == 1))
 		{
 			ret += "<li set=0 param=\"maxslotdepth\"><input type=\"hidden\" name=\"maxslotdepth\" /><h1>最大槽深<a></a></h1><div class=\"param clearfix\" >";
 			final List<Double> list = new ArrayList<Double>();  
@@ -1605,7 +1617,7 @@ public class CommonService {
 	        }
 			ret += "</div></li>";
 		}
-		if(taper.size() >2)
+		if(taper.size() >1 || (!brand.contains(0d) && brand.size() == 1))
 		{
 			ret += "<li set=0 param=\"taper\"><input type=\"hidden\" name=\"taper\" /><h1>锥度<a></a></h1><div class=\"param clearfix\" >";
 			final List<Double> list = new ArrayList<Double>();  
@@ -1620,7 +1632,7 @@ public class CommonService {
 	        }
 			ret += "</div></li>";
 		}
-		if(slotwidth.size() >2)
+		if(slotwidth.size() >1 || (!brand.contains(0d) && brand.size() == 1))
 		{
 			ret += "<li set=0 param=\"slotwidth\"><input type=\"hidden\" name=\"slotwidth\" /><h1>槽宽<a></a></h1><div class=\"param clearfix\" >";
 			final List<Double> list = new ArrayList<Double>();  
@@ -1635,7 +1647,7 @@ public class CommonService {
 	        }
 			ret += "</div></li>";
 		}
-		if(pointdiameter.size() >2)
+		if(pointdiameter.size() >1 || (!brand.contains(0d) && brand.size() == 1))
 		{
 			ret += "<li set=0 param=\"pointdiameter\"><input type=\"hidden\" name=\"pointdiameter\" /><h1>刀尖直径<a></a></h1><div class=\"param clearfix\" >";
 			final List<Double> list = new ArrayList<Double>();  
@@ -1650,7 +1662,7 @@ public class CommonService {
 	        }
 			ret += "</div></li>";
 		}
-		if(handledsize.size() >2)
+		if(handledsize.size() >1 || (!brand.contains(null) && brand.size() == 1))
 		{
 			ret += "<li set=0 param=\"handledsize\"><input type=\"hidden\" name=\"handledsize\" /><h1>可加持尺寸<a></a></h1><div class=\"param clearfix\" >";
 			Iterator<String> iter = handledsize.iterator();
@@ -1660,7 +1672,7 @@ public class CommonService {
 			}
 			ret += "</div></li>";
 		}
-		if(screwsize.size() >2)
+		if(screwsize.size() >1 || (!brand.contains(null) && brand.size() == 1))
 		{
 			ret += "<li set=0 param=\"screwsize\"><input type=\"hidden\" name=\"screwsize\" /><h1>螺纹尺寸<a></a></h1><div class=\"param clearfix\" >";
 			Iterator<String> iter = screwsize.iterator();
@@ -1670,7 +1682,7 @@ public class CommonService {
 			}
 			ret += "</div></li>";
 		}
-		if(screwdistance.size() >2)
+		if(screwdistance.size() >1 || (!brand.contains(null) && brand.size() == 1))
 		{
 			ret += "<li set=0 param=\"screwdistance\"><input type=\"hidden\" name=\"screwdistance\" /><h1>螺距<a></a></h1><div class=\"param clearfix\" >";
 			final List<Double> list = new ArrayList<Double>();  
@@ -1685,7 +1697,7 @@ public class CommonService {
 	        }
 			ret += "</div></li>";
 		}
-		if(accuracy.size() >2)
+		if(accuracy.size() >1 || (!brand.contains(null) && brand.size() == 1))
 		{
 			ret += "<li set=0 param=\"accuracy\"><input type=\"hidden\" name=\"accuracy\" /><h1>精度<a></a></h1><div class=\"param clearfix\" >";
 			Iterator<String> iter = accuracy.iterator();
@@ -1695,7 +1707,7 @@ public class CommonService {
 			}
 			ret += "</div></li>";
 		}
-		if(collet.size() >2)
+		if(collet.size() >1 || (!brand.contains(null) && brand.size() == 1))
 		{
 			ret += "<li set=0 param=\"collet\"><input type=\"hidden\" name=\"collet\" /><h1>对应筒夹<a></a></h1><div class=\"param clearfix\" >";
 			Iterator<String> iter = collet.iterator();
@@ -1705,7 +1717,7 @@ public class CommonService {
 			}
 			ret += "</div></li>";
 		}
-		if(interfacesize.size() >2)
+		if(interfacesize.size() >1 || (!brand.contains(null) && brand.size() == 1))
 		{
 			ret += "<li set=0 param=\"interfacesize\"><input type=\"hidden\" name=\"interfacesize\" /><h1>接口尺寸<a></a></h1><div class=\"param clearfix\" >";
 			Iterator<String> iter = interfacesize.iterator();
@@ -1715,7 +1727,7 @@ public class CommonService {
 			}
 			ret += "</div></li>";
 		}
-		if(maxbore.size() >2)
+		if(maxbore.size() >1 || (!brand.contains(0d) && brand.size() == 1))
 		{
 			ret += "<li set=0 param=\"maxbore\"><input type=\"hidden\" name=\"maxbore\" /><h1>镗孔上限<a></a></h1><div class=\"param clearfix\" >";
 			final List<Double> list = new ArrayList<Double>();  
@@ -1730,7 +1742,7 @@ public class CommonService {
 	        }
 			ret += "</div></li>";
 		}
-		if(minbore.size() >2)
+		if(minbore.size() >1 || (!brand.contains(0d) && brand.size() == 1))
 		{
 			ret += "<li set=0 param=\"minbore\"><input type=\"hidden\" name=\"minbore\" /><h1>镗孔下限<a></a></h1><div class=\"param clearfix\" >";
 			final List<Double> list = new ArrayList<Double>();  
@@ -1745,7 +1757,7 @@ public class CommonService {
 	        }
 			ret += "</div></li>";
 		}
-		if(necklength.size() >2)
+		if(necklength.size() >1 || (!brand.contains(null) && brand.size() == 1))
 		{
 			ret += "<li set=0 param=\"necklength\"><input type=\"hidden\" name=\"necklength\" /><h1>颈长<a></a></h1><div class=\"param clearfix\" >";
 			List<List<String>> list = CuttingToolsConfiguration.sortSize(necklength);
@@ -1763,6 +1775,66 @@ public class CommonService {
 	        {
 				ret += "<span>"+list2.get(i)+"</span>";
 	        }
+			ret += "</div></li>";
+		}
+		if(width.size() > 1 || (!width.contains(0d) && width.size() == 1))
+		{
+			ret += "<li set=0 param=\"width\"><input type=\"hidden\" name=\"width\" /><h1>宽度<a></a></h1><div class=\"param clearfix\" >";
+			final List<Double> list = new ArrayList<Double>();  
+	        for(final Double value : width){  
+	            list.add(value);  
+	        }  
+	        Collections.sort(list);  
+	        for(int i = 0; i<list.size();i++)
+	        {
+	        	if(list.get(i)!=0)
+					ret += "<span>"+list.get(i)+"</span>";
+	        }
+			ret += "</div></li>";
+		}
+		if(height.size() > 1 || (!height.contains(0d) && height.size() == 1))
+		{
+			ret += "<li set=0 param=\"height\"><input type=\"hidden\" name=\"height\" /><h1>高度<a></a></h1><div class=\"param clearfix\" >";
+			final List<Double> list = new ArrayList<Double>();  
+	        for(final Double value : height){  
+	            list.add(value);  
+	        }  
+	        Collections.sort(list);  
+	        for(int i = 0; i<list.size();i++)
+	        {
+	        	if(list.get(i)!=0)
+					ret += "<span>"+list.get(i)+"</span>";
+	        }
+			ret += "</div></li>";
+		}
+		if(screwdirection.size() > 1 || (!screwdirection.contains(null) && screwdirection.size() == 1))
+		{
+			ret += "<li set=0 param=\"interfacesize\"><input type=\"hidden\" name=\"interfacesize\" /><h1>接口尺寸<a></a></h1><div class=\"param clearfix\" >";
+			Iterator<String> iter = interfacesize.iterator();
+			while(iter.hasNext())
+			{
+				ret += "<span>"+iter.next()+"</span>";
+			}
+			ret += "</div></li>";
+		}
+		if(grooverange.size() > 1 || (!grooverange.contains(null) && grooverange.size() == 1))
+		{
+			ret += "<li set=0 param=\"interfacesize\"><input type=\"hidden\" name=\"interfacesize\" /><h1>接口尺寸<a></a></h1><div class=\"param clearfix\" >";
+			Iterator<String> iter = interfacesize.iterator();
+			while(iter.hasNext())
+			{
+				ret += "<span>"+iter.next()+"</span>";
+			}
+			ret += "</div></li>";
+		}
+		if(drillrange.size() > 1 || (!drillrange.contains(null) && drillrange.size() == 1))
+		{
+			ret += "<li set=0 param=\"interfacesize\"><input type=\"hidden\" name=\"interfacesize\" /><h1>接口尺寸<a></a></h1><div class=\"param clearfix\" >";
+			Iterator<String> iter = interfacesize.iterator();
+			while(iter.hasNext())
+			{
+				ret += "<span>"+iter.next()+"</span>";
+			}
 			ret += "</div></li>";
 		}
 		return ret;
@@ -2105,5 +2177,27 @@ public class CommonService {
 	public int getSeriesnameCountByCode(String code)
 	{
 		return ctDAO.getSeriesnameCountByCode(code);
+	}
+	
+	public IndexEntity getIndex()
+	{
+		return ctDAO.getIndexEntity();
+	}
+	
+	public List<CuttingToolEntity> getIndexItems()
+	{
+		List<CuttingToolEntity> cts = new ArrayList<CuttingToolEntity>();
+		List<Integer> id = new ArrayList<Integer>();
+		Map<Integer,String> items = Util.getIndexInfo();
+		for (Iterator<Integer> it =  items.keySet().iterator();it.hasNext();) 
+		{
+			id.add(Integer.valueOf(it.next().toString()));
+		}
+		cts = ctDAO.getIndexCts(id);
+		for(int i = 0;i<cts.size();i++)
+		{
+			cts.get(i).setOutline(items.get(cts.get(i).getId()));
+		}
+		return cts;
 	}
 }

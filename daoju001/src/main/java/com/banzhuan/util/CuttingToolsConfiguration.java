@@ -479,6 +479,10 @@ public class CuttingToolsConfiguration
 	public static String getSeriesParamSpan(CuttingToolEntity ct, String ret)
 	{
 		String tmp = "";
+		if(StringUtil.isEmpty(ret))
+		{
+			return tmp;
+		}
 		if (ret.contains("brand"))
 		{
 			tmp += "<span>" + ct.getBrand() + "</span>";

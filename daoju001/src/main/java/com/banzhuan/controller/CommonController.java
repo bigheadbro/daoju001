@@ -239,36 +239,14 @@ public class CommonController extends BaseController{
 	@RequestMapping(value="*")
 	public ModelAndView otherEnter(final HttpServletRequest request,final HttpServletResponse response,@ModelAttribute("form")RequestForm form)
 	{
-		Account account = (Account) WebUtils.getSessionAttribute(request, "account");
-		if(account != null)
-			commonService.setRequestFormWithAccount(form, account);
-		ModelAndView mv = new ModelAndView("/common/index3");
-		
-		List<QuickrequestEntity> requests = commonService.getMainRequests();
-		mv.addObject("requests", requests);
-		
-		List<ProductEntity> products = new ArrayList<ProductEntity>();
-		products.add(commonService.getProduct(150));
-		products.add(commonService.getProduct(149));
-		products.add(commonService.getProduct(151));
-		products.add(commonService.getProduct(148));
-		mv.addObject("products", products);
-		
-		List<QuestionEntity> questions = new ArrayList<QuestionEntity>();
-		questions.add(commonService.getQuestion(165));
-		questions.add(commonService.getQuestion(161));
-		questions.add(commonService.getQuestion(160));
-		mv.addObject("questions", questions);
-
-		List<ItemEntity> items = new ArrayList<ItemEntity>();
-		items.add(commonService.getItem(48));
-		items.add(commonService.getItem(18));
-		items.add(commonService.getItem(19));
-		items.add(commonService.getItem(22));
-		items.add(commonService.getItem(27));
-		items.add(commonService.getItem(54));
-		mv.addObject("items", items);
-		
+		ModelAndView mv = new ModelAndView("/common/index4");
+		System.out.println(StringUtil.getCurrentSec());
+		IndexEntity index = commonService.getIndex();
+		List<CuttingToolEntity> cts = commonService.getIndexItems();
+		mv.addObject("count",index);
+		mv.addObject("cts",cts);
+		mv.addObject("queses",commonService.getLatestQuestion());
+		System.out.println(StringUtil.getCurrentSec());	
 		return mv;
 	}
 	
@@ -1683,7 +1661,7 @@ public class CommonController extends BaseController{
 		String usage = request.getParameter("usage");
 		int cujing = Integer.valueOf(CuttingToolsConfiguration.formatCujing(request.getParameter("cujing")));
 		double usefullength = Double.valueOf(StringUtil.isEmpty(request.getParameter("usefullength"))?"0":request.getParameter("usefullength"));
-		double pipesize = Double.valueOf(StringUtil.isEmpty(request.getParameter("pipesize"))?"0":request.getParameter("ctcount"));
+		double pipesize = Double.valueOf(StringUtil.isEmpty(request.getParameter("pipesize"))?"0":request.getParameter("pipesize"));
 		String shank = request.getParameter("shank");
 		String shanktype = request.getParameter("shanktype");
 		String shape = request.getParameter("shape");
@@ -1831,6 +1809,12 @@ public class CommonController extends BaseController{
 		view.addObject("cts",cts);
 		return view;
 	}
+	
+	
+	//
+	//华丽的分割线，下部分为微信服务号代码
+	//
+	
 	
 	@RequestMapping(value="/wxstocklist")
 	public ModelAndView wxstocklist(HttpServletRequest request, HttpServletResponse response,@ModelAttribute("form")RequestForm form) {

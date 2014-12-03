@@ -555,7 +555,7 @@ public class Util {
 			return result;
 		}
 		try {
-            Workbook book = Workbook.getWorkbook(new File("D:/Data/materilsort.xls"));
+            Workbook book = Workbook.getWorkbook(new File("C:/Data/materilsort.xls"));
             // 获得第一个工作表对象
             Sheet sheet;
             for(int i = 0; i < book.getSheets().length;i++)
@@ -609,7 +609,7 @@ public class Util {
 			return result;
 		}
 		try {
-            Workbook book = Workbook.getWorkbook(new File("D:/Data/steel.xls"));
+            Workbook book = Workbook.getWorkbook(new File("C:/Data/steel.xls"));
             // 获得第一个工作表对象
             Sheet sheet= book.getSheet(0);
             for(int j = 1; j < sheet.getRows(); j++)

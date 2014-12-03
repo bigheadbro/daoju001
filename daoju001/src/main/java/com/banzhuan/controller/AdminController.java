@@ -553,7 +553,7 @@ public class AdminController extends BaseController{
             // 获得第一个工作表对象
             Sheet sheet= book.getSheet(0);
             
-            for(int j = 1; j < sheet.getRows(); j++)
+            for(int j = 1048; j < sheet.getRows(); j++)
             {
             	CuttingToolEntity ct = new CuttingToolEntity();
             	String tmp = sheet.getCell(0, j).getContents().trim().replace("；", ";").replace("（", "(").replace("）", ")");
@@ -605,7 +605,7 @@ public class AdminController extends BaseController{
             	tmp = sheet.getCell(9, j).getContents().trim().replace("；", ";").replace("（", "(").replace("）", ")");
             	if(StringUtil.isNotEmpty(tmp))
             	{
-            		ct.setCujing(Integer.valueOf(tmp.replace("粗", "3").replace("精", "2").replace("一般", "1")));
+            		ct.setCujing(Integer.valueOf(tmp.replace("粗加工", "3").replace("粗", "3").replace("精", "2").replace("一般", "1")));
             	}
             	tmp = sheet.getCell(10, j).getContents().trim().replace("；", ";").replace("（", "(").replace("）", ")");
             	if(StringUtil.isNotEmpty(tmp))

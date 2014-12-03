@@ -81,9 +81,13 @@ public class CuttingToolDAOImpl extends SqlSessionDaoSupport implements CuttingT
 	@Override
 	public List<CuttingToolEntity> queryCuttingToolByCode(String code)
 	{
-		if(code.length() < 6)
+		if(code.length() == 4)
 		{
-			code = code + "*";
+			code = code + "00";
+		}
+		else if(code.length() == 2)
+		{
+			code = code + "0000";
 		}
 		return this.getSqlSession().selectList("queryCuttingToolByCode", code);
 	}
@@ -91,6 +95,14 @@ public class CuttingToolDAOImpl extends SqlSessionDaoSupport implements CuttingT
 	@Override
 	public List<CuttingToolEntity> getSeriesByParam(CuttingToolEntity ct)
 	{
+		if(ct.getCode().length() == 4)
+		{
+			ct.setCode(ct.getCode() + "00");
+		}
+		else if(ct.getCode().length() == 2)
+		{
+			ct.setCode(ct.getCode() + "0000");
+		}
 		return this.getSqlSession().selectList("getSeriesByParam",ct);
 	}
 	@Override

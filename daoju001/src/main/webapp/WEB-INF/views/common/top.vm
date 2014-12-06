@@ -85,10 +85,10 @@
                             <a class="second" href="/category/0102">组合刀体</a>
 							<div class="level3 clearfix">
 								<span>
-									<a href="/category/020201">螺纹接头</a>
+									<a href="/category/010201">螺纹接头</a>
 								</span>
 								<span>
-									<a href="/category/020202">合金接杆</a>
+									<a href="/category/010202">合金接杆</a>
 								</span>
 							</div>
                         </li>
@@ -393,7 +393,7 @@
                     <a href="/index">首页</a>
                 </li>
 				#else
-				<li>
+				<li class="item">
                     <a href="/index">首页</a>
                 </li>
 				#end
@@ -402,7 +402,7 @@
                     <a href="/questions">供应商问答</a>
                 </li>
 				#else
-				<li>
+				<li class="item">
                     <a href="/questions">供应商问答</a>
                 </li>
 				#end
@@ -411,17 +411,33 @@
                     <a href="/agents">全国供应商</a>
                 </li>
 				#else
-				<li>
+				<li class="item">
                     <a href="/agents">全国供应商</a>
                 </li>
 				#end
 				#if($!stringUtil.isContains($request.getServletPath(),"/samples"))
-                <li class="current">
+                <li class="current ctinfo">
                     <a href="/samples">刀具资料</a>
+					<ul class="top-dropdown" style="display: none;">
+                        <li>
+                            <a rel="external" href="/samples">刀具样本</a>
+                        </li>
+                        <li>
+                            <a rel="external" href="/articles">刀具小百科</a>
+                        </li>
+                    </ul>
                 </li>
 				#else
-				<li>
+				<li class="item ctinfo">
                     <a href="/samples">刀具资料</a>
+					<ul class="top-dropdown" style="display: none;">
+                        <li>
+                            <a rel="external" href="/samples">刀具样本</a>
+                        </li>
+                        <li>
+                            <a rel="external" href="/articles">刀具小百科</a>
+                        </li>
+                    </ul>
                 </li>
 				#end
             </ul>

@@ -1,97 +1,76 @@
 #set($layout = "/layout/item_layout.vm")
 <script type="text/javascript" src="/js/azlist.js"></script>
-<div class="main-content-container clearfix">
-    <div class="main-list-container width630 ml15">
-        <div class="gc-list-header">
-            <h1>刀具供应商</h1>
-            <div class="a-zlist clearfix">
-				#foreach ($mapEntry in $agentMap)
-					<a>$stringUtil.convertToChar($mapEntry.key)</a>
-				#end
-            </div>
+<div class="main-content-wrap clearfix">
+	<h1 class="providers-title">刀师傅供应商</h1>
+	<div class="letter-wrap">
+		<h1>品牌首字母索引</h1>
+        <div class="a-zlist clearfix">
+			#foreach ($mapEntry in $agentMap)
+				<a>$stringUtil.convertToChar($mapEntry.key)</a>
+			#end
         </div>
-		<div class="agent-list-content">
-            #foreach ($mapEntry in $agentMap)
-                #if ($mapEntry.key)
-                    <div class="gc-item clearfix">
-                        <h1>$stringUtil.convertToChar($mapEntry.key)</h1>
-						#set ($agentMap2 = $mapEntry.value)
-						#foreach ($mapEntry2 in $agentMap2.entrySet())
-							#set ($agentList = $util.sortProviders($mapEntry2.value))
-                            #foreach($agent in $agentList)							
-								#if($velocityCount == 1)
-								<div class="brand-list clearfix">
-								<div class="brand-logo">
-            						<img src="/img/logo/$stringUtil.getBrandLogo($mapEntry2.key)" />
-									<p>
-										$stringUtil.getBrand($mapEntry2.key)-$stringUtil.getBrandCountry($mapEntry2.key)
-									</p>
-            					</div>
-								<div class="arrow">
-									<div class="agent">
-										供应商
-									</div>
-								</div>
-								<div class="agent-list clearfix">
-								#end
-                                <div class="agent-info clearfix">
-                                    <div class="agent-logo logo" aid="$!{agent.id}">
-                                        <a href="/agents/$!{agent.id}">
-											#if($!{agent.logo})
-												<img src="/logo/$!{agent.logo}" />
+	</div>
+	<div class="provider-list-content">
+        #foreach ($mapEntry in $agentMap)
+            #if ($mapEntry.key)
+                <div class="provider-item clearfix">
+                    <h1>$stringUtil.convertToChar($mapEntry.key)</h1>
+					#set ($agentMap2 = $mapEntry.value)
+					#foreach ($mapEntry2 in $agentMap2.entrySet())
+						#set ($agentList = $util.sortProviders($mapEntry2.value))
+                        #foreach($agent in $agentList)							
+							#if($velocityCount == 1)
+							<div class="brand-list clearfix">
+							<div class="brand-logo">
+        						<img src="/img/logo/$stringUtil.getBrandLogo($mapEntry2.key)" />
+        					</div>
+							<div class="agent-list clearfix">
+							#end
+                            <div class="agent-info clearfix">
+                                <div class="agent-detail">
+                                    <h2 class="clearfix">
+										<a class="agent-name" href="/agents/$!{agent.id}">$!{agent.companyName}</a>
+										#if(${agent.authority} == 5)
+											#if($stringUtil.isNotEmpty(${agent.verifiedLink}))
+												<a class="fancybox-v red" title="$!{agent.companyName}的代理证书" href="$!{agent.verifiedLink}"><厂商></a>
 											#else
-												<img src="/img/avatar.png" />
+												<a class="red"><厂商></a>
 											#end
-                                        </a>
-                                    </div>
-                                    <div class="agent-detail">
-                                        <h2 class="clearfix">
-											<a class="agent-name" href="/agents/$!{agent.id}">$!{agent.companyName}</a>
-											#if(${agent.authority} == 5)
-												#if($stringUtil.isNotEmpty(${agent.verifiedLink}))
-													<a class="fancybox-v red" title="$!{agent.companyName}的代理证书" href="$!{agent.verifiedLink}"><厂商></a>
-												#else
-													<a class="red"><厂商></a>
-												#end
-											#else
-    											#if($stringUtil.isNotEmpty(${agent.verifiedLink}) && ${agent.authority} >= 4)
-    												<a class="fancybox-v" title="$!{agent.companyName}的代理证书" href="$!{agent.verifiedLink}"><代理></a>
-    											#end
+										#else
+											#if($stringUtil.isNotEmpty(${agent.verifiedLink}) && ${agent.authority} >= 4)
+												<a class="fancybox-v" title="$!{agent.companyName}的代理证书" href="$!{agent.verifiedLink}"><代理></a>
 											#end
-										</h2>
-                                        <h4>$stringUtil.getBrand($!{agent.brand}) $stringUtil.getBrand($!{agent.brand2})</h4>
-										<h5>
-											<a class="common" href="/samples"><em>样本</em>${agent.cntSample}</a>
-										</h5>
-										<h5>
-											<span class="mobile">手机</span>
-											#if(${agent.contactPhone})
-												$!{agent.contactPhone}
-											#else
-												无
-											#end
-										</h5>
-										<h5>
-											#if(${agent.contactQq})
-												<a class="common" target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=${agent.contactQq}&site=qq&menu=yes"><span class="qq">QQ</span>$!{agent.contactQq}</a>
-											#else
-												<span class="qq">QQ</span>无
-											#end
-										</h5>
-                                    </div>
+										#end
+									</h2>
+									<h5>
+										<span class="mobile">电话:</span>
+										#if(${agent.contactPhone})
+											$!{agent.contactPhone}
+										#else
+											未填写
+										#end
+									</h5>
+									<h4>
+										<span class="address">地址:</span>
+										#if(${agent.address})
+											$!{agent.address}
+										#else
+											未填写
+										#end
+									</h4>
                                 </div>
-								#if($velocityCount == $agentList.size())
-								</div>
-								</div>
-								#end
+                            </div>
+							#if($velocityCount == $agentList.size())
+							</div>
+							</div>
 							#end
 						#end
-                    </div>
-                #end
+					#end
+                </div>
             #end
-        </div>
+        #end
     </div>
-	<div class="main-list-container width300 ml50">
+	<!--<div class="main-list-container width300 ml50">
     	<div class="agent-right">
     		<h1>怎么找到需要的代理商？</h1>
     		<h5><span>1</span>搜索想要的品牌，找到对应认证代理商</h2>
@@ -113,5 +92,5 @@
 邮箱：client@daoshifu.com<br/>
 电话：400-042-1145</p>
     	</div>
-	</div>
+	</div>-->
 </div>

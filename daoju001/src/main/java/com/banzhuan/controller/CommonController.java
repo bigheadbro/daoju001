@@ -1357,6 +1357,15 @@ public class CommonController extends BaseController{
 		
 	}
 	
+	@RequestMapping(value = "knowmore")
+	public ModelAndView knowmore(final HttpServletRequest request,final HttpServletResponse response)
+	{
+		ModelAndView mv = new ModelAndView("/common/knowmore");
+
+		return mv;
+		
+	}
+	
 	@RequestMapping(value = "samples")
 	public ModelAndView allsamples(final HttpServletRequest request,final HttpServletResponse response)
 	{
@@ -1756,9 +1765,19 @@ public class CommonController extends BaseController{
 		ct.setGrooverange(grooverange);
 		ct.setDrillrange(drillrange);
 		ct.setScrewdirection(screwdirection);
-		List<CuttingToolEntity> cts = commonService.getSeriesByParam(ct);
+		
 		Map<String,List<String>> map = commonService.getSearchParamMap(ct);
-		JsonUtil.sendSeriesList(response, cts,map);
+		int type = request.getParameter("type")==null?2:Integer.valueOf(request.getParameter("type"));
+		if(type == 1)
+		{
+			List<CuttingToolEntity> cts = commonService.getSeriesByParam(ct, 2);
+			JsonUtil.sendVersionsList(response, cts, map);
+		}
+		else
+		{
+			List<CuttingToolEntity> cts = commonService.getSeriesByParam(ct, 1);
+			JsonUtil.sendSeriesList(response, cts,map);
+		}
 	}
 	@RequestMapping(value = "category/{pid}")
 	public ModelAndView category(final HttpServletRequest request,final HttpServletResponse response, @PathVariable String pid)
@@ -1769,7 +1788,7 @@ public class CommonController extends BaseController{
 		{
 			view = new ModelAndView("/common/series");
 			List<CuttingToolEntity> cts = commonService.getCategorySeries(pid);
-			String param = commonService.queryCuttingToolsByCode(pid);
+			String param = commonService.queryCuttingToolsByCode(pid,1);
 			view.addObject("code",pid);
 			view.addObject("category", CuttingToolsConfiguration.getCategoryHtml(pid,false));
 			view.addObject("cts",cts);
@@ -1802,7 +1821,8 @@ public class CommonController extends BaseController{
 		CuttingToolEntity ct = commonService.getCuttingToolByid(detailid);
 		List<CuttingToolEntity> cts = commonService.getVersionsBySeries(ct.getSeriesname());
 		List<UserEntity> users = commonService.getProviders(ct.getProvider());
-		String param = commonService.queryCuttingToolsByCode(ct.getCode());
+		String param = commonService.queryCuttingToolsByCode(ct.getSeriesname(),2);
+		view.addObject("seriesname",ct.getSeriesname());
 		view.addObject("param",param);
 		view.addObject("users",users);
 		view.addObject("ct",ct);

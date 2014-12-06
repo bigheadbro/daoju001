@@ -34,7 +34,7 @@ $(function() {
 			$(".video-content").show();
 		}
 	});
-	$('.version-table').flexigrid();
+	$('.version-table').flexigrid({height:400});
 	$(".operation").click(function(){
 		if($(this).attr("show") == 1)
 		{
@@ -57,6 +57,96 @@ $(function() {
 			$(this).children("em").css("background-position","0 0");
 		}
 	});
+
+	$("body").on("click",".params-list span",function(){
+		$(this).parent().parent().children("input").val($(this).text());
+		$(this).parent().parent().attr("set","1");
+		$(this).parent().hide();
+		$(this).parent().parent().children("h1").children("a").append($(this).text());
+		$("#form_param").ajaxSubmit({  
+            dataType:"json", //数据类型  
+            url:"/changeparam",
+            success:function(data){ //提交成功的回调函数  
+				$(".version-content").empty().append(data.cts);
+				$(".detail-content .left ul.params-list li").each(function(){
+					var count =0;
+					if($(this).attr("set") == "0")
+					{
+						for(var x in data.map){
+        					if($(this).attr("param")==x)
+							{
+								$(this).children(".param").empty();
+								for(var y in data.map[x]){
+									$(this).children(".param").append("<span>" + data.map[x][y] + "</span>");
+								}
+								count++;
+							}
+        				}
+						if(count == 0){
+							$(this).hide();
+							count = 0;
+						}
+					}
+				});
+				$('.version-table').flexigrid({height:400});
+            }  
+        });   
+	});
+	$("body").on("click",".params-list a",function(){
+			$(this).parent().parent().children("input").val("");
+			$(this).parent().parent().attr("set","0");
+			$(this).empty();
+			$(this).parent().parent().children(".param").show();
+			$(".series-content .right").empty();
+			$(".series-content .right").html("<div class=\"no-result\"><img src=\"/img/loading.gif\" /><h1>请稍等</h1><p>刀师傅正在为您全力搜索资料库<br/>我们将为您提供丰富、专业的刀具信息 </p></div>");
+			$("#form_param").ajaxSubmit({  
+                dataType:"json", //数据类型  
+                url:"/changeparam",
+                success:function(data){ //提交成功的回调函数  
+                    $(".version-content").empty().append(data.cts);
+					$(".detail-content .left ul.params-list li").each(function(){
+						if($(this).attr("set") == "0")
+						{
+							for(var x in data.map){
+            					if($(this).attr("param")==x)
+								{
+									$(this).children(".param").empty();
+									for(var y in data.map[x]){
+										if(x=="direction"){
+											if(data.map[x][y]==1)
+												$(this).children(".param").append("<span>通用槽</span>");
+											else if(data.map[x][y]==2)
+												$(this).children(".param").append("<span>左手</span>");
+											else
+												$(this).children(".param").append("<span>右手</span>");
+										}
+										else if(x=="innercooling"){
+											if(data.map[x][y]==1)
+												$(this).children(".param").append("<span>一般</span>");
+											else if(data.map[x][y]==2)
+												$(this).children(".param").append("<span>内冷</span>");
+											else
+												$(this).children(".param").append("<span>外冷</span>");
+										} 
+										else if(x=="cujing"){
+											if(data.map[x][y]==1)
+												$(this).children(".param").append("<span>一般</span>");
+											else if(data.map[x][y]==2)
+												$(this).children(".param").append("<span>粗加工</span>");
+											else
+												$(this).children(".param").append("<span>精加工</span>");
+										} 
+										else
+											$(this).children(".param").append("<span>" + data.map[x][y] + "</span>");
+									}
+								}
+            				}
+						}
+					});
+					$('.version-table').flexigrid({height:400});
+                }  
+            });   
+		});
 });
 </script>
 <div class="main-content-wrap clearfix">
@@ -64,7 +154,8 @@ $(function() {
 	<div class="detail-content clearfix">
 		<div class="left">
 			<form id="form_param" method="post">
-        	<input type="hidden" name="code" value="${code}" />
+        	<input type="hidden" name="seriesname" value="${seriesname}" />
+			<input type="hidden" name="type" value="1" />
         	<ul class="params-list">
         		$!{param}
         	</ul>
@@ -89,7 +180,9 @@ $(function() {
 			<div class="provider">
 				<h1>供应商</h1>
 				#if($users.size()==0)
+					<div class="no-provider">
 					暂无供应商
+					</div>
 				#else
     				#foreach($user in $users)
     				<div class="provider-item clearfix">

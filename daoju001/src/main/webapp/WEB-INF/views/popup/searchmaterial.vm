@@ -28,6 +28,7 @@
 							else{
 								$(".result h1").text("对不起！");
     							$(".result p").html("没有查询到您输入的材质哦~<br/>请核对您输入的材质后，再次查询");
+								$(".result h5").html("查询山特维克材质时，请输入\"GC\"");
 							}
     					}
     				});
@@ -37,6 +38,7 @@
 			<div class="result">
                 <h1></h1>
 				<p></p>
+				<h5></h5>
             </div>
 			<a class="close-searchmaterial close">关  闭</a>
         </div>

@@ -39,7 +39,7 @@ public interface CuttingToolDAO {
 	
 	public List<CuttingToolEntity> queryCuttingToolByCode(String code);
 	
-	public List<CuttingToolEntity> getSeriesByParam(CuttingToolEntity ct);
+	public List<CuttingToolEntity> getSeriesByParam(CuttingToolEntity ct, int type);
 	
 	public List<CuttingToolEntity> queryCuttingToolByCt(CuttingToolEntity ct);
 

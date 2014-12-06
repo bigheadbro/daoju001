@@ -171,6 +171,9 @@
 		<if test="code != null and code != '' ">
         	and code = #{code}
 		</if>
+		<if test="seriesname != null and seriesname != '' ">
+        	and seriesname = #{seriesname}
+		</if>
 		<if test="brand != null and brand != ''">
         	and brand = #{brand}
 		</if>
@@ -324,11 +327,172 @@
 		 group by seriesname	
 	</select>
 	
-	
+	<select id="getVersionsByParam" parameterType="CuttingToolEntity" resultMap="CuttingToolResultMap">
+		SELECT * from t_cuttingtool t where 1=1 
+		<if test="code != null and code != '' ">
+        	and code = #{code}
+		</if>
+		<if test="seriesname != null and seriesname != '' ">
+        	and seriesname = #{seriesname}
+		</if>
+		<if test="brand != null and brand != ''">
+        	and brand = #{brand}
+		</if>
+		<if test="material != null and material != ''">
+        	and material = #{material}
+		</if>
+		<if test="angle != 0">
+        	and angle = #{angle}
+		</if>
+		<if test="ctcount != 0">
+        	and ctcount = #{ctcount}
+		</if>
+		<if test="diameter != null and diameter != ''">
+        	and diameter = #{diameter}
+		</if>
+		<if test="cujing != 0">
+        	and cujing = #{cujing}
+		</if>
+		<if test="usefullength != 0">
+        	and usefullength = #{usefullength}
+		</if>
+		<if test="pipesize != 0">
+ 			and pipesize = #{pipesize}
+		</if>
+		<if test="shank != null and shank != ''">
+ 	        and shank = #{shank}
+		</if>
+		<if test="shanktype != null and shanktype != ''">
+ 	        and shanktype = #{shanktype}
+		</if>
+		<if test="shape != null and shape != ''">
+ 	        and shape = #{shape}
+		</if>
+		<if test="backangle != 0">
+ 	        and backangle = #{backangle}
+		</if>
+		<if test="edgeno != 0">
+ 	        and edgeno = #{edgeno}
+		</if>
+		<if test="edgelength != null and edgelength != ''">
+ 	        and edgelength = #{edgelength}
+		</if>
+		<if test="totallength != null and totallength != ''">
+ 	        and totallength = #{totallength}
+		</if>
+		<if test="screwangle != null and screwangle != ''">
+ 	        and screwangle = #{screwangle}
+		</if>
+		<if test="coatingtype != null and coatingtype != ''">
+ 	        and coatingtype = #{coatingtype}
+		</if>
+		<if test="rangle != null and rangle != ''">
+ 	        and rangle = #{rangle}
+		</if>
+		<if test="direction != 0">
+ 	        and direction = #{direction}
+		</if>
+		<if test="minworkdiameter != 0">
+ 	        and minworkdiameter = #{minworkdiameter}
+		</if>
+		<if test="innercooling != 0">
+ 	        and innercooling = #{innercooling}
+		</if>
+		<if test="diameterratio != null and diameterratio != ''">
+ 	        and diameterratio = #{diameterratio}
+		</if>
+		<if test="slotshape != null and slotshape != ''">
+ 	        and slotshape = #{slotshape}
+		</if>
+		<if test="handlenorm != null and handlenorm != ''">
+ 	        and handlenorm = #{handlenorm}
+		</if>
+		<if test="taptype != null and taptype != ''">
+ 	        and taptype = #{taptype}
+		</if>
+		<if test="screwtype != null and screwtype != ''">
+ 	        and screwtype = #{screwtype}
+		</if>
+		<if test="axistype != null and axistype != ''">
+ 	        and axistype = #{axistype}
+		</if>
+		<if test="axisdetail != null and axisdetail != ''">
+ 	        and axisdetail = #{axisdetail}
+		</if>
+		<if test="provider != null and provider != ''">
+    	   and provider = #{provider}
+		</if>
+		<if test="thickness != 0">
+ 	        and thickness = #{thickness}
+		</if>
+		<if test="maxslotdepth != 0">
+ 	        and maxslotdepth = #{maxslotdepth}
+		</if>
+		<if test="taper != 0">
+ 	        and taper = #{taper}
+		</if>
+		<if test="slotwidth != 0">
+ 	        and slotwidth = #{slotwidth}
+		</if>
+		<if test="pointdiameter != 0">
+ 	        and pointdiameter = #{pointdiameter}
+		</if>
+		<if test="handledsize != null and handledsize != ''">
+ 	        and handledsize = #{handledsize}
+		</if>
+		<if test="screwsize != null and screwsize != ''">
+ 	        and screwsize = #{screwsize}
+		</if>
+		<if test="screwdistance != null and screwdistance != ''">
+ 	        and screwdistance = #{screwdistance}
+		</if>
+		<if test="accuracy != null and accuracy != ''">
+ 	        and accuracy = #{accuracy}
+		</if>
+		<if test="interfacesize != null and interfacesize != ''">
+ 	        and interfacesize = #{interfacesize}
+		</if>
+		<if test="maxbore != 0">
+ 	        and maxbore = #{maxbore}
+		</if>
+		<if test="minbore != 0">
+ 	        and minbore = #{minbore}
+		</if>
+		<if test="necklength != null and necklength != ''">
+ 	        and necklength = #{necklength}
+		</if>
+		<if test="relativecollet != null and relativecollet != ''">
+ 	        and relativecollet = #{relativecollet}
+		</if>
+		<if test="width != null and width != 0">
+ 	        and width = #{width}
+		</if>
+		<if test="height != null and height != 0">
+ 	        and height = #{height}
+		</if>
+		<if test="grooverange != null and grooverange != ''">
+ 	        and grooverange = #{grooverange}
+		</if>
+		<if test="drillrange != null and drillrange != ''">
+ 	        and drillrange = #{drillrange}
+		</if>
+		<if test="screwdirection != null and screwdirection != ''">
+ 	        and screwdirection = #{screwdirection}
+		</if>
+		<if test="usage != null and usage != ''">
+       		and locate(#{usage},`usage`) > 0
+		</if>
+		<if test="workingtool != null and workingtool != ''">
+ 	        and locate(#{workingtool},`workingtool`) > 0
+		</if>	
+	</select>
 	<select id="queryCuttingToolByCt" parameterType="CuttingToolEntity" resultMap="CuttingToolResultMap">
 		SELECT * from t_cuttingtool t where 1=1 
 		<if test="code != null and code != '' ">
         	and code = #{code}
+		</if>
+		<if test="seriesname != null and seriesname != '' ">
+        	and seriesname = #{seriesname}
 		</if>
 		<if test="brand != null and brand != ''">
         	and brand = #{brand}
@@ -482,6 +646,7 @@
 		update t_cuttingtool
 		<set>
 		  <if test="samecolume != null">samecolume=#{samecolume},</if>
+		  <if test="provider != null">provider=#{provider},</if>
 		</set>
 	   where seriesname=#{seriesname}
 	</update>

@@ -10,6 +10,7 @@ import com.banzhuan.dao.CuttingToolDAO;
 import com.banzhuan.entity.AddressEntity;
 import com.banzhuan.entity.CuttingToolEntity;
 import com.banzhuan.entity.IndexEntity;
+import com.banzhuan.util.StringUtil;
 
 @Repository("ctDAO")
 public class CuttingToolDAOImpl extends SqlSessionDaoSupport implements CuttingToolDAO {
@@ -81,29 +82,39 @@ public class CuttingToolDAOImpl extends SqlSessionDaoSupport implements CuttingT
 	@Override
 	public List<CuttingToolEntity> queryCuttingToolByCode(String code)
 	{
-		if(code.length() == 4)
+		if(StringUtil.isNotEmpty(code))
 		{
-			code = code + "00";
-		}
-		else if(code.length() == 2)
-		{
-			code = code + "0000";
+			if(code.length() == 4)
+			{
+				code = code + "00";
+			}
+			else if(code.length() == 2)
+			{
+				code = code + "0000";
+			}
 		}
 		return this.getSqlSession().selectList("queryCuttingToolByCode", code);
 	}
 	
 	@Override
-	public List<CuttingToolEntity> getSeriesByParam(CuttingToolEntity ct)
+	public List<CuttingToolEntity> getSeriesByParam(CuttingToolEntity ct, int type)
 	{
-		if(ct.getCode().length() == 4)
+		if(StringUtil.isNotEmpty(ct.getCode()))
 		{
-			ct.setCode(ct.getCode() + "00");
+			if(ct.getCode().length() == 4)
+			{
+				ct.setCode(ct.getCode() + "00");
+			}
+			else if(ct.getCode().length() == 2)
+			{
+				ct.setCode(ct.getCode() + "0000");
+			}
 		}
-		else if(ct.getCode().length() == 2)
+		if(type == 1)
 		{
-			ct.setCode(ct.getCode() + "0000");
+			return this.getSqlSession().selectList("getSeriesByParam",ct);
 		}
-		return this.getSqlSession().selectList("getSeriesByParam",ct);
+		return this.getSqlSession().selectList("getVersionsByParam",ct);
 	}
 	@Override
 	public List<CuttingToolEntity> queryCuttingToolByCt(CuttingToolEntity ct)

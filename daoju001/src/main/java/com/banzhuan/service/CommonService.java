@@ -1044,10 +1044,17 @@ public class CommonService {
 		
 	}
 	
-	public String queryCuttingToolsByCode(String code)
+	public String queryCuttingToolsByCode(String param, int type)
 	{
-		
-		List<CuttingToolEntity> cts = ctDAO.queryCuttingToolByCode(code);
+		List<CuttingToolEntity> cts = new ArrayList<CuttingToolEntity>();
+		if(type == 1)//code
+		{
+			cts = ctDAO.queryCuttingToolByCode(param);
+		}
+		else if(type == 2)//detail
+		{
+			cts = ctDAO.getVersionsBySeries(param);
+		}
 		HashSet<String> brand= new HashSet<String>();
 		HashSet<String> material= new HashSet<String>();
 		HashSet<String> usage= new HashSet<String>();
@@ -1506,11 +1513,11 @@ public class CommonService {
 			while(iter.hasNext())
 			{
 				int tmp = iter.next();
-				if(tmp == 1)
+				if(tmp == 2)
 				{	
 					ret += "<span>内冷</span>";
 				}
-				else if(tmp == 2)
+				else if(tmp == 3)
 				{
 					ret += "<span>外冷</span>";
 				}
@@ -2149,16 +2156,16 @@ public class CommonService {
 		}
 		return map;
 	}
-	
-	public List<CuttingToolEntity> getSeriesByParam(CuttingToolEntity ct)
+	//type:1是系列，2是型号
+	public List<CuttingToolEntity> getSeriesByParam(CuttingToolEntity ct, int type)
 	{
-		return ctDAO.getSeriesByParam(ct);
+		return ctDAO.getSeriesByParam(ct,type);
 	}
 	
 	public List<UserEntity> getProviders(String providers)
 	{
 		List<UserEntity> users = new ArrayList<UserEntity>();
-		if(providers == null)
+		if(StringUtil.isEmpty(providers))
 		{
 			return users;
 		}

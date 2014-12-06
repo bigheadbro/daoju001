@@ -1,6 +1,14 @@
 $(function() {
-	$(".ctinfo").hover(function() {
+	/*$(".ctinfo").hover(function() {
 		$(".top-user").css("background-color","#007298");
+		$(".top-dropdown").show();
+	});
+	$(".ctinfo").mouseleave(function() {
+		$(".top-user").css("background-color","#0099cb");
+		$(".top-dropdown").hide();
+	});*/
+	$(".ctinfo").hover(function() {
+		$(".top-user").css("background-color","#00759c");
 		$(".top-dropdown").show();
 	});
 	$(".ctinfo").mouseleave(function() {

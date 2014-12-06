@@ -14,7 +14,6 @@
                 dataType:"json", //数据类型  
                 url:"/changeparam",
                 success:function(data){ //提交成功的回调函数  
-					window.setTimeout("eval(1);",10000);
                     $(".series-content .right").empty().append(data.cts);
 					$(".series-content .series-left ul.params-list li").each(function(){
 						var count =0;

@@ -553,7 +553,7 @@ public class AdminController extends BaseController{
             // 获得第一个工作表对象
             Sheet sheet= book.getSheet(0);
             
-            for(int j = 1048; j < sheet.getRows(); j++)
+            for(int j = 1; j < sheet.getRows(); j++)
             {
             	CuttingToolEntity ct = new CuttingToolEntity();
             	String tmp = sheet.getCell(0, j).getContents().trim().replace("；", ";").replace("（", "(").replace("）", ")");
@@ -834,6 +834,26 @@ public class AdminController extends BaseController{
         } catch (Exception e) {
             System.out.println(e);
         }
+		return mv;
+	}
+	
+	@RequestMapping(value="/cuttingtools")
+	public ModelAndView cts(final HttpServletRequest request, final HttpServletResponse response)
+	{
+		ModelAndView mv = new ModelAndView("/admin/cuttingtools");
+		List<CuttingToolEntity> cts = ctDAO.getAllItems();
+		mv.addObject("cts",cts);
+		return mv;
+	}
+	
+	@RequestMapping(value="/updateseries/{id}")
+	public ModelAndView updateseries(final HttpServletRequest request, final HttpServletResponse response, String id)
+	{
+		ModelAndView mv = new ModelAndView("/admin/cuttingtools");
+		int ctid = Integer.parseInt(id);
+		CuttingToolEntity ct = ctDAO.queryCuttingToolById(ctid);
+		ct.setProvider(request.getParameter("provider"));
+		ctDAO.updateCuttingToolById(ct);
 		return mv;
 	}
 	

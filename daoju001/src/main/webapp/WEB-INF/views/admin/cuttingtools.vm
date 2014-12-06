@@ -1,0 +1,10 @@
+#set($layout = "/layout/admin_layout.vm")
+<div class="adminitems">
+	#foreacht($ct in $cts)
+		<div class="series">
+			<form id="form_series" action="updateseries">
+				
+			</form>
+		</div>
+	#end
+</div>

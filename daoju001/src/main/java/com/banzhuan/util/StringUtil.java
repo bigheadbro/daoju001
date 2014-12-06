@@ -67,6 +67,15 @@ public class StringUtil {
 		return str.replace(";", "/");
 	}
 	
+	public static String replaceHtmlDiv(String str)
+	{
+		if(str == null)
+		{
+			return "";
+		}
+		return str.replace("<div>", "<br/>").replace("</div>", "");
+	}
+	
 	public static String replaceBackspace(String str)
 	{
 		if(str == null)

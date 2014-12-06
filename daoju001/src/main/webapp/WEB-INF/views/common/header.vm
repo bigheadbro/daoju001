@@ -9,6 +9,7 @@
     <script type="text/javascript" src="/js/jquery.fancybox.pack.js"></script>
 	<script type="text/javascript" src="/js/jQuery.mouseDelay.min.js"></script>
 	<script type="text/javascript" src="/js/additional-methods.js"></script>
+	<script type="text/javascript" src="/js/top-nav.js"></script>
 	<script type="text/javascript" name="baidu-tc-cerfication" src="http://apps.bdimg.com/cloudaapi/lightapp.js#32f7b9e719646def920c3b56d009a7c5"></script>
 	<script type="text/javascript">window.bd && bd._qdc && bd._qdc.init({app_id: '550ce186e1c92b6cc755ef5a'});</script>
 	<script type="text/javascript" >

@@ -1327,7 +1327,7 @@ opacity: .3;
 .agent-detail h4{color:#606060;font-size:12px;font-weight:100;overflow:hidden;white-space:nowrap;text-overflow: ellipsis;}
 .agent-detail h2 a.fancybox-v.red{float:left;color:red;margin-left: 3px;font-size: 13px;}
 .agent-detail h2 a.red{float:left;color:red;margin-left: 3px;font-size: 13px;}
-.agent-detail h2 a.fancybox-v{float:left;color:#ff9000;margin-left: 3px;font-size: 13px;}
+.agent-detail h2 a.fancybox-v{float:left;color:#ff9000;margin-left: 3px;font-size: 13px;color:white;background-color:#0099cb;border:1px solid #00c0ff;font-size:12px;padding:1px 5px;}
 .agent-detail h2 a.fancybox-v img{width:12px;margin-top: 3px;}
 .download{float:right;margin:17px;}
 .download a{background-color: #0088b5;color: white;padding: 10px 30px;border-radius: 5px;}
@@ -1516,7 +1516,9 @@ opacity: .3;
 .member-content ul.info .right .alipay p{font-size:13px;line-height: 22px;}
 /*代理商列表*/
 .brand-list{border-bottom:1px solid #d9e8ec;}
-.brand-list .agent-list{display:block;border-left: 1px solid #d9e8ec;float: left;width: 617px;}
+.brand-list .agent-list{display:block;border-left: 1px solid #d9e8ec;float: left;width: 613px;}
+.brand-list .agent-list .agent-row{border-bottom:1px solid #d9e8ec}
+.brand-list .agent-list .agent-row:last-child{border-bottom:none}
 .brand-list .agent-list .agent-info{display:inline-block;padding: 40px 20px;}
 .brand-logo{float:left;}
 .brand-logo p{color:#828282;text-align:center;margin-top:10px;}
@@ -1615,10 +1617,13 @@ p.forget{font-size: 12px;margin: 10px;color: #707070;}
 
 /*knowmore*/
 .knowmore{font-family:"幼圆"}
-.knowmore h1.title{text-align: center;color: #606060;font-size: 34px;font-weight:normal;font-family:"幼圆";margin-top: 30px;}
+.knowmore h1.title{text-align: center;color: #606060;font-size: 34px;font-weight:normal;font-family:"幼圆";margin: 35px;}
 .knowmore h1.title span{color:#0099cb;}
 .knowmore h1.title span em{font-family:"Arial"}
-.knowmore p.head{color:#606060;font-size:18px;padding:0 64px;line-height: 30px;}
+.knowmore p.head{color:#606060;font-size:18px;padding:0 64px;line-height: 28px;font-family:"幼圆";}
+.knowmore .data{padding:40px 64px;border-bottom:1px solid #f2f2f2;color:#606060;}
+.knowmore .data .item{display:inline-block;font-size:18px;font-family:"幼圆";width: 272px;text-align: center;height: 115px;}
+.knowmore .data .item span{font-size:72px;font-family: "华文细黑";}
 /*pay*/
 .payorder-container{margin:0 auto;width:960px;margin-top:30px;}
 .pay-head h1{font-size:18px;margin-bottom:10px;}

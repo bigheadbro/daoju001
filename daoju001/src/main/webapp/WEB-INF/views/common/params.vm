@@ -77,7 +77,7 @@
 #if($stringUtil.isContains($param,">丝锥种类<"))
     <td>$!{cut.taptype}</td>
 #end
-#if($stringUtil.isContains($param,">螺纹类型<"))
+#if($stringUtil.isContains($param,">螺纹种类<"))
     <td>$!{cut.screwtype}</td>
 #end
 #if($stringUtil.isContains($param,">主轴类型<"))
@@ -109,6 +109,8 @@
 #end
 #if($stringUtil.isContains($param,">螺距<"))
     <td>$!{cut.screwdistance}</td>
+#else 
+	<td>123</td>
 #end
 #if($stringUtil.isContains($param,">精度<"))
     <td>$!{cut.accuracy}</td>

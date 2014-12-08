@@ -23,11 +23,11 @@
 								required:true
 							},
 							phone:{
-								required:true,
-								number:true
+								require_from_group: [1, ".contact-group"],
+								isphone:true
 							},
 							mobile:{
-								required:true,
+								require_from_group: [1, ".contact-group"],
 								number:true
 							},
 							qq:{
@@ -51,12 +51,8 @@
 							company:{
 								required:"请填写公司名称"
 							},
-							phone:{
-								required:"请输入公司电话",
-								number:"电话号码只包含数字"
-							},
 							mobile:{
-								required:"请输入联系人手机",
+								
 								number:"手机号码只包含数字"
 							},
 							qq:{
@@ -128,7 +124,7 @@
 				  公司电话<i>*</i>
 				</li>
 			  <li class="value">
-				  <input type="text"  name="$!{status.expression}"  class="dsf-form-text-input" />
+				  <input type="text"  name="$!{status.expression}"  class="dsf-form-text-input contact-group" />
 				  <em for="$!{status.expression}" generated="true" class="error">$!{status.errorMessage}</em>
 				</li>
 			</ul>
@@ -138,7 +134,7 @@
 				  手机<i>*</i>
 				</li>
 			  <li class="value">
-				  <input type="text"  name="$!{status.expression}"  class="dsf-form-text-input" />
+				  <input type="text"  name="$!{status.expression}"  class="dsf-form-text-input contact-group" />
 				  <em for="$!{status.expression}" generated="true" class="error">$!{status.errorMessage}</em>
 				</li>
 			</ul>

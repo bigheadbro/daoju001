@@ -1566,7 +1566,7 @@ public class CommonService {
 		}
 		if(screwtype.size() >1 || (!screwtype.contains(null) && screwtype.size() == 1))
 		{
-			ret += "<li set=0 param=\"screwtype\"><input type=\"hidden\" name=\"screwtype\" /><h1>螺纹类型<a></a></h1><div class=\"param clearfix\" >";
+			ret += "<li set=0 param=\"screwtype\"><input type=\"hidden\" name=\"screwtype\" /><h1>螺纹种类<a></a></h1><div class=\"param clearfix\" >";
 			Iterator<String> iter = screwtype.iterator();
 			while(iter.hasNext())
 			{

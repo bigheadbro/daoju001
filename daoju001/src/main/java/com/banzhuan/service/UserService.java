@@ -385,19 +385,14 @@ public class UserService {
 				user.setAddress(form.getAddress());
 			}
 			
-			if(StringUtil.isNotEmpty(form.getCompanyPhone()))
-			{
-				user.setPhone(form.getCompanyPhone());
-			}
+			user.setPhone(form.getCompanyPhone());
 			if(StringUtil.isNotEmpty(form.getContactName()))
 			{
 				user.setContactName(form.getContactName());
 			}
-			if(StringUtil.isNotEmpty(form.getContactPhone()))
-			{
-				user.setContactPhone(form.getContactPhone());
-				account.setPhone(user.getContactPhone());
-			}
+			user.setContactPhone(form.getContactPhone());
+			account.setPhone(user.getContactPhone());
+			
 			if(StringUtil.isNotEmpty(form.getContactQQ()))
 			{
 				user.setContactQq(form.getContactQQ());

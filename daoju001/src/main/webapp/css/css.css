@@ -570,7 +570,7 @@ h1.category-level a:hover{text-decoration:underline;color:#ff8f17}
 .category-content .right a img{border:1px solid white}
 .category-content .right a:hover img{border:1px solid #d8e8ec}
 
-.series-content{position:relative;min-height:700px;}
+.series-content{position:relative;min-height:700px;margin-top: 20px;}
 .series-left{float:left;width:173px;background-color:#f6f6f6;border:1px solid #d8d8d8;overflow-y:auto;overflow-x:hidden;max-height:700px;min-height: 400px;}
 .series-left h1{font-size:15px;color:#9c9c9c;line-height:22px;margin: 10px;margin-bottom: 30px;}
 .series-left p{color:#606060;font-size:12px;line-height:24px;margin: 10px;}
@@ -647,7 +647,7 @@ h1.category-level a:hover{text-decoration:underline;color:#ff8f17}
 .detail-content ul.series-tab{background-color:#f4f8f9;}
 .detail-content ul.series-tab li{float:left;font-size:14px;color:#828282;cursor:pointer;line-height:30px;padding:2px 10px;;color:#0099cb;}
 .detail-content ul.series-tab li.current{background-color:#dae9ed;font-weight:bold;position: relative;z-index: 101;}
-.detail-content .version-content{position: relative;z-index: 100;padding-top: 20px;width: 100%;overflow-x: auto;overflow-y: hidden;}
+.detail-content .version-content{position: relative;z-index: 100;padding-top: 10px;width: 100%;overflow-x: auto;overflow-y: hidden;}
 .detail-content .version-content .head{letter-spacing: -4px;border-bottom:1px dotted #0099cb;padding-bottom: 5px;}
 .detail-content .category-content{display:none;position: relative;z-index: 100;padding-top:20px;}
 .detail-content .version-content .head span{width:200px;display:inline-block;text-align:center;font-size:13px;letter-spacing: normal;  word-spacing: normal;}
@@ -1353,7 +1353,7 @@ opacity: .3;
 .letter-wrap .a-zlist a.current{color:#0099cb;background: white;}
 .letter-wrap .a-zlist a:hover{color:#0099cb}
 .provider-list-content{width:760px;}
-.provider-item{margin-top:25px;border:1px solid #d9e8ec;}
+.provider-item{margin-top:10px;border:1px solid #d9e8ec;}
 .provider-item h1{font-size:14px;color:#0099cb;background-color:#f4f8f9;padding: 5px 10px;border-bottom:1px solid #d9e8ec;}
 /*案例页面*/
 .sample-item .agent-info{margin:10px 0 0 20px;float:left;}
@@ -1538,6 +1538,7 @@ opacity: .3;
 .brand-list .agent-detail h4{color:#4b4b4b;}
 .agent-list-content .gc-item .brand-list .agent-info{margin:0}
 .brand-list .agent-detail h2 a.agent-name{max-width:185px;}
+.brand-list .agent-detail h2 a.agent-name:hover{color:#0099cb;}
 /*代理商详细页面*/
 .regular{font-weight:100;}
 .company-detail{margin-top:20px;}

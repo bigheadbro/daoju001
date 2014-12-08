@@ -200,7 +200,14 @@ $(function() {
     					</div>
     					<div class="contactway clearfix">
     						<div class="name">&nbsp;</div>
-        					<div class="phone"><span>手机</span>${user.contactPhone}</div>
+        					<div class="phone">
+								<span>手机</span>
+								#if($stringUtil.isNotEmpty(${user.contactPhone}))
+									${user.contactPhone}
+								#else
+									${user.phone}
+								#end
+							</div>
         					<div class="qq"><span>QQ</span>${user.contactQq}</div>
     					</div>
     				</div>

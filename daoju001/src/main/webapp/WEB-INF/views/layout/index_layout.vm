@@ -443,7 +443,7 @@
                     </ul>
 					<div class="content clearfix">
     					<div class="banner">
-    						<a href="http://www.baidu.com"><img src="/img/banner.png" /></a>
+    						<a href="/knowmore"><img src="/img/banner.png" /></a>
             			</div>
 						<script>
 						$(function(){

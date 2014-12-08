@@ -25,7 +25,12 @@
 						nick:{
 							required:true
 						},
+						companyPhone:{
+							require_from_group: [1, ".contact-group"],
+							isphone:true
+						},
         				contactPhone:{
+							require_from_group: [1, ".contact-group"],
         					number:true
         				},
         				contactQQ:{
@@ -147,18 +152,7 @@
                 </li>
             </ul>
         </div>
-        <div class="listitem clearfix">
-			#springBind("form.companyPhone")
-            <ul class="user-info clearfix">
-                <li class="key">
-                    公司电话
-                </li>
-                <li class="value">
-                    <input type="text" class="dsf-form-text-input" name="${status.expression}" value="$!{status.value}" />
-                </li>
-            </ul>
-        </div>
-        <div class="listitem clearfix">
+		<div class="listitem clearfix">
 			#springBind("form.contactName")
             <ul class="user-info clearfix">
                 <li class="key">
@@ -170,13 +164,24 @@
             </ul>
         </div>
         <div class="listitem clearfix">
+			#springBind("form.companyPhone")
+            <ul class="user-info clearfix">
+                <li class="key">
+                    公司电话
+                </li>
+                <li class="value">
+                    <input type="text" class="dsf-form-text-input contact-group" name="${status.expression}" value="$!{status.value}" />
+                </li>
+            </ul>
+        </div>
+        <div class="listitem clearfix">
 			#springBind("form.contactPhone")
             <ul class="user-info clearfix">
                 <li class="key">
                     手机
                 </li>
                 <li class="value">
-                    <input type="text" class="dsf-form-text-input" name="${status.expression}" value="$!{status.value}" />
+                    <input type="text" class="dsf-form-text-input contact-group" name="${status.expression}" value="$!{status.value}" />
                 </li>
             </ul>
         </div>

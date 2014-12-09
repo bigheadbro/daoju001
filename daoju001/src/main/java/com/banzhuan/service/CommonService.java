@@ -1062,6 +1062,7 @@ public class CommonService {
 		HashSet<String> shanktype= new HashSet<String>();
 		HashSet<String> shape= new HashSet<String>();
 		HashSet<String> workingtool= new HashSet<String>();
+		HashSet<String> workingtype= new HashSet<String>();
 		HashSet<String> coatingtype= new HashSet<String>();
 		HashSet<String> diameterratio= new HashSet<String>();
 		HashSet<String> slotshape= new HashSet<String>();
@@ -1116,6 +1117,7 @@ public class CommonService {
 			shanktype.add(cts.get(j).getShanktype());
 			shape.add(cts.get(j).getShape());
 			workingtool.add(cts.get(j).getWorkingtool());
+			workingtype.add(cts.get(j).getWorkingtype());
 			coatingtype.add(cts.get(j).getCoatingtype());
 			diameterratio.add(cts.get(j).getDiameterratio());
 			slotshape.add(cts.get(j).getSlotshape());
@@ -1345,11 +1347,80 @@ public class CommonService {
 			{
 				String str = iter.next();
 				if(StringUtil.isNotEmpty(str))
-					ret += "<span>"+str+"</span>";
+				{
+					if(StringUtil.isEqual(str, "H"))
+					{
+						ret += "<span>H(正六角形)</span>";
+					}
+					else if(StringUtil.isEqual(str, "O"))
+					{
+						ret += "<span>O(八角形)</span>";
+					}
+					else if(StringUtil.isEqual(str, "P"))
+					{
+						ret += "<span>P(五角型)</span>";
+					}
+					else if(StringUtil.isEqual(str, "S"))
+					{
+						ret += "<span>S(正方形)</span>";
+					}
+					else if(StringUtil.isEqual(str, "T"))
+					{
+						ret += "<span>T(三角形)</span>";
+					}
+					else if(StringUtil.isEqual(str, "C"))
+					{
+						ret += "<span>C(菱形80°)</span>";
+					}
+					else if(StringUtil.isEqual(str, "D"))
+					{
+						ret += "<span>D(菱形55°)</span>";
+					}
+					else if(StringUtil.isEqual(str, "E"))
+					{
+						ret += "<span>E(菱形75°)</span>";
+					}
+					else if(StringUtil.isEqual(str, "F"))
+					{
+						ret += "<span>F(菱形50°)</span>";
+					}
+					else if(StringUtil.isEqual(str, "M"))
+					{
+						ret += "<span>M(菱形86°)</span>";
+					}
+					else if(StringUtil.isEqual(str, "V"))
+					{
+						ret += "<span>V(菱形35°)</span>";
+					}
+					else if(StringUtil.isEqual(str, "W"))
+					{
+						ret += "<span>W(不等角六角形)</span>";
+					}
+					else if(StringUtil.isEqual(str, "L"))
+					{
+						ret += "<span>L(长方形90°)</span>";
+					}
+					else if(StringUtil.isEqual(str, "A"))
+					{
+						ret += "<span>A(四边形顶角85°)</span>";
+					}
+					else if(StringUtil.isEqual(str, "B"))
+					{
+						ret += "<span>B(四边形顶角82°)</span>";
+					}
+					else if(StringUtil.isEqual(str, "K"))
+					{
+						ret += "<span>K(四边形顶角55°)</span>";
+					}
+					else if(StringUtil.isEqual(str, "R"))
+					{
+						ret += "<span>R(圆形)</span>";
+					}
+				}
 			}
 			ret += "</div></li>";
 		}
-		if(backangle.size() > 1 || (!backangle.contains(0) && backangle.size() == 1))
+		if(backangle.size() > 1 || (!backangle.contains(1000) && backangle.size() == 1))
 		{
 			ret += "<li set=0 param=\"backangle\"><input type=\"hidden\" name=\"backangle\" /><h1>后角<a></a></h1><div class=\"param clearfix\" >";
 			final List<Integer> list = new ArrayList<Integer>();  
@@ -1359,8 +1430,39 @@ public class CommonService {
 	        Collections.sort(list);  
 	        for(int i = 0; i<list.size();i++)
 	        {
-	        	if(list.get(i)!=0)
-					ret += "<span>"+list.get(i)+"</span>";
+	        	if(list.get(i)!=1000)
+	        	{
+	        		switch(list.get(i))
+	        		{
+	        		case 3:
+	        			ret += "<span>A(3°)</span>";
+	        			break;
+	        		case 5:
+	        			ret += "<span>B(5°)</span>";
+	        			break;
+	        		case 7:
+	        			ret += "<span>C(7°)</span>";
+	        			break;
+	        		case 15:
+	        			ret += "<span>D(15°)</span>";
+	        			break;
+	        		case 20:
+	        			ret += "<span>E(20°)</span>";
+	        			break;
+	        		case 25:
+	        			ret += "<span>F(25°)</span>";
+	        			break;
+	        		case 30:
+	        			ret += "<span>G(30°)</span>";
+	        			break;
+	        		case 0:
+	        			ret += "<span>N(0°)</span>";
+	        			break;
+	        		case 11:
+	        			ret += "<span>P(11°)</span>";
+	        			break;
+	        		}
+	        	}
 	        }
 			ret += "</div></li>";
 		}
@@ -1368,6 +1470,16 @@ public class CommonService {
 		{
 			ret += "<li set=0 param=\"workingtool\"><input type=\"hidden\" name=\"workingtool\" /><h1>适用工件<a></a></h1><div class=\"param clearfix\" >";
 			List<String> list = CuttingToolsConfiguration.splitWorkingtoolOrUsage(workingtool);
+			for(int i = 0;i<list.size();i++)
+			{
+				ret += "<span>"+list.get(i)+"</span>";
+			}
+			ret += "</div></li>";
+		}
+		if(workingtype.size() > 1 || (!workingtype.contains(null) && workingtype.size() == 1))
+		{
+			ret += "<li set=0 param=\"workingtype\"><input type=\"hidden\" name=\"workingtype\" /><h1>加工类型<a></a></h1><div class=\"param clearfix\" >";
+			List<String> list = CuttingToolsConfiguration.splitWorkingtoolOrUsage(workingtype);
 			for(int i = 0;i<list.size();i++)
 			{
 				ret += "<span>"+list.get(i)+"</span>";
@@ -1816,8 +1928,8 @@ public class CommonService {
 		}
 		if(screwdirection.size() > 1 || (!screwdirection.contains(null) && screwdirection.size() == 1))
 		{
-			ret += "<li set=0 param=\"interfacesize\"><input type=\"hidden\" name=\"interfacesize\" /><h1>接口尺寸<a></a></h1><div class=\"param clearfix\" >";
-			Iterator<String> iter = interfacesize.iterator();
+			ret += "<li set=0 param=\"interfacesize\"><input type=\"hidden\" name=\"interfacesize\" /><h1>=螺纹方向<a></a></h1><div class=\"param clearfix\" >";
+			Iterator<String> iter = screwdirection.iterator();
 			while(iter.hasNext())
 			{
 				ret += "<span>"+iter.next()+"</span>";
@@ -1826,8 +1938,8 @@ public class CommonService {
 		}
 		if(grooverange.size() > 1 || (!grooverange.contains(null) && grooverange.size() == 1))
 		{
-			ret += "<li set=0 param=\"interfacesize\"><input type=\"hidden\" name=\"interfacesize\" /><h1>接口尺寸<a></a></h1><div class=\"param clearfix\" >";
-			Iterator<String> iter = interfacesize.iterator();
+			ret += "<li set=0 param=\"interfacesize\"><input type=\"hidden\" name=\"interfacesize\" /><h1>切槽范围<a></a></h1><div class=\"param clearfix\" >";
+			Iterator<String> iter = grooverange.iterator();
 			while(iter.hasNext())
 			{
 				ret += "<span>"+iter.next()+"</span>";
@@ -1836,8 +1948,8 @@ public class CommonService {
 		}
 		if(drillrange.size() > 1 || (!drillrange.contains(null) && drillrange.size() == 1))
 		{
-			ret += "<li set=0 param=\"interfacesize\"><input type=\"hidden\" name=\"interfacesize\" /><h1>接口尺寸<a></a></h1><div class=\"param clearfix\" >";
-			Iterator<String> iter = interfacesize.iterator();
+			ret += "<li set=0 param=\"interfacesize\"><input type=\"hidden\" name=\"interfacesize\" /><h1>钻孔范围<a></a></h1><div class=\"param clearfix\" >";
+			Iterator<String> iter = drillrange.iterator();
 			while(iter.hasNext())
 			{
 				ret += "<span>"+iter.next()+"</span>";
@@ -1857,6 +1969,8 @@ public class CommonService {
 		HashSet<String> shanktype= new HashSet<String>();
 		HashSet<String> shape= new HashSet<String>();
 		HashSet<String> workingtool= new HashSet<String>();
+		HashSet<String> workingtype= new HashSet<String>();
+		
 		HashSet<String> coatingtype= new HashSet<String>();
 		HashSet<String> diameterratio= new HashSet<String>();
 		HashSet<String> slotshape= new HashSet<String>();
@@ -1912,6 +2026,7 @@ public class CommonService {
 			shanktype.add(cts.get(j).getShanktype());
 			shape.add(cts.get(j).getShape());
 			workingtool.add(cts.get(j).getWorkingtool());
+			workingtype.add(cts.get(j).getWorkingtype());
 			coatingtype.add(cts.get(j).getCoatingtype());
 			diameterratio.add(cts.get(j).getDiameterratio());
 			slotshape.add(cts.get(j).getSlotshape());
@@ -2003,16 +2118,21 @@ public class CommonService {
 		}
 		if(shape.size() > 1 || (!shape.contains(null) && shape.size() == 1))
 		{
-			map.put("shape", CuttingToolsConfiguration.convertSetToList(shape));
+			map.put("shape", CuttingToolsConfiguration.convertShapeToList(shape));
 		}
-		if(backangle.size() > 1 || (!backangle.contains(0) && backangle.size() == 1))
+		if(backangle.size() > 1 || (!backangle.contains(1000) && backangle.size() == 1))
 		{
-			map.put("backangle", CuttingToolsConfiguration.sortIntegerList(backangle));
+			map.put("backangle", CuttingToolsConfiguration.sortBaList(backangle));
 		}
 		if(workingtool.size() > 1 || (!workingtool.contains(null) && workingtool.size() == 1))
 		{
 			List<String> list = CuttingToolsConfiguration.splitWorkingtoolOrUsage(workingtool);
 			map.put("workingtool", list);
+		}
+		if(workingtype.size() > 1 || (!workingtype.contains(null) && workingtype.size() == 1))
+		{
+			List<String> list = CuttingToolsConfiguration.splitWorkingtoolOrUsage(workingtype);
+			map.put("workingtype", list);
 		}
 		if(edgeno.size() > 1 || (!edgeno.contains(0) && edgeno.size() == 1))
 		{

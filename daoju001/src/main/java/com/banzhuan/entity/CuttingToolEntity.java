@@ -137,6 +137,8 @@ public class CuttingToolEntity implements Serializable {
 	
 	private String screwdirection;
 	
+	private String workingtype;
+	
 	public int getId() {
 		return id;
 	}
@@ -659,5 +661,15 @@ public class CuttingToolEntity implements Serializable {
 	public void setScrewdirection(String screwdirection)
 	{
 		this.screwdirection = screwdirection;
+	}
+
+	public String getWorkingtype()
+	{
+		return workingtype;
+	}
+
+	public void setWorkingtype(String workingtype)
+	{
+		this.workingtype = workingtype;
 	}
 }

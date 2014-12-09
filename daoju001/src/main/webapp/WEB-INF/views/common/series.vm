@@ -25,14 +25,14 @@
 									$(this).children(".param").empty();
 									for(var y in data.map[x]){
 										$(this).children(".param").append("<span>" + data.map[x][y] + "</span>");
+										count++;
 									}
-									count++;
 								}
             				}
 							if(count == 0){
 								$(this).hide();
-								count = 0;
 							}
+							count = 0;
 						}
 					});
                 }  
@@ -51,6 +51,7 @@
                 success:function(data){ //提交成功的回调函数  
                     $(".series-content .right").empty().append(data.cts);
 					$(".series-content .series-left ul.params-list li").each(function(){
+						var count =0;
 						if($(this).attr("set") == "0")
 						{
 							for(var x in data.map){
@@ -84,7 +85,12 @@
 										} 
 										else
 											$(this).children(".param").append("<span>" + data.map[x][y] + "</span>");
+										count++;
 									}
+									if(count > 0){
+										$(this).show();
+									}
+									count = 0;
 								}
             				}
 						}

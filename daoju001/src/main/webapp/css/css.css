@@ -572,13 +572,13 @@ h1.category-level a:hover{text-decoration:underline;color:#ff8f17}
 
 .series-content{position:relative;min-height:700px;margin-top: 20px;}
 .series-left{float:left;width:173px;background-color:#f6f6f6;border:1px solid #d8d8d8;overflow-y:auto;overflow-x:hidden;max-height:700px;min-height: 400px;}
-.series-left h1{font-size:15px;color:#9c9c9c;line-height:22px;margin: 10px;margin-bottom: 30px;}
+.series-left h1{font-size:15px;color:#9c9c9c;line-height:22px;margin-bottom: 30px;}
 .series-left p{color:#606060;font-size:12px;line-height:24px;margin: 10px;}
 .series-left p span{color:#0099cb;display:block}
 .series-left ul.params-list{}
 .series-left ul.params-list li{border-bottom:1px solid #d8d8d8;padding: 10px;}
 .series-left ul.params-list li h1{margin-left: 4px;font-size:12px;color:#606060;margin-bottom: 5px;}
-.series-left ul.params-list li h1 a{padding:1px 3px;text-decoration:underline;cursor:pointer;float:right;margin-right:5px;}
+.series-left ul.params-list li h1 a{padding:0px 3px;text-decoration:underline;cursor:pointer;float:right;overflow: hidden;white-space: nowrap;text-align:right;}
 .series-left ul.params-list li h1 a:hover{color:white;background-color:#ff8f17;}
 .series-left ul.params-list li .param{}
 .series-left ul.params-list li .param span{font-size:12px;color:#464646;padding:1px 5px;cursor:pointer;display:block;float:left;}
@@ -1353,8 +1353,8 @@ opacity: .3;
 .letter-wrap .a-zlist a.current{color:#0099cb;background: white;}
 .letter-wrap .a-zlist a:hover{color:#0099cb}
 .provider-list-content{width:760px;}
-.provider-item{margin-top:10px;border:1px solid #d9e8ec;}
-.provider-item h1{font-size:14px;color:#0099cb;background-color:#f4f8f9;padding: 5px 10px;border-bottom:1px solid #d9e8ec;}
+.provider-list-content .provider-item{margin-top:10px;border:1px solid #d9e8ec;}
+.provider-list-content .provider-item h1{font-size:14px;color:#0099cb;background-color:#f4f8f9;padding: 5px 10px;border-bottom:1px solid #d9e8ec;}
 /*案例页面*/
 .sample-item .agent-info{margin:10px 0 0 20px;float:left;}
 .sample-item .agent-info .agent-detail{width:148px;}

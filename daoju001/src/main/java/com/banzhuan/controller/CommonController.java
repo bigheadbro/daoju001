@@ -1673,8 +1673,8 @@ public class CommonController extends BaseController{
 		double pipesize = Double.valueOf(StringUtil.isEmpty(request.getParameter("pipesize"))?"0":request.getParameter("pipesize"));
 		String shank = request.getParameter("shank");
 		String shanktype = request.getParameter("shanktype");
-		String shape = request.getParameter("shape");
-		int backangle = Integer.valueOf(StringUtil.isEmpty(request.getParameter("backangle"))?"0":request.getParameter("backangle"));
+		String shape = CuttingToolsConfiguration.formatShape(request.getParameter("shape"));
+		int backangle = Integer.valueOf(CuttingToolsConfiguration.formatBackangle(request.getParameter("backangle")));
 		String workingtool = request.getParameter("workingtool");
 		int edgeno = Integer.valueOf(StringUtil.isEmpty(request.getParameter("edgeno"))?"0":request.getParameter("edgeno"));
 		String edgelength = request.getParameter("edgelength");

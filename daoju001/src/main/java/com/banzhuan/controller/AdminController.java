@@ -108,6 +108,41 @@ public class AdminController extends BaseController{
 	@Qualifier("ctDAO")
 	private CuttingToolDAO ctDAO;
 
+	@RequestMapping(value="/updatebyxls")
+	public ModelAndView updatebyxls(final HttpServletRequest request, final HttpServletResponse response)
+	{
+		ModelAndView mv = new ModelAndView("/admin/test");
+		try {
+            Workbook book = Workbook.getWorkbook(new File("C:/data/update.xls"));
+            Sheet sheet = book.getSheet(2);      
+            for(int j = 3; j < sheet.getRows(); j++)
+            {
+            	CuttingToolEntity ct = new CuttingToolEntity();
+            	String tmp = sheet.getCell(0, j).getContents().trim().replace("；", ";").replace("（", "(").replace("）", ")");
+            	tmp = sheet.getCell(0, j).getContents().trim().replace("；", ";").replace("（", "(").replace("）", ")");
+            	if(StringUtil.isNotEmpty(tmp))
+            	{
+            		ct.setBrand(tmp);
+            	}
+            	tmp = sheet.getCell(1, j).getContents().trim().replace("；", ";").replace("（", "(").replace("）", ")");
+            	if(StringUtil.isNotEmpty(tmp))
+            	{
+            		ct.setSeriesname(tmp);
+            	}
+            	tmp = sheet.getCell(2, j).getContents().trim().replace("；", ";").replace("（", "(").replace("）", ")");
+            	if(StringUtil.isNotEmpty(tmp))
+            	{
+            		ct.setWorkingtype(tmp);
+            	}
+            	ctDAO.updateCuttingToolById(ct);
+            }
+            book.close();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+		return mv;
+	}
+	
 	@RequestMapping(value="/generateSameColume/{id}")
 	public ModelAndView generateSameColume(final HttpServletRequest request, final HttpServletResponse response, @PathVariable String id)
 	{

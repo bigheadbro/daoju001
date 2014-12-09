@@ -300,6 +300,10 @@ public class CuttingToolsConfiguration
 			{
 				ret += "<th>加工用途</th>";
 			}
+			if (StringUtil.isNotEmpty(cts.get(i).getWorkingtype()) && !ret.contains("<th>加工类型</th>"))
+			{
+				ret += "<th>加工类型</th>";
+			}
 			if (cts.get(i).getCujing() != 0 && !ret.contains("<th>光洁度</th>"))
 			{
 				ret += "<th>光洁度</th>";
@@ -472,6 +476,7 @@ public class CuttingToolsConfiguration
 			{
 				ret += "<th>螺纹方向</th>";
 			}
+			
 		}
 		return ret;
 	}
@@ -498,6 +503,10 @@ public class CuttingToolsConfiguration
 		if (ret.contains("usage"))
 		{
 			tmp += "<span>"+ct.getUsage().replace(";", "/")+"</span>";
+		}
+		if (ret.contains("workingtype"))
+		{
+			tmp += "<span>"+ct.getWorkingtype().replace("；", "/").replace(";", "/")+"</span>";
 		}
 		if (ret.contains("<span>光洁度</span>"))
 		{
@@ -748,28 +757,7 @@ public class CuttingToolsConfiguration
 		}
 		return tmp;
 	}
-	
-	public static String formatDirection(String direction)
-	{
-		
-		if(StringUtil.isEqual(direction, "左手"))
-		{
-			return "2";
-		}
-		else if(StringUtil.isEqual(direction, "右手"))
-		{
-			return "3";
-		}
-		else if(StringUtil.isEqual(direction, "通用槽"))
-		{
-			return "1";
-		}
-		else
-		{
-			return "0";
-		}
-	}
-	
+
 	public static List<String> convertSetToList(HashSet<String> param)
 	{
 		Iterator<String> iter = param.iterator();
@@ -779,6 +767,88 @@ public class CuttingToolsConfiguration
 			String str = iter.next();
 			if(StringUtil.isNotEmpty(str))
 				list.add(str);
+		}
+		return list;
+	}
+	
+	public static List<String> convertShapeToList(HashSet<String> param)
+	{
+		Iterator<String> iter = param.iterator();
+		List<String> list = new ArrayList<String>();
+		while(iter.hasNext())
+		{
+			String str = iter.next();
+			if(StringUtil.isNotEmpty(str))
+			{
+				if(StringUtil.isEqual(str, "H"))
+				{
+					list.add("H(正六角形)");
+				}
+				else if(StringUtil.isEqual(str, "O"))
+				{
+					list.add("O(八角形)");
+				}
+				else if(StringUtil.isEqual(str, "P"))
+				{
+					list.add("P(五角型)");
+				}
+				else if(StringUtil.isEqual(str, "S"))
+				{
+					list.add("S(正方形)");
+				}
+				else if(StringUtil.isEqual(str, "T"))
+				{
+					list.add("T(三角形)");
+				}
+				else if(StringUtil.isEqual(str, "C"))
+				{
+					list.add("C(菱形80°)");
+				}
+				else if(StringUtil.isEqual(str, "D"))
+				{
+					list.add("D(菱形55°)");
+				}
+				else if(StringUtil.isEqual(str, "E"))
+				{
+					list.add("E(菱形75°)");
+				}
+				else if(StringUtil.isEqual(str, "F"))
+				{
+					list.add("F(菱形50°)");
+				}
+				else if(StringUtil.isEqual(str, "M"))
+				{
+					list.add("M(菱形86°)");
+				}
+				else if(StringUtil.isEqual(str, "V"))
+				{
+					list.add("V(菱形35°)");
+				}
+				else if(StringUtil.isEqual(str, "W"))
+				{
+					list.add("W(不等角六角形)");
+				}
+				else if(StringUtil.isEqual(str, "L"))
+				{
+					list.add("L(长方形90°)");
+				}
+				else if(StringUtil.isEqual(str, "A"))
+				{
+					list.add("A(四边形顶角85°)");
+				}
+				else if(StringUtil.isEqual(str, "B"))
+				{
+					list.add("B(四边形顶角82°)");
+				}
+				else if(StringUtil.isEqual(str, "K"))
+				{
+					list.add("K(四边形顶角55°)");
+				}
+				else if(StringUtil.isEqual(str, "R"))
+				{
+					list.add("R(圆形)");
+				}
+			}
 		}
 		return list;
 	}
@@ -890,13 +960,57 @@ public class CuttingToolsConfiguration
 	{
 		List<Integer> list = new ArrayList<Integer>();
 		for(final Integer value : param){  
-        	if(value != 0)
+        	if(value != 1000)
         		list.add(value);  
         }  
         Collections.sort(list);  
         List<String> ret = new ArrayList<String>();  
         for(final Integer value : list){  
             ret.add(String.valueOf(value));  
+        }  
+        return ret;
+	}
+	
+	public static List<String> sortBaList(HashSet<Integer> param)
+	{
+		List<Integer> list = new ArrayList<Integer>();
+		for(final Integer value : param){  
+        	if(value != 0)
+        		list.add(value);  
+        }  
+        Collections.sort(list);  
+        List<String> ret = new ArrayList<String>();  
+        for(final Integer value : list){  
+        	switch(value)
+    		{
+    		case 3:
+    			ret.add("A(3°)");
+    			break;
+    		case 5:
+    			ret.add("B(5°)");
+    			break;
+    		case 7:
+    			ret.add("C(7°)");
+    			break;
+    		case 15:
+    			ret.add("D(15°)");
+    			break;
+    		case 20:
+    			ret.add("E(20°)");
+    			break;
+    		case 25:
+    			ret.add("F(25°)");
+    			break;
+    		case 30:
+    			ret.add("G(30°)");
+    			break;
+    		case 0:
+    			ret.add("N(0°)");
+    			break;
+    		case 11:
+    			ret.add("P(11°)");
+    			break;
+    		}
         }  
         return ret;
 	}
@@ -937,6 +1051,258 @@ public class CuttingToolsConfiguration
 		}
 	}
 	
+	public static String formatDirection(String direction)
+	{
+		
+		if(StringUtil.isEqual(direction, "左手"))
+		{
+			return "2";
+		}
+		else if(StringUtil.isEqual(direction, "右手"))
+		{
+			return "3";
+		}
+		else if(StringUtil.isEqual(direction, "通用槽"))
+		{
+			return "1";
+		}
+		else
+		{
+			return "0";
+		}
+	}
+	
+	public static String convertBackangle(int ba)
+	{
+		if(ba != 1000)
+    	{
+    		switch(ba)
+    		{
+    		case 3:
+    			return "A(3°)";
+    		case 5:
+    			return "B(5°)";
+    			
+    		case 7:
+    			return "C(7°)";
+    			
+    		case 15:
+    			return "D(15°)";
+    			
+    		case 20:
+    			return "E(20°)";
+    			
+    		case 25:
+    			return "F(25°)";
+    			
+    		case 30:
+    			return "G(30°)";
+    			
+    		case 0:
+    			return "N(0°)";
+    			
+    		case 11:
+    			return "P(11°)";
+    			
+    		}
+    	}
+		return "";
+	}
+	
+	public static String formatBackangle(String ba)
+	{
+		
+		if(StringUtil.isEqual(ba, "A(3°)"))
+		{
+			return "3";
+		}
+		else if(StringUtil.isEqual(ba, "B(5°)"))
+		{
+			return "5";
+		}
+		else if(StringUtil.isEqual(ba, "C(7°)"))
+		{
+			return "7";
+		}
+		else if(StringUtil.isEqual(ba, "D(15°)"))
+		{
+			return "15";
+		}
+		else if(StringUtil.isEqual(ba, "E(20°)"))
+		{
+			return "20";
+		}
+		else if(StringUtil.isEqual(ba, "F(25°)"))
+		{
+			return "25";
+		}
+		else if(StringUtil.isEqual(ba, "G(30°)"))
+		{
+			return "30";
+		}
+		else if(StringUtil.isEqual(ba, "N(0°)"))
+		{
+			return "0";
+		}
+		else if(StringUtil.isEqual(ba, "P(11°)"))
+		{
+			return "11";
+		}
+		else
+		{
+			return "1000";
+		}
+	}
+	
+	public static String convertShape(String shape)
+	{
+		if(StringUtil.isNotEmpty(shape))
+		{
+			if(StringUtil.isEqual(shape, "H"))
+			{
+				return "H(正六角形)";
+			}
+			else if(StringUtil.isEqual(shape, "O"))
+			{
+				return "O(八角形)";
+			}
+			else if(StringUtil.isEqual(shape, "P"))
+			{
+				return "P(五角型)";
+			}
+			else if(StringUtil.isEqual(shape, "S"))
+			{
+				return "S(正方形)";
+			}
+			else if(StringUtil.isEqual(shape, "T"))
+			{
+				return "T(三角形)";
+			}
+			else if(StringUtil.isEqual(shape, "C"))
+			{
+				return "C(菱形80°)";
+			}
+			else if(StringUtil.isEqual(shape, "D"))
+			{
+				return "D(菱形55°)";
+			}
+			else if(StringUtil.isEqual(shape, "E"))
+			{
+				return "E(菱形75°)";
+			}
+			else if(StringUtil.isEqual(shape, "F"))
+			{
+				return "F(菱形50°)";
+			}
+			else if(StringUtil.isEqual(shape, "M"))
+			{
+				return "M(菱形86°)";
+			}
+			else if(StringUtil.isEqual(shape, "V"))
+			{
+				return "V(菱形35°)";
+			}
+			else if(StringUtil.isEqual(shape, "W"))
+			{
+				return "W(不等角六角形)";
+			}
+			else if(StringUtil.isEqual(shape, "L"))
+			{
+				return "L(长方形90°)";
+			}
+			else if(StringUtil.isEqual(shape, "A"))
+			{
+				return "A(四边形顶角85°)";
+			}
+			else if(StringUtil.isEqual(shape, "B"))
+			{
+				return "B(四边形顶角82°)";
+			}
+			else if(StringUtil.isEqual(shape, "K"))
+			{
+				return "K(四边形顶角55°)";
+			}
+			else if(StringUtil.isEqual(shape, "R"))
+			{
+				return "R(圆形)";
+			}
+		}
+		return "";
+		
+	}
+	public static String formatShape(String shape)
+	{
+		String ret="";
+		if(StringUtil.isEqual(shape, "H(正六角形)"))
+		{
+			ret = "H";
+		}
+		else if(StringUtil.isEqual(shape, "O(八角形)"))
+		{
+			ret ="O";
+		}
+		else if(StringUtil.isEqual(shape, "P(五角型)"))
+		{
+			ret = "P";
+		}
+		else if(StringUtil.isEqual(shape, "S(正方形)"))
+		{
+			ret = "S";
+		}
+		else if(StringUtil.isEqual(shape, "T(三角形)"))
+		{
+			ret = "T";
+		}
+		else if(StringUtil.isEqual(shape, "C(菱形80°)"))
+		{
+			ret = "C";
+		}
+		else if(StringUtil.isEqual(shape, "D(菱形55°)"))
+		{
+			ret = "D";
+		}
+		else if(StringUtil.isEqual(shape, "E(菱形75°)"))
+		{
+			ret = "E";
+		}
+		else if(StringUtil.isEqual(shape, "F(菱形50°)"))
+		{
+			ret = "F";
+		}
+		else if(StringUtil.isEqual(shape, "M(菱形86°)"))
+		{
+			ret = "M";
+		}
+		else if(StringUtil.isEqual(shape, "V(菱形35°)"))
+		{
+			ret = "V";
+		}
+		else if(StringUtil.isEqual(shape, "W(不等角六角形)"))
+		{
+			ret = "W";
+		}
+		else if(StringUtil.isEqual(shape, "L(长方形90°)"))
+		{
+			ret = "L";
+		}
+		else if(StringUtil.isEqual(shape, "A(四边形顶角85°)"))
+		{
+			ret ="A";
+		}
+		else if(StringUtil.isEqual(shape, "B(四边形顶角82°)"))
+		{
+			ret ="B";
+		}
+		else if(StringUtil.isEqual(shape, "K(四边形顶角55°)"))
+		{
+			ret = "K";
+		}
+		else if(StringUtil.isEqual(shape, "R(圆形)"))
+		{
+			ret ="R";
+		}
+		return ret;
+	}
 	
 	public static String formatCooling(String cooling)
 	{

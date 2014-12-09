@@ -99,6 +99,7 @@
 		<id property="grooverange" column="grooverange" />
 		<id property="drillrange" column="drillrange" />
 		<id property="screwdirection" column="screwdirection" />
+		<id property="workingtype" column="workingtype" />
 	</resultMap>
 	
 	<resultMap type="com.banzhuan.entity.IndexEntity" id="IndexResultMap">
@@ -207,7 +208,7 @@
 		<if test="shape != null and shape != ''">
  	        and shape = #{shape}
 		</if>
-		<if test="backangle != 0">
+		<if test="backangle != 1000">
  	        and backangle = #{backangle}
 		</if>
 		<if test="edgeno != 0">
@@ -324,6 +325,9 @@
 		<if test="workingtool != null and workingtool != ''">
  	        and locate(#{workingtool},`workingtool`) > 0
 		</if>
+		<if test="workingtype != null and workingtype != ''">
+ 	        and locate(#{workingtool},`workingtool`) > 0
+		</if>
 		 group by seriesname	
 	</select>
 	
@@ -368,7 +372,7 @@
 		<if test="shape != null and shape != ''">
  	        and shape = #{shape}
 		</if>
-		<if test="backangle != 0">
+		<if test="backangle != 1000">
  	        and backangle = #{backangle}
 		</if>
 		<if test="edgeno != 0">
@@ -485,6 +489,9 @@
 		<if test="workingtool != null and workingtool != ''">
  	        and locate(#{workingtool},`workingtool`) > 0
 		</if>	
+		<if test="workingtype != null and workingtype != ''">
+ 	        and locate(#{workingtool},`workingtool`) > 0
+		</if>
 	</select>
 	<select id="queryCuttingToolByCt" parameterType="CuttingToolEntity" resultMap="CuttingToolResultMap">
 		SELECT * from t_cuttingtool t where 1=1 
@@ -527,7 +534,7 @@
 		<if test="shape != null and shape != ''">
  	        and shape = #{shape}
 		</if>
-		<if test="backangle != 0">
+		<if test="backangle != 1000">
  	        and backangle = #{backangle}
 		</if>
 		<if test="edgeno != 0">
@@ -641,12 +648,16 @@
 		<if test="workingtool != null and workingtool != ''">
  	        and locate(#{workingtool},`workingtool`) > 0
 		</if>
+		<if test="workingtype != null and workingtype != ''">
+ 	        and locate(#{workingtool},`workingtool`) > 0
+		</if>
 	</select>
 	<update id="updateCuttingToolById" parameterType="CuttingToolEntity">
 		update t_cuttingtool
 		<set>
 		  <if test="samecolume != null">samecolume=#{samecolume},</if>
 		  <if test="provider != null">provider=#{provider},</if>
+		  <if test="workingtype != null">workingtype=#{workingtype},</if>
 		</set>
 	   where seriesname=#{seriesname}
 	</update>
@@ -715,7 +726,8 @@
 		,width
 		,height
 		,grooverange
-		,drillrange)
+		,drillrange
+		,workingtype)
 		values
 		(
 		#{ishot}
@@ -777,6 +789,7 @@
 		,#{height}
 		,#{grooverange}
 		,#{drillrange}
+		,#{workingtype}
 		)
 	</insert>
 </mapper>

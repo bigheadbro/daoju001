@@ -30,10 +30,10 @@
     <td>$!{cut.shanktype}</td>
 #end
 #if($stringUtil.isContains($param,">形状<"))
-    <td>$!{cut.shape}</td>
+    <td>$ctConfig.convertShape(${cut.shape})</td>
 #end
 #if($stringUtil.isContains($param,">后角<"))
-    <td>$!{cut.backangle}</td>
+    <td>$ctConfig.convertBackangle(${cut.backangle})</td>
 #end
 #if($stringUtil.isContains($param,">适用工件<"))
     <td>$stringUtil.replaceSemicolon($!{cut.workingtool})</td>
@@ -109,8 +109,6 @@
 #end
 #if($stringUtil.isContains($param,">螺距<"))
     <td>$!{cut.screwdistance}</td>
-#else 
-	<td>123</td>
 #end
 #if($stringUtil.isContains($param,">精度<"))
     <td>$!{cut.accuracy}</td>

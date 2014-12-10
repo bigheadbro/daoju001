@@ -228,6 +228,7 @@ $(function() {
                     </li>
 					#end
                 </ul>
+				
         		<div class="version-content clearfix">
 					<table class="version-table">
         			#foreach($cut in $cts)
@@ -238,7 +239,7 @@ $(function() {
 								</tr>
         					</thead>
 							<tbody>
-							#set($param = $ctConfig.getParamsHtml($cts))
+							#set($parameter = $ctConfig.getParamsHtml($cts))
         					<tr>
         						#parse("/common/params.vm")
         					</tr>

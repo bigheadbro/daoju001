@@ -476,7 +476,7 @@ div[contentEditable]{outline:0}
 
 /*新版banner*/
 .indexmenu-wrap{}
-.indexmenu{float:left;width: 182px;position: absolute;background-color: white;z-index: 1000000;}
+.indexmenu{float:left;width: 182px;position: absolute;background-color: white;z-index: 1100;}
 .indexmenu li.top{line-height:40px;background-color:#ff8f17;color:white;font-size:15px;text-indent: 15px;background-image: url(../img/indexmenu.png);background-position:center -5px;}
 .indexmenu li.item{display:none;position:relative;width: 180px;line-height: 45px;font-size:14px;border-left: 1px solid #ff8f17;border-right: 1px solid #ff8f17;text-indent: 15px;}
 .indexmenu li.item:last-child{border-bottom: 1px solid #ff8f17;}
@@ -637,7 +637,7 @@ h1.category-level a:hover{text-decoration:underline;color:#ff8f17}
 .detail-content .left ul.params-list{}
 .detail-content .left ul.params-list li{border-bottom:1px solid #d8d8d8;padding: 10px;}
 .detail-content .left ul.params-list li h1{margin-left: 4px;font-size:12px;color:#606060;margin-bottom: 5px;}
-.detail-content .left ul.params-list li h1 a{padding:1px 3px;text-decoration:underline;cursor:pointer;float:right;margin-right:5px;}
+.detail-content .left ul.params-list li h1 a{padding:0px 3px;text-decoration:underline;cursor:pointer;float:right;margin-right:5px;}
 .detail-content .left ul.params-list li h1 a:hover{color:white;background-color:#ff8f17;}
 .detail-content .left ul.params-list li .param{width:153px;}
 .detail-content .left ul.params-list li .param span{font-size:12px;color:#464646;padding:1px 5px;cursor:pointer;display:block;float:left;}

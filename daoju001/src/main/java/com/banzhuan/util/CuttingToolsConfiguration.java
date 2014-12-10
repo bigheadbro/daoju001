@@ -431,7 +431,7 @@ public class CuttingToolsConfiguration
 			{
 				ret += "<th>形状</th>";
 			}
-			if (cts.get(i).getBackangle() != 0 && !ret.contains("<th>后角</th>"))
+			if (cts.get(i).getBackangle() != 1000 && !ret.contains("<th>后角</th>"))
 			{
 				ret += "<th>后角</th>";
 			}
@@ -579,7 +579,6 @@ public class CuttingToolsConfiguration
 			{
 				ret += "<th>螺纹方向</th>";
 			}
-			
 		}
 		return ret;
 	}

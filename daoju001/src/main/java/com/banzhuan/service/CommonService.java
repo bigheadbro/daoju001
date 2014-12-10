@@ -1346,7 +1346,7 @@ public class CommonService {
 		}
 		if(shape.size() > 1 || (!shape.contains(null) && shape.size() == 1))
 		{
-			ret += "<li set=0 param=\"shape\"><input type=\"hidden\" name=\"shape\" /><h1>形状<a></a></h1><div class=\"param clearfix\" >";
+			ret += "<li set=0 param=\"shape\"><input type=\"hidden\" name=\"shape\" /><h1>形状(首字母)<a></a></h1><div class=\"param clearfix\" >";
 			Iterator<String> iter = shape.iterator();
 			while(iter.hasNext())
 			{

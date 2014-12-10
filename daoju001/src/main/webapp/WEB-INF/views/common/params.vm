@@ -1,145 +1,172 @@
     <td>$!{cut.version}</td>
-#if($stringUtil.isContains($param,">材质<"))
+#if($stringUtil.isContains($parameter,">材质<"))
     <td>$!{cut.material}</td>
 #end
-#if($stringUtil.isContains($param,">主偏角<"))
-    <td>$!{cut.angle}</td>
+#if($stringUtil.isContains($parameter,">主偏角<"))
+    <td>$!{cut.angle}°</td>
 #end
-#if($stringUtil.isContains($param,">刀片个数<"))
+#if($stringUtil.isContains($parameter,">刀片个数<"))
     <td>$!{cut.ctcount}</td>
 #end
-#if($stringUtil.isContains($param,">直径<"))
+#if($stringUtil.isContains($parameter,">直径<"))
     <td>$!{cut.diameter}</td>
 #end
-#if($stringUtil.isContains($param,">加工用途<"))
+#if($stringUtil.isContains($parameter,">加工用途<"))
     <td>$stringUtil.replaceSemicolon($!{cut.usage})</td>
 #end
-#if($stringUtil.isContains($param,">光洁度<"))
-    <td>$!{cut.cujing}</td>
+#if($stringUtil.isContains($parameter,">加工类型<"))
+    <td>$!{cut.workingtype}</td>
+#end  
+#if($stringUtil.isContains($parameter,">光洁度<"))
+    <td>
+		#if($!{cut.cujing} == 3)
+			粗加工
+		#elseif($!{cut.cujing} == 2)
+			精加工
+		#elseif($!{cut.cujing} == 1)
+			一般加工
+		#end
+	</td>
 #end
-#if($stringUtil.isContains($param,">有效长<"))
+#if($stringUtil.isContains($parameter,">有效长<"))
     <td>$!{cut.usefullength}</td>
 #end
-#if($stringUtil.isContains($param,">安装孔接口<"))
+#if($stringUtil.isContains($parameter,">安装孔接口<"))
     <td>$!{cut.pipesize}</td>
 #end
-#if($stringUtil.isContains($param,">柄径<"))
+#if($stringUtil.isContains($parameter,">柄径<"))
     <td>$!{cut.shank}</td>
 #end
-#if($stringUtil.isContains($param,">柄部类型<"))
+#if($stringUtil.isContains($parameter,">柄部类型<"))
     <td>$!{cut.shanktype}</td>
 #end
-#if($stringUtil.isContains($param,">形状<"))
+#if($stringUtil.isContains($parameter,">形状<"))
     <td>$ctConfig.convertShape(${cut.shape})</td>
 #end
-#if($stringUtil.isContains($param,">后角<"))
+#if($stringUtil.isContains($parameter,">后角<"))
     <td>$ctConfig.convertBackangle(${cut.backangle})</td>
 #end
-#if($stringUtil.isContains($param,">适用工件<"))
+#if($stringUtil.isContains($parameter,">适用工件<"))
     <td>$stringUtil.replaceSemicolon($!{cut.workingtool})</td>
 #end
-#if($stringUtil.isContains($param,">刃数<"))
+#if($stringUtil.isContains($parameter,">刃数<"))
     <td>$!{cut.edgeno}</td>
 #end
-#if($stringUtil.isContains($param,">刃长<"))
+#if($stringUtil.isContains($parameter,">刃长<"))
     <td>$!{cut.edgelength}</td>
 #end
-#if($stringUtil.isContains($param,">总长<"))
+#if($stringUtil.isContains($parameter,">总长<"))
     <td>$!{cut.totallength}</td>
 #end
-#if($stringUtil.isContains($param,">螺旋角<"))
+#if($stringUtil.isContains($parameter,">螺旋角<"))
     <td>$!{cut.screwangle}</td>
 #end
-#if($stringUtil.isContains($param,">涂层种类<"))
+#if($stringUtil.isContains($parameter,">涂层种类<"))
     <td>$!{cut.coatingtype}</td>
 #end
-#if($stringUtil.isContains($param,">R角<"))
-    <td>$!{cut.rangle}</td>
+#if($stringUtil.isContains($parameter,">R角<"))
+    <td>$!{cut.rangle}°</td>
 #end
-#if($stringUtil.isContains($param,">方向<"))
-    <td>$!{cut.direction}</td>
+#if($stringUtil.isContains($parameter,">方向<"))
+	<td>
+		#if($!{cut.direction} == 3)
+			右手
+		#elseif($!{cut.direction} == 2)
+			左手
+		#elseif($!{cut.direction} == 1)
+			通用
+		#end
+	</td>
 #end
-#if($stringUtil.isContains($param,">最小加工直径<"))
+#if($stringUtil.isContains($parameter,">最小加工直径<"))
     <td>$!{cut.minworkdiameter}</td>
 #end
-#if($stringUtil.isContains($param,">冷却方式<"))
-    <td>$!{cut.innercooling}</td>
+#if($stringUtil.isContains($parameter,">冷却方式<"))
+	<td>
+		#if($!{cut.innercooling} == 3)
+			外冷
+		#elseif($!{cut.innercooling} == 2)
+			内冷
+		#elseif($!{cut.innercooling} == 1)
+			一般
+		#end
+	</td>
 #end
-#if($stringUtil.isContains($param,">倍径比<"))
+#if($stringUtil.isContains($parameter,">倍径比<"))
     <td>$!{cut.diameterratio}</td>
 #end
-#if($stringUtil.isContains($param,">槽型状<"))
+#if($stringUtil.isContains($parameter,">槽型状<"))
     <td>$!{cut.slotshape}</td>
 #end
-#if($stringUtil.isContains($param,">柄部规格<"))
+#if($stringUtil.isContains($parameter,">柄部规格<"))
     <td>$!{cut.handlenorm}</td>
 #end
-#if($stringUtil.isContains($param,">丝锥种类<"))
+#if($stringUtil.isContains($parameter,">丝锥种类<"))
     <td>$!{cut.taptype}</td>
 #end
-#if($stringUtil.isContains($param,">螺纹种类<"))
+#if($stringUtil.isContains($parameter,">螺纹种类<"))
     <td>$!{cut.screwtype}</td>
 #end
-#if($stringUtil.isContains($param,">主轴类型<"))
+#if($stringUtil.isContains($parameter,">主轴类型<"))
     <td>$!{cut.axistype}</td>
 #end
-#if($stringUtil.isContains($param,">主轴细分<"))
+#if($stringUtil.isContains($parameter,">主轴细分<"))
     <td>$!{cut.axisdetail}</td>
 #end
-#if($stringUtil.isContains($param,">厚度<"))
+#if($stringUtil.isContains($parameter,">厚度<"))
     <td>$!{cut.thickness}</td>
 #end
-#if($stringUtil.isContains($param,">最大槽深<"))
+#if($stringUtil.isContains($parameter,">最大槽深<"))
     <td>$!{cut.taper}</td>
 #end
-#if($stringUtil.isContains($param,">锥度<"))
+#if($stringUtil.isContains($parameter,">锥度<"))
     <td>$!{cut.maxslotdepth}</td>
 #end
-#if($stringUtil.isContains($param,">槽宽<"))
+#if($stringUtil.isContains($parameter,">槽宽<"))
     <td>$!{cut.slotwidth}</td>
 #end
-#if($stringUtil.isContains($param,">刀尖直径<"))
+#if($stringUtil.isContains($parameter,">刀尖直径<"))
     <td>$!{cut.pointdiameter}</td>
 #end
-#if($stringUtil.isContains($param,">可加持尺寸<"))
+#if($stringUtil.isContains($parameter,">可加持尺寸<"))
     <td>$!{cut.handledsize}</td>
 #end
-#if($stringUtil.isContains($param,">螺纹尺寸<"))
+#if($stringUtil.isContains($parameter,">螺纹尺寸<"))
     <td>$!{cut.screwsize}</td>
 #end
-#if($stringUtil.isContains($param,">螺距<"))
+#if($stringUtil.isContains($parameter,">螺距<"))
     <td>$!{cut.screwdistance}</td>
 #end
-#if($stringUtil.isContains($param,">精度<"))
+#if($stringUtil.isContains($parameter,">精度<"))
     <td>$!{cut.accuracy}</td>
 #end
-#if($stringUtil.isContains($param,">接口尺寸<"))
+#if($stringUtil.isContains($parameter,">接口尺寸<"))
     <td>$!{cut.interfacesize}</td>
 #end
-#if($stringUtil.isContains($param,">镗孔上限<"))
+#if($stringUtil.isContains($parameter,">镗孔上限<"))
     <td>$!{cut.maxbore}</td>
 #end
-#if($stringUtil.isContains($param,">镗孔下限<"))
+#if($stringUtil.isContains($parameter,">镗孔下限<"))
     <td>$!{cut.minbore}</td>
 #end
-#if($stringUtil.isContains($param,">颈长<"))
+#if($stringUtil.isContains($parameter,">颈长<"))
     <td>$!{cut.necklength}</td>
 #end
-#if($stringUtil.isContains($param,">对应筒夹"))
+#if($stringUtil.isContains($parameter,">对应筒夹"))
     <td>$!{cut.relativecollet}</td>
 #end
-#if($stringUtil.isContains($param,">宽度"))
+#if($stringUtil.isContains($parameter,">宽度"))
     <td>$!{cut.width}</td>
 #end
-#if($stringUtil.isContains($param,">高度"))
+#if($stringUtil.isContains($parameter,">高度"))
     <td>$!{cut.height}</td>
 #end
-#if($stringUtil.isContains($param,">切槽范围"))
+#if($stringUtil.isContains($parameter,">切槽范围"))
     <td>$!{cut.grooverange}</td>
 #end
-#if($stringUtil.isContains($param,">钻孔范围"))
+#if($stringUtil.isContains($parameter,">钻孔范围"))
     <td>$!{cut.drillrange}</td>
 #end
-#if($stringUtil.isContains($param,">螺纹方向"))
+#if($stringUtil.isContains($parameter,">螺纹方向"))
     <td>$!{cut.screwdirection}</td>
-#end    
+#end      

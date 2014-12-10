@@ -1047,6 +1047,7 @@ public class CommonService {
 	public String queryCuttingToolsByCode(String param, int type)
 	{
 		List<CuttingToolEntity> cts = new ArrayList<CuttingToolEntity>();
+		String code = "";
 		if(type == 1)//code
 		{
 			cts = ctDAO.queryCuttingToolByCode(param);
@@ -1054,6 +1055,10 @@ public class CommonService {
 		else if(type == 2)//detail
 		{
 			cts = ctDAO.getVersionsBySeries(param);
+		}
+		if(cts.size() > 0)
+		{
+			code = cts.get(0).getCode();
 		}
 		HashSet<String> brand= new HashSet<String>();
 		HashSet<String> material= new HashSet<String>();
@@ -1956,7 +1961,8 @@ public class CommonService {
 			}
 			ret += "</div></li>";
 		}
-		return ret;
+		
+		return CuttingToolsConfiguration.orderParams(ret,code);
 	}
 	
 	public Map<String,List<String>> getSearchParamMap(CuttingToolEntity ct)

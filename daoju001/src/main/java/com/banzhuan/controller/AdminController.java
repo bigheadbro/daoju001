@@ -480,7 +480,7 @@ public class AdminController extends BaseController{
             	File root = new File("D:/workspace/daoju001/daoju001/src/main/webapp/img/series");
                 File[] files = root.listFiles();
 				for (File file : files) {
-					if (StringUtil.isEqual(file.getName(),sn)) {
+					if (StringUtil.isEqual(file.getName().split("[.]")[0],sn)) {
 						tmp.cover = "" + file.getName();
 						break;
 					}
@@ -493,7 +493,7 @@ public class AdminController extends BaseController{
             	root = new File("D:/workspace/daoju001/daoju001/src/main/webapp/img/sample");
                 files = root.listFiles();
 				for (File file : files) {
-					if (StringUtil.isEqual(file.getName(),sn)) {
+					if (StringUtil.isEqual(file.getName().split("[.]")[0].split("-")[0],sn)) {
 						if (file.getName().contains("-1")) 
 						{
 							tmp.pic = "";

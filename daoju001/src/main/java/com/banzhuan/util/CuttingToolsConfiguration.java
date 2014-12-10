@@ -9,6 +9,7 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.Map.Entry;
 
 import com.banzhuan.entity.CategoryEntity;
@@ -25,6 +26,7 @@ public class CuttingToolsConfiguration
 	private static Map<String, String> level3Map = new HashMap<String, String>();
 	private static Map<String, String> level4Map = new HashMap<String, String>();
 	private static Map<String, String> codeMap = new HashMap<String, String>();
+	private static Map<String, String> orderMap = new HashMap<String, String>();
 	static
 	{
 		level1Map.put("01", "机夹铣刀");
@@ -196,8 +198,109 @@ public class CuttingToolsConfiguration
 		codeMap.put("57", "990200");
 		codeMap.put("58", "990300");
 
+		orderMap.put("010101", "brand,diameter,cujing,usage,workingtool,angle,ctcount,pipesize");
+		orderMap.put("010102", "brand,diameter,cujing,usage,workingtool,angle,ctcount,usefullength,totallength,shank,innercooling,shanktype,material");
+		orderMap.put("010201", "brand,diameter,cujing,usage,workingtool,angle,ctcount,usefullength,interfacesize,innercooling");
+		orderMap.put("010202", "brand,diameter,shank,interfacesize,usefullength,totallength,shanktype");
+		orderMap.put("0105",   "brand,diameter,ctcount,workingtool,usefullength,totallength,interfacesize,shank,shanktype");
+		orderMap.put("010601", "");
+		orderMap.put("010602", "");
+		orderMap.put("0108",   "brand,shape,backangle,workingtool,material");
+		orderMap.put("020101", "brand,diameter,edgeno,workingtool,edgelength,totallength,shank,screwangle,innercooling,rangle,coatingtype,shanktype");
+		orderMap.put("020102", "");
+		orderMap.put("020103", "brand,diameter,edgeno,workingtool,edgelength,totallength,shank,screwangle,innercooling,necklength,coatingtype,shanktype");
+		orderMap.put("020201", "brand,diameter,edgeno,workingtool,edgelength,totallength,shank");
+		orderMap.put("020202", "brand,diameter,edgeno,workingtool,edgelength,totallength,shank,necklength");
+		orderMap.put("020301", "brand,diameter,edgeno,workingtool,edgelength,totallength,shank,screwangle,innercooling,rangle,coatingtype,shanktype");
+		orderMap.put("020302", "");
+		orderMap.put("020401", "");
+		orderMap.put("020402", "");
+		orderMap.put("020403", "");
+		orderMap.put("020501", "");
+		orderMap.put("020502", "");
+		orderMap.put("020503", "");
+		orderMap.put("030101", "");
+		orderMap.put("030102", "");
+		orderMap.put("030103", "brand,direction,width,height,totallength");
+		orderMap.put("030201", "brand,shape,backangle,workingtool,rangle,direction,material");
+		orderMap.put("030202", "brand,shape,backangle,workingtool,rangle,direction,material");
+		orderMap.put("030203", "brand,workingtool,thickness,maxslotdepth,material");
+		orderMap.put("040101", "brand,diameter,diameterratio,workingtool,innercooling,screwangle,edgelengthe,totallength,shank,shanktype,coatingtype");
+		orderMap.put("040102", "brand,diameter,diameterratio,workingtool,innercooling,screwangle,edgelengthe,totallength,shank,shanktype,coatingtype");
+		orderMap.put("040201", "brand,drillrange,diameterratio,workingtool,innercooling,shank");
+		orderMap.put("040202", "");
+		orderMap.put("040301", "");
+		orderMap.put("040302", "");
+		orderMap.put("040401", "brand,diameter,diameterratio,workingtool,innercooling,screwangle,edgelengthe,totallength,shank,shanktype,direction");
+		orderMap.put("040402", "");
+		orderMap.put("0409",   "");
+		orderMap.put("0410",   "");
+		orderMap.put("050101", "");
+		orderMap.put("050102", "");
+		orderMap.put("050103", "brand,axistype,axisdetail,usefullength,handledsize,relativecollet,diameter");
+		orderMap.put("050104", "brand,axistype,axisdetail,usefullength,handledsize,relativecollet,diameter");
+		orderMap.put("050105", "");
+		orderMap.put("0503",   "brand,axistype,axisdetail,pipesize,usefullength,diameter");
+		orderMap.put("0504",   "brand,axistype,axisdetail,usefullength,handledsize");
+		orderMap.put("0506",   "brand,handledsize,accuracy");
+		orderMap.put("060101", "brand,screwtype,screwsize,screwdistance,screwdirection,edgeno,edgelength,totallength,shank,shanktype");
+		orderMap.put("060102", "");
+		orderMap.put("060103", "");
+		orderMap.put("060201", "");
+		orderMap.put("060202", "");
+		orderMap.put("060601", "brand,screwtype,screwsize,screwdistance,workingtool,coatingtype,taptype");
+		orderMap.put("060602", "brand,screwtype,screwsize,screwdistance,workingtool,coatingtype");
+		orderMap.put("060603", "brand,screwtype,screwsize,screwdistance,workingtool,coatingtype");
+		orderMap.put("060604", "brand,screwtype,screwsize,screwdistance,workingtool,coatingtype");
+		orderMap.put("0607",   "");
+		orderMap.put("9901",   "");
+		orderMap.put("9902",   "");
+		orderMap.put("9903",   "brand,minbore,maxbore,shanktype");
+
 	}
 
+	public static String orderParams(String param, String code)
+	{
+		String ret = "";
+		String ret2 = "";
+		String order = orderMap.get(code);
+		Set<String> paramSet = new HashSet<String>();
+		//order是空的，直接返回参数
+		if(StringUtil.isEmpty(order))
+		{
+			return param;
+		}
+		
+		String[] paramArr = param.split("</li>");
+		for(int i = 0;i<paramArr.length;i++)
+		{
+			int begin = paramArr[i].indexOf("\"") + 1;
+			int end = paramArr[i].indexOf("\"",17);
+			String p = paramArr[i].substring(begin, end);
+			paramSet.add(p);
+		}
+		String[] tmp = order.split(",");
+		for(int i = 0; i< tmp.length;i++)
+		{
+			for(int j = 0;j< paramArr.length;j++)
+			{
+				if(StringUtil.isNotEmpty(tmp[i]) && paramArr[j].contains(tmp[i]))
+				{
+					if(paramSet.contains(tmp[i]))
+					{
+						ret += paramArr[j]+"</li>";
+					}
+					else
+					{
+						ret2 += paramArr[j]+"</li>";
+					}
+				}
+			}
+		}
+		
+		return ret+ret2;
+	}
+	
 	public static String getCodeValue(String order)
 	{
 		return codeMap.get(order);

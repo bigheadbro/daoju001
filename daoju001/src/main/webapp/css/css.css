@@ -655,7 +655,7 @@ h1.category-level a:hover{text-decoration:underline;color:#ff8f17}
 .detail-content .video-content{display:none;position: relative;z-index: 100;padding-top:20px;}
 .detail-content .video-content p{color: #474747;margin-bottom:10px;font-size: 14px;}
 /*首页，低价刀具*/
-.main-content-wrap{margin:10px auto;width:960px;}
+.main-content-wrap{margin:10px auto 0;width:960px;}
 .main-content-wrap .main-items-wrap{float:left;margin-top: 20px;}
 .main-content-wrap .main-items{width:634px;}
 .main-content-wrap .main-items .quickrequests{color: #616161;font-size: 18px;font-weight: 700;line-height: 29px;border-bottom: 2px solid #e1e1e1;}
@@ -1624,6 +1624,8 @@ p.forget{font-size: 12px;margin: 10px;color: #707070;}
 .knowmore .data{padding:40px 64px;border-bottom:1px solid #f2f2f2;color:#606060;}
 .knowmore .data .item{display:inline-block;font-size:18px;font-family:"幼圆";width: 272px;text-align: center;height: 115px;}
 .knowmore .data .item span{font-size:72px;font-family: "华文细黑";}
+a.join{background-color:#0099cb;background-image:url(../img/kma.png);color:white;font-size:18px;position:absolute;text-align:center;width:286px;left:336px;top:210px;padding: 6px 0;background-repeat: no-repeat;background-position: 90px center;text-indent: 25px;}
+a.join:hover{background-color:#00ace4;}
 /*pay*/
 .payorder-container{margin:0 auto;width:960px;margin-top:30px;}
 .pay-head h1{font-size:18px;margin-bottom:10px;}

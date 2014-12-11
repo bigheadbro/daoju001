@@ -261,10 +261,11 @@ public class CuttingToolsConfiguration
 
 	public static String orderParams(String param, String code)
 	{
+		//tmp为order的数组，paramArr为包含参数的li数组，paramSet为参数set
 		String ret = "";
 		String ret2 = "";
 		String order = orderMap.get(code);
-		Set<String> paramSet = new HashSet<String>();
+		Set<String> orderSet = new HashSet<String>();
 		//order是空的，直接返回参数
 		if(StringUtil.isEmpty(order))
 		{
@@ -272,32 +273,41 @@ public class CuttingToolsConfiguration
 		}
 		
 		String[] paramArr = param.split("</li>");
-		for(int i = 0;i<paramArr.length;i++)
-		{
-			int begin = paramArr[i].indexOf("\"") + 1;
-			int end = paramArr[i].indexOf("\"",17);
-			String p = paramArr[i].substring(begin, end);
-			paramSet.add(p);
-		}
+
 		String[] tmp = order.split(",");
+		for(int i = 0;i<tmp.length;i++)
+		{
+			orderSet.add(tmp[i]);
+		}
+		
 		for(int i = 0; i< tmp.length;i++)
 		{
+			if(StringUtil.isEmpty(tmp[i]))
+			{
+				break;
+			}
 			for(int j = 0;j< paramArr.length;j++)
 			{
-				if(StringUtil.isNotEmpty(tmp[i]) && paramArr[j].contains(tmp[i]))
+				int begin = paramArr[j].indexOf("\"") + 1;
+				int end = paramArr[j].indexOf("\"",17);
+				String p = paramArr[j].substring(begin, end);
+				if(orderSet.contains(p))
 				{
-					if(paramSet.contains(tmp[i]))
+					if(!ret.contains(paramArr[j]) && StringUtil.isEqual(p, tmp[i]))
 					{
 						ret += paramArr[j]+"</li>";
 					}
-					else
+				}
+				else
+				{
+					if(!ret2.contains(paramArr[j]))
 					{
 						ret2 += paramArr[j]+"</li>";
 					}
 				}
 			}
 		}
-		
+			
 		return ret+ret2;
 	}
 	

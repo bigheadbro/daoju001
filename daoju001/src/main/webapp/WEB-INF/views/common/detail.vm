@@ -77,15 +77,40 @@ $(function() {
 							{
 								$(this).children(".param").empty();
 								for(var y in data.map[x]){
-									$(this).children(".param").append("<span>" + data.map[x][y] + "</span>");
+									if(x=="direction"){
+											if(data.map[x][y]==1)
+												$(this).children(".param").append("<span>通用槽</span>");
+											else if(data.map[x][y]==2)
+												$(this).children(".param").append("<span>左手</span>");
+											else
+												$(this).children(".param").append("<span>右手</span>");
+										}
+										else if(x=="innercooling"){
+											if(data.map[x][y]==1)
+												$(this).children(".param").append("<span>一般</span>");
+											else if(data.map[x][y]==2)
+												$(this).children(".param").append("<span>内冷</span>");
+											else
+												$(this).children(".param").append("<span>外冷</span>");
+										} 
+										else if(x=="cujing"){
+											if(data.map[x][y]==1)
+												$(this).children(".param").append("<span>一般</span>");
+											else if(data.map[x][y]==3)
+												$(this).children(".param").append("<span>粗加工</span>");
+											else
+												$(this).children(".param").append("<span>精加工</span>");
+										} 
+										else
+											$(this).children(".param").append("<span>" + data.map[x][y] + "</span>");
+										count++;
 								}
-								count++;
 							}
         				}
 						if(count == 0){
 							$(this).hide();
-							count = 0;
 						}
+						count = 0;
 					}
 				});
 				$('.version-table').flexigrid({height:400});
@@ -131,7 +156,7 @@ $(function() {
 										else if(x=="cujing"){
 											if(data.map[x][y]==1)
 												$(this).children(".param").append("<span>一般</span>");
-											else if(data.map[x][y]==2)
+											else if(data.map[x][y]==3)
 												$(this).children(".param").append("<span>粗加工</span>");
 											else
 												$(this).children(".param").append("<span>精加工</span>");

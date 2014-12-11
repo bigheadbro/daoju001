@@ -21,6 +21,19 @@
                 });
             });
         </script>
+		<link rel="stylesheet" href="/css/flexslider.css">
+        <link rel="stylesheet" href="/css/flexigrid.pack.css">
+        <script type="text/javascript" src="/js/jquery.flexslider-min.js"></script>
+        <script>
+        $(function() {
+        	$('.banner').flexslider({
+                animation: "fade",
+        		controlNav: false,
+				slideshow: true,
+				slideshowspeed:4000
+            });
+		});
+		</script>
         <div class="main-head-wrap">
             <div class="main-head-container2">
                 <div class="main-head-content clearfix">
@@ -442,8 +455,11 @@
         				#end
                     </ul>
 					<div class="content clearfix">
-    					<div class="banner">
-    						<a href="/knowmore"><img src="/img/banner.png" /></a>
+    					<div class="flexslider banner">
+                			<ul class="slides">
+                				<li><a href="/knowmore"><img src="/img/banner.png" /></a></li>
+    							<li><a href="/knowmore#joinus"><img src="/img/Banner2.jpg" /></a></li>
+                			</ul>
             			</div>
 						<script>
 						$(function(){

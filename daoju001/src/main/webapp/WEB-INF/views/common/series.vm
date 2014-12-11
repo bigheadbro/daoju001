@@ -35,7 +35,7 @@
 										else if(x=="innercooling"){
 											if(data.map[x][y]==1)
 												$(this).children(".param").append("<span>一般</span>");
-											else if(data.map[x][y]==2)
+											else if(data.map[x][y]==3)
 												$(this).children(".param").append("<span>内冷</span>");
 											else
 												$(this).children(".param").append("<span>外冷</span>");
@@ -95,7 +95,7 @@
 										else if(x=="innercooling"){
 											if(data.map[x][y]==1)
 												$(this).children(".param").append("<span>一般</span>");
-											else if(data.map[x][y]==2)
+											else if(data.map[x][y]==3)
 												$(this).children(".param").append("<span>内冷</span>");
 											else
 												$(this).children(".param").append("<span>外冷</span>");

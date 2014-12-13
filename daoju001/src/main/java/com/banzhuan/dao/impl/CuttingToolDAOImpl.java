@@ -65,8 +65,19 @@ public class CuttingToolDAOImpl extends SqlSessionDaoSupport implements CuttingT
 	}
 	
 	@Override
-	public int updateCuttingToolById(CuttingToolEntity ct) {
-		return this.getSqlSession().update("updateCuttingToolById", ct);
+	public List<CuttingToolEntity> getCuttingtoolsGroupbyBrand()
+	{
+		return this.getSqlSession().selectList("getCuttingtoolsGroupbyBrand");
+	}
+	
+	@Override
+	public int updateCuttingToolBySn(CuttingToolEntity ct) {
+		return this.getSqlSession().update("updateCuttingToolBySn", ct);
+	}
+	
+	@Override
+	public int updateCuttingToolByBrand(CuttingToolEntity ct) {
+		return this.getSqlSession().update("updateCuttingToolByBrand", ct);
 	}
 	
 	@Override
@@ -119,6 +130,17 @@ public class CuttingToolDAOImpl extends SqlSessionDaoSupport implements CuttingT
 	@Override
 	public List<CuttingToolEntity> queryCuttingToolByCt(CuttingToolEntity ct)
 	{
+		if(StringUtil.isNotEmpty(ct.getCode()))
+		{
+			if(ct.getCode().length() == 4)
+			{
+				ct.setCode(ct.getCode() + "00");
+			}
+			else if(ct.getCode().length() == 2)
+			{
+				ct.setCode(ct.getCode() + "0000");
+			}
+		}
 		return this.getSqlSession().selectList("queryCuttingToolByCt",ct);
 	}
 	

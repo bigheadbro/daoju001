@@ -1072,7 +1072,7 @@ public class CuttingToolsConfiguration
 	{
 		List<Integer> list = new ArrayList<Integer>();
 		for(final Integer value : param){  
-        	if(value != 1000)
+        	if(value != 0)
         		list.add(value);  
         }  
         Collections.sort(list);  
@@ -1087,7 +1087,7 @@ public class CuttingToolsConfiguration
 	{
 		List<Integer> list = new ArrayList<Integer>();
 		for(final Integer value : param){  
-        	if(value != 0)
+        	if(value != 1000)
         		list.add(value);  
         }  
         Collections.sort(list);  
@@ -1540,7 +1540,8 @@ public class CuttingToolsConfiguration
 					categories.add(cat);
 				}
 			}
-		} else
+		} 
+		else
 		{
 			Iterator<Entry<String, String>> iter = level2Map.entrySet()
 					.iterator();
@@ -1561,6 +1562,7 @@ public class CuttingToolsConfiguration
 				}
 			}
 		}
+		Collections.sort(categories);
 		return categories;
 	}
 

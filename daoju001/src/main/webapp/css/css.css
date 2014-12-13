@@ -299,10 +299,12 @@ h2.mt100{margin-top:70px;}
 .agent-right h5 span{color: white;background-color: #ff6600;display: inline-block;border-radius: 10px;width: 20px;height: 20px;text-align: center;margin-right: 10px;}
 .agent-right h2{color:white;background-color:#ff6600;border-radius:4px;display:inline-block;font-size:16px;font-weight:100;padding:2px 10px;margin-bottom: 10px;}
 .agent-right p{font-size: 13px;line-height: 22px;margin-bottom: 20px;}
-
+a#join{font-size:14px;color:#fa3232}
+a#join:hover{text-decoration:underline;}
 
 /*管理员页面*/
 .admin-wrap{}
+.admin-wrap fieldset a{display:block}
 .admin-wrap fieldset{display:inline-block;width:250px;padding:10px;margin-left:20px;}
 .admin-wrap fieldset legend{margin-left:20px;}
 .admin-wrap fieldset span{color:red}
@@ -368,6 +370,7 @@ border: 2px solid #B1B1B1;
 .adminitems .content{border: 1px solid #ff6600;border-bottom: none;}
 .adminitems .content span{width: 100px;display: inline-block;height:150px;border-right:1px solid #ff6600;overflow: hidden;white-space: normal;}
 .adminitems .head span{width: 100px;display: inline-block;height:150px;border-right:1px solid #ff6600;overflow: hidden;white-space: normal;text-align:center;height:20px;}
+.adminitems .series{border:1px solid #222;padding:10px;margin-bottom:20px}
 .zg-top{top:7px;left: 13px;}
 .company-info{width:400px;height:35px;resize:none;}
 .qr-cont{resize:none;}
@@ -571,8 +574,8 @@ h1.category-level a:hover{text-decoration:underline;color:#ff8f17}
 .category-content .right a:hover img{border:1px solid #d8e8ec}
 
 .series-content{position:relative;min-height:700px;margin-top: 20px;}
-.series-left{float:left;width:173px;background-color:#f6f6f6;border:1px solid #d8d8d8;overflow-y:auto;overflow-x:hidden;max-height:700px;min-height: 400px;}
-.series-left h1{font-size:15px;color:#9c9c9c;line-height:22px;margin: 10px;margin-bottom: 30px;}
+.series-left{float:left;width:227px;background-color:#f6f6f6;border:1px solid #d8d8d8;overflow-y:auto;overflow-x:hidden;max-height:700px;min-height: 400px;}
+.series-left h1{font-size:15px;color:#9c9c9c;line-height:22px;margin-bottom: 30px;}
 .series-left p{color:#606060;font-size:12px;line-height:24px;margin: 10px;}
 .series-left p span{color:#0099cb;display:block}
 .series-left ul.params-list{}
@@ -585,7 +588,7 @@ h1.category-level a:hover{text-decoration:underline;color:#ff8f17}
 .series-left ul.params-list li .param em{display:block;float:left;height:18px;width:100%;}
 .series-left ul.params-list li .param span.selected{color:white;background-color:#ff8f17}
 .series-left ul.params-list li .param span:hover{color:white;background-color:#ff8f17}
-.series-content .right{float:right;width:765px;border:1px solid #d8d8d8}
+.series-content .right{float:right;width:719px;border:1px solid #d8d8d8}
 .series-content .right .no-result{color:#0099cb;text-align:center;padding:30px;}
 .series-content .right .no-result h1{font-size:30px;font-weight:normal;margin-bottom:15px;margin-top: 15px;}
 .series-content .right .no-result p{font-size:14px;line-height: 22px;}
@@ -594,7 +597,7 @@ h1.category-level a:hover{text-decoration:underline;color:#ff8f17}
 .series-content .right a.series-item .series-pic{float:left;border:1px solid white;text-align:center;display:table;width:130px;height:110px;background-color: white;}
 .series-content .right a.series-item .series-pic span{display:table-cell;vertical-align:middle;}
 .series-content .right a.series-item:hover .series-pic{border:1px solid #0099cb}
-.series-content .right a.series-item .series-params{float:left;margin-left:20px;padding: 10px 0;width: 560px;}
+.series-content .right a.series-item .series-params{float:left;margin-left:20px;padding: 10px 0;width: 527px;}
 .series-content .right a.series-item .series-params h3{color:#5e5e5e;font-size: 18px;margin-bottom:10px;}
 .series-content .right a.series-item:hover .series-params h3{color:#0099cb}
 .series-content .right a.series-item .series-params h3{color:#5e5e5e}
@@ -606,10 +609,10 @@ h1.category-level a:hover{text-decoration:underline;color:#ff8f17}
 .series-content .right a.series-item:hover .series-params p{color:#0099cb}
 
 .detail-content .left{float:left;width:173px;min-height:400px;background-color:#f6f6f6;border:1px solid #d8d8d8}
-.detail-content .right{float:left;margin-left:18px;width:765px;}
+.detail-content .right{float:left;margin-left:18px;width:713px;}
 .detail-content .right .series-item{border-bottom:1px solid #f6f6f6;padding: 10px;}
 .detail-content .right .series-item .series-pic{float:left;border:1px solid white}
-.detail-content .right .series-item .series-params{float:left;margin-left:20px;padding: 5px 0;width: 560px;}
+.detail-content .right .series-item .series-params{float:left;margin-left:20px;padding: 5px 0;width: 541px;}
 .detail-content .right .series-item .series-params h3{color:#5e5e5e;font-size: 18px;margin-bottom:10px;}
 .detail-content .right .series-item .series-params h4{color:#0099cb;font-size:14px;font-weight:normal;margin-bottom:5px;}
 .detail-content .right .series-item .series-params h4 span{padding-right:15px;white-space:nowrap;}
@@ -617,6 +620,7 @@ h1.category-level a:hover{text-decoration:underline;color:#ff8f17}
 .detail-content .right .series-item .series-params p{color:#474747;font-size:14px;font-weight:normal;}
 .detail-content .right .provider{}
 .detail-content .right .provider h1{color:#0099cb;font-size:14px;line-height:30px;background-color:#f4f8f9;text-indent: 10px;}
+.detail-content .right .provider h1 a#join{float:right;margin-right:10px;color:grey;}
 .detail-content .right .provider .no-provider{padding: 10px;font-size: 14px;}
 .detail-content .right .provider .provider-item{border-bottom:1px solid #d5d5d5;padding:10px 0;font-size:14px;color:#252525;}
 .detail-content .right .provider .provider-item .name{float:left;width:285px;text-indent:10px;}
@@ -633,13 +637,13 @@ h1.category-level a:hover{text-decoration:underline;color:#ff8f17}
 .detail-content .right .provider .provider-item .contactway .qq span{font-weight:bold;margin-right: 10px;color:#007196}
 /*detail型号tab*/
 .detail-content{margin-top:30px;}
-.detail-content .left{float:left;width:173px;background-color:#f6f6f6;border:1px solid #d8d8d8}
+.detail-content .left{float:left;width:227px;background-color:#f6f6f6;border:1px solid #d8d8d8}
 .detail-content .left ul.params-list{}
 .detail-content .left ul.params-list li{border-bottom:1px solid #d8d8d8;padding: 10px;}
 .detail-content .left ul.params-list li h1{margin-left: 4px;font-size:12px;color:#606060;margin-bottom: 5px;}
 .detail-content .left ul.params-list li h1 a{padding:0px 3px;text-decoration:underline;cursor:pointer;float:right;margin-right:5px;}
 .detail-content .left ul.params-list li h1 a:hover{color:white;background-color:#ff8f17;}
-.detail-content .left ul.params-list li .param{width:153px;}
+.detail-content .left ul.params-list li .param{}
 .detail-content .left ul.params-list li .param span{font-size:12px;color:#464646;padding:1px 5px;cursor:pointer;display:block;float:left;}
 .detail-content .left ul.params-list li .param em{display:block;float:left;height:18px;width:100%;}
 .detail-content .left ul.params-list li .param span.selected{color:white;background-color:#ff8f17}
@@ -1519,10 +1523,11 @@ opacity: .3;
 .brand-list .agent-list{display:block;border-left: 1px solid #d9e8ec;float: left;width: 613px;}
 .brand-list .agent-list .agent-row{border-bottom:1px solid #d9e8ec}
 .brand-list .agent-list .agent-row:last-child{border-bottom:none}
-.brand-list .agent-list .agent-info{display:inline-block;padding: 40px 20px;}
+.brand-list .agent-list .agent-info{display:inline-block;padding: 45px 20px;}
 .brand-logo{float:left;}
 .brand-logo p{color:#828282;text-align:center;margin-top:10px;}
 .brand-logo img{width:140px;}
+.brand-logo h4{text-align:center;font-size:14px;color:#535353}
 .brand-list .agent-logo{border-radius: 5px;width:66px;height:66px;overflow:hidden;text-align:center;display:table;float:left;background-color:white;}
 .brand-list .agent-logo a{display:table-cell;vertical-align:middle;}
 .brand-list .agent-logo a img{margin:0 auto;max-width:66px;max-height:66px;}

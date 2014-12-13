@@ -39,11 +39,13 @@ $(function() {
 		if($(this).attr("show") == 1)
 		{
 			var userid = parseInt($(this).attr("userid"));
+			var sn = $(this).attr("sn");
     		$.ajax( {   
     		    type : "POST",   
     		    url : "/getProviderInfo", 
     		    data : {
     		      'userid' : userid,
+				  'sn':sn
     		    }
     		});   
 			$(this).parent().parent().children(".contactway").animate({height:"34px"});
@@ -203,7 +205,17 @@ $(function() {
 				</div>
             </div>
 			<div class="provider">
-				<h1>供应商</h1>
+				<h1>供应商<a id="join" href="/knowmore#joinus">我也是这个产品的供应商</a></h1>
+				<script>
+                $(function() {
+                	$("#join").click(function(){
+                		$.ajax( {   
+                		    type : "POST",   
+                		    url : "/joinus"
+                		});   
+                	});
+                });
+                </script>
 				#if($users.size()==0)
 					<div class="no-provider">
 					暂无供应商
@@ -221,7 +233,7 @@ $(function() {
     								${user.contactName}
     							#end
     						</div>
-        					<div class="operation" show=1 userid=${user.id}>查看联系方式<em></em></div>
+        					<div class="operation" show=1 userid=${user.id} sn="${ct.seriesname}">查看联系方式<em></em></div>
     					</div>
     					<div class="contactway clearfix">
     						<div class="name">&nbsp;</div>
@@ -233,7 +245,7 @@ $(function() {
 									${user.phone}
 								#end
 							</div>
-        					<div class="qq"><span>QQ</span>${user.contactQq}</div>
+        					<div class="qq"><span>QQ</span><a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=${user.contactQq}&site=qq&menu=yes">${user.contactQq}</a></div>
     					</div>
     				</div>
     				#end

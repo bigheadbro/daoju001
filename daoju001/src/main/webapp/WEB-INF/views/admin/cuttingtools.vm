@@ -1,10 +1,40 @@
 #set($layout = "/layout/admin_layout.vm")
 <div class="adminitems">
-	#foreacht($ct in $cts)
-		<div class="series">
-			<form id="form_series" action="updateseries">
-				
-			</form>
-		</div>
+	#if($type==2)
+    	#foreach($ct in $cts)
+    		<div class="series">
+    			<form class="form_series" method="post" action="updateprovider">
+    				<span>${ct.seriesname}</span>
+    				<input type="text" name="provider" placeholder="供应商id" value="$!{ct.provider}" />
+    				<input type="hidden" name="seriesname" placeholder="供应商id" value="$!{ct.seriesname}" />
+    				<a class="update">更新</a>
+					<script>
+            			$(function() {
+            				$(".update").click(function () {
+                            	$(this).parent(".form_series").submit();
+            				});
+            			});
+            		</script>
+    			</form>
+    		</div>
+		#end
+	#else
+		#foreach($ct in $cts)
+    		<div class="series">
+    			<form class="form_series" method="post" action="updateprovider">
+    				<span>${ct.brand}</span>
+    				<input type="text" name="provider" placeholder="供应商id" value="$!{ct.provider}" />
+    				<input type="hidden" name="brand" placeholder="供应商id" value="$!{ct.brand}" />
+    				<a class="update">更新</a>
+					<script>
+            			$(function() {
+            				$(".update").click(function () {
+                            	$(this).parent(".form_series").submit();
+            				});
+            			});
+            		</script>
+    			</form>
+    		</div>
+		#end
 	#end
 </div>

@@ -31,7 +31,11 @@ public interface CuttingToolDAO {
 	
 	public List<CuttingToolEntity> getAllSeries();
 	
-	public int updateCuttingToolById(CuttingToolEntity ct);
+	public List<CuttingToolEntity> getCuttingtoolsGroupbyBrand();
+	
+	public int updateCuttingToolBySn(CuttingToolEntity ct);
+	
+	public int updateCuttingToolByBrand(CuttingToolEntity ct);
 	
 	public int getBrandCountByCode(String code);
 	

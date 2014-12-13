@@ -43,6 +43,7 @@ import com.banzhuan.dao.ProductDAO;
 import com.banzhuan.dao.QuestionDAO;
 import com.banzhuan.dao.QuickrequestDAO;
 import com.banzhuan.dao.SampleDAO;
+import com.banzhuan.dao.StatisticsDAO;
 import com.banzhuan.dao.UserDAO;
 import com.banzhuan.entity.AgentEntity;
 import com.banzhuan.entity.ArticleEntity;
@@ -55,6 +56,7 @@ import com.banzhuan.entity.ProductEntity;
 import com.banzhuan.entity.QuestionEntity;
 import com.banzhuan.entity.QuickrequestEntity;
 import com.banzhuan.entity.SampleEntity;
+import com.banzhuan.entity.StatisticsEntity;
 import com.banzhuan.entity.TempEntity;
 import com.banzhuan.entity.UserEntity;
 import com.banzhuan.form.ItemForm;
@@ -108,6 +110,10 @@ public class AdminController extends BaseController{
 	@Qualifier("ctDAO")
 	private CuttingToolDAO ctDAO;
 
+	@Autowired
+	@Qualifier("stDAO")
+	private StatisticsDAO stDAO;
+	
 	@RequestMapping(value="/updatebyxls")
 	public ModelAndView updatebyxls(final HttpServletRequest request, final HttpServletResponse response)
 	{
@@ -134,7 +140,7 @@ public class AdminController extends BaseController{
             	{
             		ct.setWorkingtype(tmp);
             	}
-            	ctDAO.updateCuttingToolById(ct);
+            	ctDAO.updateCuttingToolBySn(ct);
             }
             book.close();
         } catch (Exception e) {
@@ -453,7 +459,7 @@ public class AdminController extends BaseController{
 			CuttingToolEntity update = new CuttingToolEntity();
 			update.setSeriesname(series.get(i).getSeriesname());
 			update.setSamecolume(ret);
-			ctDAO.updateCuttingToolById(update);
+			ctDAO.updateCuttingToolBySn(update);
 		}
 		return mv;
 	}
@@ -872,11 +878,58 @@ public class AdminController extends BaseController{
 		return mv;
 	}
 	
-	@RequestMapping(value="/cuttingtools")
-	public ModelAndView cts(final HttpServletRequest request, final HttpServletResponse response)
+	@RequestMapping(value="/updateprovider")
+	public void updateprovider(HttpServletRequest request, HttpServletResponse response)
+	{
+		String brand = request.getParameter("brand");
+		String sn = request.getParameter("seriesname");
+		String provider = request.getParameter("provider");
+		if(StringUtil.isNotEmpty(brand))
+		{
+			CuttingToolEntity ct = new CuttingToolEntity();
+			ct.setBrand(brand);
+			ct.setProvider(provider.replace("，",","));
+			ctDAO.updateCuttingToolByBrand(ct);
+			return;
+		}
+		if(StringUtil.isNotEmpty(sn))
+		{
+			CuttingToolEntity ct = new CuttingToolEntity();
+			ct.setSeriesname(sn);
+			ct.setProvider(provider.replace("，",","));
+			ctDAO.updateCuttingToolBySn(ct);
+			return;
+		}
+	}
+	
+	@RequestMapping(value="/statistics")
+	public ModelAndView statistics(final HttpServletRequest request, final HttpServletResponse response)
+	{
+		ModelAndView mv = new ModelAndView("/admin/statistics");
+		List<StatisticsEntity> contacts = stDAO.getStatistcisByType(2);
+		List<StatisticsEntity> searches = stDAO.getStatistcisByType(3);
+		
+		mv.addObject("contacts",contacts);
+		mv.addObject("searches",searches);
+		return mv;
+	}
+	
+	@RequestMapping(value="/cuttingtoolsgroupbyseries")
+	public ModelAndView cuttingtoolsgroupbyseries(final HttpServletRequest request, final HttpServletResponse response)
 	{
 		ModelAndView mv = new ModelAndView("/admin/cuttingtools");
-		List<CuttingToolEntity> cts = ctDAO.getAllItems();
+		List<CuttingToolEntity> cts = ctDAO.getAllSeries();
+		mv.addObject("type",2);
+		mv.addObject("cts",cts);
+		return mv;
+	}
+	
+	@RequestMapping(value="/cuttingtoolsgroupbybrand")
+	public ModelAndView cuttingtoolsgroupbybrand(final HttpServletRequest request, final HttpServletResponse response)
+	{
+		ModelAndView mv = new ModelAndView("/admin/cuttingtools");
+		List<CuttingToolEntity> cts = ctDAO.getCuttingtoolsGroupbyBrand();
+		mv.addObject("type",1);
 		mv.addObject("cts",cts);
 		return mv;
 	}
@@ -888,7 +941,7 @@ public class AdminController extends BaseController{
 		int ctid = Integer.parseInt(id);
 		CuttingToolEntity ct = ctDAO.queryCuttingToolById(ctid);
 		ct.setProvider(request.getParameter("provider"));
-		ctDAO.updateCuttingToolById(ct);
+		ctDAO.updateCuttingToolBySn(ct);
 		return mv;
 	}
 	
@@ -959,6 +1012,8 @@ public class AdminController extends BaseController{
 		int itemcount = itemDAO.getItemCountByType(null);
 		mv.addObject("itemcount",itemcount);
 		
+		List<StatisticsEntity> joinuses = stDAO.getStatistcisByType(4);
+		mv.addObject("joinus",joinuses.size());
 		return mv;
 	}
 	

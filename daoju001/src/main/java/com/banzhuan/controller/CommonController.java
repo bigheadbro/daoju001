@@ -195,16 +195,17 @@ public class CommonController extends BaseController{
 	public void getProviderInfo(final HttpServletRequest request,final HttpServletResponse response)
 	{
 		int userid = Integer.parseInt(request.getParameter("userid"));
+		String sn = request.getParameter("sn");
 		StatisticsEntity st = new StatisticsEntity();
 		st.setType(2);
 		Account account = (Account) WebUtils.getSessionAttribute(request, "account");
 		if(account != null)
 		{
-			st.setInfo("["+account.getUserName()+","+account.getCompanyName()+","+account.getUserId()+"]查看" + String.valueOf(userid)+"的联系方式");
+			st.setInfo("["+sn+"]["+account.getUserName()+","+account.getCompanyName()+","+account.getUserId()+"]查看" + String.valueOf(userid)+"的联系方式");
 		}
 		else
 		{
-			st.setInfo("[未登录用户]查看" + String.valueOf(userid)+"的联系方式");
+			st.setInfo("["+sn+"][未登录用户]查看" + String.valueOf(userid)+"的联系方式");
 		}
 		commonService.addstatistics(st);
 	}
@@ -215,6 +216,23 @@ public class CommonController extends BaseController{
 		StatisticsEntity st = new StatisticsEntity();
 		st.setType(1);
 		st.setInfo("点击进入问卷");
+		commonService.addstatistics(st);
+	}
+	
+	@RequestMapping(value="/joinus")
+	public void joinus(final HttpServletRequest request,final HttpServletResponse response)
+	{
+		StatisticsEntity st = new StatisticsEntity();
+		st.setType(4);
+		Account account = (Account) WebUtils.getSessionAttribute(request, "account");
+		if(account != null)
+		{
+			st.setInfo("["+account.getUserName()+","+account.getCompanyName()+","+account.getUserId()+"]");
+		}
+		else
+		{
+			st.setInfo("[未登录用户]");
+		}
 		commonService.addstatistics(st);
 	}
 	

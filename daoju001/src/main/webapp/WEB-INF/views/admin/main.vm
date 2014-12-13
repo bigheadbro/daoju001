@@ -30,4 +30,14 @@
 		<legend>订单管理</legend>
 		<a target="_blank" href="/admin/lghlmclyhblsqtorder">订单管理</a>
 	</fieldset>
+	<fieldset>
+		<legend>刀具管理</legend>
+		<a target="_blank" href="/admin/cuttingtoolsgroupbyseries">根据系列更新供应商</a>
+		<a target="_blank" href="/admin/cuttingtoolsgroupbybrand">根据品牌更新供应商</a>
+	</fieldset>
+	<fieldset>
+		<legend>统计页面</legend>
+		<p>加入我们点击数：<span>${joinus}</span></p>
+		<a target="_blank" href="/admin/statistics">进入统计页</a>
+	</fieldset>
 </div>

@@ -12,7 +12,10 @@
 	  <id property="gmtCreate" column="gmt_create"/>
 	</resultMap>
 	
-	
+	<select id="getStatistcisByType" parameterType="int" resultMap="StatisticsResultMap">
+        select * from t_statistics where type=#{type}
+    </select>
+    
 	<insert id="insertStatisticsEntity" parameterType="StatisticsEntity">
 		<selectKey resultType="int" order="AFTER" keyProperty="id">
 			SELECT LAST_INSERT_ID() AS id

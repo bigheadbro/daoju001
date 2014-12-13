@@ -1,5 +1,7 @@
 package com.banzhuan.dao;
 
+import java.util.List;
+
 import com.banzhuan.entity.StatisticsEntity;
 
 /**
@@ -10,5 +12,7 @@ import com.banzhuan.entity.StatisticsEntity;
 public interface StatisticsDAO {
 
 	public int insertStatisticsEntity(StatisticsEntity st);
+	
+	public List<StatisticsEntity> getStatistcisByType(int type);
 
 }

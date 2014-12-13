@@ -1173,7 +1173,9 @@ public class CommonService {
 			Iterator<String> iter = brand.iterator();
 			while(iter.hasNext())
 			{
-				ret += "<span>"+iter.next()+"</span>";
+				String tmp = iter.next();
+				if(StringUtil.isNotEmpty(tmp))
+					ret += "<span>"+tmp+"</span>";
 			}
 			ret += "</div></li>";
 		}
@@ -1552,7 +1554,9 @@ public class CommonService {
 			Iterator<String> iter = screwangle.iterator();
 			while(iter.hasNext())
 			{
-				ret += "<span>"+iter.next()+"</span>";
+				String tmp = iter.next();
+				if(StringUtil.isNotEmpty(tmp))
+					ret += "<span>"+tmp+"</span>";
 			}
 			ret += "</div></li>";
 		}
@@ -1562,7 +1566,9 @@ public class CommonService {
 			Iterator<String> iter = coatingtype.iterator();
 			while(iter.hasNext())
 			{
-				ret += "<span>"+iter.next()+"</span>";
+				String tmp = iter.next();
+				if(StringUtil.isNotEmpty(tmp))
+					ret += "<span>"+tmp+"</span>";
 			}
 			ret += "</div></li>";
 		}
@@ -1647,7 +1653,9 @@ public class CommonService {
 			Iterator<String> iter = diameterratio.iterator();
 			while(iter.hasNext())
 			{
-				ret += "<span>"+iter.next()+"</span>";
+				String tmp = iter.next();
+				if(StringUtil.isNotEmpty(tmp))
+					ret += "<span>"+tmp+"</span>";
 			}
 			ret += "</div></li>";
 		}
@@ -1657,7 +1665,9 @@ public class CommonService {
 			Iterator<String> iter = slotshape.iterator();
 			while(iter.hasNext())
 			{
-				ret += "<span>"+iter.next()+"</span>";
+				String tmp = iter.next();
+				if(StringUtil.isNotEmpty(tmp))
+					ret += "<span>"+tmp+"</span>";
 			}
 			ret += "</div></li>";
 		}
@@ -1667,7 +1677,9 @@ public class CommonService {
 			Iterator<String> iter = handlenorm.iterator();
 			while(iter.hasNext())
 			{
-				ret += "<span>"+iter.next()+"</span>";
+				String tmp = iter.next();
+				if(StringUtil.isNotEmpty(tmp))
+					ret += "<span>"+tmp+"</span>";
 			}
 			ret += "</div></li>";
 		}
@@ -1677,7 +1689,9 @@ public class CommonService {
 			Iterator<String> iter = taptype.iterator();
 			while(iter.hasNext())
 			{
-				ret += "<span>"+iter.next()+"</span>";
+				String tmp = iter.next();
+				if(StringUtil.isNotEmpty(tmp))
+					ret += "<span>"+tmp+"</span>";
 			}
 			ret += "</div></li>";
 		}
@@ -1687,7 +1701,9 @@ public class CommonService {
 			Iterator<String> iter = screwtype.iterator();
 			while(iter.hasNext())
 			{
-				ret += "<span>"+iter.next()+"</span>";
+				String tmp = iter.next();
+				if(StringUtil.isNotEmpty(tmp))
+					ret += "<span>"+tmp+"</span>";
 			}
 			ret += "</div></li>";
 		}
@@ -1697,7 +1713,9 @@ public class CommonService {
 			Iterator<String> iter = axistype.iterator();
 			while(iter.hasNext())
 			{
-				ret += "<span>"+iter.next()+"</span>";
+				String tmp = iter.next();
+				if(StringUtil.isNotEmpty(tmp))
+					ret += "<span>"+tmp+"</span>";
 			}
 			ret += "</div></li>";
 		}
@@ -1707,7 +1725,9 @@ public class CommonService {
 			Iterator<String> iter = axisdetail.iterator();
 			while(iter.hasNext())
 			{
-				ret += "<span>"+iter.next()+"</span>";
+				String tmp = iter.next();
+				if(StringUtil.isNotEmpty(tmp))
+					ret += "<span>"+tmp+"</span>";
 			}
 			ret += "</div></li>";
 		}
@@ -1792,7 +1812,9 @@ public class CommonService {
 			Iterator<String> iter = handledsize.iterator();
 			while(iter.hasNext())
 			{
-				ret += "<span>"+iter.next()+"</span>";
+				String tmp = iter.next();
+				if(StringUtil.isNotEmpty(tmp))
+					ret += "<span>"+tmp+"</span>";
 			}
 			ret += "</div></li>";
 		}
@@ -1802,7 +1824,9 @@ public class CommonService {
 			Iterator<String> iter = screwsize.iterator();
 			while(iter.hasNext())
 			{
-				ret += "<span>"+iter.next()+"</span>";
+				String tmp = iter.next();
+				if(StringUtil.isNotEmpty(tmp))
+					ret += "<span>"+tmp+"</span>";
 			}
 			ret += "</div></li>";
 		}
@@ -1827,7 +1851,9 @@ public class CommonService {
 			Iterator<String> iter = accuracy.iterator();
 			while(iter.hasNext())
 			{
-				ret += "<span>"+iter.next()+"</span>";
+				String tmp = iter.next();
+				if(StringUtil.isNotEmpty(tmp))
+					ret += "<span>"+tmp+"</span>";
 			}
 			ret += "</div></li>";
 		}
@@ -1837,7 +1863,9 @@ public class CommonService {
 			Iterator<String> iter = collet.iterator();
 			while(iter.hasNext())
 			{
-				ret += "<span>"+iter.next()+"</span>";
+				String tmp = iter.next();
+				if(StringUtil.isNotEmpty(tmp))
+					ret += "<span>"+tmp+"</span>";
 			}
 			ret += "</div></li>";
 		}
@@ -1847,7 +1875,9 @@ public class CommonService {
 			Iterator<String> iter = interfacesize.iterator();
 			while(iter.hasNext())
 			{
-				ret += "<span>"+iter.next()+"</span>";
+				String tmp = iter.next();
+				if(StringUtil.isNotEmpty(tmp))
+					ret += "<span>"+tmp+"</span>";
 			}
 			ret += "</div></li>";
 		}
@@ -1937,7 +1967,9 @@ public class CommonService {
 			Iterator<String> iter = screwdirection.iterator();
 			while(iter.hasNext())
 			{
-				ret += "<span>"+iter.next()+"</span>";
+				String tmp = iter.next();
+				if(StringUtil.isNotEmpty(tmp))
+					ret += "<span>"+tmp+"</span>";
 			}
 			ret += "</div></li>";
 		}
@@ -1947,7 +1979,9 @@ public class CommonService {
 			Iterator<String> iter = grooverange.iterator();
 			while(iter.hasNext())
 			{
-				ret += "<span>"+iter.next()+"</span>";
+				String tmp = iter.next();
+				if(StringUtil.isNotEmpty(tmp))
+					ret += "<span>"+tmp+"</span>";
 			}
 			ret += "</div></li>";
 		}
@@ -1957,7 +1991,9 @@ public class CommonService {
 			Iterator<String> iter = drillrange.iterator();
 			while(iter.hasNext())
 			{
-				ret += "<span>"+iter.next()+"</span>";
+				String tmp = iter.next();
+				if(StringUtil.isNotEmpty(tmp))
+					ret += "<span>"+tmp+"</span>";
 			}
 			ret += "</div></li>";
 		}

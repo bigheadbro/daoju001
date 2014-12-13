@@ -1,8 +1,9 @@
 package com.banzhuan.entity;
 
 import java.io.Serializable;
+import java.util.Comparator;
 
-public class CategoryEntity implements Serializable {
+public class CategoryEntity implements Serializable, Comparable<CategoryEntity> {
 	/**
 	 * 
 	 */
@@ -28,4 +29,15 @@ public class CategoryEntity implements Serializable {
 	public void setPic(String pic) {
 		this.pic = pic;
 	}
+	
+	@Override
+    public int compareTo(CategoryEntity o) {
+        if (Integer.valueOf(this.getCode())-Integer.valueOf(o.getCode()) > 0) {
+            return 1;
+        }
+        if (Integer.valueOf(this.getCode())-Integer.valueOf(o.getCode()) < 0) {
+            return -1;
+        }
+        return 0;
+    }
 }

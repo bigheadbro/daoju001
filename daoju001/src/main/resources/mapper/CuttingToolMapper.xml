@@ -148,6 +148,9 @@
 	<select id="getAllSeries" resultMap="CuttingToolResultMap">
 		SELECT * from t_cuttingtool group by seriesname
 	</select>
+	<select id="getCuttingtoolsGroupbyBrand" resultMap="CuttingToolResultMap">
+		SELECT * from t_cuttingtool group by brand 
+	</select>
 	
 	<select id="getVersionsBySeries" parameterType="String" resultMap="CuttingToolResultMap">
 		SELECT * from t_cuttingtool where seriesname=#{sn}
@@ -652,7 +655,7 @@
  	        and locate(#{workingtool},`workingtool`) > 0
 		</if>
 	</select>
-	<update id="updateCuttingToolById" parameterType="CuttingToolEntity">
+	<update id="updateCuttingToolBySn" parameterType="CuttingToolEntity">
 		update t_cuttingtool
 		<set>
 		  <if test="samecolume != null">samecolume=#{samecolume},</if>
@@ -661,6 +664,16 @@
 		</set>
 	   where seriesname=#{seriesname}
 	</update>
+	<update id="updateCuttingToolByBrand" parameterType="CuttingToolEntity">
+		update t_cuttingtool
+		<set>
+		  <if test="samecolume != null">samecolume=#{samecolume},</if>
+		  <if test="provider != null">provider=#{provider},</if>
+		  <if test="workingtype != null">workingtype=#{workingtype},</if>
+		</set>
+	   where brand=#{brand}
+	</update>
+	
 	<!-- 新代理商信息 -->
 	<insert id="insertCuttingToolEntity" parameterType="CuttingToolEntity">
 		<selectKey resultType="int" order="AFTER" keyProperty="id">

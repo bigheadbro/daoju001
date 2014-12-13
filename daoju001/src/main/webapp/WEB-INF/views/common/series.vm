@@ -151,7 +151,18 @@
 			<div class="no-result">
 				<h1>对不起！</h1>
 				<p>没有查询到您输入的相关内容~<br/>请核对您输入的内容后，再次查询 </p>
+				<a id="join" href="/knowmore#joinus">我是这个产品的供应商，点击加入刀师傅</a>
 			</div>
+			<script>
+            $(function() {
+            	$("#join").click(function(){
+            		$.ajax( {   
+            		    type : "POST",   
+            		    url : "/joinus"
+            		});   
+            	});
+            });
+            </script>
 		#end
 		#foreach ($ct in $cts)
             <a class="series-item clearfix" href="/detail/${ct.id}">

@@ -24,6 +24,7 @@
 							<div class="brand-logo">
 								<div>
 									<img src="/img/logo/$stringUtil.getBrandLogo($mapEntry2.key)" />
+									<h4>$stringUtil.getBrand($mapEntry2.key)-$stringUtil.getBrandCountry($mapEntry2.key)</h4>
 								</div>
         					</div>
 							<div class="agent-list clearfix">

@@ -87,7 +87,7 @@
 			#if($errormsg == 1)
 				上传特色刀具前，请先完善您的个人信息，<a href="/user/profile">完善资料</a>
 			#else
-				您的账户最多上传$errormsg个特色刀具，如需要上传更多，<a href="/membership">请升级账户</a>
+				您的账户最多上传$errormsg个特色刀具，如需要上传更多，请联系客服。
 			#end
     	</div>
 		#end

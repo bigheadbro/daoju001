@@ -156,7 +156,7 @@ a.common:hover{text-decoration:underline;color:#00c0ff}
 .purchase-content-container .operation p{clear:both;color:#525252;font-size:12px;margin-top:60px;}
 
 /*newaddr*/
-.newaddr-win{display:none;position:absolute;top:50px;right:400px;z-index:1000002;width:740px;border:1px solid #0099cb;font-size:13px;}
+.newaddr-win{display:none;position:absolute;top:50px;right:400px;z-index:1002;width:740px;border:1px solid #0099cb;font-size:13px;}
 .newaddr-win-content{background-color:white;padding: 15px;}
 .newaddr-win h2{font-size:18px;color:#8b8b8b;font-weight: 100;}
 .newaddr-win h2 a{float:right;color:black;margin-top: -10px;}
@@ -636,7 +636,8 @@ h1.category-level a:hover{text-decoration:underline;color:#ff8f17}
 .detail-content .right .provider .provider-item .contactway .qq{float:left;color:#0099cb;padding-top:15px;}
 .detail-content .right .provider .provider-item .contactway .qq span{font-weight:bold;margin-right: 10px;color:#007196}
 /*detail型号tab*/
-.detail-content{margin-top:30px;}
+.detail-content{margin-top:30px;position:relative;}
+.detail-content .product-side{position:absolute;right: -222px;width:202px;}
 .detail-content .left{float:left;width:227px;background-color:#f6f6f6;border:1px solid #d8d8d8}
 .detail-content .left ul.params-list{}
 .detail-content .left ul.params-list li{border-bottom:1px solid #d8d8d8;padding: 10px;}
@@ -1083,7 +1084,7 @@ top: 0;
 left: 0;
 width: 100%;
 background: #333;
-z-index: 1000001;
+z-index: 1001;
 filter: alpha(opacity=30);
 opacity: .3;
 }
@@ -1165,8 +1166,8 @@ opacity: .3;
 .uploadlogo-win .content{margin: 50px;margin-top:20px;}
 .uploadlogo-win .content .left{float:left;width: 319px;border-right:1px solid #ccc;padding-right:20px;margin: 20px;}
 .uploadlogo-win .content .left .upload{position:relative;margin-top:20px}
-.uploadlogo-win .content .left .upload a{background-color:#00607f;color:white;border-radius:4px;text-align:center;padding:10px 28px;font-size:16px;line-height: 41px;}
-.uploadlogo-win .content .left .upload input[type="file"]{display: block;width: 104px;height: 41px;top: 0;left: 0;position: absolute;opacity:0;}
+.uploadlogo-win .content .left .upload a{background-color:#00607f;color:white;border-radius:4px;text-align:center;padding:10px 20px;font-size:16px;line-height: 41px;}
+.uploadlogo-win .content .left .upload input[type="file"]{display: block;width: 100px;height: 41px;top: 0;left: -28px;position: absolute;opacity:0;filter:alpha(opacity=0)}
 .uploadlogo-win .content .right{float:left;margin-top:100px;}
 .uploadlogo-win .content .right .save{display:block;background-color:#63a200;color:white;border-radius:4px;text-align:center;padding:10px 20px;margin-top:20px;font-size:16px}
 .uploadlogo-win .content .thumb-container{background-color: #fafafa;border-radius: 8px;}
@@ -1183,8 +1184,8 @@ opacity: .3;
 .mainpage-container .main-right .addimg-cont h2{color:white;}
 .addimg-cont h3{color:#323232;font-size:18px;margin: 25px;margin-bottom: 15px;}
 .addimg-cont .choose-wrap{position:relative;margin-left:25px;margin-right: 25px;padding-bottom: 15px;border-bottom: 1px solid #989898;}
-.addimg-cont .choose-wrap input{position: absolute;top: 0;left: 0;width: 104px;height: 41px;opacity:0;}
-.addimg-cont .choose-pic{background-color:#0099cb;color:white;padding:10px 20px;font-size:16px;display:inline-block}
+.addimg-cont .choose-wrap input{position: absolute;top: 0;left: 0;width: 80px;height: 41px;opacity:0;filter:alpha(opacity=0)}
+.addimg-cont .choose-pic{background-color:#0099cb;color:white;padding:10px 10px;font-size:16px;display:inline-block}
 .addimg-cont p{color: #7a7a7a;font-size: 12px;margin-top: 5px;text-indent: 25px;}
 .addimg-cont .operation{margin-right: 25px;}
 .addimg-cont .operation #submit_addimg{background-color: #0099cb;color: white;padding: 5px 10px;border-radius: 5px;}

@@ -457,8 +457,8 @@
 					<div class="content clearfix">
     					<div class="flexslider banner">
                 			<ul class="slides">
-                				<li><a href="/knowmore"><img src="/img/banner.png" /></a></li>
-    							<li><a href="/knowmore#joinus"><img src="/img/Banner2.jpg" /></a></li>
+                				<li><a href="/knowmore"><img src="/img/Banner2.jpg" /></a></li>
+    							<li><a href="/knowmore#joinus"><img src="/img/banner.png" /></a></li>
                 			</ul>
             			</div>
 						<script>

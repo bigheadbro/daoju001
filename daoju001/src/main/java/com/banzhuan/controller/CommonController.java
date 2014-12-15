@@ -1845,6 +1845,10 @@ public class CommonController extends BaseController{
 		view.addObject("users",users);
 		view.addObject("ct",ct);
 		view.addObject("cts",cts);
+		String path = request.getSession().getServletContext().getRealPath("/qrcode");
+		String qrcode = Util.genRandomName("") + ".png";
+		TwoDimensionCode.encoderQRCode("http://www.daoshifu.com/wxproducts/" + id,path +"/"+ qrcode);
+		view.addObject("qrcode",qrcode);
 		return view;
 	}
 	

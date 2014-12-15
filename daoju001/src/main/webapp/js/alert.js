@@ -78,9 +78,7 @@ function showstock() {
 	}
 }
 $(function() {
-	if (document.all) {
-		window.location.href = "/browser";
-	}
+	
 	$(".complain-win").hide();
 	$("#pagemask-complain").hide();
 	complainshow = false;

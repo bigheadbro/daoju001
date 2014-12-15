@@ -17,7 +17,7 @@ $(function() {
 		    		window.location.href='/log';
 		    	  break;
 		    	case 2:
-		    		showAlert("权限不够",data.code,"","确定","/membership");
+		    		showAlert("权限不够",data.code,"","确定","#");
 		    	  break;
 		    	default:
 		    		showanswer(); 

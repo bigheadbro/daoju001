@@ -179,6 +179,12 @@ $(function() {
 <div class="main-content-wrap clearfix">
 	<h1 class="category-level">$ctConfig.getCategoryHtml(${ct.code},true) > 系列详情</h1>
 	<div class="detail-content clearfix">
+		<div class="product-side">
+    		<div class="qrcode">
+    			<img src="/qrcode/$qrcode" />
+    			<p>扫描二维码<br/>将本页产品分享到微信</p>
+    		</div>
+    	</div>
 		<div class="left">
 			<form id="form_param" method="post">
         	<input type="hidden" name="seriesname" value="${seriesname}" />

@@ -495,7 +495,7 @@ public class UserController extends BaseController{
 		{
 			if(account.isLogin())
 			{
-				if(account.getAuthority() < 3)
+				if(account.getAuthority() < 2)
 				{
 					JsonUtil.checkAnswerStatus(response, 2);
 				}

@@ -99,7 +99,7 @@ public class JsonUtil {
 	
 	public static void showAlert(HttpServletResponse response, String title, String content, String btn, String info, String link){
 		JSONObject object = new JSONObject();  
-        response.setContentType("text/Xml;charset=gbk");  
+        response.setContentType("text/json;charset=gbk");  
         object.element("title", title);
         object.element("content", content);
         object.element("btn", btn);
@@ -120,7 +120,7 @@ public class JsonUtil {
 	
 	public static void sendAgentInfo(HttpServletResponse response, String name, String logo, String brandname, String brandlink, boolean isverify, int cntAnswer, int cntSample, String phone, String qq){
 		JSONObject object = new JSONObject();  
-        response.setContentType("text/Xml;charset=gbk");  
+        response.setContentType("text/json;charset=gbk");  
         object.element("name", name);
         object.element("logo", logo);
         object.element("brandname", brandname);
@@ -146,7 +146,7 @@ public class JsonUtil {
 	public static void sendImg(HttpServletResponse response, String addr)
 	{
 		JSONObject object = new JSONObject();  
-        response.setContentType("text/Xml;charset=gbk");  
+        response.setContentType("text/json;charset=gbk");  
         object.element("addr", addr);
         PrintWriter out = null;  
         try {  
@@ -164,7 +164,7 @@ public class JsonUtil {
 	public static void sendAnswernt(HttpServletResponse response,int state, String content, String price, boolean freeuse)
 	{
 		JSONObject object = new JSONObject();  
-        response.setContentType("text/Xml;charset=gbk");  
+        response.setContentType("text/json;charset=gbk");  
 
         object.element("state", state);
         object.element("content", content);
@@ -187,7 +187,7 @@ public class JsonUtil {
 	public static void sendAddress(HttpServletResponse response,String pca, String detail, String name, String zip, String phone, int id, boolean isdefault, boolean isedit)
 	{
 		JSONObject object = new JSONObject();  
-        response.setContentType("text/Xml;charset=gbk");  
+        response.setContentType("text/json;charset=gbk");  
 
         object.element("pca", pca);
         object.element("detail", detail);
@@ -214,7 +214,7 @@ public class JsonUtil {
 	public static void sendComment(HttpServletResponse response, String comment, String userName, String logo, String brandName, String verifiedLink, String time,int commentid)
 	{
 		JSONObject object = new JSONObject();  
-        response.setContentType("text/Xml;charset=gbk");  
+        response.setContentType("text/json;charset=gbk");  
         object.element("comment", comment);
         object.element("userName", userName);
         object.element("logo", logo);
@@ -239,7 +239,7 @@ public class JsonUtil {
 	public static void sendFileLink(HttpServletResponse response, String addr)
 	{
 		JSONObject object = new JSONObject();  
-        response.setContentType("text/Xml;charset=gbk");  
+        response.setContentType("text/json;charset=gbk");  
         object.element("addr", addr);
         PrintWriter out = null;  
         try {  
@@ -258,7 +258,7 @@ public class JsonUtil {
 	{
 		JSONObject object = new JSONObject();  
 		String strStatus = "";
-        response.setContentType("text/Xml;charset=gbk");  
+        response.setContentType("text/json;charset=gbk");  
        	switch(status)
        	{
        	case 1:
@@ -294,7 +294,7 @@ public class JsonUtil {
 		JSONObject object = new JSONObject();  
 		String strStatus = "";
 		int mid = 0;
-        response.setContentType("text/Xml;charset=gbk");  
+        response.setContentType("text/json;charset=gbk");  
        	switch(status)
        	{
        	case 1://未登录
@@ -329,7 +329,7 @@ public class JsonUtil {
 	{
 		JSONObject object = new JSONObject();  
 		String strStatus = "";
-        response.setContentType("text/Xml;charset=gbk");  
+        response.setContentType("text/json;charset=gbk");  
        	switch(status)
        	{
        	case 1:
@@ -363,7 +363,7 @@ public class JsonUtil {
 	public static void sendMsgCount(HttpServletResponse response, int msgCount)
 	{
 		JSONObject object = new JSONObject();  
-        response.setContentType("text/Xml;charset=gbk");  
+        response.setContentType("text/json;charset=gbk");  
 	
         object.element("msgCount", msgCount);
         PrintWriter out = null;  
@@ -400,7 +400,7 @@ public class JsonUtil {
 	public static void sendLoginError(HttpServletResponse response, String mail, String pwd)
 	{
 		JSONObject object = new JSONObject();  
-        response.setContentType("text/Xml;charset=gbk");  
+        response.setContentType("text/json;charset=gbk");  
         object.element("mail", mail);
         object.element("pwd", pwd);
         PrintWriter out = null;  
@@ -419,7 +419,7 @@ public class JsonUtil {
 	public static void sendSingleString(HttpServletResponse response, String str)
 	{
 		JSONObject object = new JSONObject();  
-        response.setContentType("text/Xml;charset=gbk");  
+        response.setContentType("text/json;charset=gbk");  
         object.element("str", str);
         PrintWriter out = null;  
         try {  
@@ -437,7 +437,7 @@ public class JsonUtil {
 	public static void sendTwoString(HttpServletResponse response, String str1, String str2)
 	{
 		JSONObject object = new JSONObject();  
-        response.setContentType("text/Xml;charset=gbk");  
+        response.setContentType("text/json;charset=gbk");  
         object.element("str1", str1);
         object.element("str2", str2);
         PrintWriter out = null;  
@@ -457,7 +457,7 @@ public class JsonUtil {
 	{
 		JSONArray jsonArray = JSONArray.fromObject(list);
 		JSONObject object = new JSONObject();  
-        response.setContentType("text/Xml;charset=gbk");  
+        response.setContentType("text/json;charset=gbk");  
         object.element("cts", jsonArray);
         PrintWriter out = null;  
         try {  
@@ -489,7 +489,7 @@ public class JsonUtil {
 					+"</div>"
 					+"</a>";
 		}
-        response.setContentType("text/Xml;charset=gbk");  
+        response.setContentType("text/json;charset=gbk");  
         object.element("cts", str);
         object.element("map",map);
         PrintWriter out = null;  
@@ -662,7 +662,7 @@ public class JsonUtil {
 		    str += "<tr>";
 		}
 		str += "</tbody></table>";
-        response.setContentType("text/Xml;charset=gbk");  
+        response.setContentType("text/json;charset=gbk");  
         object.element("cts", str);
         object.element("map",map);
         PrintWriter out = null;  

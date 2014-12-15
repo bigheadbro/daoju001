@@ -15,8 +15,13 @@
 			</div>
 		</form>
 		<script>
-		function processAddimg(data) { 
-		  hideimg();
+		
+		$(function() {
+    		$("#submit_addimg").click(function () {
+    			$("#form_addimg").ajaxSubmit({
+						dataType:'json',
+						success:function(data) { 
+		  	hideimg();
 			if($("#ques-cont-editor").length > 0)
 			{
 				$("#ques-cont-editor").append("<img class=\"img-in-question\" src=\"/uploadfile/" + data.addr + "\"/>");
@@ -28,11 +33,6 @@
 				$("#hasPic").val(1);
 			}
 		}
-		$(function() {
-    		$("#submit_addimg").click(function () {
-    			$("#form_addimg").ajaxSubmit({
-						dataType:'json',
-						success:processAddimg
 					});//提交
     		});
     	});

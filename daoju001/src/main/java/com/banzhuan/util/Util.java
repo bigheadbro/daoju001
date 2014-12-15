@@ -68,6 +68,14 @@ public class Util {
 	private static Logger logger = LoggerFactory.getLogger(Util.class);
 	public static void cropImage(String lastdir, File file, String aa,
 			String subpath) throws IOException {
+		if(StringUtil.isEqual(lastdir, "pjpeg"))
+		{
+			lastdir = "jpeg";
+		}
+		if(StringUtil.isEqual(lastdir, "x-png"))
+		{
+			lastdir = "png";
+		}
 		FileInputStream is = null;
 		ImageInputStream iis = null;
 

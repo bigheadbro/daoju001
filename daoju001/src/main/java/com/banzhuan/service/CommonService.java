@@ -2369,4 +2369,9 @@ public class CommonService {
 		}
 		return cts;
 	}
+	
+	public int updateSampleDownloadCount(int id)
+	{
+		return sampleDAO.updateSampleDownloadCount(id);
+	}
 }

@@ -33,6 +33,13 @@ public class SampleDAOImpl extends SqlSessionDaoSupport implements SampleDAO {
 	{
 		return this.getSqlSession().update("updateAgentidById", sample);
 	}
+	
+	@Override
+	public int updateSampleDownloadCount(int id)
+	{
+		return this.getSqlSession().update("updateSampleDownloadCount", id);
+	}
+	
 	@Override
 	public List<SampleEntity> querySampleEntityByUserid(int id, RowBounds bound) {
 		return this.getSqlSession().selectList("querySampleEntityByUserid", id, bound);

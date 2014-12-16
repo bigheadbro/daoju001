@@ -22,4 +22,7 @@ public interface SampleDAO {
 	void delSample(int sid);
 	
 	int updateAgentidById(SampleEntity buyer);
+	
+	int updateSampleDownloadCount(int id);
+	
 }

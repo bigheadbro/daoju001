@@ -1458,6 +1458,27 @@ public class CuttingToolsConfiguration
 		}
 	}
 
+	public static String getCategoryPicForWx(String pic)
+	{
+		if (StringUtil.isEmpty(pic))
+		{
+			return null;
+		}
+		if (pic.contains("|"))
+		{
+			String ret = "";
+			String[] pics = pic.split("[|]");
+			for (int i = 0; i < pics.length; i++)
+			{
+				ret += "<li><a target=\"__blank\" href=\"/img/sample/"+ pics[i] + "\">样本"+String.valueOf(i+1)+"</a></li>";
+			}
+			return ret;
+		} else
+		{
+			return "<li><a target=\"__blank\" href=\"/img/sample/"+ pic + "\">样本</a></li>";
+		}
+	}
+	
 	public static String getCategoryHtml(String code, boolean lastislink)
 	{
 		String ret = "";

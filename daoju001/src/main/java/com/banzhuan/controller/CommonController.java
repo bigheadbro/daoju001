@@ -141,9 +141,11 @@ public class CommonController extends BaseController{
         response.setCharacterEncoding("utf-8");  
         response.setContentType("multipart/form-data");  
         String fileName = request.getParameter("file");
+        int id = Integer.valueOf(request.getParameter("id"));
         response.setHeader("Content-Disposition", "attachment;fileName="+java.net.URLEncoder.encode(fileName.split("/")[3], "UTF-8"));  
         String path = request.getSession().getServletContext().getRealPath("/sample")+ fileName.substring(9);
         try {  
+        	commonService.updateSampleDownloadCount(id);
             File file=new File(path);  
             response.setContentLength((int)(long)file.length());
             InputStream inputStream=new FileInputStream(file);  
@@ -153,6 +155,7 @@ public class CommonController extends BaseController{
             while((length=inputStream.read(b))>0){  
                 os.write(b,0,length);  
             }  
+            
             inputStream.close();  
         } catch (FileNotFoundException e) {  
             e.printStackTrace();  
@@ -1847,7 +1850,7 @@ public class CommonController extends BaseController{
 		view.addObject("cts",cts);
 		String path = request.getSession().getServletContext().getRealPath("/qrcode");
 		String qrcode = Util.genRandomName("") + ".png";
-		TwoDimensionCode.encoderQRCode("http://www.daoshifu.com/wxproducts/" + id,path +"/"+ qrcode);
+		TwoDimensionCode.encoderQRCode("http://www.daoshifu.com/wxdetail/" + id,path +"/"+ qrcode);
 		view.addObject("qrcode",qrcode);
 		return view;
 	}
@@ -1857,6 +1860,18 @@ public class CommonController extends BaseController{
 	//华丽的分割线，下部分为微信服务号代码
 	//
 	
+	
+	@RequestMapping(value = "/wxdetail/{id}")
+	public ModelAndView wxdetail(final HttpServletRequest request,final HttpServletResponse response, @PathVariable String id) 
+	{
+		ModelAndView mv = new ModelAndView("/wx/wxdetail");
+		int detailid = Integer.parseInt(id);
+		CuttingToolEntity ct = commonService.getCuttingToolByid(detailid);
+		List<UserEntity> users = commonService.getProviders(ct.getProvider());
+		mv.addObject("ct",ct);
+		mv.addObject("users",users);
+		return mv;
+	}
 	
 	@RequestMapping(value="/wxstocklist")
 	public ModelAndView wxstocklist(HttpServletRequest request, HttpServletResponse response,@ModelAttribute("form")RequestForm form) {

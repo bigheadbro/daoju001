@@ -20,16 +20,24 @@ a{text-decoration:none;}
 html {	-ms-text-size-adjust:100%;	-webkit-text-size-adjust:100%;	font-family:Helvetica,"STHeiti STXihei","Microsoft JhengHei","Microsoft YaHei",Tohoma,Arial}
 .content-body {background-color: #fff;box-shadow: 0px 2px 10px rgba(0,0,0,0.1);margin: 0 auto;}
 .content-body {	background-color:#fff;	padding:10px;	border:1px solid #ddd}
-.custom-richtext {padding:0 10px;box-sizing:border-box;margin-top:10px;font-size:16px;color:#333;line-height:1.5;overflow:hidden;text-align:left;word-wrap:break-word}
+.custom-richtext {box-sizing:border-box;margin-top:10px;font-size:16px;color:#333;line-height:1.5;overflow:hidden;text-align:left;word-wrap:break-word}
 .custom-title {background: url('http://kdt-static.qiniudn.com/v2/image/wap/bottom_line.png') left top no-repeat;background-size: 100% 1px;background-position: left bottom;padding: 0 10px;box-sizing: border-box;margin-bottom: 10px;
 padding-top: 10px;
 padding-bottom: 10px;
 overflow: hidden;
 word-break: break-all;
 }
+.list-item{border-bottom:1px solid #eee;padding:10px;color:#111}
 .body{text-align:center;}
+.slides{margin-bottom:10px;}
+.slides li{float:left;margin-right:10px;}
+.slides li a{color: #388cba;}
 .log-title{width:auto;color:#0099cb;font-weight:bold;line-height:4em;background-color:#f0f0f0;padding:3em 0;height: 128px;background-size: 70px;background-position: center;background-image: url(../img/wx/cardlogo.png);background-repeat: no-repeat;}
-.custom-title .title {margin: 0;font-size: 20px;line-height: 22px;}
+.custom-title .title {margin: 0;font-size: 18px;line-height: 22px;}
+.custom-title .right{float:left;margin-left:10px;margin-top:10px;}
+.custom-title .right h4{font-size:14px;}
+.custom-title .right h5{font-size:14px;}
+.provider{color:#0099cb;font-size:14px;line-height:30px;background-color:#f4f8f9;text-indent: 10px;}
 .text-left {text-align: left;}
 .custom-richtext img {background: none;max-width: 100% !important;min-height: 1px;width: auto !important;height: auto !important;vertical-align: middle;}
 .custom-richtext p {margin: 0 0 1em 0;}
@@ -184,3 +192,5 @@ em.error{color:red;text-align: left;display: block;width: 90%;margin: 0.5em auto
 .brand-con{margin:2em 1em 2em 1em;}
 .brand-con p{font-size:1em;text-align: left;word-wrap:break-word; word-break:normal;}
 .brand-con h2{font-size:1em;text-align: center;}
+.series-pic{float:left;border:1px solid white;text-align:center;display:table;width:130px;height:110px;background-color: white;}
+.series-pic span{display:table-cell;vertical-align:middle;}

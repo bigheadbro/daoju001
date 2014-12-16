@@ -253,10 +253,10 @@
                                     <a class="second" href="/category/0402">机夹式钻头</a>
         							<div class="level3 clearfix">
         								<span>
-        									<a href="/category/040201">冷压刀柄</a>
+        									<a href="/category/040201">机夹式钻头</a>
         								</span>
         								<span>
-        									<a href="/category/040202">蜗杆刀柄</a>
+        									<a href="/category/040202">机夹式钻头刀片</a>
         								</span>
         							</div>
                                 </li>
@@ -457,8 +457,8 @@
 					<div class="content clearfix">
     					<div class="flexslider banner">
                 			<ul class="slides">
-                				<li><a href="/knowmore"><img src="/img/Banner2.jpg" /></a></li>
-    							<li><a href="/knowmore#joinus"><img src="/img/banner.png" /></a></li>
+                				<li><a href="/knowmore"><img src="/img/banner.png" /></a></li>
+    							<li><a class="joinus" href="/knowmore#joinus"><img src="/img/Banner2.jpg" /></a></li>
                 			</ul>
             			</div>
 						<script>
@@ -481,9 +481,16 @@
 									}
 								});
 							});
+							$(".joinus").click(function(){
+                        		$.ajax( {   
+                        		    type : "POST",   
+                        		    url : "/joinus"
+                        		});   
+                        	});
 						});
 						</script>
     					<div class="side">
+							<a class="joinus" href="/knowmore#joinus" style="background-color:#CC3232;color:white;display:block;padding:5px;text-align:center;margin-bottom:10px;">供应商加入</a>
 							<div class="query">
 								<form id="form_material" method="post">
 								<input type="text" id="index-material" name="material" placeholder="输入你需要查询的材质" />

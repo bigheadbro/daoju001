@@ -539,7 +539,7 @@ div[contentEditable]{outline:0}
 .main-menu .content .side .query a{background-color:#ff8f17;font-size:14px;color:white;padding:2px 6px;border:1px solid #ea7900;}
 .main-menu .content .side .query a:hover{background-color:#fda240;}
 .main-menu .content .side .query span{font-size:12px;color:#ff8f17}
-.main-menu .content .side .question{border:1px solid #d8d8d8;margin-top:10px;padding:10px;height: 196px;}
+.main-menu .content .side .question{border:1px solid #d8d8d8;margin-top:10px;padding:10px;height: 155px;}
 .main-menu .content .side .question h1{font-size:14px;color:#636363}
 .main-menu .content .side .question p{color:#636363;font-size:12px;margin: 5px 0;max-height: 50px;overflow: hidden;text-overflow: ellipsis;}
 .main-menu .content .side .question a{color:#ff8f17;font-size:12px;}
@@ -575,7 +575,7 @@ h1.category-level a:hover{text-decoration:underline;color:#ff8f17}
 
 .series-content{position:relative;min-height:700px;margin-top: 20px;}
 .series-left{float:left;width:227px;background-color:#f6f6f6;border:1px solid #d8d8d8;overflow-y:auto;overflow-x:hidden;max-height:700px;min-height: 400px;}
-.series-left h1{font-size:15px;color:#9c9c9c;line-height:22px;margin-bottom: 30px;}
+.series-left h1{font-size:15px;color:#9c9c9c;line-height:22px;margin:10px;margin-bottom: 30px;}
 .series-left p{color:#606060;font-size:12px;line-height:24px;margin: 10px;}
 .series-left p span{color:#0099cb;display:block}
 .series-left ul.params-list{}

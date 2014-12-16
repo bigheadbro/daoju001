@@ -100,6 +100,10 @@
 		update t_sample set
 		name = #{name}, brandid=#{brandid},gmt_modified=now() where id=#{id}
 	</update>
+	<update id="updateSampleDownloadCount" parameterType="SampleEntity">
+		update t_sample set
+		count = count + 1,gmt_modified=now() where id=#{id}
+	</update>
 	<update id="updateAgentidById" parameterType="SampleEntity">
 		update t_sample set
 		agent_id = #{agentId} where id=#{id}

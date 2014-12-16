@@ -43,7 +43,7 @@ public class SendCloudTest {
 	public static void main(String[] args) throws Exception {
 		ArrayList<String> set = readEdmFileByLines("EDM/notqq.txt");
 
-		for (int i = 13989; i < 15997; i++) {
+		for (int i = 3896; i < 7896; i++) {//for (int i = 1980; i < 2000; i++) {
 			try
 			{
 			/*while (true) {
@@ -56,32 +56,7 @@ public class SendCloudTest {
 			}*/
 			Message message = new Message("client@sends.daoshifu.com", "刀师傅");
 			// 正文， 使用html形式，或者纯文本形式
-			message.setBody("<div  style=\"margin: 10px auto;width: 700px;\">"
-							+"<div class=\"\">"
-							+"<img style=\"width:700px;display:block;\" src=\"http://www.daoshifu.com/img/sys.png\" />"
-							+"<h1 style=\"text-align:center;font-size:24px;color:#8d8d8d;font-weight:normal;margin-top:70px;\">花一分钟，与我们共建全品牌选刀系统</h1>"
-							+"<a id=\"query\" target=\"__blank\" href=\"http://www.wenjuan.com/s/3QfaQns/\" style=\"display:block;text-decoration: none;text-align: center;margin: 30px auto;background-color: #44bde5;color: white;font-size: 30px;border-radius: 7px;padding: 10px;width: 160px;\">填写问卷</a>"
-							+"</div>"
-							+"<ul style=\"border-top:1px solid #eaeaea;margin-top:50px;padding-top: 40px;\">"
-							+"<li style=\"list-style: none;text-align: left;display: inline-block;\">"
-							+"<h1 style=\"font-size:22px;color:#8d8d8d;margin-bottom: 15px;\">更直观</h1>"
-							+"<p style=\"font-size:14px;color:#cecece;line-height:28px;\">数千款热销品<br/>产品特性一目了然</p>"
-							+"</li>"
-							+"<li style=\"list-style: none;text-align: left;display: inline-block;margin-left:63px\">"
-							+"<h1 style=\"font-size:22px;color:#8d8d8d;margin-bottom: 15px;\">更准确</h1>"
-							+"<p style=\"font-size:14px;color:#cecece;line-height:28px;\">70余个参数<br/>准确匹配方案</p>"
-							+"</li>"
-							+"<li style=\"list-style: none;text-align: left;display: inline-block;margin-left:63px\">"
-							+"<h1 style=\"font-size:22px;color:#8d8d8d;margin-bottom: 15px;\">更安全</h1>"
-							+"<p style=\"font-size:14px;color:#cecece;line-height:28px;\">供应商经过刀师傅认证<br/>货源严格保证</p>"
-							+"</li>"
-							+"<li style=\"list-style: none;text-align: left;display: inline-block;margin-left:63px\">"
-							+"<h1 style=\"font-size:22px;color:#8d8d8d;margin-bottom: 15px;\">更全面</h1>"
-							+"<p style=\"font-size:14px;color:#cecece;line-height:28px;\">目标覆盖市场<br/>90%以上的品牌</p>"
-							+"</li>"
-							+"</ul>"
-							+"</div>"
-							+"<p style=\"text-align: center;font-size:12px;font-family:'微软雅黑';\">如果您不愿意继续接受此类邮件,可点此<a href=\"https://sendcloud.sohu.com/webapi/unsubscribes.get.xml?api_user=yourusername\">退订此类邮件</a></p>");
+			message.setBody("<p><a href=\"http://www.daoshifu.com\"><img src=\"http://daoshifu.com/img/dan.jpg\" style=\"width:600px\" /></a></p><p style=\"text-align: left;font-size:12px;font-family:'微软雅黑';\">如果您不愿意继续接受此类邮件,可点此<a href=\"https://sendcloud.sohu.com/webapi/unsubscribes.get.xml?api_user=yourusername\">退订此类邮件</a></p>");
 			// 添加to, cc, bcc replyto
 			message.setSubject("刀师傅全品牌选刀系统即将上线");
 

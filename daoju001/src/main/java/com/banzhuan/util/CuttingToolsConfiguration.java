@@ -384,6 +384,250 @@ public class CuttingToolsConfiguration
 		}
 	}
 
+	public static String makeVersionTable(List<CuttingToolEntity> list)
+	{
+		String str = "<table class=\"version-table\"><thead><tr>";
+		str += CuttingToolsConfiguration.getParamsHtml(list) + "</tr></thead><tbody>";
+		String param = CuttingToolsConfiguration.getParamsHtml(list);
+		for(int i = 0;i < list.size();i++)
+		{
+			str += "<tr>";
+			str += "<td>"+list.get(i).getVersion() +"</td>";
+		    if(StringUtil.isContains(param,">材质<"))
+		        str += "<td>"+list.get(i).getMaterial() +"</td>";
+		    
+		    if(StringUtil.isContains(param,">主偏角<"))
+		        str += "<td>"+list.get(i).getAngle() +"</td>";
+		    
+		    if(StringUtil.isContains(param,">刀片个数<"))
+		        str += "<td>"+list.get(i).getCtcount() +"</td>";
+		    
+		    if(StringUtil.isContains(param,">直径<"))
+		        str += "<td>"+list.get(i).getDiameter() +"</td>";
+		    
+		    if(StringUtil.isContains(param,">加工用途<"))
+		        str += "<td>"+StringUtil.replaceSemicolon(list.get(i).getUsage())+"</td>";
+		    
+		    if(StringUtil.isContains(param,">光洁度<"))
+		    {
+		        if(list.get(i).getCujing() == 2)
+				{
+		        	str += "<td>精加工用</td>";
+				}
+				else if(list.get(i).getCujing() == 3)
+				{
+					str += "<td>粗加工用</td>";
+				}
+				else
+				{
+					str += "<td>一般加工用</td>";
+				}
+		    }
+		    if(StringUtil.isContains(param,">有效长<"))
+		        str += "<td>"+list.get(i).getUsefullength() +"</td>";
+		    
+		    if(StringUtil.isContains(param,">安装孔接口<"))
+		        str += "<td>"+list.get(i).getPipesize() +"</td>";
+		    
+		    if(StringUtil.isContains(param,">柄径<"))
+		        str += "<td>"+list.get(i).getShank() +"</td>";
+		    
+		    if(StringUtil.isContains(param,">柄部类型<"))
+		        str += "<td>"+list.get(i).getShanktype() +"</td>";
+		    
+		    if(StringUtil.isContains(param,">形状<"))
+		    {
+		        if(StringUtil.isEqual(list.get(i).getShape() , "H"))
+				{
+					str += "<td>正六角形</td>";
+				}
+				else if(StringUtil.isEqual(list.get(i).getShape() , "O"))
+				{
+					str += "<td>八角形</td>";
+				}
+				else if(StringUtil.isEqual(list.get(i).getShape() , "P"))
+				{
+					str += "<td>五角形</td>";
+				}
+				else if(StringUtil.isEqual(list.get(i).getShape() , "S"))
+				{
+					str += "<td>正方形</td>";
+				}
+				else if(StringUtil.isEqual(list.get(i).getShape() , "T"))
+				{
+					str += "<td>三角形</td>";
+				}
+				else if(StringUtil.isEqual(list.get(i).getShape() , "C"))
+				{
+					str += "<td>菱形80°</td>";
+				}
+				else if(StringUtil.isEqual(list.get(i).getShape() , "D"))
+				{
+					str += "<td>菱形55°</td>";
+				}
+				else if(StringUtil.isEqual(list.get(i).getShape() , "E"))
+				{
+					str += "<td>菱形75°</td>";
+				}
+				else if(StringUtil.isEqual(list.get(i).getShape() , "F"))
+				{
+					str += "<td>菱形50°</td>";
+				}
+				else if(StringUtil.isEqual(list.get(i).getShape() , "M"))
+				{
+					str += "<td>菱形86°</td>";
+				}
+				else if(StringUtil.isEqual(list.get(i).getShape() , "V"))
+				{
+					str += "<td>菱形35°</td>";
+				}
+				else if(StringUtil.isEqual(list.get(i).getShape() , "W"))
+				{
+					str += "<td>不等角六角形</td>";
+				}
+				else if(StringUtil.isEqual(list.get(i).getShape() , "L"))
+				{
+					str += "<td>长方形90°</td>";
+				}
+				else if(StringUtil.isEqual(list.get(i).getShape() , "A"))
+				{
+					str += "<td>平行四边形顶角55°</td>";
+				}
+				else if(StringUtil.isEqual(list.get(i).getShape() , "R"))
+				{
+					str += "<td>圆形</td>";
+				}
+		    }
+		    
+		    if(StringUtil.isContains(param,">后角<"))
+		        str += "<td>"+list.get(i).getBackangle() +"</td>";
+		    
+		    if(StringUtil.isContains(param,">适用工件<"))
+		        str += "<td>"+StringUtil.replaceSemicolon(list.get(i).getWorkingtool())+"</td>";
+		    
+		    if(StringUtil.isContains(param,">刃数<"))
+		        str += "<td>"+list.get(i).getEdgeno() +"</td>";
+		    
+		    if(StringUtil.isContains(param,">刃长<"))
+		        str += "<td>"+list.get(i).getEdgelength() +"</td>";
+		    
+		    if(StringUtil.isContains(param,">总长<"))
+		        str += "<td>"+list.get(i).getTotallength() +"</td>";
+		    
+		    if(StringUtil.isContains(param,">螺旋角<"))
+		        str += "<td>"+list.get(i).getScrewangle() +"</td>";
+		    
+		    if(StringUtil.isContains(param,">涂层种类<"))
+		        str += "<td>"+list.get(i).getCoatingtype() +"</td>";
+		    
+		    if(StringUtil.isContains(param,">R角<"))
+		        str += "<td>"+list.get(i).getRangle() +"</td>";
+		    
+		    if(StringUtil.isContains(param,">方向<"))
+		    {
+		    	if(list.get(i).getDirection() == 2)
+				{
+					str += "<td>左手</td>";
+				}
+				else if(list.get(i).getDirection() == 3)
+				{
+					str += "<td>右手</td>";
+				}
+				else if(list.get(i).getDirection() == 1)
+				{
+					str += "<td>通用槽</td>";
+				}
+		    }
+
+		    if(StringUtil.isContains(param,">最小加工直径<"))
+		        str += "<td>"+list.get(i).getMinworkdiameter() +"</td>";
+		    
+		    if(StringUtil.isContains(param,">冷却方式<"))
+		    {
+		    	if(list.get(i).getInnercooling() == 1)
+		    		str += "<td>一般</td>";
+		    	else if(list.get(i).getInnercooling() == 2)
+		    		str += "<td>内冷</td>";
+		    	else if(list.get(i).getInnercooling() == 3)
+		    		str += "<td>外冷</td>";
+		    }
+		    if(StringUtil.isContains(param,">倍径比<"))
+		        str += "<td>"+list.get(i).getDiameterratio() +"</td>";
+		    
+		    if(StringUtil.isContains(param,">槽型状<"))
+		        str += "<td>"+list.get(i).getSlotshape() +"</td>";
+		    
+		    if(StringUtil.isContains(param,">柄部规格<"))
+		        str += "<td>"+list.get(i).getHandlenorm() +"</td>";
+		    
+		    if(StringUtil.isContains(param,">丝锥种类<"))
+		        str += "<td>"+list.get(i).getTaptype() +"</td>";
+		    
+		    if(StringUtil.isContains(param,">螺纹类型<"))
+		        str += "<td>"+list.get(i).getScrewtype() +"</td>";
+		    
+		    if(StringUtil.isContains(param,">主轴类型<"))
+		        str += "<td>"+list.get(i).getAxistype() +"</td>";
+		    
+		    if(StringUtil.isContains(param,">主轴细分<"))
+		        str += "<td>"+list.get(i).getAxisdetail() +"</td>";
+		    
+		    if(StringUtil.isContains(param,">厚度<"))
+		        str += "<td>"+list.get(i).getThickness() +"</td>";
+		    
+		    if(StringUtil.isContains(param,">最大槽深<"))
+		        str += "<td>"+list.get(i).getTaper() +"</td>";
+		    
+		    if(StringUtil.isContains(param,">锥度<"))
+		        str += "<td>"+list.get(i).getMaxslotdepth() +"</td>";
+		    
+		    if(StringUtil.isContains(param,">槽宽<"))
+		        str += "<td>"+list.get(i).getSlotwidth() +"</td>";
+		    
+		    if(StringUtil.isContains(param,">刀尖直径<"))
+		        str += "<td>"+list.get(i).getPointdiameter() +"</td>";
+		    
+		    if(StringUtil.isContains(param,">可加持尺寸<"))
+		        str += "<td>"+list.get(i).getHandledsize() +"</td>";
+		    
+		    if(StringUtil.isContains(param,">螺纹尺寸<"))
+		        str += "<td>"+list.get(i).getScrewsize() +"</td>";
+		    
+		    if(StringUtil.isContains(param,">螺距<"))
+		        str += "<td>"+list.get(i).getScrewdistance() +"</td>";
+		    
+		    if(StringUtil.isContains(param,">精度<"))
+		        str += "<td>"+list.get(i).getAccuracy() +"</td>";
+		    
+		    if(StringUtil.isContains(param,">接口尺寸<"))
+		        str += "<td>"+list.get(i).getInterfacesize() +"</td>";
+		    
+		    if(StringUtil.isContains(param,">颈长<"))
+		        str += "<td>"+list.get(i).getNecklength() +"</td>";
+		    
+		    if(StringUtil.isContains(param,">对应筒夹"))
+		        str += "<td>"+list.get(i).getRelativecollet() +"</td>";
+		    
+		    if(StringUtil.isContains(param,">宽度"))
+		        str += "<td>"+list.get(i).getWidth() +"</td>";
+		    
+		    if(StringUtil.isContains(param,">高度"))
+		        str += "<td>"+list.get(i).getHeight() +"</td>";
+		    
+		    if(StringUtil.isContains(param,">切槽范围"))
+		        str += "<td>"+list.get(i).getGrooverange() +"</td>";
+		    
+		    if(StringUtil.isContains(param,">钻孔范围"))
+		        str += "<td>"+list.get(i).getDrillrange() +"</td>";
+		    
+		    if(StringUtil.isContains(param,">螺纹方向"))
+		        str += "<td>"+list.get(i).getScrewdirection() +"</td>";
+		    
+		    str += "<tr>";
+		}
+		str += "</tbody></table>";
+		return str;
+	}
 	public static String getParamsHtml(List<CuttingToolEntity> cts)
 	{
 		String ret = "";
@@ -552,14 +796,6 @@ public class CuttingToolsConfiguration
 			if (StringUtil.isNotEmpty(cts.get(i).getInterfacesize())  && !ret.contains("<th>接口尺寸</th>"))
 			{
 				ret += "<th>接口尺寸</th>";
-			}
-			if (cts.get(i).getMaxbore() != 0 && !ret.contains("<th>镗孔上限</th>"))
-			{
-				ret += "<th>镗孔上限</th>";
-			}
-			if (cts.get(i).getMinbore() != 0 && !ret.contains("<th>镗孔下限</th>"))
-			{
-				ret += "<th>镗孔下限</th>";
 			}
 			if (StringUtil.isNotEmpty(cts.get(i).getNecklength()) && !ret.contains("<th>颈长</th>"))
 			{
@@ -764,11 +1000,15 @@ public class CuttingToolsConfiguration
 		{
 			if(ct.getInnercooling() == 1)
 			{
-				tmp += "<span>内冷</span>";
+				tmp += "<span>一般</span>";
 			}
-			else
+			else if(ct.getInnercooling() == 3)
 			{
 				tmp += "<span>外冷</span>";
+			}
+			else if(ct.getInnercooling() == 2)
+			{
+				tmp += "<span>内冷</span>";
 			}
 		}
 		if (ret.contains(",diameterratio"))
@@ -834,14 +1074,6 @@ public class CuttingToolsConfiguration
 		if (ret.contains("interfacesize"))
 		{
 			tmp += "<span>"+ct.getInterfacesize()+"</span>";
-		}
-		if (ret.contains("maxbore"))
-		{
-			tmp += "<span>最大尺寸"+ct.getMaxbore()+"</span>";
-		}
-		if (ret.contains("minbore"))
-		{
-			tmp += "<span>最小尺寸"+ct.getMinbore()+"</span>";
 		}
 		if (ret.contains("relativecollet"))
 		{
@@ -974,6 +1206,41 @@ public class CuttingToolsConfiguration
 		return list1;
 	}
 	
+	public static String aggregateSpan(List<String> list)
+	{
+		String ret="";
+		if(list.size()<10000)
+		{
+			for(int i = 0; i<list.size();i++)
+	        {
+				ret += "<span>"+list.get(i)+"</span>";
+	        }
+			return ret;
+		}
+		else
+		{
+			for(int i = 0; i<list.size();i++)
+	        {
+				if(i%15==0)
+				{
+					ret += "<div class=\"aggr\"><h3>"+list.get(i)+"~</h3><div class=\"list clearfix\">";
+				}
+				ret += "<span>"+list.get(i)+"</span>";
+				if(i%15==14)
+				{
+					ret += "</div></div>";
+					int begin = ret.lastIndexOf("~");
+					ret = ret.substring(0, begin+1)+list.get(i)+ret.substring(begin+1, ret.length());
+				}
+	        }
+			if(list.size()%15 != 14)
+			{
+				ret += "</div></div>";
+				ret = ret.substring(0, ret.lastIndexOf("~")+1)+list.get(list.size()-1)+ret.substring(ret.lastIndexOf("~")+1, ret.length());
+			}
+			return ret;
+		}
+	}
 	//公制英寸分离，返回两种结果
 	public static List<List<String>> sortSize(HashSet<String> list)
 	{

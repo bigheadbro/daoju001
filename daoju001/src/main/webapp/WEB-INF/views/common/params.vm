@@ -143,12 +143,6 @@
 #if($stringUtil.isContains($parameter,">接口尺寸<"))
     <td>$!{cut.interfacesize}</td>
 #end
-#if($stringUtil.isContains($parameter,">镗孔上限<"))
-    <td>$!{cut.maxbore}</td>
-#end
-#if($stringUtil.isContains($parameter,">镗孔下限<"))
-    <td>$!{cut.minbore}</td>
-#end
 #if($stringUtil.isContains($parameter,">颈长<"))
     <td>$!{cut.necklength}</td>
 #end

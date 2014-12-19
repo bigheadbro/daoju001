@@ -48,7 +48,7 @@
                     </div>
                     <div class="right">
                         <a rel="external" rel="external" href="/user/main">我的刀师傅</a>|
-                        <a class="complain">客服热线 4000-421-145</a>
+                        <a class="contact">客服热线 4000-421-145</a>
                     </div>
                 </div>
             </div>
@@ -452,7 +452,10 @@
                                 </li>
                             </ul>
                         </li>
-        				#end
+						#end
+						<li class="complain">
+                            <a>投诉建议</a>
+                        </li>
                     </ul>
 					<div class="content clearfix">
     					<div class="flexslider banner">
@@ -465,6 +468,8 @@
 						$(function(){
 							$("a.searchmaterial").click(function(){
 								$("#materialinput").val($("#index-material").val());
+								$(".result h1").empty();
+								$(".result p").empty().append("<img src=\"/img/loading.gif\" /><br/>刀师傅正在为您全力搜索资料库");;
 								$("#form_material").ajaxSubmit({
 									 dataType:"json", //数据类型  
                                     url:"/searchmaterial",
@@ -507,7 +512,7 @@
 									$stringUtil.replaceHtmlDiv(${ques.content})
 								</p>
 								#end
-								<a href="/user/newquestion">我要提问</a>
+								<a href="/questions">我来回答！</a>
 							</div>
     					</div>
 					</div>

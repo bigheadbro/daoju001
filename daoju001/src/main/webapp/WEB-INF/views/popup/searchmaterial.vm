@@ -7,7 +7,7 @@
 		</h2>
         <div class="content">
             <div class="material-box clearfix">
-                <form id="form_sm" method="post" action="/sm">
+                <form id="form_sm" method="post">
                     <!-- 隐藏字段，用于标示是表单提交 -->
                     <input type="hidden" name="do_submit" value="true"/>
                     <input id="materialinput" type="text" name="searchmaterial" placeholder="请输入你需要查询的材质" />
@@ -17,6 +17,8 @@
 			<script>
     		$(function(){
     			$("#searchmaterial").click(function(){
+					$(".result h1").empty();
+					$(".result p").empty().append("<img src=\"/img/loading.gif\" /><br/>刀师傅正在为您全力搜索资料库");;
     				$("#form_sm").ajaxSubmit({
     					dataType:"json", //数据类型  
                         url:"/searchmaterial",

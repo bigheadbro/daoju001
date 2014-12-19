@@ -1154,8 +1154,6 @@ public class CommonService {
 			minworkdiameter.add(cts.get(j).getMinworkdiameter());
 			thickness.add(cts.get(j).getThickness());
 			maxslotdepth.add(cts.get(j).getMaxslotdepth());
-			maxbore.add(cts.get(j).getMaxbore());
-			minbore.add(cts.get(j).getMinbore());
 			necklength.add(cts.get(j).getNecklength());
 			taper.add(cts.get(j).getTaper());
 			slotwidth.add(cts.get(j).getSlotwidth());
@@ -1229,11 +1227,8 @@ public class CommonService {
 			List<List<String>> list = CuttingToolsConfiguration.sortSize(diameter);
 			final List<String> list1 = list.get(0);
 			final List<String> list2 = list.get(1);
-			for(int i = 0; i<list1.size();i++)
-	        {
-				ret += "<span>"+list1.get(i)+"</span>";
-	        }
-			if(list2.size() > 0)
+			ret += CuttingToolsConfiguration.aggregateSpan(list1);
+			if(list2.size() > 0 && list1.size() > 0)
 			{
 				ret += "<em></em>";
 			}
@@ -1316,7 +1311,7 @@ public class CommonService {
 	        {
 				ret += "<span>"+list1.get(i)+"</span>";
 	        }
-			if(list2.size() > 0)
+			if(list2.size() > 0 && list1.size() > 0)
 			{
 				ret += "<em></em>";
 			}
@@ -1324,7 +1319,7 @@ public class CommonService {
 	        {
 				ret += "<span>"+list2.get(i)+"</span>";
 	        }
-			if(list3.size() > 0)
+			if(list3.size() > 0 && list2.size() > 0)
 			{
 				ret += "<em></em>";
 			}
@@ -1518,7 +1513,7 @@ public class CommonService {
 	        {
 				ret += "<span>"+list1.get(i)+"</span>";
 	        }
-			if(list2.size() > 0)
+			if(list2.size() > 0 && list1.size() > 0)
 			{
 				ret += "<em></em>";
 			}
@@ -1538,7 +1533,7 @@ public class CommonService {
 	        {
 				ret += "<span>"+list1.get(i)+"</span>";
 	        }
-			if(list2.size() > 0)
+			if(list2.size() > 0 && list1.size() > 0)
 			{
 				ret += "<em></em>";
 			}
@@ -1582,7 +1577,7 @@ public class CommonService {
 	        {
 				ret += "<span>"+list1.get(i)+"</span>";
 	        }
-			if(list2.size() > 0)
+			if(list2.size() > 0 && list1.size() > 0)
 			{
 				ret += "<em></em>";
 			}
@@ -1921,7 +1916,7 @@ public class CommonService {
 	        {
 				ret += "<span>"+list1.get(i)+"</span>";
 	        }
-			if(list2.size() > 0)
+			if(list2.size() > 0 && list1.size() > 0)
 			{
 				ret += "<em></em>";
 			}
@@ -2100,8 +2095,6 @@ public class CommonService {
 			minworkdiameter.add(cts.get(j).getMinworkdiameter());
 			thickness.add(cts.get(j).getThickness());
 			maxslotdepth.add(cts.get(j).getMaxslotdepth());
-			maxbore.add(cts.get(j).getMaxbore());
-			minbore.add(cts.get(j).getMinbore());
 			necklength.add(cts.get(j).getNecklength());
 			taper.add(cts.get(j).getTaper());
 			slotwidth.add(cts.get(j).getSlotwidth());

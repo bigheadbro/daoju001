@@ -34,7 +34,7 @@ word-break: break-all;
 .slides li a{color: #388cba;}
 .log-title{width:auto;color:#0099cb;font-weight:bold;line-height:4em;background-color:#f0f0f0;padding:3em 0;height: 128px;background-size: 70px;background-position: center;background-image: url(../img/wx/cardlogo.png);background-repeat: no-repeat;}
 .custom-title .title {margin: 0;font-size: 18px;line-height: 22px;}
-.custom-title .right{float:left;margin-left:10px;margin-top:10px;}
+.custom-title .right{float:left;margin-left:10px;margin-top:10px;width: 47%;}
 .custom-title .right h4{font-size:14px;}
 .custom-title .right h5{font-size:14px;}
 .provider{color:#0099cb;font-size:14px;line-height:30px;background-color:#f4f8f9;text-indent: 10px;}

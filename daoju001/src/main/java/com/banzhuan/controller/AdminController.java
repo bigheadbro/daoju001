@@ -253,8 +253,6 @@ public class AdminController extends BaseController{
 				minworkdiameter.add(versions.get(j).getMinworkdiameter());
 				thickness.add(versions.get(j).getThickness());
 				maxslotdepth.add(versions.get(j).getMaxslotdepth());
-				maxbore.add(versions.get(j).getMaxbore());
-				minbore.add(versions.get(j).getMinbore());
 				necklength.add(versions.get(j).getNecklength());
 				taper.add(versions.get(j).getTaper());
 				slotwidth.add(versions.get(j).getSlotwidth());
@@ -268,11 +266,11 @@ public class AdminController extends BaseController{
 			{
 				ret = "brand";
 			}
-			if(angle.size() == 1 && StringUtil.isNotEmpty(angle.toArray()[0].toString()))
+			if(angle.size() == 1 && (int)(angle.toArray()[0]) != 0)
 			{
 				ret += ",angle";
 			}
-			if(ctcount.size() == 1 && StringUtil.isNotEmpty(ctcount.toArray()[0].toString()))
+			if(ctcount.size() == 1 && (int)(ctcount.toArray()[0]) != 0)
 			{
 				ret += ",ctcount";
 			}
@@ -288,15 +286,15 @@ public class AdminController extends BaseController{
 			{
 				ret += ",usage";
 			}
-			if(cujing.size() == 1 && StringUtil.isNotEmpty(cujing.toArray()[0].toString()))
+			if(cujing.size() == 1 && (int)(cujing.toArray()[0]) != 0)
 			{
 				ret += ",cujing";
 			}
-			if(usefullength.size() == 1 && StringUtil.isNotEmpty(usefullength.toArray()[0].toString()))
+			if(usefullength.size() == 1 && (double)(usefullength.toArray()[0]) != 0)
 			{
 				ret += ",usefullength";
 			}
-			if(pipesize.size() == 1 && StringUtil.isNotEmpty(pipesize.toArray()[0].toString()))
+			if(pipesize.size() == 1 && (double)(pipesize.toArray()[0]) != 0)
 			{
 				ret += ",pipesize";
 			}
@@ -312,7 +310,7 @@ public class AdminController extends BaseController{
 			{
 				ret += ",shape";
 			}
-			if(backangle.size() == 1 && StringUtil.isNotEmpty(backangle.toArray()[0].toString()))
+			if(backangle.size() == 1 && (int)(backangle.toArray()[0]) != 0)
 			{
 				ret += ",backangle";
 			}
@@ -320,7 +318,7 @@ public class AdminController extends BaseController{
 			{
 				ret += ",workingtool";
 			}
-			if(edgeno.size() == 1 && StringUtil.isNotEmpty(edgeno.toArray()[0].toString()))
+			if(edgeno.size() == 1 && (int)(edgeno.toArray()[0]) != 0)
 			{
 				ret += ",edgeno";
 			}
@@ -344,15 +342,15 @@ public class AdminController extends BaseController{
 			{
 				ret += ",rangle";
 			}
-			if(direction.size() == 1 && StringUtil.isNotEmpty(direction.toArray()[0].toString()))
+			if(direction.size() == 1 && (int)(direction.toArray()[0]) != 0)
 			{
 				ret += ",direction";
 			}
-			if(minworkdiameter.size() == 1 && StringUtil.isNotEmpty(minworkdiameter.toArray()[0].toString()))
+			if(minworkdiameter.size() == 1 && (double)(minworkdiameter.toArray()[0]) != 0)
 			{
 				ret += ",minworkdiameter";
 			}
-			if(innercooling.size() == 1 && StringUtil.isNotEmpty(innercooling.toArray()[0].toString()))
+			if(innercooling.size() == 1 && (int)(innercooling.toArray()[0]) != 0)
 			{
 				ret += ",innercooling";
 			}
@@ -384,23 +382,23 @@ public class AdminController extends BaseController{
 			{
 				ret += ",axisdetail";
 			}
-			if(thickness.size() == 1 && StringUtil.isNotEmpty(thickness.toArray()[0].toString()))
+			if(thickness.size() == 1 && (double)(thickness.toArray()[0]) != 0)
 			{
 				ret += ",thickness";
 			}
-			if(maxslotdepth.size() == 1 && StringUtil.isNotEmpty(maxslotdepth.toArray()[0].toString()))
+			if(maxslotdepth.size() == 1 && (double)(maxslotdepth.toArray()[0]) != 0)
 			{
 				ret += ",maxslotdepth";
 			}
-			if(taper.size() == 1 && StringUtil.isNotEmpty(taper.toArray()[0].toString()))
+			if(taper.size() == 1 && (double)(taper.toArray()[0]) != 0)
 			{
 				ret += ",taper";
 			}
-			if(slotwidth.size() == 1 && StringUtil.isNotEmpty(slotwidth.toArray()[0].toString()))
+			if(slotwidth.size() == 1 && (double)(slotwidth.toArray()[0]) != 0)
 			{
 				ret += ",slotwidth";
 			}
-			if(pointdiameter.size() == 1 && StringUtil.isNotEmpty(pointdiameter.toArray()[0].toString()))
+			if(pointdiameter.size() == 1 && (double)(pointdiameter.toArray()[0]) != 0)
 			{
 				ret += ",pointdiameter";
 			}
@@ -428,11 +426,11 @@ public class AdminController extends BaseController{
 			{
 				ret += ",interfacesize";
 			}
-			if(maxbore.size() == 1 && StringUtil.isNotEmpty(maxbore.toArray()[0].toString()))
+			if(maxbore.size() == 1 && (double)(maxbore.toArray()[0]) != 0)
 			{
 				ret += ",maxbore";
 			}
-			if(minbore.size() == 1 && StringUtil.isNotEmpty(minbore.toArray()[0].toString()))
+			if(minbore.size() == 1 && (double)(minbore.toArray()[0]) != 0)
 			{
 				ret += ",minbore";
 			}
@@ -440,11 +438,11 @@ public class AdminController extends BaseController{
 			{
 				ret += ",necklength";
 			}
-			if(width.size() == 1 && StringUtil.isNotEmpty(width.toArray()[0].toString()))
+			if(width.size() == 1 && (double)(width.toArray()[0]) != 0)
 			{
 				ret += ",width";
 			}
-			if(height.size() == 1 && StringUtil.isNotEmpty(height.toArray()[0].toString()))
+			if(height.size() == 1 && (double)(height.toArray()[0]) != 0)
 			{
 				ret += ",height";
 			}
@@ -500,70 +498,89 @@ public class AdminController extends BaseController{
                 files = root.listFiles();
 				for (File file : files) {
 					if (StringUtil.isEqual(file.getName().split("[.]")[0].split("-")[0],sn)) {
-						if (file.getName().contains("-1")) 
+						if (file.getName().contains("-01")) 
 						{
 							tmp.pic = "";
 						}
-						else if (file.getName().contains("-2")) 
+						else if (file.getName().contains("-02")) 
 						{
-							tmp.pic = "" + sn + "-1.jpg|"
-									+ "" + sn + "-2.jpg";
+							tmp.pic = "" + sn + "-01.jpg|"
+									+ "" + sn + "-02.jpg";
 							;
 						}
-						else if (file.getName().contains("-3")) 
+						else if (file.getName().contains("-03")) 
 						{
-							tmp.pic = "" + sn + "-1.jpg|"
-									+ "" + sn + "-2.jpg|"
-									+ "" + sn + "-3.jpg";
+							tmp.pic = "" + sn + "-01.jpg|"
+									+ "" + sn + "-02.jpg|"
+									+ "" + sn + "-03.jpg";
 						}
-						else if (file.getName().contains("-4")) 
+						else if (file.getName().contains("-04")) 
 						{
-							tmp.pic = "" + sn + "-1.jpg|"
-									+ "" + sn + "-2.jpg|"
-									+ "" + sn + "-3.jpg|"
-									+ "" + sn + "-4.jpg";
+							tmp.pic = "" + sn + "-01.jpg|"
+									+ "" + sn + "-02.jpg|"
+									+ "" + sn + "-03.jpg|"
+									+ "" + sn + "-04.jpg";
 						}
-						else if (file.getName().contains("-5")) 
+						else if (file.getName().contains("-05")) 
 						{
-							tmp.pic = "" + sn + "-1.jpg|"
-									+ "" + sn + "-2.jpg|"
-									+ "" + sn + "-3.jpg|"
-									+ "" + sn + "-4.jpg|"
-									+ "" + sn + "-5.jpg";
+							tmp.pic = "" + sn + "-01.jpg|"
+									+ "" + sn + "-02.jpg|"
+									+ "" + sn + "-03.jpg|"
+									+ "" + sn + "-04.jpg|"
+									+ "" + sn + "-05.jpg";
 						}
-						else if (file.getName().contains("-6")) 
+						else if (file.getName().contains("-06")) 
 						{
-							tmp.pic = "" + sn + "-1.jpg|"
-									+ "" + sn + "-2.jpg|"
-									+ "" + sn + "-3.jpg|"
-									+ "" + sn + "-4.jpg|"
-									+ "" + sn + "-5.jpg|"
-									+ "" + sn + "-6.jpg";
+							tmp.pic = "" + sn + "-01.jpg|"
+									+ "" + sn + "-02.jpg|"
+									+ "" + sn + "-03.jpg|"
+									+ "" + sn + "-04.jpg|"
+									+ "" + sn + "-05.jpg|"
+									+ "" + sn + "-06.jpg";
 						}
-						else if (file.getName().contains("-7")) 
+						else if (file.getName().contains("-07")) 
 						{
-							tmp.pic = "" + sn + "-1.jpg|"
-									+ "" + sn + "-2.jpg|"
-									+ "" + sn + "-3.jpg|"
-									+ "" + sn + "-4.jpg|"
-									+ "" + sn + "-5.jpg|"
-									+ "" + sn + "-6.jpg|"
-									+ "" + sn + "-7.jpg";
+							tmp.pic = "" + sn + "-01.jpg|"
+									+ "" + sn + "-02.jpg|"
+									+ "" + sn + "-03.jpg|"
+									+ "" + sn + "-04.jpg|"
+									+ "" + sn + "-05.jpg|"
+									+ "" + sn + "-06.jpg|"
+									+ "" + sn + "-07.jpg";
 						}
-						else if (file.getName().contains("-8")) 
+						else if (file.getName().contains("-08")) 
 						{
-							tmp.pic = "" + sn + "-1.jpg|"
-									+ "" + sn + "-2.jpg|"
-									+ "" + sn + "-3.jpg|"
-									+ "" + sn + "-4.jpg|"
-									+ "" + sn + "-5.jpg|"
-									+ "" + sn + "-6.jpg|"
-									+ "" + sn + "-7.jpg|"
-									+ "" + sn + "-8.jpg";
+							tmp.pic = "" + sn + "-01.jpg|"
+									+ "" + sn + "-02.jpg|"
+									+ "" + sn + "-03.jpg|"
+									+ "" + sn + "-04.jpg|"
+									+ "" + sn + "-05.jpg|"
+									+ "" + sn + "-06.jpg|"
+									+ "" + sn + "-07.jpg|"
+									+ "" + sn + "-08.jpg";
+						}
+						else if (file.getName().contains("-16")) 
+						{
+							tmp.pic = "" + sn + "-01.jpg|"
+									+ "" + sn + "-02.jpg|"
+									+ "" + sn + "-03.jpg|"
+									+ "" + sn + "-04.jpg|"
+									+ "" + sn + "-05.jpg|"
+									+ "" + sn + "-06.jpg|"
+									+ "" + sn + "-07.jpg|"
+									+ "" + sn + "-08.jpg"
+									+ "" + sn + "-09.jpg|"
+									+ "" + sn + "-10.jpg|"
+									+ "" + sn + "-11.jpg|"
+									+ "" + sn + "-12.jpg|"
+									+ "" + sn + "-13.jpg|"
+									+ "" + sn + "-14.jpg|"
+									+ "" + sn + "-15.jpg"
+									+ "" + sn + "-16.jpg";
 						}
 						else
 						{
-							tmp.pic = "" + file.getName();
+							tmp.pic = file.getName();
 						}
 					}
 				}         
@@ -679,6 +696,10 @@ public class AdminController extends BaseController{
             	{
             		ct.setBackangle(Integer.valueOf(tmp));
             	}
+            	else
+            	{
+            		ct.setBackangle(1000);
+            	}
             	tmp = sheet.getCell(16, j).getContents().trim().replace("；", ";").replace("（", "(").replace("）", ")");
             	if(StringUtil.isNotEmpty(tmp))
             	{
@@ -727,7 +748,7 @@ public class AdminController extends BaseController{
             	tmp = sheet.getCell(25, j).getContents().trim().replace("；", ";").replace("（", "(").replace("）", ")");
             	if(StringUtil.isNotEmpty(tmp))
             	{
-            		ct.setInnercooling(Integer.valueOf(tmp.replace("外冷", "3").replace("内冷", "2").replace("一般", "1")));
+            		ct.setInnercooling(Integer.valueOf(tmp.replace("外冷", "3").replace("内冷", "2").replace("一般", "1").replace("内部", "2")));
             	}
             	tmp = sheet.getCell(26, j).getContents().trim().replace("；", ";").replace("（", "(").replace("）", ")");
             	if(StringUtil.isNotEmpty(tmp))
@@ -799,16 +820,6 @@ public class AdminController extends BaseController{
             	{
             		ct.setMaxslotdepth(Double.parseDouble(tmp));
             	}
-            	tmp = sheet.getCell(41, j).getContents().trim().replace("；", ";").replace("（", "(").replace("）", ")");
-            	if(StringUtil.isNotEmpty(tmp))
-            	{
-            		ct.setMaxbore(Double.parseDouble(tmp));
-            	}
-            	tmp = sheet.getCell(40, j).getContents().trim().replace("；", ";").replace("（", "(").replace("）", ")");
-            	if(StringUtil.isNotEmpty(tmp))
-            	{
-            		ct.setMinbore(Double.parseDouble(tmp));
-            	}
             	tmp = sheet.getCell(42, j).getContents().trim().replace("；", ";").replace("（", "(").replace("）", ")");
             	if(StringUtil.isNotEmpty(tmp))
             	{
@@ -858,6 +869,16 @@ public class AdminController extends BaseController{
             	if(StringUtil.isNotEmpty(tmp))
             	{
             		ct.setScrewdirection(tmp);
+            	}
+            	tmp = sheet.getCell(52, j).getContents().trim().replace("；", ";").replace("（", "(").replace("）", ")");
+            	if(StringUtil.isNotEmpty(tmp))
+            	{
+            		ct.setWorkingtype(tmp);
+            	}
+            	tmp = sheet.getCell(53, j).getContents().trim().replace("；", ";").replace("（", "(").replace("）", ")");
+            	if(StringUtil.isNotEmpty(tmp))
+            	{
+            		ct.setWorkingrange(tmp);
             	}
             	ct.setIshot(1);
             	if(seriesMap.get(ct.getSeriesname()) != null)

@@ -6,6 +6,7 @@
 		<link rel="stylesheet" href="/css/wap.css">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 		<script>
+		
 		function onBridgeReady(){
          WeixinJSBridge.call('showOptionMenu');
         }
@@ -21,15 +22,6 @@
             onBridgeReady();
         }
 		$(function(){
-          var mySwiper = $('.swiper-container').swiper({
-             mode:'horizontal',
-    		 loop: true,
-			 calculateHeight: true,
-			 pagination : '.pagination',
-			 paginationClickable:true,
-			 autoplay:1500,
-			 speed:500
-          });
 		  $.mobile.loading( 'show', {
             text: '',
             textVisible: false,
@@ -37,18 +29,18 @@
 		  );
         })
 
-        var imgUrl = 'http://www.daoshifu.com/product/${ct.cover}';
+        var imgUrl = 'http://www.daoshifu.com/img/series/${ct.cover}';
         var lineLink = 'http://www.daoshifu.com/wxdetail/${ct.id}';
-        var descContent = "${ct.description}";
+        var descContent = "${ct.info}";
         var shareTitle = "${ct.seriesname}-${ct.brand}";
-        var appid = 'wxb5f0887883f34822';
+        var appid = 'wx507ba351159acc88';
         
         function shareFriend() {
             WeixinJSBridge.invoke('sendAppMessage',{
                                     "appid": appid,
                                     "img_url": imgUrl,
-                                    "img_width": "640",
-                                    "img_height": "640",
+                                    "img_width": "200",
+                                    "img_height": "200",
                                     "link": lineLink,
                                     "desc": descContent,
                                     "title": shareTitle
@@ -59,8 +51,8 @@
         function shareTimeline() {
             WeixinJSBridge.invoke('shareTimeline',{
                                     "img_url": imgUrl,
-                                    "img_width": "640",
-                                    "img_height": "640",
+                                    "img_width": "200",
+                                    "img_height": "200",
                                     "link": lineLink,
                                     "desc": descContent,
                                     "title": shareTitle

@@ -531,8 +531,20 @@ public class JsonUtil {
 		        str += "<td>"+StringUtil.replaceSemicolon(list.get(i).getUsage())+"</td>";
 		    
 		    if(StringUtil.isContains(param,">光洁度<"))
-		        str += "<td>"+list.get(i).getCujing() +"</td>";
-		    
+		    {
+		        if(list.get(i).getCujing() == 2)
+				{
+		        	str += "<td>精加工用</td>";
+				}
+				else if(list.get(i).getCujing() == 3)
+				{
+					str += "<td>粗加工用</td>";
+				}
+				else
+				{
+					str += "<td>一般加工用</td>";
+				}
+		    }
 		    if(StringUtil.isContains(param,">有效长<"))
 		        str += "<td>"+list.get(i).getUsefullength() +"</td>";
 		    
@@ -546,7 +558,68 @@ public class JsonUtil {
 		        str += "<td>"+list.get(i).getShanktype() +"</td>";
 		    
 		    if(StringUtil.isContains(param,">形状<"))
-		        str += "<td>"+list.get(i).getShape() +"</td>";
+		    {
+		        if(StringUtil.isEqual(list.get(i).getShape() , "H"))
+				{
+					str += "<td>正六角形</td>";
+				}
+				else if(StringUtil.isEqual(list.get(i).getShape() , "O"))
+				{
+					str += "<td>八角形</td>";
+				}
+				else if(StringUtil.isEqual(list.get(i).getShape() , "P"))
+				{
+					str += "<td>五角形</td>";
+				}
+				else if(StringUtil.isEqual(list.get(i).getShape() , "S"))
+				{
+					str += "<td>正方形</td>";
+				}
+				else if(StringUtil.isEqual(list.get(i).getShape() , "T"))
+				{
+					str += "<td>三角形</td>";
+				}
+				else if(StringUtil.isEqual(list.get(i).getShape() , "C"))
+				{
+					str += "<td>菱形80°</td>";
+				}
+				else if(StringUtil.isEqual(list.get(i).getShape() , "D"))
+				{
+					str += "<td>菱形55°</td>";
+				}
+				else if(StringUtil.isEqual(list.get(i).getShape() , "E"))
+				{
+					str += "<td>菱形75°</td>";
+				}
+				else if(StringUtil.isEqual(list.get(i).getShape() , "F"))
+				{
+					str += "<td>菱形50°</td>";
+				}
+				else if(StringUtil.isEqual(list.get(i).getShape() , "M"))
+				{
+					str += "<td>菱形86°</td>";
+				}
+				else if(StringUtil.isEqual(list.get(i).getShape() , "V"))
+				{
+					str += "<td>菱形35°</td>";
+				}
+				else if(StringUtil.isEqual(list.get(i).getShape() , "W"))
+				{
+					str += "<td>不等角六角形</td>";
+				}
+				else if(StringUtil.isEqual(list.get(i).getShape() , "L"))
+				{
+					str += "<td>长方形90°</td>";
+				}
+				else if(StringUtil.isEqual(list.get(i).getShape() , "A"))
+				{
+					str += "<td>平行四边形顶角55°</td>";
+				}
+				else if(StringUtil.isEqual(list.get(i).getShape() , "R"))
+				{
+					str += "<td>圆形</td>";
+				}
+		    }
 		    
 		    if(StringUtil.isContains(param,">后角<"))
 		        str += "<td>"+list.get(i).getBackangle() +"</td>";
@@ -573,14 +646,33 @@ public class JsonUtil {
 		        str += "<td>"+list.get(i).getRangle() +"</td>";
 		    
 		    if(StringUtil.isContains(param,">方向<"))
-		        str += "<td>"+list.get(i).getDirection() +"</td>";
-		    
+		    {
+		    	if(list.get(i).getDirection() == 2)
+				{
+					str += "<td>左手</td>";
+				}
+				else if(list.get(i).getDirection() == 3)
+				{
+					str += "<td>右手</td>";
+				}
+				else if(list.get(i).getDirection() == 1)
+				{
+					str += "<td>通用槽</td>";
+				}
+		    }
+
 		    if(StringUtil.isContains(param,">最小加工直径<"))
 		        str += "<td>"+list.get(i).getMinworkdiameter() +"</td>";
 		    
 		    if(StringUtil.isContains(param,">冷却方式<"))
-		        str += "<td>"+list.get(i).getInnercooling() +"</td>";
-		    
+		    {
+		    	if(list.get(i).getInnercooling() == 1)
+		    		str += "<td>一般</td>";
+		    	else if(list.get(i).getInnercooling() == 2)
+		    		str += "<td>内冷</td>";
+		    	else if(list.get(i).getInnercooling() == 3)
+		    		str += "<td>外冷</td>";
+		    }
 		    if(StringUtil.isContains(param,">倍径比<"))
 		        str += "<td>"+list.get(i).getDiameterratio() +"</td>";
 		    

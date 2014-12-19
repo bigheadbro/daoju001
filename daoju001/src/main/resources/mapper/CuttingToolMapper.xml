@@ -90,8 +90,6 @@
 		<id property="screwdistance" column="screwdistance" />
 		<id property="accuracy" column="accuracy" />
 		<id property="interfacesize" column="interfacesize" />
-		<id property="maxbore" column="maxbore" />
-		<id property="minbore" column="minbore" />
 		<id property="necklength" column="necklength" />
 		<id property="relativecollet" column="relativecollet" />
 		<id property="width" column="width" />
@@ -100,6 +98,7 @@
 		<id property="drillrange" column="drillrange" />
 		<id property="screwdirection" column="screwdirection" />
 		<id property="workingtype" column="workingtype" />
+		<id property="workingrange" column="workingrange" />
 	</resultMap>
 	
 	<resultMap type="com.banzhuan.entity.IndexEntity" id="IndexResultMap">
@@ -295,12 +294,6 @@
 		<if test="interfacesize != null and interfacesize != ''">
  	        and interfacesize = #{interfacesize}
 		</if>
-		<if test="maxbore != 0">
- 	        and maxbore = #{maxbore}
-		</if>
-		<if test="minbore != 0">
- 	        and minbore = #{minbore}
-		</if>
 		<if test="necklength != null and necklength != ''">
  	        and necklength = #{necklength}
 		</if>
@@ -322,6 +315,9 @@
 		<if test="screwdirection != null and screwdirection != ''">
  	        and screwdirection = #{screwdirection}
 		</if>
+		<if test="workingrange != null and workingrange != ''">
+ 	        and workingrange = #{workingrange}
+		</if>
 		<if test="usage != null and usage != ''">
        		and locate(#{usage},`usage`) > 0
 		</if>
@@ -329,7 +325,7 @@
  	        and locate(#{workingtool},`workingtool`) > 0
 		</if>
 		<if test="workingtype != null and workingtype != ''">
- 	        and locate(#{workingtool},`workingtool`) > 0
+ 	        and locate(#{workingtype},`workingtype`) > 0
 		</if>
 		 group by seriesname	
 	</select>
@@ -459,12 +455,6 @@
 		<if test="interfacesize != null and interfacesize != ''">
  	        and interfacesize = #{interfacesize}
 		</if>
-		<if test="maxbore != 0">
- 	        and maxbore = #{maxbore}
-		</if>
-		<if test="minbore != 0">
- 	        and minbore = #{minbore}
-		</if>
 		<if test="necklength != null and necklength != ''">
  	        and necklength = #{necklength}
 		</if>
@@ -486,6 +476,9 @@
 		<if test="screwdirection != null and screwdirection != ''">
  	        and screwdirection = #{screwdirection}
 		</if>
+		<if test="workingrange != null and workingrange != ''">
+ 	        and workingrange = #{workingrange}
+		</if>
 		<if test="usage != null and usage != ''">
        		and locate(#{usage},`usage`) > 0
 		</if>
@@ -493,7 +486,7 @@
  	        and locate(#{workingtool},`workingtool`) > 0
 		</if>	
 		<if test="workingtype != null and workingtype != ''">
- 	        and locate(#{workingtool},`workingtool`) > 0
+ 	        and locate(#{workingtype},`workingtype`) > 0
 		</if>
 	</select>
 	<select id="queryCuttingToolByCt" parameterType="CuttingToolEntity" resultMap="CuttingToolResultMap">
@@ -621,12 +614,6 @@
 		<if test="interfacesize != null and interfacesize != ''">
  	        and interfacesize = #{interfacesize}
 		</if>
-		<if test="maxbore != 0">
- 	        and maxbore = #{maxbore}
-		</if>
-		<if test="minbore != 0">
- 	        and minbore = #{minbore}
-		</if>
 		<if test="necklength != null and necklength != ''">
  	        and necklength = #{necklength}
 		</if>
@@ -642,16 +629,16 @@
 		<if test="drillrange != null and drillrange != ''">
  	        and drillrange = #{drillrange}
 		</if>
-		<if test="relativecollet != null and relativecollet != ''">
- 	        and relativecollet = #{relativecollet}
+		<if test="workingrange != null and workingrange != ''">
+ 	        and workingrange = #{workingrange}
+		</if>
+		<if test="workingtype != null and workingtype != ''">
+ 	        and locate(#{workingtype},`workingtype`) > 0
 		</if>
 		<if test="usage != null and usage != ''">
        		and locate(#{usage},`usage`) > 0
 		</if>
 		<if test="workingtool != null and workingtool != ''">
- 	        and locate(#{workingtool},`workingtool`) > 0
-		</if>
-		<if test="workingtype != null and workingtype != ''">
  	        and locate(#{workingtool},`workingtool`) > 0
 		</if>
 	</select>
@@ -730,8 +717,6 @@
 		,screwdistance
 		,accuracy
 		,interfacesize
-		,maxbore
-		,minbore
 		,necklength
 		,relativecollet
 		,videolink
@@ -740,7 +725,8 @@
 		,height
 		,grooverange
 		,drillrange
-		,workingtype)
+		,workingtype
+		,workingrange)
 		values
 		(
 		#{ishot}
@@ -792,8 +778,6 @@
 		,#{screwdistance}
 		,#{accuracy}
 		,#{interfacesize}
-		,#{maxbore}
-		,#{minbore}
 		,#{necklength}
 		,#{relativecollet}
 		,#{videolink}
@@ -803,6 +787,7 @@
 		,#{grooverange}
 		,#{drillrange}
 		,#{workingtype}
+		,#{workingrange}
 		)
 	</insert>
 </mapper>

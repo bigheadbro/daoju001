@@ -330,7 +330,7 @@ public class Util {
 	public static void removeMailFromEDM() {
 		HashSet<String> array = new HashSet<String>();
 		// 先读取edm邮箱
-		File file = new File("EDM/notqq.txt");
+		File file = new File("EDM/qq.txt");
 		BufferedReader reader = null;
 		try {
 			reader = new BufferedReader(new FileReader(file));
@@ -653,6 +653,16 @@ public class Util {
 		return result;
 	}
 	
+	public static void renameFolder(String path)
+	{
+		File root = new File(path);
+        File[] files = root.listFiles();
+		for (File file : files) {
+			File newfile=new File(path+"/"+file.getName().replace("_页面_", "-0")); 
+			file.renameTo(newfile);
+		}         
+	}
+	
 	public List<UserEntity> sortProviders(List<UserEntity> providers)
 	{
 		Collections.sort(providers,new Comparator<UserEntity>() {   
@@ -664,6 +674,7 @@ public class Util {
 	}
 	
 	public static void main(String[] args) {
-		removeMailFromEDM();
+		//removeMailFromEDM();
+		renameFolder("C:/Users/Administrator/Desktop/京瓷/目录");
 	}
 }

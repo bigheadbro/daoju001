@@ -4,12 +4,21 @@
 <script type="text/javascript" src="/js/flexigrid.pack.js"></script>
 <script type="text/javascript" src="/js/jquery.flexslider-min.js"></script>
 <script>
+var cts = '$cts';
 $(function() {
 	$('.flexslider').flexslider({
 		slideshow: false,
         animation: "fade",
 		controlNav: false
     });
+	$(".aggr h3").click(function(){
+		$("aggr h3").each(function(){
+			$(this).removeClass("current");
+		});
+		$(this).addClass("current");
+		$(this).parent().children(".list").show();
+	});
+	
 	$("ul.series-tab li").click(function(){
 		$("ul.series-tab li").each(function(){
 			$(this).removeClass("current");
@@ -34,6 +43,7 @@ $(function() {
 			$(".video-content").show();
 		}
 	});
+	$(".version-content").empty().append(cts);
 	$('.version-table').flexigrid({height:400});
 	$(".operation").click(function(){
 		if($(this).attr("show") == 1)
@@ -61,10 +71,11 @@ $(function() {
 	});
 
 	$("body").on("click",".params-list span",function(){
-		$(this).parent().parent().children("input").val($(this).text());
-		$(this).parent().parent().attr("set","1");
-		$(this).parent().hide();
-		$(this).parent().parent().children("h1").children("a").append($(this).text());
+		$(this).parents("li").children("input").val($(this).text());
+		$(this).parents("li").attr("set","1");
+		$(this).parents(".param").hide();
+		$(this).parents("li").children("h1").children("a").append($(this).text());
+		$(".version-content").html("<div class=\"no-result\"><img src=\"/img/loading.gif\" /><h1>请稍等</h1><p>刀师傅正在为您全力搜索资料库<br/>我们将为您提供丰富、专业的刀具信息 </p></div>");
 		$("#form_param").ajaxSubmit({  
             dataType:"json", //数据类型  
             url:"/changeparam",
@@ -120,12 +131,12 @@ $(function() {
         });   
 	});
 	$("body").on("click",".params-list a",function(){
-			$(this).parent().parent().children("input").val("");
-			$(this).parent().parent().attr("set","0");
+			$(this).parents("li").children("input").val("");
+			$(this).parents("li").attr("set","0");
 			$(this).empty();
-			$(this).parent().parent().children(".param").show();
-			$(".series-content .right").empty();
-			$(".series-content .right").html("<div class=\"no-result\"><img src=\"/img/loading.gif\" /><h1>请稍等</h1><p>刀师傅正在为您全力搜索资料库<br/>我们将为您提供丰富、专业的刀具信息 </p></div>");
+			$(this).parents("li").children(".param").show();
+			$(".version-content").empty();
+			$(".version-content").html("<div class=\"no-result\"><img src=\"/img/loading.gif\" /><h1>请稍等</h1><p>刀师傅正在为您全力搜索资料库<br/>我们将为您提供丰富、专业的刀具信息 </p></div>");
 			$("#form_param").ajaxSubmit({  
                 dataType:"json", //数据类型  
                 url:"/changeparam",
@@ -271,29 +282,8 @@ $(function() {
                     </li>
 					#end
                 </ul>
-				
         		<div class="version-content clearfix">
-					<table class="version-table">
-        			#foreach($cut in $cts)
-        				#if($velocityCount == 1)
-        					<thead>
-								<tr>
-        						$ctConfig.getParamsHtml($cts)
-								</tr>
-        					</thead>
-							<tbody>
-							#set($parameter = $ctConfig.getParamsHtml($cts))
-        					<tr>
-        						#parse("/common/params.vm")
-        					</tr>
-        				#else
-        					<tr class="content">
-        						#parse("/common/params.vm")
-        					</tr>
-        				#end
-					#end
-							</tbody>
-					</table>
+					<div class="no-result"><img src="/img/loading.gif" /><h1>请稍等</h1><p>刀师傅正在为您全力搜索资料库<br/>我们将为您提供丰富、专业的刀具信息 </p></div>
         		</div>
         		<div class="category-content">
         			#if($!ctConfig.getCategoryPic($!{ct.pic}))

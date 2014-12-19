@@ -100,10 +100,6 @@ public class CuttingToolEntity implements Serializable {
 	
 	private String interfacesize;
 	
-	private double maxbore;
-	
-	private double minbore;
-	
 	private String necklength;
 	
 	//锥度
@@ -138,6 +134,8 @@ public class CuttingToolEntity implements Serializable {
 	private String screwdirection;
 	
 	private String workingtype;
+	
+	private String workingrange;
 	
 	public int getId() {
 		return id;
@@ -549,22 +547,6 @@ public class CuttingToolEntity implements Serializable {
 		this.interfacesize = interfacesize;
 	}
 
-	public double getMaxbore() {
-		return maxbore;
-	}
-
-	public void setMaxbore(double maxbore) {
-		this.maxbore = maxbore;
-	}
-
-	public double getMinbore() {
-		return minbore;
-	}
-
-	public void setMinbore(double minbore) {
-		this.minbore = minbore;
-	}
-
 	public String getNecklength() {
 		return necklength;
 	}
@@ -671,5 +653,15 @@ public class CuttingToolEntity implements Serializable {
 	public void setWorkingtype(String workingtype)
 	{
 		this.workingtype = workingtype;
+	}
+
+	public String getWorkingrange()
+	{
+		return workingrange;
+	}
+
+	public void setWorkingrange(String workingrange)
+	{
+		this.workingrange = workingrange;
 	}
 }

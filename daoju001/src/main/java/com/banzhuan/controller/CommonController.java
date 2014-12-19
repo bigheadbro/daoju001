@@ -239,6 +239,23 @@ public class CommonController extends BaseController{
 		commonService.addstatistics(st);
 	}
 	
+	@RequestMapping(value="/downsample")
+	public void downsample(final HttpServletRequest request,final HttpServletResponse response)
+	{
+		StatisticsEntity st = new StatisticsEntity();
+		st.setType(6);
+		Account account = (Account) WebUtils.getSessionAttribute(request, "account");
+		if(account != null)
+		{
+			st.setInfo("["+account.getUserName()+","+account.getCompanyName()+","+account.getUserId()+"]");
+		}
+		else
+		{
+			st.setInfo("[未登录用户]");
+		}
+		commonService.addstatistics(st);
+	}
+	
 	@RequestMapping(value="/index")
 	public ModelAndView index(final HttpServletRequest request,final HttpServletResponse response)
 	{
@@ -1656,6 +1673,7 @@ public class CommonController extends BaseController{
 			String param = request.getParameter("searchparam");
 			List<CuttingToolEntity> cts = commonService.searchCuttingTool(StringUtil.prehandleParam(param));
 			view.addObject("cts",cts);
+			view.addObject("search", param);
 		}
 		return view;
 	}
@@ -1777,8 +1795,6 @@ public class CommonController extends BaseController{
 		ct.setScrewdistance(screwdistance);
 		ct.setAccuracy(accuracy);
 		ct.setInterfacesize(interfacesize);
-		ct.setMaxbore(maxbore);
-		ct.setMinbore(minbore);
 		ct.setNecklength(necklength);
 		ct.setRelativecollet(relativecollet);
 		ct.setWidth(width);
@@ -1847,7 +1863,7 @@ public class CommonController extends BaseController{
 		view.addObject("param",param);
 		view.addObject("users",users);
 		view.addObject("ct",ct);
-		view.addObject("cts",cts);
+		view.addObject("cts",CuttingToolsConfiguration.makeVersionTable(cts));
 		String path = request.getSession().getServletContext().getRealPath("/qrcode");
 		String qrcode = Util.genRandomName("") + ".png";
 		TwoDimensionCode.encoderQRCode("http://www.daoshifu.com/wxdetail/" + id,path +"/"+ qrcode);

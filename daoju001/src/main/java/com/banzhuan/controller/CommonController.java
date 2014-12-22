@@ -516,6 +516,24 @@ public class CommonController extends BaseController{
 		return mv;
 	}
 	
+	@RequestMapping(value="/pifa")
+	public void pifa(HttpServletRequest request, HttpServletResponse response) 
+	{
+		Account account = (Account) WebUtils.getSessionAttribute(request, "account");
+		if(account == null)
+		{
+			JsonUtil.checPifa(response, 1);
+			return;
+		}
+		else
+		{
+			if(account.isLogin())
+			{
+				JsonUtil.checkAnswerStatus(response, 2);
+			}
+		}
+	}
+	
 	@RequestMapping(value = "/items")
 	public ModelAndView items(final HttpServletRequest request,final HttpServletResponse response, @ModelAttribute("form")ItemForm form) 
 	{

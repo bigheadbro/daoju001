@@ -289,6 +289,36 @@ public class JsonUtil {
         }  
 	}
 	
+	public static void checPifa(HttpServletResponse response, int status)
+	{
+		JSONObject object = new JSONObject();  
+		String strStatus = "";
+        response.setContentType("text/json;charset=gbk");  
+       	switch(status)
+       	{
+       	case 1:
+       		strStatus = "需要确认刀具供应商身份";
+       		break;
+       	case 2:
+       		strStatus = "";
+       		break;
+       	}
+	
+        object.element("status", status);
+        object.element("code", strStatus);
+        PrintWriter out = null;  
+        try {  
+            out = response.getWriter();  
+            out.println(object.toString());  
+        }  
+        catch (IOException ex1) {  
+            ex1.printStackTrace();  
+        }  
+        finally {  
+            out.close();  
+        }  
+	}
+	
 	public static void checkAuthStatus(HttpServletResponse response, int status)
 	{
 		JSONObject object = new JSONObject();  
@@ -723,13 +753,6 @@ public class JsonUtil {
 		    
 		    if(StringUtil.isContains(param,">接口尺寸<"))
 		        str += "<td>"+list.get(i).getInterfacesize() +"</td>";
-		    
-		    if(StringUtil.isContains(param,">镗孔上限<"))
-		        str += "<td>"+list.get(i).getMaxbore() +"</td>";
-		    
-		    if(StringUtil.isContains(param,">镗孔下限<"))
-		        str += "<td>"+list.get(i).getMinbore() +"</td>";
-		    
 		    if(StringUtil.isContains(param,">颈长<"))
 		        str += "<td>"+list.get(i).getNecklength() +"</td>";
 		    

@@ -41,7 +41,7 @@ public class SendCloudTest {
 	}
 
 	public static void main(String[] args) throws Exception {
-		ArrayList<String> set = readEdmFileByLines("EDM/qq.txt");
+		ArrayList<String> set = readEdmFileByLines("EDM/notqq.txt");
 
 		for (int i = 11773; i < 15768; i++) {//for (int i = 2960; i < 3960; i++) {
 			try

@@ -1101,8 +1101,6 @@ public class CommonService {
 		HashSet<Double> minworkdiameter= new HashSet<Double>();
 		HashSet<Double> thickness= new HashSet<Double>();
 		HashSet<Double> maxslotdepth= new HashSet<Double>();
-		HashSet<Double> maxbore= new HashSet<Double>();
-		HashSet<Double> minbore= new HashSet<Double>();
 		HashSet<String> necklength= new HashSet<String>();
 		HashSet<Double> taper= new HashSet<Double>();
 		HashSet<Double> slotwidth= new HashSet<Double>();
@@ -1113,6 +1111,7 @@ public class CommonService {
 		HashSet<String> grooverange= new HashSet<String>();
 		HashSet<String> drillrange= new HashSet<String>();
 		HashSet<String> screwdirection= new HashSet<String>();
+		HashSet<String> workingrange= new HashSet<String>();
 		for(int j = 0; j < cts.size(); j++)
 		{
 			brand.add(cts.get(j).getBrand());
@@ -1163,6 +1162,7 @@ public class CommonService {
 			grooverange.add(cts.get(j).getGrooverange());
 			drillrange.add(cts.get(j).getDrillrange());
 			screwdirection.add(cts.get(j).getScrewdirection());
+			workingrange.add(cts.get(j).getWorkingrange());
 		}
 		String ret = "";
 		if(brand.size() > 1 || (!brand.contains(null) && brand.size() == 1))
@@ -1417,6 +1417,10 @@ public class CommonService {
 					else if(StringUtil.isEqual(str, "R"))
 					{
 						ret += "<span>R(圆形)</span>";
+					}
+					else
+					{
+						ret += "<span>非通用</span>";
 					}
 				}
 			}
@@ -1876,36 +1880,6 @@ public class CommonService {
 			}
 			ret += "</div></li>";
 		}
-		if(maxbore.size() >1 || (!maxbore.contains(0d) && maxbore.size() == 1))
-		{
-			ret += "<li set=0 param=\"maxbore\"><input type=\"hidden\" name=\"maxbore\" /><h1>镗孔上限<a></a></h1><div class=\"param clearfix\" >";
-			final List<Double> list = new ArrayList<Double>();  
-	        for(final Double value : maxbore){  
-	            list.add(value);  
-	        }  
-	        Collections.sort(list);  
-	        for(int i = 0; i<list.size();i++)
-	        {
-	        	if(list.get(i)!=0)
-					ret += "<span>"+list.get(i)+"</span>";
-	        }
-			ret += "</div></li>";
-		}
-		if(minbore.size() >1 || (!minbore.contains(0d) && minbore.size() == 1))
-		{
-			ret += "<li set=0 param=\"minbore\"><input type=\"hidden\" name=\"minbore\" /><h1>镗孔下限<a></a></h1><div class=\"param clearfix\" >";
-			final List<Double> list = new ArrayList<Double>();  
-	        for(final Double value : minbore){  
-	            list.add(value);  
-	        }  
-	        Collections.sort(list);  
-	        for(int i = 0; i<list.size();i++)
-	        {
-	        	if(list.get(i)!=0)
-					ret += "<span>"+list.get(i)+"</span>";
-	        }
-			ret += "</div></li>";
-		}
 		if(necklength.size() >1 || (!necklength.contains(null) && necklength.size() == 1))
 		{
 			ret += "<li set=0 param=\"necklength\"><input type=\"hidden\" name=\"necklength\" /><h1>颈长<a></a></h1><div class=\"param clearfix\" >";
@@ -1992,6 +1966,18 @@ public class CommonService {
 			}
 			ret += "</div></li>";
 		}
+		if(workingrange.size() > 1 || (!workingrange.contains(null) && workingrange.size() == 1))
+		{
+			ret += "<li set=0 param=\"workingrange\"><input type=\"hidden\" name=\"workingrange\" /><h1>镗孔范围<a></a></h1><div class=\"param clearfix\" >";
+			Iterator<String> iter = workingrange.iterator();
+			while(iter.hasNext())
+			{
+				String tmp = iter.next();
+				if(StringUtil.isNotEmpty(tmp))
+					ret += "<span>"+tmp+"</span>";
+			}
+			ret += "</div></li>";
+		}
 		
 		return CuttingToolsConfiguration.orderParams(ret,code);
 	}
@@ -2053,7 +2039,7 @@ public class CommonService {
 		HashSet<String> grooverange= new HashSet<String>();
 		HashSet<String> drillrange= new HashSet<String>();
 		HashSet<String> screwdirection= new HashSet<String>();
-		
+		HashSet<String> workingrange= new HashSet<String>();
 		for(int j = 0; j < cts.size(); j++)
 		{
 			brand.add(cts.get(j).getBrand());
@@ -2104,6 +2090,7 @@ public class CommonService {
 			grooverange.add(cts.get(j).getGrooverange());
 			drillrange.add(cts.get(j).getDrillrange());
 			screwdirection.add(cts.get(j).getScrewdirection());
+			workingrange.add(cts.get(j).getWorkingrange());
 		}
 		Map<String,List<String>> map = new HashMap<String, List<String>>();
 		if(brand.size() > 1 || (!brand.contains(null) && brand.size() == 1))
@@ -2308,6 +2295,10 @@ public class CommonService {
 		if(drillrange.size() > 1 || (!drillrange.contains(null) && drillrange.size() == 1))
 		{
 			map.put("drillrange", CuttingToolsConfiguration.convertSetToList(drillrange));
+		}
+		if(workingrange.size() > 1 || (!workingrange.contains(null) && workingrange.size() == 1))
+		{
+			map.put("workingrange", CuttingToolsConfiguration.convertSetToList(workingrange));
 		}
 		return map;
 	}

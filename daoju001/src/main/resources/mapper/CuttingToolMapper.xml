@@ -99,6 +99,7 @@
 		<id property="screwdirection" column="screwdirection" />
 		<id property="workingtype" column="workingtype" />
 		<id property="workingrange" column="workingrange" />
+		<id property="relative" column="relative" />
 	</resultMap>
 	
 	<resultMap type="com.banzhuan.entity.IndexEntity" id="IndexResultMap">
@@ -648,6 +649,7 @@
 		  <if test="samecolume != null">samecolume=#{samecolume},</if>
 		  <if test="provider != null">provider=#{provider},</if>
 		  <if test="workingtype != null">workingtype=#{workingtype},</if>
+		  <if test="relative != null">relative=#{relative},</if>
 		</set>
 	   where seriesname=#{seriesname}
 	</update>

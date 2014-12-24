@@ -268,6 +268,23 @@ $(function() {
     				#end
 				#end
 			</div>
+			<div class="provider">
+				<h1>关联产品</h1>
+				#if($relatives.size()==0)
+					<div class="no-provider">
+					无关联产品
+					</div>
+				#else
+    				#foreach($relative in $relatives)
+    				<div class="provider-item clearfix">
+    					<div class="clearfix">
+        					<div class="name">${relative.seriesname}</div>
+        					<a target="_blank" href="/detail/${relative.id}">查看详情</a>
+    					</div>
+    				</div>
+    				#end
+				#end
+			</div>
 			<div class="series-content">
         		<ul class="series-tab clearfix">
                     <li tabno=1 class="current">

@@ -497,6 +497,10 @@ public class CuttingToolsConfiguration
 				{
 					str += "<td>圆形</td>";
 				}
+				else
+				{
+					str += "<td>非通用</td>";
+				}
 		    }
 		    
 		    if(StringUtil.isContains(param,">后角<"))
@@ -622,6 +626,8 @@ public class CuttingToolsConfiguration
 		    
 		    if(StringUtil.isContains(param,">螺纹方向"))
 		        str += "<td>"+list.get(i).getScrewdirection() +"</td>";
+		    if(StringUtil.isContains(param,">镗孔范围"))
+		        str += "<td>"+list.get(i).getWorkingrange() +"</td>";
 		    
 		    str += "<tr>";
 		}
@@ -820,6 +826,10 @@ public class CuttingToolsConfiguration
 			if (StringUtil.isNotEmpty(cts.get(i).getDrillrange()) && !ret.contains("<th>钻孔范围</th>"))
 			{
 				ret += "<th>钻孔范围</th>";
+			}
+			if (StringUtil.isNotEmpty(cts.get(i).getWorkingrange()) && !ret.contains("<th>镗孔范围</th>"))
+			{
+				ret += "<th>镗孔范围</th>";
 			}
 			if (StringUtil.isNotEmpty(cts.get(i).getScrewdirection()) && !ret.contains("<th>螺纹方向</th>"))
 			{
@@ -1095,6 +1105,10 @@ public class CuttingToolsConfiguration
 		{
 			tmp += "<span>"+ct.getDrillrange()+"</span>";
 		}
+		if (ret.contains("<span>镗孔范围</span>"))
+		{
+			tmp += "<span>"+ct.getWorkingrange()+"</span>";
+		}
 		if (ret.contains("<span>螺纹方向</span>"))
 		{
 			tmp += "<span>"+ct.getScrewdirection()+"</span>";
@@ -1191,6 +1205,10 @@ public class CuttingToolsConfiguration
 				else if(StringUtil.isEqual(str, "R"))
 				{
 					list.add("R(圆形)");
+				}
+				else
+				{
+					list.add("非通用");
 				}
 			}
 		}
@@ -1604,6 +1622,10 @@ public class CuttingToolsConfiguration
 			else if(StringUtil.isEqual(shape, "R"))
 			{
 				return "R(圆形)";
+			}
+			else
+			{
+				return "非通用";
 			}
 		}
 		return "";

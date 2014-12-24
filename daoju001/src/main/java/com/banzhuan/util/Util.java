@@ -330,7 +330,7 @@ public class Util {
 	public static void removeMailFromEDM() {
 		HashSet<String> array = new HashSet<String>();
 		// 先读取edm邮箱
-		File file = new File("EDM/qq.txt");
+		File file = new File("EDM/notqq.txt");
 		BufferedReader reader = null;
 		try {
 			reader = new BufferedReader(new FileReader(file));
@@ -675,6 +675,6 @@ public class Util {
 	
 	public static void main(String[] args) {
 		//removeMailFromEDM();
-		renameFolder("C:/Users/Administrator/Desktop/京瓷/目录");
+		renameFolder("C:/Users/Administrator/Desktop/黛杰刀盘对应/目录");
 	}
 }

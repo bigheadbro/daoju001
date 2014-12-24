@@ -137,6 +137,8 @@ public class CuttingToolEntity implements Serializable {
 	
 	private String workingrange;
 	
+	private String relative;
+	
 	public int getId() {
 		return id;
 	}
@@ -663,5 +665,15 @@ public class CuttingToolEntity implements Serializable {
 	public void setWorkingrange(String workingrange)
 	{
 		this.workingrange = workingrange;
+	}
+
+	public String getRelative()
+	{
+		return relative;
+	}
+
+	public void setRelative(String relative)
+	{
+		this.relative = relative;
 	}
 }

@@ -1760,8 +1760,7 @@ public class CommonController extends BaseController{
 		String screwdistance = request.getParameter("screwdistance");
 		String accuracy = request.getParameter("accuracy");
 		String interfacesize = request.getParameter("interfacesize");
-		double maxbore = Double.valueOf(StringUtil.isEmpty(request.getParameter("maxbore"))?"0":request.getParameter("maxbore"));
-		double minbore = Double.valueOf(StringUtil.isEmpty(request.getParameter("minbore"))?"0":request.getParameter("minbore"));
+		String workingrange = request.getParameter("workingrange");
 		String necklength = request.getParameter("necklength");
 		String relativecollet = request.getParameter("relativecollet");
 		double width = Double.valueOf(StringUtil.isEmpty(request.getParameter("width"))?"0":request.getParameter("width"));
@@ -1820,7 +1819,7 @@ public class CommonController extends BaseController{
 		ct.setGrooverange(grooverange);
 		ct.setDrillrange(drillrange);
 		ct.setScrewdirection(screwdirection);
-		
+		ct.setWorkingrange(workingrange);
 		Map<String,List<String>> map = commonService.getSearchParamMap(ct);
 		int type = request.getParameter("type")==null?2:Integer.valueOf(request.getParameter("type"));
 		if(type == 1)
@@ -1875,11 +1874,20 @@ public class CommonController extends BaseController{
 		ModelAndView view = new ModelAndView("common/detail");
 		CuttingToolEntity ct = commonService.getCuttingToolByid(detailid);
 		List<CuttingToolEntity> cts = commonService.getVersionsBySeries(ct.getSeriesname());
+		List<CuttingToolEntity> relatives = new ArrayList<CuttingToolEntity>();
+		if(StringUtil.isNotEmpty(ct.getRelative()))
+		{
+			for(int i = 0;i<ct.getRelative().split(";").length;i++)
+			{
+				relatives.add(commonService.getVersionsBySeries(ct.getRelative().split(";")[i]).get(0));
+			}
+		}
 		List<UserEntity> users = commonService.getProviders(ct.getProvider());
 		String param = commonService.queryCuttingToolsByCode(ct.getSeriesname(),2);
 		view.addObject("seriesname",ct.getSeriesname());
 		view.addObject("param",param);
 		view.addObject("users",users);
+		view.addObject("relatives",relatives);
 		view.addObject("ct",ct);
 		view.addObject("cts",CuttingToolsConfiguration.makeVersionTable(cts));
 		String path = request.getSession().getServletContext().getRealPath("/qrcode");

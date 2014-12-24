@@ -161,6 +161,9 @@
 #if($stringUtil.isContains($parameter,">钻孔范围"))
     <td>$!{cut.drillrange}</td>
 #end
+#if($stringUtil.isContains($parameter,">镗孔范围"))
+    <td>$!{cut.workingrange}</td>
+#end    
 #if($stringUtil.isContains($parameter,">螺纹方向"))
     <td>$!{cut.screwdirection}</td>
 #end      

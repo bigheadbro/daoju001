@@ -621,7 +621,7 @@ h1.category-level a:hover{text-decoration:underline;color:#ff8f17}
 .detail-content .right .series-item .series-params h4 span{padding-right:15px;white-space:nowrap;}
 .detail-content .right .series-item .series-params h5{color:#252525;font-size:14px;font-weight:normal;white-space:nowrap;margin-bottom:5px;}
 .detail-content .right .series-item .series-params p{color:#474747;font-size:14px;font-weight:normal;}
-.detail-content .right .provider{}
+.detail-content .right .provider{margin-top: 10px;}
 .detail-content .right .provider h1{color:#0099cb;font-size:14px;line-height:30px;background-color:#f4f8f9;text-indent: 10px;}
 .detail-content .right .provider h1 a#join{float:right;margin-right:10px;color:grey;}
 .detail-content .right .provider .no-provider{padding: 10px;font-size: 14px;}
@@ -638,6 +638,8 @@ h1.category-level a:hover{text-decoration:underline;color:#ff8f17}
 .detail-content .right .provider .provider-item .contactway .phone span{font-weight:bold;margin-right: 10px;color:#007196}
 .detail-content .right .provider .provider-item .contactway .qq{float:left;color:#0099cb;padding-top:15px;}
 .detail-content .right .provider .provider-item .contactway .qq span{font-weight:bold;margin-right: 10px;color:#007196}
+.detail-content .right .provider .provider-item a{float:right;color:#7b7b7b;margin-right: 10px;}
+.detail-content .right .provider .provider-item a:hover{text-decoration:underline;}
 /*detail型号tab*/
 .detail-content{margin-top:30px;position:relative;}
 .detail-content .product-side{position:absolute;right: -222px;width:202px;}

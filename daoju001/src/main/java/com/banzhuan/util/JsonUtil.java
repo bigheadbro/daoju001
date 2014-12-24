@@ -649,6 +649,10 @@ public class JsonUtil {
 				{
 					str += "<td>圆形</td>";
 				}
+				else
+				{
+					str += "<td>非通用</td>";
+				}
 		    }
 		    
 		    if(StringUtil.isContains(param,">后角<"))
@@ -770,7 +774,8 @@ public class JsonUtil {
 		    
 		    if(StringUtil.isContains(param,">钻孔范围"))
 		        str += "<td>"+list.get(i).getDrillrange() +"</td>";
-		    
+		    if(StringUtil.isContains(param,">镗孔范围"))
+		        str += "<td>"+list.get(i).getWorkingrange() +"</td>";
 		    if(StringUtil.isContains(param,">螺纹方向"))
 		        str += "<td>"+list.get(i).getScrewdirection() +"</td>";
 		    

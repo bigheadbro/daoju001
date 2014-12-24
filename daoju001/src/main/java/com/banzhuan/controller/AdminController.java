@@ -114,6 +114,46 @@ public class AdminController extends BaseController{
 	@Qualifier("stDAO")
 	private StatisticsDAO stDAO;
 	
+	@RequestMapping(value="/updaterelative")
+	public ModelAndView updaterelative(final HttpServletRequest request, final HttpServletResponse response)
+	{
+		ModelAndView mv = new ModelAndView("/admin/test");
+		try {
+            Workbook book = Workbook.getWorkbook(new File("D:/data/1.xls"));
+            Sheet sheet = book.getSheet(2);      
+            for(int j = 0; j < sheet.getRows(); j++)
+            {
+            	CuttingToolEntity ct = new CuttingToolEntity();
+            	String tmp = sheet.getCell(0, j).getContents().trim().replace("；", ";").replace("（", "(").replace("）", ")");
+            	if(StringUtil.isNotEmpty(tmp))
+            	{
+            		ct.setSeriesname(tmp);
+            	}
+            	String tmp2 = sheet.getCell(1, j).getContents().trim().replace("；", ";").replace("（", "(").replace("）", ")");
+            	if(StringUtil.isNotEmpty(tmp2))
+            	{
+            		ct.setRelative(tmp2);
+            	}
+            	ctDAO.updateCuttingToolBySn(ct);
+            	
+            	String[] relative = tmp2.split(";");
+            	if(relative.length > 0)
+            	{
+            		for(int i = 0;i < relative.length; i++)
+            		{
+            			ct.setSeriesname(relative[i]);
+            			ct.setRelative(tmp);
+            			ctDAO.updateCuttingToolBySn(ct);
+            		}
+            	}
+            }
+            book.close();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+		return mv;
+	}
+	
 	@RequestMapping(value="/updatebyxls")
 	public ModelAndView updatebyxls(final HttpServletRequest request, final HttpServletResponse response)
 	{

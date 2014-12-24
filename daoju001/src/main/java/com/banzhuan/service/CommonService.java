@@ -1106,8 +1106,8 @@ public class CommonService {
 		HashSet<Double> slotwidth= new HashSet<Double>();
 		HashSet<Double> pointdiameter= new HashSet<Double>();
 		
-		HashSet<Double> width= new HashSet<Double>();
-		HashSet<Double> height= new HashSet<Double>();
+		HashSet<String> width= new HashSet<String>();
+		HashSet<String> height= new HashSet<String>();
 		HashSet<String> grooverange= new HashSet<String>();
 		HashSet<String> drillrange= new HashSet<String>();
 		HashSet<String> screwdirection= new HashSet<String>();
@@ -1319,7 +1319,7 @@ public class CommonService {
 	        {
 				ret += "<span>"+list2.get(i)+"</span>";
 	        }
-			if(list3.size() > 0 && list2.size() > 0)
+			if(list3.size() > 0 && (list2.size() > 0 || list1.size() > 0))
 			{
 				ret += "<em></em>";
 			}
@@ -1900,39 +1900,67 @@ public class CommonService {
 	        }
 			ret += "</div></li>";
 		}
-		if(width.size() > 1 || (!width.contains(0d) && width.size() == 1))
+		if(width.size() > 1 || (!width.contains(null) && width.size() == 1))
 		{
 			ret += "<li set=0 param=\"width\"><input type=\"hidden\" name=\"width\" /><h1>宽度<a></a></h1><div class=\"param clearfix\" >";
-			final List<Double> list = new ArrayList<Double>();  
-	        for(final Double value : width){  
-	            list.add(value);  
-	        }  
-	        Collections.sort(list);  
-	        for(int i = 0; i<list.size();i++)
+			List<List<String>> list = CuttingToolsConfiguration.sortSize(width);
+			final List<String> list1 = list.get(0);
+			final List<String> list2 = list.get(1);
+			final List<String> list3 = list.get(2);
+			for(int i = 0; i<list1.size();i++)
 	        {
-	        	if(list.get(i)!=0)
-					ret += "<span>"+list.get(i)+"</span>";
+				ret += "<span>"+list1.get(i)+"</span>";
+	        }
+			if(list2.size() > 0 && list1.size() > 0)
+			{
+				ret += "<em></em>";
+			}
+			for(int i = 0; i<list2.size();i++)
+	        {
+				ret += "<span>"+list2.get(i)+"</span>";
+	        }
+			if(list3.size() > 0 && (list2.size() > 0 || list1.size() > 0))
+			{
+				ret += "<em></em>";
+			}
+			for(int i = 0; i<list3.size();i++)
+	        {
+				ret += "<span>"+list3.get(i)+"</span>";
 	        }
 			ret += "</div></li>";
 		}
-		if(height.size() > 1 || (!height.contains(0d) && height.size() == 1))
+		if(height.size() > 1 || (!height.contains(null) && height.size() == 1))
 		{
 			ret += "<li set=0 param=\"height\"><input type=\"hidden\" name=\"height\" /><h1>高度<a></a></h1><div class=\"param clearfix\" >";
-			final List<Double> list = new ArrayList<Double>();  
-	        for(final Double value : height){  
-	            list.add(value);  
-	        }  
-	        Collections.sort(list);  
-	        for(int i = 0; i<list.size();i++)
+			List<List<String>> list = CuttingToolsConfiguration.sortSize(height);
+			final List<String> list1 = list.get(0);
+			final List<String> list2 = list.get(1);
+			final List<String> list3 = list.get(2);
+			for(int i = 0; i<list1.size();i++)
 	        {
-	        	if(list.get(i)!=0)
-					ret += "<span>"+list.get(i)+"</span>";
+				ret += "<span>"+list1.get(i)+"</span>";
+	        }
+			if(list2.size() > 0 && list1.size() > 0)
+			{
+				ret += "<em></em>";
+			}
+			for(int i = 0; i<list2.size();i++)
+	        {
+				ret += "<span>"+list2.get(i)+"</span>";
+	        }
+			if(list3.size() > 0 && (list2.size() > 0 || list1.size() > 0))
+			{
+				ret += "<em></em>";
+			}
+			for(int i = 0; i<list3.size();i++)
+	        {
+				ret += "<span>"+list3.get(i)+"</span>";
 	        }
 			ret += "</div></li>";
 		}
 		if(screwdirection.size() > 1 || (!screwdirection.contains(null) && screwdirection.size() == 1))
 		{
-			ret += "<li set=0 param=\"interfacesize\"><input type=\"hidden\" name=\"interfacesize\" /><h1>=螺纹方向<a></a></h1><div class=\"param clearfix\" >";
+			ret += "<li set=0 param=\"screwdirection\"><input type=\"hidden\" name=\"screwdirection\" /><h1>螺纹方向<a></a></h1><div class=\"param clearfix\" >";
 			Iterator<String> iter = screwdirection.iterator();
 			while(iter.hasNext())
 			{
@@ -1944,7 +1972,7 @@ public class CommonService {
 		}
 		if(grooverange.size() > 1 || (!grooverange.contains(null) && grooverange.size() == 1))
 		{
-			ret += "<li set=0 param=\"interfacesize\"><input type=\"hidden\" name=\"interfacesize\" /><h1>切槽范围<a></a></h1><div class=\"param clearfix\" >";
+			ret += "<li set=0 param=\"grooverange\"><input type=\"hidden\" name=\"grooverange\" /><h1>切槽范围<a></a></h1><div class=\"param clearfix\" >";
 			Iterator<String> iter = grooverange.iterator();
 			while(iter.hasNext())
 			{
@@ -1956,7 +1984,7 @@ public class CommonService {
 		}
 		if(drillrange.size() > 1 || (!drillrange.contains(null) && drillrange.size() == 1))
 		{
-			ret += "<li set=0 param=\"interfacesize\"><input type=\"hidden\" name=\"interfacesize\" /><h1>钻孔范围<a></a></h1><div class=\"param clearfix\" >";
+			ret += "<li set=0 param=\"drillrange\"><input type=\"hidden\" name=\"drillrange\" /><h1>钻孔范围<a></a></h1><div class=\"param clearfix\" >";
 			Iterator<String> iter = drillrange.iterator();
 			while(iter.hasNext())
 			{
@@ -2034,8 +2062,8 @@ public class CommonService {
 		HashSet<Double> slotwidth= new HashSet<Double>();
 		HashSet<Double> pointdiameter= new HashSet<Double>();
 		
-		HashSet<Double> width= new HashSet<Double>();
-		HashSet<Double> height= new HashSet<Double>();
+		HashSet<String> width= new HashSet<String>();
+		HashSet<String> height= new HashSet<String>();
 		HashSet<String> grooverange= new HashSet<String>();
 		HashSet<String> drillrange= new HashSet<String>();
 		HashSet<String> screwdirection= new HashSet<String>();
@@ -2184,7 +2212,7 @@ public class CommonService {
 		{
 			map.put("direction", CuttingToolsConfiguration.sortIntegerList(direction));
 		}
-		if(minworkdiameter.size() > 1 || (!minworkdiameter.contains(width) && minworkdiameter.size() == 1))
+		if(minworkdiameter.size() > 1 || (!minworkdiameter.contains(0d) && minworkdiameter.size() == 1))
 		{
 			map.put("minworkdiameter", CuttingToolsConfiguration.sortDoubleList(minworkdiameter));
 		}
@@ -2276,13 +2304,13 @@ public class CommonService {
 		{
 			map.put("necklength", CuttingToolsConfiguration.mergeList(necklength));
 		}
-		if(width.size() > 1 || (!width.contains(0d) && width.size() == 1))
+		if(width.size() > 1 || (!width.contains(null) && width.size() == 1))
 		{
-			map.put("width", CuttingToolsConfiguration.sortDoubleList(width));
+			map.put("width", CuttingToolsConfiguration.mergeList(width));
 		}
-		if(height.size() > 1 || (!height.contains(0d) && height.size() == 1))
+		if(height.size() > 1 || (!height.contains(null) && height.size() == 1))
 		{
-			map.put("height", CuttingToolsConfiguration.sortDoubleList(height));
+			map.put("height", CuttingToolsConfiguration.mergeList(height));
 		}
 		if(screwdirection.size() > 1 || (!screwdirection.contains(null) && screwdirection.size() == 1))
 		{

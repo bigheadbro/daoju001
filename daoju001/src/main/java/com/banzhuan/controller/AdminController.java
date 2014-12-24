@@ -118,6 +118,35 @@ public class AdminController extends BaseController{
 	@Qualifier("stDAO")
 	private StatisticsDAO stDAO;
 	
+	@RequestMapping(value="/updatescrewdirection")
+	public ModelAndView updatescrewdirection(final HttpServletRequest request, final HttpServletResponse response)
+	{
+		ModelAndView mv = new ModelAndView("/admin/test");
+		try {
+            Workbook book = Workbook.getWorkbook(new File("D:/data/1.xls"));
+            Sheet sheet = book.getSheet(2);      
+            for(int j = 0; j < sheet.getRows(); j++)
+            {
+            	CuttingToolEntity ct = new CuttingToolEntity();
+            	String tmp = sheet.getCell(0, j).getContents().trim().replace("；", ";").replace("（", "(").replace("）", ")");
+            	if(StringUtil.isNotEmpty(tmp))
+            	{
+            		ct.setVersion(tmp);
+            	}
+            	String tmp2 = sheet.getCell(1, j).getContents().trim().replace("；", ";").replace("（", "(").replace("）", ")");
+            	if(StringUtil.isNotEmpty(tmp2))
+            	{
+            		ct.setScrewdirection(tmp2);
+            	}
+            	ctDAO.updateCuttingToolByVersion(ct);
+            }
+            book.close();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+		return mv;
+	}
+	
 	@RequestMapping(value="/updaterelative")
 	public ModelAndView updaterelative(final HttpServletRequest request, final HttpServletResponse response)
 	{
@@ -251,8 +280,8 @@ public class AdminController extends BaseController{
 			HashSet<Double> taper= new HashSet<Double>();
 			HashSet<Double> slotwidth= new HashSet<Double>();
 			HashSet<Double> pointdiameter= new HashSet<Double>();
-			HashSet<Double> width= new HashSet<Double>();
-			HashSet<Double> height= new HashSet<Double>();
+			HashSet<String> width= new HashSet<String>();
+			HashSet<String> height= new HashSet<String>();
 			HashSet<String> grooverange= new HashSet<String>();
 			HashSet<String> drillrange= new HashSet<String>();
 			String ret = "";
@@ -482,11 +511,11 @@ public class AdminController extends BaseController{
 			{
 				ret += ",necklength";
 			}
-			if(width.size() == 1 && (double)(width.toArray()[0]) != 0)
+			if(width.size() == 1 && width.toArray()[0] != null)
 			{
 				ret += ",width";
 			}
-			if(height.size() == 1 && (double)(height.toArray()[0]) != 0)
+			if(height.size() == 1 && height.toArray()[0] != null)
 			{
 				ret += ",height";
 			}
@@ -631,7 +660,6 @@ public class AdminController extends BaseController{
             	seriesMap.put(sn, tmp);
             }
             
-           
             if(book.getNumberOfSheets()==3)
             {
             	 Sheet sheet3= book.getSheet(2);
@@ -889,15 +917,15 @@ public class AdminController extends BaseController{
             	{
             		ct.setRelativecollet(tmp);
             	}
-            	tmp = sheet.getCell(47, j).getContents().trim().replace("；", ";").replace("（", "(").replace("）", ")");
-            	if(StringUtil.isNotEmpty(tmp))
-            	{
-            		ct.setHeight(Double.parseDouble(tmp));
-            	}
             	tmp = sheet.getCell(48, j).getContents().trim().replace("；", ";").replace("（", "(").replace("）", ")");
             	if(StringUtil.isNotEmpty(tmp))
             	{
-            		ct.setWidth(Double.parseDouble(tmp));
+            		ct.setHeight(tmp);
+            	}
+            	tmp = sheet.getCell(47, j).getContents().trim().replace("；", ";").replace("（", "(").replace("）", ")");
+            	if(StringUtil.isNotEmpty(tmp))
+            	{
+            		ct.setWidth(tmp);
             	}
             	tmp = sheet.getCell(49, j).getContents().trim().replace("；", ";").replace("（", "(").replace("）", ")");
             	if(StringUtil.isNotEmpty(tmp))

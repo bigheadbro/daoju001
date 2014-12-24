@@ -274,7 +274,7 @@
 		<if test="taper != 0">
  	        and taper = #{taper}
 		</if>
-		<if test="slotwidth != 0">
+		<if test="slotwidth != ''">
  	        and slotwidth = #{slotwidth}
 		</if>
 		<if test="pointdiameter != 0">
@@ -301,10 +301,10 @@
 		<if test="relativecollet != null and relativecollet != ''">
  	        and relativecollet = #{relativecollet}
 		</if>
-		<if test="width != null and width != 0">
+		<if test="width != null and width != ''">
  	        and width = #{width}
 		</if>
-		<if test="height != null and height != 0">
+		<if test="height != null and height != ''">
  	        and height = #{height}
 		</if>
 		<if test="grooverange != null and grooverange != ''">
@@ -435,7 +435,7 @@
 		<if test="taper != 0">
  	        and taper = #{taper}
 		</if>
-		<if test="slotwidth != 0">
+		<if test="slotwidth != ''">
  	        and slotwidth = #{slotwidth}
 		</if>
 		<if test="pointdiameter != 0">
@@ -462,10 +462,10 @@
 		<if test="relativecollet != null and relativecollet != ''">
  	        and relativecollet = #{relativecollet}
 		</if>
-		<if test="width != null and width != 0">
+		<if test="width != null and width != ''">
  	        and width = #{width}
 		</if>
-		<if test="height != null and height != 0">
+		<if test="height != null and height != ''">
  	        and height = #{height}
 		</if>
 		<if test="grooverange != null and grooverange != ''">
@@ -594,7 +594,7 @@
 		<if test="taper != 0">
  	        and taper = #{taper}
 		</if>
-		<if test="slotwidth != 0">
+		<if test="slotwidth != ''">
  	        and slotwidth = #{slotwidth}
 		</if>
 		<if test="pointdiameter != 0">
@@ -618,10 +618,10 @@
 		<if test="necklength != null and necklength != ''">
  	        and necklength = #{necklength}
 		</if>
-		<if test="width != null and width != 0">
+		<if test="width != null and width != ''">
  	        and width = #{width}
 		</if>
-		<if test="height != null and height != 0">
+		<if test="height != null and height != ''">
  	        and height = #{height}
 		</if>
 		<if test="grooverange != null and grooverange != ''">
@@ -652,6 +652,13 @@
 		  <if test="relative != null">relative=#{relative},</if>
 		</set>
 	   where seriesname=#{seriesname}
+	</update>
+	<update id="updateCuttingToolByVersion" parameterType="CuttingToolEntity">
+		update t_cuttingtool
+		<set>
+		  <if test="screwdirection != null">screwdirection=#{screwdirection},</if>
+		</set>
+	   where version=#{version}
 	</update>
 	<update id="updateCuttingToolByBrand" parameterType="CuttingToolEntity">
 		update t_cuttingtool
@@ -727,6 +734,7 @@
 		,height
 		,grooverange
 		,drillrange
+		,screwdirection
 		,workingtype
 		,workingrange)
 		values
@@ -788,6 +796,7 @@
 		,#{height}
 		,#{grooverange}
 		,#{drillrange}
+		,#{screwdirection}
 		,#{workingtype}
 		,#{workingrange}
 		)

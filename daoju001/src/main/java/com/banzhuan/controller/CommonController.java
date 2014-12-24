@@ -1763,8 +1763,8 @@ public class CommonController extends BaseController{
 		String workingrange = request.getParameter("workingrange");
 		String necklength = request.getParameter("necklength");
 		String relativecollet = request.getParameter("relativecollet");
-		double width = Double.valueOf(StringUtil.isEmpty(request.getParameter("width"))?"0":request.getParameter("width"));
-		double height = Double.valueOf(StringUtil.isEmpty(request.getParameter("height"))?"0":request.getParameter("height"));
+		String width =request.getParameter("width");
+		String height = request.getParameter("height");
 		String grooverange = request.getParameter("grooverange");
 		String drillrange = request.getParameter("drillrange");
 		String screwdirection = request.getParameter("screwdirection");

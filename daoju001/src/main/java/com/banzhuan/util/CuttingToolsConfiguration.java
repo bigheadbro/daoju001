@@ -87,6 +87,7 @@ public class CuttingToolsConfiguration
 		level2Map.put("9901", "对刀仪");
 		level2Map.put("9902", "寻边器");
 		level2Map.put("9903", "滚压头");
+		level2Map.put("9904", "滚花轮");
 
 		level3Map.put("010101", "面铣刀盘");
 		level3Map.put("010102", "铣刀杆");
@@ -197,6 +198,7 @@ public class CuttingToolsConfiguration
 		codeMap.put("56", "990100");
 		codeMap.put("57", "990200");
 		codeMap.put("58", "990300");
+		codeMap.put("59", "990400");
 
 		orderMap.put("010101", "brand,diameter,cujing,usage,workingtool,angle,ctcount,pipesize");
 		orderMap.put("010102", "brand,diameter,cujing,usage,workingtool,angle,ctcount,usefullength,totallength,shank,innercooling,shanktype,material");
@@ -541,6 +543,10 @@ public class CuttingToolsConfiguration
 				{
 					str += "<td>通用槽</td>";
 				}
+				else
+				{
+					str += "<td>无</td>";
+				}
 		    }
 
 		    if(StringUtil.isContains(param,">最小加工直径<"))
@@ -567,7 +573,7 @@ public class CuttingToolsConfiguration
 		    if(StringUtil.isContains(param,">丝锥种类<"))
 		        str += "<td>"+list.get(i).getTaptype() +"</td>";
 		    
-		    if(StringUtil.isContains(param,">螺纹类型<"))
+		    if(StringUtil.isContains(param,">螺纹种类<"))
 		        str += "<td>"+list.get(i).getScrewtype() +"</td>";
 		    
 		    if(StringUtil.isContains(param,">主轴类型<"))
@@ -580,10 +586,10 @@ public class CuttingToolsConfiguration
 		        str += "<td>"+list.get(i).getThickness() +"</td>";
 		    
 		    if(StringUtil.isContains(param,">最大槽深<"))
-		        str += "<td>"+list.get(i).getTaper() +"</td>";
+		        str += "<td>"+list.get(i).getMaxslotdepth() +"</td>";
 		    
 		    if(StringUtil.isContains(param,">锥度<"))
-		        str += "<td>"+list.get(i).getMaxslotdepth() +"</td>";
+		        str += "<td>"+list.get(i).getTaper() +"</td>";
 		    
 		    if(StringUtil.isContains(param,">槽宽<"))
 		        str += "<td>"+list.get(i).getSlotwidth() +"</td>";
@@ -637,204 +643,305 @@ public class CuttingToolsConfiguration
 	public static String getParamsHtml(List<CuttingToolEntity> cts)
 	{
 		String ret = "";
-		for (int i = 0; i < cts.size(); i++)
+		HashSet<String> version = new HashSet<String>();
+		HashSet<String> material= new HashSet<String>();
+		HashSet<String> usage= new HashSet<String>();
+		HashSet<String> shank= new HashSet<String>();
+		HashSet<String> shanktype= new HashSet<String>();
+		HashSet<String> shape= new HashSet<String>();
+		HashSet<String> workingtool= new HashSet<String>();
+		HashSet<String> workingtype= new HashSet<String>();
+		HashSet<String> coatingtype= new HashSet<String>();
+		HashSet<String> diameterratio= new HashSet<String>();
+		HashSet<String> slotshape= new HashSet<String>();
+		HashSet<String> handlenorm= new HashSet<String>();
+		HashSet<String> taptype= new HashSet<String>();
+		HashSet<String> screwtype= new HashSet<String>();
+		HashSet<String> axistype= new HashSet<String>();
+		HashSet<String> axisdetail= new HashSet<String>();
+		HashSet<String> interfacesize= new HashSet<String>();
+		HashSet<String> handledsize= new HashSet<String>();
+		HashSet<String> screwsize= new HashSet<String>();
+		HashSet<String> screwdistance= new HashSet<String>();
+		HashSet<String> accuracy= new HashSet<String>();
+		HashSet<String> collet= new HashSet<String>();
+		
+		HashSet<Integer> ctcount= new HashSet<Integer>();
+		HashSet<Integer>angle= new HashSet<Integer>();
+		HashSet<Integer>backangle= new HashSet<Integer>();
+		HashSet<Integer>edgeno= new HashSet<Integer>();
+		HashSet<Integer>cujing= new HashSet<Integer>();
+		HashSet<Integer>direction= new HashSet<Integer>();
+		HashSet<Integer>innercooling= new HashSet<Integer>();
+		
+		HashSet<Double> usefullength= new HashSet<Double>();
+		HashSet<Double> pipesize= new HashSet<Double>();
+		HashSet<String> diameter= new HashSet<String>();
+		HashSet<String> edgelength= new HashSet<String>();
+		HashSet<String> totallength= new HashSet<String>();
+		HashSet<String> screwangle= new HashSet<String>();
+		HashSet<String> rangle= new HashSet<String>();
+		HashSet<Double> minworkdiameter= new HashSet<Double>();
+		HashSet<Double> thickness= new HashSet<Double>();
+		HashSet<Double> maxslotdepth= new HashSet<Double>();
+		HashSet<String> necklength= new HashSet<String>();
+		HashSet<Double> taper= new HashSet<Double>();
+		HashSet<Double> slotwidth= new HashSet<Double>();
+		HashSet<Double> pointdiameter= new HashSet<Double>();
+		
+		HashSet<String> width= new HashSet<String>();
+		HashSet<String> height= new HashSet<String>();
+		HashSet<String> grooverange= new HashSet<String>();
+		HashSet<String> drillrange= new HashSet<String>();
+		HashSet<String> screwdirection= new HashSet<String>();
+		HashSet<String> workingrange= new HashSet<String>();
+		for(int j = 0; j < cts.size(); j++)
 		{
-			if (StringUtil.isNotEmpty(cts.get(i).getVersion()) && !ret.contains("<th>型号</th>"))
-			{
-				ret += "<th>型号</th>";
-			}
-			if (StringUtil.isNotEmpty(cts.get(i).getMaterial())  && !ret.contains("<th>材质</th>"))
-			{
-				ret += "<th>材质</th>";
-			}
-			if (cts.get(i).getAngle() != 0 && !ret.contains("<th>主偏角</th>"))
-			{
-				ret += "<th>主偏角</th>";
-			}
-			if (cts.get(i).getCtcount() != 0 && !ret.contains("<th>刀片个数</th>"))
-			{
-				ret += "<th>刀片个数</th>";
-			}
-			if (StringUtil.isNotEmpty(cts.get(i).getDiameter()) && !ret.contains("<th>直径</th>"))
-			{
-				ret += "<th>直径</th>";
-			}
-			if (StringUtil.isNotEmpty(cts.get(i).getUsage())  && !ret.contains("<th>加工用途</th>"))
-			{
-				ret += "<th>加工用途</th>";
-			}
-			if (StringUtil.isNotEmpty(cts.get(i).getWorkingtype()) && !ret.contains("<th>加工类型</th>"))
-			{
-				ret += "<th>加工类型</th>";
-			}
-			if (cts.get(i).getCujing() != 0 && !ret.contains("<th>光洁度</th>"))
-			{
-				ret += "<th>光洁度</th>";
-			}
-			if (cts.get(i).getUsefullength() != 0 && !ret.contains("<th>有效长</th>"))
-			{
-				ret += "<th>有效长</th>";
-			}
-			if (cts.get(i).getPipesize() != 0 && !ret.contains("<th>安装孔接口</th>"))
-			{
-				ret += "<th>安装孔接口</th>";
-			}
-			if (StringUtil.isNotEmpty(cts.get(i).getShank())  && !ret.contains("<th>柄径</th>"))
-			{
-				ret += "<th>柄径</th>";
-			}
-			if (StringUtil.isNotEmpty(cts.get(i).getShanktype())  && !ret.contains("<th>柄部类型</th>"))
-			{
-				ret += "<th>柄部类型</th>";
-			}
-			if (StringUtil.isNotEmpty(cts.get(i).getShape())  && !ret.contains("<th>形状</th>"))
-			{
-				ret += "<th>形状</th>";
-			}
-			if (cts.get(i).getBackangle() != 1000 && !ret.contains("<th>后角</th>"))
-			{
-				ret += "<th>后角</th>";
-			}
-			if (StringUtil.isNotEmpty(cts.get(i).getWorkingtool())  && !ret.contains("<th>适用工件</th>"))
-			{
-				ret += "<th>适用工件</th>";
-			}
-			if (cts.get(i).getEdgeno() != 0 && !ret.contains("<th>刃数</th>"))
-			{
-				ret += "<th>刃数</th>";
-			}
-			if (StringUtil.isNotEmpty(cts.get(i).getEdgelength()) && !ret.contains("<th>刃长</th>"))
-			{
-				ret += "<th>刃长</th>";
-			}
-			if (StringUtil.isNotEmpty(cts.get(i).getTotallength()) && !ret.contains("<th>总长</th>"))
-			{
-				ret += "<th>总长</th>";
-			}
-			if (StringUtil.isNotEmpty(cts.get(i).getScrewangle()) && !ret.contains("<th>螺旋角</th>"))
-			{
-				ret += "<th>螺旋角</th>";
-			}
-			if (StringUtil.isNotEmpty(cts.get(i).getCoatingtype())  && !ret.contains("<th>涂层种类</th>"))
-			{
-				ret += "<th>涂层种类</th>";
-			}
-			if (StringUtil.isNotEmpty(cts.get(i).getRangle()) && !ret.contains("<th>R角</th>"))
-			{
-				ret += "<th>R角</th>";
-			}
-			if (cts.get(i).getDirection() != 0 && !ret.contains("<th>方向</th>"))
-			{
-				ret += "<th>方向</th>";
-			}
-			if (cts.get(i).getMinworkdiameter() != 0 && !ret.contains("<th>最小加工直径</th>"))
-			{
-				ret += "<th>最小加工直径</th>";
-			}
-			if (cts.get(i).getInnercooling() != 0 && !ret.contains("<th>冷却方式</th>"))
-			{
-				ret += "<th>冷却方式</th>";
-			}
-			if (StringUtil.isNotEmpty(cts.get(i).getDiameterratio())  && !ret.contains("<th>倍径比</th>"))
-			{
-				ret += "<th>倍径比</th>";
-			}
-			if (StringUtil.isNotEmpty(cts.get(i).getSlotshape())  && !ret.contains("<th>槽型状</th>"))
-			{
-				ret += "<th>槽型状</th>";
-			}
-			if (StringUtil.isNotEmpty(cts.get(i).getHandlenorm())  && !ret.contains("<th>柄部规格</th>"))
-			{
-				ret += "<th>柄部规格</th>";
-			}
-			if (StringUtil.isNotEmpty(cts.get(i).getTaptype())  && !ret.contains("<th>丝锥种类</th>"))
-			{
-				ret += "<th>丝锥种类</th>";
-			}
-			if (StringUtil.isNotEmpty(cts.get(i).getScrewtype())  && !ret.contains("<th>螺纹种类</th>"))
-			{
-				ret += "<th>螺纹种类</th>";
-			}
-			if (StringUtil.isNotEmpty(cts.get(i).getAxistype())  && !ret.contains("<th>主轴种类</th>"))
-			{
-				ret += "<th>主轴种类</th>";
-			}
-			if (StringUtil.isNotEmpty(cts.get(i).getAxisdetail())  && !ret.contains("<th>主轴细分</th>"))
-			{
-				ret += "<th>主轴细分</th>";
-			}
-			if (cts.get(i).getThickness() != 0 && !ret.contains("<th>厚度</th>"))
-			{
-				ret += "<th>厚度</th>";
-			}
-			if (cts.get(i).getMaxslotdepth() != 0 && !ret.contains("<th>最大槽深</th>"))
-			{
-				ret += "<th>最大槽深</th>";
-			}
-			if (cts.get(i).getTaper() != 0 && !ret.contains("<th>锥度</th>"))
-			{
-				ret += "<th>锥度</th>";
-			}
-			if (cts.get(i).getSlotwidth() != 0 && !ret.contains("<th>槽宽</th>"))
-			{
-				ret += "<th>槽宽</th>";
-			}
-			if (cts.get(i).getPointdiameter() != 0 && !ret.contains("<th>刀尖直径</th>"))
-			{
-				ret += "<th>刀尖直径</th>";
-			}
-			if (StringUtil.isNotEmpty(cts.get(i).getHandledsize())  && !ret.contains("<th>可加持尺寸</th>"))
-			{
-				ret += "<th>可加持尺寸</th>";
-			}
-			if (StringUtil.isNotEmpty(cts.get(i).getScrewsize())  && !ret.contains("<th>螺纹尺寸</th>"))
-			{
-				ret += "<th>螺纹尺寸</th>";
-			}
-			if (StringUtil.isNotEmpty(cts.get(i).getScrewdistance())  && !ret.contains("<th>螺距</th>"))
-			{
-				ret += "<th>螺距</th>";
-			}
-			if (StringUtil.isNotEmpty(cts.get(i).getAccuracy())  && !ret.contains("<th>精度</th>"))
-			{
-				ret += "<th>精度</th>";
-			}
-			if (StringUtil.isNotEmpty(cts.get(i).getInterfacesize())  && !ret.contains("<th>接口尺寸</th>"))
-			{
-				ret += "<th>接口尺寸</th>";
-			}
-			if (StringUtil.isNotEmpty(cts.get(i).getNecklength()) && !ret.contains("<th>颈长</th>"))
-			{
-				ret += "<th>颈长</th>";
-			}
-			if (StringUtil.isNotEmpty(cts.get(i).getRelativecollet()) && !ret.contains("<th>对应筒夹</th>"))
-			{
-				ret += "<th>对应筒夹</th>";
-			}
-			if (cts.get(i).getHeight() != 0 && !ret.contains("<th>高度</th>"))
-			{
-				ret += "<th>高度</th>";
-			}
-			if (cts.get(i).getWidth() != 0 && !ret.contains("<th>宽度</th>"))
-			{
-				ret += "<th>宽度</th>";
-			}
-			if (StringUtil.isNotEmpty(cts.get(i).getGrooverange()) && !ret.contains("<th>切槽范围</th>"))
-			{
-				ret += "<th>切槽范围</th>";
-			}
-			if (StringUtil.isNotEmpty(cts.get(i).getDrillrange()) && !ret.contains("<th>钻孔范围</th>"))
-			{
-				ret += "<th>钻孔范围</th>";
-			}
-			if (StringUtil.isNotEmpty(cts.get(i).getWorkingrange()) && !ret.contains("<th>镗孔范围</th>"))
-			{
-				ret += "<th>镗孔范围</th>";
-			}
-			if (StringUtil.isNotEmpty(cts.get(i).getScrewdirection()) && !ret.contains("<th>螺纹方向</th>"))
-			{
-				ret += "<th>螺纹方向</th>";
-			}
+			version.add(cts.get(j).getVersion());
+			material.add(cts.get(j).getMaterial());
+			usage.add(cts.get(j).getUsage());
+			shank.add(cts.get(j).getShank());
+			shanktype.add(cts.get(j).getShanktype());
+			shape.add(cts.get(j).getShape());
+			workingtool.add(cts.get(j).getWorkingtool());
+			workingtype.add(cts.get(j).getWorkingtype());
+			coatingtype.add(cts.get(j).getCoatingtype());
+			diameterratio.add(cts.get(j).getDiameterratio());
+			slotshape.add(cts.get(j).getSlotshape());
+			handlenorm.add(cts.get(j).getHandlenorm());
+			taptype.add(cts.get(j).getTaptype());
+			screwtype.add(cts.get(j).getScrewtype());
+			axistype.add(cts.get(j).getAxistype());
+			axisdetail.add(cts.get(j).getAxisdetail());
+			interfacesize.add(cts.get(j).getInterfacesize());
+			handledsize.add(cts.get(j).getHandledsize());
+			screwsize.add(cts.get(j).getScrewsize());
+			screwdistance.add(cts.get(j).getScrewdistance());
+			accuracy.add(cts.get(j).getAccuracy());
+			collet.add(cts.get(j).getRelativecollet());
+			ctcount.add(cts.get(j).getCtcount());
+			angle.add(cts.get(j).getAngle());
+			backangle.add(cts.get(j).getBackangle());
+			edgeno.add(cts.get(j).getEdgeno());
+			cujing.add(cts.get(j).getCujing());
+			direction.add(cts.get(j).getDirection());
+			innercooling.add(cts.get(j).getInnercooling());
+			usefullength.add(cts.get(j).getUsefullength());
+			pipesize.add(cts.get(j).getPipesize());
+			diameter.add(cts.get(j).getDiameter());
+			edgelength.add(cts.get(j).getEdgelength());
+			totallength.add(cts.get(j).getTotallength());
+			screwangle.add(cts.get(j).getScrewangle());
+			rangle.add(cts.get(j).getRangle());
+			minworkdiameter.add(cts.get(j).getMinworkdiameter());
+			thickness.add(cts.get(j).getThickness());
+			maxslotdepth.add(cts.get(j).getMaxslotdepth());
+			necklength.add(cts.get(j).getNecklength());
+			taper.add(cts.get(j).getTaper());
+			slotwidth.add(cts.get(j).getSlotwidth());
+			pointdiameter.add(cts.get(j).getPointdiameter());
+			width.add(cts.get(j).getWidth());
+			height.add(cts.get(j).getHeight());
+			grooverange.add(cts.get(j).getGrooverange());
+			drillrange.add(cts.get(j).getDrillrange());
+			screwdirection.add(cts.get(j).getScrewdirection());
+			workingrange.add(cts.get(j).getWorkingrange());
+		}
+		if (version.size() > 1 || (!version.contains(null) && version.size() == 1))
+		{
+			ret += "<th>型号</th>";
+		}
+		if (material.size() > 1 || (!material.contains(null) && material.size() == 1))
+		{
+			ret += "<th>材质</th>";
+		}
+		if (angle.size() > 1 || (!angle.contains(0) && angle.size() == 1))
+		{
+			ret += "<th>主偏角</th>";
+		}
+		if (ctcount.size() > 1 || (!ctcount.contains(0) && ctcount.size() == 1))
+		{
+			ret += "<th>刀片个数</th>";
+		}
+		if (diameter.size() > 1 || (!diameter.contains(null) && diameter.size() == 1))
+		{
+			ret += "<th>直径</th>";
+		}
+		if (usage.size() > 1 || (!usage.contains(null) && usage.size() == 1))
+		{
+			ret += "<th>加工用途</th>";
+		}
+		if (workingtype.size() > 1 || (!workingtype.contains(null) && workingtype.size() == 1))
+		{
+			ret += "<th>加工类型</th>";
+		}
+		if (cujing.size() > 1 || (!cujing.contains(0) && cujing.size() == 1))
+		{
+			ret += "<th>光洁度</th>";
+		}
+		if (usefullength.size() > 1 || (!usefullength.contains(0d) && usefullength.size() == 1))
+		{
+			ret += "<th>有效长</th>";
+		}
+		if (pipesize.size() > 1 || (!pipesize.contains(0d) && pipesize.size() == 1))
+		{
+			ret += "<th>安装孔接口</th>";
+		}
+		if (shank.size() > 1 || (!shank.contains(null) && shank.size() == 1))
+		{
+			ret += "<th>柄径</th>";
+		}
+		if (shanktype.size() > 1 || (!shanktype.contains(null) && shanktype.size() == 1))
+		{
+			ret += "<th>柄部类型</th>";
+		}
+		if (shape.size() > 1 || (!shape.contains(null) && shape.size() == 1))
+		{
+			ret += "<th>形状</th>";
+		}
+		if (backangle.size() > 1 || (!backangle.contains(1000) && backangle.size() == 1))
+		{
+			ret += "<th>后角</th>";
+		}
+		if (workingtool.size() > 1 || (!workingtool.contains(null) && workingtool.size() == 1))
+		{
+			ret += "<th>适用工件</th>";
+		}
+		if (edgeno.size() > 1 || (!edgeno.contains(0) && edgeno.size() == 1))
+		{
+			ret += "<th>刃数</th>";
+		}
+		if (edgelength.size() > 1 || (!edgelength.contains(null) && edgelength.size() == 1))
+		{
+			ret += "<th>刃长</th>";
+		}
+		if (totallength.size() > 1 || (!totallength.contains(null) && totallength.size() == 1))
+		{
+			ret += "<th>总长</th>";
+		}
+		if (screwangle.size() > 1 || (!screwangle.contains(null) && screwangle.size() == 1))
+		{
+			ret += "<th>螺旋角</th>";
+		}
+		if (coatingtype.size() > 1 || (!coatingtype.contains(null) && coatingtype.size() == 1))
+		{
+			ret += "<th>涂层种类</th>";
+		}
+		if (rangle.size() > 1 || (!rangle.contains(null) && rangle.size() == 1))
+		{
+			ret += "<th>R角</th>";
+		}
+		if (direction.size() > 1 || (!direction.contains(0) && direction.size() == 1))
+		{
+			ret += "<th>方向</th>";
+		}
+		if (minworkdiameter.size() > 1 || (!minworkdiameter.contains(0d) && minworkdiameter.size() == 1))
+		{
+			ret += "<th>最小加工直径</th>";
+		}
+		if (innercooling.size() > 1 || (!innercooling.contains(0) && innercooling.size() == 1))
+		{
+			ret += "<th>冷却方式</th>";
+		}
+		if (diameterratio.size() > 1 || (!diameterratio.contains(null) && diameterratio.size() == 1))
+		{
+			ret += "<th>倍径比</th>";
+		}
+		if (slotshape.size() > 1 || (!slotshape.contains(null) && slotshape.size() == 1))
+		{
+			ret += "<th>槽型状</th>";
+		}
+		if (handlenorm.size() > 1 || (!handlenorm.contains(null) && handlenorm.size() == 1))
+		{
+			ret += "<th>柄部规格</th>";
+		}
+		if (taptype.size() > 1 || (!taptype.contains(null) && taptype.size() == 1))
+		{
+			ret += "<th>丝锥种类</th>";
+		}
+		if (screwtype.size() > 1 || (!screwtype.contains(null) && screwtype.size() == 1))
+		{
+			ret += "<th>螺纹种类</th>";
+		}
+		if (axistype.size() > 1 || (!axistype.contains(null) && axistype.size() == 1))
+		{
+			ret += "<th>主轴种类</th>";
+		}
+		if (axisdetail.size() > 1 || (!axisdetail.contains(null) && axisdetail.size() == 1))
+		{
+			ret += "<th>主轴细分</th>";
+		}
+		if (thickness.size() > 1 || (!thickness.contains(0d) && thickness.size() == 1))
+		{
+			ret += "<th>厚度</th>";
+		}
+		if (maxslotdepth.size() > 1 || (!maxslotdepth.contains(0d) && maxslotdepth.size() == 1))
+		{
+			ret += "<th>最大槽深</th>";
+		}
+		if (taper.size() > 1 || (!taper.contains(0d) && taper.size() == 1))
+		{
+			ret += "<th>锥度</th>";
+		}
+		if (slotwidth.size() > 1 || (!slotwidth.contains(0d) && slotwidth.size() == 1))
+		{
+			ret += "<th>槽宽</th>";
+		}
+		if (pointdiameter.size() > 1 || (!pointdiameter.contains(0d) && pointdiameter.size() == 1))
+		{
+			ret += "<th>刀尖直径</th>";
+		}
+		if (handledsize.size() > 1 || (!handledsize.contains(null) && handledsize.size() == 1))
+		{
+			ret += "<th>可加持尺寸</th>";
+		}
+		if (screwsize.size() > 1 || (!screwsize.contains(null) && screwsize.size() == 1))
+		{
+			ret += "<th>螺纹尺寸</th>";
+		}
+		if (screwdistance.size() > 1 || (!screwdistance.contains(null) && screwdistance.size() == 1))
+		{
+			ret += "<th>螺距</th>";
+		}
+		if (accuracy.size() > 1 || (!accuracy.contains(null) && accuracy.size() == 1))
+		{
+			ret += "<th>精度</th>";
+		}
+		if (interfacesize.size() > 1 || (!interfacesize.contains(null) && interfacesize.size() == 1))
+		{
+			ret += "<th>接口尺寸</th>";
+		}
+		if (necklength.size() > 1 || (!necklength.contains(null) && necklength.size() == 1))
+		{
+			ret += "<th>颈长</th>";
+		}
+		if (collet.size() > 1 || (!collet.contains(null) && collet.size() == 1))
+		{
+			ret += "<th>对应筒夹</th>";
+		}
+		if (width.size() > 1 || (!width.contains(null) && width.size() == 1))
+		{
+			ret += "<th>宽度</th>";
+		}
+		if (height.size() > 1 || (!height.contains(null) && height.size() == 1))
+		{
+			ret += "<th>高度</th>";
+		}
+		if (grooverange.size() > 1 || (!grooverange.contains(null) && grooverange.size() == 1))
+		{
+			ret += "<th>切槽范围</th>";
+		}
+		if (drillrange.size() > 1 || (!drillrange.contains(null) && drillrange.size() == 1))
+		{
+			ret += "<th>钻孔范围</th>";
+		}
+		if (workingrange.size() > 1 || (!workingrange.contains(null) && workingrange.size() == 1))
+		{
+			ret += "<th>镗孔范围</th>";
+		}
+		if (screwdirection.size() > 1 || (!screwdirection.contains(null) && screwdirection.size() == 1))
+		{
+			ret += "<th>螺纹方向</th>";
 		}
 		return ret;
 	}

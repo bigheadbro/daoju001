@@ -76,6 +76,11 @@ public class CuttingToolDAOImpl extends SqlSessionDaoSupport implements CuttingT
 	}
 	
 	@Override
+	public int updateCuttingToolByVersion(CuttingToolEntity ct) {
+		return this.getSqlSession().update("updateCuttingToolByVersion", ct);
+	}
+	
+	@Override
 	public int updateCuttingToolByBrand(CuttingToolEntity ct) {
 		return this.getSqlSession().update("updateCuttingToolByBrand", ct);
 	}

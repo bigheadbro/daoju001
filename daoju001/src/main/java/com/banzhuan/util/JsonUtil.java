@@ -719,7 +719,7 @@ public class JsonUtil {
 		    if(StringUtil.isContains(param,">丝锥种类<"))
 		        str += "<td>"+list.get(i).getTaptype() +"</td>";
 		    
-		    if(StringUtil.isContains(param,">螺纹类型<"))
+		    if(StringUtil.isContains(param,">螺纹种类<"))
 		        str += "<td>"+list.get(i).getScrewtype() +"</td>";
 		    
 		    if(StringUtil.isContains(param,">主轴类型<"))
@@ -732,10 +732,10 @@ public class JsonUtil {
 		        str += "<td>"+list.get(i).getThickness() +"</td>";
 		    
 		    if(StringUtil.isContains(param,">最大槽深<"))
-		        str += "<td>"+list.get(i).getTaper() +"</td>";
+		        str += "<td>"+list.get(i).getMaxslotdepth() +"</td>";
 		    
 		    if(StringUtil.isContains(param,">锥度<"))
-		        str += "<td>"+list.get(i).getMaxslotdepth() +"</td>";
+		        str += "<td>"+list.get(i).getTaper() +"</td>";
 		    
 		    if(StringUtil.isContains(param,">槽宽<"))
 		        str += "<td>"+list.get(i).getSlotwidth() +"</td>";

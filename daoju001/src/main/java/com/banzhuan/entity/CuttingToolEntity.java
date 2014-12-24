@@ -123,9 +123,9 @@ public class CuttingToolEntity implements Serializable {
 	
 	private String relativecollet;
 
-	private double width;
+	private String width;
 	
-	private double height;
+	private String height;
 	
 	private String grooverange;
 	
@@ -597,22 +597,22 @@ public class CuttingToolEntity implements Serializable {
 		this.videolink = videolink;
 	}
 
-	public double getWidth()
+	public String getWidth()
 	{
 		return width;
 	}
 
-	public void setWidth(double width)
+	public void setWidth(String width)
 	{
 		this.width = width;
 	}
 
-	public double getHeight()
+	public String getHeight()
 	{
 		return height;
 	}
 
-	public void setHeight(double heigth)
+	public void setHeight(String heigth)
 	{
 		this.height = heigth;
 	}

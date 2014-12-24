@@ -467,6 +467,23 @@ public class StringUtil {
 		return "";
 	}
 	
+	public static String formatDate(String timeStr, String srcFormat, String desFormat, boolean type)
+	{
+		if(isEmpty(timeStr))
+		{
+			return "";
+		}
+		try {
+			SimpleDateFormat df = new SimpleDateFormat(srcFormat);
+			Date date = df.parse(timeStr);
+			SimpleDateFormat dateFormat = new SimpleDateFormat(desFormat);
+			SimpleDateFormat todayFormat = new SimpleDateFormat("HH:mm");
+			return dateFormat.format(date);
+		} catch (ParseException e) {
+		}
+		return "";
+	}
+	
 	public static boolean isToday(Date date)
 	{
         Date now = new Date();
@@ -493,6 +510,10 @@ public class StringUtil {
 		return formatDate(dateStr, "yyyy-MM-dd HH:mm:ss", "yyyy-MM-dd");
 	}
 	
+	public static String formateDateWithouttoday(String dateStr, boolean b)
+	{
+		return formatDate(dateStr, "yyyy-MM-dd HH:mm:ss", "yyyy-MM-dd",b);
+	}
 	/**
 	 * 计算指定时间与当前时间的时间差
 	 * @param dateStr

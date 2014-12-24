@@ -50,7 +50,7 @@
 		</div>
         <div class="search">
 			<div class="search-box">
-                <form id="form_search" method="post" action="/searchresult">
+                <form id="form_search" method="get" action="/searchresult">
                     <!-- 隐藏字段，用于标示是表单提交 -->
                     <input type="hidden" name="do_submit" value="true"/>
                     <input name="searchparam" placeholder="请输入产品型号/系列名称/品牌" value="$!{search}"/>

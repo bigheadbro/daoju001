@@ -61,6 +61,7 @@ import org.slf4j.LoggerFactory;
 import com.banzhuan.common.Constant;
 import com.banzhuan.controller.CommonController;
 import com.banzhuan.entity.BrandEntity;
+import com.banzhuan.entity.StatisticsEntity;
 import com.banzhuan.entity.UserEntity;
 
 public class Util {
@@ -671,6 +672,22 @@ public class Util {
 		    }
 		}); 
 		return providers;
+	}
+	
+	public static Map<String,List<StatisticsEntity>> stGroupByTime(List<StatisticsEntity> list)
+	{
+		Map<String,List<StatisticsEntity>> map = new HashMap<String, List<StatisticsEntity>>();
+		for(int i = 0;i<list.size();i++)
+		{
+			List<StatisticsEntity> tmp = map.get(StringUtil.formateDateWithouttoday(list.get(i).getGmtCreate(),true));
+			if(tmp == null)
+			{
+				tmp = new ArrayList<StatisticsEntity>();
+			}
+			tmp.add(list.get(i));
+			map.put(StringUtil.formateDateWithouttoday(list.get(i).getGmtCreate(),true), tmp);
+		}
+		return map;
 	}
 	
 	public static void main(String[] args) {

@@ -2,11 +2,15 @@ package com.banzhuan.controller;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -969,9 +973,54 @@ public class AdminController extends BaseController{
 		ModelAndView mv = new ModelAndView("/admin/statistics");
 		List<StatisticsEntity> contacts = stDAO.getStatistcisByType(2);
 		List<StatisticsEntity> searches = stDAO.getStatistcisByType(3);
-		
-		mv.addObject("contacts",contacts);
-		mv.addObject("searches",searches);
+		Map<String,List<StatisticsEntity>> contactMap = Util.stGroupByTime(contacts);
+		Map<String,List<StatisticsEntity>> searchMap = Util.stGroupByTime(searches); 
+		/*List<Map.Entry<String, List<StatisticsEntity>>> list = new LinkedList<Map.Entry<String, List<StatisticsEntity>>>();  
+		list.addAll(contactMap.entrySet());  
+		Collections.sort(list, new Comparator<Map.Entry<String, List<StatisticsEntity>>>() {  
+		   public int compare(Map.Entry obj1, Map.Entry obj2) {//从高往低排序  
+			   java.text.DateFormat df=new java.text.SimpleDateFormat("yyyy-MM-dd");
+			   java.util.Calendar c1=java.util.Calendar.getInstance();
+			   java.util.Calendar c2=java.util.Calendar.getInstance();
+			   try{
+				   c1.setTime(df.parse(obj1.getKey().toString()));
+				   c2.setTime(df.parse(obj2.getKey().toString()));
+			   }catch(java.text.ParseException e){
+				   System.err.println("格式不正确");
+			   }
+			   int result=c1.compareTo(c2);
+			   if(result==0)
+				   return 1;  
+			   else if(result<0)
+				   return -1;  
+			   else
+				   return 1;  
+		   }  
+		});  
+		List<Map.Entry<String, List<StatisticsEntity>>> list2 = new LinkedList<Map.Entry<String, List<StatisticsEntity>>>();  
+		list2.addAll(searchMap.entrySet());  
+		Collections.sort(list2, new Comparator<Map.Entry<String, List<StatisticsEntity>>>() {  
+		   public int compare(Map.Entry obj1, Map.Entry obj2) {//从高往低排序  
+			   java.text.DateFormat df=new java.text.SimpleDateFormat("yyyy-MM-dd");
+			   java.util.Calendar c1=java.util.Calendar.getInstance();
+			   java.util.Calendar c2=java.util.Calendar.getInstance();
+			   try{
+				   c1.setTime(df.parse(obj1.getKey().toString()));
+				   c2.setTime(df.parse(obj2.getKey().toString()));
+			   }catch(java.text.ParseException e){
+				   System.err.println("格式不正确");
+			   }
+			   int result=c1.compareTo(c2);
+			   if(result==0)
+				   return 1;  
+			   else if(result<0)
+				   return -1;  
+			   else
+				   return 1;  
+		   }  
+		});*/
+		mv.addObject("contactMap",contactMap);
+		mv.addObject("searchMap",searchMap);
 		return mv;
 	}
 	

@@ -554,7 +554,7 @@ public class AdminController extends BaseController{
             	tmp.info = (sheet2.getCell(3, j)!=null)?sheet2.getCell(3, j).getContents().trim().replace("；", ";").replace("（", "(").replace("）", ")"):""; 
             	//tmp.suitcase = (sheet2.getCell(4, j)==null)?sheet2.getCell(4, j).getContents().trim().replace("；", ";").replace("（", "(").replace("）", ")"):""; 
             	//tmp.cover = "/img/series/" + sn + ".png";
-            	File root = new File("D:/workspace/daoju001/daoju001/src/main/webapp/img/series");
+            	File root = new File("D:/github/daoju001/daoju001/src/main/webapp/img/series");
                 File[] files = root.listFiles();
 				for (File file : files) {
 					if (StringUtil.isEqual(file.getName().split("[.]")[0],sn)) {
@@ -567,7 +567,7 @@ public class AdminController extends BaseController{
 					}
 
 				}         
-            	root = new File("D:/workspace/daoju001/daoju001/src/main/webapp/img/sample");
+            	root = new File("D:/github/daoju001/daoju001/src/main/webapp/img/sample");
                 files = root.listFiles();
 				for (File file : files) {
 					if (StringUtil.isEqual(file.getName().split("[.]")[0].split("-")[0],sn)) {
@@ -683,7 +683,7 @@ public class AdminController extends BaseController{
             // 获得第一个工作表对象
             Sheet sheet= book.getSheet(0);
             
-            for(int j = 1; j < sheet.getRows(); j++)
+            for(int j = 940; j < sheet.getRows(); j++)
             {
             	CuttingToolEntity ct = new CuttingToolEntity();
             	String tmp = sheet.getCell(0, j).getContents().trim().replace("；", ";").replace("（", "(").replace("）", ")");
@@ -810,7 +810,7 @@ public class AdminController extends BaseController{
             	tmp = sheet.getCell(23, j).getContents().trim().replace("；", ";").replace("（", "(").replace("）", ")");
             	if(StringUtil.isNotEmpty(tmp))
             	{
-            		ct.setDirection(Integer.valueOf(tmp.replace("右手", "3").replace("左手", "2").replace("通用", "1")));
+            		ct.setDirection(Integer.valueOf(tmp.replace("右手", "3").replace("左手", "2").replace("右", "3").replace("左", "2").replace("通用", "1")));
             	}
             	tmp = sheet.getCell(24, j).getContents().trim().replace("；", ";").replace("（", "(").replace("）", ")");
             	if(StringUtil.isNotEmpty(tmp))

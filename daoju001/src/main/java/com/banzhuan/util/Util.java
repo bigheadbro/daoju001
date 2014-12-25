@@ -692,6 +692,6 @@ public class Util {
 	
 	public static void main(String[] args) {
 		//removeMailFromEDM();
-		renameFolder("C:/Users/Administrator/Desktop/ARNO/目录");
+		renameFolder("C:/Users/Administrator/Desktop/株洲钻石/目录");
 	}
 }

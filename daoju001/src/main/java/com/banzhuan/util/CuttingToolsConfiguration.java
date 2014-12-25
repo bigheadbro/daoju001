@@ -1809,6 +1809,10 @@ public class CuttingToolsConfiguration
 		{
 			ret ="R";
 		}
+		else
+		{
+			ret = "非通用";
+		}
 		return ret;
 	}
 	

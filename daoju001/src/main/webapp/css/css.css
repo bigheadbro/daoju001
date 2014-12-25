@@ -296,9 +296,10 @@ h2.mt100{margin-top:70px;}
 .agent-right{border: 1px solid #cccccc;box-shadow: 0 1px 2px #dddddd;border-color: #c6c6c6;padding: 10px;margin-bottom: 20px;}
 .agent-right h1{font-size:18px;font-weight:100;margin-bottom: 15px;}
 .agent-right h5{font-size:13px;font-weight:100;margin-bottom: 10px;}
-.agent-right h5 span{color: white;background-color: #ff6600;display: inline-block;border-radius: 10px;width: 20px;height: 20px;text-align: center;margin-right: 10px;}
+.agent-right h5 span{float:left;diplay:block;color: white;background-color: #ff6600;display: inline-block;border-radius: 10px;width: 20px;height: 20px;text-align: center;margin-right: 10px;margin-top: 3px;}
+.agent-right h5 p{margin-left:30px;}
 .agent-right h2{color:white;background-color:#ff6600;border-radius:4px;display:inline-block;font-size:16px;font-weight:100;padding:2px 10px;margin-bottom: 10px;}
-.agent-right p{font-size: 13px;line-height: 22px;margin-bottom: 20px;}
+.agent-right p{font-size: 13px;line-height: 22px;margin-bottom: 10px;}
 a#join{font-size:14px;color:#fa3232}
 a#join:hover{text-decoration:underline;}
 
@@ -2067,7 +2068,7 @@ a.join:hover{background-color:#00ace4;}
 .erweima{}
 .erweima p{background-color:#0099cb;color:white;font-size:12px;margin-top: 5px;text-align: center;line-height: 18px;padding: 5px;}
 
-.goTab {position: fixed;bottom: 156px;right: 10px;_position: absolute;z-index: 9999;}
+.goTab {position: fixed;bottom: 156px;right: 10px;z-index: 9999;}
 .goTab li {position: relative;width: 45px;height: 45px;line-height: 45px;margin-bottom: 4px;font-size: 14px;list-style: none;}
 .goTab li a {position: absolute;width: 45px;height: 45px;right: 0;top: 0;text-align: center;color: #fff !important;background-color: #71b6cd;overflow: hidden;text-decoration: none;cursor: pointer;color: #fff;}
 .goTab li em {position: absolute;width: 45px;height: 45px;right: 0;top: 0;text-align: center;color: #fff !important;background-color: #71b6cd;overflow: hidden;text-decoration: none;cursor: pointer;color: #fff;}
@@ -2081,8 +2082,10 @@ a.join:hover{background-color:#00ace4;}
 .goTab .complain b{background:url(../img/complain.png) no-repeat 0 0;width:29px;height:27px;top: 9px;right:8px;}
 
 
-
-
+.right-side {position: fixed;top: 156px;left: 40px;z-index: 9999;width:200px;}
+.right-side h3{font-size:14px;}
+.right-side p{font-size:13px;}
+.right-side h4{font-size:14px;}
 
 .width900{width:900px;}
 .width462{width:462px;}

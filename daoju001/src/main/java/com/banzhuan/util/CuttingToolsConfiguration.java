@@ -499,7 +499,7 @@ public class CuttingToolsConfiguration
 				{
 					str += "<td>圆形</td>";
 				}
-				else
+				else if(StringUtil.isEqual(list.get(i).getShape() , "非通用"))
 				{
 					str += "<td>非通用</td>";
 				}
@@ -1730,7 +1730,7 @@ public class CuttingToolsConfiguration
 			{
 				return "R(圆形)";
 			}
-			else
+			else if(StringUtil.isEqual(shape, "非通用"))
 			{
 				return "非通用";
 			}
@@ -1809,7 +1809,7 @@ public class CuttingToolsConfiguration
 		{
 			ret ="R";
 		}
-		else
+		else if(StringUtil.isEqual(shape, "非通用"))
 		{
 			ret = "非通用";
 		}

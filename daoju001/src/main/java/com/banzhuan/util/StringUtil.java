@@ -917,7 +917,7 @@ public class StringUtil {
 		String[] tmp = str.split(" ");
 		for(int i = 0;i<tmp.length;i++)
 		{
-			if(tmp[i].contains("-"))
+			if(tmp[i].contains("-") || tmp[i].contains("."))
 			{
 				tmp[i] = "\"" + tmp[i] + "\"";
 			}

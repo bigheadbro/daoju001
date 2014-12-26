@@ -1,0 +1,74 @@
+#set($layout = "/layout/item_layout.vm")
+<script type="text/javascript" src="/js/azlist.js"></script>
+<div style="background:url(../img/greybak.png);margin:0 auto;width:960px;height:338px;position:relative;">
+	<a class="join" href="#joinus">加入我们</a>
+</div>
+<div class="main-content-wrap clearfix">
+	<div class="knowmore">
+		
+		<h1 class="title"><span>刀师傅<em>2.0</em></span>全新上线</h1>
+		<p class="head">刀师傅一直致力于为刀具供需双方打造专业、便捷的互联网平台。经过1.0版本的实践，我们收集了许多用户的反馈。为了使满足各类用户的不同需求，刀师傅联合众多供应商，苦心开发数月，终于推出了全新的刀师傅2.0——全网最强的选刀系统。</p>
+		<div class="data">
+			<div class="item" style="text-align:left">
+				<span>58</span>个分类
+			</div>
+			<div class="item">
+				<span>7000</span>种刀具型号
+			</div>
+			<div class="item" style="text-align:right">
+				<span>53</span>个认证供应商
+			</div>
+			<div class="item" style="text-align:left">
+				<span>47</span>种参数
+			</div>
+			<div class="item">
+				<span>200</span>个系列
+			</div>
+			<div class="item" style="text-align:right">
+				<span>16</span>个刀具品牌
+			</div>
+		</div>
+		<h1 class="title" style="margin-top: 60px;">专业分类与详细参数</h1>
+		<p class="head">在全新的选刀系统中，专业的分类与详细的参数选择让您更便捷、快速地找到自己所需要的刀具<br/>首先您可以从我们请专业的刀具分类开始选择您所需要的产品</p>
+		<img style="padding:30px 64px;" src="../img/01.png" />
+		<p class="head" style="width: 761px;">然后,在刀具分类的结果中，我们列举了详细的参数供您筛选，您可以选择详细的参数来进行更精准的筛选</p>
+		<img style="padding:30px 64px;" src="../img/02.png" />
+		<p class="head">在短短数秒间,您就能获得相应产品的品牌/型号/详细尺寸/样本信息/供应商联系方式等信息</p>
+		<img style="padding:30px 64px;padding-bottom:60px;border-bottom: 1px solid #f2f2f2;" src="../img/03.png" />
+		<h1 class="title" id="joinus" style="padding-top:110px;">加入我们的选刀系统</h1>
+		<p class="head" style="width:760px">如果您也想加入我们的选刀系统，录入您的特色产品，通过互联网寻觅更多商机。不要犹豫,马上与我们联系！经过刀师傅认证后，您就可以免费将您的刀具录入在我们的数据库中。</p>
+		<div style="margin:64px;">
+			<div style="width:252px;display:inline-block;text-align:center">
+				<h1 style="background-color:#0099cb;color:white;border-radius:50%;font-size:36px;text-align:center;width:180px;height:180px;line-height:180px;margin:10px 36px;">免费</h1>
+				<p style="color:#0099cb;font-size:24px">完全免费加入</p>
+			</div>
+			<div style="width:252px;display:inline-block;text-align:center">
+				<h1 style="background-color:#0099cb;color:white;border-radius:50%;font-size:36px;text-align:center;width:180px;height:180px;line-height:180px;margin:10px 36px;">20</h1>
+				<p style="color:#0099cb;font-size:24px">20分钟完成</p>
+			</div>
+			<div style="width:252px;display:inline-block;text-align:center">
+				<h1 style="background-color:#0099cb;color:white;border-radius:50%;font-size:36px;text-align:center;width:180px;height:180px;line-height:180px;margin:10px 36px;">稳定</h1>
+				<p style="color:#0099cb;font-size:24px">终身免费永久推广</p>
+			</div>
+		</div>
+		<h1 style="font-size:18px;color:#606060;background-color:#f4f4f4;text-align:center;margin:64px;font-weight:normal;padding: 10px;width: 770px;font-family:'幼圆';margin-bottom: 20px;">加入我们</h1>
+		<p style="font-size:18px;font-family:'幼圆';color:#606060;width:770px;margin:0 64px;line-height: 34px;border-bottom: 1px solid #f2f2f2;padding-bottom: 65px;">
+			1. 将营业执照，代理资质（若有）以及品牌名称、联系人信息发送邮件至<span style="color:#F21A08">client@daoshifu.com</span><br/>
+            2. 通过初审后，在工作人员指导下简单填写“热销系列-特色说明”表,<a class="downsample" href="/resource/填写示范.xls" style="color:#F21A08;text-decoration:underline">点击下载三菱示例</a><br/>
+            3. 由工作人员补全所有型号/参数/图片/目录等信息。（根据品牌情况，大约需要一周时间）<br/>
+            4. 承诺给与刀师傅网用户VIP待遇，直接对接终端用户/推广型分销商。<br/>
+		</p>
+		<script>
+		$(function(){
+			$(".downsample").click(function(){
+        		$.ajax( {   
+        		    type : "POST",   
+        		    url : "/downsample"
+        		});   
+        	});
+		});
+		</script>
+		<h1 class="title" style="margin-top:100px;">欢迎联系我们</h1>
+		<p class="head" style="width:760px;margin-bottom:100px;">如果您有任何的建议与意见，请拨打我们的官方热线<span style="color:#0099cb;font-family:'微软雅黑'"> 4000-421-145</span> ,您的意见对我们非常重要</p>
+	</div>
+</div>

@@ -1003,7 +1003,7 @@ public class AdminController extends BaseController{
 		List<StatisticsEntity> searches = stDAO.getStatistcisByType(3);
 		Map<String,List<StatisticsEntity>> contactMap = Util.stGroupByTime(contacts);
 		Map<String,List<StatisticsEntity>> searchMap = Util.stGroupByTime(searches); 
-		/*List<Map.Entry<String, List<StatisticsEntity>>> list = new LinkedList<Map.Entry<String, List<StatisticsEntity>>>();  
+		List<Map.Entry<String, List<StatisticsEntity>>> list = new LinkedList<Map.Entry<String, List<StatisticsEntity>>>();  
 		list.addAll(contactMap.entrySet());  
 		Collections.sort(list, new Comparator<Map.Entry<String, List<StatisticsEntity>>>() {  
 		   public int compare(Map.Entry obj1, Map.Entry obj2) {//从高往低排序  
@@ -1018,13 +1018,13 @@ public class AdminController extends BaseController{
 			   }
 			   int result=c1.compareTo(c2);
 			   if(result==0)
-				   return 1;  
-			   else if(result<0)
 				   return -1;  
-			   else
+			   else if(result<0)
 				   return 1;  
+			   else
+				   return -1;  
 		   }  
-		});  
+		});
 		List<Map.Entry<String, List<StatisticsEntity>>> list2 = new LinkedList<Map.Entry<String, List<StatisticsEntity>>>();  
 		list2.addAll(searchMap.entrySet());  
 		Collections.sort(list2, new Comparator<Map.Entry<String, List<StatisticsEntity>>>() {  
@@ -1040,15 +1040,15 @@ public class AdminController extends BaseController{
 			   }
 			   int result=c1.compareTo(c2);
 			   if(result==0)
-				   return 1;  
-			   else if(result<0)
 				   return -1;  
-			   else
+			   else if(result<0)
 				   return 1;  
+			   else
+				   return -1;  
 		   }  
-		});*/
-		mv.addObject("contactMap",contactMap);
-		mv.addObject("searchMap",searchMap);
+		});
+		mv.addObject("contactMap",list);
+		mv.addObject("searchMap",list2);
 		return mv;
 	}
 	

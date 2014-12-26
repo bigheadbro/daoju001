@@ -1,19 +1,17 @@
 #set($layout = "/layout/admin_layout.vm")
 <div class="adminitems">
 	<div style="float:left;width:400px;border:1px solid #111;padding:20px;">
-		#foreach ($mapEntry in $searchMap.entrySet())
-			<h4 style="color:#0099cb;">$mapEntry.key</h4>
-			#set ($searches = $mapEntry.value)
-    		#foreach($search in $searches)
-    			<h4 style="text-indent:30px">$!{search.info}</h4>
+		#foreach ($items in $searchMap)
+			<h4 style="color:#0099cb;">$items.key</h4>
+			#foreach($item in $items.value)
+				<h4 style="text-indent:30px">${item.info}</h4>
 			#end
 		#end
 	</div>
 	<div style="float:left;border:1px solid #111;padding:20px;margin-left:20px;">
-		#foreach ($mapEntry2 in $contactMap.entrySet())
-			<h4 style="color:#0099cb;">$mapEntry2.key</h4>
-			#set ($contacts = $mapEntry2.value)
-    		#foreach($contact in $contacts)
+		#foreach ($items in $contactMap)
+			<h4 style="color:#0099cb;">$items.key</h4>
+    		#foreach($contact in $items.value)
     			<h4 style="text-indent:30px">$!{contact.info}</h4>
 			#end
 		#end

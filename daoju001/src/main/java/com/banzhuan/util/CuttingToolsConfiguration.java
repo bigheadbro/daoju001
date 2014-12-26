@@ -1545,7 +1545,7 @@ public class CuttingToolsConfiguration
 		{
 			return "2";
 		}
-		else if(StringUtil.isEqual(direction, "一般加工"))
+		else if(StringUtil.isEqual(direction, "一般加工") || StringUtil.isEqual(direction, "一般"))
 		{
 			return "1";
 		}

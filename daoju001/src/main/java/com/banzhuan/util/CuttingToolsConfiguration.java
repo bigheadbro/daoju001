@@ -223,7 +223,7 @@ public class CuttingToolsConfiguration
 		orderMap.put("020503", "");
 		orderMap.put("030101", "");
 		orderMap.put("030102", "");
-		orderMap.put("030103", "brand,direction,width,height,totallength");
+		orderMap.put("030103", "brand,slotwidth,maxslotdepth,grooverange,totallength,direction,width,height");
 		orderMap.put("030201", "brand,shape,backangle,workingtool,rangle,direction,material");
 		orderMap.put("030202", "brand,shape,backangle,workingtool,rangle,direction,material");
 		orderMap.put("030203", "brand,workingtool,thickness,maxslotdepth,material");
@@ -231,7 +231,7 @@ public class CuttingToolsConfiguration
 		orderMap.put("040102", "brand,diameter,diameterratio,workingtool,innercooling,screwangle,edgelengthe,totallength,shank,shanktype,coatingtype");
 		orderMap.put("040201", "brand,drillrange,diameterratio,workingtool,innercooling,shank");
 		orderMap.put("040202", "");
-		orderMap.put("040301", "");
+		orderMap.put("040301", "brand,drillrange,diameterratio,workingtool,usefullength,totallength,shank,shanktype,slotshape");
 		orderMap.put("040302", "");
 		orderMap.put("040401", "brand,diameter,diameterratio,workingtool,innercooling,screwangle,edgelengthe,totallength,shank,shanktype,direction");
 		orderMap.put("040402", "");
@@ -1449,7 +1449,13 @@ public class CuttingToolsConfiguration
 		for(final String value : set){  
 			if(StringUtil.isEmpty(value))
 				continue;
-			String[] tmp = value.contains("/")?value.split("/"):value.split(";");
+			String[] tmp;
+			if(value.contains("/"))
+				tmp= value.split("/");
+			else if(value.contains("、"))
+				tmp= value.split("、");
+			else
+				tmp= value.split(";");
 			for(int i = 0;i<tmp.length;i++)
 				list.add(tmp[i]);
 			

@@ -1332,12 +1332,10 @@ public class CommonService {
 		if(shanktype.size() > 1 || (!shanktype.contains(null) && shanktype.size() == 1))
 		{
 			ret += "<li set=0 param=\"shanktype\"><input type=\"hidden\" name=\"shanktype\" /><h1>柄部类型<a></a></h1><div class=\"param clearfix\" >";
-			Iterator<String> iter = shanktype.iterator();
-			while(iter.hasNext())
+			List<String> list = CuttingToolsConfiguration.splitWorkingtoolOrUsage(shanktype);
+			for(int i = 0;i<list.size();i++)
 			{
-				String str = iter.next();
-				if(StringUtil.isNotEmpty(str))
-					ret += "<span>"+str+"</span>";
+				ret += "<span>"+list.get(i)+"</span>";
 			}
 			ret += "</div></li>";
 		}
@@ -2164,7 +2162,7 @@ public class CommonService {
 		}
 		if(shanktype.size() > 1 || (!shanktype.contains(null) && shanktype.size() == 1))
 		{
-			map.put("shanktype", CuttingToolsConfiguration.convertSetToList(shanktype));
+			map.put("shanktype", CuttingToolsConfiguration.splitWorkingtoolOrUsage(shanktype));
 		}
 		if(shape.size() > 1 || (!shape.contains(null) && shape.size() == 1))
 		{

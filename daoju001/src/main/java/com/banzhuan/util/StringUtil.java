@@ -64,7 +64,7 @@ public class StringUtil {
 		{
 			return "";
 		}
-		return str.replace(";", "/");
+		return str.replace(";", "/").replace("、", "/");
 	}
 	
 	public static String replaceHtmlDiv(String str)

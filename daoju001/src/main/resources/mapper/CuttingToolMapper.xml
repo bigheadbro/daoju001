@@ -205,9 +205,6 @@
 		<if test="shank != null and shank != ''">
  	        and shank = #{shank}
 		</if>
-		<if test="shanktype != null and shanktype != ''">
- 	        and shanktype = #{shanktype}
-		</if>
 		<if test="shape != null and shape != ''">
  	        and shape = #{shape}
 		</if>
@@ -328,6 +325,9 @@
 		<if test="workingtype != null and workingtype != ''">
  	        and locate(#{workingtype},`workingtype`) > 0
 		</if>
+		<if test="shanktype != null and shanktype != ''">
+ 	        and locate(#{shanktype},`shanktype`) > 0
+		</if>
 		 group by seriesname	
 	</select>
 	
@@ -365,9 +365,6 @@
 		</if>
 		<if test="shank != null and shank != ''">
  	        and shank = #{shank}
-		</if>
-		<if test="shanktype != null and shanktype != ''">
- 	        and shanktype = #{shanktype}
 		</if>
 		<if test="shape != null and shape != ''">
  	        and shape = #{shape}
@@ -489,6 +486,9 @@
 		<if test="workingtype != null and workingtype != ''">
  	        and locate(#{workingtype},`workingtype`) > 0
 		</if>
+		<if test="shanktype != null and shanktype != ''">
+ 	        and locate(#{shanktype},`shanktype`) > 0
+		</if>
 	</select>
 	<select id="queryCuttingToolByCt" parameterType="CuttingToolEntity" resultMap="CuttingToolResultMap">
 		SELECT * from t_cuttingtool t where 1=1 
@@ -524,9 +524,6 @@
 		</if>
 		<if test="shank != null and shank != ''">
  	        and shank = #{shank}
-		</if>
-		<if test="shanktype != null and shanktype != ''">
- 	        and shanktype = #{shanktype}
 		</if>
 		<if test="shape != null and shape != ''">
  	        and shape = #{shape}
@@ -641,6 +638,9 @@
 		</if>
 		<if test="workingtool != null and workingtool != ''">
  	        and locate(#{workingtool},`workingtool`) > 0
+		</if>
+		<if test="shanktype != null and shanktype != ''">
+ 	        and locate(#{shanktype},`shanktype`) > 0
 		</if>
 	</select>
 	<update id="updateCuttingToolBySn" parameterType="CuttingToolEntity">

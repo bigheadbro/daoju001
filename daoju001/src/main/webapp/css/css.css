@@ -628,6 +628,7 @@ h1.category-level a:hover{text-decoration:underline;color:#ff8f17}
 .detail-content .right .provider .no-provider{padding: 10px;font-size: 14px;}
 .detail-content .right .provider .provider-item{border-bottom:1px solid #d5d5d5;padding:10px 0;font-size:14px;color:#252525;}
 .detail-content .right .provider .provider-item .name{float:left;width:285px;text-indent:10px;}
+.detail-content .right .provider .provider-item .name a{float:none;}
 .detail-content .right .provider .provider-item .contact{float:left;color:#787878;}
 .detail-content .right .provider .provider-item .contact span{font-weight:bold;margin-right: 10px;}
 .detail-content .right .provider .provider-item .area{float:left;color:#787878;width:155px;}

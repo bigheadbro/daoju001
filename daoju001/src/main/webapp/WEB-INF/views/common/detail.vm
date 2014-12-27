@@ -241,7 +241,7 @@ $(function() {
     				#foreach($user in $users)
     				<div class="provider-item clearfix">
     					<div class="clearfix">
-        					<div class="name">${user.companyName}</div>
+        					<div class="name"><a target="_blank" href="/agents/${user.id}">${user.companyName}</a></div>
         					<div class="area"><span>地区</span>$stringUtil.getCityFromPca(${user.pca})</div>
         					<div class="contact"><span>联系人</span>
     							#if($stringUtil.isEmpty(${user.contactName}))

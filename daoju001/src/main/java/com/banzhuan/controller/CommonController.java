@@ -1422,6 +1422,15 @@ public class CommonController extends BaseController{
 		
 	}
 	
+	@RequestMapping(value = "knifestory")
+	public ModelAndView knifestory(final HttpServletRequest request,final HttpServletResponse response)
+	{
+		ModelAndView mv = new ModelAndView("/common/knifestory");
+
+		return mv;
+		
+	}
+	
 	@RequestMapping(value = "samples")
 	public ModelAndView allsamples(final HttpServletRequest request,final HttpServletResponse response)
 	{

@@ -1,0 +1,42 @@
+#set($layout = "/layout/item_layout.vm")
+<script type="text/javascript" src="/js/azlist.js"></script>
+<div style="background:url(../img/story.png);margin:0 auto;width:960px;height:338px;position:relative;">
+	<a style="background-color: #70a07c;background-image: url(../img/kma.png);color: white;font-size: 16px;position: absolute;text-align: center;width: 146px;left: 220px;top: 250px;padding: 6px 0;background-repeat: no-repeat;background-position: 26px center;text-indent: 19px;" href="#seedetail">查看详情</a>
+</div>
+<div class="main-content-wrap clearfix" style="margin-top:0;background-color:#ecf8f2;padding: 0 120px;box-sizing: border-box;">
+	<h1 style="font-size:24px;color:#2a8649;font-weight:normal;padding-top:100px;">你是否曾经遇到棘手的刀具问题，最后通过层层分析成功解决？</h1>
+	<h1 style="font-size:24px;color:#2a8649;;font-weight:normal;margin-top:20px;">你是否曾经开发出原创的先进刀具或动手DIY出实用的刀具？</h1>
+	<h1 style="font-size:24px;color:#2a8649;font-weight:normal;margin-top:20px;">你是否曾经对刀具产品和行业有着自己不吐不快的想法？</h1>
+	<p style="font-size:12px;color:#2a8649;margin-top: 80px;line-height: 22px;">
+		随着机械加工现代化程度越来越高，刀具的使用也越来越普遍、种类越来越丰富。从过去的白钢刀到硬质合金，从国产到欧美日韩，再到全球刀具品牌争先恐后涌入中国，刀具产品和整个行业都发生了巨大的变化。无论是刀具用户还是供应商，请将你的刀具故事通过刀师傅网分享出来，成为同行们瞩目的焦点吧！入选的每一个刀具故事，我们都会给予丰厚的现金奖励。除此以外，每期活动都有5位参与奖，希望大家不吝经验多多投稿。
+	</p>
+	<div id="seedetail" style="border-top:1px solid #2a8649;margin-top:60px;">
+		<h1 style="color: #4e9766;margin: 0 auto;font-size: 18px;text-align: center;width: 120px;height: 50px;padding-top: 10px;background-color: #ffe300;border: 14px solid #ffef6c;border-top: none;border-radius: 0 0 200px 200px;">活动详情</h1>
+	</div>
+	<div style="padding:0 95px;margin-top:30px;">
+		<p style="font-size:14px;color:#2a8649;margin-bottom:10px;"><b>参与方式：</b>以WORD格式发送至 plan@daoshifu.com 或跟帖</p>
+		<p style="font-size:14px;color:#2a8649;margin-bottom:10px;"><b>征文内容：</b>与刀具相关的真实事件与感受即可，篇幅不设要求，配图佳。</p>
+		<p style="font-size:14px;color:#2a8649;margin-bottom:10px;"><b>选用奖励：现金1000元</b></p>
+		<p style="font-size:14px;color:#2a8649;margin-bottom:10px;"><b>有效投稿：话费50元，每期五份，送完即止先到先得。</b></p>
+		<p style="font-size:14px;color:#2a8649;margin-bottom:10px;line-height: 28px;">
+			<b style="float:left;height:60px;">其他事项：</b>
+			<span>
+				1.  每周一期，长期举办，随时欢迎来稿。<br/>
+				2.  欢迎用户介绍自己的企业情况，供应商可介绍产品或技术<br/>
+				3.  活动结果将通过刀师傅官方微信号（见下方二维码）以及官网公布。
+			</span>
+		</p>
+	</div>
+	<p style="margin-left:95px;font-size:14px;color:#2a8649;margin-top:40px;line-height: 28px;">
+		<b style="font-weight:normal;float:left;height:60px;">参考例文连接：</b>
+		<span style="font-size:12px;">
+			<a target="_blank" href="http://bbs.cmiw.cn/forum.php?mod=viewthread&tid=170070&extra=page%3D5">http://bbs.cmiw.cn/forum.php?mod=viewthread&tid=345500&extra=page%3D1</a>
+			<a target="_blank" href="http://bbs.cmiw.cn/forum.php?mod=viewthread&tid=170070&extra=page%3D5">http://bbs.cmiw.cn/forum.php?mod=viewthread&tid=170070&extra=page%3D5</a>
+		</span>
+	</p>
+	<div style="border-top:1px solid #2a8649;margin-top:60px;">
+		<p style="font-size:12px;color:#2a8649;text-align:center;margin-top:60px;">如您对活动有任何疑问，欢迎随时致电</p>
+		<h1 style="font-size:24px;color:#2a8649;text-align:center;margin-top:10px;font-weight:normal;">400-042-114</h1>
+		<p style="font-size:14px;color:#2a8649;text-align:center;margin-top:10px;margin-bottom:200px;">刀师傅客服热线</p>
+	</div>
+</div>

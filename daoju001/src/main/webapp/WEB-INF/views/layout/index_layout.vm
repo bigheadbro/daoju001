@@ -425,14 +425,30 @@
         				#if($!stringUtil.isContains($request.getServletPath(),"/agents"))
                         <li class="current">
                             <a href="/agents">全国供应商</a>
+							<ul class="top-dropdown" style="display: none;">
+                                <li>
+                                    <a rel="external" href="/agents">供应商列表</a>
+                                </li>
+                                <li>
+                                    <a rel="external" href="/agentsmap">供应商地图</a>
+                                </li>
+                            </ul>
                         </li>
         				#else
         				<li class="item">
                             <a href="/agents">全国供应商</a>
+							<ul class="top-dropdown" style="display: none;">
+                                <li>
+                                    <a rel="external" href="/agents">供应商列表</a>
+                                </li>
+                                <li>
+                                    <a rel="external" href="/agentsmap">供应商地图</a>
+                                </li>
+                            </ul>
                         </li>
         				#end
         				#if($!stringUtil.isContains($request.getServletPath(),"/samples"))
-                        <li class="current ctinfo">
+                        <li class="current item">
                             <a>刀具资料</a>
 							<ul class="top-dropdown" style="display: none;">
                                 <li>
@@ -444,7 +460,7 @@
                             </ul>
                         </li>
         				#else
-        				<li class="item ctinfo">
+        				<li class="item">
                             <a href="/samples">刀具资料</a>
 							<ul class="top-dropdown" style="display: none;">
                                 <li>

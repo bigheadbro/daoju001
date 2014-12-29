@@ -1393,13 +1393,6 @@ public class CommonController extends BaseController{
 		
 		Map<Integer,Map<Integer,List<UserEntity>>> agentMap = commonService.getAllAgents();
 
-		//对key进行排序--字母
-		/*List<Map.Entry<Integer,List<AgentEntity>>> infoIds = new ArrayList<Map.Entry<Integer,List<AgentEntity>>>(agentMap.entrySet());
-		Collections.sort(infoIds, new Comparator<Map.Entry<Integer,List<AgentEntity>>>() {   
-		    public int compare(Map.Entry<Integer,List<AgentEntity>> o1, Map.Entry<Integer,List<AgentEntity>> o2) {      
-		        return (o1.getKey()-o2.getKey());
-		    }
-		}); */
 		List<Map.Entry<Integer,Map<Integer,List<UserEntity>>>> infoIds = new ArrayList<Map.Entry<Integer,Map<Integer,List<UserEntity>>>>(agentMap.entrySet());
 		Collections.sort(infoIds, new Comparator<Map.Entry<Integer,Map<Integer,List<UserEntity>>>>() {   
 		    public int compare(Map.Entry<Integer,Map<Integer,List<UserEntity>>> o1, Map.Entry<Integer,Map<Integer,List<UserEntity>>> o2) {      
@@ -1409,6 +1402,17 @@ public class CommonController extends BaseController{
 
 		mv.addObject("agentMap", infoIds);
 		
+		return mv;
+		
+	}
+	
+	@RequestMapping(value = "agentsmap")
+	public ModelAndView agentsmap(final HttpServletRequest request,final HttpServletResponse response)
+	{
+		ModelAndView mv = new ModelAndView("/common/agentsmap");
+		
+		String str = commonService.getProviderMap();
+		mv.addObject("info", str);
 		return mv;
 		
 	}

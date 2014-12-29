@@ -7,13 +7,13 @@ $(function() {
 		$(".top-user").css("background-color","#0099cb");
 		$(".top-dropdown").hide();
 	});*/
-	$(".ctinfo").hover(function() {
+	$(".item").hover(function() {
 		$(".top-user").css("background-color","#00759c");
-		$(".top-dropdown").show();
+		$(this).children(".top-dropdown").show();
 	});
-	$(".ctinfo").mouseleave(function() {
+	$(".item").mouseleave(function() {
 		$(".top-user").css("background-color","#0099cb");
-		$(".top-dropdown").hide();
+		$(this).children(".top-dropdown").hide();
 	});
 
 	

@@ -34,6 +34,10 @@ public class UserEntity implements Serializable {
 	private String wxlogo;
 	// 公司地址
 	private String address;
+	
+	private double lat;
+	
+	private double lng;
 	// 公司电话
 	private String phone;
 	// 公司传真
@@ -596,6 +600,26 @@ public class UserEntity implements Serializable {
 	 */
 	public void setRank(int rank) {
 		this.rank = rank;
+	}
+
+	public double getLat()
+	{
+		return lat;
+	}
+
+	public void setLat(double lat)
+	{
+		this.lat = lat;
+	}
+
+	public double getLng()
+	{
+		return lng;
+	}
+
+	public void setLng(double lng)
+	{
+		this.lng = lng;
 	}
 
 	

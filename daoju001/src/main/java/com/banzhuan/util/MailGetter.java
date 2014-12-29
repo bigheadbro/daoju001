@@ -29,11 +29,12 @@ public class MailGetter {
 
 		try {
 
-			URL url = new URL(strUrl);
+			URL url = new URL(strUrl.replace(" ", ""));
+			HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+			connection.connect();
+			InputStream is = connection.getInputStream();
 
-			BufferedReader br = new BufferedReader(new InputStreamReader(url
-
-			.openStream()));
+			BufferedReader br = new BufferedReader(new InputStreamReader(is));
 
 			String s = "";
 
@@ -50,7 +51,6 @@ public class MailGetter {
 			return sb.toString();
 
 		} catch (Exception e) {
-
 			return "error open url:" + strUrl;
 
 		}
@@ -89,8 +89,7 @@ public class MailGetter {
 			URL server2 = new URL("http://waixie.net/task/info.php?id="
 					+ String.valueOf(index));
 
-			HttpURLConnection connection2 = (HttpURLConnection) server2
-					.openConnection();
+			HttpURLConnection connection2 = (HttpURLConnection) server2.openConnection();
 
 			connection2.connect();
 			InputStream is2 = connection2.getInputStream();

@@ -26,6 +26,8 @@
 		<id property="brandName2" column="brand_name2" />
 		<!--公司地址 -->
 		<id property="address" column="address" />
+		<id property="lat" column="lat" />
+		<id property="lng" column="lng" />
 		<!--公司电话 -->
 		<id property="phone" column="phone" />
 		<!--公司传真 -->
@@ -233,6 +235,8 @@
 	      <if test="brand2 != 0">brand2=#{brand2},</if>
 	      <if test="brandName2 != null">brand_name2=#{brandName2},</if>
 	      <if test="address != null">address=#{address},</if>
+	      <if test="lat != 0d">lat=#{lat},</if>
+	      <if test="lng != 0d">lng=#{lng},</if>
 	      <if test="phone != null">phone=#{phone},</if>
 	      <if test="fax != null">fax=#{fax},</if>
 	      <if test="description != null">description=#{description},</if>

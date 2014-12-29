@@ -18,6 +18,7 @@ import javax.servlet.http.HttpServletResponse;
 import jxl.Cell;
 import jxl.Sheet;
 import jxl.Workbook;
+import net.sf.json.JSONObject;
 
 import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -66,6 +67,7 @@ import com.banzhuan.entity.UserEntity;
 import com.banzhuan.form.ItemForm;
 import com.banzhuan.form.RegForm;
 import com.banzhuan.util.CuttingToolsConfiguration;
+import com.banzhuan.util.MailGetter;
 import com.banzhuan.util.StringUtil;
 import com.banzhuan.util.Util;
 
@@ -118,6 +120,35 @@ public class AdminController extends BaseController{
 	@Qualifier("stDAO")
 	private StatisticsDAO stDAO;
 	
+	@RequestMapping(value="/updatelocation")
+	public ModelAndView updatelocation(final HttpServletRequest request, final HttpServletResponse response)
+	{
+		ModelAndView mv = new ModelAndView("/admin/test");
+		List<UserEntity> users = userDAO.getUsersByAuth(3);
+		for(int i = 0; i<users.size();i++)
+		{
+			String addr = users.get(i).getAddress();
+			if(StringUtil.isNotEmpty(addr))
+			{
+				try
+				{
+				String tmp = MailGetter.getContent("http://api.map.baidu.com/geocoder?address=" + addr + "&output=json&key=30fa5b6fbf80b1867d196b58f548341f");
+				JSONObject json = JSONObject.fromObject(tmp.replace("    ", "").replace("/r/n", ""));
+				JSONObject jsonResult = JSONObject.fromObject(json.get("result"));
+				JSONObject jsonLoc = JSONObject.fromObject(jsonResult.get("location"));
+				UserEntity user = users.get(i);
+				user.setLat(jsonLoc.getDouble("lat"));
+				user.setLng(jsonLoc.getDouble("lng"));
+				userDAO.updateUserEntityById(user);
+				}
+				catch(Exception e)
+				{
+					
+				}
+			}
+		}
+		return mv;
+	}
 	@RequestMapping(value="/updatescrewdirection")
 	public ModelAndView updatescrewdirection(final HttpServletRequest request, final HttpServletResponse response)
 	{

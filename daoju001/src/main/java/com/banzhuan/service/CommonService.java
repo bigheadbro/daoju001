@@ -359,6 +359,10 @@ public class CommonService {
 		for(int i = 0; i< users.size();i++)
 		{
 			UserEntity user = users.get(i);
+			if(StringUtil.isEmpty(user.getAddress()))
+			{
+				continue;
+			}
 			ret += "[";
 			ret += user.getLng();
 			ret += "," + user.getLat();

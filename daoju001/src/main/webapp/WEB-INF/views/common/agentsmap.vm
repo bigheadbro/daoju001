@@ -11,7 +11,7 @@
 <script type="text/javascript">
     	// 百度地图API功能	
     	map = new BMap.Map("allmap");
-    	map.centerAndZoom(new BMap.Point(113,34), 5);
+    	map.centerAndZoom(new BMap.Point(105,34), 5);
     	map.enableScrollWheelZoom(true);     //开启鼠标滚轮缩放
     	var data_info = $info;
     	var opts = {

@@ -2095,3 +2095,8 @@ a.join:hover{background-color:#00ace4;}
 .width162{width:162px;}
 .width180{width:180px}
 .width60{width:60px;}
+
+@media (max-width: 1440px) 
+{
+	.right-side{display:none;}
+}

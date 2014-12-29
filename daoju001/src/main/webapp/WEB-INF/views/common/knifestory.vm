@@ -1,5 +1,8 @@
 #set($layout = "/layout/item_layout.vm")
 <script type="text/javascript" src="/js/azlist.js"></script>
+<style>
+	a:hover{text-decoration:underline;}
+</style>
 <div style="background:url(../img/story.png);margin:0 auto;width:960px;height:338px;position:relative;">
 	<a style="background-color: #70a07c;background-image: url(../img/kma.png);color: white;font-size: 16px;position: absolute;text-align: center;width: 146px;left: 220px;top: 250px;padding: 6px 0;background-repeat: no-repeat;background-position: 26px center;text-indent: 19px;" href="#seedetail">查看详情</a>
 </div>
@@ -10,7 +13,9 @@
 	<p style="font-size:12px;color:#2a8649;margin-top: 80px;line-height: 22px;">
 		随着机械加工现代化程度越来越高，刀具的使用也越来越普遍、种类越来越丰富。从过去的白钢刀到硬质合金，从国产到欧美日韩，再到全球刀具品牌争先恐后涌入中国，刀具产品和整个行业都发生了巨大的变化。无论是刀具用户还是供应商，请将你的刀具故事通过刀师傅网分享出来，成为同行们瞩目的焦点吧！入选的每一个刀具故事，我们都会给予丰厚的现金奖励。除此以外，每期活动都有5位参与奖，希望大家不吝经验多多投稿。
 	</p>
-	<div id="seedetail" style="border-top:1px solid #2a8649;margin-top:60px;">
+	<div id="seedetail" style="padding-top:25px;margin-top:60px;">
+	</div>
+	<div style="border-top:1px solid #2a8649;">
 		<h1 style="color: #4e9766;margin: 0 auto;font-size: 18px;text-align: center;width: 120px;height: 50px;padding-top: 10px;background-color: #ffe300;border: 14px solid #ffef6c;border-top: none;border-radius: 0 0 200px 200px;">活动详情</h1>
 	</div>
 	<div style="padding:0 95px;margin-top:30px;">

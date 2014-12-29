@@ -5,7 +5,7 @@
 </style>
 <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=30fa5b6fbf80b1867d196b58f548341f"></script>
 <div class="main-content-wrap clearfix">
-	<h1 class="providers-title">刀师傅供应商</h1>
+	<h1 class="providers-title">刀师傅供应商地图</h1>
 	<div id="allmap"></div>
 </div>
 <script type="text/javascript">

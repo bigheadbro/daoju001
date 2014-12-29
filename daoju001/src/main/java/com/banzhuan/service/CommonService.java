@@ -364,13 +364,26 @@ public class CommonService {
 			ret += "," + user.getLat();
 			ret += ",\"<div>"
 					+ "<h2 style='color: #535353;font-size: 16px;padding: 5px 5px 3px 0;margin-bottom: 7px;'>"
-					+ "<a href='/agents/454'>"+user.getCompanyName()+"</a>"
+					+ "<a target='_blank' href='/agents/"+user.getId()+"'>"+user.getCompanyName()+"</a>"
 					+ "</h2>"
-					+ "<h3><span style='display: inline-block;text-align: center;color: #929292;padding: 1px 0px;margin-right: 5px;border-radius: 4px;font-size: 12px;'>供应品牌:</span>"
-					+ "<span style='font-size:14px;padding:5px;'>" + StringUtil.getBrand(user.getBrand()) + "</span><span style='font-size:14px;padding:5px;'>" + StringUtil.getBrand(user.getBrand2()) + "<span>"
-					+ "</h3>"
+					+ "<h3><span style='display: inline-block;text-align: center;color: #929292;padding: 1px 0px;margin-right: 5px;border-radius: 4px;font-size: 12px;'>供应品牌:</span>";
+			if(user.getBrand() == user.getBrand2() && user.getBrand() == 0)
+			{
+				ret += "<span style='font-size:14px;padding:5px;'>不详</span>";
+			}
+			else if(user.getBrand() == user.getBrand2())
+			{
+				ret += "<span style='font-size:14px;padding:5px;'>" + StringUtil.getBrand(user.getBrand()) + "</span>";
+			}
+			else
+			{
+				ret += "<span style='font-size:14px;padding:5px;'>" + StringUtil.getBrand(user.getBrand()) + "</span>"
+					+"<span style='font-size:14px;padding:5px;'>" + StringUtil.getBrand(user.getBrand2()) + "<span>";
+			}
+			ret += "</h3>"
 					+ "<h5 style='font-weight: 100;margin: 2px 0 2px 0;white-space: nowrap;color: #ff8f17;'>"
 					+ "<span style='display: inline-block;width: 25px;text-align: center;color: #929292;padding: 1px 0px;margin-right: 5px;border-radius: 4px;font-size: 12px;'>电话:</span>";
+			
 			if(StringUtil.isNotEmpty(user.getContactPhone()))
 			{
 				ret += user.getContactPhone();

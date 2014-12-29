@@ -6,6 +6,9 @@
 <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=30fa5b6fbf80b1867d196b58f548341f"></script>
 <div class="main-content-wrap clearfix">
 	<h1 class="providers-title">刀师傅供应商地图</h1>
+	<style>
+		h2 a:hover{text-decoration:underline;}
+	</style>
 	<div id="allmap"></div>
 </div>
 <script type="text/javascript">
@@ -13,6 +16,12 @@
     	map = new BMap.Map("allmap");
     	map.centerAndZoom(new BMap.Point(105,34), 5);
     	map.enableScrollWheelZoom(true);     //开启鼠标滚轮缩放
+		var top_left_control = new BMap.ScaleControl({anchor: BMAP_ANCHOR_TOP_LEFT});// 左上角，添加比例尺
+		var top_left_navigation = new BMap.NavigationControl();  //左上角，添加默认缩放平移控件
+		var top_right_navigation = new BMap.NavigationControl({anchor: BMAP_ANCHOR_TOP_RIGHT, type: BMAP_NAVIGATION_CONTROL_SMALL}); //右上角，仅包含平移和缩放按钮
+		map.addControl(top_left_control);        
+		map.addControl(top_left_navigation);     
+		map.addControl(top_right_navigation);   
     	var data_info = $info;
     	var opts = {
     				title : "信息窗口" , // 信息窗口标题

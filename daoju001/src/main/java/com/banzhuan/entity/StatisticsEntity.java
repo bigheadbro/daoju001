@@ -9,7 +9,7 @@ public class StatisticsEntity implements Serializable {
 	private static final long serialVersionUID = -5054274202911059356L;
 	//
 	private int id;
-	//1问卷调查，2查看联系方式,3搜索内容,4为加入我们
+	//1问卷调查，2查看联系方式,3搜索内容,4为加入我们,5我来回答
 	private int type;
 	//
 	private String info;

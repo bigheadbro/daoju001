@@ -81,6 +81,11 @@
 											  <option value ="φ20精球">φ20精球</option>
 											  <option value ="机床附件">机床附件</option>
 											  <option value ="螺旋丝锥">螺旋丝锥</option>
+											  <option value ="DN">DN</option>
+                                              <option value ="DC">DC</option>
+											  <option value ="VB">VB</option>
+											  <option value ="TP">TP</option>
+                                              <option value ="切槽/切断">切槽/切断</option>
 											  <option value ="其它">其它</option>
                                             </select>
                             			</li>

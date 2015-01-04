@@ -1143,7 +1143,7 @@ public class CommonService {
 		HashSet<String> collet= new HashSet<String>();
 		
 		HashSet<Integer> ctcount= new HashSet<Integer>();
-		HashSet<Integer>angle= new HashSet<Integer>();
+		HashSet<Double>angle= new HashSet<Double>();
 		HashSet<Integer>backangle= new HashSet<Integer>();
 		HashSet<Integer>edgeno= new HashSet<Integer>();
 		HashSet<Integer>cujing= new HashSet<Integer>();
@@ -1171,6 +1171,8 @@ public class CommonService {
 		HashSet<String> drillrange= new HashSet<String>();
 		HashSet<String> screwdirection= new HashSet<String>();
 		HashSet<String> workingrange= new HashSet<String>();
+		HashSet<String> handledtype= new HashSet<String>();
+		HashSet<String> relativescrewct= new HashSet<String>();
 		for(int j = 0; j < cts.size(); j++)
 		{
 			brand.add(cts.get(j).getBrand());
@@ -1222,6 +1224,8 @@ public class CommonService {
 			drillrange.add(cts.get(j).getDrillrange());
 			screwdirection.add(cts.get(j).getScrewdirection());
 			workingrange.add(cts.get(j).getWorkingrange());
+			handledtype.add(cts.get(j).getHandledtype());
+			relativescrewct.add(cts.get(j).getRelativescrewct());
 		}
 		String ret = "";
 		if(brand.size() > 1 || (!brand.contains(null) && brand.size() == 1))
@@ -1239,9 +1243,9 @@ public class CommonService {
 		if(angle.size() > 1 || (!angle.contains(0) && angle.size() == 1))
 		{
 			ret += "<li set=0 param=\"angle\"><input type=\"hidden\" name=\"angle\" /><h1>主偏角<a></a></h1><div class=\"param clearfix\" >";
-			final List<Integer> list = new ArrayList<Integer>();  
+			final List<Double> list = new ArrayList<Double>();  
 			  
-	        for(final Integer value : angle){  
+	        for(final double value : angle){  
 	            list.add(value);  
 	        }  
 	        Collections.sort(list);  
@@ -2064,6 +2068,30 @@ public class CommonService {
 			ret += "</div></li>";
 		}
 		
+		if(handledtype.size() > 1 || (!handledtype.contains(null) && handledtype.size() == 1))
+		{
+			ret += "<li set=0 param=\"handledtype\"><input type=\"hidden\" name=\"handledtype\" /><h1>夹持方式<a></a></h1><div class=\"param clearfix\" >";
+			Iterator<String> iter = handledtype.iterator();
+			while(iter.hasNext())
+			{
+				String tmp = iter.next();
+				if(StringUtil.isNotEmpty(tmp))
+					ret += "<span>"+tmp+"</span>";
+			}
+			ret += "</div></li>";
+		}
+		if(relativescrewct.size() > 1 || (!relativescrewct.contains(null) && relativescrewct.size() == 1))
+		{
+			ret += "<li set=0 param=\"relativescrewct\"><input type=\"hidden\" name=\"relativescrewct\" /><h1>匹配螺纹刀片<a></a></h1><div class=\"param clearfix\" >";
+			Iterator<String> iter = relativescrewct.iterator();
+			while(iter.hasNext())
+			{
+				String tmp = iter.next();
+				if(StringUtil.isNotEmpty(tmp))
+					ret += "<span>"+tmp+"</span>";
+			}
+			ret += "</div></li>";
+		}
 		return CuttingToolsConfiguration.orderParams(ret,code);
 	}
 	
@@ -2095,7 +2123,7 @@ public class CommonService {
 		HashSet<String> collet= new HashSet<String>();
 		
 		HashSet<Integer> ctcount= new HashSet<Integer>();
-		HashSet<Integer>angle= new HashSet<Integer>();
+		HashSet<Double>angle= new HashSet<Double>();
 		HashSet<Integer>backangle= new HashSet<Integer>();
 		HashSet<Integer>edgeno= new HashSet<Integer>();
 		HashSet<Integer>cujing= new HashSet<Integer>();
@@ -2125,6 +2153,8 @@ public class CommonService {
 		HashSet<String> drillrange= new HashSet<String>();
 		HashSet<String> screwdirection= new HashSet<String>();
 		HashSet<String> workingrange= new HashSet<String>();
+		HashSet<String> handledtype= new HashSet<String>();
+		HashSet<String> relativescrewct= new HashSet<String>();
 		for(int j = 0; j < cts.size(); j++)
 		{
 			brand.add(cts.get(j).getBrand());
@@ -2176,6 +2206,8 @@ public class CommonService {
 			drillrange.add(cts.get(j).getDrillrange());
 			screwdirection.add(cts.get(j).getScrewdirection());
 			workingrange.add(cts.get(j).getWorkingrange());
+			handledtype.add(cts.get(j).getHandledtype());
+			relativescrewct.add(cts.get(j).getRelativescrewct());
 		}
 		Map<String,List<String>> map = new HashMap<String, List<String>>();
 		if(brand.size() > 1 || (!brand.contains(null) && brand.size() == 1))
@@ -2184,7 +2216,7 @@ public class CommonService {
 		}
 		if(angle.size() > 1 || (!angle.contains(0) && angle.size() == 1))
 		{
-			map.put("angle", CuttingToolsConfiguration.sortIntegerList(angle));
+			map.put("angle", CuttingToolsConfiguration.sortDoubleList(angle));
 		}
 		if(ctcount.size() > 1 || (!ctcount.contains(0) && ctcount.size() == 1))
 		{
@@ -2384,6 +2416,14 @@ public class CommonService {
 		if(workingrange.size() > 1 || (!workingrange.contains(null) && workingrange.size() == 1))
 		{
 			map.put("workingrange", CuttingToolsConfiguration.convertSetToList(workingrange));
+		}
+		if(handledtype.size() > 1 || (!handledtype.contains(null) && handledtype.size() == 1))
+		{
+			map.put("handledtype", CuttingToolsConfiguration.convertSetToList(handledtype));
+		}
+		if(relativescrewct.size() > 1 || (!relativescrewct.contains(null) && relativescrewct.size() == 1))
+		{
+			map.put("relativescrewct", CuttingToolsConfiguration.convertSetToList(relativescrewct));
 		}
 		return map;
 	}

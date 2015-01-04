@@ -30,7 +30,7 @@ public class CuttingToolEntity implements Serializable {
 	//
 	private int ctcount;
 	//
-	private int angle;
+	private double angle;
 	//
 	private String diameter;
 	//
@@ -139,6 +139,10 @@ public class CuttingToolEntity implements Serializable {
 	
 	private String relative;
 	
+	private String handledtype;
+	
+	private String relativescrewct;
+	
 	public int getId() {
 		return id;
 	}
@@ -203,11 +207,11 @@ public class CuttingToolEntity implements Serializable {
 		this.ctcount = ctcount;
 	}
 
-	public int getAngle() {
+	public double getAngle() {
 		return angle;
 	}
 
-	public void setAngle(int angle) {
+	public void setAngle(double angle) {
 		this.angle = angle;
 	}
 
@@ -675,5 +679,25 @@ public class CuttingToolEntity implements Serializable {
 	public void setRelative(String relative)
 	{
 		this.relative = relative;
+	}
+
+	public String getHandledtype()
+	{
+		return handledtype;
+	}
+
+	public void setHandledtype(String handledtype)
+	{
+		this.handledtype = handledtype;
+	}
+
+	public String getRelativescrewct()
+	{
+		return relativescrewct;
+	}
+
+	public void setRelativescrewct(String relativescrewct)
+	{
+		this.relativescrewct = relativescrewct;
 	}
 }

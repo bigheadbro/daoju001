@@ -288,7 +288,7 @@ public class AdminController extends BaseController{
 			HashSet<String> collet= new HashSet<String>();
 			
 			HashSet<Integer> ctcount= new HashSet<Integer>();
-			HashSet<Integer>angle= new HashSet<Integer>();
+			HashSet<Double> angle= new HashSet<Double>();
 			HashSet<Integer>backangle= new HashSet<Integer>();
 			HashSet<Integer>edgeno= new HashSet<Integer>();
 			HashSet<Integer>cujing= new HashSet<Integer>();
@@ -315,6 +315,10 @@ public class AdminController extends BaseController{
 			HashSet<String> height= new HashSet<String>();
 			HashSet<String> grooverange= new HashSet<String>();
 			HashSet<String> drillrange= new HashSet<String>();
+			HashSet<String> screwdirection= new HashSet<String>();
+			HashSet<String> workingrange= new HashSet<String>();
+			HashSet<String> handledtype= new HashSet<String>();
+			HashSet<String> relativescrewct= new HashSet<String>();
 			String ret = "";
 			
 			for(int j = 0; j < versions.size(); j++)
@@ -365,12 +369,17 @@ public class AdminController extends BaseController{
 				height.add(versions.get(j).getHeight());
 				grooverange.add(versions.get(j).getGrooverange());
 				drillrange.add(versions.get(j).getDrillrange());
+				screwdirection.add(versions.get(j).getScrewdirection());
+				workingrange.add(versions.get(j).getWorkingrange());
+				handledtype.add(versions.get(j).getHandledtype());
+				relativescrewct.add(versions.get(j).getRelativescrewct());
 			}
+			
 			if(brand.size() == 1 && brand.toArray()[0] != null)
 			{
 				ret = "brand";
 			}
-			if(angle.size() == 1 && (int)(angle.toArray()[0]) != 0)
+			if(angle.size() == 1 && (double)(angle.toArray()[0]) != 0)
 			{
 				ret += ",angle";
 			}
@@ -558,6 +567,22 @@ public class AdminController extends BaseController{
 			{
 				ret += ",drillrange";
 			}
+			if(screwdirection.size() == 1 && screwdirection.toArray()[0] != null)
+			{
+				ret += "screwdirection";
+			}
+			if(workingrange.size() == 1 && workingrange.toArray()[0] != null)
+			{
+				ret += "workingrange";
+			}
+			if(handledtype.size() == 1 && handledtype.toArray()[0] != null)
+			{
+				ret += "handledtype";
+			}
+			if(relativescrewct.size() == 1 && relativescrewct.toArray()[0] != null)
+			{
+				ret += "relativescrewct";
+			}
 			CuttingToolEntity update = new CuttingToolEntity();
 			update.setSeriesname(series.get(i).getSeriesname());
 			update.setSamecolume(ret);
@@ -585,7 +610,7 @@ public class AdminController extends BaseController{
             	tmp.info = (sheet2.getCell(3, j)!=null)?sheet2.getCell(3, j).getContents().trim().replace("；", ";").replace("（", "(").replace("）", ")"):""; 
             	//tmp.suitcase = (sheet2.getCell(4, j)==null)?sheet2.getCell(4, j).getContents().trim().replace("；", ";").replace("（", "(").replace("）", ")"):""; 
             	//tmp.cover = "/img/series/" + sn + ".png";
-            	File root = new File("D:/github/daoju001/daoju001/src/main/webapp/img/series");
+            	File root = new File("D:/workspace/daoju001/daoju001/src/main/webapp/img/series");
                 File[] files = root.listFiles();
 				for (File file : files) {
 					if (StringUtil.isEqual(file.getName().split("[.]")[0],sn)) {
@@ -598,7 +623,7 @@ public class AdminController extends BaseController{
 					}
 
 				}         
-            	root = new File("D:/github/daoju001/daoju001/src/main/webapp/img/sample");
+            	root = new File("D:/workspace/daoju001/daoju001/src/main/webapp/img/sample");
                 files = root.listFiles();
 				for (File file : files) {
 					if (StringUtil.isEqual(file.getName().split("[.]")[0].split("-")[0],sn)) {
@@ -714,7 +739,7 @@ public class AdminController extends BaseController{
             // 获得第一个工作表对象
             Sheet sheet= book.getSheet(0);
             
-            for(int j = 940; j < sheet.getRows(); j++)
+            for(int j = 886; j < sheet.getRows(); j++)
             {
             	CuttingToolEntity ct = new CuttingToolEntity();
             	String tmp = sheet.getCell(0, j).getContents().trim().replace("；", ";").replace("（", "(").replace("）", ")");
@@ -746,7 +771,7 @@ public class AdminController extends BaseController{
             	tmp = sheet.getCell(5, j).getContents().trim().replace("；", ";").replace("（", "(").replace("）", ")");
             	if(StringUtil.isNotEmpty(tmp))
             	{
-            		ct.setAngle(Integer.valueOf(tmp));
+            		ct.setAngle(Double.valueOf(tmp));
             	}
             	tmp = sheet.getCell(6, j).getContents().trim().replace("；", ";").replace("（", "(").replace("）", ")");
             	if(StringUtil.isNotEmpty(tmp))
@@ -982,6 +1007,16 @@ public class AdminController extends BaseController{
             	if(StringUtil.isNotEmpty(tmp))
             	{
             		ct.setWorkingrange(tmp);
+            	}
+            	tmp = sheet.getCell(54, j).getContents().trim().replace("；", ";").replace("（", "(").replace("）", ")");
+            	if(StringUtil.isNotEmpty(tmp))
+            	{
+            		ct.setHandledtype(tmp);
+            	}
+            	tmp = sheet.getCell(55, j).getContents().trim().replace("；", ";").replace("（", "(").replace("）", ")");
+            	if(StringUtil.isNotEmpty(tmp))
+            	{
+            		ct.setRelativescrewct(tmp);
             	}
             	ct.setIshot(1);
             	if(seriesMap.get(ct.getSeriesname()) != null)

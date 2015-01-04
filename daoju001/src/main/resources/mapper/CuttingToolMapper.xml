@@ -100,6 +100,8 @@
 		<id property="workingtype" column="workingtype" />
 		<id property="workingrange" column="workingrange" />
 		<id property="relative" column="relative" />
+		<id property="handledtype" column="handledtype" />
+		<id property="relativescrewct" column="relativescrewct" />
 	</resultMap>
 	
 	<resultMap type="com.banzhuan.entity.IndexEntity" id="IndexResultMap">
@@ -121,13 +123,13 @@
 	<select  id="getIndexCount" resultMap="IndexResultMap">
 		select * from (
 			(select count(1) as b1 from (select id,code,brand from (select id,code,brand from t_cuttingtool group by seriesname) as series  where left(`code`,2)="01" group by brand) as brand) brand1,
-			(select count(1) as b2 from (select id,code,brand from (select id,code,brand from t_cuttingtool group by seriesname) as series  where left(`code`,2)="02" group by brand) as brand) brand2,
+			(select count(1) as b2 from (select id,code,brand from (select id,code,brand from t_cuttingtool group by seriesname) as series  where left(`code`,2)="03" group by brand) as brand) brand2,
 			(select count(1) as b3 from (select id,code,brand from (select id,code,brand from t_cuttingtool group by seriesname) as series  where left(`code`,2)="04" group by brand) as brand) brand3,
-			(select count(1) as b4 from (select id,code,brand from (select id,code,brand from t_cuttingtool group by seriesname) as series  where left(`code`,2)="05" group by brand) as brand) brand4,
+			(select count(1) as b4 from (select id,code,brand from (select id,code,brand from t_cuttingtool group by seriesname) as series  where left(`code`,2)="06" group by brand) as brand) brand4,
 			(select count(1) as sn1 from (select id,code,seriesname from (select id,code,seriesname from t_cuttingtool group by seriesname) as series  where left(`code`,2)="01" group by seriesname) as sn) sn1,
-			(select count(1) as sn2 from (select id,code,seriesname from (select id,code,seriesname from t_cuttingtool group by seriesname) as series  where left(`code`,2)="02" group by seriesname) as sn) sn2,
+			(select count(1) as sn2 from (select id,code,seriesname from (select id,code,seriesname from t_cuttingtool group by seriesname) as series  where left(`code`,2)="03" group by seriesname) as sn) sn2,
 			(select count(1) as sn3 from (select id,code,seriesname from (select id,code,seriesname from t_cuttingtool group by seriesname) as series  where left(`code`,2)="04" group by seriesname) as sn) sn3,
-			(select count(1) as sn4 from (select id,code,seriesname from (select id,code,seriesname from t_cuttingtool group by seriesname) as series  where left(`code`,2)="05" group by seriesname) as sn) sn4
+			(select count(1) as sn4 from (select id,code,seriesname from (select id,code,seriesname from t_cuttingtool group by seriesname) as series  where left(`code`,2)="06" group by seriesname) as sn) sn4
 			)
 	</select>
 	<select id="getIndexCts" resultMap="CuttingToolResultMap">
@@ -316,6 +318,12 @@
 		<if test="workingrange != null and workingrange != ''">
  	        and workingrange = #{workingrange}
 		</if>
+		<if test="handledtype != null and handledtype != ''">
+ 	        and handledtype = #{handledtype}
+		</if>
+		<if test="relativescrewct != null and relativescrewct != ''">
+ 	        and relativescrewct = #{relativescrewct}
+		</if>
 		<if test="usage != null and usage != ''">
        		and locate(#{usage},`usage`) > 0
 		</if>
@@ -477,6 +485,12 @@
 		<if test="workingrange != null and workingrange != ''">
  	        and workingrange = #{workingrange}
 		</if>
+		<if test="handledtype != null and handledtype != ''">
+ 	        and handledtype = #{handledtype}
+		</if>
+		<if test="relativescrewct != null and relativescrewct != ''">
+ 	        and relativescrewct = #{relativescrewct}
+		</if>
 		<if test="usage != null and usage != ''">
        		and locate(#{usage},`usage`) > 0
 		</if>
@@ -630,6 +644,12 @@
 		<if test="workingrange != null and workingrange != ''">
  	        and workingrange = #{workingrange}
 		</if>
+		<if test="handledtype != null and handledtype != ''">
+ 	        and handledtype = #{handledtype}
+		</if>
+		<if test="relativescrewct != null and relativescrewct != ''">
+ 	        and relativescrewct = #{relativescrewct}
+		</if>
 		<if test="workingtype != null and workingtype != ''">
  	        and locate(#{workingtype},`workingtype`) > 0
 		</if>
@@ -736,7 +756,9 @@
 		,drillrange
 		,screwdirection
 		,workingtype
-		,workingrange)
+		,workingrange
+		,handledtype
+		,relativescrewct)
 		values
 		(
 		#{ishot}
@@ -799,6 +821,8 @@
 		,#{screwdirection}
 		,#{workingtype}
 		,#{workingrange}
+		,#{handledtype}
+		,#{relativescrewct}
 		)
 	</insert>
 </mapper>

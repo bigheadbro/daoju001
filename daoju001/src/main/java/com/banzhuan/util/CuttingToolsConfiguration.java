@@ -634,7 +634,10 @@ public class CuttingToolsConfiguration
 		        str += "<td>"+list.get(i).getScrewdirection() +"</td>";
 		    if(StringUtil.isContains(param,">镗孔范围"))
 		        str += "<td>"+list.get(i).getWorkingrange() +"</td>";
-		    
+		    if(StringUtil.isContains(param,">夹持方式"))
+		        str += "<td>"+list.get(i).getHandledtype() +"</td>";
+		    if(StringUtil.isContains(param,">匹配螺纹刀片"))
+		        str += "<td>"+list.get(i).getRelativescrewct() +"</td>";
 		    str += "<tr>";
 		}
 		str += "</tbody></table>";
@@ -667,7 +670,7 @@ public class CuttingToolsConfiguration
 		HashSet<String> collet= new HashSet<String>();
 		
 		HashSet<Integer> ctcount= new HashSet<Integer>();
-		HashSet<Integer>angle= new HashSet<Integer>();
+		HashSet<Double>angle= new HashSet<Double>();
 		HashSet<Integer>backangle= new HashSet<Integer>();
 		HashSet<Integer>edgeno= new HashSet<Integer>();
 		HashSet<Integer>cujing= new HashSet<Integer>();
@@ -695,6 +698,8 @@ public class CuttingToolsConfiguration
 		HashSet<String> drillrange= new HashSet<String>();
 		HashSet<String> screwdirection= new HashSet<String>();
 		HashSet<String> workingrange= new HashSet<String>();
+		HashSet<String> handledtype= new HashSet<String>();
+		HashSet<String> relativescrewct= new HashSet<String>();
 		for(int j = 0; j < cts.size(); j++)
 		{
 			version.add(cts.get(j).getVersion());
@@ -746,6 +751,8 @@ public class CuttingToolsConfiguration
 			drillrange.add(cts.get(j).getDrillrange());
 			screwdirection.add(cts.get(j).getScrewdirection());
 			workingrange.add(cts.get(j).getWorkingrange());
+			handledtype.add(cts.get(j).getHandledtype());
+			relativescrewct.add(cts.get(j).getRelativescrewct());
 		}
 		if (version.size() > 1 || (!version.contains(null) && version.size() == 1))
 		{
@@ -942,6 +949,14 @@ public class CuttingToolsConfiguration
 		if (screwdirection.size() > 1 || (!screwdirection.contains(null) && screwdirection.size() == 1))
 		{
 			ret += "<th>螺纹方向</th>";
+		}
+		if (handledtype.size() > 1 || (!handledtype.contains(null) && handledtype.size() == 1))
+		{
+			ret += "<th>夹持方式</th>";
+		}
+		if (relativescrewct.size() > 1 || (!relativescrewct.contains(null) && relativescrewct.size() == 1))
+		{
+			ret += "<th>匹配螺纹刀片</th>";
 		}
 		return ret;
 	}
@@ -1220,6 +1235,15 @@ public class CuttingToolsConfiguration
 		{
 			tmp += "<span>"+ct.getScrewdirection()+"</span>";
 		}
+		if (ret.contains("<span>夹持方式</span>"))
+		{
+			tmp += "<span>"+ct.getHandledtype()+"</span>";
+		}
+		if (ret.contains("<span>匹配螺纹刀片</span>"))
+		{
+			tmp += "<span>"+ct.getRelativescrewct()+"</span>";
+		}
+
 		return tmp;
 	}
 

@@ -30,15 +30,13 @@
 		<div class="index-item">
     		<ul class="clearfix">
     			<li class="title">
-    				<h1>整体铣刀</h1>
-					<a href="/category/020201">标准平头铣刀</a>
-					<a href="/category/020301">标准圆角铣刀</a>
-					<a href="/category/020201">标准球头铣刀</a>
-					<a href="/category/020202">长颈球头铣刀</a>
-					<a href="/category/020103">长颈平头铣刀</a>
+    				<h1>车削刀具</h1>
+					<a href="/category/030103">切槽/切断刀杆</a>
+					<a href="/category/030201">普通车刀片</a>
+					<a href="/category/030202">精磨车刀片</a>
     				<p>${count.b2}个品牌<br/>${count.sn2}个系列</p>
     			</li>
-    			#foreach($ct in $ctConfig.getCtsByType($cts,"02"))
+    			#foreach($ct in $ctConfig.getCtsByType($cts,"03"))
     			<li class="item">
     				 <a href="/detail/$ct.id">
 						<div class="img-wrap">
@@ -82,15 +80,15 @@
 		<div class="index-item">
     		<ul class="clearfix">
     			<li class="title">
-    				<h1>刀柄</h1>
-					<a href="/category/050103">冷压刀柄</a>
-					<a href="/category/050104">ER刀柄</a>
-					<a href="/category/0503">面铣刀柄</a>
-					<a href="/category/0504">丝锥刀柄</a>
-					<a href="/category/0506">筒夹</a>
+    				<h1>螺纹刀具</h1>
+					<a href="/category/060101">整体螺纹铣刀</a>
+					<a href="/category/060102">螺纹铣刀杆</a>
+					<a href="/category/060103">螺纹铣刀片</a>
+					<a href="/category/060603">先端丝锥</a>
+					<a href="/category/060604">螺旋丝锥</a>
     				<p>${count.b4}个品牌<br/>${count.sn4}个系列</p>
     			</li>
-    			#foreach($ct in $ctConfig.getCtsByType($cts,"05"))
+    			#foreach($ct in $ctConfig.getCtsByType($cts,"06"))
     			<li class="item">
     				 <a href="/detail/$ct.id">
 						<div class="img-wrap">

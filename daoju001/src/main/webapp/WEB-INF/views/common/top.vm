@@ -461,17 +461,17 @@
 				#end
 				#if($!stringUtil.isContains($request.getServletPath(),"/items"))
                 <li class="current">
-                    <a class="pifa">标准品批发</a>
+                    <a href="/items">标准品批发</a>
                 </li>
 				#else
 				<li class="item">
-                    <a class="pifa">标准品批发</a>
+                    <a href="/items">标准品批发</a>
                 </li>
 				#end
 				<li class="complain">
                     <a>投诉建议</a>
                 </li>
-				<script>
+				<!--<script>
 				$(function(){
                 	$(".pifa").click(function() {
                 		$.ajax( {   
@@ -493,7 +493,7 @@
                 		});   
                 	});
 				});
-				</script>
+				</script>-->
             </ul>
         </div>
     </div>

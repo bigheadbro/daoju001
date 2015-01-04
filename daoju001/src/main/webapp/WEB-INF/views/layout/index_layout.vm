@@ -474,11 +474,11 @@
 						#end
 						#if($!stringUtil.isContains($request.getServletPath(),"/items"))
                         <li class="current">
-                            <a class="pifa">标准品批发</a>
+                            <a href="/items">标准品批发</a>
                         </li>
         				#else
         				<li class="item pifa">
-                            <a class="pifa">标准品批发</a>
+                            <a href="/items">标准品批发</a>
                         </li>
         				#end
 						<li class="complain">
@@ -495,25 +495,6 @@
             			</div>
 						<script>
 						$(function(){
-                        	$(".pifa").click(function() {
-                        		$.ajax( {   
-                        		    type : "POST",   
-                        		    url : "/pifa",
-                        		    success : function(data) {   
-                        		    	switch(data.status)
-                        		    	{
-                        		    	case 1:
-                        		    		showAlert("权限不够",data.code,"","登录","/log");
-                        		    	  break;
-                        		    	case 2:
-											window.location.href='/items';
-                        		    	  break;
-                        		    	default:
-											window.location.href='/items';
-                        		    	}  
-                        		    }
-                        		});   
-                        	});
 							$("a.searchmaterial").click(function(){
 								$("#materialinput").val($("#index-material").val());
 								$(".result h1").empty();

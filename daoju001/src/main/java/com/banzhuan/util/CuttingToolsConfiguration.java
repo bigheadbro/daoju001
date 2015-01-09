@@ -227,13 +227,13 @@ public class CuttingToolsConfiguration
 		orderMap.put("030201", "brand,shape,backangle,workingtool,rangle,direction,material");
 		orderMap.put("030202", "brand,shape,backangle,workingtool,rangle,direction,material");
 		orderMap.put("030203", "brand,workingtool,thickness,maxslotdepth,material");
-		orderMap.put("040101", "brand,diameter,diameterratio,workingtool,innercooling,screwangle,edgelengthe,totallength,shank,shanktype,coatingtype");
-		orderMap.put("040102", "brand,diameter,diameterratio,workingtool,innercooling,screwangle,edgelengthe,totallength,shank,shanktype,coatingtype");
+		orderMap.put("040101", "brand,diameter,diameterratio,workingtool,innercooling,screwangle,edgelength,totallength,shank,shanktype,coatingtype");
+		orderMap.put("040102", "brand,diameter,diameterratio,workingtool,innercooling,screwangle,edgelength,totallength,shank,shanktype,coatingtype");
 		orderMap.put("040201", "brand,drillrange,diameterratio,workingtool,innercooling,shank");
 		orderMap.put("040202", "");
 		orderMap.put("040301", "brand,drillrange,diameterratio,workingtool,usefullength,totallength,shank,shanktype,slotshape");
 		orderMap.put("040302", "");
-		orderMap.put("040401", "brand,diameter,diameterratio,workingtool,innercooling,screwangle,edgelengthe,totallength,shank,shanktype,direction");
+		orderMap.put("040401", "brand,diameter,diameterratio,workingtool,innercooling,screwangle,edgelength,totallength,shank,shanktype,direction");
 		orderMap.put("040402", "");
 		orderMap.put("0409",   "");
 		orderMap.put("0410",   "");
@@ -396,7 +396,14 @@ public class CuttingToolsConfiguration
 			str += "<tr>";
 			str += "<td>"+list.get(i).getVersion() +"</td>";
 		    if(StringUtil.isContains(param,">材质<"))
-		        str += "<td>"+list.get(i).getMaterial() +"</td>";
+		    {
+		    	if(StringUtil.isEmpty(list.get(i).getMaterial()))
+		    	{
+		    		str += "<td></td>";
+		    	}
+		    	else
+		    		str+="<td>"+list.get(i).getMaterial() +"</td>";
+		    }
 		    
 		    if(StringUtil.isContains(param,">主偏角<"))
 		        str += "<td>"+list.get(i).getAngle() +"</td>";
@@ -762,7 +769,7 @@ public class CuttingToolsConfiguration
 		{
 			ret += "<th>材质</th>";
 		}
-		if (angle.size() > 1 || (!angle.contains(0) && angle.size() == 1))
+		if (angle.size() > 1 || (!angle.contains(0d) && angle.size() == 1))
 		{
 			ret += "<th>主偏角</th>";
 		}

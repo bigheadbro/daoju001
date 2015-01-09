@@ -546,8 +546,14 @@ public class JsonUtil {
 			str += "<tr>";
 			str += "<td>"+list.get(i).getVersion() +"</td>";
 		    if(StringUtil.isContains(param,">材质<"))
-		        str += "<td>"+list.get(i).getMaterial() +"</td>";
-		    
+		    {
+		    	if(StringUtil.isEmpty(list.get(i).getMaterial()))
+		    	{
+		    		str += "<td></td>";
+		    	}
+		    	else
+		    		str+="<td>"+list.get(i).getMaterial() +"</td>";
+		    }
 		    if(StringUtil.isContains(param,">主偏角<"))
 		        str += "<td>"+list.get(i).getAngle() +"</td>";
 		    

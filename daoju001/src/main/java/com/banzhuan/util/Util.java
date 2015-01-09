@@ -692,6 +692,10 @@ public class Util {
 	
 	public static void main(String[] args) {
 		//removeMailFromEDM();
-		renameFolder("C:/Users/Administrator/Desktop/株洲钻石/目录");
+		//renameFolder("C:/Users/Administrator/Desktop/PALBIT/目录");
+		for(int i = 1;i<=20;i++)
+		{
+			System.out.println("<option value =\"φ"+String.valueOf(i)+"\">φ"+String.valueOf(i)+"</option>");
+		}
 	}
 }

@@ -314,7 +314,7 @@ $(function() {
         			#end
         		</div>
 				<div class="video-content">
-					<p>${ct.videoinfo}</p>
+					<p>$!{ct.videoinfo}</p>
         			#if($stringUtil.isNotEmpty(${ct.videolink}) && $stringUtil.isContains(${ct.videolink},"youku"))
         				$stringUtil.convertYoukulink(${ct.videolink})
         			#end

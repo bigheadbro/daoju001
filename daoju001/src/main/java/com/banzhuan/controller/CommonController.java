@@ -1735,7 +1735,7 @@ public class CommonController extends BaseController{
 		String seriesname = request.getParameter("seriesname");
 		String version = request.getParameter("version");
 		String material = request.getParameter("material");
-		int angle = Integer.valueOf(StringUtil.isEmpty(request.getParameter("angle"))?"0":request.getParameter("angle"));
+		double angle = Double.valueOf(StringUtil.isEmpty(request.getParameter("angle"))?"0":request.getParameter("angle"));
 		String diameter = request.getParameter("diameter");
 		String usage = request.getParameter("usage");
 		int cujing = Integer.valueOf(CuttingToolsConfiguration.formatCujing(request.getParameter("cujing")));

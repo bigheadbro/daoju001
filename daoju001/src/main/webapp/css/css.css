@@ -35,7 +35,7 @@ a.common:hover{text-decoration:underline;color:#00c0ff}
 .item-filter-wrapper .filter{font-size:13px;}
 .item-filter-wrapper .filter li{border-bottom:1px solid #9b9b9b;padding: 5px 0;}
 .item-filter-wrapper .filter li .title{float: left;width:100px;text-align: right;padding:10px;}
-.item-filter-wrapper .filter li .content{display:inline-block;padding: 5px 0;}
+.item-filter-wrapper .filter li .content{display:inline-block;padding: 5px 0;width: 830px;}
 .item-filter-wrapper .filter li .content a{color:#006ab4;padding:5px;display: inline-block;}
 .item-filter-wrapper .filter li .content a:hover{background-color:#006ab4;color:white;}
 

@@ -1240,7 +1240,7 @@ public class CommonService {
 			}
 			ret += "</div></li>";
 		}
-		if(angle.size() > 1 || (!angle.contains(0) && angle.size() == 1))
+		if(angle.size() > 1 || (!angle.contains(0d) && angle.size() == 1))
 		{
 			ret += "<li set=0 param=\"angle\"><input type=\"hidden\" name=\"angle\" /><h1>主偏角<a></a></h1><div class=\"param clearfix\" >";
 			final List<Double> list = new ArrayList<Double>();  
@@ -2214,7 +2214,7 @@ public class CommonService {
 		{
 			map.put("brand", CuttingToolsConfiguration.convertSetToList(brand));
 		}
-		if(angle.size() > 1 || (!angle.contains(0) && angle.size() == 1))
+		if(angle.size() > 1 || (!angle.contains(0d) && angle.size() == 1))
 		{
 			map.put("angle", CuttingToolsConfiguration.sortDoubleList(angle));
 		}

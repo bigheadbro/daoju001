@@ -608,6 +608,7 @@ public class AdminController extends BaseController{
             	TempEntity tmp = new TempEntity();
             	tmp.outline = (sheet2.getCell(2, j)!=null)?sheet2.getCell(2, j).getContents().trim().replace("；", ";").replace("（", "(").replace("）", ")"):""; 
             	tmp.info = (sheet2.getCell(3, j)!=null)?sheet2.getCell(3, j).getContents().trim().replace("；", ";").replace("（", "(").replace("）", ")"):""; 
+            	tmp.videolink =(sheet2.getCell(4, j)!=null)?sheet2.getCell(4, j).getContents().trim().replace("；", ";").replace("（", "(").replace("）", ")"):""; 
             	//tmp.suitcase = (sheet2.getCell(4, j)==null)?sheet2.getCell(4, j).getContents().trim().replace("；", ";").replace("（", "(").replace("）", ")"):""; 
             	//tmp.cover = "/img/series/" + sn + ".png";
             	File root = new File("D:/workspace/daoju001/daoju001/src/main/webapp/img/series");
@@ -739,7 +740,7 @@ public class AdminController extends BaseController{
             // 获得第一个工作表对象
             Sheet sheet= book.getSheet(0);
             
-            for(int j = 886; j < sheet.getRows(); j++)
+            for(int j = 2; j < sheet.getRows(); j++)
             {
             	CuttingToolEntity ct = new CuttingToolEntity();
             	String tmp = sheet.getCell(0, j).getContents().trim().replace("；", ";").replace("（", "(").replace("）", ")");
@@ -791,7 +792,7 @@ public class AdminController extends BaseController{
             	tmp = sheet.getCell(9, j).getContents().trim().replace("；", ";").replace("（", "(").replace("）", ")");
             	if(StringUtil.isNotEmpty(tmp))
             	{
-            		ct.setCujing(Integer.valueOf(tmp.replace("粗加工", "3").replace("粗", "3").replace("精", "2").replace("一般", "1")));
+            		ct.setCujing(Integer.valueOf(tmp.replace("粗加工", "3").replace("一般加工", "1").replace("粗加工", "3").replace("粗", "3").replace("精", "2").replace("一般", "1")));
             	}
             	tmp = sheet.getCell(10, j).getContents().trim().replace("；", ";").replace("（", "(").replace("）", ")");
             	if(StringUtil.isNotEmpty(tmp))
@@ -1008,16 +1009,7 @@ public class AdminController extends BaseController{
             	{
             		ct.setWorkingrange(tmp);
             	}
-            	tmp = sheet.getCell(54, j).getContents().trim().replace("；", ";").replace("（", "(").replace("）", ")");
-            	if(StringUtil.isNotEmpty(tmp))
-            	{
-            		ct.setHandledtype(tmp);
-            	}
-            	tmp = sheet.getCell(55, j).getContents().trim().replace("；", ";").replace("（", "(").replace("）", ")");
-            	if(StringUtil.isNotEmpty(tmp))
-            	{
-            		ct.setRelativescrewct(tmp);
-            	}
+            	
             	ct.setIshot(1);
             	if(seriesMap.get(ct.getSeriesname()) != null)
             	{

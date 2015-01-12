@@ -133,7 +133,7 @@ public class CuttingToolsConfiguration
 		level3Map.put("030201", "普通车刀片");
 		level3Map.put("030202", "精磨车刀片");
 		level3Map.put("030203", "切槽/切断刀片");
-		level3Map.put("060601", "手用丝锥");
+		level3Map.put("060601", "刃倾角丝锥");
 		level3Map.put("060602", "挤压丝锥");
 		level3Map.put("060603", "先端丝锥");
 		level3Map.put("060604", "螺旋丝锥");

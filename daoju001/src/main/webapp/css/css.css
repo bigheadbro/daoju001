@@ -619,7 +619,7 @@ h1.category-level a:hover{text-decoration:underline;color:#ff8f17}
 .detail-content .right .series-item .series-params{float:left;margin-left:20px;padding: 5px 0;width: 541px;}
 .detail-content .right .series-item .series-params h3{color:#5e5e5e;font-size: 18px;margin-bottom:10px;}
 .detail-content .right .series-item .series-params h4{color:#0099cb;font-size:14px;font-weight:normal;margin-bottom:5px;}
-.detail-content .right .series-item .series-params h4 span{padding-right:15px;white-space:nowrap;}
+.detail-content .right .series-item .series-params h4 span{padding-right:15px;white-space:nowrap;float: left;}
 .detail-content .right .series-item .series-params h5{color:#252525;font-size:14px;font-weight:normal;white-space:nowrap;margin-bottom:5px;}
 .detail-content .right .series-item .series-params p{color:#474747;font-size:14px;font-weight:normal;}
 .detail-content .right .provider{margin-top: 10px;}

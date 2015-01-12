@@ -608,7 +608,7 @@ public class AdminController extends BaseController{
             	TempEntity tmp = new TempEntity();
             	tmp.outline = (sheet2.getCell(2, j)!=null)?sheet2.getCell(2, j).getContents().trim().replace("；", ";").replace("（", "(").replace("）", ")"):""; 
             	tmp.info = (sheet2.getCell(3, j)!=null)?sheet2.getCell(3, j).getContents().trim().replace("；", ";").replace("（", "(").replace("）", ")"):""; 
-            	tmp.videolink =(sheet2.getCell(4, j)!=null)?sheet2.getCell(4, j).getContents().trim().replace("；", ";").replace("（", "(").replace("）", ")"):""; 
+            	//tmp.videolink =(sheet2.getCell(4, j)!=null)?sheet2.getCell(4, j).getContents().trim().replace("；", ";").replace("（", "(").replace("）", ")"):""; 
             	//tmp.suitcase = (sheet2.getCell(4, j)==null)?sheet2.getCell(4, j).getContents().trim().replace("；", ";").replace("（", "(").replace("）", ")"):""; 
             	//tmp.cover = "/img/series/" + sn + ".png";
             	File root = new File("D:/workspace/daoju001/daoju001/src/main/webapp/img/series");

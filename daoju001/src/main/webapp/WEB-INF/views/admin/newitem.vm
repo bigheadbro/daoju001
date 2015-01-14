@@ -152,6 +152,7 @@
                                               <option value ="通用">通用</option>
 											  <option value ="铸铁">铸铁</option>
                                               <option value ="不锈钢">不锈钢</option>
+											  <option value ="铝合金">铝合金</option>
                                             </select>
                             			</li>
                             		</ul>

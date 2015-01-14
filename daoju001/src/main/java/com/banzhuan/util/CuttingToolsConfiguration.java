@@ -224,7 +224,7 @@ public class CuttingToolsConfiguration
 		orderMap.put("030101", "");
 		orderMap.put("030102", "");
 		orderMap.put("030103", "brand,slotwidth,maxslotdepth,grooverange,totallength,direction,width,height");
-		orderMap.put("030201", "brand,shape,backangle,workingtool,rangle,direction,material");
+		orderMap.put("030201", "brand,shape,backangle,workingtool,rangle,direction,workingtype,material");
 		orderMap.put("030202", "brand,shape,backangle,workingtool,rangle,direction,material");
 		orderMap.put("030203", "brand,workingtool,thickness,maxslotdepth,material");
 		orderMap.put("040101", "brand,diameter,diameterratio,workingtool,innercooling,screwangle,edgelength,totallength,shank,shanktype,coatingtype");
@@ -416,6 +416,8 @@ public class CuttingToolsConfiguration
 		    
 		    if(StringUtil.isContains(param,">加工用途<"))
 		        str += "<td>"+StringUtil.replaceSemicolon(list.get(i).getUsage())+"</td>";
+		    if(StringUtil.isContains(param,">加工类型<"))
+		        str += "<td>"+StringUtil.replaceSemicolon(list.get(i).getWorkingtype())+"</td>";
 		    
 		    if(StringUtil.isContains(param,">光洁度<"))
 		    {

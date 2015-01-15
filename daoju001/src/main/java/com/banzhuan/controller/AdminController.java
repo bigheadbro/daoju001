@@ -740,7 +740,7 @@ public class AdminController extends BaseController{
             // 获得第一个工作表对象
             Sheet sheet= book.getSheet(0);
             
-            for(int j = 2; j < sheet.getRows(); j++)
+            for(int j = 1; j < 2; j++)
             {
             	CuttingToolEntity ct = new CuttingToolEntity();
             	String tmp = sheet.getCell(0, j).getContents().trim().replace("；", ";").replace("（", "(").replace("）", ")");
@@ -867,7 +867,7 @@ public class AdminController extends BaseController{
             	tmp = sheet.getCell(23, j).getContents().trim().replace("；", ";").replace("（", "(").replace("）", ")");
             	if(StringUtil.isNotEmpty(tmp))
             	{
-            		ct.setDirection(Integer.valueOf(tmp.replace("右手", "3").replace("左手", "2").replace("右", "3").replace("左", "2").replace("通用", "1")));
+            		ct.setDirection(Integer.valueOf(tmp.replace("右手", "3").replace("左手", "2").replace("右", "3").replace("左", "2").replace("通用槽", "1").replace("通用", "1")));
             	}
             	tmp = sheet.getCell(24, j).getContents().trim().replace("；", ";").replace("（", "(").replace("）", ")");
             	if(StringUtil.isNotEmpty(tmp))
@@ -1008,6 +1008,10 @@ public class AdminController extends BaseController{
             	if(StringUtil.isNotEmpty(tmp))
             	{
             		ct.setWorkingrange(tmp);
+            	}
+            	else
+            	{
+            		ct.setWorkingrange(sheet.getCell(40, j).getContents().trim()+"-"+sheet.getCell(41, j).getContents().trim());
             	}
             	
             	ct.setIshot(1);

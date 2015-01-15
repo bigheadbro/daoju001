@@ -1573,6 +1573,59 @@ public class CuttingToolsConfiguration
         return ret;
 	}
 	
+	public static List<String> sortWorkingrange(HashSet<String> strParam)
+	{
+		Map<String,Double> map = new HashMap<String,Double>();
+		for(final String value : strParam){  
+			map.put(value,Double.valueOf(value.split("~")[0]));
+        }  
+		ArrayList<Entry<String,Double>> list = new ArrayList<Entry<String,Double>>(map.entrySet());   
+		  
+		Collections.sort(list, new Comparator<Object>(){   
+			public int compare(Object e1, Object e2){   
+		        double v1 = Double.parseDouble(((Entry<String,Double>)e1).getValue().toString());   
+		        double v2 = Double.parseDouble(((Entry)e2).getValue().toString());   
+		        return (v1-v2)>0?1:-1;       
+		    }   
+		});   
+		List<String> ret = new ArrayList<String>();  
+		for(int i= 0;i<list.size();i++)
+		{
+			ret.add(list.get(i).getKey());
+		}
+        return ret;
+	}
+	
+	public static List<String> sortDiameterratio(HashSet<String> strParam)
+	{
+		Map<String,Double> map = new HashMap<String,Double>();
+		for(final String value : strParam){  
+			if(StringUtil.isEqual(value, "引导"))
+			{
+				map.put(value,100d);
+			}
+			else
+			{
+				map.put(value,Double.valueOf(value.split("倍")[0]));
+			}
+        }  
+		ArrayList<Entry<String,Double>> list = new ArrayList<Entry<String,Double>>(map.entrySet());   
+		  
+		Collections.sort(list, new Comparator<Object>(){   
+			public int compare(Object e1, Object e2){   
+		        double v1 = Double.parseDouble(((Entry<String,Double>)e1).getValue().toString());   
+		        double v2 = Double.parseDouble(((Entry)e2).getValue().toString());   
+		        return (v1-v2)>0?1:-1;       
+		    }   
+		});   
+		List<String> ret = new ArrayList<String>();  
+		for(int i= 0;i<list.size();i++)
+		{
+			ret.add(list.get(i).getKey());
+		}
+        return ret;
+	}
+	
 	public static String formatCujing(String direction)
 	{
 		

@@ -1717,6 +1717,13 @@ public class CommonService {
 				if(StringUtil.isNotEmpty(tmp))
 					ret += "<span>"+tmp+"</span>";
 			}
+			List<String> list = CuttingToolsConfiguration.sortDiameterratio(diameterratio);
+			for(int i = 0;i<list.size();i++)
+			{
+				String tmp = list.get(i);
+				if(StringUtil.isNotEmpty(tmp))
+					ret += "<span>"+tmp+"</span>";
+			}
 			ret += "</div></li>";
 		}
 		if(slotshape.size() >1 || (!slotshape.contains(null) && slotshape.size() == 1))
@@ -2058,14 +2065,15 @@ public class CommonService {
 		if(workingrange.size() > 1 || (!workingrange.contains(null) && workingrange.size() == 1))
 		{
 			ret += "<li set=0 param=\"workingrange\"><input type=\"hidden\" name=\"workingrange\" /><h1>镗孔范围<a></a></h1><div class=\"param clearfix\" >";
-			Iterator<String> iter = workingrange.iterator();
-			while(iter.hasNext())
+			List<String> list = CuttingToolsConfiguration.sortWorkingrange(workingrange);
+			for(int i = 0;i<list.size();i++)
 			{
-				String tmp = iter.next();
+				String tmp = list.get(i);
 				if(StringUtil.isNotEmpty(tmp))
 					ret += "<span>"+tmp+"</span>";
 			}
 			ret += "</div></li>";
+			
 		}
 		
 		if(handledtype.size() > 1 || (!handledtype.contains(null) && handledtype.size() == 1))

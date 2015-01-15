@@ -1710,13 +1710,6 @@ public class CommonService {
 		if(diameterratio.size() >1 || (!diameterratio.contains(null) && diameterratio.size() == 1))
 		{
 			ret += "<li set=0 param=\"diameterratio\"><input type=\"hidden\" name=\"diameterratio\" /><h1>倍径比<a></a></h1><div class=\"param clearfix\" >";
-			Iterator<String> iter = diameterratio.iterator();
-			while(iter.hasNext())
-			{
-				String tmp = iter.next();
-				if(StringUtil.isNotEmpty(tmp))
-					ret += "<span>"+tmp+"</span>";
-			}
 			List<String> list = CuttingToolsConfiguration.sortDiameterratio(diameterratio);
 			for(int i = 0;i<list.size();i++)
 			{

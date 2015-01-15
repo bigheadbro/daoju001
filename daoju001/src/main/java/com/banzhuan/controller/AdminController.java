@@ -740,7 +740,7 @@ public class AdminController extends BaseController{
             // 获得第一个工作表对象
             Sheet sheet= book.getSheet(0);
             
-            for(int j = 1; j < 2; j++)
+            for(int j = 1; j < sheet.getRows(); j++)
             {
             	CuttingToolEntity ct = new CuttingToolEntity();
             	String tmp = sheet.getCell(0, j).getContents().trim().replace("；", ";").replace("（", "(").replace("）", ")");

@@ -100,6 +100,7 @@ public class CuttingToolsConfiguration
 		level3Map.put("020503", "T槽刀");
 		level3Map.put("040101", "整体合金钻");
 		level3Map.put("040102", "焊接合金钻");
+		level3Map.put("040103", "中心钻");
 		level3Map.put("040201", "机夹式钻头");
 		level3Map.put("040202", "机夹式钻头刀片");
 		level3Map.put("040301", "铲钻");
@@ -199,6 +200,8 @@ public class CuttingToolsConfiguration
 		codeMap.put("57", "990200");
 		codeMap.put("58", "990300");
 		codeMap.put("59", "990400");
+		codeMap.put("60", "040103");
+		
 
 		orderMap.put("010101", "brand,diameter,cujing,usage,workingtool,angle,ctcount,pipesize");
 		orderMap.put("010102", "brand,diameter,cujing,usage,workingtool,angle,ctcount,usefullength,totallength,shank,innercooling,shanktype,material");

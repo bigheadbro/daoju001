@@ -391,6 +391,15 @@ public class CommonController extends BaseController{
 		return mv;
 	}
 	
+	@RequestMapping(value="/evaluations")
+	public ModelAndView evaluations(final HttpServletRequest request,final HttpServletResponse response)
+	{
+		ModelAndView mv = new ModelAndView("/common/evaluations");
+		List<ArticleEntity> articles = commonService.getAllevaluations();
+		mv.addObject("articles",articles);
+		return mv;
+	}
+	
 	@RequestMapping(value="/event")
 	public ModelAndView event(final HttpServletRequest request,final HttpServletResponse response)
 	{
@@ -473,7 +482,6 @@ public class CommonController extends BaseController{
 		mv.addObject("qrcode",qrcode);
 		return mv;
 	}
-	
 	
 	@RequestMapping(value = "/updaterequest")
 	public void updaterequest(final HttpServletRequest request,final HttpServletResponse response)

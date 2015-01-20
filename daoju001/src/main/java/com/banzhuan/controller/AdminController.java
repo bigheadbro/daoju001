@@ -1392,6 +1392,26 @@ public class AdminController extends BaseController{
 		if(isDoSubmit(request))
 		{
 			ArticleEntity article = new ArticleEntity();
+			article.setType(1);
+			article.setCover(request.getParameter("picture"));
+			article.setLink(request.getParameter("link"));
+			article.setTitle(request.getParameter("title"));
+			article.setOutline(request.getParameter("outline"));
+			articleDAO.insertArticleEntity(article);
+			return mv;
+		}
+		return mv;
+	}
+	
+	@RequestMapping(value="/lghlmclyhblsqtevaluation")
+	public ModelAndView newevaluation(final HttpServletRequest request, final HttpServletResponse response)
+	{
+		ModelAndView mv = new ModelAndView("/admin/newarticle");
+		
+		if(isDoSubmit(request))
+		{
+			ArticleEntity article = new ArticleEntity();
+			article.setType(2);
 			article.setCover(request.getParameter("picture"));
 			article.setLink(request.getParameter("link"));
 			article.setTitle(request.getParameter("title"));

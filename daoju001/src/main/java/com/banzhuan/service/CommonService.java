@@ -982,6 +982,11 @@ public class CommonService {
 		return articleDAO.getAllarticles();
 	}
 	
+	public List<ArticleEntity> getAllevaluations()
+	{
+		return articleDAO.getAllevaluations();
+	}
+	
 	public List<StockEntity> getAllstocks()
 	{
 		return stockDAO.queryAllStock();

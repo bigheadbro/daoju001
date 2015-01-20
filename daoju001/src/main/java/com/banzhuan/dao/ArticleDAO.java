@@ -11,7 +11,9 @@ import com.banzhuan.entity.ArticleEntity;
 public interface ArticleDAO {
 	
 	List<ArticleEntity> getAllarticles();
-
+	
+	List<ArticleEntity> getAllevaluations();
+	
 	public int insertArticleEntity(ArticleEntity article);
 
 	public int updateArticleById(ArticleEntity article);

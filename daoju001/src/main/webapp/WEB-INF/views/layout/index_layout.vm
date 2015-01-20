@@ -475,6 +475,15 @@
                             </ul>
                         </li>
 						#end
+						#if($!stringUtil.isContains($request.getServletPath(),"/evaluations"))
+                        <li class="current">
+                            <a href="/evaluations">刀具评测</a>
+                        </li>
+        				#else
+        				<li class="item pifa">
+                            <a href="/evaluations">刀具评测</a>
+                        </li>
+        				#end
 						#if($!stringUtil.isContains($request.getServletPath(),"/items"))
                         <li class="current">
                             <a href="/items">标准品批发</a>

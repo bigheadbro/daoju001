@@ -74,12 +74,22 @@ public class ArticleEntity implements Serializable {
 	public void setGmtCreate(String gmtCreate) {
 		this.gmtCreate = gmtCreate;
 	}
+	public int getType()
+	{
+		return type;
+	}
+	public void setType(int type)
+	{
+		this.type = type;
+	}
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1205872214869809034L;
 	// 
 	  private int id;
+	  
+	  private int type;
    	  // 
 	  private String title;
    	  // 

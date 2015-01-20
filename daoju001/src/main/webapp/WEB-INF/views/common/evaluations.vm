@@ -1,0 +1,23 @@
+#set($layout = "/layout/item_layout.vm")
+<div class="main-content-container clearfix">
+    <div class="main-list-container width630">
+    	<div class="gc-list-header">
+    		<h1>刀具评测</h1>
+    	</div>
+    	<div class="main-list-content">
+			#foreach($article in $articles)
+    		<div class="article-item clearfix">
+    			<div class="left">
+    				<a target="_blank" href="${article.link}">
+    					<img src="/article/${article.cover}" />
+    				</a>
+    			</div>
+    			<div class="right">
+    				<h2><a target="_blank" href="${article.link}">${article.title}</a></h2>
+    				<p>${article.outline}</p>
+    			</div>
+    		</div>
+			#end
+    	</div>
+    </div>
+</div>

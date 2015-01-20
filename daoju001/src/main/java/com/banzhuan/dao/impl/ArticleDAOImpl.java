@@ -17,6 +17,11 @@ public class ArticleDAOImpl extends SqlSessionDaoSupport implements ArticleDAO {
 	}
 
 	@Override
+	public List<ArticleEntity> getAllevaluations() {
+		return this.getSqlSession().selectList("getAllevaluations");
+	}
+	
+	@Override
 	public int insertArticleEntity(ArticleEntity article) {
 		this.getSqlSession().insert("insertArticleEntity", article);
 		return article.getId();

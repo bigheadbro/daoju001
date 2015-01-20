@@ -4,6 +4,8 @@
 	<resultMap type="ArticleEntity" id="ArticleResultMap">
 	  <!---->
 	  <id property="id" column="id"/>
+	  <!--1是article，2是评测-->
+	  <id property="type" column="type"/>
    	  <!---->
 	  <id property="title" column="title"/>
    	  <!---->
@@ -19,10 +21,17 @@
 	<select id="getAllarticles" 
 			resultMap="ArticleResultMap">
 		<![CDATA[
-			SELECT * from t_article order by gmt_create desc
+			SELECT * from t_article where type = 1 order by gmt_create desc
 		]]>
 	</select>
 
+	<select id="getAllevaluations" 
+			resultMap="ArticleResultMap">
+		<![CDATA[
+			SELECT * from t_article where type = 2 order by gmt_create desc
+		]]>
+	</select>
+	
 	<!-- 新代理商信息 -->
 	<insert id="insertArticleEntity" parameterType="ArticleEntity">
 		<selectKey resultType="int" order="AFTER" keyProperty="id">
@@ -31,6 +40,7 @@
 		insert into t_article
 		(
 	   	  id
+	   	  ,type
 	   	  ,title
 	   	  ,outline
 	   	  ,link
@@ -39,6 +49,7 @@
 	      values
 	   (
 	   	  #{id}
+	   	  ,#{type}
 	   	  ,#{title}
 	   	  ,#{outline}
 	   	  ,#{link}
